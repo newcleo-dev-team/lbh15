@@ -16,11 +16,11 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('./../'))
-sys.path.insert(0, os.path.abspath('./../pyll/'))
+sys.path.insert(0, os.path.abspath('./../lbeh15/'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'PYLL'
+project = 'LBEH15'
 copyright = '2022, NEWCLEO'
 author = 'Daniele Panico\''
 
@@ -29,7 +29,7 @@ version = ''
 # The full version, including alpha/beta/rc tags
 release = ''
 
-logo = '/files/figures/pyll_logo.png'
+#logo = '/files/figures/pyll_logo.png'
 
 
 # -- General configuration ---------------------------------------------------
@@ -85,7 +85,7 @@ pygments_style = 'sphinx'
 
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'sphinx_rtd_theme'
-html_logo = './files/figures/pyll_logo.png'
+#html_logo = './files/figures/pyll_logo.png'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -142,6 +142,6 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pyll.tex', 'PYLL Documentation',
+    (master_doc, 'lbeh15.tex', 'LBEH15 Documentation',
      'Daniele Panico\'', 'manual'),
 ]

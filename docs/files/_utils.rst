@@ -1,7 +1,7 @@
-pyll._utils
-===========
+lbeh15._utils
+=============
 
-.. automodule:: pyll._utils
+.. automodule:: lbeh15._utils
     :members:
     :undoc-members:
     :member-order: bysource

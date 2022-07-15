@@ -225,12 +225,16 @@ class LeadProperties(object):
         """
         temp = _get_temperature_in_kelvin(T, temperature_units)
 
-        if temp > 0:
+        if temp > MELTING_TEMPERATURE:
             self.__T_assigned = True
             self.__T = temp
-        else:
-            raise ValueError("Temperature in Kelvin must be strictly positive,\
-                             {:7.2f} [K] was provided".format(temp))
+        else: 
+            if temp > 0 and temp < MELTING_TEMPERATURE:
+                raise ValueError("Temperature in Kelvin must be larger than, "
+                                 "melting temerature ({:7.2f} [K]), {:7.2f} [K] was provided".format(MELTING_TEMPERATURE, temp))
+            else:
+                raise ValueError("Temperature in Kelvin must be strictly positive, "
+                                 "{:7.2f} [K] was provided".format(temp))
 
 
 class _LeadPropertiesFromX(LeadProperties):
