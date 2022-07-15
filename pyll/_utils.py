@@ -4,7 +4,7 @@ from ._pyll import MELTING_TEMPERATURE
 
 def p_s(T):
     """
-    Computes lead saturation vapour pressure in [Pa]. 
+    Computes lead saturation vapour pressure in [Pa].
 
     Parameters
     ----------
@@ -16,7 +16,7 @@ def p_s(T):
 
 def sigma(T):
     """
-    Computes lead surface tension in [N/m]. 
+    Computes lead surface tension in [N/m].
 
     Parameters
     ----------
@@ -28,7 +28,7 @@ def sigma(T):
 
 def rho(T):
     """
-    Computes lead density in [kg/m^3]. 
+    Computes lead density in [kg/m^3].
 
     Parameters
     ----------
@@ -40,7 +40,7 @@ def rho(T):
 
 def alpha(T):
     """
-    Computes lead thermal expansion coefficient in [1/K]. 
+    Computes lead thermal expansion coefficient in [1/K].
 
     Parameters
     ----------
@@ -53,7 +53,7 @@ def alpha(T):
 
 def u_s(T):
     """
-    Computes speed of sound in lead in [m/s]. 
+    Computes speed of sound in lead in [m/s].
 
     Parameters
     ----------
@@ -65,7 +65,7 @@ def u_s(T):
 
 def beta_s(T):
     """
-    Computes lead isentropic compressibility in [1/Pa]. 
+    Computes lead isentropic compressibility in [1/Pa].
 
     Parameters
     ----------
@@ -77,7 +77,7 @@ def beta_s(T):
 
 def cp(T):
     """
-    Computes lead specific heat capacity in [J/(kg*K)]. 
+    Computes lead specific heat capacity in [J/(kg*K)].
 
     Parameters
     ----------
@@ -90,7 +90,7 @@ def cp(T):
 
 def delta_h(T):
     """
-    Computes lead specific enthalpy (in respect to melting point) in [J/K]. 
+    Computes lead specific enthalpy (in respect to melting point) in [J/K].
 
     Parameters
     ----------
@@ -103,9 +103,9 @@ def delta_h(T):
             + 1.524e6*(T**-1 - MELTING_TEMPERATURE**-1))
 
 
-def mi(T):    
+def mi(T):
     """
-    Computes lead dynamic viscosity in [Pa*s]. 
+    Computes lead dynamic viscosity in [Pa*s].
 
     Parameters
     ----------

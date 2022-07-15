@@ -24,7 +24,7 @@ def _get_temperature_in_kelvin(temperature, units):
     Returns
     -------
     rvalue : float
-        Temperature in K 
+        Temperature in K
     """
     rvalue = 0
     if units == CELSIUS_SYMBOL:
@@ -48,7 +48,7 @@ class LeadProperties(object):
         Temperature
     temperature_units : str
         Units used to specify temperature. Can be 'K' or '°C' for
-        Kelvin and Celsius respectively        
+        Kelvin and Celsius respectively
     """
     __T = 0
     __T_assigned = False
@@ -182,7 +182,7 @@ class LeadProperties(object):
 
     def __fill_class_attributes(self, T, temperature_units):
         """
-        Fills all the class attributes. 
+        Fills all the class attributes.
 
         Parameters
         ----------
@@ -190,7 +190,7 @@ class LeadProperties(object):
             Temperature
         temperature_units : str
             Units used to specify temperature. Can be 'K' or '°C' for
-            Kelvin and Celsius respectively  
+            Kelvin and Celsius respectively
         """
         self.__assign_T(T, temperature_units)
 
@@ -212,7 +212,7 @@ class LeadProperties(object):
 
     def __assign_T(self, T, temperature_units):
         """
-        Function used to set class temperature, checking if 
+        Function used to set class temperature, checking if
         temperature value in K is strictly positive
 
         Parameters
@@ -221,8 +221,8 @@ class LeadProperties(object):
             Temperature
         temperature_units : str
             Units used to specify temperature. Can be 'K' or '°C' for
-            Kelvin and Celsius respectively  
-        """        
+            Kelvin and Celsius respectively
+        """
         temp = _get_temperature_in_kelvin(T, temperature_units)
 
         if temp > 0:
@@ -245,7 +245,8 @@ class _LeadPropertiesFromX(LeadProperties):
     target : float
         value of the property
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, function_of_T, target, guess=MELTING_TEMPERATURE*1.5):
 
@@ -265,7 +266,8 @@ class LeadPropertiesP_s(_LeadPropertiesFromX):
     saturation_pressure : float
         value of the saturation vapour pressure in [Pa]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, saturation_pressure, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(p_s, saturation_pressure, guess)
@@ -280,7 +282,8 @@ class LeadPropertiesSigma(_LeadPropertiesFromX):
     surface_tension : float
         value of surface tension [N/m]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, surface_tension, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(sigma, surface_tension, guess)
@@ -295,7 +298,8 @@ class LeadPropertiesRho(_LeadPropertiesFromX):
     density : float
         value of density [kg/m^3]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, density, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(rho, density, guess)
@@ -310,7 +314,8 @@ class LeadPropertiesAlpha(_LeadPropertiesFromX):
     expansion_coefficient : float
         value of temperature expansion coefficient [1/K]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, expansion_coefficient, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(alpha, expansion_coefficient, guess)
@@ -325,7 +330,8 @@ class LeadPropertiesU_s(_LeadPropertiesFromX):
     sound_velocity : float
         value of sound velocity [m/s]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, sound_velocity, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(u_s, sound_velocity, guess)
@@ -340,7 +346,8 @@ class LeadPropertiesBeta_s(_LeadPropertiesFromX):
     isentropic_compressibility : float
         value of isentropic compressibility [1/Pa]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, isentropic_compressibility,
                  guess=MELTING_TEMPERATURE*1.5):
@@ -356,7 +363,8 @@ class LeadPropertiesCp(_LeadPropertiesFromX):
     specific_heat : float
         value of specific heat capacity [J/(kg*K)]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, specific_heat, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(cp, specific_heat, guess)
@@ -364,20 +372,22 @@ class LeadPropertiesCp(_LeadPropertiesFromX):
 
 class LeadPropertiesDelta_h(_LeadPropertiesFromX):
     """
-    Class to model lead properties from specifc enthalpy (in respect to lead melting point)
+    Class to model lead properties from specifc enthalpy
+    (in respect to lead melting point)
 
     Parameters
     ----------
     enthalpy : float
         value of specifc enthalpy [J/kg]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, enthalpy, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(delta_h, enthalpy, guess)
 
 
-class LeadPropertiesMi(_LeadPropertiesFromX):    
+class LeadPropertiesMi(_LeadPropertiesFromX):
     """
     Class to model lead properties from dynamic viscosity
 
@@ -386,7 +396,8 @@ class LeadPropertiesMi(_LeadPropertiesFromX):
     dynamic_viscosity : float
         value of dynamic viscosity [Pa*s]
     guess : float
-        initial guess of the temperature in [K] that returns property target value
+        initial guess of the temperature in [K]
+        that returns property target value
     """
     def __init__(self, dynamic_viscosity, guess=MELTING_TEMPERATURE*1.5):
         super().__init__(mi, dynamic_viscosity, guess)
