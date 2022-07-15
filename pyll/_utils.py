@@ -1,4 +1,4 @@
-import math
+import numpy as np
 from ._pyll import MELTING_TEMPERATURE
 
 
@@ -11,7 +11,7 @@ def p_s(T):
     T : float
         temperature in [K]
     """
-    return 1.88e13 * T * math.exp(-23325/T)
+    return 1.88e13 * T * np.exp(-23325/T)
 
 
 def sigma(T):
@@ -47,7 +47,6 @@ def alpha(T):
     T : float
         temperature in [K]
     """
-    densit
     return 1/(8942 - T)
 
 
@@ -112,4 +111,4 @@ def mi(T):
     T : float
         temperature in [K]
     """
-    return 4.55e-4*math.exp(1069/T)
+    return 4.55e-4*np.exp(1069/T)

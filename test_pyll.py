@@ -2,7 +2,7 @@ import unittest
 import pyll.properties as leadP
 
 T = 395
-tol = 11
+tol = 10
 prop = leadP.LeadProperties(T, '°C')
 
 
@@ -40,9 +40,9 @@ class PropertiesTester(unittest.TestCase):
         fromDelta_h = leadP.LeadPropertiesDelta_h(prop.delta_h)
         self.assertAlmostEqual(T, fromDelta_h.T_in_celsius, tol)
 
-    # def test_mi(self):
-    #     fromMi = leadP.LeadPropertiesMi(prop.mi)
-    #     self.assertAlmostEqual(T, fromMi.T_in_celsius, tol)
+    def test_mi(self):
+        fromMi = leadP.LeadPropertiesMi(prop.mi)
+        self.assertAlmostEqual(T, fromMi.T_in_celsius, tol)
 
 
 if __name__ == "__main__":

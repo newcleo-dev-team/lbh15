@@ -9,6 +9,8 @@ Welcome to PYLL documentation!
    files/README.rst
    
    files/properties
+
+   files/_utils
    
 Indices and tables
 ==================

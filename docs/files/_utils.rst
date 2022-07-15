@@ -1,7 +1,7 @@
-pyll.properties
-===============
+pyll._utils
+===========
 
-.. automodule:: pyll.properties
+.. automodule:: pyll._utils
     :members:
     :undoc-members:
     :member-order: bysource
