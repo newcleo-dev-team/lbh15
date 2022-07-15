@@ -1,5 +1,5 @@
 import numpy as np
-from ._pyll import MELTING_TEMPERATURE
+from ._lbeh15 import LEAD_MELTING_TEMPERATURE
 
 
 def p_s(T):
@@ -96,10 +96,10 @@ def delta_h(T):
     T : float
         temperature in [K]
     """
-    return (176.2*(T-MELTING_TEMPERATURE)
-            - 2.4615e-2*(T**2 - MELTING_TEMPERATURE**2)
-            + 5.147e-6*(T**3 - MELTING_TEMPERATURE**3)
-            + 1.524e6*(T**-1 - MELTING_TEMPERATURE**-1))
+    return (176.2*(T-LEAD_MELTING_TEMPERATURE)
+            - 2.4615e-2*(T**2 - LEAD_MELTING_TEMPERATURE**2)
+            + 5.147e-6*(T**3 - LEAD_MELTING_TEMPERATURE**3)
+            + 1.524e6*(T**-1 - LEAD_MELTING_TEMPERATURE**-1))
 
 
 def mi(T):
