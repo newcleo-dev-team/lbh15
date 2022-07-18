@@ -29,13 +29,11 @@ version = ''
 # The full version, including alpha/beta/rc tags
 release = ''
 
-#logo = '/files/figures/pyll_logo.png'
-
 
 # -- General configuration ---------------------------------------------------
 
 extensions = [
-    'sphinx.ext.autodoc', 
+    'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.mathjax',
     'myst_parser',
@@ -85,7 +83,6 @@ pygments_style = 'sphinx'
 
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'sphinx_rtd_theme'
-#html_logo = './files/figures/pyll_logo.png'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -117,30 +114,30 @@ htmlhelp_basename = 'AMACA documentation'
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
-    #The paper size ('letterpaper' or 'a4paper').
-    
+    # The paper size ('letterpaper' or 'a4paper').
+
     'papersize': 'letterpaper',
 
-    #The font size ('10pt', '11pt' or '12pt').
-    
+    # The font size ('10pt', '11pt' or '12pt').
+
     'pointsize': '10pt',
 
-    #Additional stuff for the LaTeX preamble.
-    
+    # Additional stuff for the LaTeX preamble.
+
     'preamble': r'''
 \renewcommand{\hyperref}[2][]{#2}
 ''',
-    
-    'makeindex' : '\\usepackage[columns=1]{idxlayout}\\makeindex',
 
-    #Latex figure (float) alignment
-    
+    'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
+
+    # Latex figure (float) alignment
+
     'figure_align': 'tbp',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
+# author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'lbeh15.tex', 'LBEH15 Documentation',
      'Daniele Panico\'', 'manual'),

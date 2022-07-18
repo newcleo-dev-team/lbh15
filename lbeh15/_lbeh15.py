@@ -1,3 +1,5 @@
+from scipy.optimize import fsolve
+
 # CONSTANTS
 ZERO_C_IN_K = 273.15
 CELSIUS_SYMBOL = "degC"
@@ -23,6 +25,7 @@ LBE_MELTING_TEMPERATURE = 398.0
 LBE_MELTING_LATENT_HEAT = 38.6e3
 LBE_BOILING_TEMPERATURE = 1927
 LBE_VAPORISATION_HEAT = 856.6e3
+
 
 # LOOK FOR PACKAGE TO REPLACE IT
 def _get_temperature_in_kelvin(temperature, units):
@@ -55,7 +58,7 @@ def _get_temperature_in_kelvin(temperature, units):
     return rvalue
 
 
-class PropertiesInterface: 
+class PropertiesInterface:
     """
     Class to model lead properties at a given temperature
 
@@ -83,6 +86,7 @@ class PropertiesInterface:
     _mi = 0
     _r = 0
     _conductivity = 0
+
     def __init__(self, T, temperature_units=KELVIN_SYMBOL):
         self._set_constants()
         self.__fill_class_attributes(T, temperature_units)
@@ -207,18 +211,19 @@ class PropertiesInterface:
         return self._r
 
     @property
-    def conductivity(self): 
+    def conductivity(self):
         """
         float : lead thermal conductivity [W/(m*K)]
         """
         return self._conductivity
 
     def _fill_properties(self):
-        raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED".format(type(self).__name__))
-    
-    def _set_constants(self):
-        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED".format(type(self).__name__))
+        raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
 
+    def _set_constants(self):
+        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
 
     def __fill_class_attributes(self, T, temperature_units):
         """
@@ -257,12 +262,34 @@ class PropertiesInterface:
             self._T_assigned = True
             self._T = temp
         else:
-            if temp >= self.T_b0: 
+            if temp >= self.T_b0:
                 raise ValueError("Temperature in Kelvin must be smaller than "
-                                 "boiling temperature ({:7.2f} [K]), {:7.2f} [K] was provided".format(self.T_b0, temp))
+                                 "boiling temperature ({:7.2f} [K]), {:7.2f} "
+                                 "[K] was provided".format(self.T_b0, temp))
             elif temp > 0 and temp <= self.T_m0:
                 raise ValueError("Temperature in Kelvin must be larger than "
-                                 "melting temerature ({:7.2f} [K]), {:7.2f} [K] was provided".format(self.T_m0, temp))
+                                 "melting temerature ({:7.2f} [K]), {:7.2f} "
+                                 "[K] was provided".format(self.T_m0, temp))
             else:
-                raise ValueError("Temperature in Kelvin must be strictly positive, "
+                raise ValueError("Temperature in Kelvin must be "
+                                 "strictly positive, "
                                  "{:7.2f} [K] was provided".format(temp))
+
+
+class PropertiesFromXInterface:
+    def __init__(self, function_of_T, target, guess):
+
+        def function_to_solve(T, target):
+            return function_of_T(T) - target
+
+        temp = fsolve(function_to_solve, x0=[guess], args=[target])[0]
+        instance = self._get_fluid_instance(temp)
+
+        if instance is not None:
+            for attr in dir(instance):
+                if not attr.startswith('_'):
+                    setattr(self, attr, getattr(instance, attr))
+
+    def _get_fluid_instance(self, T):
+        raise NotImplementedError("{:s}._get_fluid_instance NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
