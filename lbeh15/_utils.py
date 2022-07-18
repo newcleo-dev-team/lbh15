@@ -112,3 +112,27 @@ def mi(T):
         temperature in [K]
     """
     return 4.55e-4*np.exp(1069/T)
+
+
+def r(T):
+    """
+    Computes lead electrical resistivity [Ohm*m].
+
+    Parameters
+    ----------
+    T : float
+        temperature in [K]
+    """
+    return (67.0 + 0.0471*T)*1e-8
+
+
+def conductivity(T):
+    """
+    Computes lead electrical resistivity [Ohm*m].
+
+    Parameters
+    ----------
+    T : float
+        temperature in [K]
+    """
+    return 9.2 + 0.011*T

@@ -28,14 +28,14 @@ LBE_VAPORISATION_HEAT = 856.6e3
 def _get_temperature_in_kelvin(temperature, units):
     """
     Converts input temperature in Kelvin, raising value error
-    if units provided are neither 'K' or '°C'
+    if units provided are neither 'K' or 'degC'
 
     Parameters
     ----------
     T : float
         Temperature
     temperature_units : str
-        Units used to specify temperature. Can be 'K' or '°C' for
+        Units used to specify temperature. Can be 'K' or 'degC' for
         Kelvin and Celsius respectively
 
     Returns
@@ -64,7 +64,7 @@ class PropertiesInterface:
     T : float
         Temperature
     temperature_units : str
-        Units used to specify temperature. Can be 'K' or '°C' for
+        Units used to specify temperature. Can be 'K' or 'degC' for
         Kelvin and Celsius respectively
     """
     _T_m0 = 0
@@ -81,6 +81,8 @@ class PropertiesInterface:
     _beta_s = 0
     _delta_h = 0
     _mi = 0
+    _r = 0
+    _conductivity = 0
     def __init__(self, T, temperature_units=KELVIN_SYMBOL):
         self._set_constants()
         self.__fill_class_attributes(T, temperature_units)
@@ -197,11 +199,25 @@ class PropertiesInterface:
         """
         return self._mi
 
+    @property
+    def r(self):
+        """
+        float : lead electrical resistivity [Ohm*m]
+        """
+        return self._r
+
+    @property
+    def conductivity(self): 
+        """
+        float : lead thermal conductivity [W/(m*K)]
+        """
+        return self._conductivity
+
     def _fill_properties(self):
-        raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED".fortma(type(self).__name__))
+        raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED".format(type(self).__name__))
     
     def _set_constants(self):
-        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED".fortma(type(self).__name__))
+        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED".format(type(self).__name__))
 
 
     def __fill_class_attributes(self, T, temperature_units):
@@ -213,7 +229,7 @@ class PropertiesInterface:
         T : float
             Temperature
         temperature_units : str
-            Units used to specify temperature. Can be 'K' or '°C' for
+            Units used to specify temperature. Can be 'K' or 'degC' for
             Kelvin and Celsius respectively
         """
         self.__assign_T(T, temperature_units)
@@ -232,7 +248,7 @@ class PropertiesInterface:
         T : float
             Temperature
         temperature_units : str
-            Units used to specify temperature. Can be 'K' or '°C' for
+            Units used to specify temperature. Can be 'K' or 'degC' for
             Kelvin and Celsius respectively
         """
         temp = _get_temperature_in_kelvin(T, temperature_units)

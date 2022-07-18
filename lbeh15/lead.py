@@ -5,7 +5,7 @@ from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbeh15 import LEAD_VAPORISATION_HEAT
 from ._lbeh15 import PropertiesInterface
 from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mi
+from ._utils import beta_s, cp, mi, r, conductivity
 
 
 class Lead(PropertiesInterface):
@@ -17,7 +17,7 @@ class Lead(PropertiesInterface):
     T : float
         Temperature
     temperature_units : str
-        Units used to specify temperature. Can be 'K' or '°C' for
+        Units used to specify temperature. Can be 'K' or 'degC' for
         Kelvin and Celsius respectively
     """
     def __init__(self, T, temperature_units=KELVIN_SYMBOL):
@@ -39,6 +39,8 @@ class Lead(PropertiesInterface):
         self._cp = cp(self.T)
         self._delta_h = delta_h(self.T)
         self._mi = mi(self.T)
+        self._r = r(self.T)
+        self._conductivity = conductivity(self.T)
 
 class _LeadPropertiesFromX(Lead):
     """
@@ -208,3 +210,35 @@ class LeadPropertiesMi(_LeadPropertiesFromX):
     """
     def __init__(self, dynamic_viscosity, guess=LEAD_MELTING_TEMPERATURE*1.5):
         super().__init__(mi, dynamic_viscosity, guess)
+
+
+class LeadPropertiesR(_LeadPropertiesFromX):
+    """
+    Class to model lead properties from electrical resistivity
+
+    Parameters
+    ----------
+    electrical_resistivity : float
+        value of electrical resistivity [Ohm*m]
+    guess : float
+        initial guess of the temperature in [K]
+        that returns property target value
+    """
+    def __init__(self, electrical_resistivity, guess=LEAD_MELTING_TEMPERATURE*1.5):
+        super().__init__(r, electrical_resistivity, guess)
+
+
+class LeadPropertiesConductivity(_LeadPropertiesFromX):
+    """
+    Class to model lead properties from thermal conductivity
+
+    Parameters
+    ----------
+    thermal_conductivity : float
+        value of thermal conductivity [W/(m*K)]
+    guess : float
+        initial guess of the temperature in [K]
+        that returns property target value
+    """
+    def __init__(self, thermal_conductivity, guess=LEAD_MELTING_TEMPERATURE*1.5):
+        super().__init__(conductivity, thermal_conductivity, guess)
