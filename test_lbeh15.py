@@ -4,7 +4,7 @@ import lbeh15.bismuth as bismuth
 import lbeh15.lbe as lbe
 
 T = 395
-tol = 7
+tol = 9
 leadP = lead.Lead(T, 'degC')
 bismuthP = bismuth.Bismuth(T, 'degC')
 lbeP = lbe.LBE(T, 'degC')

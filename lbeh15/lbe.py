@@ -121,8 +121,8 @@ class _LBEFromX(PropertiesFromXInterface):
         to target (if more then one are retrieved)
     """
     def __init__(self, function_of_T, target,
-                 guess=LBE_MELTING_TEMPERATURE*2.0, index=0):
-        super().__init__(function_of_T, target, LBE_KEYWORD, guess, index)
+                 guess=LBE_MELTING_TEMPERATURE*2.0, second_root=False):
+        super().__init__(function_of_T, target, LBE_KEYWORD, guess, second_root)
 
     def _get_fluid_instance(self, T):
         """
@@ -149,10 +149,8 @@ class LBEP_s(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, saturation_pressure,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        if guess == LBE_MELTING_TEMPERATURE*2.0:
-            guess = p_s_initializer(saturation_pressure)
+    def __init__(self, saturation_pressure):
+        guess = p_s_initializer(saturation_pressure)
         super().__init__(p_s, saturation_pressure, guess)
 
 
@@ -168,9 +166,8 @@ class LBESigma(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, surface_tension,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(sigma, surface_tension, guess)
+    def __init__(self, surface_tension):
+        super().__init__(sigma, surface_tension)
 
 
 class LBERho(_LBEFromX):
@@ -185,9 +182,8 @@ class LBERho(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, density,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(rho, density, guess)
+    def __init__(self, density):
+        super().__init__(rho, density)
 
 
 class LBEAlpha(_LBEFromX):
@@ -203,9 +199,8 @@ class LBEAlpha(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, expansion_coefficient,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(alpha, expansion_coefficient, guess)
+    def __init__(self, expansion_coefficient):
+        super().__init__(alpha, expansion_coefficient)
 
 
 class LBEU_s(_LBEFromX):
@@ -220,9 +215,8 @@ class LBEU_s(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, sound_velocity,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(u_s, sound_velocity, guess)
+    def __init__(self, sound_velocity):
+        super().__init__(u_s, sound_velocity)
 
 
 class LBEBeta_s(_LBEFromX):
@@ -238,9 +232,8 @@ class LBEBeta_s(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, isentropic_compressibility,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(beta_s, isentropic_compressibility, guess)
+    def __init__(self, isentropic_compressibility):
+        super().__init__(beta_s, isentropic_compressibility)
 
 
 class LBECp(_LBEFromX):
@@ -261,15 +254,8 @@ class LBECp(_LBEFromX):
         of specif heat function minimum. It must be
         'left' or 'right'
     """
-    def __init__(self, specific_heat,
-                 guess=LBE_MELTING_TEMPERATURE*2.0, side=LEFT_KEYWORD):
-        index = 0
-        if side == RIGHT_KEYWORD:
-            index = 1
-        if side != RIGHT_KEYWORD and side != LEFT_KEYWORD:
-            raise ValueError("Side can be {:s} or {:s}, {:s} was provided"
-                             .format(LEFT_KEYWORD, RIGHT_KEYWORD, side))
-        super().__init__(cp, specific_heat, guess, index=index)
+    def __init__(self, specific_heat, second_root=False):        
+        super().__init__(cp, specific_heat, second_root=second_root)
         self.__T_at_cp_min = 1566.510
 
     @property
@@ -300,9 +286,8 @@ class LBEDelta_h(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, enthalpy,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(delta_h, enthalpy, guess)
+    def __init__(self, enthalpy):
+        super().__init__(delta_h, enthalpy)
 
 
 class LBEMi(_LBEFromX):
@@ -317,9 +302,8 @@ class LBEMi(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, dynamic_viscosity,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(mi, dynamic_viscosity, guess)
+    def __init__(self, dynamic_viscosity):
+        super().__init__(mi, dynamic_viscosity)
 
 
 class LBER(_LBEFromX):
@@ -334,9 +318,8 @@ class LBER(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, electrical_resistivity,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(r, electrical_resistivity, guess)
+    def __init__(self, electrical_resistivity):
+        super().__init__(r, electrical_resistivity)
 
 
 class LBEConductivity(_LBEFromX):
@@ -351,6 +334,5 @@ class LBEConductivity(_LBEFromX):
         initial guess of the temperature in [K]
         that returns property target value
     """
-    def __init__(self, thermal_conductivity,
-                 guess=LBE_MELTING_TEMPERATURE*2.0):
-        super().__init__(conductivity, thermal_conductivity, guess)
+    def __init__(self, thermal_conductivity):
+        super().__init__(conductivity, thermal_conductivity)

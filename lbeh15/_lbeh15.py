@@ -311,15 +311,17 @@ class PropertiesFromXInterface:
         index used to select the temperature corresponding
         to target (if more then one are retrieved)
     """
-    def __init__(self, function_of_T, target, fluid, guess, index=0):
+    def __init__(self, function_of_T, target, fluid, guess, second_root=False):
 
         def function_to_solve(T, fluid, target):
             return function_of_T(T, fluid) - target
 
-        res = fsolve(function_to_solve, x0=guess, args=(fluid, target))
-        temp = res[0]
-        if len(res) >= index and index != 0:
-            temp = res[index]
+        if not second_root: 
+            res = fsolve(function_to_solve, x0=[guess], args=(fluid, target), xtol=1e-10)
+            temp = res[0]
+        else: 
+            res = fsolve(function_to_solve, x0=[guess, 4*guess], args=(fluid, target), xtol=1e-10)
+            temp = res[1]
         instance = self._get_fluid_instance(temp)
 
         if instance is not None:

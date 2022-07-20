@@ -115,13 +115,16 @@ class _BismuthFromX(PropertiesFromXInterface):
     guess : float
         initial guess of the temperature in [K]
         that returns property target value
-    index : int
-        index used to select the temperature corresponding
-        to target (if more then one are retrieved)
+    second_root : bool
+        true to initialize the object with the second root
+        of function_of_T, false for the first one. 
+        Needed if target value is similar to the minimum
+        and the solution at the right of the minimum (second root)
+        is the desired one
     """
     def __init__(self, function_of_T, target,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, index=0):
-        super().__init__(function_of_T, target, BISMUTH_KEYWORD, guess, index)
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, second_root=False):
+        super().__init__(function_of_T, target, BISMUTH_KEYWORD, guess, second_root)
 
     def _get_fluid_instance(self, T):
         """
@@ -143,14 +146,9 @@ class BismuthP_s(_BismuthFromX):
     ----------
     saturation_pressure : float
         value of the saturation vapour pressure in [Pa]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, saturation_pressure,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        if guess == BISMUTH_MELTING_TEMPERATURE*1.5:
-            guess = p_s_initializer(saturation_pressure)
+    def __init__(self, saturation_pressure):
+        guess = p_s_initializer(saturation_pressure)
         super().__init__(p_s, saturation_pressure, guess)
 
 
@@ -162,13 +160,9 @@ class BismuthSigma(_BismuthFromX):
     ----------
     surface_tension : float
         value of surface tension [N/m]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, surface_tension,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(sigma, surface_tension, guess)
+    def __init__(self, surface_tension):
+        super().__init__(sigma, surface_tension)
 
 
 class BismuthRho(_BismuthFromX):
@@ -179,13 +173,9 @@ class BismuthRho(_BismuthFromX):
     ----------
     density : float
         value of density [kg/m^3]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, density,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(rho, density, guess)
+    def __init__(self, density):
+        super().__init__(rho, density)
 
 
 class BismuthAlpha(_BismuthFromX):
@@ -196,13 +186,9 @@ class BismuthAlpha(_BismuthFromX):
     ----------
     expansion_coefficient : float
         value of temperature expansion coefficient [1/K]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, expansion_coefficient,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(alpha, expansion_coefficient, guess)
+    def __init__(self, expansion_coefficient):
+        super().__init__(alpha, expansion_coefficient)
 
 
 class BismuthU_s(_BismuthFromX):
@@ -213,13 +199,9 @@ class BismuthU_s(_BismuthFromX):
     ----------
     sound_velocity : float
         value of sound velocity [m/s]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, sound_velocity,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(u_s, sound_velocity, guess)
+    def __init__(self, sound_velocity):
+        super().__init__(u_s, sound_velocity)
 
 
 class BismuthBeta_s(_BismuthFromX):
@@ -230,13 +212,9 @@ class BismuthBeta_s(_BismuthFromX):
     ----------
     isentropic_compressibility : float
         value of isentropic compressibility [1/Pa]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, isentropic_compressibility,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(beta_s, isentropic_compressibility, guess)
+    def __init__(self, isentropic_compressibility):
+        super().__init__(beta_s, isentropic_compressibility)
 
 
 class BismuthCp(_BismuthFromX):
@@ -247,19 +225,15 @@ class BismuthCp(_BismuthFromX):
     ----------
     specific_heat : float
         value of specific heat capacity [J/(kg*K)]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
+    second_root : bool
+        true to initialize the object with the second root
+        of specific_heat function, false for the first one. 
+        Needed if specific_heat value is similar to the minimum
+        and the solution at the right of the minimum (second root)
+        is the desired one
     """
-    def __init__(self, specific_heat,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, side=LEFT_KEYWORD):
-        index = 0
-        if side == RIGHT_KEYWORD:
-            index = 1
-        if side != RIGHT_KEYWORD and side != LEFT_KEYWORD:
-            raise ValueError("Side can be {:s} or {:s}, {:s} was provided"
-                             .format(LEFT_KEYWORD, RIGHT_KEYWORD, side))
-        super().__init__(cp, specific_heat, guess, index=index)
+    def __init__(self, specific_heat, second_root=False):
+        super().__init__(cp, specific_heat, second_root=second_root)
         self.__T_at_cp_min = 1342.753
 
     @property
@@ -286,13 +260,9 @@ class BismuthDelta_h(_BismuthFromX):
     ----------
     enthalpy : float
         value of specifc enthalpy [J/kg]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, enthalpy,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(delta_h, enthalpy, guess)
+    def __init__(self, enthalpy):
+        super().__init__(delta_h, enthalpy)
 
 
 class BismuthMi(_BismuthFromX):
@@ -303,13 +273,9 @@ class BismuthMi(_BismuthFromX):
     ----------
     dynamic_viscosity : float
         value of dynamic viscosity [Pa*s]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, dynamic_viscosity,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(mi, dynamic_viscosity, guess)
+    def __init__(self, dynamic_viscosity):
+        super().__init__(mi, dynamic_viscosity)
 
 
 class BismuthR(_BismuthFromX):
@@ -320,13 +286,9 @@ class BismuthR(_BismuthFromX):
     ----------
     electrical_resistivity : float
         value of electrical resistivity [Ohm*m]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, electrical_resistivity,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(r, electrical_resistivity, guess)
+    def __init__(self, electrical_resistivity):
+        super().__init__(r, electrical_resistivity)
 
 
 class BismuthConductivity(_BismuthFromX):
@@ -337,10 +299,6 @@ class BismuthConductivity(_BismuthFromX):
     ----------
     thermal_conductivity : float
         value of thermal conductivity [W/(m*K)]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
-    def __init__(self, thermal_conductivity,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
-        super().__init__(conductivity, thermal_conductivity, guess)
+    def __init__(self, thermal_conductivity):
+        super().__init__(conductivity, thermal_conductivity)
