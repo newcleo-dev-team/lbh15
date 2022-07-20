@@ -1,12 +1,15 @@
 from scipy.optimize import fsolve
 
 # CONSTANTS
+P_ATM = 101325
 ZERO_C_IN_K = 273.15
 CELSIUS_SYMBOL = "degC"
 KELVIN_SYMBOL = "K"
 LEAD_KEYWORD = "lead"
 BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
+LEFT_KEYWORD = "left"
+RIGHT_KEYWORD = "right"
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE = 600.6
@@ -60,7 +63,8 @@ def _get_temperature_in_kelvin(temperature, units):
 
 class PropertiesInterface:
     """
-    Class to model lead properties at a given temperature
+    Base class that defines liquid metal properties object
+    at a given temperature
 
     Parameters
     ----------
@@ -86,8 +90,10 @@ class PropertiesInterface:
     _mi = 0
     _r = 0
     _conductivity = 0
+    _p = 0
 
     def __init__(self, T, temperature_units=KELVIN_SYMBOL):
+        self._p = P_ATM
         self._set_constants()
         self.__fill_class_attributes(T, temperature_units)
 
@@ -115,107 +121,115 @@ class PropertiesInterface:
     @property
     def T_m0(self):
         """
-        float : lead melting temperature [K]
+        float : melting temperature [K]
         """
         return self._T_m0
 
     @property
     def Q_m0(self):
         """
-        float : lead melting latent heat [J/kg]
+        float : melting latent heat [J/kg]
         """
         return self._Q_m0
 
     @property
     def T_b0(self):
         """
-        float : lead boiling temperature [K]
+        float : boiling temperature [K]
         """
         return self._T_b0
 
     @property
     def Q_b0(self):
         """
-        float : lead vaporisation heat [J/kg]
+        float : vaporisation heat [J/kg]
         """
         return self._Q_b0
 
     @property
     def p_s(self):
         """
-        float : lead saturation vapour pressure [Pa]
+        float : saturation vapour pressure [Pa]
         """
         return self._p_s
 
     @property
     def sigma(self):
         """
-        float : lead surface tension [N/m]
+        float : surface tension [N/m]
         """
         return self._sigma
 
     @property
     def rho(self):
         """
-        float : lead density [kg/m^3]
+        float : density [kg/m^3]
         """
         return self._rho
 
     @property
     def alpha(self):
         """
-        float : lead thermal expansion coefficient [1/K]
+        float : thermal expansion coefficient [1/K]
         """
         return self._alpha
 
     @property
     def u_s(self):
         """
-        float : sound velocity in lead [m/s]
+        float : sound velocity in [m/s]
         """
         return self._u_s
 
     @property
     def beta_s(self):
         """
-        float : lead isentropic compressibility [1/Pa]
+        float : isentropic compressibility [1/Pa]
         """
         return self._beta_s
 
     @property
     def cp(self):
         """
-        float : lead specific heat capacity [J/(kg*K)]
+        float : specific heat capacity [J/(kg*K)]
         """
         return self._cp
 
     @property
     def delta_h(self):
         """
-        float : lead specific enthalpy difference from melting point [J/kg]
+        float : specific enthalpy difference from melting point [J/kg]
         """
         return self._delta_h
 
     @property
     def mi(self):
         """
-        float : lead dynamic viscosity [Ps*s]
+        float : dynamic viscosity [Ps*s]
         """
         return self._mi
 
     @property
     def r(self):
         """
-        float : lead electrical resistivity [Ohm*m]
+        float : electrical resistivity [Ohm*m]
         """
         return self._r
 
     @property
     def conductivity(self):
         """
-        float : lead thermal conductivity [W/(m*K)]
+        float : thermal conductivity [W/(m*K)]
         """
         return self._conductivity
+
+    @property
+    def p(self):
+        """
+        float : pressure adopted for property calculation, i.e.,
+        atmospheric pressure
+        """
+        return self._p
 
     def _fill_properties(self):
         raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED"
@@ -277,12 +291,35 @@ class PropertiesInterface:
 
 
 class PropertiesFromXInterface:
-    def __init__(self, function_of_T, target, guess):
+    """
+    Base class that defines liquid metal properties object
+    initialized with one of its properties.
 
-        def function_to_solve(T, target):
-            return function_of_T(T) - target
+    Parameters
+    ----------
+    function_of_T : function
+        function that implements the dependency of the property on temperature
+        in [K]
+    target : float
+        physical property value
+    fluid : str
+        fluid for which calculation shall be performed,
+        can be one among lead, bismuth or lbe
+    guess : float
+        initial guess of temperature in [K]
+    index : int
+        index used to select the temperature corresponding
+        to target (if more then one are retrieved)
+    """
+    def __init__(self, function_of_T, target, fluid, guess, index=0):
 
-        temp = fsolve(function_to_solve, x0=[guess], args=[target])[0]
+        def function_to_solve(T, fluid, target):
+            return function_of_T(T, fluid) - target
+
+        res = fsolve(function_to_solve, x0=guess, args=(fluid, target))
+        temp = res[0]
+        if len(res) >= index and index != 0:
+            temp = res[index]
         instance = self._get_fluid_instance(temp)
 
         if instance is not None:
@@ -291,5 +328,13 @@ class PropertiesFromXInterface:
                     setattr(self, attr, getattr(instance, attr))
 
     def _get_fluid_instance(self, T):
+        """
+        Returns a fluid properties object
+
+        Parameters
+        ----------
+        T : float
+            temperature in [K]
+        """
         raise NotImplementedError("{:s}._get_fluid_instance NOT IMPLEMENTED"
                                   .format(type(self).__name__))

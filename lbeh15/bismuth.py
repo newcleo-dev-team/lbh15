@@ -1,7 +1,7 @@
 from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
-from ._lbeh15 import KELVIN_SYMBOL, LEAD_MELTING_TEMPERATURE
-from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
-from ._lbeh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
+from ._lbeh15 import KELVIN_SYMBOL, BISMUTH_MELTING_TEMPERATURE
+from ._lbeh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
+from ._lbeh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbeh15 import LEFT_KEYWORD, RIGHT_KEYWORD
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
@@ -10,9 +10,9 @@ from ._utils import beta_s, cp, mi, r, conductivity
 from ._utils import p_s_initializer
 
 
-class Lead(PropertiesInterface):
+class Bismuth(PropertiesInterface):
     """
-    Class to model lead properties at a given temperature
+    Class to model bismuth properties at a given temperature
 
     Parameters
     ----------
@@ -26,28 +26,28 @@ class Lead(PropertiesInterface):
         super().__init__(T, temperature_units)
 
     def _set_constants(self):
-        self._T_m0 = LEAD_MELTING_TEMPERATURE
-        self._Q_m0 = LEAD_MELTING_LATENT_HEAT
-        self._T_b0 = LEAD_BOILING_TEMPERATURE
-        self._Q_b0 = LEAD_VAPORISATION_HEAT
+        self._T_m0 = BISMUTH_MELTING_TEMPERATURE
+        self._Q_m0 = BISMUTH_MELTING_LATENT_HEAT
+        self._T_b0 = BISMUTH_BOILING_TEMPERATURE
+        self._Q_b0 = BISMUTH_VAPORISATION_HEAT
 
     def _fill_properties(self):
-        self._p_s = p_s(self.T, LEAD_KEYWORD)
-        self._sigma = sigma(self.T, LEAD_KEYWORD)
-        self._rho = rho(self.T, LEAD_KEYWORD)
-        self._alpha = alpha(self.T, LEAD_KEYWORD)
-        self._u_s = u_s(self.T, LEAD_KEYWORD)
-        self._beta_s = beta_s(self.T, LEAD_KEYWORD)
-        self._cp = cp(self.T, LEAD_KEYWORD)
-        self._delta_h = delta_h(self.T, LEAD_KEYWORD)
-        self._mi = mi(self.T, LEAD_KEYWORD)
-        self._r = r(self.T, LEAD_KEYWORD)
-        self._conductivity = conductivity(self.T, LEAD_KEYWORD)
+        self._p_s = p_s(self.T, BISMUTH_KEYWORD)
+        self._sigma = sigma(self.T, BISMUTH_KEYWORD)
+        self._rho = rho(self.T, BISMUTH_KEYWORD)
+        self._alpha = alpha(self.T, BISMUTH_KEYWORD)
+        self._u_s = u_s(self.T, BISMUTH_KEYWORD)
+        self._beta_s = beta_s(self.T, BISMUTH_KEYWORD)
+        self._cp = cp(self.T, BISMUTH_KEYWORD)
+        self._delta_h = delta_h(self.T, BISMUTH_KEYWORD)
+        self._mi = mi(self.T, BISMUTH_KEYWORD)
+        self._r = r(self.T, BISMUTH_KEYWORD)
+        self._conductivity = conductivity(self.T, BISMUTH_KEYWORD)
 
 
-class _LeadFromX(PropertiesFromXInterface):
+class _BismuthFromX(PropertiesFromXInterface):
     """
-    Class to model lead properties from one of its properties.
+    Class to model bismuth properties from one of its properties.
 
     Parameters
     ----------
@@ -64,24 +64,24 @@ class _LeadFromX(PropertiesFromXInterface):
         to target (if more then one are retrieved)
     """
     def __init__(self, function_of_T, target,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5, index=0):
-        super().__init__(function_of_T, target, LEAD_KEYWORD, guess, index)
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, index=0):
+        super().__init__(function_of_T, target, BISMUTH_KEYWORD, guess, index)
 
     def _get_fluid_instance(self, T):
         """
-        Returns an instance of :class:`lead.Lead`
+        Returns an instance of :class:`bismuth.Bismuth`
 
         Parameters
         ----------
         T : float
             temperature in [K]
         """
-        return Lead(T, KELVIN_SYMBOL)
+        return Bismuth(T, KELVIN_SYMBOL)
 
 
-class LeadP_s(_LeadFromX):
+class BismuthP_s(_BismuthFromX):
     """
-    Class to model lead properties from saturation vapour pressure
+    Class to model bismuth properties from saturation vapour pressure
 
     Parameters
     ----------
@@ -92,15 +92,15 @@ class LeadP_s(_LeadFromX):
         that returns property target value
     """
     def __init__(self, saturation_pressure,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
-        if guess == LEAD_MELTING_TEMPERATURE*1.5:
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
+        if guess == BISMUTH_MELTING_TEMPERATURE*1.5:
             guess = p_s_initializer(saturation_pressure)
         super().__init__(p_s, saturation_pressure, guess)
 
 
-class LeadSigma(_LeadFromX):
+class BismuthSigma(_BismuthFromX):
     """
-    Class to model lead properties from surface tension
+    Class to model bismuth properties from surface tension
 
     Parameters
     ----------
@@ -111,13 +111,13 @@ class LeadSigma(_LeadFromX):
         that returns property target value
     """
     def __init__(self, surface_tension,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(sigma, surface_tension, guess)
 
 
-class LeadRho(_LeadFromX):
+class BismuthRho(_BismuthFromX):
     """
-    Class to model lead properties from density
+    Class to model bismuth properties from density
 
     Parameters
     ----------
@@ -128,13 +128,13 @@ class LeadRho(_LeadFromX):
         that returns property target value
     """
     def __init__(self, density,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(rho, density, guess)
 
 
-class LeadAlpha(_LeadFromX):
+class BismuthAlpha(_BismuthFromX):
     """
-    Class to model lead properties from thermal expansion coefficient
+    Class to model bismuth properties from thermal expansion coefficient
 
     Parameters
     ----------
@@ -145,13 +145,13 @@ class LeadAlpha(_LeadFromX):
         that returns property target value
     """
     def __init__(self, expansion_coefficient,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(alpha, expansion_coefficient, guess)
 
 
-class LeadU_s(_LeadFromX):
+class BismuthU_s(_BismuthFromX):
     """
-    Class to model lead properties from sound velocity
+    Class to model bismuth properties from sound velocity
 
     Parameters
     ----------
@@ -162,13 +162,13 @@ class LeadU_s(_LeadFromX):
         that returns property target value
     """
     def __init__(self, sound_velocity,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(u_s, sound_velocity, guess)
 
 
-class LeadBeta_s(_LeadFromX):
+class BismuthBeta_s(_BismuthFromX):
     """
-    Class to model lead properties from isentropic compressibility
+    Class to model bismuth properties from isentropic compressibility
 
     Parameters
     ----------
@@ -179,13 +179,13 @@ class LeadBeta_s(_LeadFromX):
         that returns property target value
     """
     def __init__(self, isentropic_compressibility,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(beta_s, isentropic_compressibility, guess)
 
 
-class LeadCp(_LeadFromX):
+class BismuthCp(_BismuthFromX):
     """
-    Class to model lead properties from specific heat capacity
+    Class to model bismuth properties from specific heat capacity
 
     Parameters
     ----------
@@ -194,15 +194,9 @@ class LeadCp(_LeadFromX):
     guess : float
         initial guess of the temperature in [K]
         that returns property target value
-    side : str
-        If more than one solution is available for
-        a given specific_heat, this parameter is used
-        to select the one at the left or at the right
-        of specif heat function minimum. It must be
-        'left' or 'right'
     """
     def __init__(self, specific_heat,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5, side=LEFT_KEYWORD):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, side=LEFT_KEYWORD):
         index = 0
         if side == RIGHT_KEYWORD:
             index = 1
@@ -210,7 +204,7 @@ class LeadCp(_LeadFromX):
             raise ValueError("Side can be {:s} or {:s}, {:s} was provided"
                              .format(LEFT_KEYWORD, RIGHT_KEYWORD, side))
         super().__init__(cp, specific_heat, guess, index=index)
-        self.__T_at_cp_min = 1682.522
+        self.__T_at_cp_min = 1342.753
 
     @property
     def T_at_cp_min(self):
@@ -227,10 +221,10 @@ class LeadCp(_LeadFromX):
         return self.__T_at_cp_min - ZERO_C_IN_K
 
 
-class LeadDelta_h(_LeadFromX):
+class BismuthDelta_h(_BismuthFromX):
     """
-    Class to model lead properties from specifc enthalpy
-    (in respect to lead melting point)
+    Class to model bismuth properties from specifc enthalpy
+    (in respect to bismuth melting point)
 
     Parameters
     ----------
@@ -241,13 +235,13 @@ class LeadDelta_h(_LeadFromX):
         that returns property target value
     """
     def __init__(self, enthalpy,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(delta_h, enthalpy, guess)
 
 
-class LeadMi(_LeadFromX):
+class BismuthMi(_BismuthFromX):
     """
-    Class to model lead properties from dynamic viscosity
+    Class to model bismuth properties from dynamic viscosity
 
     Parameters
     ----------
@@ -258,13 +252,13 @@ class LeadMi(_LeadFromX):
         that returns property target value
     """
     def __init__(self, dynamic_viscosity,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(mi, dynamic_viscosity, guess)
 
 
-class LeadR(_LeadFromX):
+class BismuthR(_BismuthFromX):
     """
-    Class to model lead properties from electrical resistivity
+    Class to model bismuth properties from electrical resistivity
 
     Parameters
     ----------
@@ -275,13 +269,13 @@ class LeadR(_LeadFromX):
         that returns property target value
     """
     def __init__(self, electrical_resistivity,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(r, electrical_resistivity, guess)
 
 
-class LeadConductivity(_LeadFromX):
+class BismuthConductivity(_BismuthFromX):
     """
-    Class to model lead properties from thermal conductivity
+    Class to model bismuth properties from thermal conductivity
 
     Parameters
     ----------
@@ -292,5 +286,5 @@ class LeadConductivity(_LeadFromX):
         that returns property target value
     """
     def __init__(self, thermal_conductivity,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5):
         super().__init__(conductivity, thermal_conductivity, guess)
