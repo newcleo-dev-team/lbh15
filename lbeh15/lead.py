@@ -118,14 +118,15 @@ class _LeadFromX(PropertiesFromXInterface):
         that returns property target value
     second_root : bool
         true to initialize the object with the second root
-        of function_of_T, false for the first one. 
+        of function_of_T, false for the first one.
         Needed if target value is similar to the minimum
         and the solution at the right of the minimum (second root)
         is the desired one
     """
     def __init__(self, function_of_T, target,
                  guess=LEAD_MELTING_TEMPERATURE*1.7, second_root=False):
-        super().__init__(function_of_T, target, LEAD_KEYWORD, guess, second_root)
+        super().__init__(function_of_T, target, LEAD_KEYWORD,
+                         guess, second_root)
 
     def _get_fluid_instance(self, T):
         """
@@ -231,7 +232,7 @@ class LeadCp(_LeadFromX):
         that returns property target value
     second_root : bool
         true to initialize the object with the second root
-        of specific_heat function, false for the first one. 
+        of specific_heat function, false for the first one.
         Needed if specific_heat value is similar to the minimum
         and the solution at the right of the minimum (second root)
         is the desired one

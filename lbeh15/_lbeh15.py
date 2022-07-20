@@ -317,11 +317,13 @@ class PropertiesFromXInterface:
         def function_to_solve(T, fluid, target):
             return function_of_T(T, fluid) - target
 
-        if not second_root: 
-            res = fsolve(function_to_solve, x0=[guess], args=(fluid, target), xtol=1e-10)
+        if not second_root:
+            res = fsolve(function_to_solve, x0=[guess],
+                         args=(fluid, target), xtol=1e-10)
             temp = res[0]
         else:
-            res = fsolve(function_to_solve, x0=[guess, 4*guess], args=(fluid, target), xtol=1e-10)
+            res = fsolve(function_to_solve, x0=[guess, 4*guess],
+                         args=(fluid, target), xtol=1e-10)
             temp = res[1]
         instance = self._get_fluid_instance(temp)
 

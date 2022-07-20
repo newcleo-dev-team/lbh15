@@ -122,7 +122,8 @@ class _LBEFromX(PropertiesFromXInterface):
     """
     def __init__(self, function_of_T, target,
                  guess=LBE_MELTING_TEMPERATURE*2.0, second_root=False):
-        super().__init__(function_of_T, target, LBE_KEYWORD, guess, second_root)
+        super().__init__(function_of_T, target, LBE_KEYWORD,
+                         guess, second_root)
 
     def _get_fluid_instance(self, T):
         """
@@ -254,7 +255,7 @@ class LBECp(_LBEFromX):
         of specif heat function minimum. It must be
         'left' or 'right'
     """
-    def __init__(self, specific_heat, second_root=False):        
+    def __init__(self, specific_heat, second_root=False):
         super().__init__(cp, specific_heat, second_root=second_root)
 
     @staticmethod
