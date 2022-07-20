@@ -59,7 +59,7 @@ from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
 from ._lbeh15 import KELVIN_SYMBOL, LBE_MELTING_TEMPERATURE
 from ._lbeh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbeh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
-from ._lbeh15 import LEFT_KEYWORD, RIGHT_KEYWORD
+from ._lbeh15 import LBE_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
@@ -256,21 +256,20 @@ class LBECp(_LBEFromX):
     """
     def __init__(self, specific_heat, second_root=False):        
         super().__init__(cp, specific_heat, second_root=second_root)
-        self.__T_at_cp_min = 1566.510
 
-    @property
-    def T_at_cp_min(self):
+    @staticmethod
+    def T_at_cp_min():
         """
         float : temperature in [K] corresponding to specific heat minimum
         """
-        return self.__T_at_cp_min
+        return LBE_T_AT_CP_MIN
 
     @property
-    def T_at_cp_min_in_celsius(self):
+    def T_at_cp_min_in_celsius():
         """
         float : temperature in [degC] corresponding to specific heat minimum
         """
-        return self.__T_at_cp_min - ZERO_C_IN_K
+        return LBECp.T_at_cp_min() - ZERO_C_IN_K
 
 
 class LBEDelta_h(_LBEFromX):

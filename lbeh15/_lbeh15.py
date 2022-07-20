@@ -8,26 +8,27 @@ KELVIN_SYMBOL = "K"
 LEAD_KEYWORD = "lead"
 BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
-LEFT_KEYWORD = "left"
-RIGHT_KEYWORD = "right"
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE = 600.6
 LEAD_MELTING_LATENT_HEAT = 23.07e3
 LEAD_BOILING_TEMPERATURE = 2021
 LEAD_VAPORISATION_HEAT = 858.6e3
+LEAD_T_AT_CP_MIN = 1682.522
 
 # BISMUTH CONSTANTS
 BISMUTH_MELTING_TEMPERATURE = 544.6
 BISMUTH_MELTING_LATENT_HEAT = 53.3e3
 BISMUTH_BOILING_TEMPERATURE = 1831
 BISMUTH_VAPORISATION_HEAT = 856.2e3
+BISMUTH_T_AT_CP_MIN = 1342.753
 
 # LEAD-BISMUTH-EUTECTIC CONSTANTS
 LBE_MELTING_TEMPERATURE = 398.0
 LBE_MELTING_LATENT_HEAT = 38.6e3
 LBE_BOILING_TEMPERATURE = 1927
 LBE_VAPORISATION_HEAT = 856.6e3
+LBE_T_AT_CP_MIN = 1566.510
 
 
 # LOOK FOR PACKAGE TO REPLACE IT
@@ -319,7 +320,7 @@ class PropertiesFromXInterface:
         if not second_root: 
             res = fsolve(function_to_solve, x0=[guess], args=(fluid, target), xtol=1e-10)
             temp = res[0]
-        else: 
+        else:
             res = fsolve(function_to_solve, x0=[guess, 4*guess], args=(fluid, target), xtol=1e-10)
             temp = res[1]
         instance = self._get_fluid_instance(temp)

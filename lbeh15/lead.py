@@ -59,7 +59,7 @@ from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
 from ._lbeh15 import KELVIN_SYMBOL, LEAD_MELTING_TEMPERATURE
 from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbeh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
-from ._lbeh15 import LEFT_KEYWORD, RIGHT_KEYWORD
+from ._lbeh15 import LEAD_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
@@ -124,7 +124,7 @@ class _LeadFromX(PropertiesFromXInterface):
         is the desired one
     """
     def __init__(self, function_of_T, target,
-                 guess=LEAD_MELTING_TEMPERATURE*1.5, second_root=False):
+                 guess=LEAD_MELTING_TEMPERATURE*1.7, second_root=False):
         super().__init__(function_of_T, target, LEAD_KEYWORD, guess, second_root)
 
     def _get_fluid_instance(self, T):
@@ -238,21 +238,20 @@ class LeadCp(_LeadFromX):
     """
     def __init__(self, specific_heat, second_root=False):
         super().__init__(cp, specific_heat, second_root=second_root)
-        self.__T_at_cp_min = 1682.522
 
-    @property
-    def T_at_cp_min(self):
+    @staticmethod
+    def T_at_cp_min():
         """
         float : temperature in [K] corresponding to specific heat minimum
         """
-        return self.__T_at_cp_min
+        return T_AT_CP_MIN
 
-    @property
-    def T_at_cp_min_in_celsius(self):
+    @staticmethod
+    def T_at_cp_min_in_celsius():
         """
         float : temperature in [degC] corresponding to specific heat minimum
         """
-        return self.__T_at_cp_min - ZERO_C_IN_K
+        return LeadCp.T_at_cp_min() - ZERO_C_IN_K
 
 
 class LeadDelta_h(_LeadFromX):
