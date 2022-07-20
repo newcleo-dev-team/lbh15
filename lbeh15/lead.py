@@ -1,3 +1,60 @@
+"""
+Module that contains liquid lead properties objects.
+Those objects can be initialized with the temperature
+(:class:`.lead.Lead`) or with one of the available properties
+(:class:`.lead.LeadMi`, :class:`.lead.LeadRho`, ecc)
+
+Each object has the following properties:
+    - :math:`T_{m0}` lead melting temperature:
+        :math:`600.6 [K]`
+    - :math:`Q_{m0}` lead melting latent heat:
+        :math:`23.07\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
+    - :math:`T_{b0}` lead boiling temperature:
+        :math:`2021 [K]`
+    - :math:`Q_{b0}` lead vaporisation heat:
+        :math:`858.6\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
+    - :math:`p_s` lead saturation vapour pressure :math:`[Pa]`:
+        :math:`p_s(T) = \\displaystyle5.79\\cdot10^9\\cdot\
+        \\exp{\\Bigg(\\frac{-22131}{T}\\Bigg)}`
+    - :math:`\\sigma` lead surface tension \
+      :math:`\\Big[\\frac{N}{m}\\Big]`:
+        :math:`\\sigma(T) = \\displaystyle\\Big(525.9 \
+        - 0.113{\\cdot}T\\Big)\\cdot10^{-3}`
+    - :math:`\\rho` lead density \
+      :math:`\\Big[\\frac{kg}{m^3}\\Big]`:
+        :math:`\\rho(T) = \\displaystyle11441 - 1.2795{\\cdot}T`
+    - :math:`\\alpha` lead thermal expansion coefficient \
+      :math:`\\Big[\\frac{1}{K}\\Big]`:
+        :math:`\\alpha(T) = \\displaystyle\\frac{1}{8942 - T}`
+    - :math:`u_s` speed of sound in lead \
+      :math:`\\Big[\\frac{m}{s}\\Big]`:
+        :math:`u_s(T) = \\displaystyle1953 - 0.246{\\cdot}T`
+    - :math:`\\beta_s` lead isentropic compressibility \
+      :math:`\\Big[\\frac{1}{Pa}\\Big]`:
+        :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T) \
+        - u_s(T)}`
+    - :math:`c_p` lead specific heat \
+      :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+        :math:`c_p(T) = \\displaystyle175.1 - 4.961\\cdot10^{-2}{\\cdot}T \
+        + 1.985\\cdot10^{-5}{\\cdot}T^2 - 2.099\\cdot10^{-9}{\\cdot}T^3 \
+        - 1.524\\cdot10^{6}{\\cdot}T^{-2}`
+    - :math:`{\\Delta}h` lead specific enthalpy (in respect to melting point) \
+      :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+        :math:`{\\Delta}h(T) = \\displaystyle\
+        176.2\\cdot\\Big(T - T_{m0}\\Big) \
+        - 2.4615\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
+        + 5.147\\cdot10^{-6}\\Big(T^3 - T_{m0}^3\\Big) \
+        + 1.524\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
+    - :math:`\\mu` lead dynamic visocity :math:`[Pa{\\cdot}s]`:
+        :math:`\\mu(T) = 4.55\\cdot10^{-4}\\exp{\\frac{1069}{T}}`
+    - :math:`r` lead electrical resistivity :math:`[\\Omega{\\cdot}m]`:
+        :math:`r(T) = \\Big(67.0 + 0.0471{\\cdot}T\\Big)\\cdot10^{-8}`
+    - :math:`\\lambda` lead thermal conductivity \
+      :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
+        :math:`{\\lambda}(T) = 9.2 + 0.011{\\cdot}T`
+
+Where :math:`T` is the lead temperature in :math:`[K]`
+"""
 from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
 from ._lbeh15 import KELVIN_SYMBOL, LEAD_MELTING_TEMPERATURE
 from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
@@ -69,7 +126,7 @@ class _LeadFromX(PropertiesFromXInterface):
 
     def _get_fluid_instance(self, T):
         """
-        Returns an instance of :class:`lead.Lead`
+        Returns an instance of :class:`.lead.Lead`
 
         Parameters
         ----------

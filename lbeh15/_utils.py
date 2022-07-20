@@ -284,7 +284,7 @@ def r(T, fluid):
 
 def conductivity(T, fluid):
     """
-    Computes fluid electrical resistivity [Ohm*m].
+    Computes fluid thermal conductivity [W/(m*K)].
 
     Parameters
     ----------

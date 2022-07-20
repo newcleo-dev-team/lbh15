@@ -8,9 +8,11 @@ Welcome to LBEH15 documentation!
    
    files/README.rst
    
-   files/properties
+   files/lead.rst
 
-   files/_utils
+   files/bismuth.rst
+
+   files/lbe.rst
    
 Indices and tables
 ==================
