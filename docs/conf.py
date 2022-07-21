@@ -37,8 +37,11 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.mathjax',
     'myst_parser',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    'sphinxcontrib.bibtex'
 ]
+
+bibtex_bibfiles = ['lbeh15.bib']
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True

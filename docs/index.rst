@@ -13,6 +13,8 @@ Welcome to LBEH15 documentation!
    files/bismuth.rst
 
    files/lbe.rst
+
+   files/bibliography.rst
    
 Indices and tables
 ==================
