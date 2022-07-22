@@ -58,7 +58,8 @@ Each object has the following properties:
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` bismuth dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\mu(T) = 4.456\\cdot10^{-4}\\exp{\\frac{780}{T}}`
+        :math:`\\mu(T) = 4.456\\cdot10^{-4}\\cdot\
+        \\exp\\Bigg({\\frac{780}{T}}\\Bigg)`
     - :math:`r` bismuth electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
         :math:`r(T) = \\Big(98.96 + 0.0554{\\cdot}T\\Big)\\cdot10^{-8}`

@@ -58,7 +58,8 @@ Each object has the following properties:
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\mu(T) = 4.94\\cdot10^{-4}\\exp{\\frac{754.1}{T}}`
+        :math:`\\mu(T) = 4.94\\cdot10^{-4}\\cdot\
+        \\exp\\Bigg({\\frac{754.1}{T}}\\Bigg)`
     - :math:`r` lbe electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
         :math:`r(T) = \\Big(90.9 + 0.048{\\cdot}T\\Big)\\cdot10^{-8}`

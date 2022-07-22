@@ -59,7 +59,8 @@ Each object has the following properties:
         + 1.524\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lead dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\mu(T) = 4.55\\cdot10^{-4}\\exp{\\frac{1069}{T}}`
+        :math:`\\mu(T) = 4.55\\cdot10^{-4}\\cdot\
+        \\exp\\Bigg({\\frac{1069}{T}}\\Bigg)`
     - :math:`r` lead electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
         :math:`r(T) = \\Big(67.0 + 0.0471{\\cdot}T\\Big)\\cdot10^{-8}`
