@@ -131,9 +131,12 @@ class _LBEFromX(PropertiesFromXInterface):
     guess : float
         initial guess of the temperature in [K]
         that returns property target value
-    index : int
-        index used to select the temperature corresponding
-        to target (if more then one are retrieved)
+    second_root : bool
+        true to initialize the object with the second root
+        of function_of_T, false for the first one.
+        Needed if target value is similar to the minimum
+        and the solution at the right of the minimum (second root)
+        is the desired one
     """
     def __init__(self, function_of_T, target,
                  guess=LBE_MELTING_TEMPERATURE*2.0, second_root=False):
@@ -161,9 +164,6 @@ class LBEP_s(_LBEFromX):
     ----------
     saturation_pressure : float
         value of the saturation vapour pressure in [Pa]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, saturation_pressure):
         guess = p_s_initializer(saturation_pressure)
@@ -178,9 +178,6 @@ class LBESigma(_LBEFromX):
     ----------
     surface_tension : float
         value of surface tension [N/m]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, surface_tension):
         super().__init__(sigma, surface_tension)
@@ -194,9 +191,6 @@ class LBERho(_LBEFromX):
     ----------
     density : float
         value of density [kg/m^3]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, density):
         super().__init__(rho, density)
@@ -211,9 +205,6 @@ class LBEAlpha(_LBEFromX):
     ----------
     expansion_coefficient : float
         value of temperature expansion coefficient [1/K]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, expansion_coefficient):
         super().__init__(alpha, expansion_coefficient)
@@ -227,9 +218,6 @@ class LBEU_s(_LBEFromX):
     ----------
     sound_velocity : float
         value of sound velocity [m/s]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, sound_velocity):
         super().__init__(u_s, sound_velocity)
@@ -244,9 +232,6 @@ class LBEBeta_s(_LBEFromX):
     ----------
     isentropic_compressibility : float
         value of isentropic compressibility [1/Pa]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, isentropic_compressibility):
         super().__init__(beta_s, isentropic_compressibility)
@@ -260,15 +245,12 @@ class LBECp(_LBEFromX):
     ----------
     specific_heat : float
         value of specific heat capacity [J/(kg*K)]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
-    side : str
-        If more than one solution is available for
-        a given specific_heat, this parameter is used
-        to select the one at the left or at the right
-        of specif heat function minimum. It must be
-        'left' or 'right'
+    second_root : bool
+        true to initialize the object with the second root
+        of specific_heat function, false for the first one.
+        Needed if specific_heat value is similar to the minimum
+        and the solution at the right of the minimum (second root)
+        is the desired one
     """
     def __init__(self, specific_heat, second_root=False):
         super().__init__(cp, specific_heat, second_root=second_root)
@@ -297,9 +279,6 @@ class LBEDelta_h(_LBEFromX):
     ----------
     enthalpy : float
         value of specifc enthalpy [J/kg]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, enthalpy):
         super().__init__(delta_h, enthalpy)
@@ -313,9 +292,6 @@ class LBEMi(_LBEFromX):
     ----------
     dynamic_viscosity : float
         value of dynamic viscosity [Pa*s]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, dynamic_viscosity):
         super().__init__(mi, dynamic_viscosity)
@@ -329,9 +305,6 @@ class LBER(_LBEFromX):
     ----------
     electrical_resistivity : float
         value of electrical resistivity [Ohm*m]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, electrical_resistivity):
         super().__init__(r, electrical_resistivity)
@@ -345,9 +318,6 @@ class LBEConductivity(_LBEFromX):
     ----------
     thermal_conductivity : float
         value of thermal conductivity [W/(m*K)]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
     """
     def __init__(self, thermal_conductivity):
         super().__init__(conductivity, thermal_conductivity)
