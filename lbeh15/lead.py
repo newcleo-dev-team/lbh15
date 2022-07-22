@@ -245,7 +245,7 @@ class LeadCp(_LeadFromX):
         """
         float : temperature in [K] corresponding to specific heat minimum
         """
-        return T_AT_CP_MIN
+        return LEAD_T_AT_CP_MIN
 
     @staticmethod
     def T_at_cp_min_in_celsius():

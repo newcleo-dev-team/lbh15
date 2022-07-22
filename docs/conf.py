@@ -14,9 +14,11 @@
 #
 import os
 import sys
+import lbeh15
 
-sys.path.insert(0, os.path.abspath('./../'))
-sys.path.insert(0, os.path.abspath('./../lbeh15/'))
+sys.path.insert(0, os.path.abspath('..'))
+with open(os.path.join("..", "lbeh15", "VERSION")) as version_file:
+    __version__ = version_file.read().strip()
 
 # -- Project information -----------------------------------------------------
 
@@ -25,9 +27,9 @@ copyright = '2022, NEWCLEO'
 author = 'Daniele Panico\''
 
 # The short X.Y version
-version = ''
+version = __version__
 # The full version, including alpha/beta/rc tags
-release = ''
+release = __version__
 
 
 # -- General configuration ---------------------------------------------------
