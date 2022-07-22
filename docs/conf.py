@@ -22,9 +22,9 @@ with open(os.path.join("..", "lbeh15", "VERSION")) as version_file:
 
 # -- Project information -----------------------------------------------------
 
-project = 'LBEH15'
-copyright = '2022, NEWCLEO'
-author = 'Daniele Panico\''
+project = 'lbeh15'
+copyright = u'2022, NEWCLEO'
+author = u'Daniele Panico'
 
 # The short X.Y version
 version = __version__
@@ -113,7 +113,7 @@ html_static_path = []
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'AMACA documentation'
+htmlhelp_basename = 'lbeh15 documentation'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -144,6 +144,6 @@ latex_elements = {
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'lbeh15.tex', 'LBEH15 Documentation',
-     'Daniele Panico\'', 'manual'),
+    (master_doc, 'lbeh15.tex', u'lbeh15 Documentation',
+     u'Daniele Panico', 'manual'),
 ]

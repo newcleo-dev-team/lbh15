@@ -1,4 +1,4 @@
-Welcome to LBEH15 documentation!
+Welcome to lbeh15 documentation!
 ================================
 
 
