@@ -5,51 +5,66 @@ Those objects can be initialized with the temperature
 (:class:`.bismuth.BismuthMi`, :class:`.bismuth.BismuthRho`, ecc)
 
 Each object has the following properties:
+
     - :math:`T_{m0}` bismuth melting temperature:
+
         :math:`544.6 [K]`
     - :math:`Q_{m0}` bismuth melting latent heat:
+
         :math:`53.3\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
     - :math:`T_{b0}` bismuth boiling temperature:
+
         :math:`1831 [K]`
     - :math:`Q_{b0}` bismuth vaporisation heat:
+
         :math:`856.2\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
     - :math:`p_s` bismuth saturation vapour pressure :math:`[Pa]`:
+
         :math:`p_s(T) = \\displaystyle2.67\\cdot10^{10}\\cdot\
         \\exp{\\Bigg(\\frac{-22858}{T}\\Bigg)}`
     - :math:`\\sigma` bismuth surface tension \
       :math:`\\Big[\\frac{N}{m}\\Big]`:
+
         :math:`\\sigma(T) = \\displaystyle\\Big(420.8 \
         - 0.81{\\cdot}T\\Big)\\cdot10^{-3}`
     - :math:`\\rho` bismuth density \
       :math:`\\Big[\\frac{kg}{m^3}\\Big]`:
+
         :math:`\\rho(T) = \\displaystyle10725 - 1.22{\\cdot}T`
     - :math:`\\alpha` bismuth thermal expansion coefficient \
       :math:`\\Big[\\frac{1}{K}\\Big]`:
+
         :math:`\\alpha(T) = \\displaystyle\\frac{1}{8791 - T}`
     - :math:`u_s` speed of sound in bismuth \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
+
         :math:`u_s(T) = \\displaystyle1616 + 0.246{\\cdot}T \
         - 2.2\\cdot10^{-4}{\\cdot}T`
     - :math:`\\beta_s` bismuth isentropic compressibility \
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
-        :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T) \
-        - u_s(T)}`
+
+        :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
     - :math:`c_p` bismuth specific heat \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+
         :math:`c_p(T) = \\displaystyle118.2 - 5.934\\cdot10^{-3}{\\cdot}T \
         + 7.183\\cdot10^{6}{\\cdot}T^{-2}`
     - :math:`{\\Delta}h` bismuth specific enthalpy (in respect to melting \
       point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+
         :math:`{\\Delta}h(T) = \\displaystyle\
         118.2\\cdot\\Big(T - T_{m0}\\Big) \
         + 2.967\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` bismuth dynamic visocity :math:`[Pa{\\cdot}s]`:
+
         :math:`\\mu(T) = 4.456\\cdot10^{-4}\\exp{\\frac{780}{T}}`
     - :math:`r` bismuth electrical resistivity :math:`[\\Omega{\\cdot}m]`:
+
         :math:`r(T) = \\Big(98.96 + 0.0554{\\cdot}T\\Big)\\cdot10^{-8}`
     - :math:`\\lambda` bismuth thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
+
         :math:`{\\lambda}(T) = 7.34 + 9.5\\cdot10^{-3}{\\cdot}T`
 
 Where :math:`T` is the bismuth temperature in :math:`[K]`

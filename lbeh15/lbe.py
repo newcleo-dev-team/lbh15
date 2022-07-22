@@ -5,51 +5,66 @@ Those objects can be initialized with the temperature
 (:class:`.lbe.LBEMi`, :class:`.lbe.LBERho`, ecc)
 
 Each object has the following properties:
+
     - :math:`T_{m0}` lbe melting temperature:
+
         :math:`398.0 [K]`
     - :math:`Q_{m0}` lbe melting latent heat:
+
         :math:`38.6\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
     - :math:`T_{b0}` lbe boiling temperature:
+
         :math:`1927 [K]`
     - :math:`Q_{b0}` lbe vaporisation heat:
+
         :math:`856.6\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
     - :math:`p_s` lbe saturation vapour pressure :math:`[Pa]`:
+
         :math:`p_s(T) = \\displaystyle1.22\\cdot10^{10}\\cdot\
         \\exp{\\Bigg(\\frac{-22852}{T}\\Bigg)}`
     - :math:`\\sigma` lbe surface tension \
       :math:`\\Big[\\frac{N}{m}\\Big]`:
+
         :math:`\\sigma(T) = \\displaystyle\\Big(448.5 \
         - 0.0799{\\cdot}T\\Big)\\cdot10^{-3}`
     - :math:`\\rho` lbe density \
       :math:`\\Big[\\frac{kg}{m^3}\\Big]`:
+
         :math:`\\rho(T) = \\displaystyle11065 - 1.293{\\cdot}T`
     - :math:`\\alpha` lbe thermal expansion coefficient \
       :math:`\\Big[\\frac{1}{K}\\Big]`:
+
         :math:`\\alpha(T) = \\displaystyle\\frac{1}{8558 - T}`
     - :math:`u_s` speed of sound in lbe \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
+
         :math:`u_s(T) = \\displaystyle1855 - 0.212{\\cdot}T`
     - :math:`\\beta_s` lbe isentropic compressibility \
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
-        :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T) \
-        - u_s(T)}`
+
+        :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
     - :math:`c_p` lbe specific heat \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+
         :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-3}{\\cdot}T \
         + 1.25\\cdot10^{-5}{\\cdot}T^2 - 4.56\\cdot10^{5}{\\cdot}T^{-2}`
     - :math:`{\\Delta}h` lbe specific enthalpy (in respect to melting \
       point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+
         :math:`{\\Delta}h(T) = \\displaystyle\
         164.8\\cdot\\Big(T - T_{m0}\\Big) \
         - 1.97\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
         + 4.167\\cdot10^{-2}\\Big(T^3 - T_{m0}^3\\Big) \
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
+
         :math:`\\mu(T) = 4.94\\cdot10^{-4}\\exp{\\frac{754.1}{T}}`
     - :math:`r` lbe electrical resistivity :math:`[\\Omega{\\cdot}m]`:
+
         :math:`r(T) = \\Big(90.9 + 0.048{\\cdot}T\\Big)\\cdot10^{-8}`
     - :math:`\\lambda` lbe thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
+
         :math:`{\\lambda}(T) = 3.284 + 1.617\\cdot10^{-2}{\\cdot}T \
         - 2.305\\cdot10^{-6}{\\cdot}T^2`
 
