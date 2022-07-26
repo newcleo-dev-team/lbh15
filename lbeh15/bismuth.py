@@ -70,8 +70,7 @@ Each object has the following properties:
 
 Where :math:`T` is the bismuth temperature in :math:`[K]`
 """
-from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
-from ._lbeh15 import KELVIN_SYMBOL, BISMUTH_MELTING_TEMPERATURE
+from ._lbeh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbeh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbeh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbeh15 import BISMUTH_T_AT_CP_MIN
@@ -90,12 +89,9 @@ class Bismuth(PropertiesInterface):
     ----------
     T : float
         Temperature
-    temperature_units : str
-        Units used to specify temperature. Can be 'K' or 'degC' for
-        Kelvin and Celsius respectively
     """
-    def __init__(self, T, temperature_units=KELVIN_SYMBOL):
-        super().__init__(T, temperature_units)
+    def __init__(self, T):
+        super().__init__(T)
 
     def _set_constants(self):
         self._T_m0 = BISMUTH_MELTING_TEMPERATURE
@@ -152,7 +148,7 @@ class _BismuthFromX(PropertiesFromXInterface):
         T : float
             temperature in [K]
         """
-        return Bismuth(T, KELVIN_SYMBOL)
+        return Bismuth(T)
 
 
 class BismuthP_s(_BismuthFromX):
@@ -258,13 +254,6 @@ class BismuthCp(_BismuthFromX):
         float : temperature in [K] corresponding to specific heat minimum
         """
         return BISMUTH_T_AT_CP_MIN
-
-    @staticmethod
-    def T_at_cp_min_in_celsius():
-        """
-        float : temperature in [degC] corresponding to specific heat minimum
-        """
-        return BismuthCp.T_at_cp_min() - ZERO_C_IN_K
 
 
 class BismuthDelta_h(_BismuthFromX):

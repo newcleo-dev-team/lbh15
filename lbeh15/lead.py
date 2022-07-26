@@ -71,8 +71,7 @@ Each object has the following properties:
 
 Where :math:`T` is the lead temperature in :math:`[K]`
 """
-from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
-from ._lbeh15 import KELVIN_SYMBOL, LEAD_MELTING_TEMPERATURE
+from ._lbeh15 import LEAD_MELTING_TEMPERATURE
 from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbeh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
 from ._lbeh15 import LEAD_T_AT_CP_MIN
@@ -95,8 +94,8 @@ class Lead(PropertiesInterface):
         Units used to specify temperature. Can be 'K' or 'degC' for
         Kelvin and Celsius respectively
     """
-    def __init__(self, T, temperature_units=KELVIN_SYMBOL):
-        super().__init__(T, temperature_units)
+    def __init__(self, T):
+        super().__init__(T)
 
     def _set_constants(self):
         self._T_m0 = LEAD_MELTING_TEMPERATURE
@@ -153,7 +152,7 @@ class _LeadFromX(PropertiesFromXInterface):
         T : float
             temperature in [K]
         """
-        return Lead(T, KELVIN_SYMBOL)
+        return Lead(T)
 
 
 class LeadP_s(_LeadFromX):
@@ -262,13 +261,6 @@ class LeadCp(_LeadFromX):
         float : temperature in [K] corresponding to specific heat minimum
         """
         return LEAD_T_AT_CP_MIN
-
-    @staticmethod
-    def T_at_cp_min_in_celsius():
-        """
-        float : temperature in [degC] corresponding to specific heat minimum
-        """
-        return LeadCp.T_at_cp_min() - ZERO_C_IN_K
 
 
 class LeadDelta_h(_LeadFromX):

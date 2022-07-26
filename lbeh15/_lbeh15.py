@@ -1,10 +1,7 @@
 from scipy.optimize import fsolve
 from scipy.constants import atmosphere
 
-# CONSTANTS
-ZERO_C_IN_K = 273.15
-CELSIUS_SYMBOL = "degC"
-KELVIN_SYMBOL = "K"
+# KEYWORDS
 LEAD_KEYWORD = "lead"
 BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
@@ -31,37 +28,6 @@ LBE_VAPORISATION_HEAT = 856.6e3  # [J/kg]
 LBE_T_AT_CP_MIN = 1566.510  # [K]
 
 
-# LOOK FOR PACKAGE TO REPLACE IT
-def _get_temperature_in_kelvin(temperature, units):
-    """
-    Converts input temperature in Kelvin, raising value error
-    if units provided are neither 'K' or 'degC'
-
-    Parameters
-    ----------
-    T : float
-        Temperature
-    temperature_units : str
-        Units used to specify temperature. Can be 'K' or 'degC' for
-        Kelvin and Celsius respectively
-
-    Returns
-    -------
-    rvalue : float
-        Temperature in K
-    """
-    rvalue = 0
-    if units == CELSIUS_SYMBOL:
-        rvalue = temperature + ZERO_C_IN_K
-    elif units == KELVIN_SYMBOL:
-        rvalue = temperature
-    else:
-        raise ValueError("Temperature units must be one of {:s}, {:s}".
-                         format(CELSIUS_SYMBOL, KELVIN_SYMBOL))
-
-    return rvalue
-
-
 class PropertiesInterface:
     """
     Base class that defines liquid metal properties object
@@ -70,10 +36,7 @@ class PropertiesInterface:
     Parameters
     ----------
     T : float
-        Temperature
-    temperature_units : str
-        Units used to specify temperature. Can be 'K' or 'degC' for
-        Kelvin and Celsius respectively
+        Temperature in [K]
     """
     _T_m0 = 0
     _Q_m0 = 0
@@ -93,10 +56,10 @@ class PropertiesInterface:
     _conductivity = 0
     _p = 0
 
-    def __init__(self, T, temperature_units=KELVIN_SYMBOL):
+    def __init__(self, T):
         self._p = atmosphere
         self._set_constants()
-        self.__fill_class_attributes(T, temperature_units)
+        self.__fill_class_attributes(T)
 
     @property
     def T(self):
@@ -104,13 +67,6 @@ class PropertiesInterface:
         float : temperature used to compute properties [K]
         """
         return self._T
-
-    @property
-    def T_in_celsius(self):
-        """
-        float : temperature used to compute properties [°C]
-        """
-        return self.T - ZERO_C_IN_K
 
     @property
     def T_assigned(self):
@@ -240,25 +196,22 @@ class PropertiesInterface:
         raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
-    def __fill_class_attributes(self, T, temperature_units):
+    def __fill_class_attributes(self, T):
         """
         Fills all the class attributes.
 
         Parameters
         ----------
         T : float
-            Temperature
-        temperature_units : str
-            Units used to specify temperature. Can be 'K' or 'degC' for
-            Kelvin and Celsius respectively
+            Temperature in [K]
         """
-        self.__assign_T(T, temperature_units)
+        self.__assign_T(T)
 
         # continue if temperature was correctly assigned
         if self.T_assigned:
             self._fill_properties()
 
-    def __assign_T(self, T, temperature_units):
+    def __assign_T(self, T):
         """
         Function used to set class temperature, checking if
         temperature value in K is strictly positive
@@ -266,29 +219,24 @@ class PropertiesInterface:
         Parameters
         ----------
         T : float
-            Temperature
-        temperature_units : str
-            Units used to specify temperature. Can be 'K' or 'degC' for
-            Kelvin and Celsius respectively
+            Temperature in [K]
         """
-        temp = _get_temperature_in_kelvin(T, temperature_units)
-
-        if temp > self.T_m0 and temp < self.T_b0:
+        if T > self.T_m0 and T < self.T_b0:
             self._T_assigned = True
-            self._T = temp
+            self._T = T
         else:
-            if temp >= self.T_b0:
-                raise ValueError("Temperature in Kelvin must be smaller than "
+            if T >= self.T_b0:
+                raise ValueError("Temperature must be smaller than "
                                  "boiling temperature ({:7.2f} [K]), {:7.2f} "
-                                 "[K] was provided".format(self.T_b0, temp))
-            elif temp > 0 and temp <= self.T_m0:
-                raise ValueError("Temperature in Kelvin must be larger than "
+                                 "[K] was provided".format(self.T_b0, T))
+            elif T > 0 and T <= self.T_m0:
+                raise ValueError("Temperature must be larger than "
                                  "melting temerature ({:7.2f} [K]), {:7.2f} "
-                                 "[K] was provided".format(self.T_m0, temp))
+                                 "[K] was provided".format(self.T_m0, T))
             else:
-                raise ValueError("Temperature in Kelvin must be "
+                raise ValueError("Temperature must be "
                                  "strictly positive, "
-                                 "{:7.2f} [K] was provided".format(temp))
+                                 "{:7.2f} [K] was provided".format(T))
 
 
 class PropertiesFromXInterface:

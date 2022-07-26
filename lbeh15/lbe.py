@@ -71,8 +71,7 @@ Each object has the following properties:
 
 Where :math:`T` is the lbe temperature in :math:`[K]`
 """
-from ._lbeh15 import ZERO_C_IN_K, CELSIUS_SYMBOL
-from ._lbeh15 import KELVIN_SYMBOL, LBE_MELTING_TEMPERATURE
+from ._lbeh15 import LBE_MELTING_TEMPERATURE
 from ._lbeh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbeh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
 from ._lbeh15 import LBE_T_AT_CP_MIN
@@ -90,13 +89,10 @@ class LBE(PropertiesInterface):
     Parameters
     ----------
     T : float
-        Temperature
-    temperature_units : str
-        Units used to specify temperature. Can be 'K' or 'degC' for
-        Kelvin and Celsius respectively
+        Temperature in [K]
     """
-    def __init__(self, T, temperature_units=KELVIN_SYMBOL):
-        super().__init__(T, temperature_units)
+    def __init__(self, T):
+        super().__init__(T)
 
     def _set_constants(self):
         self._T_m0 = LBE_MELTING_TEMPERATURE
@@ -153,7 +149,7 @@ class _LBEFromX(PropertiesFromXInterface):
         T : float
             temperature in [K]
         """
-        return LBE(T, KELVIN_SYMBOL)
+        return LBE(T)
 
 
 class LBEP_s(_LBEFromX):
@@ -262,13 +258,6 @@ class LBECp(_LBEFromX):
         float : temperature in [K] corresponding to specific heat minimum
         """
         return LBE_T_AT_CP_MIN
-
-    @property
-    def T_at_cp_min_in_celsius():
-        """
-        float : temperature in [degC] corresponding to specific heat minimum
-        """
-        return LBECp.T_at_cp_min() - ZERO_C_IN_K
 
 
 class LBEDelta_h(_LBEFromX):
