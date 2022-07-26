@@ -1,7 +1,7 @@
 import numpy as np
-from ._lbeh15 import LEAD_MELTING_TEMPERATURE
-from ._lbeh15 import BISMUTH_MELTING_TEMPERATURE
-from ._lbeh15 import LBE_MELTING_TEMPERATURE
+from ._lbeh15 import LEAD_MELTING_TEMPERATURE as T_m0_lead
+from ._lbeh15 import BISMUTH_MELTING_TEMPERATURE as T_m0_bismuth
+from ._lbeh15 import LBE_MELTING_TEMPERATURE as T_m0_lbe
 from ._lbeh15 import LEAD_KEYWORD, BISMUTH_KEYWORD
 from ._lbeh15 import LBE_KEYWORD
 
@@ -223,19 +223,19 @@ def delta_h(T, fluid):
         can be one among lead, bismuth or lbe
     """
     if fluid == LEAD_KEYWORD:
-        rvalue = (176.2*(T - LEAD_MELTING_TEMPERATURE)
-                  - 2.4615e-2*(T**2 - LEAD_MELTING_TEMPERATURE**2)
-                  + 5.147e-6*(T**3 - LEAD_MELTING_TEMPERATURE**3)
-                  + 1.524e6*(T**-1 - LEAD_MELTING_TEMPERATURE**-1))
+        rvalue = (176.2*(T - T_m0_lead)
+                  - 2.4615e-2*(T**2 - T_m0_lead**2)
+                  + 5.147e-6*(T**3 - T_m0_lead**3)
+                  + 1.524e6*(T**-1 - T_m0_lead**-1))
     elif fluid == BISMUTH_KEYWORD:
-        rvalue = (118.2*(T - BISMUTH_MELTING_TEMPERATURE)
-                  + 2.967e-3*(T**2 - BISMUTH_MELTING_TEMPERATURE**2)
-                  - 7.183e6*(T**-1 - BISMUTH_MELTING_TEMPERATURE**-1))
+        rvalue = (118.2*(T - T_m0_bismuth)
+                  + 2.967e-3*(T**2 - T_m0_bismuth**2)
+                  - 7.183e6*(T**-1 - T_m0_bismuth**-1))
     elif fluid == LBE_KEYWORD:
-        rvalue = (164.8*(T - LBE_MELTING_TEMPERATURE)
-                  - 1.97e-2*(T**2 - LBE_MELTING_TEMPERATURE**2)
-                  + 4.167e-6*(T**3 - LBE_MELTING_TEMPERATURE**3)
-                  + 4.56e5*(T**-1 - LEAD_MELTING_TEMPERATURE**-1))
+        rvalue = (164.8*(T - T_m0_lbe)
+                  - 1.97e-2*(T**2 - T_m0_lbe**2)
+                  + 4.167e-6*(T**3 - T_m0_lbe**3)
+                  + 4.56e5*(T**-1 - T_m0_lbe**-1))
     else:
         raise ValueError("Fluid can be one among: {:s},"
                          "{:s}, {:s}. {:s} was provided"
