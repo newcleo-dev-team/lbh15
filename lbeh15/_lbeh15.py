@@ -1,7 +1,7 @@
 from scipy.optimize import fsolve
+from scipy.constants import atmosphere
 
 # CONSTANTS
-P_ATM = 101325  # [Pa]
 ZERO_C_IN_K = 273.15
 CELSIUS_SYMBOL = "degC"
 KELVIN_SYMBOL = "K"
@@ -94,7 +94,7 @@ class PropertiesInterface:
     _p = 0
 
     def __init__(self, T, temperature_units=KELVIN_SYMBOL):
-        self._p = P_ATM
+        self._p = atmosphere
         self._set_constants()
         self.__fill_class_attributes(T, temperature_units)
 
