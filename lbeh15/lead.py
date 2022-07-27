@@ -74,7 +74,7 @@ Each object has the following properties:
 
         :math:`k(T) = \\displaystyle9.2 + 0.011{\\cdot}T`
 
-Where :math:`T` is the lead temperature in :math:`[K]`
+where :math:`T` is the lead temperature in :math:`[K]`
 """
 from ._lbeh15 import LEAD_MELTING_TEMPERATURE
 from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE

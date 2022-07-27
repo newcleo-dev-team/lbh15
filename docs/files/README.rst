@@ -56,7 +56,7 @@ Properties are taken from "Handbook on Lead-bismuth Eutectic Alloy and Lead Prop
      - :math:`r`
      - :math:`[{\Omega}{\cdot}m]`
    * - Thermal conductivity
-     - :math:`\lambda`
+     - :math:`k`
      - :math:`[W/(m{\cdot}K)]`
 
 All properties are computed at atmospheric pressure ( :math:`101325 [Pa]` ). Finally, 
@@ -83,36 +83,37 @@ In this section some examples of lbeh15 usage are shown.
 
 - Initialize :class:`lead.Lead` object with temperature in Celsius
   and print its dynamic viscosity:
-
-  >>> import lbeh15.lead as lead
-  >>> # Initialize Lead object with T=395 [degC]
-  >>> lead_properties = lead.Lead(395.0, 'degC')
+  
+  >>> from scipy.constants import convert_temperature
+  >>> from lbeh15.lead import Lead
+  >>> # Initialize Lead object with T=395 Celsius
+  >>> liquid_lead = Lead(convert_temperature(395.0, 'C', 'K'))
   >>> # Print lead dynamic viscosity in [Pa*s]
-  >>> lead_properties.mi
+  >>> liquid_lead.mu
   0.0022534948395446985
 
 - Initialize :class:`lbe.LBERho`, i.e., lead-bismuth-eutectic object knowing its density
   and retrieve the corresponding temperature in Kelvin:
 
-  >>> import lbeh15.lbe as lbe
+  >>> from lbeh15.lbe import LBERho
   >>> # Initialize LBERho with rho=9800 [kg/m^3]
-  >>> lbe_properties = lbe.LBERho(9800)
+  >>> liquid_lbe = LBERho(9800)
   >>> # Print lbe temperature in [K]
-  >>> lbe_properties.T
+  >>> liquid_lbe.T
   978.3449342614078
 
 - Use other liquid metals object to compare properties at a given temperature. In this 
-  example :class:`lead.LeadConductivity` object is initialized from its conductivity, then its temperature in Kelvin
+  example :class:`lead.LeadK` object is initialized knowing conductivity value K, then its temperature in Kelvin
   is used to initialize a :class:`bismuth.Bismuth` object, then its conductivity is printed as comparison:
 
-  >>> import lbeh15.lead as lead
-  >>> import lbeh15.bismuth as bismuth
-  >>> # Inititialize LeadConductivity with conductivity=17.37 [W/(m*K)]
-  >>> lead_properties = lead.LeadConductivity(17.37)
-  >>> # Initialize Bismuth with LeadConductivity temperature in K
-  >>> bismuth_properties = bismuth.Bismuth(lead_properties.T, 'K')
+  >>> from lbeh15.lead import LeadK
+  >>> from lbeh15.bismuth import Bismuth
+  >>> # Inititialize LeadK with K=17.37 [W/(m*K)]
+  >>> liquid_lead = LeadK(17.37)
+  >>> # Initialize Bismuth with LeadK temperature in K
+  >>> liquid_bismuth = Bismuth(liquid_lead.T)
   >>> # Print bismuth conductivity
-  >>> bismuth_properties.conductivity
+  >>> liquid_bismuth.k
   14.395909090909093
 
 
@@ -126,20 +127,22 @@ properties. This is accomplished by finding the root of the function used to cal
 It follows that two main points must be underlined: 
 
 - It is not possible to initialize objects from :math:`T_{m0}`, :math:`Q_{m0}`, :math:`T_{b0}` and :math:`Q_{b0}`
+
 - Initialization from specific heat capacity is not trivial: specific heat capacity function is not injective, 
   this means that for some values of :math:`c_p` two values of temperature could be returned. This is an undesired
-  behaviour. To overcome such difficulty the package provides the possibility to the user to choose if the first or
-  second root shall be considered, i.e., the one at the left or at the right of the function minimum. An example follows:
+  behaviour. To overcome such difficulty the package provides the possibility to the user to choose if the high or
+  low range value shall be considered, i.e., the one at the left or at the right of the function minimum. The following example
+  shows its usage with :class:`bismuth.BismuthCp` (the same is valid for :class:`lead.LeadCp` and :class:`lbe.LBECp`):
 
-  >>> import lbeh15.lead as lead
+  >>> from lbeh15.bismuth import BismuthCp
   >>> # Visualize temperature in [K] corresponding to cp min
-  >>> lead.LeadCp.T_at_cp_min()
-  1682.522
+  >>> BismuthCp.T_at_cp_min()
+  1342.753
   >>> # Initialize two objects with low cp, one for the first and one for the second root
-  >>> lead_cp_1 = lead.LeadCp(137.35, second_root=False)
-  >>> lead_cp_2 = lead.LeadCp(137.35, second_root=True)
+  >>> bismuth_cp_1 = BismuthCp(137.35, high_range=False)
+  >>> bismuth_cp_2 = BismuthCp(137.35, high_range=True)
   >>> # Print their temperatures in [K]
-  >>> lead_cp_1.T, lead_cp_2.T
-  (1598.101345921492, 1768.3157244316133)
+  >>> bismuth_cp_1.T, bismuth_cp_2.T
+  (1041.8294863232934 1771.2122382213047)
 
   This is true for all the three liquid metals inside the package. 

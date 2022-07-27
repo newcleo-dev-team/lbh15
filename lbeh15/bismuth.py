@@ -69,7 +69,7 @@ Each object has the following properties:
 
         :math:`k(T) = \\displaystyle7.34 + 9.5\\cdot10^{-3}{\\cdot}T`
 
-Where :math:`T` is the bismuth temperature in :math:`[K]`
+where :math:`T` is the bismuth temperature in :math:`[K]`
 """
 from ._lbeh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbeh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE

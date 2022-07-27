@@ -1,10 +1,11 @@
 import unittest
+from scipy.constants import convert_temperature
 import lbeh15.lead as lead
 import lbeh15.bismuth as bismuth
 import lbeh15.lbe as lbe
 
 tol = 8
-Ts = [395+273.15, 1500+273.15]
+Ts = [convert_temperature(395, 'C', 'K'), convert_temperature(1500, 'C', 'K')]
 leadPs = []
 bismuthPs = []
 lbePs = []

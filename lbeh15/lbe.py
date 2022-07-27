@@ -70,7 +70,7 @@ Each object has the following properties:
         :math:`k(T) = \\displaystyle3.284 + 1.617\\cdot10^{-2}{\\cdot}T \
         - 2.305\\cdot10^{-6}{\\cdot}T^2`
 
-Where :math:`T` is the lbe temperature in :math:`[K]`
+where :math:`T` is the lbe temperature in :math:`[K]`
 """
 from ._lbeh15 import LBE_MELTING_TEMPERATURE
 from ._lbeh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
