@@ -12,6 +12,7 @@ LEAD_MELTING_LATENT_HEAT = 23.07e3  # [J/kg]
 LEAD_BOILING_TEMPERATURE = 2021  # [K]
 LEAD_VAPORISATION_HEAT = 858.6e3  # [J/kg]
 LEAD_T_AT_CP_MIN = 1682.522  # [K]
+LEAD_T_AT_CP_COMPACT_MIN = 1568.665  # [K]
 
 # BISMUTH CONSTANTS
 BISMUTH_MELTING_TEMPERATURE = 544.6  # [K]
@@ -256,22 +257,26 @@ class PropertiesFromXInterface:
         can be one among lead, bismuth or lbe
     guess : float
         initial guess of temperature in [K]
-    index : int
-        index used to select the temperature corresponding
-        to target (if more then one are retrieved)
+    high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to function_of_T minumum (if present),
+        False otherwise
     """
-    def __init__(self, function_of_T, target, fluid, guess, second_root=False):
+    def __init__(self, function_of_T, target, fluid, guess, high_range=False):
 
         self._function_of_T = function_of_T
 
-        if not second_root:
+        if not high_range:
             res = fsolve(self._function_to_solve, x0=[guess],
                          args=(fluid, target), xtol=1e-10)
             temp = res[0]
         else:
             res = fsolve(self._function_to_solve, x0=[guess, 4*guess],
                          args=(fluid, target), xtol=1e-10)
-            temp = res[1]
+            if len(res) > 0:
+                temp = res[1]
+            else:
+                temp = res[0]
         instance = self._get_fluid_instance(temp)
 
         if instance is not None:
@@ -293,6 +298,20 @@ class PropertiesFromXInterface:
 
     def _function_to_solve(self, T, fluid, target):
         """
-        Function for which the root must be found
+        Defines the function for which the root must be found.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        target : float
+            physical property value
+        fluid : str
+            fluid for which calculation shall be performed,
+            can be one among lead, bismuth or lbe
+
+        Returns
+        -------
+        float : evaluation of property correlation minus property target
         """
         return self._function_of_T(T, fluid) - target

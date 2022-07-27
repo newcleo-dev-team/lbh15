@@ -129,17 +129,15 @@ class _LBEFromX(PropertiesFromXInterface):
     guess : float
         initial guess of the temperature in [K]
         that returns property target value
-    second_root : bool
-        true to initialize the object with the second root
-        of function_of_T, false for the first one.
-        Needed if target value is similar to the minimum
-        and the solution at the right of the minimum (second root)
-        is the desired one
+    high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to function_of_T minumum (if present),
+        False otherwise
     """
     def __init__(self, function_of_T, target,
-                 guess=LBE_MELTING_TEMPERATURE*2.0, second_root=False):
+                 guess=LBE_MELTING_TEMPERATURE*2.0, high_range=False):
         super().__init__(function_of_T, target, LBE_KEYWORD,
-                         guess, second_root)
+                         guess, high_range)
 
     def _get_fluid_instance(self, T):
         """
@@ -243,15 +241,12 @@ class LBECp(_LBEFromX):
     ----------
     specific_heat : float
         value of specific heat capacity [J/(kg*K)]
-    second_root : bool
-        true to initialize the object with the second root
-        of specific_heat function, false for the first one.
-        Needed if specific_heat value is similar to the minimum
-        and the solution at the right of the minimum (second root)
-        is the desired one
+    high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to cp minumum (if present), False otherwise
     """
-    def __init__(self, specific_heat, second_root=False):
-        super().__init__(cp, specific_heat, second_root=second_root)
+    def __init__(self, specific_heat, high_range=False):
+        super().__init__(cp, specific_heat, high_range=high_range)
 
     @staticmethod
     def T_at_cp_min():
@@ -259,6 +254,13 @@ class LBECp(_LBEFromX):
         float : temperature in [K] corresponding to specific heat minimum
         """
         return LBE_T_AT_CP_MIN
+
+    @staticmethod
+    def cp_min():
+        """
+        float : specific heat minimum
+        """
+        return cp(LBECp.T_at_cp_min(), LBE_KEYWORD)
 
 
 class LBEDelta_h(_LBEFromX):

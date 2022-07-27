@@ -128,17 +128,15 @@ class _BismuthFromX(PropertiesFromXInterface):
     guess : float
         initial guess of the temperature in [K]
         that returns property target value
-    second_root : bool
-        true to initialize the object with the second root
-        of function_of_T, false for the first one.
-        Needed if target value is similar to the minimum
-        and the solution at the right of the minimum (second root)
-        is the desired one
+    high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to function_of_T minumum (if present),
+        False otherwise
     """
     def __init__(self, function_of_T, target,
-                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, second_root=False):
+                 guess=BISMUTH_MELTING_TEMPERATURE*1.5, high_range=False):
         super().__init__(function_of_T, target, BISMUTH_KEYWORD,
-                         guess, second_root)
+                         guess, high_range)
 
     def _get_fluid_instance(self, T):
         """
@@ -239,15 +237,12 @@ class BismuthCp(_BismuthFromX):
     ----------
     specific_heat : float
         value of specific heat capacity [J/(kg*K)]
-    second_root : bool
-        true to initialize the object with the second root
-        of specific_heat function, false for the first one.
-        Needed if specific_heat value is similar to the minimum
-        and the solution at the right of the minimum (second root)
-        is the desired one
+    high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to cp minumum (if present), False otherwise
     """
-    def __init__(self, specific_heat, second_root=False):
-        super().__init__(cp, specific_heat, second_root=second_root)
+    def __init__(self, specific_heat, high_range=False):
+        super().__init__(cp, specific_heat, high_range=high_range)
 
     @staticmethod
     def T_at_cp_min():
@@ -255,6 +250,13 @@ class BismuthCp(_BismuthFromX):
         float : temperature in [K] corresponding to specific heat minimum
         """
         return BISMUTH_T_AT_CP_MIN
+
+    @staticmethod
+    def cp_min():
+        """
+        float : specific heat minimum
+        """
+        return cp(BismuthCp.T_at_cp_min(), BISMUTH_KEYWORD)
 
 
 class BismuthDelta_h(_BismuthFromX):
