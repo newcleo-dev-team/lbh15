@@ -111,16 +111,27 @@ class Lead(PropertiesInterface):
 
     def _fill_properties(self):
         self._p_s = p_s(self.T, LEAD_KEYWORD)
+        self._p_s_validity = [self.T_m0, self.T_b0]
         self._sigma = sigma(self.T, LEAD_KEYWORD)
+        self._sigma_validity = [self.T_m0, 1300.0]
         self._rho = rho(self.T, LEAD_KEYWORD)
+        self._rho_validity = [self.T_m0, self.T_b0]
         self._alpha = alpha(self.T, LEAD_KEYWORD)
+        self._alpha_validity = [self.T_m0, self.T_b0]
         self._u_s = u_s(self.T, LEAD_KEYWORD)
+        self._u_s_validity = [self.T_m0, 2000.0]
         self._beta_s = beta_s(self.T, LEAD_KEYWORD)
+        self._beta_s_validity = [self.T_m0, 2000.0]
         self._cp = cp(self.T, LEAD_KEYWORD, self.cp_compact)
+        self._cp_validity = [self.T_m0, 2000.0]
         self._delta_h = delta_h(self.T, LEAD_KEYWORD)
+        self._delta_h_validity = [self.T_m0, 2000.0]
         self._mu = mu(self.T, LEAD_KEYWORD)
+        self._mu_validity = [self.T_m0, 1473.0]
         self._r = r(self.T, LEAD_KEYWORD)
+        self._r_validity = [601.0, 1273.0]
         self._k = k(self.T, LEAD_KEYWORD)
+        self._k_validity = [self.T_m0, 1300.0]
 
     @property
     def cp_compact(self):

@@ -1,3 +1,4 @@
+import warnings
 from scipy.optimize import fsolve
 from scipy.constants import atmosphere
 
@@ -43,38 +44,36 @@ class PropertiesInterface:
     _Q_m0 = 0
     _T_b0 = 0
     _Q_b0 = 0
+    _p = 0
     _T = 0
     _T_assigned = False
     _p_s = 0
+    _p_s_validity = [0, 0]
     _sigma = 0
+    _sigma_validity = [0, 0]
     _rho = 0
+    _rho_validity = [0, 0]
     _alpha = 0
+    _alpha_validity = [0, 0]
     _u_s = 0
+    _u_s_validity = [0, 0]
     _beta_s = 0
+    _beta_s_validity = [0, 0]
+    _cp = 0
+    _cp_validity = [0, 0]
     _delta_h = 0
+    _delta_h_validity = [0, 0]
     _mu = 0
+    _mu_validity = [0, 0]
     _r = 0
+    _r_validity = [0, 0]
     _k = 0
-    _p = 0
+    _k_validity = [0, 0]
 
     def __init__(self, T):
         self._p = atmosphere
         self._set_constants()
         self.__fill_class_attributes(T)
-
-    @property
-    def T(self):
-        """
-        float : temperature used to compute properties [K]
-        """
-        return self._T
-
-    @property
-    def T_assigned(self):
-        """
-        bool : true if temperature correctly assigned, false otherwise
-        """
-        return self._T_assigned
 
     @property
     def T_m0(self):
@@ -105,10 +104,33 @@ class PropertiesInterface:
         return self._Q_b0
 
     @property
+    def p(self):
+        """
+        float : pressure adopted for property calculation, i.e.,
+        atmospheric pressure
+        """
+        return self._p
+
+    @property
+    def T(self):
+        """
+        float : temperature used to compute properties [K]
+        """
+        return self._T
+
+    @property
+    def T_assigned(self):
+        """
+        bool : true if temperature correctly assigned, false otherwise
+        """
+        return self._T_assigned
+
+    @property
     def p_s(self):
         """
         float : saturation vapour pressure [Pa]
         """
+        self._check_validity_range(self._p_s_validity, 'p_s')
         return self._p_s
 
     @property
@@ -116,6 +138,7 @@ class PropertiesInterface:
         """
         float : surface tension [N/m]
         """
+        self._check_validity_range(self._sigma_validity, 'sigma')
         return self._sigma
 
     @property
@@ -123,6 +146,7 @@ class PropertiesInterface:
         """
         float : density [kg/m^3]
         """
+        self._check_validity_range(self._rho_validity, 'rho')
         return self._rho
 
     @property
@@ -130,6 +154,7 @@ class PropertiesInterface:
         """
         float : thermal expansion coefficient [1/K]
         """
+        self._check_validity_range(self._alpha_validity, 'alpha')
         return self._alpha
 
     @property
@@ -137,6 +162,7 @@ class PropertiesInterface:
         """
         float : sound velocity in [m/s]
         """
+        self._check_validity_range(self._u_s_validity, 'u_s')
         return self._u_s
 
     @property
@@ -144,6 +170,7 @@ class PropertiesInterface:
         """
         float : isentropic compressibility [1/Pa]
         """
+        self._check_validity_range(self._beta_s_validity, 'beta_s')
         return self._beta_s
 
     @property
@@ -151,6 +178,7 @@ class PropertiesInterface:
         """
         float : specific heat capacity [J/(kg*K)]
         """
+        self._check_validity_range(self._cp_validity, 'cp')
         return self._cp
 
     @property
@@ -158,6 +186,7 @@ class PropertiesInterface:
         """
         float : specific enthalpy difference from melting point [J/kg]
         """
+        self._check_validity_range(self._delta_h_validity, 'delta_h')
         return self._delta_h
 
     @property
@@ -165,6 +194,7 @@ class PropertiesInterface:
         """
         float : dynamic viscosity [Ps*s]
         """
+        self._check_validity_range(self._mu_validity, 'mu')
         return self._mu
 
     @property
@@ -172,6 +202,7 @@ class PropertiesInterface:
         """
         float : electrical resistivity [Ohm*m]
         """
+        self._check_validity_range(self._r_validity, 'r')
         return self._r
 
     @property
@@ -179,15 +210,19 @@ class PropertiesInterface:
         """
         float : thermal conductivity [W/(m*K)]
         """
+        self._check_validity_range(self._k_validity, 'k')
         return self._k
 
-    @property
-    def p(self):
-        """
-        float : pressure adopted for property calculation, i.e.,
-        atmospheric pressure
-        """
-        return self._p
+    def _check_validity_range(self, validity_range, property_name):
+        inside = False
+        if self.T >= validity_range[0] and self.T <= validity_range[1]:
+            inside = True
+        if not inside:
+            warnings.warn("Temperature {:7.2f} is outside {:s} range"
+                            "[{:7.2f}, {:7.2f}] K"
+                            .format(self.T, property_name,
+                                    validity_range[0], validity_range[1]),
+                            stacklevel=3)
 
     def _fill_properties(self):
         raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED"
@@ -279,6 +314,7 @@ class PropertiesFromXInterface:
                 temp = res[0]
         instance = self._get_fluid_instance(temp)
 
+        warnings.filterwarnings('ignore')
         if instance is not None:
             for attr in dir(instance):
                 if not attr.startswith('_') and not hasattr(self, attr):

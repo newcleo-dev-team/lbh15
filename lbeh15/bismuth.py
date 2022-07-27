@@ -102,16 +102,27 @@ class Bismuth(PropertiesInterface):
 
     def _fill_properties(self):
         self._p_s = p_s(self.T, BISMUTH_KEYWORD)
+        self._p_s_validity = [self.T_m0, self.T_b0]
         self._sigma = sigma(self.T, BISMUTH_KEYWORD)
+        self._sigma_validity = [self.T_m0, 1400.0]
         self._rho = rho(self.T, BISMUTH_KEYWORD)
+        self._rho_validity = [self.T_m0, self.T_b0]
         self._alpha = alpha(self.T, BISMUTH_KEYWORD)
+        self._alpha_validity = [self.T_m0, self.T_b0]
         self._u_s = u_s(self.T, BISMUTH_KEYWORD)
+        self._u_s_validity = [self.T_m0, 1800.0]
         self._beta_s = beta_s(self.T, BISMUTH_KEYWORD)
+        self._beta_s_validity = [self.T_m0, 1800.0]
         self._cp = cp(self.T, BISMUTH_KEYWORD)
+        self._cp_validity = [self.T_m0, self.T_b0]
         self._delta_h = delta_h(self.T, BISMUTH_KEYWORD)
+        self._delta_h_validity = [self.T_m0, self.T_b0]
         self._mu = mu(self.T, BISMUTH_KEYWORD)
+        self._mu_validity = [self.T_m0, 1300.0]
         self._r = r(self.T, BISMUTH_KEYWORD)
+        self._r_validity = [545.0, 1423.0]
         self._k = k(self.T, BISMUTH_KEYWORD)
+        self._k_validity = [self.T_m0, 1000.0]
 
 
 class _BismuthFromX(PropertiesFromXInterface):
