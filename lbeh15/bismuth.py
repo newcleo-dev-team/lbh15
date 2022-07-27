@@ -62,7 +62,8 @@ Each object has the following properties:
         \\exp\\Bigg({\\frac{780}{T}}\\Bigg)`
     - :math:`r` bismuth electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
-        :math:`r(T) = \\displaystyle\\Big(98.96 + 0.0554{\\cdot}T\\Big)\\cdot10^{-8}`
+        :math:`r(T) = \\displaystyle\\Big(98.96 + 0.0554{\\cdot}T\\Big)\
+        \\cdot10^{-8}`
     - :math:`k` bismuth thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
 

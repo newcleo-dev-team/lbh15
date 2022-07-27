@@ -262,22 +262,21 @@ class PropertiesFromXInterface:
     """
     def __init__(self, function_of_T, target, fluid, guess, second_root=False):
 
-        def function_to_solve(T, fluid, target):
-            return function_of_T(T, fluid) - target
+        self._function_of_T = function_of_T
 
         if not second_root:
-            res = fsolve(function_to_solve, x0=[guess],
+            res = fsolve(self._function_to_solve, x0=[guess],
                          args=(fluid, target), xtol=1e-10)
             temp = res[0]
         else:
-            res = fsolve(function_to_solve, x0=[guess, 4*guess],
+            res = fsolve(self._function_to_solve, x0=[guess, 4*guess],
                          args=(fluid, target), xtol=1e-10)
             temp = res[1]
         instance = self._get_fluid_instance(temp)
 
         if instance is not None:
             for attr in dir(instance):
-                if not attr.startswith('_'):
+                if not attr.startswith('_') and not hasattr(self, attr):
                     setattr(self, attr, getattr(instance, attr))
 
     def _get_fluid_instance(self, T):
@@ -291,3 +290,9 @@ class PropertiesFromXInterface:
         """
         raise NotImplementedError("{:s}._get_fluid_instance NOT IMPLEMENTED"
                                   .format(type(self).__name__))
+
+    def _function_to_solve(self, T, fluid, target):
+        """
+        Function for which the root must be found
+        """
+        return self._function_of_T(T, fluid) - target

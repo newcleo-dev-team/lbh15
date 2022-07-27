@@ -181,7 +181,7 @@ def beta_s(T, fluid):
     return 1/(rho(T, fluid) * u_s(T, fluid)**2)
 
 
-def cp(T, fluid):
+def cp(T, fluid, cp_compact=False):
     """
     Computes fluid specific heat capacity in [J/(kg*K)].
 
@@ -192,10 +192,16 @@ def cp(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+    cp_compact : bool
+        True if compact cp correlation shall be used, false otherwise
     """
     if fluid == LEAD_KEYWORD:
-        rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
-                  - 2.099e-9*T**3 - 1.524e6*T**-2)
+        if cp_compact:
+            rvalue = (176.2 - 4.923e-2*T + 1.544e-5*T**2
+                      - 1.524e6*T**-2)
+        else:
+            rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
+                      - 2.099e-9*T**3 - 1.524e6*T**-2)
     elif fluid == BISMUTH_KEYWORD:
         rvalue = 118.2 + 5.934e-3*T + 7.183e6*T**-2
     elif fluid == LBE_KEYWORD:

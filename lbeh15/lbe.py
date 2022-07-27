@@ -62,7 +62,8 @@ Each object has the following properties:
         \\exp\\Bigg({\\frac{754.1}{T}}\\Bigg)`
     - :math:`r` lbe electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
-        :math:`r(T) = \\displaystyle\\Big(90.9 + 0.048{\\cdot}T\\Big)\\cdot10^{-8}`
+        :math:`r(T) = \\displaystyle\\Big(90.9 + 0.048{\\cdot}T\\Big)\
+        \\cdot10^{-8}`
     - :math:`k` lbe thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
 
