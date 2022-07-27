@@ -245,7 +245,7 @@ def delta_h(T, fluid):
     return rvalue
 
 
-def mi(T, fluid):
+def mu(T, fluid):
     """
     Computes fluid dynamic viscosity in [Pa*s].
 
@@ -299,7 +299,7 @@ def r(T, fluid):
     return rvalue
 
 
-def conductivity(T, fluid):
+def k(T, fluid):
     """
     Computes fluid thermal conductivity [W/(m*K)].
 

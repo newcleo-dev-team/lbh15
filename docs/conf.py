@@ -76,7 +76,7 @@ source_suffix = {
 # The master toctree document.
 master_doc = 'index'
 
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

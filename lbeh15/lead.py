@@ -2,7 +2,7 @@
 Module that contains liquid lead properties objects.
 Those objects can be initialized with the temperature
 (:class:`.lead.Lead`) or with one of the available properties
-(:class:`.lead.LeadMi`, :class:`.lead.LeadRho`, ecc)
+(:class:`.lead.LeadMi`, :class:`.lead.LeadRho`, etc)
 
 Each object has the following properties:
 
@@ -59,15 +59,15 @@ Each object has the following properties:
         + 1.524\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lead dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\mu(T) = 4.55\\cdot10^{-4}\\cdot\
+        :math:`\\mu(T) = \\displaystyle4.55\\cdot10^{-4}\\cdot\
         \\exp\\Bigg({\\frac{1069}{T}}\\Bigg)`
     - :math:`r` lead electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
-        :math:`r(T) = \\Big(67.0 + 0.0471{\\cdot}T\\Big)\\cdot10^{-8}`
-    - :math:`\\lambda` lead thermal conductivity \
+        :math:`r(T) = \\displaystyle\\Big(67.0 + 0.0471{\\cdot}T\\Big)\\cdot10^{-8}`
+    - :math:`k` lead thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
 
-        :math:`{\\lambda}(T) = 9.2 + 0.011{\\cdot}T`
+        :math:`k(T) = \\displaystyle9.2 + 0.011{\\cdot}T`
 
 Where :math:`T` is the lead temperature in :math:`[K]`
 """
@@ -78,7 +78,7 @@ from ._lbeh15 import LEAD_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mi, r, conductivity
+from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
 
 
@@ -112,9 +112,9 @@ class Lead(PropertiesInterface):
         self._beta_s = beta_s(self.T, LEAD_KEYWORD)
         self._cp = cp(self.T, LEAD_KEYWORD)
         self._delta_h = delta_h(self.T, LEAD_KEYWORD)
-        self._mi = mi(self.T, LEAD_KEYWORD)
+        self._mu = mu(self.T, LEAD_KEYWORD)
         self._r = r(self.T, LEAD_KEYWORD)
-        self._conductivity = conductivity(self.T, LEAD_KEYWORD)
+        self._k = k(self.T, LEAD_KEYWORD)
 
 
 class _LeadFromX(PropertiesFromXInterface):
@@ -277,7 +277,7 @@ class LeadDelta_h(_LeadFromX):
         super().__init__(delta_h, enthalpy)
 
 
-class LeadMi(_LeadFromX):
+class LeadMu(_LeadFromX):
     """
     Class to model lead properties from dynamic viscosity
 
@@ -287,7 +287,7 @@ class LeadMi(_LeadFromX):
         value of dynamic viscosity [Pa*s]
     """
     def __init__(self, dynamic_viscosity):
-        super().__init__(mi, dynamic_viscosity)
+        super().__init__(mu, dynamic_viscosity)
 
 
 class LeadR(_LeadFromX):
@@ -303,7 +303,7 @@ class LeadR(_LeadFromX):
         super().__init__(r, electrical_resistivity)
 
 
-class LeadConductivity(_LeadFromX):
+class LeadK(_LeadFromX):
     """
     Class to model lead properties from thermal conductivity
 
@@ -313,4 +313,4 @@ class LeadConductivity(_LeadFromX):
         value of thermal conductivity [W/(m*K)]
     """
     def __init__(self, thermal_conductivity):
-        super().__init__(conductivity, thermal_conductivity)
+        super().__init__(k, thermal_conductivity)

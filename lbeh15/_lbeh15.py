@@ -51,9 +51,9 @@ class PropertiesInterface:
     _u_s = 0
     _beta_s = 0
     _delta_h = 0
-    _mi = 0
+    _mu = 0
     _r = 0
-    _conductivity = 0
+    _k = 0
     _p = 0
 
     def __init__(self, T):
@@ -160,11 +160,11 @@ class PropertiesInterface:
         return self._delta_h
 
     @property
-    def mi(self):
+    def mu(self):
         """
         float : dynamic viscosity [Ps*s]
         """
-        return self._mi
+        return self._mu
 
     @property
     def r(self):
@@ -174,11 +174,11 @@ class PropertiesInterface:
         return self._r
 
     @property
-    def conductivity(self):
+    def k(self):
         """
         float : thermal conductivity [W/(m*K)]
         """
-        return self._conductivity
+        return self._k
 
     @property
     def p(self):

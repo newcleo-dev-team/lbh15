@@ -2,7 +2,7 @@
 Module that contains liquid lead-bismuth-eutectic (lbe) properties objects.
 Those objects can be initialized with the temperature
 (:class:`.lbe.LBE`) or with one of the available properties
-(:class:`.lbe.LBEMi`, :class:`.lbe.LBERho`, ecc)
+(:class:`.lbe.LBEMi`, :class:`.lbe.LBERho`, etc)
 
 Each object has the following properties:
 
@@ -58,15 +58,15 @@ Each object has the following properties:
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\mu(T) = 4.94\\cdot10^{-4}\\cdot\
+        :math:`\\mu(T) = \\displaystyle4.94\\cdot10^{-4}\\cdot\
         \\exp\\Bigg({\\frac{754.1}{T}}\\Bigg)`
     - :math:`r` lbe electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
-        :math:`r(T) = \\Big(90.9 + 0.048{\\cdot}T\\Big)\\cdot10^{-8}`
-    - :math:`\\lambda` lbe thermal conductivity \
+        :math:`r(T) = \\displaystyle\\Big(90.9 + 0.048{\\cdot}T\\Big)\\cdot10^{-8}`
+    - :math:`k` lbe thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
 
-        :math:`{\\lambda}(T) = 3.284 + 1.617\\cdot10^{-2}{\\cdot}T \
+        :math:`k(T) = \\displaystyle3.284 + 1.617\\cdot10^{-2}{\\cdot}T \
         - 2.305\\cdot10^{-6}{\\cdot}T^2`
 
 Where :math:`T` is the lbe temperature in :math:`[K]`
@@ -78,7 +78,7 @@ from ._lbeh15 import LBE_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mi, r, conductivity
+from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
 
 
@@ -109,9 +109,9 @@ class LBE(PropertiesInterface):
         self._beta_s = beta_s(self.T, LBE_KEYWORD)
         self._cp = cp(self.T, LBE_KEYWORD)
         self._delta_h = delta_h(self.T, LBE_KEYWORD)
-        self._mi = mi(self.T, LBE_KEYWORD)
+        self._mu = mu(self.T, LBE_KEYWORD)
         self._r = r(self.T, LBE_KEYWORD)
-        self._conductivity = conductivity(self.T, LBE_KEYWORD)
+        self._k = k(self.T, LBE_KEYWORD)
 
 
 class _LBEFromX(PropertiesFromXInterface):
@@ -274,7 +274,7 @@ class LBEDelta_h(_LBEFromX):
         super().__init__(delta_h, enthalpy)
 
 
-class LBEMi(_LBEFromX):
+class LBEMu(_LBEFromX):
     """
     Class to model lead-bismuth eutectic properties from dynamic viscosity
 
@@ -284,7 +284,7 @@ class LBEMi(_LBEFromX):
         value of dynamic viscosity [Pa*s]
     """
     def __init__(self, dynamic_viscosity):
-        super().__init__(mi, dynamic_viscosity)
+        super().__init__(mu, dynamic_viscosity)
 
 
 class LBER(_LBEFromX):
@@ -300,7 +300,7 @@ class LBER(_LBEFromX):
         super().__init__(r, electrical_resistivity)
 
 
-class LBEConductivity(_LBEFromX):
+class LBEK(_LBEFromX):
     """
     Class to model lead-bismuth eutectic properties from thermal conductivity
 
@@ -310,4 +310,4 @@ class LBEConductivity(_LBEFromX):
         value of thermal conductivity [W/(m*K)]
     """
     def __init__(self, thermal_conductivity):
-        super().__init__(conductivity, thermal_conductivity)
+        super().__init__(k, thermal_conductivity)

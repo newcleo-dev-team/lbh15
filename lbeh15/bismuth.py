@@ -2,7 +2,7 @@
 Module that contains liquid bismuth properties objects.
 Those objects can be initialized with the temperature
 (:class:`.bismuth.Bismuth`) or with one of the available properties
-(:class:`.bismuth.BismuthMi`, :class:`.bismuth.BismuthRho`, ecc)
+(:class:`.bismuth.BismuthMi`, :class:`.bismuth.BismuthRho`, etc)
 
 Each object has the following properties:
 
@@ -58,15 +58,15 @@ Each object has the following properties:
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` bismuth dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\mu(T) = 4.456\\cdot10^{-4}\\cdot\
+        :math:`\\mu(T) = \\displaystyle4.456\\cdot10^{-4}\\cdot\
         \\exp\\Bigg({\\frac{780}{T}}\\Bigg)`
     - :math:`r` bismuth electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
-        :math:`r(T) = \\Big(98.96 + 0.0554{\\cdot}T\\Big)\\cdot10^{-8}`
-    - :math:`\\lambda` bismuth thermal conductivity \
+        :math:`r(T) = \\displaystyle\\Big(98.96 + 0.0554{\\cdot}T\\Big)\\cdot10^{-8}`
+    - :math:`k` bismuth thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
 
-        :math:`{\\lambda}(T) = 7.34 + 9.5\\cdot10^{-3}{\\cdot}T`
+        :math:`k(T) = \\displaystyle7.34 + 9.5\\cdot10^{-3}{\\cdot}T`
 
 Where :math:`T` is the bismuth temperature in :math:`[K]`
 """
@@ -77,7 +77,7 @@ from ._lbeh15 import BISMUTH_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mi, r, conductivity
+from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
 
 
@@ -108,9 +108,9 @@ class Bismuth(PropertiesInterface):
         self._beta_s = beta_s(self.T, BISMUTH_KEYWORD)
         self._cp = cp(self.T, BISMUTH_KEYWORD)
         self._delta_h = delta_h(self.T, BISMUTH_KEYWORD)
-        self._mi = mi(self.T, BISMUTH_KEYWORD)
+        self._mu = mu(self.T, BISMUTH_KEYWORD)
         self._r = r(self.T, BISMUTH_KEYWORD)
-        self._conductivity = conductivity(self.T, BISMUTH_KEYWORD)
+        self._k = k(self.T, BISMUTH_KEYWORD)
 
 
 class _BismuthFromX(PropertiesFromXInterface):
@@ -270,7 +270,7 @@ class BismuthDelta_h(_BismuthFromX):
         super().__init__(delta_h, enthalpy)
 
 
-class BismuthMi(_BismuthFromX):
+class BismuthMu(_BismuthFromX):
     """
     Class to model bismuth properties from dynamic viscosity
 
@@ -280,7 +280,7 @@ class BismuthMi(_BismuthFromX):
         value of dynamic viscosity [Pa*s]
     """
     def __init__(self, dynamic_viscosity):
-        super().__init__(mi, dynamic_viscosity)
+        super().__init__(mu, dynamic_viscosity)
 
 
 class BismuthR(_BismuthFromX):
@@ -296,7 +296,7 @@ class BismuthR(_BismuthFromX):
         super().__init__(r, electrical_resistivity)
 
 
-class BismuthConductivity(_BismuthFromX):
+class BismuthK(_BismuthFromX):
     """
     Class to model bismuth properties from thermal conductivity
 
@@ -306,4 +306,4 @@ class BismuthConductivity(_BismuthFromX):
         value of thermal conductivity [W/(m*K)]
     """
     def __init__(self, thermal_conductivity):
-        super().__init__(conductivity, thermal_conductivity)
+        super().__init__(k, thermal_conductivity)

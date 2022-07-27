@@ -1,7 +1,6 @@
 import unittest
 import lbeh15.lead as lead
 import lbeh15.bismuth as bismuth
-from lbeh15.bismuth import BismuthConductivity as BismuthCond
 import lbeh15.lbe as lbe
 
 tol = 8
@@ -62,20 +61,20 @@ class LeadTester(unittest.TestCase):
             fromDelta_h = lead.LeadDelta_h(leadP.delta_h)
             self.assertAlmostEqual(leadP.T, fromDelta_h.T, tol)
 
-    def test_mi(self):
+    def test_mu(self):
         for leadP in leadPs:
-            fromMi = lead.LeadMi(leadP.mi)
-            self.assertAlmostEqual(leadP.T, fromMi.T, tol)
+            fromMu = lead.LeadMu(leadP.mu)
+            self.assertAlmostEqual(leadP.T, fromMu.T, tol)
 
     def test_r(self):
         for leadP in leadPs:
             fromR = lead.LeadR(leadP.r)
             self.assertAlmostEqual(leadP.T,  fromR.T, tol)
 
-    def test_conductivity(self):
+    def test_k(self):
         for leadP in leadPs:
-            fromConductivity = lead.LeadConductivity(leadP.conductivity)
-            self.assertAlmostEqual(leadP.T, fromConductivity.T, tol)
+            fromK = lead.LeadK(leadP.k)
+            self.assertAlmostEqual(leadP.T, fromK.T, tol)
 
 
 class BismuthTester(unittest.TestCase):
@@ -125,20 +124,20 @@ class BismuthTester(unittest.TestCase):
             fromDelta_h = bismuth.BismuthDelta_h(bismuthP.delta_h)
             self.assertAlmostEqual(bismuthP.T, fromDelta_h.T, tol)
 
-    def test_mi(self):
+    def test_mu(self):
         for bismuthP in bismuthPs:
-            fromMi = bismuth.BismuthMi(bismuthP.mi)
-            self.assertAlmostEqual(bismuthP.T, fromMi.T, tol)
+            fromMu = bismuth.BismuthMu(bismuthP.mu)
+            self.assertAlmostEqual(bismuthP.T, fromMu.T, tol)
 
     def test_r(self):
         for bismuthP in bismuthPs:
             fromR = bismuth.BismuthR(bismuthP.r)
             self.assertAlmostEqual(bismuthP.T, fromR.T, tol)
 
-    def test_conductivity(self):
+    def test_k(self):
         for bismuthP in bismuthPs:
-            fromConductivity = BismuthCond(bismuthP.conductivity)
-            self.assertAlmostEqual(bismuthP.T, fromConductivity.T, tol)
+            fromK = bismuth.BismuthK(bismuthP.k)
+            self.assertAlmostEqual(bismuthP.T, fromK.T, tol)
 
 
 class LBETester(unittest.TestCase):
@@ -188,20 +187,20 @@ class LBETester(unittest.TestCase):
             fromDelta_h = lbe.LBEDelta_h(lbeP.delta_h)
             self.assertAlmostEqual(lbeP.T, fromDelta_h.T, tol)
 
-    def test_mi(self):
+    def test_mu(self):
         for lbeP in lbePs:
-            fromMi = lbe.LBEMi(lbeP.mi)
-            self.assertAlmostEqual(lbeP.T, fromMi.T, tol)
+            fromMu = lbe.LBEMu(lbeP.mu)
+            self.assertAlmostEqual(lbeP.T, fromMu.T, tol)
 
     def test_r(self):
         for lbeP in lbePs:
             fromR = lbe.LBER(lbeP.r)
             self.assertAlmostEqual(lbeP.T, fromR.T, tol)
 
-    def test_conductivity(self):
+    def test_k(self):
         for lbeP in lbePs:
-            fromConductivity = lbe.LBEConductivity(lbeP.conductivity)
-            self.assertAlmostEqual(lbeP.T, fromConductivity.T, tol)
+            fromK = lbe.LBEK(lbeP.k)
+            self.assertAlmostEqual(lbeP.T, fromK.T, tol)
 
 
 if __name__ == "__main__":
