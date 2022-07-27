@@ -158,6 +158,10 @@ class _LBEFromX(PropertiesFromXInterface):
         ----------
         T : float
             temperature in [K]
+
+        Returns
+        -------
+        :class:`.lbe.LBE`
         """
         return LBE(T)
 

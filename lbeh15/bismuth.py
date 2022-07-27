@@ -157,6 +157,10 @@ class _BismuthFromX(PropertiesFromXInterface):
         ----------
         T : float
             temperature in [K]
+
+        Returns
+        -------
+        :class:`.bismuth.Bismuth`
         """
         return Bismuth(T)
 

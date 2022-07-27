@@ -177,6 +177,10 @@ class _LeadFromX(PropertiesFromXInterface):
         ----------
         T : float
             temperature in [K]
+
+        Returns
+        -------
+        :class:`.lead.Lead`
         """
         return Lead(T, self.cp_compact)
 

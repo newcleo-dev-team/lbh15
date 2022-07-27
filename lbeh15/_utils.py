@@ -42,6 +42,10 @@ def p_s(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = 5.76e9 * np.exp(-22131/T)
@@ -69,6 +73,10 @@ def sigma(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = (525.9 - 0.113*T)*1e-3
@@ -96,6 +104,10 @@ def rho(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = 11441 - 1.2795*T
@@ -123,6 +135,10 @@ def alpha(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = 1/(8942 - T)
@@ -150,6 +166,10 @@ def u_s(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = 1953 - 0.246*T
@@ -177,6 +197,10 @@ def beta_s(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     return 1/(rho(T, fluid) * u_s(T, fluid)**2)
 
@@ -194,6 +218,10 @@ def cp(T, fluid, cp_compact=True):
         can be one among lead, bismuth or lbe
     cp_compact : bool
         True if compact cp correlation shall be used, false otherwise
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         if cp_compact:
@@ -227,6 +255,10 @@ def delta_h(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = (176.2*(T - T_m0_lead)
@@ -262,6 +294,10 @@ def mu(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = 4.55e-4*np.exp(1069/T)
@@ -289,6 +325,10 @@ def r(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = (67.0 + 0.0471*T)*1e-8
@@ -316,6 +356,10 @@ def k(T, fluid):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
+
+    Returns
+    -------
+    float
     """
     if fluid == LEAD_KEYWORD:
         rvalue = 9.2 + 0.011*T

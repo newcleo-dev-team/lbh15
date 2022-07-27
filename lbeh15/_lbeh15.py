@@ -214,21 +214,39 @@ class PropertiesInterface:
         return self._k
 
     def _check_validity_range(self, validity_range, property_name):
+        """
+        Checks if temperature is inside validity range of property. If not
+        warns the user.
+
+        Parameters
+        ----------
+        validity_range : list
+            List of two elements with lower and upper bound temperature
+            of property validity range
+        property_name : str
+            name of the property
+        """
         inside = False
         if self.T >= validity_range[0] and self.T <= validity_range[1]:
             inside = True
         if not inside:
             warnings.warn("Temperature {:7.2f} is outside {:s} range"
-                            "[{:7.2f}, {:7.2f}] K"
-                            .format(self.T, property_name,
-                                    validity_range[0], validity_range[1]),
-                            stacklevel=3)
+                          "[{:7.2f}, {:7.2f}] K"
+                          .format(self.T, property_name,
+                                  validity_range[0], validity_range[1]),
+                          stacklevel=3)
 
     def _fill_properties(self):
+        """
+        Fills the class properties
+        """
         raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
     def _set_constants(self):
+        """
+        Sets the class constants
+        """
         raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
@@ -334,7 +352,7 @@ class PropertiesFromXInterface:
 
     def _function_to_solve(self, T, fluid, target):
         """
-        Defines the function for which the root must be found.
+        Defines the function for which the root must be found
 
         Parameters
         ----------
@@ -348,6 +366,7 @@ class PropertiesFromXInterface:
 
         Returns
         -------
-        float : evaluation of property correlation minus property target
+        float
+            evaluation of the correlation at T minus the target
         """
         return self._function_of_T(T, fluid) - target

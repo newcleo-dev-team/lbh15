@@ -20,11 +20,14 @@ import lbeh15
 with open(os.path.join("..", "lbeh15", "VERSION")) as version_file:
     __version__ = version_file.read().strip()
 
+with open(os.path.join("..", "lbeh15", "AUTHOR")) as author_file:
+    __author__ = author_file.read().strip()
+
 # -- Project information -----------------------------------------------------
 
 project = 'lbeh15'
-copyright = u'2022, NEWCLEO'
-author = u'Daniele Panico'
+copyright = u'2022, newcleo'
+author = __author__
 
 # The short X.Y version
 version = __version__
@@ -145,5 +148,5 @@ latex_elements = {
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'lbeh15.tex', u'lbeh15 Documentation',
-     u'Daniele Panico', 'manual'),
+     __author__, 'manual'),
 ]

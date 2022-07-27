@@ -15,9 +15,12 @@ Welcome to lbeh15 documentation!
    files/lbe.rst
 
    files/bibliography.rst
+
+   files/contacts.rst
    
 Indices and tables
 ==================
 
 * :ref:`genindex`
+* :ref:`modindex`
 * :ref:`search`
