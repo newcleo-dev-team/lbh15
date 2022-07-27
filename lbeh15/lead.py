@@ -99,7 +99,7 @@ class Lead(PropertiesInterface):
         Units used to specify temperature. Can be 'K' or 'degC' for
         Kelvin and Celsius respectively
     """
-    def __init__(self, T, cp_compact=False):
+    def __init__(self, T, cp_compact=True):
         self._cp_compact = cp_compact
         super().__init__(T)
 
@@ -152,7 +152,7 @@ class _LeadFromX(PropertiesFromXInterface):
         False otherwise
     """
     def __init__(self, function_of_T, target,
-                 guess=LEAD_MELTING_TEMPERATURE*1.7, cp_compact=False,
+                 guess=LEAD_MELTING_TEMPERATURE*1.7, cp_compact=True,
                  high_range=False):
         self._cp_compact = cp_compact
         super().__init__(function_of_T, target, LEAD_KEYWORD,
@@ -188,7 +188,7 @@ class LeadP_s(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, saturation_pressure, cp_compact=False):
+    def __init__(self, saturation_pressure, cp_compact=True):
         guess = p_s_initializer(saturation_pressure)
         super().__init__(p_s, saturation_pressure, guess,
                          cp_compact=cp_compact)
@@ -205,7 +205,7 @@ class LeadSigma(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, surface_tension, cp_compact=False):
+    def __init__(self, surface_tension, cp_compact=True):
         super().__init__(sigma, surface_tension, cp_compact=cp_compact)
 
 
@@ -220,7 +220,7 @@ class LeadRho(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, density, cp_compact=False):
+    def __init__(self, density, cp_compact=True):
         super().__init__(rho, density, cp_compact=cp_compact)
 
 
@@ -235,7 +235,7 @@ class LeadAlpha(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, expansion_coefficient, cp_compact=False):
+    def __init__(self, expansion_coefficient, cp_compact=True):
         super().__init__(alpha, expansion_coefficient, cp_compact=cp_compact)
 
 
@@ -250,7 +250,7 @@ class LeadU_s(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, sound_velocity, cp_compact=False):
+    def __init__(self, sound_velocity, cp_compact=True):
         super().__init__(u_s, sound_velocity, cp_compact=cp_compact)
 
 
@@ -265,7 +265,7 @@ class LeadBeta_s(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, isentropic_compressibility, cp_compact=False):
+    def __init__(self, isentropic_compressibility, cp_compact=True):
         super().__init__(beta_s, isentropic_compressibility,
                          cp_compact=cp_compact)
 
@@ -287,12 +287,12 @@ class LeadCp(_LeadFromX):
         True to initialize the object with temperature larger than
         the one corresponding to cp minumum, False otherwise
     """
-    def __init__(self, specific_heat, cp_compact=False, high_range=False):
+    def __init__(self, specific_heat, cp_compact=True, high_range=False):
         super().__init__(cp, specific_heat, cp_compact=cp_compact,
                          high_range=high_range)
 
     @staticmethod
-    def T_at_cp_min(cp_compact=False):
+    def T_at_cp_min(cp_compact=True):
         """
         Temperature in [K] corresponding to specific heat minimum
 
@@ -310,7 +310,7 @@ class LeadCp(_LeadFromX):
         return rvalue
 
     @staticmethod
-    def cp_min(cp_compact=False):
+    def cp_min(cp_compact=True):
         """
         Minimum value of cp correlation in [J/(kg*K)]
 
@@ -355,7 +355,7 @@ class LeadDelta_h(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, enthalpy, cp_compact=False):
+    def __init__(self, enthalpy, cp_compact=True):
         super().__init__(delta_h, enthalpy, cp_compact=cp_compact)
 
 
@@ -370,7 +370,7 @@ class LeadMu(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, dynamic_viscosity, cp_compact=False):
+    def __init__(self, dynamic_viscosity, cp_compact=True):
         super().__init__(mu, dynamic_viscosity, cp_compact=cp_compact)
 
 
@@ -385,7 +385,7 @@ class LeadR(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, electrical_resistivity, cp_compact=False):
+    def __init__(self, electrical_resistivity, cp_compact=True):
         super().__init__(r, electrical_resistivity, cp_compact=cp_compact)
 
 
@@ -400,5 +400,5 @@ class LeadK(_LeadFromX):
     cp_compact : bool
         True to use compact form of cp correlation, False otherwise
     """
-    def __init__(self, thermal_conductivity, cp_compact=False):
+    def __init__(self, thermal_conductivity, cp_compact=True):
         super().__init__(k, thermal_conductivity, cp_compact=cp_compact)

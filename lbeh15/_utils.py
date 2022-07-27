@@ -181,7 +181,7 @@ def beta_s(T, fluid):
     return 1/(rho(T, fluid) * u_s(T, fluid)**2)
 
 
-def cp(T, fluid, cp_compact=False):
+def cp(T, fluid, cp_compact=True):
     """
     Computes fluid specific heat capacity in [J/(kg*K)].
 
