@@ -1,5 +1,5 @@
-lbeh15.lbe
-==========
+lbeh15.lbe module
+=================
 
 .. automodule:: lbeh15.lbe
     :members:

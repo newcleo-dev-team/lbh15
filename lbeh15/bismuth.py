@@ -49,10 +49,10 @@ Each object has the following properties:
 
         :math:`c_p(T) = \\displaystyle118.2 - 5.934\\cdot10^{-3}{\\cdot}T \
         + 7.183\\cdot10^{6}{\\cdot}T^{-2}`
-    - :math:`{\\Delta}h` bismuth specific enthalpy (in respect to melting \
+    - :math:`h` bismuth specific enthalpy (in respect to melting \
       point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
-        :math:`{\\Delta}h(T) = \\displaystyle\
+        :math:`h(T) = \\displaystyle\
         118.2\\cdot\\Big(T - T_{m0}\\Big) \
         + 2.967\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
@@ -77,7 +77,7 @@ from ._lbeh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbeh15 import BISMUTH_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
-from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
+from ._utils import p_s, h, sigma, rho, alpha, u_s
 from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
 
@@ -121,8 +121,8 @@ class Bismuth(PropertiesInterface):
         self._beta_s_validity = [self.T_m0, 1800.0]
         self._cp = cp(self.T, BISMUTH_KEYWORD)
         self._cp_validity = [self.T_m0, self.T_b0]
-        self._delta_h = delta_h(self.T, BISMUTH_KEYWORD)
-        self._delta_h_validity = [self.T_m0, self.T_b0]
+        self._h = h(self.T, BISMUTH_KEYWORD)
+        self._h_validity = [self.T_m0, self.T_b0]
         self._mu = mu(self.T, BISMUTH_KEYWORD)
         self._mu_validity = [self.T_m0, 1300.0]
         self._r = r(self.T, BISMUTH_KEYWORD)
@@ -280,7 +280,7 @@ class BismuthCp(_BismuthFromX):
         return cp(BismuthCp.T_at_cp_min(), BISMUTH_KEYWORD)
 
 
-class BismuthDelta_h(_BismuthFromX):
+class BismuthH(_BismuthFromX):
     """
     Class to model bismuth properties from specifc enthalpy
     (in respect to bismuth melting point)
@@ -291,7 +291,7 @@ class BismuthDelta_h(_BismuthFromX):
         value of specifc enthalpy [J/kg]
     """
     def __init__(self, enthalpy):
-        super().__init__(delta_h, enthalpy)
+        super().__init__(h, enthalpy)
 
 
 class BismuthMu(_BismuthFromX):

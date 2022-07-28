@@ -4,6 +4,7 @@ from ._lbeh15 import BISMUTH_MELTING_TEMPERATURE as T_m0_bismuth
 from ._lbeh15 import LBE_MELTING_TEMPERATURE as T_m0_lbe
 from ._lbeh15 import LEAD_KEYWORD, BISMUTH_KEYWORD
 from ._lbeh15 import LBE_KEYWORD
+from ._lbeh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 
 
 def p_s_initializer(p_s):
@@ -205,7 +206,7 @@ def beta_s(T, fluid):
     return 1/(rho(T, fluid) * u_s(T, fluid)**2)
 
 
-def cp(T, fluid, cp_compact=True):
+def cp(T, fluid, cp_correlation=SOBOLEV_KEYWORD):
     """
     Computes fluid specific heat capacity in [J/(kg*K)].
 
@@ -216,20 +217,25 @@ def cp(T, fluid, cp_compact=True):
     fluid : str
         fluid for which calculation shall be performed,
         can be one among lead, bismuth or lbe
-    cp_compact : bool
-        True if compact cp correlation shall be used, false otherwise
+    cp_correlation : str
+        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
 
     Returns
     -------
     float
     """
     if fluid == LEAD_KEYWORD:
-        if cp_compact:
+        if cp_correlation == SOBOLEV_KEYWORD:
             rvalue = (176.2 - 4.923e-2*T + 1.544e-5*T**2
                       - 1.524e6*T**-2)
-        else:
+        elif cp_correlation == GURVICH_KEYWORD:
             rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
                       - 2.099e-9*T**3 - 1.524e6*T**-2)
+        else:
+            raise ValueError("cp_correlation can be one among: {:s},"
+                             "{:s}. {:s} was provided"
+                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
+                                     cp_correlation))
     elif fluid == BISMUTH_KEYWORD:
         rvalue = 118.2 + 5.934e-3*T + 7.183e6*T**-2
     elif fluid == LBE_KEYWORD:
@@ -244,7 +250,7 @@ def cp(T, fluid, cp_compact=True):
     return rvalue
 
 
-def delta_h(T, fluid):
+def h(T, fluid):
     """
     Computes fluid specific enthalpy (in respect to melting point) in [J/K].
 

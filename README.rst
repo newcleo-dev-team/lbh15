@@ -159,9 +159,7 @@ Initialization from properties
 
 lbeh15 package gives the possibility to initialize a liquid metal properties object just knowing one of its
 properties. This is accomplished by finding the root of the function used to calculate the target property value.
-It follows that two main points must be underlined: 
-
-- It is not possible to initialize objects from :math:`T_{m0}`, :math:`Q_{m0}`, :math:`T_{b0}` and :math:`Q_{b0}`
+It follows that two main points must be underlined:
 
 - Initialization from specific heat capacity is not trivial: specific heat capacity function is not injective, 
   this means that for some values of :math:`c_p` two values of temperature could be returned. This is an undesired

@@ -48,10 +48,10 @@ Each object has the following properties:
 
         :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-3}{\\cdot}T \
         + 1.25\\cdot10^{-5}{\\cdot}T^2 - 4.56\\cdot10^{5}{\\cdot}T^{-2}`
-    - :math:`{\\Delta}h` lbe specific enthalpy (in respect to melting \
+    - :math:`h` lbe specific enthalpy (in respect to melting \
       point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
-        :math:`{\\Delta}h(T) = \\displaystyle\
+        :math:`h(T) = \\displaystyle\
         164.8\\cdot\\Big(T - T_{m0}\\Big) \
         - 1.97\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
         + 4.167\\cdot10^{-2}\\Big(T^3 - T_{m0}^3\\Big)`
@@ -79,7 +79,7 @@ from ._lbeh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
 from ._lbeh15 import LBE_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
 from ._lbeh15 import PropertiesFromXInterface
-from ._utils import p_s, delta_h, sigma, rho, alpha, u_s
+from ._utils import p_s, h, sigma, rho, alpha, u_s
 from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
 
@@ -123,8 +123,8 @@ class LBE(PropertiesInterface):
         self._u_s_validity = [self.T_m0, self.T_b0]
         self._cp = cp(self.T, LBE_KEYWORD)
         self._cp_validity = [400.0, self.T_b0]
-        self._delta_h = delta_h(self.T, LBE_KEYWORD)
-        self._delta_h_validity = [400.0, self.T_b0]
+        self._h = h(self.T, LBE_KEYWORD)
+        self._h_validity = [400.0, self.T_b0]
         self._mu = mu(self.T, LBE_KEYWORD)
         self._mu_validity = [self.T_m0, self.T_b0]
         self._r = r(self.T, LBE_KEYWORD)
@@ -285,7 +285,7 @@ class LBECp(_LBEFromX):
         return cp(LBECp.T_at_cp_min(), LBE_KEYWORD)
 
 
-class LBEDelta_h(_LBEFromX):
+class LBEH(_LBEFromX):
     """
     Class to model lead-bismuth eutectic properties from specifc enthalpy
     (in respect to lead-bismuth eutectic melting point)
@@ -296,7 +296,7 @@ class LBEDelta_h(_LBEFromX):
         value of specifc enthalpy [J/kg]
     """
     def __init__(self, enthalpy):
-        super().__init__(delta_h, enthalpy)
+        super().__init__(h, enthalpy)
 
 
 class LBEMu(_LBEFromX):

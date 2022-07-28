@@ -6,6 +6,8 @@ from scipy.constants import atmosphere
 LEAD_KEYWORD = "lead"
 BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
+GURVICH_KEYWORD = 'gurvich1991'
+SOBOLEV_KEYWORD = 'sobolev2011'
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE = 600.6  # [K]
@@ -61,8 +63,8 @@ class PropertiesInterface:
     _beta_s_validity = [0, 0]
     _cp = 0
     _cp_validity = [0, 0]
-    _delta_h = 0
-    _delta_h_validity = [0, 0]
+    _h = 0
+    _h_validity = [0, 0]
     _mu = 0
     _mu_validity = [0, 0]
     _r = 0
@@ -231,19 +233,19 @@ class PropertiesInterface:
         return self._cp_validity.copy()
 
     @property
-    def delta_h(self):
+    def h(self):
         """
         float : specific enthalpy difference from melting point [J/kg]
         """
-        self._check_validity_range(self._delta_h_validity, 'delta_h')
-        return self._delta_h
+        self._check_validity_range(self._h_validity, 'h')
+        return self._h
 
     @property
-    def delta_h_validity(self):
+    def h_validity(self):
         """
-        list : temperature validity range for delta_h correlation
+        list : temperature validity range for h correlation
         """
-        return self._delta_h_validity.copy()
+        return self._h_validity.copy()
 
     @property
     def mu(self):
@@ -307,8 +309,8 @@ class PropertiesInterface:
         if self.T >= validity_range[0] and self.T <= validity_range[1]:
             inside = True
         if not inside:
-            warnings.warn("Temperature {:7.2f} is outside {:s} range"
-                          "[{:7.2f}, {:7.2f}] K"
+            warnings.warn("Temperature {:.2f} is outside {:s} range"
+                          "[{:.2f}, {:.2f}] K"
                           .format(self.T, property_name,
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)

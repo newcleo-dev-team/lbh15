@@ -18,7 +18,7 @@ class LeadComparisonTester(unittest.TestCase):
     def test_vs_data(self):
         for i in range(len(celsius_array)):
             liquid_lead = Lead(convert_temperature(celsius_array[i], 'C', 'K'),
-                               cp_compact=False)
+                               cp_correlation='gurvich1991')
             self.assertAlmostEqual(liquid_lead.rho, rho_array[i], tol)
             self.assertAlmostEqual(liquid_lead.k, k_array[i], tol)
             self.assertAlmostEqual(liquid_lead.cp, cp_array[i], tol)

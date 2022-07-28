@@ -57,10 +57,10 @@ class LeadTester(unittest.TestCase):
             first = False
         self.assertAlmostEqual(leadP.T, fromCp.T, tol)
 
-    def test_delta_h(self):
+    def test_h(self):
         for leadP in leadPs:
-            fromDelta_h = lead.LeadDelta_h(leadP.delta_h)
-            self.assertAlmostEqual(leadP.T, fromDelta_h.T, tol)
+            fromH = lead.LeadH(leadP.h)
+            self.assertAlmostEqual(leadP.T, fromH.T, tol)
 
     def test_mu(self):
         for leadP in leadPs:
@@ -120,10 +120,10 @@ class BismuthTester(unittest.TestCase):
             first = False
         self.assertAlmostEqual(bismuthP.T, fromCp.T, tol)
 
-    def test_delta_h(self):
+    def test_h(self):
         for bismuthP in bismuthPs:
-            fromDelta_h = bismuth.BismuthDelta_h(bismuthP.delta_h)
-            self.assertAlmostEqual(bismuthP.T, fromDelta_h.T, tol)
+            fromH = bismuth.BismuthH(bismuthP.h)
+            self.assertAlmostEqual(bismuthP.T, fromH.T, tol)
 
     def test_mu(self):
         for bismuthP in bismuthPs:
@@ -183,10 +183,10 @@ class LBETester(unittest.TestCase):
             first = False
             self.assertAlmostEqual(lbeP.T, fromCp.T, tol)
 
-    def test_delta_h(self):
+    def test_h(self):
         for lbeP in lbePs:
-            fromDelta_h = lbe.LBEDelta_h(lbeP.delta_h)
-            self.assertAlmostEqual(lbeP.T, fromDelta_h.T, tol)
+            fromH = lbe.LBEH(lbeP.h)
+            self.assertAlmostEqual(lbeP.T, fromH.T, tol)
 
     def test_mu(self):
         for lbeP in lbePs:

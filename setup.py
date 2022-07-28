@@ -23,7 +23,7 @@ setup(
                 'Materials Compatibility, Thermal-hydraulics and Technologies',
     long_description=long_description,
     license="gpl v3",
-    python_requires='>=3.*',
+    python_requires='>=3.8.10',
     install_requires=["scipy>=1.8.1"],
     classifiers=[
         "Development Status :: 3 - Alpha",

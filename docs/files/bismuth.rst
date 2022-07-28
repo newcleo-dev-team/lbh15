@@ -1,5 +1,5 @@
-lbeh15.bismuth
-==============
+lbeh15.bismuth module
+=====================
 
 .. automodule:: lbeh15.bismuth
     :members:
