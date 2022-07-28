@@ -2,7 +2,7 @@
 Module that contains liquid lead-bismuth-eutectic (lbe) properties objects.
 Those objects can be initialized with the temperature
 (:class:`.lbe.LBE`) or with one of the available properties
-(:class:`.lbe.LBEMi`, :class:`.lbe.LBERho`, etc)
+(:class:`.lbe.LBEMu`, :class:`.lbe.LBERho`, etc)
 
 Each object has the following properties:
 
@@ -54,8 +54,9 @@ Each object has the following properties:
         :math:`{\\Delta}h(T) = \\displaystyle\
         164.8\\cdot\\Big(T - T_{m0}\\Big) \
         - 1.97\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
-        + 4.167\\cdot10^{-2}\\Big(T^3 - T_{m0}^3\\Big) \
-        - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
+        + 4.167\\cdot10^{-2}\\Big(T^3 - T_{m0}^3\\Big)`
+        
+        :math:`\\qquad\\qquad- 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
 
         :math:`\\mu(T) = \\displaystyle4.94\\cdot10^{-4}\\cdot\
@@ -91,6 +92,12 @@ class LBE(PropertiesInterface):
     ----------
     T : float
         Temperature in [K]
+
+    Examples 
+    --------
+    >>> liquid_lbe = LBE(600)
+    >>> liquid_lbe.mu  # [Pa*s]
+    0.001736052003181349
     """
     def __init__(self, T):
         super().__init__(T)

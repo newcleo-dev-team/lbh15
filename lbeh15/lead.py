@@ -2,7 +2,7 @@
 Module that contains liquid lead properties objects.
 Those objects can be initialized with the temperature
 (:class:`.lead.Lead`) or with one of the available properties
-(:class:`.lead.LeadMi`, :class:`.lead.LeadRho`, etc)
+(:class:`.lead.LeadMu`, :class:`.lead.LeadRho`, etc)
 
 Each object has the following properties:
 
@@ -45,22 +45,24 @@ Each object has the following properties:
         :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
     - :math:`c_p` lead specific heat :math:`\\Big[\
       \\frac{J}{kg{\\cdot}K}\\Big]`, two correlations are available,\
-      the second one will be referred as *compact form*:
+      the first one will be referred as *compact form* and it is the\
+      default one used by :class:`.lead.Lead` and its inherited classes:
+
+        :math:`c_p(T) = \\displaystyle176.2 - 4.923\\cdot10^{-2}{\\cdot}T \
+        + 1.544\\cdot10^{-5}{\\cdot}T^2 - 1.524\\cdot10^{6}{\\cdot}T^{-2}`
 
         :math:`c_p(T) = \\displaystyle175.1 - 4.961\\cdot10^{-2}{\\cdot}T \
         + 1.985\\cdot10^{-5}{\\cdot}T^2 - 2.099\\cdot10^{-9}{\\cdot}T^3 \
         - 1.524\\cdot10^{6}{\\cdot}T^{-2}`
-
-        :math:`c_p(T) = \\displaystyle176.2 - 4.923\\cdot10^{-2}{\\cdot}T \
-        + 1.544\\cdot10^{-5}{\\cdot}T^2 - 1.524\\cdot10^{6}{\\cdot}T^{-2}`
     - :math:`{\\Delta}h` lead specific enthalpy (in respect to melting point) \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`{\\Delta}h(T) = \\displaystyle\
         176.2\\cdot\\Big(T - T_{m0}\\Big) \
         - 2.4615\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
-        + 5.147\\cdot10^{-6}\\Big(T^3 - T_{m0}^3\\Big) \
-        + 1.524\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
+        + 5.147\\cdot10^{-6}\\Big(T^3 - T_{m0}^3\\Big)`
+
+        :math:`\\qquad\\qquad+ 1.524\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lead dynamic visocity :math:`[Pa{\\cdot}s]`:
 
         :math:`\\mu(T) = \\displaystyle4.55\\cdot10^{-4}\\cdot\
@@ -95,9 +97,16 @@ class Lead(PropertiesInterface):
     ----------
     T : float
         Temperature
-    temperature_units : str
-        Units used to specify temperature. Can be 'K' or 'degC' for
-        Kelvin and Celsius respectively
+
+    Examples
+    --------
+    Compare :class:`.lead.Lead` specific heat values at T=800 K
+    with with cp_compact True and False:
+
+    >>> liquid_lead_1 = Lead(800)  # cp_compact=True
+    >>> liquid_lead_2 = Lead(800, cp_compact=False)
+    >>> liquid_lead_1.cp, liquid_lead_2.cp
+    (144.31634999999997, 144.66006199999998)
     """
     def __init__(self, T, cp_compact=True):
         self._cp_compact = cp_compact
@@ -136,14 +145,15 @@ class Lead(PropertiesInterface):
     @property
     def cp_compact(self):
         """
-        bool : True if compact cp correlation is used, false otherwise
+        bool : True if *compact form* of cp correlation is used,
+        False otherwise
         """
         return self._cp_compact
 
 
 class _LeadFromX(PropertiesFromXInterface):
     """
-    Class to model lead properties from one of its properties.
+    Class to model lead properties from one of its properties
 
     Parameters
     ----------
@@ -187,7 +197,8 @@ class _LeadFromX(PropertiesFromXInterface):
     @property
     def cp_compact(self):
         """
-        bool : True if compact cp correlation is used, false otherwise
+        bool : True if *compact form* of cp correlation is used,
+        False otherwise
         """
         return self._cp_compact
 

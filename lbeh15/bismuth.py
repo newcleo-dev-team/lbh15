@@ -2,7 +2,7 @@
 Module that contains liquid bismuth properties objects.
 Those objects can be initialized with the temperature
 (:class:`.bismuth.Bismuth`) or with one of the available properties
-(:class:`.bismuth.BismuthMi`, :class:`.bismuth.BismuthRho`, etc)
+(:class:`.bismuth.BismuthMu`, :class:`.bismuth.BismuthRho`, etc)
 
 Each object has the following properties:
 
@@ -90,6 +90,12 @@ class Bismuth(PropertiesInterface):
     ----------
     T : float
         Temperature
+
+    Examples
+    --------
+    >>> liquid_bismuth = Bismuth(670)
+    >>> liquid_bismuth.k  # [W/(m*K)]
+    13.705
     """
     def __init__(self, T):
         super().__init__(T)
