@@ -152,3 +152,5 @@ latex_documents = [
     (master_doc, 'lbeh15.tex', u'lbeh15 Documentation',
      __author__, 'manual'),
 ]
+
+latex_logo = html_logo
