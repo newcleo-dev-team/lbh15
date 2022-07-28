@@ -134,12 +134,26 @@ class PropertiesInterface:
         return self._p_s
 
     @property
+    def p_s_validity(self):
+        """
+        list : temperature validity range for p_s correlation
+        """
+        return self._p_s_validity.copy()
+
+    @property
     def sigma(self):
         """
         float : surface tension [N/m]
         """
         self._check_validity_range(self._sigma_validity, 'sigma')
         return self._sigma
+
+    @property
+    def sigma_validity(self):
+        """
+        list : temperature validity range for sigma correlation
+        """
+        return self._sigma_validity.copy()
 
     @property
     def rho(self):
@@ -150,12 +164,26 @@ class PropertiesInterface:
         return self._rho
 
     @property
+    def rho_validity(self):
+        """
+        list : temperature validity range for rho correlation
+        """
+        return self._rho_validity.copy()
+
+    @property
     def alpha(self):
         """
         float : thermal expansion coefficient [1/K]
         """
         self._check_validity_range(self._alpha_validity, 'alpha')
         return self._alpha
+
+    @property
+    def alpha_validity(self):
+        """
+        list : temperature validity range for alpha correlation
+        """
+        return self._alpha_validity.copy()
 
     @property
     def u_s(self):
@@ -166,12 +194,26 @@ class PropertiesInterface:
         return self._u_s
 
     @property
+    def u_s_validity(self):
+        """
+        list : temperature validity range for u_s correlation
+        """
+        return self._u_s_validity.copy()
+
+    @property
     def beta_s(self):
         """
         float : isentropic compressibility [1/Pa]
         """
         self._check_validity_range(self._beta_s_validity, 'beta_s')
         return self._beta_s
+
+    @property
+    def beta_s_validity(self):
+        """
+        list : temperature validity range for beta_s correlation
+        """
+        return self._beta_s_validity.copy()
 
     @property
     def cp(self):
@@ -182,12 +224,26 @@ class PropertiesInterface:
         return self._cp
 
     @property
+    def cp_validity(self):
+        """
+        list : temperature validity range for cp correlation
+        """
+        return self._cp_validity.copy()
+
+    @property
     def delta_h(self):
         """
         float : specific enthalpy difference from melting point [J/kg]
         """
         self._check_validity_range(self._delta_h_validity, 'delta_h')
         return self._delta_h
+
+    @property
+    def delta_h_validity(self):
+        """
+        list : temperature validity range for delta_h correlation
+        """
+        return self._delta_h_validity.copy()
 
     @property
     def mu(self):
@@ -198,6 +254,13 @@ class PropertiesInterface:
         return self._mu
 
     @property
+    def mu_validity(self):
+        """
+        list : temperature validity range for mu correlation
+        """
+        return self._mu_validity.copy()
+
+    @property
     def r(self):
         """
         float : electrical resistivity [Ohm*m]
@@ -206,12 +269,26 @@ class PropertiesInterface:
         return self._r
 
     @property
+    def r_validity(self):
+        """
+        list : temperature validity range for r correlation
+        """
+        return self._r_validity.copy()
+
+    @property
     def k(self):
         """
         float : thermal conductivity [W/(m*K)]
         """
         self._check_validity_range(self._k_validity, 'k')
         return self._k
+
+    @property
+    def k_validity(self):
+        """
+        list : temperature validity range for k correlation
+        """
+        return self._k_validity.copy()
 
     def _check_validity_range(self, validity_range, property_name):
         """

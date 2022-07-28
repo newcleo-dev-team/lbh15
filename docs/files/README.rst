@@ -62,7 +62,8 @@ Properties are taken from "Handbook on Lead-bismuth Eutectic Alloy and Lead Prop
      - :math:`k`
      - :math:`[W/(m{\cdot}K)]`
 
-All properties are computed at atmospheric pressure ( :math:`101325 [Pa]` ). lbeh15 package warns
+All properties are computed at atmospheric pressure ( :math:`101325 [Pa]` ) and for each of 
+them the validty range of the correlation is provided as well. lbeh15 package warns
 the user if it asks for a property that is computed with a temperature outside correlation validity range
 see (see :ref:`Examples` for more details).Finally, it is possible to initialize an object knowing one of 
 its properties (see :ref:`Initialization from properties` for more details)

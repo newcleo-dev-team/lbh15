@@ -55,7 +55,7 @@ Each object has the following properties:
         164.8\\cdot\\Big(T - T_{m0}\\Big) \
         - 1.97\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
         + 4.167\\cdot10^{-2}\\Big(T^3 - T_{m0}^3\\Big)`
-        
+
         :math:`\\qquad\\qquad- 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
 
@@ -93,7 +93,7 @@ class LBE(PropertiesInterface):
     T : float
         Temperature in [K]
 
-    Examples 
+    Examples
     --------
     >>> liquid_lbe = LBE(600)
     >>> liquid_lbe.mu  # [Pa*s]
