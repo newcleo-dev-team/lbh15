@@ -6,7 +6,7 @@ Welcome to lbeh15 documentation!
    :maxdepth: 3
    :caption: Contents:
    
-   files/README.rst
+   files/readme_link.rst
    
    files/lead.rst
 
