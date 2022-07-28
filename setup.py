@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 
 from setuptools import setup
-import os
 
-
-with open(os.path.join("lbeh15", "VERSION")) as version_file:
+with open('./lbeh15/VERSION') as version_file:
     __version__ = version_file.read().strip()
 
-with open(os.path.join("lbeh15", "AUTHOR")) as author_file:
+with open('./lbeh15/AUTHOR') as author_file:
     __author__ = author_file.read().strip()
 
-with open(os.path.join("docs", "files", "README.rst")) as readme_file:
+with open('README.rst') as readme_file:
     long_description = readme_file.read()
 
 setup(
@@ -20,9 +18,9 @@ setup(
     include_package_data=True,
     author=__author__,
     author_email='daniele.panico@newcleo.com, daniele.tomatis@newcleo.it',
-    description='Python implementation of liquid metal properties from Handbook'
-                'on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility,'
-                ' Thermal-hydraulics and Technologies',
+    description='Python implementation of liquid metal properties from '
+                'Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, '
+                'Materials Compatibility, Thermal-hydraulics and Technologies',
     long_description=long_description,
     license="gpl v3",
     python_requires='>=3.*',
