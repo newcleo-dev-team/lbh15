@@ -1,9 +1,6 @@
-======
-lbeh15
-======
-
+============
 Introduction
-************
+============
 
 lbeh15 is a python library that models properties of liquid metals: lead, bismuth and lead-bismuth eutectic (lbe).
 Properties are taken from "Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
@@ -66,12 +63,15 @@ All properties are computed at atmospheric pressure ( :math:`101325 [Pa]` ) and 
 them the validty range of the correlation is provided as well. lbeh15 package warns
 the user if it asks for a property that is computed with a temperature outside correlation validity range
 see (see :ref:`Examples` for more details).Finally, it is possible to initialize an object knowing one of 
-its properties (see :ref:`Initialization from properties` for more details)
+its properties (see :ref:`Initialization from properties` for more details).
+
+Go to :ref:`Documentation` to see full package documentation.
 
 lbeh15 is released under the GNU General Public License 3.
 
+=================
 Project Structure
-*****************
+=================
 The project is organized in the following folder structure:
 
 .. code:: bash
@@ -85,22 +85,25 @@ The project is organized in the following folder structure:
 - docs: collection of material for the generation of the documentation
 - tests: collection of scripts used to verify package correct implementation
 
+===========
 Dependences
-***********
+===========
 
 - python 3.x
 - numpy-scipy: library with mathematic and scientific tools
 
+============
 Installation
-************
+============
   .. code-block:: bash
 
       pip install lbeh15
 
 .. _Examples:
 
+========
 Examples
-********
+========
 In this section some examples of lbeh15 usage are shown.
 
 - Initialize :class:`lbeh15.lead.Lead` object with temperature in Celsius
@@ -150,8 +153,9 @@ In this section some examples of lbeh15 usage are shown.
 
 .. _Initialization from properties:
 
+==============================
 Initialization from properties
-******************************
+==============================
 
 lbeh15 package gives the possibility to initialize a liquid metal properties object just knowing one of its
 properties. This is accomplished by finding the root of the function used to calculate the target property value.
@@ -175,3 +179,17 @@ It follows that two main points must be underlined:
   >>> # Print their temperatures in [K]
   >>> bismuth_cp_1.T, bismuth_cp_2.T
   (1041.8294863232934 1771.2122382213047)
+
+
+.. _Documentation:
+
+=============
+Documentation
+=============
+
+You can navigate the full documentation of package:
+
+.. toctree::
+   :maxdepth: 3
+
+   documentation.rst
