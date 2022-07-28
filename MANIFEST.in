@@ -1,0 +1,4 @@
+include docs/files/README.rst
+include LICENSE
+include lbeh15/VERSION
+include lbeh15/AUTHOR
