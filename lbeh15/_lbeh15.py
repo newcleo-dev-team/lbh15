@@ -55,7 +55,7 @@ class PropertiesInterface(ABC):
 
         - 'T' : temperature [K]
         - 'p_s' : saturation vapour pressure [Pa]
-        - 'sigma' : surface tension [N/m] 
+        - 'sigma' : surface tension [N/m]
         - 'rho' : density [Kg/m^3]
         - 'alpha' : thermal expansion coefficient [1/K]
         - 'u_s': speed of sound [m/s]
@@ -354,6 +354,7 @@ class PropertiesInterface(ABC):
                           .format(self.T, property_name,
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
+
     @abstractmethod
     def _fill_properties(self):
         """
@@ -533,7 +534,7 @@ class PropertiesInterface(ABC):
                 function_of_T = self._p_s_correlation
             elif input_property == 'sigma':
                 function_of_T = self._sigma_correlation
-            elif input_property == 'rho': 
+            elif input_property == 'rho':
                 function_of_T = self._rho_correlation
             elif input_property == 'alpha':
                 function_of_T = self._alpha_correlation
@@ -551,25 +552,25 @@ class PropertiesInterface(ABC):
                 function_of_T = self._r_correlation
             elif input_property == 'k':
                 function_of_T = self._k_correlation
-            
-            if function_of_T != None:
+
+            if function_of_T is not None:
                 def function_to_solve(T, target):
                     return function_of_T(T) - target
-                
+
                 if input_property != 'cp':
                     res = fsolve(function_to_solve, x0=[self._guess],
-                         args=(input_value), xtol=1e-10)
+                                 args=(input_value), xtol=1e-10)
                     rvalue = res[0]
                 else:
-                    res = fsolve(function_to_solve, x0=[self._guess, 4*self._guess],
-                                args=(input_value), xtol=1e-10)
+                    res = fsolve(function_to_solve,
+                                 x0=[self._guess, 4*self._guess],
+                                 args=(input_value), xtol=1e-10)
                     if len(res) > 0 and self.__cp_high_range:
                         rvalue = res[1]
                     else:
                         rvalue = res[0]
 
         return rvalue
-
 
     def __fill_class_attributes(self, kwargs):
         """
@@ -585,16 +586,18 @@ class PropertiesInterface(ABC):
                              "time can be used for initialization. "
                              "{:d} were provided".format(len(kwargs)))
         else:
+            valid_prop = PropertiesInterface.properties_for_initialization()
             input_property = list(kwargs.keys())[0]
             input_value = kwargs[input_property]
-            if input_property not in PropertiesInterface.properties_for_initialization():
+            if input_property not in valid_prop:
                 list_to_print = "\n\n"
-                for sym in PROPERTIES_FOR_INITIALIZATION.properties_for_initialization():
+                for sym in valid_prop:
                     list_to_print += sym+"\n"
                 list_to_print += "\n"
                 raise ValueError("Initialization can be done only with one of "
                                  "the following properties:{:s}"
-                                 "{:s} was provided".format(list_to_print, input_property))
+                                 "{:s} was provided"
+                                 .format(list_to_print, input_property))
             else:
                 self._p = atmosphere
                 self._set_constants()

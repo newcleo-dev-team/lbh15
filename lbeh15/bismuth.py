@@ -90,15 +90,15 @@ class Bismuth(PropertiesInterface):
     cp_high_range : bool
         True to initialize the object with temperature larger than
         the one corresponding to cp minumum (if present), False otherwise.
-        It is used if \**kwargs contains 'cp', i.e., if initialization from
+        It is used if \\**kwargs contains 'cp', i.e., if initialization from
         specific heat is required
-    \**kwargs : dict
+    \\**kwargs : dict
         Dictionary that spefifies the quantity from which the parameter shall
         be initialized. The available ones are:
 
         - 'T' : temperature [K]
         - 'p_s' : saturation vapour pressure [Pa]
-        - 'sigma' : surface tension [N/m] 
+        - 'sigma' : surface tension [N/m]
         - 'rho' : density [Kg/m^3]
         - 'alpha' : thermal expansion coefficient [1/K]
         - 'u_s': speed of sound [m/s]
@@ -189,13 +189,13 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         saturation vapour pressure in [Pa] : float
         """
         return p_s(T, BISMUTH_KEYWORD)
-    
+
     def _sigma_correlation(self, T):
         """
         Correlation used to compute surface tension
@@ -204,7 +204,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         surface tension in [N/m] : float
@@ -219,7 +219,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         density in [kg/m^3] : float
@@ -234,7 +234,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         thermal expansion coefficient in [1/K] : float
@@ -249,7 +249,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         sound velocity in [m/s] : float
@@ -264,13 +264,13 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         isentropic compressibility in [1/Pa] : float
         """
         return beta_s(T, BISMUTH_KEYWORD)
-    
+
     def _cp_correlation(self, T):
         """
         Correlation used to compute specific heat capacity
@@ -279,7 +279,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         specific heat capacity in [J/(kg*K)] : float
@@ -294,7 +294,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         specific enthalpy in [J/kg] : float
@@ -309,7 +309,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         dynamic viscosity in [Pa*s] : float
@@ -324,13 +324,13 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         electrical resistivity in [Ohm*m] : float
         """
         return r(T, BISMUTH_KEYWORD)
-    
+
     def _k_correlation(self, T):
         """
         Correlation used to compute thermal conductivity
@@ -339,7 +339,7 @@ class Bismuth(PropertiesInterface):
         ----------
         T : float
             Temperature in [K]
-        
+
         Returns
         -------
         thermal conductivity in [W/(m*K)] : float
