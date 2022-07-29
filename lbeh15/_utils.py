@@ -232,7 +232,7 @@ def cp(T, fluid, cp_correlation=SOBOLEV_KEYWORD):
             rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
                       - 2.099e-9*T**3 - 1.524e6*T**-2)
         else:
-            raise ValueError("cp_correlation can be one among: {:s},"
+            raise ValueError("cp_correlation can be one among: {:s}, "
                              "{:s}. {:s} was provided"
                              .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
                                      cp_correlation))

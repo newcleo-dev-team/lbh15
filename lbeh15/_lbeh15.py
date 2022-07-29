@@ -9,6 +9,10 @@ BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
 GURVICH_KEYWORD = 'gurvich1991'
 SOBOLEV_KEYWORD = 'sobolev2011'
+PROPERTIES_FOR_INITIALIZATION = (['T', 'p_s', 'sigma',
+                                  'rho', 'alpha', 'u_s',
+                                  'beta_s', 'cp', 'h',
+                                  'mu', 'r', 'k'])
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE = 600.6  # [K]
@@ -35,13 +39,32 @@ LBE_T_AT_CP_MIN = 1566.510  # [K]
 
 class PropertiesInterface(ABC):
     """
-    Base class that defines liquid metal properties object
+    Abstract class that defines liquid metal properties object
     at a given temperature
 
     Parameters
     ----------
-    T : float
-        Temperature in [K]
+    cp_high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to cp minumum (if present), False otherwise.
+        It is used if **kwargs contains 'cp', i.e., if initialization from
+        specific heat is required
+    **kwargs : dict
+        Dictionary that spefifies the quantity from which the parameter shall
+        be initialized. The available ones are:
+
+        - 'T' : temperature [K]
+        - 'p_s' : saturation vapour pressure [Pa]
+        - 'sigma' : surface tension [N/m] 
+        - 'rho' : density [Kg/m^3]
+        - 'alpha' : thermal expansion coefficient [1/K]
+        - 'u_s': speed of sound [m/s]
+        - 'beta_s' : isentropic compressibility [1/Pa]
+        - 'cp' : specific heat capacity [J/(kg*K)]
+        - 'h' : specific hentalpy (in respect to melting point) [J/kg]
+        - 'mu' : dynamic viscosity [Pa*s]
+        - 'r' : electrical resistivity [Ohm*m]
+        - 'k' : thermal conductivity [W/(m*K)]
     """
     _T_m0 = 0
     _Q_m0 = 0
@@ -72,16 +95,20 @@ class PropertiesInterface(ABC):
     _r_validity = [0, 0]
     _k = 0
     _k_validity = [0, 0]
-    __list_of_properties_symbol = (['T', 'p_s', 'sigma',
-                                    'rho', 'alpha', 'u_s',
-                                    'beta_s', 'cp', 'h',
-                                    'mu', 'r', 'k'])
     _guess = 0
     __cp_high_range = False
 
     def __init__(self, cp_high_range=False, **kwargs):
         self.__cp_high_range = cp_high_range
         self.__fill_class_attributes(kwargs)
+
+    @staticmethod
+    def properties_for_initialization():
+        """
+        list : list of available properties that can be used for
+        initialization
+        """
+        return PROPERTIES_FOR_INITIALIZATION.copy()
 
     @property
     def T_m0(self):
@@ -297,10 +324,13 @@ class PropertiesInterface(ABC):
         list : temperature validity range for k correlation
         """
         return self._k_validity.copy()
-    
+
     @property
-    def list_of_properties_symbol(self): 
-        return self.__list_of_properties_symbol.copy()
+    def Pr(self):
+        """
+        float : Prandtl number [-]
+        """
+        return self.cp * self.mu / self.k
 
     def _check_validity_range(self, validity_range, property_name):
         """
@@ -343,7 +373,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _p_s_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute saturation vapour pressure
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._p_s_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -351,7 +386,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _sigma_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute surface tension
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._sigma_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -359,7 +399,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _rho_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute density
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._rho_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -367,7 +412,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _alpha_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute thermal expansion coefficient
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._alpha_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -375,7 +425,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _u_s_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute sound velocity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._u_s_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -383,7 +438,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _beta_s_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute isentropic compressibility
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._beta_s_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -391,7 +451,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _cp_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute specific heat capacity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._cp_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -399,7 +464,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _h_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute specific enthalpy
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._h_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -407,7 +477,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _mu_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute dynamic viscosity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._mu_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -415,7 +490,12 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _r_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute electrical resistivity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._r_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
@@ -423,12 +503,28 @@ class PropertiesInterface(ABC):
     @abstractmethod
     def _k_correlation(self, T):
         """
-        Sets the class constants
+        Correlation used to compute thermal conductivity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
         """
         raise NotImplementedError("{:s}._k_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
     def __compute_T(self, input_value, input_property):
+        """
+        Computes the temperature in [K] that is then set as value
+        of the object property
+
+        Parameters
+        ----------
+        input_value : float
+            value of the property used to compute the temperature
+        input_property : str
+            name of the property used to perform the calculation
+        """
         if input_property == 'T':
             rvalue = input_value
         else:
@@ -491,9 +587,9 @@ class PropertiesInterface(ABC):
         else:
             input_property = list(kwargs.keys())[0]
             input_value = kwargs[input_property]
-            if input_property not in self.list_of_properties_symbol:
+            if input_property not in PropertiesInterface.properties_for_initialization():
                 list_to_print = "\n\n"
-                for sym in self.list_of_properties_symbol:
+                for sym in PROPERTIES_FOR_INITIALIZATION.properties_for_initialization():
                     list_to_print += sym+"\n"
                 list_to_print += "\n"
                 raise ValueError("Initialization can be done only with one of "

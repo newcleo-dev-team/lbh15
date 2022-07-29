@@ -95,10 +95,27 @@ class Lead(PropertiesInterface):
 
     Parameters
     ----------
-    T : float
-        Temperature
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
+    cp_high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to cp minumum (if present), False otherwise.
+        It is used if **kwargs contains 'cp', i.e., if initialization from
+        specific heat is required
+    **kwargs : dict
+        Dictionary that spefifies the quantity from which the parameter shall
+        be initialized. The available ones are:
+
+        - 'T' : temperature [K]
+        - 'p_s' : saturation vapour pressure [Pa]
+        - 'sigma' : surface tension [N/m] 
+        - 'rho' : density [Kg/m^3]
+        - 'alpha' : thermal expansion coefficient [1/K]
+        - 'u_s': speed of sound [m/s]
+        - 'beta_s' : isentropic compressibility [1/Pa]
+        - 'cp' : specific heat capacity [J/(kg*K)]
+        - 'h' : specific hentalpy (in respect to melting point) [J/kg]
+        - 'mu' : dynamic viscosity [Pa*s]
+        - 'r' : electrical resistivity [Ohm*m]
+        - 'k' : thermal conductivity [W/(m*K)]
 
     Examples
     --------
@@ -148,13 +165,10 @@ class Lead(PropertiesInterface):
         return cp(Lead.T_at_cp_min(cp_correlation),
                   LEAD_KEYWORD, cp_correlation)
 
-    def _set_constants(self):
-        self._T_m0 = LEAD_MELTING_TEMPERATURE
-        self._Q_m0 = LEAD_MELTING_LATENT_HEAT
-        self._T_b0 = LEAD_BOILING_TEMPERATURE
-        self._Q_b0 = LEAD_VAPORISATION_HEAT
-
     def _fill_properties(self):
+        """
+        Fills the class properties
+        """
         self._p_s = self._p_s_correlation(self.T)
         self._p_s_validity = [self.T_m0, self.T_b0]
         self._sigma = self._sigma_correlation(self.T)
@@ -178,6 +192,15 @@ class Lead(PropertiesInterface):
         self._k = self._k_correlation(self.T)
         self._k_validity = [self.T_m0, 1300.0]
 
+    def _set_constants(self):
+        """
+        Sets the class constants
+        """
+        self._T_m0 = LEAD_MELTING_TEMPERATURE
+        self._Q_m0 = LEAD_MELTING_LATENT_HEAT
+        self._T_b0 = LEAD_BOILING_TEMPERATURE
+        self._Q_b0 = LEAD_VAPORISATION_HEAT
+
     @property
     def cp_correlation_used(self):
         """
@@ -186,34 +209,166 @@ class Lead(PropertiesInterface):
         return self._cp_correlation_to_use
 
     def _p_s_correlation(self, T):
+        """
+        Correlation used to compute saturation vapour pressure
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : saturation vapour pressure in [Pa]
+        """
         return p_s(T, LEAD_KEYWORD)
     
     def _sigma_correlation(self, T):
+        """
+        Correlation used to compute surface tension
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : surface tension in [N/m]
+        """
         return sigma(T, LEAD_KEYWORD)
 
     def _rho_correlation(self, T):
+        """
+        Correlation used to compute density
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : density in [kg/m^3]
+        """
         return rho(T, LEAD_KEYWORD)
 
     def _alpha_correlation(self, T):
+        """
+        Correlation used to compute thermal expansion coefficient
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : density in [kg/m^3]
+        """
         return alpha(T, LEAD_KEYWORD)
 
     def _u_s_correlation(self, T):
+        """
+        Correlation used to compute sound velocity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : sound velocity in [m/s]
+        """
         return u_s(T, LEAD_KEYWORD)
 
     def _beta_s_correlation(self, T):
+        """
+        Correlation used to compute isentropic compressibility
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : isentropic compressibility in [m/s]
+        """
         return beta_s(T, LEAD_KEYWORD)
     
     def _cp_correlation(self, T):
+        """
+        Correlation used to compute specific heat capacity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : specific heat capacity in [J/(kg*K)]
+        """
         return cp(T, LEAD_KEYWORD, self.cp_correlation_used)
 
     def _h_correlation(self, T):
+        """
+        Correlation used to compute specific enthalpy
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : specific enthalpy in [J/kg]
+        """
         return h(T, LEAD_KEYWORD)
 
     def _mu_correlation(self, T):
+        """
+        Correlation used to compute dynamic viscosity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : dynamic viscosity in [Pa*s]
+        """
         return mu(T, LEAD_KEYWORD)
 
     def _r_correlation(self, T):
+        """
+        Correlation used to compute electrical resistivity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : electrical resistivity in [Ohm*m]
+        """
         return r(T, LEAD_KEYWORD)
     
     def _k_correlation(self, T):
+        """
+        Correlation used to compute thermal conductivity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        
+        Returns
+        -------
+        float : thermal conductivity in [W/(m*K)]
+        """
         return k(T, LEAD_KEYWORD)
