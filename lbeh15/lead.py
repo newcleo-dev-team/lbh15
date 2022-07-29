@@ -84,7 +84,6 @@ from ._lbeh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 from ._lbeh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
 from ._lbeh15 import LEAD_T_AT_CP_MIN, LEAD_T_AT_CP_COMPACT_MIN
 from ._lbeh15 import PropertiesInterface
-from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, h, sigma, rho, alpha, u_s
 from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
@@ -111,215 +110,13 @@ class Lead(PropertiesInterface):
     >>> liquid_lead_1.cp, liquid_lead_2.cp
     (144.31634999999997, 144.66006199999998)
     """
-    def __init__(self, T, cp_correlation=SOBOLEV_KEYWORD):
-        self._cp_correlation = cp_correlation
-        super().__init__(T)
-
-    def _set_constants(self):
-        self._T_m0 = LEAD_MELTING_TEMPERATURE
-        self._Q_m0 = LEAD_MELTING_LATENT_HEAT
-        self._T_b0 = LEAD_BOILING_TEMPERATURE
-        self._Q_b0 = LEAD_VAPORISATION_HEAT
-
-    def _fill_properties(self):
-        self._p_s = p_s(self.T, LEAD_KEYWORD)
-        self._p_s_validity = [self.T_m0, self.T_b0]
-        self._sigma = sigma(self.T, LEAD_KEYWORD)
-        self._sigma_validity = [self.T_m0, 1300.0]
-        self._rho = rho(self.T, LEAD_KEYWORD)
-        self._rho_validity = [self.T_m0, self.T_b0]
-        self._alpha = alpha(self.T, LEAD_KEYWORD)
-        self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s = u_s(self.T, LEAD_KEYWORD)
-        self._u_s_validity = [self.T_m0, 2000.0]
-        self._beta_s = beta_s(self.T, LEAD_KEYWORD)
-        self._beta_s_validity = [self.T_m0, 2000.0]
-        self._cp = cp(self.T, LEAD_KEYWORD, self.cp_correlation)
-        self._cp_validity = [self.T_m0, 2000.0]
-        self._h = h(self.T, LEAD_KEYWORD)
-        self._h_validity = [self.T_m0, 2000.0]
-        self._mu = mu(self.T, LEAD_KEYWORD)
-        self._mu_validity = [self.T_m0, 1473.0]
-        self._r = r(self.T, LEAD_KEYWORD)
-        self._r_validity = [601.0, 1273.0]
-        self._k = k(self.T, LEAD_KEYWORD)
-        self._k_validity = [self.T_m0, 1300.0]
-
-    @property
-    def cp_correlation(self):
-        """
-        str : name of cp correlation used
-        """
-        return self._cp_correlation
-
-
-class _LeadFromX(PropertiesFromXInterface):
-    """
-    Class to model lead properties from one of its properties
-
-    Parameters
-    ----------
-    function_of_T : function
-        function that implements the dependency of the property on temperature
-        in [K]
-    target : float
-        value of the property
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to function_of_T minumum (if present),
-        False otherwise
-    """
-    def __init__(self, function_of_T, target,
-                 guess=LEAD_MELTING_TEMPERATURE*1.7,
-                 cp_correlation=SOBOLEV_KEYWORD, high_range=False):
-        self._cp_correlation = cp_correlation
-        super().__init__(function_of_T, target, LEAD_KEYWORD,
-                         guess, high_range)
-
-    def _get_fluid_instance(self, T):
-        """
-        Returns an instance of :class:`.lead.Lead`
-
-        Parameters
-        ----------
-        T : float
-            temperature in [K]
-
-        Returns
-        -------
-        :class:`.lead.Lead`
-        """
-        return Lead(T, self.cp_correlation)
-
-    @property
-    def cp_correlation(self):
-        """
-        str : name of cp correlation used
-        """
-        return self._cp_correlation
-
-
-class LeadP_s(_LeadFromX):
-    """
-    Class to model lead properties from saturation vapour pressure
-
-    Parameters
-    ----------
-    saturation_pressure : float
-        value of the saturation vapour pressure in [Pa]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, saturation_pressure, cp_correlation=SOBOLEV_KEYWORD):
-        guess = p_s_initializer(saturation_pressure)
-        super().__init__(p_s, saturation_pressure, guess,
-                         cp_correlation=cp_correlation)
-
-
-class LeadSigma(_LeadFromX):
-    """
-    Class to model lead properties from surface tension
-
-    Parameters
-    ----------
-    surface_tension : float
-        value of surface tension [N/m]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, surface_tension, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(sigma, surface_tension, cp_correlation=cp_correlation)
-
-
-class LeadRho(_LeadFromX):
-    """
-    Class to model lead properties from density
-
-    Parameters
-    ----------
-    density : float
-        value of density [kg/m^3]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, density, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(rho, density, cp_correlation=cp_correlation)
-
-
-class LeadAlpha(_LeadFromX):
-    """
-    Class to model lead properties from thermal expansion coefficient
-
-    Parameters
-    ----------
-    expansion_coefficient : float
-        value of temperature expansion coefficient [1/K]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, expansion_coefficient, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(alpha, expansion_coefficient,
-                         cp_correlation=cp_correlation)
-
-
-class LeadU_s(_LeadFromX):
-    """
-    Class to model lead properties from sound velocity
-
-    Parameters
-    ----------
-    sound_velocity : float
-        value of sound velocity [m/s]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, sound_velocity, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(u_s, sound_velocity, cp_correlation=cp_correlation)
-
-
-class LeadBeta_s(_LeadFromX):
-    """
-    Class to model lead properties from isentropic compressibility
-
-    Parameters
-    ----------
-    isentropic_compressibility : float
-        value of isentropic compressibility [1/Pa]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, isentropic_compressibility,
-                 cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(beta_s, isentropic_compressibility,
-                         cp_correlation=cp_correlation)
-
-
-class LeadCp(_LeadFromX):
-    """
-    Class to model lead properties from specific heat capacity
-
-    Parameters
-    ----------
-    specific_heat : float
-        value of specific heat capacity [J/(kg*K)]
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to cp minumum, False otherwise
-    """
-    def __init__(self, specific_heat, cp_correlation=SOBOLEV_KEYWORD,
-                 high_range=False):
-        super().__init__(cp, specific_heat, cp_correlation=cp_correlation,
-                         high_range=high_range)
+    def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD, cp_high_range=False, **kwargs):
+        self._cp_correlation_to_use = cp_correlation_to_use
+        if 'p_s' in kwargs.keys():
+            self._guess = p_s_initializer(kwargs['p_s'])
+        else:
+            self._guess = LEAD_MELTING_TEMPERATURE*1.7
+        super().__init__(cp_high_range=cp_high_range, **kwargs)
 
     @staticmethod
     def T_at_cp_min(cp_correlation=SOBOLEV_KEYWORD):
@@ -348,88 +145,75 @@ class LeadCp(_LeadFromX):
         cp_correlation : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
         """
-        return cp(LeadCp.T_at_cp_min(cp_correlation),
+        return cp(Lead.T_at_cp_min(cp_correlation),
                   LEAD_KEYWORD, cp_correlation)
 
-    def _function_to_solve(self, T, fluid, target):
+    def _set_constants(self):
+        self._T_m0 = LEAD_MELTING_TEMPERATURE
+        self._Q_m0 = LEAD_MELTING_LATENT_HEAT
+        self._T_b0 = LEAD_BOILING_TEMPERATURE
+        self._Q_b0 = LEAD_VAPORISATION_HEAT
+
+    def _fill_properties(self):
+        self._p_s = self._p_s_correlation(self.T)
+        self._p_s_validity = [self.T_m0, self.T_b0]
+        self._sigma = self._sigma_correlation(self.T)
+        self._sigma_validity = [self.T_m0, 1300.0]
+        self._rho = self._rho_correlation(self.T)
+        self._rho_validity = [self.T_m0, self.T_b0]
+        self._alpha = self._alpha_correlation(self.T)
+        self._alpha_validity = [self.T_m0, self.T_b0]
+        self._u_s = self._u_s_correlation(self.T)
+        self._u_s_validity = [self.T_m0, 2000.0]
+        self._beta_s = self._beta_s_correlation(self.T)
+        self._beta_s_validity = [self.T_m0, 2000.0]
+        self._cp = self._cp_correlation(self.T)
+        self._cp_validity = [self.T_m0, 2000.0]
+        self._h = self._h_correlation(self.T)
+        self._h_validity = [self.T_m0, 2000.0]
+        self._mu = self._mu_correlation(self.T)
+        self._mu_validity = [self.T_m0, 1473.0]
+        self._r = self._r_correlation(self.T)
+        self._r_validity = [601.0, 1273.0]
+        self._k = self._k_correlation(self.T)
+        self._k_validity = [self.T_m0, 1300.0]
+
+    @property
+    def cp_correlation_used(self):
         """
-        Defines the function for which the root must be found.
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        target : float
-            physical property value
-        fluid : str
-            fluid for which calculation shall be performed,
-            can be one among lead, bismuth or lbe
-
-        Returns
-        -------
-        float : evaluation of property correlation minus property target
+        str : name of cp correlation used
         """
-        return self._function_of_T(T, fluid, self.cp_correlation) - target
+        return self._cp_correlation_to_use
 
+    def _p_s_correlation(self, T):
+        return p_s(T, LEAD_KEYWORD)
+    
+    def _sigma_correlation(self, T):
+        return sigma(T, LEAD_KEYWORD)
 
-class LeadH(_LeadFromX):
-    """
-    Class to model lead properties from specifc enthalpy
-    (in respect to lead melting point)
+    def _rho_correlation(self, T):
+        return rho(T, LEAD_KEYWORD)
 
-    Parameters
-    ----------
-    enthalpy : float
-        value of specifc enthalpy [J/kg]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, enthalpy, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(h, enthalpy, cp_correlation=cp_correlation)
+    def _alpha_correlation(self, T):
+        return alpha(T, LEAD_KEYWORD)
 
+    def _u_s_correlation(self, T):
+        return u_s(T, LEAD_KEYWORD)
 
-class LeadMu(_LeadFromX):
-    """
-    Class to model lead properties from dynamic viscosity
+    def _beta_s_correlation(self, T):
+        return beta_s(T, LEAD_KEYWORD)
+    
+    def _cp_correlation(self, T):
+        return cp(T, LEAD_KEYWORD, self.cp_correlation_used)
 
-    Parameters
-    ----------
-    dynamic_viscosity : float
-        value of dynamic viscosity [Pa*s]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, dynamic_viscosity, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(mu, dynamic_viscosity, cp_correlation=cp_correlation)
+    def _h_correlation(self, T):
+        return h(T, LEAD_KEYWORD)
 
+    def _mu_correlation(self, T):
+        return mu(T, LEAD_KEYWORD)
 
-class LeadR(_LeadFromX):
-    """
-    Class to model lead properties from electrical resistivity
-
-    Parameters
-    ----------
-    electrical_resistivity : float
-        value of electrical resistivity [Ohm*m]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, electrical_resistivity, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(r, electrical_resistivity,
-                         cp_correlation=cp_correlation)
-
-
-class LeadK(_LeadFromX):
-    """
-    Class to model lead properties from thermal conductivity
-
-    Parameters
-    ----------
-    thermal_conductivity : float
-        value of thermal conductivity [W/(m*K)]
-    cp_correlation : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    """
-    def __init__(self, thermal_conductivity, cp_correlation=SOBOLEV_KEYWORD):
-        super().__init__(k, thermal_conductivity,
-                         cp_correlation=cp_correlation)
+    def _r_correlation(self, T):
+        return r(T, LEAD_KEYWORD)
+    
+    def _k_correlation(self, T):
+        return k(T, LEAD_KEYWORD)
