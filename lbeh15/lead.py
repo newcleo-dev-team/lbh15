@@ -139,20 +139,20 @@ class Lead(PropertiesInterface):
         super().__init__(cp_high_range=cp_high_range, **kwargs)
 
     @staticmethod
-    def T_at_cp_min(cp_correlation=SOBOLEV_KEYWORD):
+    def T_at_cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
         """
         Temperature in [K] corresponding to specific heat minimum
 
         Parameters
         ----------
-        cp_correlation : str
+        cp_correlation_to_use : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
 
         Returns
         -------
         float
         """
-        if cp_correlation:
+        if cp_correlation_to_use:
             rvalue = LEAD_T_AT_CP_COMPACT_MIN
         else:
             rvalue = LEAD_T_AT_CP_MIN
@@ -160,7 +160,7 @@ class Lead(PropertiesInterface):
         return rvalue
 
     @staticmethod
-    def cp_min(cp_correlation=SOBOLEV_KEYWORD):
+    def cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
         """
         Minimum value of cp correlation in [J/(kg*K)]
 

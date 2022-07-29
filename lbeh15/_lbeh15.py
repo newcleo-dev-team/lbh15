@@ -349,7 +349,7 @@ class PropertiesInterface(ABC):
         if self.T >= validity_range[0] and self.T <= validity_range[1]:
             inside = True
         if not inside:
-            warnings.warn("Temperature {:.2f} is outside {:s} range"
+            warnings.warn("Temperature {:.2f} is outside {:s} range "
                           "[{:.2f}, {:.2f}] K"
                           .format(self.T, property_name,
                                   validity_range[0], validity_range[1]),

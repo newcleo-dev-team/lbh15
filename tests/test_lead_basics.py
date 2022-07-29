@@ -1,6 +1,8 @@
 import unittest
 from scipy.constants import convert_temperature
 import numpy
+import sys
+sys.path.insert(0, '../')
 from lbeh15.lead import Lead
 
 properties_table = numpy.loadtxt("data.dat", comments='#',
@@ -17,8 +19,8 @@ class LeadComparisonTester(unittest.TestCase):
 
     def test_vs_data(self):
         for i in range(len(celsius_array)):
-            liquid_lead = Lead(convert_temperature(celsius_array[i], 'C', 'K'),
-                               cp_correlation='gurvich1991')
+            liquid_lead = Lead(T=convert_temperature(celsius_array[i], 'C', 'K'),
+                               cp_correlation_to_use='gurvich1991')
             self.assertAlmostEqual(liquid_lead.rho, rho_array[i], tol)
             self.assertAlmostEqual(liquid_lead.k, k_array[i], tol)
             self.assertAlmostEqual(liquid_lead.cp, cp_array[i], tol)
