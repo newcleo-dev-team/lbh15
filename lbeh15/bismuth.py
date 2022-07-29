@@ -111,7 +111,7 @@ class Bismuth(PropertiesInterface):
 
     Examples
     --------
-    >>> liquid_bismuth = Bismuth(670)
+    >>> liquid_bismuth = Bismuth(T=670.0)
     >>> liquid_bismuth.k  # [W/(m*K)]
     13.705
     """

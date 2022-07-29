@@ -105,8 +105,12 @@ class PropertiesInterface(ABC):
     @staticmethod
     def properties_for_initialization():
         """
-        list : list of available properties that can be used for
+        List of available properties that can be used for
         initialization
+
+        Returns
+        -------
+        list
         """
         return PROPERTIES_FOR_INITIALIZATION.copy()
 

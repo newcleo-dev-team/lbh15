@@ -113,7 +113,7 @@ class LBE(PropertiesInterface):
 
     Examples
     --------
-    >>> liquid_lbe = LBE(600)
+    >>> liquid_lbe = LBE(T=600.0)
     >>> liquid_lbe.mu  # [Pa*s]
     0.001736052003181349
     """
