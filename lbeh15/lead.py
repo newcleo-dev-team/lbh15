@@ -1,8 +1,7 @@
 """
-Module that contains liquid lead properties objects.
-Those objects can be initialized with the temperature
-(:class:`.lead.Lead`) or with one of the available properties
-(:class:`.lead.LeadMu`, :class:`.lead.LeadRho`, etc)
+Module that contains liquid lead properties object.
+:class:`.lead.Lead` object can be initialized with the temperature
+or with one of the available properties
 
 Each object has the following properties:
 
@@ -124,7 +123,7 @@ class Lead(PropertiesInterface):
     Compare :class:`.lead.Lead` specific heat values at T=800 K
     with with cp_correlation_to_use equal to sobolev2011 and gurvich1991:
 
-    >>> liquid_lead_1 = Lead(T=800)  # correlation=sobolev2011
+    >>> liquid_lead_1 = Lead(T=800)  # cp_correlation_to_use=sobolev2011
     >>> liquid_lead_2 = Lead(T=800, cp_correlation_to_use=gurvich1991)
     >>> liquid_lead_1.cp, liquid_lead_2.cp
     (144.31634999999997, 144.66006199999998)

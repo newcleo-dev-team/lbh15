@@ -1,8 +1,7 @@
 """
-Module that contains liquid lead-bismuth-eutectic (lbe) properties objects.
-Those objects can be initialized with the temperature
-(:class:`.lbe.LBE`) or with one of the available properties
-(:class:`.lbe.LBEMu`, :class:`.lbe.LBERho`, etc)
+Module that contains liquid lead-bismuth-eutectic (lbe) properties object.
+:class:`.lbe.LBE` object can be initialized with the temperature
+or with one of the available properties
 
 Each object has the following properties:
 

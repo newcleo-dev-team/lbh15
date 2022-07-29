@@ -1,8 +1,7 @@
 """
-Module that contains liquid bismuth properties objects.
-Those objects can be initialized with the temperature
-(:class:`.bismuth.Bismuth`) or with one of the available properties
-(:class:`.bismuth.BismuthMu`, :class:`.bismuth.BismuthRho`, etc)
+Module that contains liquid bismuth properties object.
+:class:`.bismuth.Bismuth` object can be initialized with the temperature
+or with one of the available properties
 
 Each object has the following properties:
 
