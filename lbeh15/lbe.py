@@ -78,7 +78,6 @@ from ._lbeh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbeh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
 from ._lbeh15 import LBE_T_AT_CP_MIN
 from ._lbeh15 import PropertiesInterface
-from ._lbeh15 import PropertiesFromXInterface
 from ._utils import p_s, h, sigma, rho, alpha, u_s
 from ._utils import beta_s, cp, mu, r, k
 from ._utils import p_s_initializer
@@ -99,176 +98,12 @@ class LBE(PropertiesInterface):
     >>> liquid_lbe.mu  # [Pa*s]
     0.001736052003181349
     """
-    def __init__(self, T):
-        super().__init__(T)
-
-    def _set_constants(self):
-        self._T_m0 = LBE_MELTING_TEMPERATURE
-        self._Q_m0 = LBE_MELTING_LATENT_HEAT
-        self._T_b0 = LBE_BOILING_TEMPERATURE
-        self._Q_b0 = LBE_VAPORISATION_HEAT
-
-    def _fill_properties(self):
-        self._p_s = p_s(self.T, LBE_KEYWORD)
-        self._p_s_validity = [self.T_m0, self.T_b0]
-        self._sigma = sigma(self.T, LBE_KEYWORD)
-        self._sigma_validity = [self.T_m0, 1400.0]
-        self._rho = rho(self.T, LBE_KEYWORD)
-        self._rho_validity = [self.T_m0, self.T_b0]
-        self._alpha = alpha(self.T, LBE_KEYWORD)
-        self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s = u_s(self.T, LBE_KEYWORD)
-        self._u_s_validity = [self.T_m0, self.T_b0]
-        self._beta_s = beta_s(self.T, LBE_KEYWORD)
-        self._u_s_validity = [self.T_m0, self.T_b0]
-        self._cp = cp(self.T, LBE_KEYWORD)
-        self._cp_validity = [400.0, self.T_b0]
-        self._h = h(self.T, LBE_KEYWORD)
-        self._h_validity = [400.0, self.T_b0]
-        self._mu = mu(self.T, LBE_KEYWORD)
-        self._mu_validity = [self.T_m0, self.T_b0]
-        self._r = r(self.T, LBE_KEYWORD)
-        self._r_validity = [self.T_m0, 1100.0]
-        self._k = k(self.T, LBE_KEYWORD)
-        self._k_validity = [self.T_m0, 1100.0]
-
-
-class _LBEFromX(PropertiesFromXInterface):
-    """
-    Class to model lead-bismuth eutectic properties from one of its properties.
-
-    Parameters
-    ----------
-    function_of_T : function
-        function that implements the dependency of the property on temperature
-        in [K]
-    target : float
-        value of the property
-    guess : float
-        initial guess of the temperature in [K]
-        that returns property target value
-    high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to function_of_T minumum (if present),
-        False otherwise
-    """
-    def __init__(self, function_of_T, target,
-                 guess=LBE_MELTING_TEMPERATURE*2.0, high_range=False):
-        super().__init__(function_of_T, target, LBE_KEYWORD,
-                         guess, high_range)
-
-    def _get_fluid_instance(self, T):
-        """
-        Returns an instance of :class:`.lbe.LBE`
-
-        Parameters
-        ----------
-        T : float
-            temperature in [K]
-
-        Returns
-        -------
-        :class:`.lbe.LBE`
-        """
-        return LBE(T)
-
-
-class LBEP_s(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties
-    from saturation vapour pressure
-
-    Parameters
-    ----------
-    saturation_pressure : float
-        value of the saturation vapour pressure in [Pa]
-    """
-    def __init__(self, saturation_pressure):
-        guess = p_s_initializer(saturation_pressure)
-        super().__init__(p_s, saturation_pressure, guess)
-
-
-class LBESigma(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from surface tension
-
-    Parameters
-    ----------
-    surface_tension : float
-        value of surface tension [N/m]
-    """
-    def __init__(self, surface_tension):
-        super().__init__(sigma, surface_tension)
-
-
-class LBERho(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from density
-
-    Parameters
-    ----------
-    density : float
-        value of density [kg/m^3]
-    """
-    def __init__(self, density):
-        super().__init__(rho, density)
-
-
-class LBEAlpha(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties
-    from thermal expansion coefficient
-
-    Parameters
-    ----------
-    expansion_coefficient : float
-        value of temperature expansion coefficient [1/K]
-    """
-    def __init__(self, expansion_coefficient):
-        super().__init__(alpha, expansion_coefficient)
-
-
-class LBEU_s(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from sound velocity
-
-    Parameters
-    ----------
-    sound_velocity : float
-        value of sound velocity [m/s]
-    """
-    def __init__(self, sound_velocity):
-        super().__init__(u_s, sound_velocity)
-
-
-class LBEBeta_s(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties
-    from isentropic compressibility
-
-    Parameters
-    ----------
-    isentropic_compressibility : float
-        value of isentropic compressibility [1/Pa]
-    """
-    def __init__(self, isentropic_compressibility):
-        super().__init__(beta_s, isentropic_compressibility)
-
-
-class LBECp(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from specific heat capacity
-
-    Parameters
-    ----------
-    specific_heat : float
-        value of specific heat capacity [J/(kg*K)]
-    high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to cp minumum (if present), False otherwise
-    """
-    def __init__(self, specific_heat, high_range=False):
-        super().__init__(cp, specific_heat, high_range=high_range)
+    def __init__(self, cp_high_range=False, **kwargs):
+        if 'p_s' in kwargs.keys():
+            self._guess = p_s_initializer(kwargs['p_s'])
+        else:
+            self._guess = LBE_MELTING_TEMPERATURE*2.0
+        super().__init__(cp_high_range, **kwargs)
 
     @staticmethod
     def T_at_cp_min():
@@ -282,57 +117,67 @@ class LBECp(_LBEFromX):
         """
         float : specific heat minimum
         """
-        return cp(LBECp.T_at_cp_min(), LBE_KEYWORD)
+        return cp(LBE.T_at_cp_min(), LBE_KEYWORD)
 
+    def _set_constants(self):
+        self._T_m0 = LBE_MELTING_TEMPERATURE
+        self._Q_m0 = LBE_MELTING_LATENT_HEAT
+        self._T_b0 = LBE_BOILING_TEMPERATURE
+        self._Q_b0 = LBE_VAPORISATION_HEAT
 
-class LBEH(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from specifc enthalpy
-    (in respect to lead-bismuth eutectic melting point)
+    def _fill_properties(self):
+        self._p_s = self._p_s_correlation(self.T)
+        self._p_s_validity = [self.T_m0, self.T_b0]
+        self._sigma = self._sigma_correlation(self.T)
+        self._sigma_validity = [self.T_m0, 1400.0]
+        self._rho = self._rho_correlation(self.T)
+        self._rho_validity = [self.T_m0, self.T_b0]
+        self._alpha = self._alpha_correlation(self.T)
+        self._alpha_validity = [self.T_m0, self.T_b0]
+        self._u_s = self._u_s_correlation(self.T)
+        self._u_s_validity = [self.T_m0, self.T_b0]
+        self._beta_s = self._beta_s_correlation(self.T)
+        self._u_s_validity = [self.T_m0, self.T_b0]
+        self._cp = self._cp_correlation(self.T)
+        self._cp_validity = [400.0, self.T_b0]
+        self._h = self._h_correlation(self.T)
+        self._h_validity = [400.0, self.T_b0]
+        self._mu = self._mu_correlation(self.T)
+        self._mu_validity = [self.T_m0, self.T_b0]
+        self._r = self._r_correlation(self.T)
+        self._r_validity = [self.T_m0, 1100.0]
+        self._k = self._k_correlation(self.T)
+        self._k_validity = [self.T_m0, 1100.0]
 
-    Parameters
-    ----------
-    enthalpy : float
-        value of specifc enthalpy [J/kg]
-    """
-    def __init__(self, enthalpy):
-        super().__init__(h, enthalpy)
+    def _p_s_correlation(self, T):
+        return p_s(T, LBE_KEYWORD)
+    
+    def _sigma_correlation(self, T):
+        return sigma(T, LBE_KEYWORD)
 
+    def _rho_correlation(self, T):
+        return rho(T, LBE_KEYWORD)
 
-class LBEMu(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from dynamic viscosity
+    def _alpha_correlation(self, T):
+        return alpha(T, LBE_KEYWORD)
 
-    Parameters
-    ----------
-    dynamic_viscosity : float
-        value of dynamic viscosity [Pa*s]
-    """
-    def __init__(self, dynamic_viscosity):
-        super().__init__(mu, dynamic_viscosity)
+    def _u_s_correlation(self, T):
+        return u_s(T, LBE_KEYWORD)
 
+    def _beta_s_correlation(self, T):
+        return beta_s(T, LBE_KEYWORD)
+    
+    def _cp_correlation(self, T):
+        return cp(T, LBE_KEYWORD)
 
-class LBER(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from electrical resistivity
+    def _h_correlation(self, T):
+        return h(T, LBE_KEYWORD)
 
-    Parameters
-    ----------
-    electrical_resistivity : float
-        value of electrical resistivity [Ohm*m]
-    """
-    def __init__(self, electrical_resistivity):
-        super().__init__(r, electrical_resistivity)
+    def _mu_correlation(self, T):
+        return mu(T, LBE_KEYWORD)
 
-
-class LBEK(_LBEFromX):
-    """
-    Class to model lead-bismuth eutectic properties from thermal conductivity
-
-    Parameters
-    ----------
-    thermal_conductivity : float
-        value of thermal conductivity [W/(m*K)]
-    """
-    def __init__(self, thermal_conductivity):
-        super().__init__(k, thermal_conductivity)
+    def _r_correlation(self, T):
+        return r(T, LBE_KEYWORD)
+    
+    def _k_correlation(self, T):
+        return k(T, LBE_KEYWORD)
