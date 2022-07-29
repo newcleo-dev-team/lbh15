@@ -90,9 +90,9 @@ class Bismuth(PropertiesInterface):
     cp_high_range : bool
         True to initialize the object with temperature larger than
         the one corresponding to cp minumum (if present), False otherwise.
-        It is used if **kwargs contains 'cp', i.e., if initialization from
+        It is used if \**kwargs contains 'cp', i.e., if initialization from
         specific heat is required
-    **kwargs : dict
+    \**kwargs : dict
         Dictionary that spefifies the quantity from which the parameter shall
         be initialized. The available ones are:
 
@@ -166,6 +166,7 @@ class Bismuth(PropertiesInterface):
     def _set_constants(self):
         """
         Sets the class constants
+        :meta private:
         """
         self._T_m0 = BISMUTH_MELTING_TEMPERATURE
         self._Q_m0 = BISMUTH_MELTING_LATENT_HEAT
@@ -183,7 +184,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : saturation vapour pressure in [Pa]
+        saturation vapour pressure in [Pa] : float
         """
         return p_s(T, BISMUTH_KEYWORD)
     
@@ -198,7 +199,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : surface tension in [N/m]
+        surface tension in [N/m] : float
         """
         return sigma(T, BISMUTH_KEYWORD)
 
@@ -213,7 +214,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : density in [kg/m^3]
+        density in [kg/m^3] : float
         """
         return rho(T, BISMUTH_KEYWORD)
 
@@ -228,7 +229,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : density in [kg/m^3]
+        thermal expansion coefficient in [1/K] : float
         """
         return alpha(T, BISMUTH_KEYWORD)
 
@@ -243,7 +244,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : sound velocity in [m/s]
+        sound velocity in [m/s] : float
         """
         return u_s(T, BISMUTH_KEYWORD)
 
@@ -258,7 +259,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : isentropic compressibility in [m/s]
+        isentropic compressibility in [1/Pa] : float
         """
         return beta_s(T, BISMUTH_KEYWORD)
     
@@ -273,7 +274,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : specific heat capacity in [J/(kg*K)]
+        specific heat capacity in [J/(kg*K)] : float
         """
         return cp(T, BISMUTH_KEYWORD)
 
@@ -288,7 +289,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : specific enthalpy in [J/kg]
+        specific enthalpy in [J/kg] : float
         """
         return h(T, BISMUTH_KEYWORD)
 
@@ -303,7 +304,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : dynamic viscosity in [Pa*s]
+        dynamic viscosity in [Pa*s] : float
         """
         return mu(T, BISMUTH_KEYWORD)
 
@@ -318,7 +319,7 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : electrical resistivity in [Ohm*m]
+        electrical resistivity in [Ohm*m] : float
         """
         return r(T, BISMUTH_KEYWORD)
     
@@ -333,6 +334,6 @@ class Bismuth(PropertiesInterface):
         
         Returns
         -------
-        float : thermal conductivity in [W/(m*K)]
+        thermal conductivity in [W/(m*K)] : float
         """
         return k(T, BISMUTH_KEYWORD)
