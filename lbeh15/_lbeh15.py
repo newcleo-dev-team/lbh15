@@ -1,6 +1,7 @@
 import warnings
 from scipy.optimize import fsolve
 from scipy.constants import atmosphere
+from abc import ABC, abstractmethod
 
 # KEYWORDS
 LEAD_KEYWORD = "lead"
@@ -8,6 +9,10 @@ BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
 GURVICH_KEYWORD = 'gurvich1991'
 SOBOLEV_KEYWORD = 'sobolev2011'
+PROPERTIES_FOR_INITIALIZATION = (['T', 'p_s', 'sigma',
+                                  'rho', 'alpha', 'u_s',
+                                  'beta_s', 'cp', 'h',
+                                  'mu', 'r', 'k'])
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE = 600.6  # [K]
@@ -32,15 +37,34 @@ LBE_VAPORISATION_HEAT = 856.6e3  # [J/kg]
 LBE_T_AT_CP_MIN = 1566.510  # [K]
 
 
-class PropertiesInterface:
+class PropertiesInterface(ABC):
     """
-    Base class that defines liquid metal properties object
+    Abstract class that defines liquid metal properties object
     at a given temperature
 
     Parameters
     ----------
-    T : float
-        Temperature in [K]
+    cp_high_range : bool
+        True to initialize the object with temperature larger than
+        the one corresponding to cp minumum (if present), False otherwise.
+        It is used if **kwargs contains 'cp', i.e., if initialization from
+        specific heat is required
+    **kwargs : dict
+        Dictionary that spefifies the quantity from which the parameter shall
+        be initialized. The available ones are:
+
+        - 'T' : temperature [K]
+        - 'p_s' : saturation vapour pressure [Pa]
+        - 'sigma' : surface tension [N/m]
+        - 'rho' : density [Kg/m^3]
+        - 'alpha' : thermal expansion coefficient [1/K]
+        - 'u_s': speed of sound [m/s]
+        - 'beta_s' : isentropic compressibility [1/Pa]
+        - 'cp' : specific heat capacity [J/(kg*K)]
+        - 'h' : specific hentalpy (in respect to melting point) [J/kg]
+        - 'mu' : dynamic viscosity [Pa*s]
+        - 'r' : electrical resistivity [Ohm*m]
+        - 'k' : thermal conductivity [W/(m*K)]
     """
     _T_m0 = 0
     _Q_m0 = 0
@@ -71,11 +95,24 @@ class PropertiesInterface:
     _r_validity = [0, 0]
     _k = 0
     _k_validity = [0, 0]
+    _guess = 0
+    __cp_high_range = False
 
-    def __init__(self, T):
-        self._p = atmosphere
-        self._set_constants()
-        self.__fill_class_attributes(T)
+    def __init__(self, cp_high_range=False, **kwargs):
+        self.__cp_high_range = cp_high_range
+        self.__fill_class_attributes(kwargs)
+
+    @staticmethod
+    def properties_for_initialization():
+        """
+        List of available properties that can be used for
+        initialization
+
+        Returns
+        -------
+        list
+        """
+        return PROPERTIES_FOR_INITIALIZATION.copy()
 
     @property
     def T_m0(self):
@@ -292,6 +329,13 @@ class PropertiesInterface:
         """
         return self._k_validity.copy()
 
+    @property
+    def Pr(self):
+        """
+        float : Prandtl number [-]
+        """
+        return self.cp * self.mu / self.k
+
     def _check_validity_range(self, validity_range, property_name):
         """
         Checks if temperature is inside validity range of property. If not
@@ -309,12 +353,13 @@ class PropertiesInterface:
         if self.T >= validity_range[0] and self.T <= validity_range[1]:
             inside = True
         if not inside:
-            warnings.warn("Temperature {:.2f} is outside {:s} range"
+            warnings.warn("Temperature {:.2f} is outside {:s} range "
                           "[{:.2f}, {:.2f}] K"
                           .format(self.T, property_name,
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
 
+    @abstractmethod
     def _fill_properties(self):
         """
         Fills the class properties
@@ -322,6 +367,7 @@ class PropertiesInterface:
         raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
+    @abstractmethod
     def _set_constants(self):
         """
         Sets the class constants
@@ -329,7 +375,208 @@ class PropertiesInterface:
         raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
-    def __fill_class_attributes(self, T):
+    @abstractmethod
+    def _p_s_correlation(self, T):
+        """
+        Correlation used to compute saturation vapour pressure
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._p_s_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _sigma_correlation(self, T):
+        """
+        Correlation used to compute surface tension
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._sigma_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _rho_correlation(self, T):
+        """
+        Correlation used to compute density
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._rho_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _alpha_correlation(self, T):
+        """
+        Correlation used to compute thermal expansion coefficient
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._alpha_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _u_s_correlation(self, T):
+        """
+        Correlation used to compute sound velocity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._u_s_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _beta_s_correlation(self, T):
+        """
+        Correlation used to compute isentropic compressibility
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._beta_s_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _cp_correlation(self, T):
+        """
+        Correlation used to compute specific heat capacity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._cp_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _h_correlation(self, T):
+        """
+        Correlation used to compute specific enthalpy
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._h_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _mu_correlation(self, T):
+        """
+        Correlation used to compute dynamic viscosity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._mu_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _r_correlation(self, T):
+        """
+        Correlation used to compute electrical resistivity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._r_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _k_correlation(self, T):
+        """
+        Correlation used to compute thermal conductivity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        raise NotImplementedError("{:s}._k_correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    def __compute_T(self, input_value, input_property):
+        """
+        Computes the temperature in [K] that is then set as value
+        of the object property
+
+        Parameters
+        ----------
+        input_value : float
+            value of the property used to compute the temperature
+        input_property : str
+            name of the property used to perform the calculation
+        """
+        if input_property == 'T':
+            rvalue = input_value
+        else:
+            function_of_T = None
+            if input_property == 'p_s':
+                function_of_T = self._p_s_correlation
+            elif input_property == 'sigma':
+                function_of_T = self._sigma_correlation
+            elif input_property == 'rho':
+                function_of_T = self._rho_correlation
+            elif input_property == 'alpha':
+                function_of_T = self._alpha_correlation
+            elif input_property == 'u_s':
+                function_of_T = self._u_s_correlation
+            elif input_property == 'beta_s':
+                function_of_T = self._beta_s_correlation
+            elif input_property == 'cp':
+                function_of_T = self._cp_correlation
+            elif input_property == 'h':
+                function_of_T = self._h_correlation
+            elif input_property == 'mu':
+                function_of_T = self._mu_correlation
+            elif input_property == 'r':
+                function_of_T = self._r_correlation
+            elif input_property == 'k':
+                function_of_T = self._k_correlation
+
+            if function_of_T is not None:
+                def function_to_solve(T, target):
+                    return function_of_T(T) - target
+
+                if input_property != 'cp':
+                    res = fsolve(function_to_solve, x0=[self._guess],
+                                 args=(input_value), xtol=1e-10)
+                    rvalue = res[0]
+                else:
+                    res = fsolve(function_to_solve,
+                                 x0=[self._guess, 4*self._guess],
+                                 args=(input_value), xtol=1e-10)
+                    if len(res) > 0 and self.__cp_high_range:
+                        rvalue = res[1]
+                    else:
+                        rvalue = res[0]
+
+        return rvalue
+
+    def __fill_class_attributes(self, kwargs):
         """
         Fills all the class attributes.
 
@@ -338,11 +585,30 @@ class PropertiesInterface:
         T : float
             Temperature in [K]
         """
-        self.__assign_T(T)
-
-        # continue if temperature was correctly assigned
-        if self.T_assigned:
-            self._fill_properties()
+        if len(kwargs) != 1:
+            raise ValueError("One and only one parameter at "
+                             "time can be used for initialization. "
+                             "{:d} were provided".format(len(kwargs)))
+        else:
+            valid_prop = PropertiesInterface.properties_for_initialization()
+            input_property = list(kwargs.keys())[0]
+            input_value = kwargs[input_property]
+            if input_property not in valid_prop:
+                list_to_print = "\n\n"
+                for sym in valid_prop:
+                    list_to_print += sym+"\n"
+                list_to_print += "\n"
+                raise ValueError("Initialization can be done only with one of "
+                                 "the following properties:{:s}"
+                                 "{:s} was provided"
+                                 .format(list_to_print, input_property))
+            else:
+                self._p = atmosphere
+                self._set_constants()
+                temperature = self.__compute_T(input_value, input_property)
+                self.__assign_T(temperature)
+                if self.T_assigned:
+                    self._fill_properties()
 
     def __assign_T(self, T):
         """
@@ -360,92 +626,13 @@ class PropertiesInterface:
         else:
             if T >= self.T_b0:
                 raise ValueError("Temperature must be smaller than "
-                                 "boiling temperature ({:7.2f} [K]), {:7.2f} "
+                                 "boiling temperature ({:.2f} [K]), {:.2f} "
                                  "[K] was provided".format(self.T_b0, T))
             elif T > 0 and T <= self.T_m0:
                 raise ValueError("Temperature must be larger than "
-                                 "melting temerature ({:7.2f} [K]), {:7.2f} "
+                                 "melting temerature ({:.2f} [K]), {:.2f} "
                                  "[K] was provided".format(self.T_m0, T))
             else:
                 raise ValueError("Temperature must be "
                                  "strictly positive, "
-                                 "{:7.2f} [K] was provided".format(T))
-
-
-class PropertiesFromXInterface:
-    """
-    Base class that defines liquid metal properties object
-    initialized with one of its properties.
-
-    Parameters
-    ----------
-    function_of_T : function
-        function that implements the dependency of the property on temperature
-        in [K]
-    target : float
-        physical property value
-    fluid : str
-        fluid for which calculation shall be performed,
-        can be one among lead, bismuth or lbe
-    guess : float
-        initial guess of temperature in [K]
-    high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to function_of_T minumum (if present),
-        False otherwise
-    """
-    def __init__(self, function_of_T, target, fluid, guess, high_range=False):
-
-        self._function_of_T = function_of_T
-
-        if not high_range:
-            res = fsolve(self._function_to_solve, x0=[guess],
-                         args=(fluid, target), xtol=1e-10)
-            temp = res[0]
-        else:
-            res = fsolve(self._function_to_solve, x0=[guess, 4*guess],
-                         args=(fluid, target), xtol=1e-10)
-            if len(res) > 0:
-                temp = res[1]
-            else:
-                temp = res[0]
-        instance = self._get_fluid_instance(temp)
-
-        warnings.filterwarnings('ignore')
-        if instance is not None:
-            for attr in dir(instance):
-                if not attr.startswith('_') and not hasattr(self, attr):
-                    setattr(self, attr, getattr(instance, attr))
-
-    def _get_fluid_instance(self, T):
-        """
-        Returns a fluid properties object
-
-        Parameters
-        ----------
-        T : float
-            temperature in [K]
-        """
-        raise NotImplementedError("{:s}._get_fluid_instance NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    def _function_to_solve(self, T, fluid, target):
-        """
-        Defines the function for which the root must be found
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        target : float
-            physical property value
-        fluid : str
-            fluid for which calculation shall be performed,
-            can be one among lead, bismuth or lbe
-
-        Returns
-        -------
-        float
-            evaluation of the correlation at T minus the target
-        """
-        return self._function_of_T(T, fluid) - target
+                                 "{:.2f} [K] was provided".format(T))

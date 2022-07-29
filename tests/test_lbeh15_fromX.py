@@ -1,8 +1,10 @@
 import unittest
 from scipy.constants import convert_temperature
-import lbeh15.lead as lead
-import lbeh15.bismuth as bismuth
-import lbeh15.lbe as lbe
+import sys
+sys.path.insert(0, '../')
+from lbeh15.lead import Lead
+from lbeh15.bismuth import Bismuth
+from lbeh15.lbe import LBE
 
 tol = 8
 Ts = [convert_temperature(395, 'C', 'K'), convert_temperature(1500, 'C', 'K')]
@@ -10,71 +12,71 @@ leadPs = []
 bismuthPs = []
 lbePs = []
 for T in Ts:
-    leadPs.append(lead.Lead(T))
-    bismuthPs.append(bismuth.Bismuth(T))
-    lbePs.append(lbe.LBE(T))
+    leadPs.append(Lead(T=T))
+    bismuthPs.append(Bismuth(T=T))
+    lbePs.append(LBE(T=T))
 
 
 class LeadTester(unittest.TestCase):
 
     def test_p_s(self):
         for leadP in leadPs:
-            fromPs = lead.LeadP_s(leadP.p_s)
+            fromPs = Lead(p_s=leadP.p_s)
             self.assertAlmostEqual(leadP.T, fromPs.T, tol)
 
     def test_sigma(self):
         for leadP in leadPs:
-            fromSigma = lead.LeadSigma(leadP.sigma)
+            fromSigma = Lead(sigma=leadP.sigma)
             self.assertAlmostEqual(leadP.T, fromSigma.T, tol)
 
     def test_rho(self):
         for leadP in leadPs:
-            fromRho = lead.LeadRho(leadP.rho)
+            fromRho = Lead(rho=leadP.rho)
             self.assertAlmostEqual(leadP.T, fromRho.T, tol)
 
     def test_alpha(self):
         for leadP in leadPs:
-            fromAlpha = lead.LeadAlpha(leadP.alpha)
+            fromAlpha = Lead(alpha=leadP.alpha)
             self.assertAlmostEqual(leadP.T, fromAlpha.T, tol)
 
     def test_u_s(self):
         for leadP in leadPs:
-            fromU_s = lead.LeadU_s(leadP.u_s)
+            fromU_s = Lead(u_s=leadP.u_s)
             self.assertAlmostEqual(leadP.T, fromU_s.T, tol)
 
     def test_beta_s(self):
         for leadP in leadPs:
-            fromBeta_s = lead.LeadBeta_s(leadP.beta_s)
+            fromBeta_s = Lead(beta_s=leadP.beta_s)
             self.assertAlmostEqual(leadP.T, fromBeta_s.T, tol)
 
     def test_cp(self):
         first = True
         for leadP in leadPs:
             if first:
-                fromCp = lead.LeadCp(leadP.cp)
+                fromCp = Lead(cp=leadP.cp)
             else:
-                fromCp = lead.LeadCp(leadP.cp, high_range=True)
+                fromCp = Lead(cp=leadP.cp, cp_high_range=True)
             first = False
         self.assertAlmostEqual(leadP.T, fromCp.T, tol)
 
     def test_h(self):
         for leadP in leadPs:
-            fromH = lead.LeadH(leadP.h)
+            fromH = Lead(h=leadP.h)
             self.assertAlmostEqual(leadP.T, fromH.T, tol)
 
     def test_mu(self):
         for leadP in leadPs:
-            fromMu = lead.LeadMu(leadP.mu)
+            fromMu = Lead(mu=leadP.mu)
             self.assertAlmostEqual(leadP.T, fromMu.T, tol)
 
     def test_r(self):
         for leadP in leadPs:
-            fromR = lead.LeadR(leadP.r)
+            fromR = Lead(r=leadP.r)
             self.assertAlmostEqual(leadP.T,  fromR.T, tol)
 
     def test_k(self):
         for leadP in leadPs:
-            fromK = lead.LeadK(leadP.k)
+            fromK = Lead(k=leadP.k)
             self.assertAlmostEqual(leadP.T, fromK.T, tol)
 
 
@@ -82,62 +84,62 @@ class BismuthTester(unittest.TestCase):
 
     def test_p_s(self):
         for bismuthP in bismuthPs:
-            fromPs = bismuth.BismuthP_s(bismuthP.p_s)
+            fromPs = Bismuth(p_s=bismuthP.p_s)
             self.assertAlmostEqual(bismuthP.T, fromPs.T, tol)
 
     def test_sigma(self):
         for bismuthP in bismuthPs:
-            fromSigma = bismuth.BismuthSigma(bismuthP.sigma)
+            fromSigma = Bismuth(sigma=bismuthP.sigma)
             self.assertAlmostEqual(bismuthP.T, fromSigma.T, tol)
 
     def test_rho(self):
         for bismuthP in bismuthPs:
-            fromRho = bismuth.BismuthRho(bismuthP.rho)
+            fromRho = Bismuth(rho=bismuthP.rho)
             self.assertAlmostEqual(bismuthP.T, fromRho.T, tol)
 
     def test_alpha(self):
         for bismuthP in bismuthPs:
-            fromAlpha = bismuth.BismuthAlpha(bismuthP.alpha)
+            fromAlpha = Bismuth(alpha=bismuthP.alpha)
             self.assertAlmostEqual(bismuthP.T, fromAlpha.T, tol)
 
     def test_u_s(self):
         for bismuthP in bismuthPs:
-            fromU_s = bismuth.BismuthU_s(bismuthP.u_s)
+            fromU_s = Bismuth(u_s=bismuthP.u_s)
             self.assertAlmostEqual(bismuthP.T, fromU_s.T, tol)
 
     def test_beta_s(self):
         for bismuthP in bismuthPs:
-            fromBeta_s = bismuth.BismuthBeta_s(bismuthP.beta_s)
+            fromBeta_s = Bismuth(beta_s=bismuthP.beta_s)
             self.assertAlmostEqual(bismuthP.T, fromBeta_s.T, tol)
 
     def test_cp(self):
         first = True
         for bismuthP in bismuthPs:
             if first:
-                fromCp = bismuth.BismuthCp(bismuthP.cp)
+                fromCp = Bismuth(cp=bismuthP.cp)
             else:
-                fromCp = bismuth.BismuthCp(bismuthP.cp, high_range=True)
+                fromCp = Bismuth(cp=bismuthP.cp, cp_high_range=True)
             first = False
         self.assertAlmostEqual(bismuthP.T, fromCp.T, tol)
 
     def test_h(self):
         for bismuthP in bismuthPs:
-            fromH = bismuth.BismuthH(bismuthP.h)
+            fromH = Bismuth(h=bismuthP.h)
             self.assertAlmostEqual(bismuthP.T, fromH.T, tol)
 
     def test_mu(self):
         for bismuthP in bismuthPs:
-            fromMu = bismuth.BismuthMu(bismuthP.mu)
+            fromMu = Bismuth(mu=bismuthP.mu)
             self.assertAlmostEqual(bismuthP.T, fromMu.T, tol)
 
     def test_r(self):
         for bismuthP in bismuthPs:
-            fromR = bismuth.BismuthR(bismuthP.r)
+            fromR = Bismuth(r=bismuthP.r)
             self.assertAlmostEqual(bismuthP.T, fromR.T, tol)
 
     def test_k(self):
         for bismuthP in bismuthPs:
-            fromK = bismuth.BismuthK(bismuthP.k)
+            fromK = Bismuth(k=bismuthP.k)
             self.assertAlmostEqual(bismuthP.T, fromK.T, tol)
 
 
@@ -145,62 +147,62 @@ class LBETester(unittest.TestCase):
 
     def test_p_s(self):
         for lbeP in lbePs:
-            fromPs = lbe.LBEP_s(lbeP.p_s)
+            fromPs = LBE(p_s=lbeP.p_s)
             self.assertAlmostEqual(lbeP.T, fromPs.T, tol)
 
     def test_sigma(self):
         for lbeP in lbePs:
-            fromSigma = lbe.LBESigma(lbeP.sigma)
+            fromSigma = LBE(sigma=lbeP.sigma)
             self.assertAlmostEqual(lbeP.T, fromSigma.T, tol)
 
     def test_rho(self):
         for lbeP in lbePs:
-            fromRho = lbe.LBERho(lbeP.rho)
+            fromRho = LBE(rho=lbeP.rho)
             self.assertAlmostEqual(lbeP.T, fromRho.T, tol)
 
     def test_alpha(self):
         for lbeP in lbePs:
-            fromAlpha = lbe.LBEAlpha(lbeP.alpha)
+            fromAlpha = LBE(alpha=lbeP.alpha)
             self.assertAlmostEqual(lbeP.T, fromAlpha.T, tol)
 
     def test_u_s(self):
         for lbeP in lbePs:
-            fromU_s = lbe.LBEU_s(lbeP.u_s)
+            fromU_s = LBE(u_s=lbeP.u_s)
             self.assertAlmostEqual(lbeP.T, fromU_s.T, tol)
 
     def test_beta_s(self):
         for lbeP in lbePs:
-            fromBeta_s = lbe.LBEBeta_s(lbeP.beta_s)
+            fromBeta_s = LBE(beta_s=lbeP.beta_s)
             self.assertAlmostEqual(lbeP.T, fromBeta_s.T, tol)
 
     def test_cp(self):
         first = True
         for lbeP in lbePs:
             if first:
-                fromCp = lbe.LBECp(lbeP.cp)
+                fromCp = LBE(cp=lbeP.cp)
             else:
-                fromCp = lbe.LBECp(lbeP.cp, high_range=True)
+                fromCp = LBE(cp=lbeP.cp, cp_high_range=True)
             first = False
             self.assertAlmostEqual(lbeP.T, fromCp.T, tol)
 
     def test_h(self):
         for lbeP in lbePs:
-            fromH = lbe.LBEH(lbeP.h)
+            fromH = LBE(h=lbeP.h)
             self.assertAlmostEqual(lbeP.T, fromH.T, tol)
 
     def test_mu(self):
         for lbeP in lbePs:
-            fromMu = lbe.LBEMu(lbeP.mu)
+            fromMu = LBE(mu=lbeP.mu)
             self.assertAlmostEqual(lbeP.T, fromMu.T, tol)
 
     def test_r(self):
         for lbeP in lbePs:
-            fromR = lbe.LBER(lbeP.r)
+            fromR = LBE(r=lbeP.r)
             self.assertAlmostEqual(lbeP.T, fromR.T, tol)
 
     def test_k(self):
         for lbeP in lbePs:
-            fromK = lbe.LBEK(lbeP.k)
+            fromK = LBE(k=lbeP.k)
             self.assertAlmostEqual(lbeP.T, fromK.T, tol)
 
 
