@@ -125,14 +125,22 @@ class Bismuth(PropertiesInterface):
     @staticmethod
     def T_at_cp_min():
         """
-        float : temperature in [K] corresponding to specific heat minimum
+        Temperature in [K] corresponding to specific heat minimum
+
+        Returns
+        -------
+        float
         """
         return BISMUTH_T_AT_CP_MIN
 
     @staticmethod
     def cp_min():
         """
-        float : specific heat minimum
+        Minimum value of cp correlation in [J/(kg*K)]
+
+        Returns
+        -------
+        float
         """
         return cp(BISMUTH.T_at_cp_min(), BISMUTH_KEYWORD)
 

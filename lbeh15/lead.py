@@ -146,6 +146,10 @@ class Lead(PropertiesInterface):
         ----------
         cp_correlation : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
+        
+        Returns
+        -------
+        float
         """
         if cp_correlation:
             rvalue = LEAD_T_AT_CP_COMPACT_MIN
@@ -163,6 +167,10 @@ class Lead(PropertiesInterface):
         ----------
         cp_correlation : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
+        
+        Returns
+        -------
+        float
         """
         return cp(Lead.T_at_cp_min(cp_correlation),
                   LEAD_KEYWORD, cp_correlation)

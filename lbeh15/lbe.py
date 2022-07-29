@@ -127,14 +127,22 @@ class LBE(PropertiesInterface):
     @staticmethod
     def T_at_cp_min():
         """
-        float : temperature in [K] corresponding to specific heat minimum
+        Temperature in [K] corresponding to specific heat minimum
+
+        Returns
+        -------
+        float
         """
         return LBE_T_AT_CP_MIN
 
     @staticmethod
     def cp_min():
         """
-        float : specific heat minimum
+        Minimum value of cp correlation in [J/(kg*K)]
+
+        Returns
+        -------
+        float
         """
         return cp(LBE.T_at_cp_min(), LBE_KEYWORD)
 
