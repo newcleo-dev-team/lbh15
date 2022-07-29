@@ -95,6 +95,8 @@ class Lead(PropertiesInterface):
 
     Parameters
     ----------
+    cp_correlation : str
+        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
     cp_high_range : bool
         True to initialize the object with temperature larger than
         the one corresponding to cp minumum (if present), False otherwise.
