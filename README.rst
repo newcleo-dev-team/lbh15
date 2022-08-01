@@ -2,7 +2,8 @@
 Introduction
 ============
 
-lbeh15 is a python library that models properties of liquid metals: lead, bismuth and lead-bismuth eutectic (lbe).
+lbeh15 (**L**\ ead **B**\ ismtuh **E**\ utectic **H**\ andbook 20 **15**) is a python library that models properties of liquid metals: 
+lead, bismuth and lead-bismuth eutectic (lbe).
 Properties are taken from "Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
 (see :cite:`Agency2015`). The following properties are provided: 
 

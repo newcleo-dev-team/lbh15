@@ -26,7 +26,7 @@ with open(os.path.join("..", "lbeh15", "AUTHOR")) as author_file:
 # -- Project information -----------------------------------------------------
 
 project = 'lbeh15'
-copyright = u'2022, newcleo'
+copyright = '2022, newcleo'
 author = __author__
 
 # The short X.Y version
@@ -149,7 +149,7 @@ latex_elements = {
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'lbeh15.tex', u'lbeh15',
+    (master_doc, 'lbeh15.tex', 'lbeh15: Lead Bismtuh Eutectic Handbook 2015',
      __author__, 'manual'),
 ]
 
