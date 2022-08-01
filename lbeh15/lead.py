@@ -77,15 +77,14 @@ Each object has the following properties:
 
 where :math:`T` is the lead temperature in :math:`[K]`
 """
+import numpy as np
 from ._lbeh15 import LEAD_MELTING_TEMPERATURE
 from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbeh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 from ._lbeh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
-from ._lbeh15 import LEAD_T_AT_CP_MIN, LEAD_T_AT_CP_COMPACT_MIN
-from ._lbeh15 import PropertiesInterface
-from ._utils import p_s, h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mu, r, k
-from ._utils import p_s_initializer
+from ._lbeh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
+from ._lbeh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
+from ._lbeh15 import PropertiesInterface, p_s_initializer
 
 
 class Lead(PropertiesInterface):
@@ -151,10 +150,15 @@ class Lead(PropertiesInterface):
         -------
         float
         """
-        if cp_correlation_to_use:
-            rvalue = LEAD_T_AT_CP_COMPACT_MIN
+        if cp_correlation_to_use == SOBOLEV_KEYWORD:
+            rvalue = LEAD_T_AT_CP_MIN_SOBOLEV
+        elif cp_correlation_to_use == GURVICH_KEYWORD:
+            rvalue = LEAD_T_AT_CP_MIN_GURVICH
         else:
-            rvalue = LEAD_T_AT_CP_MIN
+            raise ValueError("cp correlation can be one among: {:s}, "
+                             "{:s}. {:s} was provided"
+                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
+                                     cp_correlation_to_use))
 
         return rvalue
 
@@ -165,15 +169,24 @@ class Lead(PropertiesInterface):
 
         Parameters
         ----------
-        cp_correlation : str
+        cp_correlation_to_use : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
 
         Returns
         -------
         float
         """
-        return cp(Lead.T_at_cp_min(cp_correlation),
-                  LEAD_KEYWORD, cp_correlation)
+        if cp_correlation_to_use == SOBOLEV_KEYWORD:
+            rvalue = LEAD_CP_MIN_SOBOLEV
+        elif cp_correlation_to_use == GURVICH_KEYWORD:
+            rvalue = LEAD_CP_MIN_GURVICH
+        else:
+            raise ValueError("cp correlation can be one among: {:s}, "
+                             "{:s}. {:s} was provided"
+                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
+                                     cp_correlation_to_use))
+
+        return rvalue
 
     def _fill_properties(self):
         """
@@ -231,7 +244,7 @@ class Lead(PropertiesInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
-        return p_s(T, LEAD_KEYWORD)
+        return 5.76e9 * np.exp(-22131/T)
 
     def _sigma_correlation(self, T):
         """
@@ -246,7 +259,7 @@ class Lead(PropertiesInterface):
         -------
         surface tension in [N/m] : float
         """
-        return sigma(T, LEAD_KEYWORD)
+        return (525.9 - 0.113*T)*1e-3
 
     def _rho_correlation(self, T):
         """
@@ -261,7 +274,7 @@ class Lead(PropertiesInterface):
         -------
         density in [kg/m^3] : float
         """
-        return rho(T, LEAD_KEYWORD)
+        return 11441 - 1.2795*T
 
     def _alpha_correlation(self, T):
         """
@@ -276,7 +289,7 @@ class Lead(PropertiesInterface):
         -------
         thermal expansion coefficient in [1/K] : float
         """
-        return alpha(T, LEAD_KEYWORD)
+        return 1/(8942 - T)
 
     def _u_s_correlation(self, T):
         """
@@ -291,7 +304,7 @@ class Lead(PropertiesInterface):
         -------
         sound velocity in [m/s] : float
         """
-        return u_s(T, LEAD_KEYWORD)
+        return 1953 - 0.246*T
 
     def _beta_s_correlation(self, T):
         """
@@ -306,7 +319,7 @@ class Lead(PropertiesInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        return beta_s(T, LEAD_KEYWORD)
+        return 1/(self._rho_correlation(T) * self._u_s_correlation(T))
 
     def _cp_correlation(self, T):
         """
@@ -321,7 +334,18 @@ class Lead(PropertiesInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return cp(T, LEAD_KEYWORD, self.cp_correlation_used)
+        if self.cp_correlation_used == SOBOLEV_KEYWORD:
+            rvalue = (176.2 - 4.923e-2*T + 1.544e-5*T**2
+                      - 1.524e6*T**-2)
+        elif self.cp_correlation_used == GURVICH_KEYWORD:
+            rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
+                      - 2.099e-9*T**3 - 1.524e6*T**-2)
+        else:
+            raise ValueError("cp correlation can be one among: {:s}, "
+                             "{:s}. {:s} was provided"
+                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
+                                     self.cp_correlation_used))
+        return rvalue
 
     def _h_correlation(self, T):
         """
@@ -336,7 +360,10 @@ class Lead(PropertiesInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return h(T, LEAD_KEYWORD)
+        return (176.2*(T - LEAD_MELTING_TEMPERATURE)
+                - 2.4615e-2*(T**2 - LEAD_MELTING_TEMPERATURE**2)
+                + 5.147e-6*(T**3 - LEAD_MELTING_TEMPERATURE**3)
+                + 1.524e6*(T**-1 - LEAD_MELTING_TEMPERATURE**-1))
 
     def _mu_correlation(self, T):
         """
@@ -351,7 +378,7 @@ class Lead(PropertiesInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
-        return mu(T, LEAD_KEYWORD)
+        return 4.55e-4*np.exp(1069/T)
 
     def _r_correlation(self, T):
         """
@@ -366,7 +393,7 @@ class Lead(PropertiesInterface):
         -------
         electrical resistivity in [Ohm*m] : float
         """
-        return r(T, LEAD_KEYWORD)
+        return (67.0 + 0.0471*T)*1e-8
 
     def _k_correlation(self, T):
         """
@@ -381,4 +408,4 @@ class Lead(PropertiesInterface):
         -------
         thermal conductivity in [W/(m*K)] : float
         """
-        return k(T, LEAD_KEYWORD)
+        return 9.2 + 0.011*T

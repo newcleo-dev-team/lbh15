@@ -19,8 +19,10 @@ LEAD_MELTING_TEMPERATURE = 600.6  # [K]
 LEAD_MELTING_LATENT_HEAT = 23.07e3  # [J/kg]
 LEAD_BOILING_TEMPERATURE = 2021  # [K]
 LEAD_VAPORISATION_HEAT = 858.6e3  # [J/kg]
-LEAD_T_AT_CP_MIN = 1682.522  # [K]
-LEAD_T_AT_CP_COMPACT_MIN = 1568.665  # [K]
+LEAD_T_AT_CP_MIN_GURVICH = 1682.522  # [K]
+LEAD_T_AT_CP_MIN_SOBOLEV = 1568.665  # [K]
+LEAD_CP_MIN_GURVICH = 137.287133  # [J/(kg*K)]
+LEAD_CP_MIN_SOBOLEV = 136.348649  # [J/(kg*K)]
 
 # BISMUTH CONSTANTS
 BISMUTH_MELTING_TEMPERATURE = 544.6  # [K]
@@ -28,6 +30,7 @@ BISMUTH_MELTING_LATENT_HEAT = 53.3e3  # [J/kg]
 BISMUTH_BOILING_TEMPERATURE = 1831  # [K]
 BISMUTH_VAPORISATION_HEAT = 856.2e3  # [J/kg]
 BISMUTH_T_AT_CP_MIN = 1342.753  # [K]
+BISMUTH_CP_MIN = 130.151844  # [J/(kg*K)]
 
 # LEAD-BISMUTH-EUTECTIC CONSTANTS
 LBE_MELTING_TEMPERATURE = 398.0  # [K]
@@ -35,6 +38,32 @@ LBE_MELTING_LATENT_HEAT = 38.6e3  # [J/kg]
 LBE_BOILING_TEMPERATURE = 1927  # [K]
 LBE_VAPORISATION_HEAT = 856.6e3  # [J/kg]
 LBE_T_AT_CP_MIN = 1566.510  # [K]
+LBE_CP_MIN = 133.568103  # [J/(kg*K)]
+
+
+def p_s_initializer(p_s):
+    """
+    Returns a temperature guess according to the value
+    of the saturation vapour pressure
+
+    Parameters
+    ----------
+    p_s : float
+        saturation vapour pressure in [Pa]
+
+    Returns
+    -------
+    rvalue : float
+        Temperature guess in [K]
+    """
+    if p_s < 1e-2:
+        rvalue = 800
+    elif p_s >= 1e-2 and p_s < 1e2:
+        rvalue = 1200
+    else:
+        rvalue = 2000
+
+    return rvalue
 
 
 class PropertiesInterface(ABC):

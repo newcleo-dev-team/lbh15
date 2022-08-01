@@ -72,14 +72,12 @@ Each object has the following properties:
 
 where :math:`T` is the lbe temperature in :math:`[K]`
 """
+import numpy as np
 from ._lbeh15 import LBE_MELTING_TEMPERATURE
 from ._lbeh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbeh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
-from ._lbeh15 import LBE_T_AT_CP_MIN
-from ._lbeh15 import PropertiesInterface
-from ._utils import p_s, h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mu, r, k
-from ._utils import p_s_initializer
+from ._lbeh15 import LBE_T_AT_CP_MIN, LBE_CP_MIN
+from ._lbeh15 import PropertiesInterface, p_s_initializer
 
 
 class LBE(PropertiesInterface):
@@ -143,7 +141,7 @@ class LBE(PropertiesInterface):
         -------
         float
         """
-        return cp(LBE.T_at_cp_min(), LBE_KEYWORD)
+        return LBE_CP_MIN
 
     def _fill_properties(self):
         """
@@ -158,15 +156,15 @@ class LBE(PropertiesInterface):
         self._alpha = self._alpha_correlation(self.T)
         self._alpha_validity = [self.T_m0, self.T_b0]
         self._u_s = self._u_s_correlation(self.T)
-        self._u_s_validity = [self.T_m0, self.T_b0]
+        self._u_s_validity = [400.0, 1100.0]
         self._beta_s = self._beta_s_correlation(self.T)
-        self._u_s_validity = [self.T_m0, self.T_b0]
+        self._beta_s_validity = [400.0, 1100.0]
         self._cp = self._cp_correlation(self.T)
-        self._cp_validity = [400.0, self.T_b0]
+        self._cp_validity = [400.0, 1100.0]
         self._h = self._h_correlation(self.T)
-        self._h_validity = [400.0, self.T_b0]
+        self._h_validity = [400.0, 1100.0]
         self._mu = self._mu_correlation(self.T)
-        self._mu_validity = [self.T_m0, self.T_b0]
+        self._mu_validity = [self.T_m0, 1300.0]
         self._r = self._r_correlation(self.T)
         self._r_validity = [self.T_m0, 1100.0]
         self._k = self._k_correlation(self.T)
@@ -194,7 +192,7 @@ class LBE(PropertiesInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
-        return p_s(T, LBE_KEYWORD)
+        return 1.22e10 * np.exp(-22552/T)
 
     def _sigma_correlation(self, T):
         """
@@ -209,7 +207,7 @@ class LBE(PropertiesInterface):
         -------
         surface tension in [N/m] : float
         """
-        return sigma(T, LBE_KEYWORD)
+        return (448.5 - 0.0799*T)*1e-3
 
     def _rho_correlation(self, T):
         """
@@ -224,7 +222,7 @@ class LBE(PropertiesInterface):
         -------
         density in [kg/m^3] : float
         """
-        return rho(T, LBE_KEYWORD)
+        return 11065 - 1.293*T
 
     def _alpha_correlation(self, T):
         """
@@ -239,7 +237,7 @@ class LBE(PropertiesInterface):
         -------
         thermal expansion coefficient in [1/K] : float
         """
-        return alpha(T, LBE_KEYWORD)
+        return 1/(8558 - T)
 
     def _u_s_correlation(self, T):
         """
@@ -254,7 +252,7 @@ class LBE(PropertiesInterface):
         -------
         sound velocity in [m/s] : float
         """
-        return u_s(T, LBE_KEYWORD)
+        return 1855 - 0.212*T
 
     def _beta_s_correlation(self, T):
         """
@@ -269,7 +267,7 @@ class LBE(PropertiesInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        return beta_s(T, LBE_KEYWORD)
+        return 1/(self._rho_correlation(T) * self._u_s_correlation(T))
 
     def _cp_correlation(self, T):
         """
@@ -284,7 +282,8 @@ class LBE(PropertiesInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return cp(T, LBE_KEYWORD)
+        return (164.8 - 3.94e-2*T + 1.25e-5*T**2
+                - 4.56e5*T**-2)
 
     def _h_correlation(self, T):
         """
@@ -299,7 +298,10 @@ class LBE(PropertiesInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return h(T, LBE_KEYWORD)
+        return (164.8*(T - LBE_MELTING_TEMPERATURE)
+                - 1.97e-2*(T**2 - LBE_MELTING_TEMPERATURE**2)
+                + 4.167e-6*(T**3 - LBE_MELTING_TEMPERATURE**3)
+                + 4.56e5*(T**-1 - LBE_MELTING_TEMPERATURE**-1))
 
     def _mu_correlation(self, T):
         """
@@ -314,7 +316,7 @@ class LBE(PropertiesInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
-        return mu(T, LBE_KEYWORD)
+        return 4.94e-4*np.exp(754.1/T)
 
     def _r_correlation(self, T):
         """
@@ -329,7 +331,7 @@ class LBE(PropertiesInterface):
         -------
         electrical resistivity in [Ohm*m] : float
         """
-        return r(T, LBE_KEYWORD)
+        return (90.9 + 0.048*T)*1e-8
 
     def _k_correlation(self, T):
         """
@@ -344,4 +346,4 @@ class LBE(PropertiesInterface):
         -------
         thermal conductivity in [W/(m*K)] : float
         """
-        return k(T, LBE_KEYWORD)
+        return 3.284 + 1.617e-2*T - 2.305e-6*T**2

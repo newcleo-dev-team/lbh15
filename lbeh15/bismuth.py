@@ -70,14 +70,12 @@ Each object has the following properties:
 
 where :math:`T` is the bismuth temperature in :math:`[K]`
 """
+import numpy as np
 from ._lbeh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbeh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbeh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
-from ._lbeh15 import BISMUTH_T_AT_CP_MIN
-from ._lbeh15 import PropertiesInterface
-from ._utils import p_s, h, sigma, rho, alpha, u_s
-from ._utils import beta_s, cp, mu, r, k
-from ._utils import p_s_initializer
+from ._lbeh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
+from ._lbeh15 import PropertiesInterface, p_s_initializer
 
 
 class Bismuth(PropertiesInterface):
@@ -141,7 +139,7 @@ class Bismuth(PropertiesInterface):
         -------
         float
         """
-        return cp(BISMUTH.T_at_cp_min(), BISMUTH_KEYWORD)
+        return BISMUTH_CP_MIN
 
     def _fill_properties(self):
         """
@@ -193,7 +191,7 @@ class Bismuth(PropertiesInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
-        return p_s(T, BISMUTH_KEYWORD)
+        return 2.67e10 * np.exp(-22858/T)
 
     def _sigma_correlation(self, T):
         """
@@ -208,7 +206,7 @@ class Bismuth(PropertiesInterface):
         -------
         surface tension in [N/m] : float
         """
-        return sigma(T, BISMUTH_KEYWORD)
+        return (420.8 - 0.81*T)*1e-3
 
     def _rho_correlation(self, T):
         """
@@ -223,7 +221,7 @@ class Bismuth(PropertiesInterface):
         -------
         density in [kg/m^3] : float
         """
-        return rho(T, BISMUTH_KEYWORD)
+        return 10725 - 1.22*T
 
     def _alpha_correlation(self, T):
         """
@@ -238,7 +236,7 @@ class Bismuth(PropertiesInterface):
         -------
         thermal expansion coefficient in [1/K] : float
         """
-        return alpha(T, BISMUTH_KEYWORD)
+        return 1/(8791 - T)
 
     def _u_s_correlation(self, T):
         """
@@ -253,7 +251,7 @@ class Bismuth(PropertiesInterface):
         -------
         sound velocity in [m/s] : float
         """
-        return u_s(T, BISMUTH_KEYWORD)
+        return 1616 + 0.187*T - 2.2e-4*T**2
 
     def _beta_s_correlation(self, T):
         """
@@ -268,7 +266,7 @@ class Bismuth(PropertiesInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        return beta_s(T, BISMUTH_KEYWORD)
+        return 1/(self._rho_correlation(T) * self._u_s_correlation(T))
 
     def _cp_correlation(self, T):
         """
@@ -283,7 +281,7 @@ class Bismuth(PropertiesInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return cp(T, BISMUTH_KEYWORD)
+        return 118.2 + 5.934e-3*T + 7.183e6*T**-2
 
     def _h_correlation(self, T):
         """
@@ -298,7 +296,9 @@ class Bismuth(PropertiesInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return h(T, BISMUTH_KEYWORD)
+        return (118.2*(T - BISMUTH_MELTING_TEMPERATURE)
+                + 2.967e-3*(T**2 - BISMUTH_MELTING_TEMPERATURE**2)
+                - 7.183e6*(T**-1 - BISMUTH_MELTING_TEMPERATURE**-1))
 
     def _mu_correlation(self, T):
         """
@@ -313,7 +313,7 @@ class Bismuth(PropertiesInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
-        return mu(T, BISMUTH_KEYWORD)
+        return 4.456e-4*np.exp(780/T)
 
     def _r_correlation(self, T):
         """
@@ -328,7 +328,7 @@ class Bismuth(PropertiesInterface):
         -------
         electrical resistivity in [Ohm*m] : float
         """
-        return r(T, BISMUTH_KEYWORD)
+        return (98.96 + 0.0554*T)*1e-8
 
     def _k_correlation(self, T):
         """
@@ -343,4 +343,4 @@ class Bismuth(PropertiesInterface):
         -------
         thermal conductivity in [W/(m*K)] : float
         """
-        return k(T, BISMUTH_KEYWORD)
+        return 7.34 + 9.5e-3*T
