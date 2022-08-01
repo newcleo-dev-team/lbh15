@@ -13,9 +13,11 @@ Welcome to lbeh15 documentation!
 
    files/contacts.rst
    
-Indices and tables
-==================
+.. only:: html
+   
+   Indices and tables
+   ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`
