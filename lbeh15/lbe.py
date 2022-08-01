@@ -1,7 +1,7 @@
 """
 Module that contains liquid lead-bismuth-eutectic (lbe) properties object.
 :class:`.lbe.LBE` object can be initialized with the temperature
-or with one of the available properties
+or with one of the available properties.
 
 Each object has the following properties:
 
@@ -69,6 +69,9 @@ Each object has the following properties:
 
         :math:`k(T) = \\displaystyle3.284 + 1.617\\cdot10^{-2}{\\cdot}T \
         - 2.305\\cdot10^{-6}{\\cdot}T^2`
+    - :math:`Pr` Prandtl number :math:`[-]`:
+
+        :math:`Pr(T) = \\displaystyle\\frac{c_p(T)\\cdot\\mu(T)}{k(T)}`
 
 where :math:`T` is the lbe temperature in :math:`[K]`
 """
@@ -92,21 +95,22 @@ class LBE(PropertiesInterface):
         It is used if \\**kwargs contains 'cp', i.e., if initialization from
         specific heat is required
     \\**kwargs : dict
-        Dictionary that spefifies the quantity from which the parameter shall
+        Dictionary that specifies the quantity from which the object shall
         be initialized. The available ones are:
 
-        - 'T' : temperature [K]
-        - 'p_s' : saturation vapour pressure [Pa]
-        - 'sigma' : surface tension [N/m]
-        - 'rho' : density [Kg/m^3]
-        - 'alpha' : thermal expansion coefficient [1/K]
-        - 'u_s': speed of sound [m/s]
-        - 'beta_s' : isentropic compressibility [1/Pa]
-        - 'cp' : specific heat capacity [J/(kg*K)]
-        - 'h' : specific hentalpy (in respect to melting point) [J/kg]
-        - 'mu' : dynamic viscosity [Pa*s]
-        - 'r' : electrical resistivity [Ohm*m]
-        - 'k' : thermal conductivity [W/(m*K)]
+        - **T** (float) : temperature [K]
+        - **p_s** (float) : saturation vapour pressure [Pa]
+        - **sigma** (float) : surface tension [N/m]
+        - **rho** (float) : density [Kg/m^3]
+        - **alpha** (float) : thermal expansion coefficient [1/K]
+        - **u_s** (float) : speed of sound [m/s]
+        - **beta_s** (float) : isentropic compressibility [1/Pa]
+        - **cp** (float) : specific heat capacity [J/(kg*K)]
+        - **h** (float) : specific hentalpy \
+        (in respect to melting point) [J/kg]
+        - **mu** (float) : dynamic viscosity [Pa*s]
+        - **r** (float) : electrical resistivity [Ohm*m]
+        - **k** (float) : thermal conductivity [W/(m*K)]
 
     Examples
     --------
