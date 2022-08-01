@@ -3,8 +3,8 @@ Introduction
 ============
 
 lbeh15 (**L**\ ead **B**\ ismtuh **E**\ utectic **H**\ andbook 20 **15**) is a python library that models properties of liquid metals: 
-lead, bismuth and lead-bismuth eutectic (lbe).
-Properties are taken from "Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
+lead, bismuth and lead-bismuth eutectic (lbe). Properties are taken from 
+"Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
 (see :cite:`Agency2015`). The following properties are provided: 
 
 .. list-table:: lbeh15 properties from (:cite:`Agency2015`)
@@ -78,6 +78,7 @@ them the validty range of the correlation is provided as well. lbeh15 package wa
 the user if it asks for a property that is computed with a temperature outside correlation validity range
 see (see :ref:`Examples` for more details).Finally, it is possible to initialize an object knowing one of 
 its properties (see :ref:`Initialization from properties` for more details).
+Correlations are detailed in each liquid metal specific section.
 
 Go to :ref:`Documentation` to see full package documentation.
 
@@ -173,7 +174,7 @@ Initialization from properties
 
 lbeh15 package gives the possibility to initialize a liquid metal properties object just knowing one of its
 properties. This is accomplished by finding the root of the function used to calculate the target property value.
-It follows that two main points must be underlined:
+The following point must be underlined:
 
 - Initialization from specific heat capacity is not trivial: specific heat capacity function is not injective, 
   this means that for some values of :math:`c_p` two values of temperature could be returned. This is an undesired
