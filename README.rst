@@ -160,7 +160,7 @@ In this section some examples of lbeh15 usage are shown.
   using a temperature value that is outside surface tension validity range:
 
   >>> from lbeh15.lead import Lead
-  >>> liquid_lead = Lead(1400.0)
+  >>> liquid_lead = Lead(T=1400.0)
   >>> liquid_lead.sigma
   <stdin>:1: UserWarning: Temperature 1400.00 is outside sigma range [600.60, 1300.00] K
   0.3676999999999999
