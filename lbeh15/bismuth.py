@@ -145,31 +145,20 @@ class Bismuth(PropertiesInterface):
         """
         return BISMUTH_CP_MIN
 
-    def _fill_properties(self):
+    def _set_validity_ranges(self):
         """
-        Fills the class properties
+        Sets validity range for each property
         """
-        self._p_s = self._p_s_correlation(self.T)
         self._p_s_validity = [self.T_m0, self.T_b0]
-        self._sigma = self._sigma_correlation(self.T)
         self._sigma_validity = [self.T_m0, 1400.0]
-        self._rho = self._rho_correlation(self.T)
         self._rho_validity = [self.T_m0, self.T_b0]
-        self._alpha = self._alpha_correlation(self.T)
         self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s = self._u_s_correlation(self.T)
         self._u_s_validity = [self.T_m0, 1800.0]
-        self._beta_s = self._beta_s_correlation(self.T)
         self._beta_s_validity = [self.T_m0, 1800.0]
-        self._cp = self._cp_correlation(self.T)
         self._cp_validity = [self.T_m0, self.T_b0]
-        self._h = self._h_correlation(self.T)
         self._h_validity = [self.T_m0, self.T_b0]
-        self._mu = self._mu_correlation(self.T)
         self._mu_validity = [self.T_m0, 1300.0]
-        self._r = self._r_correlation(self.T)
         self._r_validity = [545.0, 1423.0]
-        self._k = self._k_correlation(self.T)
         self._k_validity = [self.T_m0, 1000.0]
 
     def _set_constants(self):

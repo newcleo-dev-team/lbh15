@@ -198,7 +198,7 @@ class PropertiesInterface(ABC):
         """
         float : saturation vapour pressure [Pa]
         """
-        self._check_validity_range(self._p_s_validity, 'p_s')
+        self.__check_validity_range(self._p_s_validity, 'p_s')
         return self._p_s
 
     @property
@@ -213,7 +213,7 @@ class PropertiesInterface(ABC):
         """
         float : surface tension [N/m]
         """
-        self._check_validity_range(self._sigma_validity, 'sigma')
+        self.__check_validity_range(self._sigma_validity, 'sigma')
         return self._sigma
 
     @property
@@ -228,7 +228,7 @@ class PropertiesInterface(ABC):
         """
         float : density [kg/m^3]
         """
-        self._check_validity_range(self._rho_validity, 'rho')
+        self.__check_validity_range(self._rho_validity, 'rho')
         return self._rho
 
     @property
@@ -243,7 +243,7 @@ class PropertiesInterface(ABC):
         """
         float : thermal expansion coefficient [1/K]
         """
-        self._check_validity_range(self._alpha_validity, 'alpha')
+        self.__check_validity_range(self._alpha_validity, 'alpha')
         return self._alpha
 
     @property
@@ -258,7 +258,7 @@ class PropertiesInterface(ABC):
         """
         float : sound velocity in [m/s]
         """
-        self._check_validity_range(self._u_s_validity, 'u_s')
+        self.__check_validity_range(self._u_s_validity, 'u_s')
         return self._u_s
 
     @property
@@ -273,7 +273,7 @@ class PropertiesInterface(ABC):
         """
         float : isentropic compressibility [1/Pa]
         """
-        self._check_validity_range(self._beta_s_validity, 'beta_s')
+        self.__check_validity_range(self._beta_s_validity, 'beta_s')
         return self._beta_s
 
     @property
@@ -288,7 +288,7 @@ class PropertiesInterface(ABC):
         """
         float : specific heat capacity [J/(kg*K)]
         """
-        self._check_validity_range(self._cp_validity, 'cp')
+        self.__check_validity_range(self._cp_validity, 'cp')
         return self._cp
 
     @property
@@ -303,7 +303,7 @@ class PropertiesInterface(ABC):
         """
         float : specific enthalpy difference from melting point [J/kg]
         """
-        self._check_validity_range(self._h_validity, 'h')
+        self.__check_validity_range(self._h_validity, 'h')
         return self._h
 
     @property
@@ -318,7 +318,7 @@ class PropertiesInterface(ABC):
         """
         float : dynamic viscosity [Ps*s]
         """
-        self._check_validity_range(self._mu_validity, 'mu')
+        self.__check_validity_range(self._mu_validity, 'mu')
         return self._mu
 
     @property
@@ -333,7 +333,7 @@ class PropertiesInterface(ABC):
         """
         float : electrical resistivity [Ohm*m]
         """
-        self._check_validity_range(self._r_validity, 'r')
+        self.__check_validity_range(self._r_validity, 'r')
         return self._r
 
     @property
@@ -348,7 +348,7 @@ class PropertiesInterface(ABC):
         """
         float : thermal conductivity [W/(m*K)]
         """
-        self._check_validity_range(self._k_validity, 'k')
+        self.__check_validity_range(self._k_validity, 'k')
         return self._k
 
     @property
@@ -365,7 +365,7 @@ class PropertiesInterface(ABC):
         """
         return self.cp * self.mu / self.k
 
-    def _check_validity_range(self, validity_range, property_name):
+    def __check_validity_range(self, validity_range, property_name):
         """
         Checks if temperature is inside validity range of property. If not
         warns the user.
@@ -388,13 +388,22 @@ class PropertiesInterface(ABC):
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
 
-    @abstractmethod
-    def _fill_properties(self):
+    def __fill_properties(self):
         """
         Fills the class properties
         """
-        raise NotImplementedError("{:s}._fill_properties NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        self._p_s = self._p_s_correlation(self.T)
+        self._sigma = self._sigma_correlation(self.T)
+        self._rho = self._rho_correlation(self.T)
+        self._alpha = self._alpha_correlation(self.T)
+        self._u_s = self._u_s_correlation(self.T)
+        self._beta_s = self._beta_s_correlation(self.T)
+        self._cp = self._cp_correlation(self.T)
+        self._h = self._h_correlation(self.T)
+        self._mu = self._mu_correlation(self.T)
+        self._r = self._r_correlation(self.T)
+        self._k = self._k_correlation(self.T)
+        self._set_validity_ranges()
 
     @abstractmethod
     def _set_constants(self):
@@ -402,6 +411,14 @@ class PropertiesInterface(ABC):
         Sets the class constants
         """
         raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractmethod
+    def _set_validity_ranges(self):
+        """
+        Sets validity range for each property
+        """
+        raise NotImplementedError("{:s}._set_validity_ranges NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
     @abstractmethod
@@ -637,7 +654,7 @@ class PropertiesInterface(ABC):
                 temperature = self.__compute_T(input_value, input_property)
                 self.__assign_T(temperature)
                 if self.T_assigned:
-                    self._fill_properties()
+                    self.__fill_properties()
 
     def __assign_T(self, T):
         """
