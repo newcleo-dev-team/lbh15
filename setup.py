@@ -2,19 +2,19 @@
 
 from setuptools import setup
 
-with open('./lbeh15/VERSION') as version_file:
+with open('./lbh15/VERSION') as version_file:
     __version__ = version_file.read().strip()
 
-with open('./lbeh15/AUTHOR') as author_file:
+with open('./lbh15/AUTHOR') as author_file:
     __author__ = author_file.read().strip()
 
 with open('README.rst') as readme_file:
     long_description = readme_file.read()
 
 setup(
-    name='lbeh15',
+    name='lbh15',
     version=__version__,
-    packages=['lbeh15'],
+    packages=['lbh15'],
     include_package_data=True,
     author=__author__,
     author_email='daniele.panico@newcleo.com, daniele.tomatis@newcleo.it',

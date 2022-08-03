@@ -1,92 +1,90 @@
 """
-Module with liquid lead-bismuth-eutectic (lbe) properties.
-:class:`.lbe.LBE` object can be initialized with the temperature
+Module liquid bismuth properties.
+:class:`.bismuth.Bismuth` object can be initialized with the temperature
 or with one of the available properties.
 
 Each object has the following properties:
 
-    - :math:`T_{m0}` lbe melting temperature:
+    - :math:`T_{m0}` bismuth melting temperature:
 
-        :math:`398.0 [K]`
-    - :math:`Q_{m0}` lbe melting latent heat:
+        :math:`544.6 [K]`
+    - :math:`Q_{m0}` bismuth melting latent heat:
 
-        :math:`38.6\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
-    - :math:`T_{b0}` lbe boiling temperature:
+        :math:`53.3\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
+    - :math:`T_{b0}` bismuth boiling temperature:
 
-        :math:`1927 [K]`
-    - :math:`Q_{b0}` lbe vaporisation heat:
+        :math:`1831 [K]`
+    - :math:`Q_{b0}` bismuth vaporisation heat:
 
-        :math:`856.6\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
-    - :math:`p_s` lbe saturation vapour pressure :math:`[Pa]`:
+        :math:`856.2\\cdot10^3 \\Big[\\frac{J}{kg}\\Big]`
+    - :math:`p_s` bismuth saturation vapour pressure :math:`[Pa]`:
 
-        :math:`p_s(T) = \\displaystyle1.22\\cdot10^{10}\\cdot\
-        \\exp{\\Big(-22852/T\\Big)}`
-    - :math:`\\sigma` lbe surface tension \
+        :math:`p_s(T) = \\displaystyle2.67\\cdot10^{10}\\cdot\
+        \\exp{\\Big(-22858/T\\Big)}`
+    - :math:`\\sigma` bismuth surface tension \
       :math:`\\Big[\\frac{N}{m}\\Big]`:
 
-        :math:`\\sigma(T) = \\displaystyle\\Big(448.5 \
-        - 0.0799{\\cdot}T\\Big)\\cdot10^{-3}`
-    - :math:`\\rho` lbe density \
+        :math:`\\sigma(T) = \\displaystyle\\Big(420.8 \
+        - 0.081{\\cdot}T\\Big)\\cdot10^{-3}`
+    - :math:`\\rho` bismuth density \
       :math:`\\Big[\\frac{kg}{m^3}\\Big]`:
 
-        :math:`\\rho(T) = \\displaystyle11065 - 1.293{\\cdot}T`
-    - :math:`\\alpha` lbe thermal expansion coefficient \
+        :math:`\\rho(T) = \\displaystyle10725 - 1.22{\\cdot}T`
+    - :math:`\\alpha` bismuth thermal expansion coefficient \
       :math:`\\Big[\\frac{1}{K}\\Big]`:
 
-        :math:`\\alpha(T) = \\displaystyle\\Big(8558 - T\\Big)^{-1}`
-    - :math:`u_s` speed of sound in lbe \
+        :math:`\\alpha(T) = \\displaystyle\\Big(8791 - T\\Big)^{-1}`
+    - :math:`u_s` speed of sound in bismuth \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
 
-        :math:`u_s(T) = \\displaystyle1855 - 0.212{\\cdot}T`
-    - :math:`\\beta_s` lbe isentropic compressibility \
+        :math:`u_s(T) = \\displaystyle1616 + 0.187{\\cdot}T \
+        - 2.2\\cdot10^{-4}{\\cdot}T`
+    - :math:`\\beta_s` bismuth isentropic compressibility \
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
 
         :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
-    - :math:`c_p` lbe specific heat \
+    - :math:`c_p` bismuth specific heat \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
-        :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-2}{\\cdot}T \
-        + 1.25\\cdot10^{-5}{\\cdot}T^2 - 4.56\\cdot10^{5}{\\cdot}T^{-2}`
-    - :math:`h` lbe specific enthalpy (as difference with \
+        :math:`c_p(T) = \\displaystyle118.2 - 5.934\\cdot10^{-3}{\\cdot}T \
+        + 7.183\\cdot10^{6}{\\cdot}T^{-2}`
+    - :math:`h` bismuth specific enthalpy (as difference with \
       respect to the melting point enthalpy) \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`h(T) = \\displaystyle\
-        164.8\\cdot\\Big(T - T_{m0}\\Big) \
-        - 1.97\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
-        + 4.167\\cdot10^{-6}\\Big(T^3 - T_{m0}^3\\Big)`
+        118.2\\cdot\\Big(T - T_{m0}\\Big) \
+        + 2.967\\cdot10^{-3}\\Big(T^2 - T_{m0}^2\\Big) \
+        - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
+    - :math:`\\mu` bismuth dynamic visocity :math:`[Pa{\\cdot}s]`:
 
-        :math:`\\qquad\\qquad- 4.56\\cdot10^5\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
-    - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
+        :math:`\\mu(T) = \\displaystyle4.456\\cdot10^{-4}\\cdot\
+        \\exp{\\Big(780/T\\Big)}`
+    - :math:`r` bismuth electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
-        :math:`\\mu(T) = \\displaystyle4.94\\cdot10^{-4}\\cdot\
-        \\exp{\\Big(754.1/T\\Bigg)}`
-    - :math:`r` lbe electrical resistivity :math:`[\\Omega{\\cdot}m]`:
-
-        :math:`r(T) = \\displaystyle\\Big(90.9 + 0.048{\\cdot}T\\Big)\
+        :math:`r(T) = \\displaystyle\\Big(98.96 + 0.0554{\\cdot}T\\Big)\
         \\cdot10^{-8}`
-    - :math:`k` lbe thermal conductivity \
+    - :math:`k` bismuth thermal conductivity \
       :math:`\\Big[\\frac{W}{m{\\cdot}K}\\Big]`:
 
-        :math:`k(T) = \\displaystyle3.284 + 1.617\\cdot10^{-2}{\\cdot}T \
-        - 2.305\\cdot10^{-6}{\\cdot}T^2`
+        :math:`k(T) = \\displaystyle7.34 + 9.5\\cdot10^{-3}{\\cdot}T`
     - :math:`Pr` Prandtl number :math:`[-]`:
 
         :math:`Pr(T) = \\displaystyle\\frac{c_p(T)\\cdot\\mu(T)}{k(T)}`
 
-where :math:`T` is the lbe temperature in :math:`[K]`
+where :math:`T` is the bismuth temperature in :math:`[K]`
 """
 import numpy as np
-from ._lbeh15 import LBE_MELTING_TEMPERATURE
-from ._lbeh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
-from ._lbeh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
-from ._lbeh15 import LBE_T_AT_CP_MIN, LBE_CP_MIN
-from ._lbeh15 import PropertiesInterface, p_s_initializer
+from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
+from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
+from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
+from ._lbh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
+from ._lbh15 import PropertiesInterface, p_s_initializer
 
 
-class LBE(PropertiesInterface):
+class Bismuth(PropertiesInterface):
     """
-    Class to model lead-bismuth eutectic properties at a given temperature
+    Class to model bismuth properties at a given temperature
 
     Parameters
     ----------
@@ -115,15 +113,15 @@ class LBE(PropertiesInterface):
 
     Examples
     --------
-    >>> liquid_lbe = LBE(T=600.0)
-    >>> liquid_lbe.mu  # [Pa*s]
-    0.001736052003181349
+    >>> liquid_bismuth = Bismuth(T=670.0)
+    >>> liquid_bismuth.k  # [W/(m*K)]
+    13.705
     """
     def __init__(self, cp_high_range=False, **kwargs):
         if 'p_s' in kwargs.keys():
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
-            self._guess = LBE_MELTING_TEMPERATURE*2.0
+            self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(cp_high_range, **kwargs)
 
     @staticmethod
@@ -135,7 +133,7 @@ class LBE(PropertiesInterface):
         -------
         float
         """
-        return LBE_T_AT_CP_MIN
+        return BISMUTH_T_AT_CP_MIN
 
     @staticmethod
     def cp_min():
@@ -146,7 +144,7 @@ class LBE(PropertiesInterface):
         -------
         float
         """
-        return LBE_CP_MIN
+        return BISMUTH_CP_MIN
 
     def _set_validity_ranges(self):
         """
@@ -156,22 +154,23 @@ class LBE(PropertiesInterface):
         self._sigma_validity = [self.T_m0, 1400.0]
         self._rho_validity = [self.T_m0, self.T_b0]
         self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s_validity = [400.0, 1100.0]
-        self._beta_s_validity = [400.0, 1100.0]
-        self._cp_validity = [400.0, 1100.0]
-        self._h_validity = [400.0, 1100.0]
+        self._u_s_validity = [self.T_m0, 1800.0]
+        self._beta_s_validity = [self.T_m0, 1800.0]
+        self._cp_validity = [self.T_m0, self.T_b0]
+        self._h_validity = [self.T_m0, self.T_b0]
         self._mu_validity = [self.T_m0, 1300.0]
-        self._r_validity = [self.T_m0, 1100.0]
-        self._k_validity = [self.T_m0, 1100.0]
+        self._r_validity = [545.0, 1423.0]
+        self._k_validity = [self.T_m0, 1000.0]
 
     def _set_constants(self):
         """
         Sets the class constants
+        :meta private:
         """
-        self._T_m0 = LBE_MELTING_TEMPERATURE
-        self._Q_m0 = LBE_MELTING_LATENT_HEAT
-        self._T_b0 = LBE_BOILING_TEMPERATURE
-        self._Q_b0 = LBE_VAPORISATION_HEAT
+        self._T_m0 = BISMUTH_MELTING_TEMPERATURE
+        self._Q_m0 = BISMUTH_MELTING_LATENT_HEAT
+        self._T_b0 = BISMUTH_BOILING_TEMPERATURE
+        self._Q_b0 = BISMUTH_VAPORISATION_HEAT
 
     def _p_s_correlation(self, T):
         """
@@ -186,7 +185,7 @@ class LBE(PropertiesInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
-        return 1.22e10 * np.exp(-22552/T)
+        return 2.67e10 * np.exp(-22858/T)
 
     def _sigma_correlation(self, T):
         """
@@ -201,7 +200,7 @@ class LBE(PropertiesInterface):
         -------
         surface tension in [N/m] : float
         """
-        return (448.5 - 0.0799*T)*1e-3
+        return (420.8 - 0.081*T)*1e-3
 
     def _rho_correlation(self, T):
         """
@@ -216,7 +215,7 @@ class LBE(PropertiesInterface):
         -------
         density in [kg/m^3] : float
         """
-        return 11065 - 1.293*T
+        return 10725 - 1.22*T
 
     def _alpha_correlation(self, T):
         """
@@ -231,7 +230,7 @@ class LBE(PropertiesInterface):
         -------
         thermal expansion coefficient in [1/K] : float
         """
-        return 1/(8558 - T)
+        return 1/(8791 - T)
 
     def _u_s_correlation(self, T):
         """
@@ -246,7 +245,7 @@ class LBE(PropertiesInterface):
         -------
         sound velocity in [m/s] : float
         """
-        return 1855 - 0.212*T
+        return 1616 + 0.187*T - 2.2e-4*T**2
 
     def _beta_s_correlation(self, T):
         """
@@ -276,8 +275,7 @@ class LBE(PropertiesInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (164.8 - 3.94e-2*T + 1.25e-5*T**2
-                - 4.56e5*T**-2)
+        return 118.2 + 5.934e-3*T + 7.183e6*T**-2
 
     def _h_correlation(self, T):
         """
@@ -292,10 +290,9 @@ class LBE(PropertiesInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return (164.8*(T - LBE_MELTING_TEMPERATURE)
-                - 1.97e-2*(T**2 - LBE_MELTING_TEMPERATURE**2)
-                + 4.167e-6*(T**3 - LBE_MELTING_TEMPERATURE**3)
-                + 4.56e5*(T**-1 - LBE_MELTING_TEMPERATURE**-1))
+        return (118.2*(T - BISMUTH_MELTING_TEMPERATURE)
+                + 2.967e-3*(T**2 - BISMUTH_MELTING_TEMPERATURE**2)
+                - 7.183e6*(T**-1 - BISMUTH_MELTING_TEMPERATURE**-1))
 
     def _mu_correlation(self, T):
         """
@@ -310,7 +307,7 @@ class LBE(PropertiesInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
-        return 4.94e-4*np.exp(754.1/T)
+        return 4.456e-4*np.exp(780/T)
 
     def _r_correlation(self, T):
         """
@@ -325,7 +322,7 @@ class LBE(PropertiesInterface):
         -------
         electrical resistivity in [Ohm*m] : float
         """
-        return (90.9 + 0.048*T)*1e-8
+        return (98.96 + 0.0554*T)*1e-8
 
     def _k_correlation(self, T):
         """
@@ -340,4 +337,4 @@ class LBE(PropertiesInterface):
         -------
         thermal conductivity in [W/(m*K)] : float
         """
-        return 3.284 + 1.617e-2*T - 2.305e-6*T**2
+        return 7.34 + 9.5e-3*T

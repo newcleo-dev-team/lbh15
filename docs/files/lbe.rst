@@ -1,7 +1,7 @@
-lbeh15.lbe module
+lbh15.lbe module
 =================
 
-.. automodule:: lbeh15.lbe
+.. automodule:: lbh15.lbe
     :members:
     :member-order: bysource
     :inherited-members:

@@ -1,7 +1,7 @@
-lbeh15.bismuth module
-=====================
+lbh15.bismuth module
+====================
 
-.. automodule:: lbeh15.bismuth
+.. automodule:: lbh15.bismuth
     :members:
     :member-order: bysource
     :inherited-members:

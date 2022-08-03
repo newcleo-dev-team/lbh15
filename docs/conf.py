@@ -17,10 +17,10 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 import lbeh15
-with open(os.path.join("..", "lbeh15", "VERSION")) as version_file:
+with open(os.path.join("..", "lbh15", "VERSION")) as version_file:
     __version__ = version_file.read().strip()
 
-with open(os.path.join("..", "lbeh15", "AUTHOR")) as author_file:
+with open(os.path.join("..", "lbh15", "AUTHOR")) as author_file:
     __author__ = author_file.read().strip()
 
 # -- Project information -----------------------------------------------------
@@ -92,8 +92,6 @@ pygments_style = 'sphinx'
 # -- Options for HTML output -------------------------------------------------
 html_theme = 'sphinx_rtd_theme'
 
-html_logo = 'files/figures/newcleologo.png'
-
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
@@ -118,7 +116,7 @@ html_static_path = []
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'lbeh15 documentation'
+htmlhelp_basename = 'lbh15 documentation'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -154,4 +152,5 @@ latex_documents = [
      __author__, 'manual'),
 ]
 
-latex_logo = html_logo
+latex_logo = 'files/figures/newcleologo.png'
+

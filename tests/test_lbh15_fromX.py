@@ -2,9 +2,9 @@ import unittest
 from scipy.constants import convert_temperature
 import sys
 sys.path.insert(0, '../')
-from lbeh15.lead import Lead
-from lbeh15.bismuth import Bismuth
-from lbeh15.lbe import LBE
+from lbh15 import Lead
+from lbh15 import Bismuth
+from lbh15 import LBE
 
 tol = 8
 Ts = [convert_temperature(395, 'C', 'K'), convert_temperature(1500, 'C', 'K')]

@@ -82,13 +82,13 @@ Each object has the following properties:
 where :math:`T` is the lead temperature in :math:`[K]`
 """
 import numpy as np
-from ._lbeh15 import LEAD_MELTING_TEMPERATURE
-from ._lbeh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
-from ._lbeh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
-from ._lbeh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
-from ._lbeh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
-from ._lbeh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
-from ._lbeh15 import PropertiesInterface, p_s_initializer
+from ._lbh15 import LEAD_MELTING_TEMPERATURE
+from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
+from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
+from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
+from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
+from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
+from ._lbh15 import PropertiesInterface, p_s_initializer
 
 
 class Lead(PropertiesInterface):

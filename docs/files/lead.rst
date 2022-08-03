@@ -1,7 +1,7 @@
-lbeh15.lead module
+lbh15.lead module
 ==================
 
-.. automodule:: lbeh15.lead
+.. automodule:: lbh15.lead
     :members:
     :member-order: bysource
     :inherited-members:
