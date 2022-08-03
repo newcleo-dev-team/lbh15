@@ -260,7 +260,7 @@ class LBE(PropertiesInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        return 1/(self._rho_correlation(T) * self._u_s_correlation(T))
+        return 1/(self._rho_correlation(T) * self._u_s_correlation(T)**2)
 
     def _cp_correlation(self, T):
         """

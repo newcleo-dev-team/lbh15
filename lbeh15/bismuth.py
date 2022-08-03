@@ -25,7 +25,7 @@ Each object has the following properties:
       :math:`\\Big[\\frac{N}{m}\\Big]`:
 
         :math:`\\sigma(T) = \\displaystyle\\Big(420.8 \
-        - 0.81{\\cdot}T\\Big)\\cdot10^{-3}`
+        - 0.081{\\cdot}T\\Big)\\cdot10^{-3}`
     - :math:`\\rho` bismuth density \
       :math:`\\Big[\\frac{kg}{m^3}\\Big]`:
 
@@ -37,7 +37,7 @@ Each object has the following properties:
     - :math:`u_s` speed of sound in bismuth \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
 
-        :math:`u_s(T) = \\displaystyle1616 + 0.246{\\cdot}T \
+        :math:`u_s(T) = \\displaystyle1616 + 0.187{\\cdot}T \
         - 2.2\\cdot10^{-4}{\\cdot}T`
     - :math:`\\beta_s` bismuth isentropic compressibility \
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
@@ -53,7 +53,7 @@ Each object has the following properties:
 
         :math:`h(T) = \\displaystyle\
         118.2\\cdot\\Big(T - T_{m0}\\Big) \
-        + 2.967\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
+        + 2.967\\cdot10^{-3}\\Big(T^2 - T_{m0}^2\\Big) \
         - 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` bismuth dynamic visocity :math:`[Pa{\\cdot}s]`:
 
@@ -199,7 +199,7 @@ class Bismuth(PropertiesInterface):
         -------
         surface tension in [N/m] : float
         """
-        return (420.8 - 0.81*T)*1e-3
+        return (420.8 - 0.081*T)*1e-3
 
     def _rho_correlation(self, T):
         """
@@ -259,7 +259,7 @@ class Bismuth(PropertiesInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        return 1/(self._rho_correlation(T) * self._u_s_correlation(T))
+        return 1/(self._rho_correlation(T) * self._u_s_correlation(T)**2)
 
     def _cp_correlation(self, T):
         """

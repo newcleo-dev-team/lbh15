@@ -69,7 +69,6 @@ def p_s_initializer(p_s):
 class PropertiesInterface(ABC):
     """
     Abstract class that defines liquid metal properties object
-    at a given temperature
 
     Parameters
     ----------
@@ -632,7 +631,7 @@ class PropertiesInterface(ABC):
             Temperature in [K]
         """
         if len(kwargs) != 1:
-            raise ValueError("One and only one parameter at "
+            raise ValueError("One and only one property at "
                              "time can be used for initialization. "
                              "{:d} were provided".format(len(kwargs)))
         else:
