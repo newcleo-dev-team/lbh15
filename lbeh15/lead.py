@@ -1,5 +1,5 @@
 """
-Module that contains liquid lead properties object.
+Module with liquid lead properties.
 :class:`.lead.Lead` object can be initialized with the temperature
 or with one of the available properties.
 
@@ -20,7 +20,7 @@ Each object has the following properties:
     - :math:`p_s` lead saturation vapour pressure :math:`[Pa]`:
 
         :math:`p_s(T) = \\displaystyle5.79\\cdot10^9\\cdot\
-        \\exp{\\Bigg(\\frac{-22131}{T}\\Bigg)}`
+        \\exp{\\Big(-22131/T\\Big)}`
     - :math:`\\sigma` lead surface tension \
       :math:`\\Big[\\frac{N}{m}\\Big]`:
 
@@ -33,7 +33,7 @@ Each object has the following properties:
     - :math:`\\alpha` lead thermal expansion coefficient \
       :math:`\\Big[\\frac{1}{K}\\Big]`:
 
-        :math:`\\alpha(T) = \\displaystyle\\frac{1}{8942 - T}`
+        :math:`\\alpha(T) = \\displaystyle\\Big(8942 - T\\Big)^{-1}`
     - :math:`u_s` speed of sound in lead \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
 
@@ -53,7 +53,8 @@ Each object has the following properties:
         :math:`c_p(T) = \\displaystyle175.1 - 4.961\\cdot10^{-2}{\\cdot}T \
         + 1.985\\cdot10^{-5}{\\cdot}T^2 - 2.099\\cdot10^{-9}{\\cdot}T^3 \
         - 1.524\\cdot10^{6}{\\cdot}T^{-2}`
-    - :math:`h` lead specific enthalpy (in respect to melting point) \
+    - :math:`h` lead specific enthalpy (as difference with \
+      respect to the melting point enthalpy) \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`h(T) = \\displaystyle\
@@ -65,7 +66,7 @@ Each object has the following properties:
     - :math:`\\mu` lead dynamic visocity :math:`[Pa{\\cdot}s]`:
 
         :math:`\\mu(T) = \\displaystyle4.55\\cdot10^{-4}\\cdot\
-        \\exp\\Bigg({\\frac{1069}{T}}\\Bigg)`
+        \\exp{\\Big(1069/T\\Big)}`
     - :math:`r` lead electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
         :math:`r(T) = \\displaystyle\\Big(67.0 + 0.0471{\\cdot}T\\Big)\

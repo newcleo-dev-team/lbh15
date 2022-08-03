@@ -9,5 +9,5 @@
 Bibliography
 ************
 
-.. bibliography:: ../lbeh15.bib
+.. bibliography:: ../lbh15.bib
    :style: plain

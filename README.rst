@@ -2,12 +2,13 @@
 Introduction
 ============
 
-lbeh15 (**L**\ ead **B**\ ismtuh **E**\ utectic **H**\ andbook 20 **15**) is a python library that models properties of liquid metals: 
-lead, bismuth and lead-bismuth eutectic (lbe). Properties are taken from 
-"Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
-(see :cite:`Agency2015`). The following properties are provided: 
+lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20 **15**) is a Python library that implements the
+thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
+the well known handbook edited by OECD/NEA ::cite:`Agency2015`: <<url>>
+The properties implemented in the package are listed in table :ref:`table_properties`
 
-.. list-table:: lbeh15 properties from (:cite:`Agency2015`)
+.. _table_properties:
+.. list-table:: lbh15 properties from (:cite:`Agency2015`)
    :widths: 50 25 25
    :header-rows: 1
 
@@ -60,29 +61,24 @@ lead, bismuth and lead-bismuth eutectic (lbe). Properties are taken from
      - :math:`k`
      - :math:`[W/(m{\cdot}K)]`
 
-Additional properties are provided as well:
+The dimensionless Prandtl number (:math:`Pr`) can be quaried as instance attribute as well.
 
-.. list-table:: lbeh15 additional properties
-   :widths: 50 25 25
-   :header-rows: 1
-
-   * - Property
-     - Symbol
-     - Units
-   * - Prandtl number
-     - :math:`Pr`
-     - :math:`[-]`
-
-All properties are computed at atmospheric pressure ( :math:`101325 [Pa]` ) and for each of 
-them the validty range of the correlation is provided as well. lbeh15 package warns
-the user if it asks for a property that is computed with a temperature outside correlation validity range
-see (see :ref:`Examples` for more details).Finally, it is possible to initialize an object knowing one of 
+All properties are given at atmospheric pressure (:math:`101325\quad[Pa]`) and the correlations'
+validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Examples` for more details).
+Finally, it is possible to initialize an object knowing one of 
 its properties (see :ref:`Initialization from properties` for more details).
-Correlations are detailed in each liquid metal specific section.
+The corre are reported in the doctring documentation for sake of completeness.
 
 Go to :ref:`Documentation` to see full package documentation.
 
-lbeh15 is released under the GNU General Public License 3.
+lbh15 is released under the GNU General Public License 3.
+
+==============
+Aknowledgments
+==============
+The author to Juan José Gómez Romera (jjgomera@gmail.com) who mantains `iapws <https://iapws.readthedocs.io/en/latest/>`_
+Python package, since they took inspiration from his work to develop the lbh15 package.
+
 
 =================
 Project Structure
@@ -91,63 +87,87 @@ The project is organized in the following folder structure:
 
 .. code:: bash
 
-  <lbeh15 parent folder>
-    ├── lbeh15
-    ├── docs
-    ├── tests
+  <lbh15 parent folder>
+    ├── lbh15/
+    ├── docs/
+    ├── tests/
+    ├── LICENSE
+    ├── MANIFEST.in
+    ├── README.rst
 
-- lbeh15 folder: this folder collects all modules, classes and methods implemented in lbeh15
-- docs: collection of material for the generation of the documentation
-- tests: collection of scripts used to verify package correct implementation
+- lbh15: contains all modules, classes and methods implemented in lbh15
+- docs: contains materials for the generation of the documentation (Sphinx v5.1.0)
+- tests: collection of tests used to verify correct implementation
 
 ===========
 Dependences
 ===========
 
-- python 3.x
-- numpy-scipy: library with mathematic and scientific tools
+- Python 3.8.10
+- scipy 1.8.1
 
 ============
 Installation
 ============
+To install the package lbh15 simply type the following command:
+
   .. code-block:: bash
 
-      pip install lbeh15
+      pip install lbh15
+
+Or download the package at ###LINK###. After downloading the package on disk, 
+execute the following command inside the base folder:
+
+  .. code-block:: bash
+
+      pip install .
+
+
+The documenation can be built both in html and latex. To do that execute the following command in
+package docs folder:
+ 
+  .. code-block:: bash
+
+      sphinx-build -b html . <dest_dir>
+ 
+  .. code-block:: bash
+
+      sphinx-build -b latex . <dest_dir>
 
 .. _Examples:
 
 ========
 Examples
 ========
-In this section some examples of lbeh15 usage are shown.
+This section shows a fex example of basic lbh25 usage.
 
-- Initialize :class:`lbeh15.lead.Lead` object with temperature in Celsius
+- Create an instance :class:`lbh15.lead.Lead` object with temperature in Celsius
   and print its dynamic viscosity:
   
   >>> from scipy.constants import convert_temperature
-  >>> from lbeh15.lead import Lead
+  >>> from lbh15 import Lead
   >>> # Initialize Lead object with T=395 Celsius
   >>> liquid_lead = Lead(T=convert_temperature(395.0, 'C', 'K'))
   >>> # Print lead dynamic viscosity in [Pa*s]
   >>> liquid_lead.mu
   0.0022534948395446985
 
-- Initialize :class:`lbeh15.lbe.LBE`, i.e., lead-bismuth-eutectic object knowing its density
+- Initialize :class:`lbh15.lbe.LBE`, i.e., lead-bismuth-eutectic object knowing its density
   and retrieve the corresponding temperature in Kelvin:
 
-  >>> from lbeh15.lbe import LBE
+  >>> from lbh15 import LBE
   >>> # Initialize LBE with rho=9800 [kg/m^3]
   >>> liquid_lbe = LBE(rho=9800)
   >>> # Print lbe temperature in [K]
   >>> liquid_lbe.T
   978.3449342614078
 
-- Use other liquid metals object to compare properties at a given temperature. In this 
-  example :class:`lbeh15.lead.Lead` object is initialized knowing conductivity value k, then its temperature in Kelvin
-  is used to initialize a :class:`lbeh15.bismuth.Bismuth` object, finally its conductivity is printed as comparison:
+- Use other liquid metal objects to compare properties at a given temperature. In this 
+  example :class:`lbh15.lead.Lead` object is initialized knowing the conductivity value :math:`k`, then its temperature in Kelvin
+  is used to initialize a :class:`lbh15.bismuth.Bismuth` object, finally the conductivity is printed as comparison:
 
-  >>> from lbeh15.lead import Lead
-  >>> from lbeh15.bismuth import Bismuth
+  >>> from lbh15 import Lead
+  >>> from lbh15 import Bismuth
   >>> # Inititialize Lead with k=17.37 [W/(m*K)]
   >>> liquid_lead = Lead(k=17.37)
   >>> # Initialize Bismuth with Lead temperature in K
@@ -156,10 +176,10 @@ In this section some examples of lbeh15 usage are shown.
   >>> liquid_bismuth.k
   14.395909090909093
 
-- Use property outside its range of validity. In this example :class:`lbeh15.lead.Lead` object is initialized
+- Request property outside its range of validity. In this example :class:`lbh15.lead.Lead` object is initialized
   using a temperature value that is outside surface tension validity range:
 
-  >>> from lbeh15.lead import Lead
+  >>> from lbh15 import Lead
   >>> liquid_lead = Lead(T=1400.0)
   >>> liquid_lead.sigma
   <stdin>:1: UserWarning: Temperature 1400.00 is outside sigma range [600.60, 1300.00] K
@@ -172,26 +192,26 @@ In this section some examples of lbeh15 usage are shown.
 Initialization from properties
 ==============================
 
-lbeh15 package gives the possibility to initialize a liquid metal properties object just knowing one of its
+lbh15 package gives the possibility to initialize a liquid metal properties object just knowing one of its
 properties. This is accomplished by finding the root of the function used to calculate the target property value.
 The following point must be underlined:
 
-- Initialization from specific heat capacity is not trivial: specific heat capacity function is not injective, 
-  this means that for some values of :math:`c_p` two values of temperature could be returned. This is an undesired
+- Initialization from specific heat capacity is needs some attention because specific heat capacity function is not injective, 
+  this means that for some values of :math:`c_p` two values of temperature are possible. This is an undesired
   behaviour. To overcome such difficulty the package provides the possibility to the user to choose if the high or
   low range of cp values shall be considered, i.e., the one at the left or at the right of the function minimum. The following example
-  shows its usage with :class:`lbeh15.bismuth.Bismuth` (the same is valid for :class:`lbeh15.lead.Lead` and :class:`lbeh15.lbe.LBE`):
+  shows its usage with :class:`lbh15.lead.Lead` (the same is valid for :class:`lbh15.bismuth.Bismuth` and :class:`lbh15.lbe.LBE`):
 
-  >>> from lbeh15.bismuth import Bismuth
+  >>> from lbh15 import Lead
   >>> # Visualize temperature in [K] corresponding to cp min
-  >>> Bismuth.T_at_cp_min()
+  >>> Lead.T_at_cp_min()
   1342.753
   >>> # Initialize two objects with low cp, one for the first and one for the second root
-  >>> bismuth_cp_1 = Bismuth(cp=137.35, cp_high_range=False)
-  >>> bismuth_cp_2 = Bismuth(cp=137.35, cp_high_range=True)
+  >>> lead_cp_1 = Lead(cp=136.6, cp_high_range=False)
+  >>> lead_cp_2 = Lead(cp=136.6, cp_high_range=True)
   >>> # Print their temperatures in [K]
-  >>> bismuth_cp_1.T, bismuth_cp_2.T
-  (1041.8294863232934 1771.2122382213047)
+  >>> lead_cp_1.T, lead_cp_1.T
+  (1437.4148683655994, 1699.1573335323235)
 
 
 .. _Documentation:
@@ -199,8 +219,9 @@ The following point must be underlined:
 =============
 Documentation
 =============
+.. only:: html
 
-You can navigate the full documentation of package:
+  You can navigate the full documentation of package:
 
 .. toctree::
    :maxdepth: 3

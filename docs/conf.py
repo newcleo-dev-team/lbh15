@@ -25,7 +25,7 @@ with open(os.path.join("..", "lbeh15", "AUTHOR")) as author_file:
 
 # -- Project information -----------------------------------------------------
 
-project = 'lbeh15'
+project = 'lbh15'
 copyright = '2022, newcleo'
 author = __author__
 
@@ -46,7 +46,7 @@ extensions = [
     'sphinxcontrib.bibtex'
 ]
 
-bibtex_bibfiles = ['lbeh15.bib']
+bibtex_bibfiles = ['lbh15.bib']
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
@@ -149,7 +149,8 @@ latex_elements = {
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'lbeh15.tex', 'lbeh15: Lead Bismtuh Eutectic Handbook 2015',
+    (master_doc, 'lbh15.tex', 'lbh15: Collection of properties from the lead-bismuth\
+     eutectic alloy and lead OECD/NEA handbook',
      __author__, 'manual'),
 ]
 

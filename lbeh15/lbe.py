@@ -1,5 +1,5 @@
 """
-Module that contains liquid lead-bismuth-eutectic (lbe) properties object.
+Module with liquid lead-bismuth-eutectic (lbe) properties.
 :class:`.lbe.LBE` object can be initialized with the temperature
 or with one of the available properties.
 
@@ -20,7 +20,7 @@ Each object has the following properties:
     - :math:`p_s` lbe saturation vapour pressure :math:`[Pa]`:
 
         :math:`p_s(T) = \\displaystyle1.22\\cdot10^{10}\\cdot\
-        \\exp{\\Bigg(\\frac{-22852}{T}\\Bigg)}`
+        \\exp{\\Big(-22852/T\\Big)}`
     - :math:`\\sigma` lbe surface tension \
       :math:`\\Big[\\frac{N}{m}\\Big]`:
 
@@ -33,7 +33,7 @@ Each object has the following properties:
     - :math:`\\alpha` lbe thermal expansion coefficient \
       :math:`\\Big[\\frac{1}{K}\\Big]`:
 
-        :math:`\\alpha(T) = \\displaystyle\\frac{1}{8558 - T}`
+        :math:`\\alpha(T) = \\displaystyle\\Big(8558 - T\\Big)^{-1}`
     - :math:`u_s` speed of sound in lbe \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
 
@@ -47,8 +47,9 @@ Each object has the following properties:
 
         :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-2}{\\cdot}T \
         + 1.25\\cdot10^{-5}{\\cdot}T^2 - 4.56\\cdot10^{5}{\\cdot}T^{-2}`
-    - :math:`h` lbe specific enthalpy (in respect to melting \
-      point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+    - :math:`h` lbe specific enthalpy (as difference with \
+      respect to the melting point enthalpy) \
+      :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`h(T) = \\displaystyle\
         164.8\\cdot\\Big(T - T_{m0}\\Big) \
@@ -59,7 +60,7 @@ Each object has the following properties:
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
 
         :math:`\\mu(T) = \\displaystyle4.94\\cdot10^{-4}\\cdot\
-        \\exp\\Bigg({\\frac{754.1}{T}}\\Bigg)`
+        \\exp{\\Big(754.1/T\\Bigg)}`
     - :math:`r` lbe electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
         :math:`r(T) = \\displaystyle\\Big(90.9 + 0.048{\\cdot}T\\Big)\

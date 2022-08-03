@@ -1,9 +1,9 @@
-Welcome to lbeh15 documentation!
-================================
+Welcome to lbh15 documentation!
+===============================
 
 .. only:: html
 
-   **L**\ ead **B**\ ismtuh **E**\ utectic **H**\ andbook 20 **15**
+   **L**\ ead **B**\ ismtuh **H**\ andbook 20 **15**
 
 
 .. toctree::

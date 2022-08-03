@@ -1,5 +1,5 @@
 """
-Module that contains liquid bismuth properties object.
+Module liquid bismuth properties.
 :class:`.bismuth.Bismuth` object can be initialized with the temperature
 or with one of the available properties.
 
@@ -20,7 +20,7 @@ Each object has the following properties:
     - :math:`p_s` bismuth saturation vapour pressure :math:`[Pa]`:
 
         :math:`p_s(T) = \\displaystyle2.67\\cdot10^{10}\\cdot\
-        \\exp{\\Bigg(\\frac{-22858}{T}\\Bigg)}`
+        \\exp{\\Big(-22858/T\\Big)}`
     - :math:`\\sigma` bismuth surface tension \
       :math:`\\Big[\\frac{N}{m}\\Big]`:
 
@@ -33,7 +33,7 @@ Each object has the following properties:
     - :math:`\\alpha` bismuth thermal expansion coefficient \
       :math:`\\Big[\\frac{1}{K}\\Big]`:
 
-        :math:`\\alpha(T) = \\displaystyle\\frac{1}{8791 - T}`
+        :math:`\\alpha(T) = \\displaystyle\\Big(8791 - T\\Big)^{-1}`
     - :math:`u_s` speed of sound in bismuth \
       :math:`\\Big[\\frac{m}{s}\\Big]`:
 
@@ -48,8 +48,9 @@ Each object has the following properties:
 
         :math:`c_p(T) = \\displaystyle118.2 - 5.934\\cdot10^{-3}{\\cdot}T \
         + 7.183\\cdot10^{6}{\\cdot}T^{-2}`
-    - :math:`h` bismuth specific enthalpy (in respect to melting \
-      point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
+    - :math:`h` bismuth specific enthalpy (as difference with \
+      respect to the melting point enthalpy) \
+      :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`h(T) = \\displaystyle\
         118.2\\cdot\\Big(T - T_{m0}\\Big) \
@@ -58,7 +59,7 @@ Each object has the following properties:
     - :math:`\\mu` bismuth dynamic visocity :math:`[Pa{\\cdot}s]`:
 
         :math:`\\mu(T) = \\displaystyle4.456\\cdot10^{-4}\\cdot\
-        \\exp\\Bigg({\\frac{780}{T}}\\Bigg)`
+        \\exp{\\Big(780/T\\Big)}`
     - :math:`r` bismuth electrical resistivity :math:`[\\Omega{\\cdot}m]`:
 
         :math:`r(T) = \\displaystyle\\Big(98.96 + 0.0554{\\cdot}T\\Big)\
