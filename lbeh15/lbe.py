@@ -45,7 +45,7 @@ Each object has the following properties:
     - :math:`c_p` lbe specific heat \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
-        :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-3}{\\cdot}T \
+        :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-2}{\\cdot}T \
         + 1.25\\cdot10^{-5}{\\cdot}T^2 - 4.56\\cdot10^{5}{\\cdot}T^{-2}`
     - :math:`h` lbe specific enthalpy (in respect to melting \
       point) :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
@@ -53,9 +53,9 @@ Each object has the following properties:
         :math:`h(T) = \\displaystyle\
         164.8\\cdot\\Big(T - T_{m0}\\Big) \
         - 1.97\\cdot10^{-2}\\Big(T^2 - T_{m0}^2\\Big) \
-        + 4.167\\cdot10^{-2}\\Big(T^3 - T_{m0}^3\\Big)`
+        + 4.167\\cdot10^{-6}\\Big(T^3 - T_{m0}^3\\Big)`
 
-        :math:`\\qquad\\qquad- 7.183\\cdot10^6\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
+        :math:`\\qquad\\qquad- 4.56\\cdot10^5\\Big(T^{-1} - T_{m0}^{-1}\\Big)`
     - :math:`\\mu` lbe dynamic visocity :math:`[Pa{\\cdot}s]`:
 
         :math:`\\mu(T) = \\displaystyle4.94\\cdot10^{-4}\\cdot\
