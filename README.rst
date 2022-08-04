@@ -15,7 +15,7 @@ the well known handbook edited by OECD/NEA :cite:`Agency2015`:
 
    * - Property
      - Symbol
-     - Units
+     - Units 
    * - Melting temperature
      - :math:`T_{m0}`
      - :math:`[K]`
