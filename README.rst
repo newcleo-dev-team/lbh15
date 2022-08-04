@@ -88,6 +88,7 @@ The project is organized in the following folder structure:
     ├── LICENSE
     ├── MANIFEST.in
     ├── README.rst
+    ├── setup.py
 
 - lbh15: contains all modules, classes and methods implemented in lbh15
 - docs: contains materials for the generation of the documentation (Sphinx v5.1.0)
@@ -133,7 +134,7 @@ package docs folder:
 ========
 Examples
 ========
-This section shows a fex example of basic lbh25 usage.
+This section shows a few example of basic lbh25 usage.
 
 - Create an instance :class:`.Lead` object with temperature in Celsius
   and print its dynamic viscosity:
