@@ -98,7 +98,7 @@ class Lead(PropertiesInterface):
 
     Parameters
     ----------
-    cp_correlation : str
+    cp_correlation_to_use : str
         Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
     cp_high_range : bool
         True to initialize the object with temperature larger than
@@ -126,16 +126,16 @@ class Lead(PropertiesInterface):
     Examples
     --------
     Compare :class:`.lead.Lead` specific heat values at T=800 K
-    with with cp_correlation equal to 'sobolev2011' and 'gurvich1991':
+    with with cp_correlation_to_use equal to 'sobolev2011' and 'gurvich1991':
 
-    >>> liquid_lead_1 = Lead(T=800)  # cp_correlation='sobolev2011'
-    >>> liquid_lead_2 = Lead(T=800, cp_correlation='gurvich1991')
+    >>> liquid_lead_1 = Lead(T=800)  # cp_correlation_to_use='sobolev2011'
+    >>> liquid_lead_2 = Lead(T=800, cp_correlation_to_use='gurvich1991')
     >>> liquid_lead_1.cp, liquid_lead_2.cp
     (144.31634999999997, 144.66006199999998)
     """
-    def __init__(self, cp_correlation=SOBOLEV_KEYWORD,
+    def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD,
                  cp_high_range=False, **kwargs):
-        self._cp_correlation = cp_correlation
+        self._cp_correlation_to_use = cp_correlation_to_use
         if 'p_s' in kwargs.keys():
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
@@ -143,54 +143,54 @@ class Lead(PropertiesInterface):
         super().__init__(cp_high_range=cp_high_range, **kwargs)
 
     @staticmethod
-    def T_at_cp_min(cp_correlation=SOBOLEV_KEYWORD):
+    def T_at_cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
         """
         Temperature in [K] corresponding to specific heat minimum
 
         Parameters
         ----------
-        cp_correlation : str
+        cp_correlation_to_use : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
 
         Returns
         -------
         float
         """
-        if cp_correlation == SOBOLEV_KEYWORD:
+        if cp_correlation_to_use == SOBOLEV_KEYWORD:
             rvalue = LEAD_T_AT_CP_MIN_SOBOLEV
-        elif cp_correlation == GURVICH_KEYWORD:
+        elif cp_correlation_to_use == GURVICH_KEYWORD:
             rvalue = LEAD_T_AT_CP_MIN_GURVICH
         else:
             raise ValueError("cp correlation can be one among: {:s}, "
                              "{:s}. {:s} was provided"
                              .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
-                                     cp_correlation))
+                                     cp_correlation_to_use))
 
         return rvalue
 
     @staticmethod
-    def cp_min(cp_correlation=SOBOLEV_KEYWORD):
+    def cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
         """
         Minimum value of cp correlation in [J/(kg*K)]
 
         Parameters
         ----------
-        cp_correlation : str
+        cp_correlation_to_use : str
             Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
 
         Returns
         -------
         float
         """
-        if cp_correlation == SOBOLEV_KEYWORD:
+        if cp_correlation_to_use == SOBOLEV_KEYWORD:
             rvalue = LEAD_CP_MIN_SOBOLEV
-        elif cp_correlation == GURVICH_KEYWORD:
+        elif cp_correlation_to_use == GURVICH_KEYWORD:
             rvalue = LEAD_CP_MIN_GURVICH
         else:
             raise ValueError("cp correlation can be one among: {:s}, "
                              "{:s}. {:s} was provided"
                              .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
-                                     cp_correlation))
+                                     cp_correlation_to_use))
 
         return rvalue
 
@@ -224,7 +224,7 @@ class Lead(PropertiesInterface):
         """
         str : name of cp correlation used
         """
-        return self._cp_correlation
+        return self._cp_correlation_to_use
 
     def _p_s_correlation(self, T):
         """

@@ -197,7 +197,8 @@ class PropertiesInterface(ABC):
         """
         float : saturation vapour pressure [Pa]
         """
-        self.__check_validity_range(self._p_s_validity, 'p_s')
+        self.__check_validity_range(self._p_s_validity,
+                                    'saturation vapour pressure')
         return self._p_s
 
     @property
@@ -212,7 +213,8 @@ class PropertiesInterface(ABC):
         """
         float : surface tension [N/m]
         """
-        self.__check_validity_range(self._sigma_validity, 'sigma')
+        self.__check_validity_range(self._sigma_validity,
+                                    'surface tension')
         return self._sigma
 
     @property
@@ -227,7 +229,8 @@ class PropertiesInterface(ABC):
         """
         float : density [kg/m^3]
         """
-        self.__check_validity_range(self._rho_validity, 'rho')
+        self.__check_validity_range(self._rho_validity,
+                                    'density')
         return self._rho
 
     @property
@@ -242,7 +245,8 @@ class PropertiesInterface(ABC):
         """
         float : thermal expansion coefficient [1/K]
         """
-        self.__check_validity_range(self._alpha_validity, 'alpha')
+        self.__check_validity_range(self._alpha_validity,
+                                    'thermal expansion coefficient')
         return self._alpha
 
     @property
@@ -257,7 +261,8 @@ class PropertiesInterface(ABC):
         """
         float : sound velocity in [m/s]
         """
-        self.__check_validity_range(self._u_s_validity, 'u_s')
+        self.__check_validity_range(self._u_s_validity,
+                                    'sound velocity')
         return self._u_s
 
     @property
@@ -272,7 +277,8 @@ class PropertiesInterface(ABC):
         """
         float : isentropic compressibility [1/Pa]
         """
-        self.__check_validity_range(self._beta_s_validity, 'beta_s')
+        self.__check_validity_range(self._beta_s_validity,
+                                    'isentropic compressibility')
         return self._beta_s
 
     @property
@@ -287,7 +293,8 @@ class PropertiesInterface(ABC):
         """
         float : specific heat capacity [J/(kg*K)]
         """
-        self.__check_validity_range(self._cp_validity, 'cp')
+        self.__check_validity_range(self._cp_validity,
+                                    'specific heat capacity')
         return self._cp
 
     @property
@@ -302,7 +309,8 @@ class PropertiesInterface(ABC):
         """
         float : specific enthalpy difference from melting point [J/kg]
         """
-        self.__check_validity_range(self._h_validity, 'h')
+        self.__check_validity_range(self._h_validity,
+                                    'specific enthalpy')
         return self._h
 
     @property
@@ -317,7 +325,8 @@ class PropertiesInterface(ABC):
         """
         float : dynamic viscosity [Ps*s]
         """
-        self.__check_validity_range(self._mu_validity, 'mu')
+        self.__check_validity_range(self._mu_validity,
+                                    'dynamic viscosity')
         return self._mu
 
     @property
@@ -332,7 +341,8 @@ class PropertiesInterface(ABC):
         """
         float : electrical resistivity [Ohm*m]
         """
-        self.__check_validity_range(self._r_validity, 'r')
+        self.__check_validity_range(self._r_validity,
+                                    'electrical resistivity')
         return self._r
 
     @property
@@ -347,7 +357,8 @@ class PropertiesInterface(ABC):
         """
         float : thermal conductivity [W/(m*K)]
         """
-        self.__check_validity_range(self._k_validity, 'k')
+        self.__check_validity_range(self._k_validity,
+                                    'thermal conductivity')
         return self._k
 
     @property
@@ -381,9 +392,11 @@ class PropertiesInterface(ABC):
         if self.T >= validity_range[0] and self.T <= validity_range[1]:
             inside = True
         if not inside:
-            warnings.warn("Temperature {:.2f} is outside {:s} range "
+            warnings.warn("The {:s} is requested at "
+                          "temperature value of {:.2f} K "
+                          "that is not in validity range "
                           "[{:.2f}, {:.2f}] K"
-                          .format(self.T, property_name,
+                          .format(property_name, self.T,
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
 

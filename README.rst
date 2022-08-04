@@ -66,9 +66,8 @@ The dimensionless Prandtl number (:math:`Pr`) can be quaried as instance attribu
 
 All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) and the correlations'
 validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Examples` for more details).
-Finally, it is possible to initialize an object knowing one of 
-its properties (see :ref:`Initialization from properties` for more details).
-The corre are reported in the doctring documentation for sake of completeness.
+We also provide an example of instantiation using a target property value, see section :ref:`Initialization from properties` 
+for instance. The correlations are reported in the doctring documentation for sake of completeness.
 
 Go to :ref:`Documentation` to see full package documentation.
 
@@ -153,7 +152,7 @@ This section shows a fex example of basic lbh25 usage.
   >>> from lbh15 import Lead
   >>> liquid_lead = Lead(T=1400.0)
   >>> liquid_lead.sigma
-  <stdin>:1: UserWarning: Temperature 1400.00 is outside sigma range [600.60, 1300.00] K
+  <stdin>:1: UserWarning: The surface tension is requested at temperature value of 1400.00 K that is not in validity range [600.60, 1300.00] K
   0.3676999999999999
 
 
