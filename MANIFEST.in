@@ -1,4 +1,4 @@
 include README.rst
 include LICENSE
-include lbeh15/VERSION
-include lbeh15/AUTHOR
+include lbh15/VERSION
+include lbh15/AUTHOR

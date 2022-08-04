@@ -1,9 +1,10 @@
 """
 Module liquid bismuth properties.
 :class:`.bismuth.Bismuth` object can be initialized with the temperature
-or with one of the available properties.
+or with one of the available properties (see :class:`.bismuth.Bismuth` for \
+the full list).
 
-Each object has the following properties:
+Each object has the following themophysical properties:
 
     - :math:`T_{m0}` bismuth melting temperature:
 
@@ -43,7 +44,7 @@ Each object has the following properties:
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
 
         :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
-    - :math:`c_p` bismuth specific heat \
+    - :math:`c_p` bismuth specific heat capacity \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`c_p(T) = \\displaystyle118.2 - 5.934\\cdot10^{-3}{\\cdot}T \

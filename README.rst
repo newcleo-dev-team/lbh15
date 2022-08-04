@@ -4,8 +4,9 @@ Introduction
 
 lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20 **15**) is a Python library that implements the
 thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
-the well known handbook edited by OECD/NEA ::cite:`Agency2015`: <<url>>
-The properties implemented in the package are listed in table :ref:`table_properties`
+the well known handbook edited by OECD/NEA :cite:`Agency2015`: 
+`oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
+. The properties implemented in the package are listed in table :ref:`table_properties`
 
 .. _table_properties:
 .. list-table:: lbh15 properties from (:cite:`Agency2015`)
@@ -63,7 +64,7 @@ The properties implemented in the package are listed in table :ref:`table_proper
 
 The dimensionless Prandtl number (:math:`Pr`) can be quaried as instance attribute as well.
 
-All properties are given at atmospheric pressure (:math:`101325\quad[Pa]`) and the correlations'
+All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) and the correlations'
 validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Examples` for more details).
 Finally, it is possible to initialize an object knowing one of 
 its properties (see :ref:`Initialization from properties` for more details).
@@ -152,30 +153,6 @@ This section shows a fex example of basic lbh25 usage.
   >>> liquid_lead.mu
   0.0022534948395446985
 
-- Initialize :class:`lbh15.lbe.LBE`, i.e., lead-bismuth-eutectic object knowing its density
-  and retrieve the corresponding temperature in Kelvin:
-
-  >>> from lbh15 import LBE
-  >>> # Initialize LBE with rho=9800 [kg/m^3]
-  >>> liquid_lbe = LBE(rho=9800)
-  >>> # Print lbe temperature in [K]
-  >>> liquid_lbe.T
-  978.3449342614078
-
-- Use other liquid metal objects to compare properties at a given temperature. In this 
-  example :class:`lbh15.lead.Lead` object is initialized knowing the conductivity value :math:`k`, then its temperature in Kelvin
-  is used to initialize a :class:`lbh15.bismuth.Bismuth` object, finally the conductivity is printed as comparison:
-
-  >>> from lbh15 import Lead
-  >>> from lbh15 import Bismuth
-  >>> # Inititialize Lead with k=17.37 [W/(m*K)]
-  >>> liquid_lead = Lead(k=17.37)
-  >>> # Initialize Bismuth with Lead temperature in K
-  >>> liquid_bismuth = Bismuth(liquid_lead.T)
-  >>> # Print bismuth conductivity
-  >>> liquid_bismuth.k
-  14.395909090909093
-
 - Request property outside its range of validity. In this example :class:`lbh15.lead.Lead` object is initialized
   using a temperature value that is outside surface tension validity range:
 
@@ -188,16 +165,43 @@ This section shows a fex example of basic lbh25 usage.
 
 .. _Initialization from properties:
 
-==============================
-Initialization from properties
-==============================
++++++++++++++++++++++++++++++++++++++++++++++++
+Initialization from properties - *experimental*
++++++++++++++++++++++++++++++++++++++++++++++++
 
-lbh15 package gives the possibility to initialize a liquid metal properties object just knowing one of its
-properties. This is accomplished by finding the root of the function used to calculate the target property value.
-The following point must be underlined:
+The lbh15 package gives the possibility to instantiate a liquid metal properties object just knowing one of its
+properties (see :class:`lbh15.lead.Lead`, :class:`lbh15.bismuth.Bismuth` and :class:`lbh15.lbe.LBE` documentation for the full list). 
+This is accomplished by finding the root of the function used to calculate the target property value.
+This functionality is marked as *experimental* since it depends on the specific mathematical formulation of 
+property correlations that are implemented in lbh15. The authors cannot guarantee its correct behaviour if 
+such implementations are changed by the user.
 
-- Initialization from specific heat capacity is needs some attention because specific heat capacity function is not injective, 
-  this means that for some values of :math:`c_p` two values of temperature are possible. This is an undesired
+- Initialize :class:`lbh15.lbe.LBE`, i.e., lead-bismuth-eutectic object knowing its density
+  and retrieve the corresponding temperature in Kelvin:
+
+  >>> from lbh15 import LBE
+  >>> # Initialize LBE with rho=9800 [kg/m^3]
+  >>> liquid_lbe = LBE(rho=9800)
+  >>> # Print lbe temperature in [K]
+  >>> liquid_lbe.T
+  978.3449342614078
+
+- Use other liquid metal objects to compare properties at a given temperature. In this 
+  example :class:`lbh15.lead.Lead` object is initialized knowing the conductivity value :math:`k`, then its temperature in Kelvin
+  is used to initialize a :class:`lbh15.bismuth.Bismuth` object. Finally, the conductivity of the bismuth object is printed for comparison:
+
+  >>> from lbh15 import Lead
+  >>> from lbh15 import Bismuth
+  >>> # Inititialize Lead with k=17.37 [W/(m*K)]
+  >>> liquid_lead = Lead(k=17.37)
+  >>> # Initialize Bismuth with Lead temperature in K
+  >>> liquid_bismuth = Bismuth(liquid_lead.T)
+  >>> # Print bismuth conductivity
+  >>> liquid_bismuth.k
+  14.395909090909093
+
+- Initialization from specific heat capacity needs some attention because the corresponding function of temperature is not injective, 
+  hence for some values of :math:`c_p` two values of temperature are mapped. This is an undesired
   behaviour. To overcome such difficulty the package provides the possibility to the user to choose if the high or
   low range of cp values shall be considered, i.e., the one at the left or at the right of the function minimum. The following example
   shows its usage with :class:`lbh15.lead.Lead` (the same is valid for :class:`lbh15.bismuth.Bismuth` and :class:`lbh15.lbe.LBE`):
@@ -206,7 +210,10 @@ The following point must be underlined:
   >>> # Visualize temperature in [K] corresponding to cp min
   >>> Lead.T_at_cp_min()
   1342.753
-  >>> # Initialize two objects with low cp, one for the first and one for the second root
+  >>> # Visualize minimum value of cp in [J/(kg*K)]
+  >>> Lead.cp_min()
+  136.348649
+  >>> # Initialize two objects with cp, one for the low range and one for the high range
   >>> lead_cp_1 = Lead(cp=136.6, cp_high_range=False)
   >>> lead_cp_2 = Lead(cp=136.6, cp_high_range=True)
   >>> # Print their temperatures in [K]

@@ -1,9 +1,10 @@
 """
 Module with liquid lead-bismuth-eutectic (lbe) properties.
 :class:`.lbe.LBE` object can be initialized with the temperature
-or with one of the available properties.
+or with one of the available properties (see :class:`.lbe.LBE` for \
+the full list).
 
-Each object has the following properties:
+Each object has the following themophysical properties:
 
     - :math:`T_{m0}` lbe melting temperature:
 
@@ -42,7 +43,7 @@ Each object has the following properties:
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
 
         :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
-    - :math:`c_p` lbe specific heat \
+    - :math:`c_p` lbe specific heat capacity \
       :math:`\\Big[\\frac{J}{kg{\\cdot}K}\\Big]`:
 
         :math:`c_p(T) = \\displaystyle164.8 - 3.94\\cdot10^{-2}{\\cdot}T \

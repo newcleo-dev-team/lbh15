@@ -16,7 +16,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
-import lbeh15
+import lbh15
 with open(os.path.join("..", "lbh15", "VERSION")) as version_file:
     __version__ = version_file.read().strip()
 

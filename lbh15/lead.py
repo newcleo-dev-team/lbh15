@@ -1,9 +1,10 @@
 """
 Module with liquid lead properties.
 :class:`.lead.Lead` object can be initialized with the temperature
-or with one of the available properties.
+or with one of the available properties (see :class:`.lead.Lead` for \
+the full list).
 
-Each object has the following properties:
+Each object has the following themophysical properties:
 
     - :math:`T_{m0}` lead melting temperature:
 
@@ -42,7 +43,7 @@ Each object has the following properties:
       :math:`\\Big[\\frac{1}{Pa}\\Big]`:
 
         :math:`\\beta_s(T) = \\displaystyle\\frac{1}{\\rho(T){\\cdot}u_s(T)^2}`
-    - :math:`c_p` lead specific heat :math:`\\Big[\
+    - :math:`c_p` lead specific heat capacity :math:`\\Big[\
       \\frac{J}{kg{\\cdot}K}\\Big]`, two correlations are available,\
       sobolev2011 and gurvich1991. The first one is the\
       default one used by :class:`.lead.Lead` and its inherited classes:
