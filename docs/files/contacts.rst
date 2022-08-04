@@ -2,8 +2,8 @@
 Contacts
 ********
 
-For further information on package installation, usage, bugs report, or 
-suggetions for new development, it is possible to contact the package authors: 
+For further information on package installation, usage, or 
+suggetions of new development, please contact: 
 
-- Daniele Panico, daniele.panico@newcleo.com
-- Daniele Tomatis, daniele.tomatis@newcleo.com
+- `Daniele Panico <daniele.panico@newcleo.com>`_
+- `Daniele Tomatis <daniele.tomatis@newcleo.com>`_

@@ -232,5 +232,5 @@ Documentation
 ==============
 Aknowledgments
 ==============
-The authors are very thankful to Juan José Gómez Romera (jjgomera@gmail.com) who mantains `iapws <https://iapws.readthedocs.io/en/latest/>`_
+The authors are very thankful to `Juan José Gómez Romera <jjgomera@gmail.com>`_ who mantains `iapws <https://iapws.readthedocs.io/en/latest/>`_
 Python package, since they took inspiration from his work to develop the lbh15 package.

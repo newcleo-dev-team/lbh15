@@ -80,7 +80,13 @@ Each object has the following themophysical properties:
 
         :math:`Pr(T) = \\displaystyle\\frac{c_p(T)\\cdot\\mu(T)}{k(T)}`
 
-where :math:`T` is the lead temperature in :math:`[K]`
+where :math:`T` is the lead temperature in :math:`[K]`.
+
+The two :math:`c_p(T)` correlations are shown below,
+together with the relative error.
+
+.. figure:: figures/cp_correlations.png
+   :width: 700
 """
 import numpy as np
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
