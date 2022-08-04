@@ -9,7 +9,7 @@ the well known handbook edited by OECD/NEA :cite:`Agency2015`:
 . The properties implemented in the package are listed in table :ref:`table_properties`
 
 .. _table_properties:
-.. list-table:: lbh15 properties from (:cite:`Agency2015`)
+.. list-table:: lbh15 properties from :cite:`Agency2015`
    :widths: 50 25 25
    :header-rows: 1
 
@@ -72,13 +72,7 @@ The corre are reported in the doctring documentation for sake of completeness.
 
 Go to :ref:`Documentation` to see full package documentation.
 
-lbh15 is released under the GNU General Public License 3.
-
-==============
-Aknowledgments
-==============
-The author to Juan José Gómez Romera (jjgomera@gmail.com) who mantains `iapws <https://iapws.readthedocs.io/en/latest/>`_
-Python package, since they took inspiration from his work to develop the lbh15 package.
+lbh15 is released under the GNU General Public License 3 (see :any:`License`).
 
 
 =================
@@ -234,3 +228,10 @@ Documentation
    :maxdepth: 3
 
    documentation.rst
+
+
+==============
+Aknowledgments
+==============
+The author to Juan José Gómez Romera (jjgomera@gmail.com) who mantains `iapws <https://iapws.readthedocs.io/en/latest/>`_
+Python package, since they took inspiration from his work to develop the lbh15 package.

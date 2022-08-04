@@ -14,6 +14,8 @@ Welcome to lbh15 documentation!
    files/bibliography.rst
 
    files/contacts.rst
+
+   files/license.rst
    
 .. only:: html
    

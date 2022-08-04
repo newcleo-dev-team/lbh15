@@ -147,8 +147,7 @@ latex_elements = {
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'lbh15.tex', 'lbh15: Collection of properties from the lead-bismuth\
-     eutectic alloy and lead OECD/NEA handbook',
+    (master_doc, 'lbh15.tex', 'lbh15',
      __author__, 'manual'),
 ]
 
