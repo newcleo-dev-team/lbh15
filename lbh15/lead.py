@@ -1,7 +1,7 @@
 """
 Module with liquid lead properties.
-:class:`.lead.Lead` object can be initialized with the temperature
-or with one of the available properties (see :class:`.lead.Lead` for \
+Lead object can be initialized with the temperature
+or with one of the available properties (see :class:`.Lead` for \
 the full list).
 
 Each object has the following themophysical properties:

@@ -1,7 +1,7 @@
 """
-Module liquid bismuth properties.
-:class:`.bismuth.Bismuth` object can be initialized with the temperature
-or with one of the available properties (see :class:`.bismuth.Bismuth` for \
+Module with liquid bismuth properties.
+Bismuth object can be initialized with the temperature
+or with one of the available properties (see :class:`.Bismuth` for \
 the full list).
 
 Each object has the following themophysical properties:

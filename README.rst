@@ -136,7 +136,7 @@ Examples
 ========
 This section shows a fex example of basic lbh25 usage.
 
-- Create an instance :class:`lbh15.lead.Lead` object with temperature in Celsius
+- Create an instance :class:`.Lead` object with temperature in Celsius
   and print its dynamic viscosity:
   
   >>> from scipy.constants import convert_temperature
@@ -147,7 +147,7 @@ This section shows a fex example of basic lbh25 usage.
   >>> liquid_lead.mu
   0.0022534948395446985
 
-- Request property outside its range of validity. In this example :class:`lbh15.lead.Lead` object is initialized
+- Request property outside its range of validity. In this example :class:`.Lead` object is initialized
   using a temperature value that is outside surface tension validity range:
 
   >>> from lbh15 import Lead
@@ -164,13 +164,13 @@ Initialization from properties - *experimental*
 +++++++++++++++++++++++++++++++++++++++++++++++
 
 The lbh15 package gives the possibility to instantiate a liquid metal properties object just knowing one of its
-properties (see :class:`lbh15.lead.Lead`, :class:`lbh15.bismuth.Bismuth` and :class:`lbh15.lbe.LBE` documentation for the full list). 
+properties (see :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` documentation for the full list). 
 This is accomplished by finding the root of the function used to calculate the target property value.
 This functionality is marked as *experimental* since it depends on the specific mathematical formulation of 
 property correlations that are implemented in lbh15. The authors cannot guarantee its correct behaviour if 
 such implementations are changed by the user.
 
-- Initialize :class:`lbh15.lbe.LBE`, i.e., lead-bismuth-eutectic object knowing its density
+- Initialize :class:`.LBE`, i.e., lead-bismuth-eutectic object knowing its density
   and retrieve the corresponding temperature in Kelvin:
 
   >>> from lbh15 import LBE
@@ -181,8 +181,8 @@ such implementations are changed by the user.
   978.3449342614078
 
 - Use other liquid metal objects to compare properties at a given temperature. In this 
-  example :class:`lbh15.lead.Lead` object is initialized knowing the conductivity value :math:`k`, then its temperature in Kelvin
-  is used to initialize a :class:`lbh15.bismuth.Bismuth` object. Finally, the conductivity of the bismuth object is printed for comparison:
+  example :class:`.Lead` object is initialized knowing the conductivity value :math:`k`, then its temperature in Kelvin
+  is used to initialize a :class:`.Bismuth` object. Finally, the conductivity of the bismuth object is printed for comparison:
 
   >>> from lbh15 import Lead
   >>> from lbh15 import Bismuth
@@ -198,7 +198,7 @@ such implementations are changed by the user.
   hence for some values of :math:`c_p` two values of temperature are mapped. This is an undesired
   behaviour. To overcome such difficulty the package provides the possibility to the user to choose if the high or
   low range of cp values shall be considered, i.e., the one at the left or at the right of the function minimum. The following example
-  shows its usage with :class:`lbh15.lead.Lead` (the same is valid for :class:`lbh15.bismuth.Bismuth` and :class:`lbh15.lbe.LBE`):
+  shows its usage with :class:`.Lead` (the same is valid for :class:`.Bismuth` and :class:`.LBE`):
 
   >>> from lbh15 import Lead
   >>> # Visualize temperature in [K] corresponding to cp min
