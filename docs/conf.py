@@ -57,6 +57,7 @@ napoleon_google_docstring = True
 napoleon_numpy_docstring = True
 napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True
+add_module_names = False
 
 autodoc_mock_imports = []
 
