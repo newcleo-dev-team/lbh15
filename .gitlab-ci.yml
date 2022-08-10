@@ -4,6 +4,7 @@ image: python:3.8-alpine
 test-all-test:
   stage: test
   script:
+  - pwd
   - cd test/
   - pip install scipy
   - python3 test_lbh15_fromX.py -v
