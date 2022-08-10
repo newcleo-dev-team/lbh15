@@ -1,3 +1,4 @@
+# Test all scripts in tests/ and publish html documentation
 test-all-test:
   stage: test
   script:
