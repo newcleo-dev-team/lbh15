@@ -15,24 +15,18 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-
 import lbh15
-with open(os.path.join("..", "lbh15", "VERSION")) as version_file:
-    __version__ = version_file.read().strip()
-
-with open(os.path.join("..", "lbh15", "AUTHOR")) as author_file:
-    __author__ = author_file.read().strip()
 
 # -- Project information -----------------------------------------------------
 
 project = 'lbh15'
-copyright = '2022, newcleo'
-author = __author__
+copyright = '2022, ' + lbh15.__company__
+author = lbh15.__author__
 
 # The short X.Y version
-version = __version__
+version = str(lbh15.__version__)
 # The full version, including alpha/beta/rc tags
-release = __version__
+release = str(lbh15.__version__)
 
 
 # -- General configuration ---------------------------------------------------
@@ -154,7 +148,7 @@ latex_elements = {
 latex_documents = [
     (master_doc, 'lbh15.tex', 'lbh15: collection of properties from \
     the lead-bismuth eutectic alloy and lead OECD/NEA handbook',
-     __author__, 'manual'),
+     lbh15.__author__, 'manual'),
 ]
 
 latex_logo = 'files/figures/newcleologo.png'
