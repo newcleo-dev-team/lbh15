@@ -27,6 +27,8 @@ documentation:
     - ls -lht _build
     - cd ..
     - cp -r docs/_build/* public/
+  tags:
+    - ci-shared
   artifacts:
     paths:
     - public
