@@ -8,7 +8,7 @@ test-all-test:
   rules:
     - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
   tags:
-    - newcleo_shell
+    - shell_newcleo
     
 documentation:
   stage: deploy
@@ -22,7 +22,7 @@ documentation:
     - cd ..
     - cp -r docs/_build/* public/
   tags:
-    - newcleo_shell
+    - shell_newcleo
   artifacts:
     paths:
     - public
