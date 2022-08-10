@@ -28,7 +28,7 @@ documentation:
     - cd ..
     - cp -r docs/_build/* public/
   tags:
-    - ci-shared
+    - newcleo
   artifacts:
     paths:
     - public
