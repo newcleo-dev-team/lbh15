@@ -111,7 +111,8 @@ To install the package lbh15 simply type the following command:
 
       pip install lbh15
 
-Or download the package at ###LINK###. After downloading the package on disk, 
+Or cloning the package at http://172.16.10.46/gitlab-instance-c126a35e/lbh15.git. 
+After cloning the package on disk, 
 execute the following command inside the base folder:
 
   .. code-block:: bash
