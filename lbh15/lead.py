@@ -78,7 +78,7 @@ Each object has the following themophysical properties:
         :math:`k(T) = \\displaystyle9.2 + 0.011{\\cdot}T`
     - :math:`Pr` Prandtl number :math:`[-]`:
 
-        :math:`Pr(T) = \\displaystyle\\frac{c_p(T)\\cdot\\mu(T)}{k(T)}`
+        :math:`Pr = \\displaystyle\\frac{c_p\\cdot\\mu}{k}`
 
 where :math:`T` is the lead temperature in :math:`[K]`.
 

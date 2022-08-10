@@ -4,7 +4,7 @@ import unittest
 from scipy.constants import convert_temperature
 import numpy
 import sys
-sys.path.insert(0, '../')
+sys.path.insert(0, '..')
 from lbh15 import Lead
 
 properties_table = numpy.loadtxt("data.dat", comments='#',

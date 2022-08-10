@@ -71,7 +71,7 @@ Each object has the following themophysical properties:
         :math:`k(T) = \\displaystyle7.34 + 9.5\\cdot10^{-3}{\\cdot}T`
     - :math:`Pr` Prandtl number :math:`[-]`:
 
-        :math:`Pr(T) = \\displaystyle\\frac{c_p(T)\\cdot\\mu(T)}{k(T)}`
+        :math:`Pr = \\displaystyle\\frac{c_p\\cdot\\mu}{k}`
 
 where :math:`T` is the bismuth temperature in :math:`[K]`
 """

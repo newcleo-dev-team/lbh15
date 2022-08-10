@@ -2,7 +2,7 @@
 Introduction
 ============
 
-lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20 **15**) is a Python library that implements the
+lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20\ **15**) is a Python library that implements the
 thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the well known handbook edited by OECD/NEA :cite:`Agency2015`: 
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
