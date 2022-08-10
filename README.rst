@@ -79,16 +79,17 @@ Project Structure
 =================
 The project is organized in the following folder structure:
 
-.. code:: bash
+.. code:: text
 
   <lbh15 parent folder>
-    ├── lbh15/
     ├── docs/
+    ├── lbh15/
     ├── tests/
     ├── LICENSE
     ├── MANIFEST.in
     ├── README.rst
-    ├── setup.py
+    └── setup.py
+    
 
 - lbh15: contains all modules, classes and methods implemented in lbh15
 - docs: contains materials for the generation of the documentation (Sphinx v5.1.0)
