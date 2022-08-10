@@ -1,18 +1,16 @@
-image: python:3.8-alpine
+# Test all scripts in tests/ and publish html documentation
 
-# for testing we do not want to publish pages - just check everything works
 test-all-test:
   stage: test
   script:
-  - cd test/
-  - pip install scipy
+  - cd tests/
   - python3 test_lbh15_fromX.py -v
   - python3 test_lbh15_static.py -v
   - python3 test_lead_basics.py -v
   rules:
     - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
   tags:
-    - newcleo_shell
+    - shell_newcleo
     
 documentation:
   stage: deploy
@@ -21,16 +19,12 @@ documentation:
     - ls -lht
   script:
     - cd docs
-    - pip install -U sphinx
-    - pip install -U numpydoc  
-    - pip install -U sphinx-rtd-theme
-    - pip install -U myst-parser
     - sphinx-build -b html . _build
     - ls -lht _build
     - cd ..
     - cp -r docs/_build/* public/
   tags:
-    - newcleo_shell
+  - shell_newcleo
   artifacts:
     paths:
     - public
