@@ -2,5 +2,6 @@
 **/_html/
 **/_latex/
 **/build/
+**/_build/
 **/dist/
 **/lbeh15.egg-info/

@@ -112,8 +112,7 @@ To install the package lbh15 simply type the following command:
       pip install lbh15
 
 Or cloning the package at http://172.16.10.46/gitlab-instance-c126a35e/lbh15.git. 
-After cloning the package on disk, 
-execute the following command inside the base folder:
+After cloning the package, execute the following command inside the base folder:
 
   .. code-block:: bash
 
@@ -125,11 +124,13 @@ package docs folder:
  
   .. code-block:: bash
 
-      sphinx-build -b html . <dest_dir>
+      make html
  
   .. code-block:: bash
 
-      sphinx-build -b latex . <dest_dir>
+      make latex
+      cd _build/latex
+      latexmk -pdf -f
 
 .. _Examples:
 
