@@ -11,6 +11,8 @@ test-all-test:
   - python3 test_lead_basics.py -v
   rules:
     - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+  tags:
+    - newcleo
     
 documentation:
   stage: deploy
