@@ -19,10 +19,10 @@ documentation:
     - ls -lht
   script:
     - cd docs
-    - sphinx-build -b html . _build
-    - ls -lht _build
+    - make html
+    - ls -lht _build/html/
     - cd ..
-    - cp -r docs/_build/* public/
+    - cp -r docs/_build/html/* public/
   tags:
   - shell_newcleo
   artifacts:
