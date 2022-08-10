@@ -6,3 +6,4 @@ License
 *******
 
 .. include:: ../../LICENSE
+   :literal:
