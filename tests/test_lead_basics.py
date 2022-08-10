@@ -1,3 +1,5 @@
+# This test is used to check correct implementation of some lead properties
+# comparing the Lead class output with data.dat
 import unittest
 from scipy.constants import convert_temperature
 import numpy

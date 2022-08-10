@@ -1,3 +1,4 @@
+# This test is used to check lbh15 static methods
 import unittest
 import sys
 sys.path.insert(0, '../')

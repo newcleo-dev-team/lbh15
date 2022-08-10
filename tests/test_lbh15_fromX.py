@@ -1,3 +1,4 @@
+# This test is used to check initialization from properties
 import unittest
 from scipy.constants import convert_temperature
 import sys
