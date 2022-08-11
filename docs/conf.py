@@ -40,7 +40,7 @@ extensions = [
     'sphinxcontrib.bibtex'
 ]
 
-bibtex_bibfiles = ['lbh15.bib']
+bibtex_bibfiles = ['files/lbh15.bib']
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
