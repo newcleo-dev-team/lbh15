@@ -1,14 +1,16 @@
 # Test all scripts in tests/ and publish html documentation
+image: python:3.8-alpine
 
 test-all-test:
   stage: test
   script:
   - cd tests/
+  - python3 -m pip install scipy
   - python3 test_lbh15_fromX.py -v
   - python3 test_lbh15_static.py -v
   - python3 test_lead_basics.py -v
   tags:
-    - shell_newcleo
+    - newcleo_docker_alpine3.8
     
 documentation:
   stage: deploy
