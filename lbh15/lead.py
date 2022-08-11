@@ -89,16 +89,19 @@ together with the relative error.
    :width: 700
 """
 import numpy as np
+import sys, inspect
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
 from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
 from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
-from ._lbh15 import PropertiesInterface, p_s_initializer
+from ._lbh15 import LiquidMetalInterface, p_s_initializer
+from .properties._properties import PropertiesInterface
+from .properties.lead_properties import mu
 
 
-class Lead(PropertiesInterface):
+class Lead(LiquidMetalInterface):
     """
     Class to model lead properties at a given temperature
 
@@ -146,6 +149,7 @@ class Lead(PropertiesInterface):
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
             self._guess = LEAD_MELTING_TEMPERATURE*1.7
+        
         super().__init__(cp_high_range=cp_high_range, **kwargs)
 
     @staticmethod
@@ -200,21 +204,15 @@ class Lead(PropertiesInterface):
 
         return rvalue
 
-    def _set_validity_ranges(self):
-        """
-        Sets validity range for each property
-        """
-        self._p_s_validity = [self.T_m0, self.T_b0]
-        self._sigma_validity = [self.T_m0, 1300.0]
-        self._rho_validity = [self.T_m0, self.T_b0]
-        self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s_validity = [self.T_m0, 2000.0]
-        self._beta_s_validity = [self.T_m0, 2000.0]
-        self._cp_validity = [self.T_m0, 2000.0]
-        self._h_validity = [self.T_m0, 2000.0]
-        self._mu_validity = [self.T_m0, 1473.0]
-        self._r_validity = [601.0, 1273.0]
-        self._k_validity = [self.T_m0, 1300.0]
+    def _load_properties(self):
+        propertyObjectList = []
+        for name, obj in inspect.getmembers(sys.modules['lbh15.properties.lead_properties']):
+            if inspect.isclass(obj) and obj is not PropertiesInterface:
+                if name != 'cp':
+                    propertyObjectList.append(obj())
+                else:
+                    propertyObjectList.append(obj(self.cp_correlation_used))
+        return propertyObjectList
 
     def _set_constants(self):
         """
@@ -231,182 +229,3 @@ class Lead(PropertiesInterface):
         str : name of cp correlation used
         """
         return self._cp_correlation_to_use
-
-    def _p_s_correlation(self, T):
-        """
-        Correlation used to compute saturation vapour pressure
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        saturation vapour pressure in [Pa] : float
-        """
-        return 5.76e9 * np.exp(-22131/T)
-
-    def _sigma_correlation(self, T):
-        """
-        Correlation used to compute surface tension
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        surface tension in [N/m] : float
-        """
-        return (525.9 - 0.113*T)*1e-3
-
-    def _rho_correlation(self, T):
-        """
-        Correlation used to compute density
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        density in [kg/m^3] : float
-        """
-        return 11441 - 1.2795*T
-
-    def _alpha_correlation(self, T):
-        """
-        Correlation used to compute thermal expansion coefficient
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        thermal expansion coefficient in [1/K] : float
-        """
-        return 1/(8942 - T)
-
-    def _u_s_correlation(self, T):
-        """
-        Correlation used to compute sound velocity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        sound velocity in [m/s] : float
-        """
-        return 1953 - 0.246*T
-
-    def _beta_s_correlation(self, T):
-        """
-        Correlation used to compute isentropic compressibility
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        isentropic compressibility in [1/Pa] : float
-        """
-        return 1/(self._rho_correlation(T) * self._u_s_correlation(T)**2)
-
-    def _cp_correlation(self, T):
-        """
-        Correlation used to compute specific heat capacity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        specific heat capacity in [J/(kg*K)] : float
-        """
-        if self.cp_correlation_used == SOBOLEV_KEYWORD:
-            rvalue = (176.2 - 4.923e-2*T + 1.544e-5*T**2
-                      - 1.524e6*T**-2)
-        elif self.cp_correlation_used == GURVICH_KEYWORD:
-            rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
-                      - 2.099e-9*T**3 - 1.524e6*T**-2)
-        else:
-            raise ValueError("cp correlation can be one among: {:s}, "
-                             "{:s}. {:s} was provided"
-                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
-                                     self.cp_correlation_used))
-        return rvalue
-
-    def _h_correlation(self, T):
-        """
-        Correlation used to compute specific enthalpy
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        specific enthalpy in [J/kg] : float
-        """
-        return (176.2*(T - LEAD_MELTING_TEMPERATURE)
-                - 2.4615e-2*(T**2 - LEAD_MELTING_TEMPERATURE**2)
-                + 5.147e-6*(T**3 - LEAD_MELTING_TEMPERATURE**3)
-                + 1.524e6*(T**-1 - LEAD_MELTING_TEMPERATURE**-1))
-
-    def _mu_correlation(self, T):
-        """
-        Correlation used to compute dynamic viscosity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        dynamic viscosity in [Pa*s] : float
-        """
-        return 4.55e-4*np.exp(1069/T)
-
-    def _r_correlation(self, T):
-        """
-        Correlation used to compute electrical resistivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        electrical resistivity in [Ohm*m] : float
-        """
-        return (67.0 + 0.0471*T)*1e-8
-
-    def _k_correlation(self, T):
-        """
-        Correlation used to compute thermal conductivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        thermal conductivity in [W/(m*K)] : float
-        """
-        return 9.2 + 0.011*T

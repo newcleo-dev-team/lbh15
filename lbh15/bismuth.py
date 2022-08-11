@@ -80,10 +80,10 @@ from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
-from ._lbh15 import PropertiesInterface, p_s_initializer
+from ._lbh15 import LiquidMetalInterface, p_s_initializer
 
 
-class Bismuth(PropertiesInterface):
+class Bismuth(LiquidMetalInterface):
     """
     Class to model bismuth properties at a given temperature
 

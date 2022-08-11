@@ -82,10 +82,10 @@ from ._lbh15 import LBE_MELTING_TEMPERATURE
 from ._lbh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
 from ._lbh15 import LBE_T_AT_CP_MIN, LBE_CP_MIN
-from ._lbh15 import PropertiesInterface, p_s_initializer
+from ._lbh15 import LiquidMetalInterface, p_s_initializer
 
 
-class LBE(PropertiesInterface):
+class LBE(LiquidMetalInterface):
     """
     Class to model lead-bismuth eutectic properties at a given temperature
 

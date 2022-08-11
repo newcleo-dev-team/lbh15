@@ -66,7 +66,7 @@ def p_s_initializer(p_s):
     return rvalue
 
 
-class PropertiesInterface(ABC):
+class LiquidMetalInterface(ABC):
     """
     Abstract class that defines liquid metal properties object
 
@@ -101,32 +101,12 @@ class PropertiesInterface(ABC):
     _p = 0
     _T = 0
     _T_assigned = False
-    _p_s = 0
-    _p_s_validity = [0, 0]
-    _sigma = 0
-    _sigma_validity = [0, 0]
-    _rho = 0
-    _rho_validity = [0, 0]
-    _alpha = 0
-    _alpha_validity = [0, 0]
-    _u_s = 0
-    _u_s_validity = [0, 0]
-    _beta_s = 0
-    _beta_s_validity = [0, 0]
-    _cp = 0
-    _cp_validity = [0, 0]
-    _h = 0
-    _h_validity = [0, 0]
-    _mu = 0
-    _mu_validity = [0, 0]
-    _r = 0
-    _r_validity = [0, 0]
-    _k = 0
-    _k_validity = [0, 0]
     _guess = 0
     __cp_high_range = False
+    _propertyNames = []
 
     def __init__(self, cp_high_range=False, **kwargs):
+        self.__properties = {}
         self.__cp_high_range = cp_high_range
         self.__fill_class_attributes(kwargs)
 
@@ -193,182 +173,6 @@ class PropertiesInterface(ABC):
         return self._T_assigned
 
     @property
-    def p_s(self):
-        """
-        float : saturation vapour pressure [Pa]
-        """
-        self.__check_validity_range(self._p_s_validity,
-                                    'saturation vapour pressure')
-        return self._p_s
-
-    @property
-    def p_s_validity(self):
-        """
-        list : temperature validity range for p_s correlation
-        """
-        return self._p_s_validity.copy()
-
-    @property
-    def sigma(self):
-        """
-        float : surface tension [N/m]
-        """
-        self.__check_validity_range(self._sigma_validity,
-                                    'surface tension')
-        return self._sigma
-
-    @property
-    def sigma_validity(self):
-        """
-        list : temperature validity range for sigma correlation
-        """
-        return self._sigma_validity.copy()
-
-    @property
-    def rho(self):
-        """
-        float : density [kg/m^3]
-        """
-        self.__check_validity_range(self._rho_validity,
-                                    'density')
-        return self._rho
-
-    @property
-    def rho_validity(self):
-        """
-        list : temperature validity range for rho correlation
-        """
-        return self._rho_validity.copy()
-
-    @property
-    def alpha(self):
-        """
-        float : thermal expansion coefficient [1/K]
-        """
-        self.__check_validity_range(self._alpha_validity,
-                                    'thermal expansion coefficient')
-        return self._alpha
-
-    @property
-    def alpha_validity(self):
-        """
-        list : temperature validity range for alpha correlation
-        """
-        return self._alpha_validity.copy()
-
-    @property
-    def u_s(self):
-        """
-        float : sound velocity in [m/s]
-        """
-        self.__check_validity_range(self._u_s_validity,
-                                    'sound velocity')
-        return self._u_s
-
-    @property
-    def u_s_validity(self):
-        """
-        list : temperature validity range for u_s correlation
-        """
-        return self._u_s_validity.copy()
-
-    @property
-    def beta_s(self):
-        """
-        float : isentropic compressibility [1/Pa]
-        """
-        self.__check_validity_range(self._beta_s_validity,
-                                    'isentropic compressibility')
-        return self._beta_s
-
-    @property
-    def beta_s_validity(self):
-        """
-        list : temperature validity range for beta_s correlation
-        """
-        return self._beta_s_validity.copy()
-
-    @property
-    def cp(self):
-        """
-        float : specific heat capacity [J/(kg*K)]
-        """
-        self.__check_validity_range(self._cp_validity,
-                                    'specific heat capacity')
-        return self._cp
-
-    @property
-    def cp_validity(self):
-        """
-        list : temperature validity range for cp correlation
-        """
-        return self._cp_validity.copy()
-
-    @property
-    def h(self):
-        """
-        float : specific enthalpy difference from melting point [J/kg]
-        """
-        self.__check_validity_range(self._h_validity,
-                                    'specific enthalpy')
-        return self._h
-
-    @property
-    def h_validity(self):
-        """
-        list : temperature validity range for h correlation
-        """
-        return self._h_validity.copy()
-
-    @property
-    def mu(self):
-        """
-        float : dynamic viscosity [Ps*s]
-        """
-        self.__check_validity_range(self._mu_validity,
-                                    'dynamic viscosity')
-        return self._mu
-
-    @property
-    def mu_validity(self):
-        """
-        list : temperature validity range for mu correlation
-        """
-        return self._mu_validity.copy()
-
-    @property
-    def r(self):
-        """
-        float : electrical resistivity [Ohm*m]
-        """
-        self.__check_validity_range(self._r_validity,
-                                    'electrical resistivity')
-        return self._r
-
-    @property
-    def r_validity(self):
-        """
-        list : temperature validity range for r correlation
-        """
-        return self._r_validity.copy()
-
-    @property
-    def k(self):
-        """
-        float : thermal conductivity [W/(m*K)]
-        """
-        self.__check_validity_range(self._k_validity,
-                                    'thermal conductivity')
-        return self._k
-
-    @property
-    def k_validity(self):
-        """
-        list : temperature validity range for k correlation
-        """
-        return self._k_validity.copy()
-
-    @property
     def Pr(self):
         """
         float : Prandtl number [-]
@@ -404,18 +208,58 @@ class PropertiesInterface(ABC):
         """
         Fills the class properties
         """
-        self._p_s = self._p_s_correlation(self.T)
-        self._sigma = self._sigma_correlation(self.T)
-        self._rho = self._rho_correlation(self.T)
-        self._alpha = self._alpha_correlation(self.T)
-        self._u_s = self._u_s_correlation(self.T)
-        self._beta_s = self._beta_s_correlation(self.T)
-        self._cp = self._cp_correlation(self.T)
-        self._h = self._h_correlation(self.T)
-        self._mu = self._mu_correlation(self.T)
-        self._r = self._r_correlation(self.T)
-        self._k = self._k_correlation(self.T)
-        self._set_validity_ranges()
+        propertyObjectList = self._load_properties()
+        for propertyObject in propertyObjectList:
+            self._propertyNames.append(propertyObject.name)
+            propDictionary = {}
+            propDictionary['value'] = propertyObject.correlation(self.T)
+            propDictionary['validity_range'] = propertyObject.range
+            propDictionary['units'] = propertyObject.units
+            propDictionary['long_name'] = propertyObject.long_name
+            propDictionary['description'] = propertyObject.description
+            self.__properties[self._propertyNames[-1]] = propDictionary
+
+            @property
+            def new_property(self):
+                self.__check_validity_range(self.__properties[self._propertyNames[-1]]['validity_range'],
+                                            self.__properties[self._propertyNames[-1]]['long_name'])
+                return self.__properties[self._propertyNames[-1]]['value']
+            
+            def new_property_print_info(self, info=''):
+                key = self._propertyNames[-1]
+                name = "Name: " + key
+                value = "Value: " + self.__properties[key]['value'] + " " + self.__properties[key]['units']
+                long_name = "Long name: " + self.__properties[key]['description']
+                descr = self.__properties[key]['description']
+                validity = "Validity range: [" + self.__properties[key]['validity_range'] + "] K"
+                units = "Units: " + self.__properties[key]['units']
+                if info == '' or info == 'all':
+                    print(name)
+                    print("\t"+value)
+                    print("\t"+long_name)
+                    print("\t"+descr)
+                    print("\t"+validity)
+                    print("\t"+units)
+                elif info == 'name':
+                    print(name)
+                elif info == 'value':
+                    print(value)
+                elif info == 'long_name':
+                    print(long_name)
+                elif info == 'description':
+                    print(descr)
+                elif info == 'validity_range':
+                    print(validity_range)
+                elif info == 'units':
+                    print(units)
+
+            setattr(LiquidMetalInterface, propertyObject.name, new_property)
+            setattr(LiquidMetalInterface, propertyObject.name+"_print_info", new_property)
+
+    @abstractmethod
+    def _load_properties(self):
+        raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
 
     @abstractmethod
     def _set_constants(self):
@@ -423,157 +267,6 @@ class PropertiesInterface(ABC):
         Sets the class constants
         """
         raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _set_validity_ranges(self):
-        """
-        Sets validity range for each property
-        """
-        raise NotImplementedError("{:s}._set_validity_ranges NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _p_s_correlation(self, T):
-        """
-        Correlation used to compute saturation vapour pressure
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._p_s_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _sigma_correlation(self, T):
-        """
-        Correlation used to compute surface tension
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._sigma_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _rho_correlation(self, T):
-        """
-        Correlation used to compute density
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._rho_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _alpha_correlation(self, T):
-        """
-        Correlation used to compute thermal expansion coefficient
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._alpha_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _u_s_correlation(self, T):
-        """
-        Correlation used to compute sound velocity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._u_s_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _beta_s_correlation(self, T):
-        """
-        Correlation used to compute isentropic compressibility
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._beta_s_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _cp_correlation(self, T):
-        """
-        Correlation used to compute specific heat capacity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._cp_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _h_correlation(self, T):
-        """
-        Correlation used to compute specific enthalpy
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._h_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _mu_correlation(self, T):
-        """
-        Correlation used to compute dynamic viscosity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._mu_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _r_correlation(self, T):
-        """
-        Correlation used to compute electrical resistivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._r_correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
-    @abstractmethod
-    def _k_correlation(self, T):
-        """
-        Correlation used to compute thermal conductivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        """
-        raise NotImplementedError("{:s}._k_correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
     def __compute_T(self, input_value, input_property):
@@ -592,28 +285,11 @@ class PropertiesInterface(ABC):
             rvalue = input_value
         else:
             function_of_T = None
-            if input_property == 'p_s':
-                function_of_T = self._p_s_correlation
-            elif input_property == 'sigma':
-                function_of_T = self._sigma_correlation
-            elif input_property == 'rho':
-                function_of_T = self._rho_correlation
-            elif input_property == 'alpha':
-                function_of_T = self._alpha_correlation
-            elif input_property == 'u_s':
-                function_of_T = self._u_s_correlation
-            elif input_property == 'beta_s':
-                function_of_T = self._beta_s_correlation
-            elif input_property == 'cp':
-                function_of_T = self._cp_correlation
-            elif input_property == 'h':
-                function_of_T = self._h_correlation
-            elif input_property == 'mu':
-                function_of_T = self._mu_correlation
-            elif input_property == 'r':
-                function_of_T = self._r_correlation
-            elif input_property == 'k':
-                function_of_T = self._k_correlation
+            propertyObjectList = self._load_properties()
+            for propertyObject in propertyObjectList:
+                if input_property == propertyObject.name:
+                    function_of_T = propertyObject.correlation
+                    break
 
             if function_of_T is not None:
                 def function_to_solve(T, target):
@@ -648,7 +324,7 @@ class PropertiesInterface(ABC):
                              "time can be used for initialization. "
                              "{:d} were provided".format(len(kwargs)))
         else:
-            valid_prop = PropertiesInterface.properties_for_initialization()
+            valid_prop = LiquidMetalInterface.properties_for_initialization()
             input_property = list(kwargs.keys())[0]
             input_value = kwargs[input_property]
             if input_property not in valid_prop:
