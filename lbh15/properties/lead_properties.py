@@ -1,23 +1,10 @@
+import numpy as np
 from ._properties import PropertiesInterface
 from .._lbh15 import LEAD_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import LEAD_BOILING_TEMPERATURE as T_b0
 from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
-import numpy as np
 
-"""
-        self._p_s_validity = [self.T_m0, self.T_b0]
-        self._sigma_validity = [self.T_m0, 1300.0]
-        self._rho_validity = [self.T_m0, self.T_b0]
-        self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s_validity = [self.T_m0, 2000.0]
-        self._beta_s_validity = [self.T_m0, 2000.0]
-        self._cp_validity = [self.T_m0, 2000.0]
-        self._h_validity = [self.T_m0, 2000.0]
-        self._mu_validity = [self.T_m0, 1473.0]
-        self._r_validity = [601.0, 1273.0]
-        self._k_validity = [self.T_m0, 1300.0]
 
-"""
 class p_s(PropertiesInterface):
     def __init__(self):
         super().__init__()
@@ -46,9 +33,9 @@ class rho(PropertiesInterface):
     def __init__(self):
         super().__init__()
         self._range = [T_m0, T_b0]
-        self._units = "[1/K]"
+        self._units = "[kg/m^3]"
         self._long_name = "density"
-        self._description = "Liquid lead " + self._long_name 
+        self._description = "Liquid lead " + self._long_name
 
     def correlation(self, T):
         return 11441 - 1.2795*T
@@ -58,7 +45,7 @@ class alpha(PropertiesInterface):
     def __init__(self):
         super().__init__()
         self._range = [T_m0, T_b0]
-        self._units = "[kg/m^3]"
+        self._units = "[1/K]"
         self._long_name = "thermal expansion coefficient"
         self._description = "Liquid lead " + self._long_name
 
@@ -93,7 +80,7 @@ class beta_s(PropertiesInterface):
 
 
 class cp(PropertiesInterface):
-    def __init__(self, cp_correlation_to_use):
+    def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD):
         super().__init__()
         self._range = [T_m0, 2000.0]
         self._units = "[j/kg*K]"

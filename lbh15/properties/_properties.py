@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from numpy import inf
 
+
 class PropertiesInterface(ABC):
     def __init__(self):
         self._name = type(self).__name__
@@ -17,19 +18,19 @@ class PropertiesInterface(ABC):
     @property
     def name(self):
         return self._name
-    
+
     @property
     def range(self):
         return self._range.copy()
-    
+
     @property
     def units(self):
         return self._units
-    
+
     @property
     def long_name(self):
         return self._long_name
-    
+
     @property
     def description(self):
         return self._description

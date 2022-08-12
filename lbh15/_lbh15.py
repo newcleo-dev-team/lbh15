@@ -1,7 +1,7 @@
 import warnings
 from scipy.optimize import fsolve
 from scipy.constants import atmosphere
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractclassmethod
 
 # KEYWORDS
 LEAD_KEYWORD = "lead"
@@ -98,17 +98,92 @@ class LiquidMetalInterface(ABC):
     _Q_m0 = 0
     _T_b0 = 0
     _Q_b0 = 0
-    _p = 0
-    _T = 0
-    _T_assigned = False
+    __p = 0
+    __T = 0
     _guess = 0
+    __T_assigned = False
     __cp_high_range = False
-    _propertyNames = []
+    __properties = {}
 
     def __init__(self, cp_high_range=False, **kwargs):
-        self.__properties = {}
         self.__cp_high_range = cp_high_range
         self.__fill_class_attributes(kwargs)
+
+    @classmethod
+    def __addProperty(cls, propertyObject):
+        propDictionary = {}
+        propDictionary['correlation'] = propertyObject.correlation
+        propDictionary['validity_range'] = propertyObject.range
+        propDictionary['units'] = propertyObject.units
+        propDictionary['long_name'] = propertyObject.long_name
+        propDictionary['description'] = propertyObject.description
+        cls.__properties[propertyObject.name] = propDictionary
+
+        @property
+        def new_property(cls):
+            name = propertyObject.name
+            validity_range = cls.__properties[name]['validity_range']
+            long_name = cls.__properties[name]['long_name']
+            cls.__check_validity_range(validity_range, long_name)
+            return cls.__properties[name]['correlation'](cls.__T)
+
+        @classmethod
+        def new_property_print_info(cls, info=''):
+            name = propertyObject.name
+            value = ("Value: {:.4f} {:s}"
+                     .format(cls.__properties[name]['correlation'](cls.__T),
+                             cls.__properties[name]['units']))
+            validity = ("Validity range: [{:.2f}, {:.2f}] K"
+                        .format(cls.__properties[name]['validity_range'][0],
+                                cls.__properties[name]['validity_range'][1]))
+            long_name = ("Long name: {:s}"
+                         .format(cls.__properties[name]['long_name']))
+            units = "Units: {:s}".format(cls.__properties[name]['units'])
+            description = ("Description:\n{:s}{:s}"
+                           .format(2*"\t",
+                                   cls.__properties[name]['description']))
+            if info == '' or info == 'all':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(value))
+                print("\t{:s}".format(validity))
+                print("\t{:s}".format(long_name))
+                print("\t{:s}".format(units))
+                print("\t{:s}".format(description))
+            elif info == 'value':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(value))
+            elif info == 'validity_range':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(validity))
+            elif info == 'long_name':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(long_name))
+            elif info == 'units':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(units))
+            elif info == 'description':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(description))
+            else:
+                print("Type of info not known. "
+                      "Plese select one of the following:\n"
+                      "\t'all' or '' to print all info\n"
+                      "\t'value' to print the value\n"
+                      "\t'validity_range' to print the "
+                      "correlation validity range\n"
+                      "\t'long_name' to print the full name\n"
+                      "\t'description to print the description")
+
+        setattr(cls, propertyObject.name, new_property)
+        setattr(cls, propertyObject.name+"_print_info",
+                new_property_print_info)
+
+    def __new__(cls, cp_high_range=False, **kwargs):
+        propertyObjectList = cls._load_properties()
+        for propertyObject in propertyObjectList:
+            cls.__addProperty(propertyObject)
+        obj = object.__new__(cls)
+        return obj
 
     @staticmethod
     def properties_for_initialization():
@@ -156,21 +231,21 @@ class LiquidMetalInterface(ABC):
         float : pressure adopted for property calculation, i.e.,
         atmospheric pressure
         """
-        return self._p
+        return self.__p
 
     @property
     def T(self):
         """
         float : temperature used to compute properties [K]
         """
-        return self._T
+        return self.__T
 
     @property
     def T_assigned(self):
         """
         bool : true if temperature correctly assigned, false otherwise
         """
-        return self._T_assigned
+        return self.__T_assigned
 
     @property
     def Pr(self):
@@ -204,62 +279,10 @@ class LiquidMetalInterface(ABC):
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
 
-    def __fill_properties(self):
-        """
-        Fills the class properties
-        """
-        propertyObjectList = self._load_properties()
-        for propertyObject in propertyObjectList:
-            self._propertyNames.append(propertyObject.name)
-            propDictionary = {}
-            propDictionary['value'] = propertyObject.correlation(self.T)
-            propDictionary['validity_range'] = propertyObject.range
-            propDictionary['units'] = propertyObject.units
-            propDictionary['long_name'] = propertyObject.long_name
-            propDictionary['description'] = propertyObject.description
-            self.__properties[self._propertyNames[-1]] = propDictionary
-
-            @property
-            def new_property(self):
-                self.__check_validity_range(self.__properties[self._propertyNames[-1]]['validity_range'],
-                                            self.__properties[self._propertyNames[-1]]['long_name'])
-                return self.__properties[self._propertyNames[-1]]['value']
-            
-            def new_property_print_info(self, info=''):
-                key = self._propertyNames[-1]
-                name = "Name: " + key
-                value = "Value: " + self.__properties[key]['value'] + " " + self.__properties[key]['units']
-                long_name = "Long name: " + self.__properties[key]['description']
-                descr = self.__properties[key]['description']
-                validity = "Validity range: [" + self.__properties[key]['validity_range'] + "] K"
-                units = "Units: " + self.__properties[key]['units']
-                if info == '' or info == 'all':
-                    print(name)
-                    print("\t"+value)
-                    print("\t"+long_name)
-                    print("\t"+descr)
-                    print("\t"+validity)
-                    print("\t"+units)
-                elif info == 'name':
-                    print(name)
-                elif info == 'value':
-                    print(value)
-                elif info == 'long_name':
-                    print(long_name)
-                elif info == 'description':
-                    print(descr)
-                elif info == 'validity_range':
-                    print(validity_range)
-                elif info == 'units':
-                    print(units)
-
-            setattr(LiquidMetalInterface, propertyObject.name, new_property)
-            setattr(LiquidMetalInterface, propertyObject.name+"_print_info", new_property)
-
-    @abstractmethod
-    def _load_properties(self):
+    @abstractclassmethod
+    def _load_properties(cls):
         raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+                                  .format(type(cls).__name__))
 
     @abstractmethod
     def _set_constants(self):
@@ -285,10 +308,10 @@ class LiquidMetalInterface(ABC):
             rvalue = input_value
         else:
             function_of_T = None
-            propertyObjectList = self._load_properties()
-            for propertyObject in propertyObjectList:
-                if input_property == propertyObject.name:
-                    function_of_T = propertyObject.correlation
+            propertyObjectList = self.__properties
+            for key in self.__properties:
+                if input_property == key:
+                    function_of_T = self.__properties[key]['correlation']
                     break
 
             if function_of_T is not None:
@@ -337,12 +360,10 @@ class LiquidMetalInterface(ABC):
                                  "{:s} was provided"
                                  .format(list_to_print, input_property))
             else:
-                self._p = atmosphere
+                self.__p = atmosphere
                 self._set_constants()
                 temperature = self.__compute_T(input_value, input_property)
                 self.__assign_T(temperature)
-                if self.T_assigned:
-                    self.__fill_properties()
 
     def __assign_T(self, T):
         """
@@ -356,7 +377,7 @@ class LiquidMetalInterface(ABC):
         """
         if T > self.T_m0 and T < self.T_b0:
             self._T_assigned = True
-            self._T = T
+            self.__class__.__T = T
         else:
             if T >= self.T_b0:
                 raise ValueError("Temperature must be smaller than "

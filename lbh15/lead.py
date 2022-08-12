@@ -89,7 +89,8 @@ together with the relative error.
    :width: 700
 """
 import numpy as np
-import sys, inspect
+import sys
+import inspect
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
@@ -98,7 +99,7 @@ from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
 from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
 from .properties._properties import PropertiesInterface
-from .properties.lead_properties import mu
+import lbh15.properties.lead_properties
 
 
 class Lead(LiquidMetalInterface):
@@ -142,15 +143,22 @@ class Lead(LiquidMetalInterface):
     >>> liquid_lead_1.cp, liquid_lead_2.cp
     (144.31634999999997, 144.66006199999998)
     """
+    __cp_correlation_to_use = ''
+
     def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD,
                  cp_high_range=False, **kwargs):
-        self._cp_correlation_to_use = cp_correlation_to_use
         if 'p_s' in kwargs.keys():
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
             self._guess = LEAD_MELTING_TEMPERATURE*1.7
-        
+
         super().__init__(cp_high_range=cp_high_range, **kwargs)
+
+    def __new__(cls, cp_correlation_to_use=SOBOLEV_KEYWORD,
+                cp_high_range=False, **kwargs):
+        cls.__cp_correlation_to_use = cp_correlation_to_use
+        obj = super().__new__(cls)
+        return obj
 
     @staticmethod
     def T_at_cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
@@ -204,14 +212,18 @@ class Lead(LiquidMetalInterface):
 
         return rvalue
 
-    def _load_properties(self):
+    @classmethod
+    def _load_properties(cls):
         propertyObjectList = []
-        for name, obj in inspect.getmembers(sys.modules['lbh15.properties.lead_properties']):
+        module = 'lbh15.properties.lead_properties'
+        for name, obj in inspect.getmembers(sys.modules[module]):
             if inspect.isclass(obj) and obj is not PropertiesInterface:
-                if name != 'cp':
-                    propertyObjectList.append(obj())
-                else:
-                    propertyObjectList.append(obj(self.cp_correlation_used))
+                if issubclass(obj, PropertiesInterface):
+                    if name != 'cp':
+                        instance = obj()
+                    else:
+                        instance = obj(cls.__cp_correlation_to_use)
+                propertyObjectList.append(instance)
         return propertyObjectList
 
     def _set_constants(self):
@@ -228,4 +240,4 @@ class Lead(LiquidMetalInterface):
         """
         str : name of cp correlation used
         """
-        return self._cp_correlation_to_use
+        return self.__cp_correlation_to_use
