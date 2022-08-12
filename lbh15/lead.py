@@ -88,7 +88,6 @@ together with the relative error.
 .. figure:: figures/cp_correlations.png
    :width: 700
 """
-import numpy as np
 import sys
 import inspect
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
@@ -158,6 +157,7 @@ class Lead(LiquidMetalInterface):
                 cp_high_range=False, **kwargs):
         cls.__cp_correlation_to_use = cp_correlation_to_use
         obj = super().__new__(cls)
+
         return obj
 
     @staticmethod
@@ -223,7 +223,7 @@ class Lead(LiquidMetalInterface):
                         instance = obj()
                     else:
                         instance = obj(cls.__cp_correlation_to_use)
-                propertyObjectList.append(instance)
+                    propertyObjectList.append(instance)
         return propertyObjectList
 
     def _set_constants(self):

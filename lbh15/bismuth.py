@@ -75,12 +75,15 @@ Each object has the following themophysical properties:
 
 where :math:`T` is the bismuth temperature in :math:`[K]`
 """
-import numpy as np
+import sys
+import inspect
 from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
+from .properties._properties import PropertiesInterface
+import lbh15.properties.bismuth_properties
 
 
 class Bismuth(LiquidMetalInterface):
@@ -147,195 +150,21 @@ class Bismuth(LiquidMetalInterface):
         """
         return BISMUTH_CP_MIN
 
-    def _set_validity_ranges(self):
-        """
-        Sets validity range for each property
-        """
-        self._p_s_validity = [self.T_m0, self.T_b0]
-        self._sigma_validity = [self.T_m0, 1400.0]
-        self._rho_validity = [self.T_m0, self.T_b0]
-        self._alpha_validity = [self.T_m0, self.T_b0]
-        self._u_s_validity = [self.T_m0, 1800.0]
-        self._beta_s_validity = [self.T_m0, 1800.0]
-        self._cp_validity = [self.T_m0, self.T_b0]
-        self._h_validity = [self.T_m0, self.T_b0]
-        self._mu_validity = [self.T_m0, 1300.0]
-        self._r_validity = [545.0, 1423.0]
-        self._k_validity = [self.T_m0, 1000.0]
+    @classmethod
+    def _load_properties(cls):
+        propertyObjectList = []
+        module = 'lbh15.properties.bismuth_properties'
+        for name, obj in inspect.getmembers(sys.modules[module]):
+            if inspect.isclass(obj) and obj is not PropertiesInterface:
+                if issubclass(obj, PropertiesInterface):
+                    propertyObjectList.append(obj())
+        return propertyObjectList
 
     def _set_constants(self):
         """
         Sets the class constants
-        :meta private:
         """
         self._T_m0 = BISMUTH_MELTING_TEMPERATURE
         self._Q_m0 = BISMUTH_MELTING_LATENT_HEAT
         self._T_b0 = BISMUTH_BOILING_TEMPERATURE
         self._Q_b0 = BISMUTH_VAPORISATION_HEAT
-
-    def _p_s_correlation(self, T):
-        """
-        Correlation used to compute saturation vapour pressure
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        saturation vapour pressure in [Pa] : float
-        """
-        return 2.67e10 * np.exp(-22858/T)
-
-    def _sigma_correlation(self, T):
-        """
-        Correlation used to compute surface tension
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        surface tension in [N/m] : float
-        """
-        return (420.8 - 0.081*T)*1e-3
-
-    def _rho_correlation(self, T):
-        """
-        Correlation used to compute density
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        density in [kg/m^3] : float
-        """
-        return 10725 - 1.22*T
-
-    def _alpha_correlation(self, T):
-        """
-        Correlation used to compute thermal expansion coefficient
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        thermal expansion coefficient in [1/K] : float
-        """
-        return 1/(8791 - T)
-
-    def _u_s_correlation(self, T):
-        """
-        Correlation used to compute sound velocity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        sound velocity in [m/s] : float
-        """
-        return 1616 + 0.187*T - 2.2e-4*T**2
-
-    def _beta_s_correlation(self, T):
-        """
-        Correlation used to compute isentropic compressibility
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        isentropic compressibility in [1/Pa] : float
-        """
-        return 1/(self._rho_correlation(T) * self._u_s_correlation(T)**2)
-
-    def _cp_correlation(self, T):
-        """
-        Correlation used to compute specific heat capacity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        specific heat capacity in [J/(kg*K)] : float
-        """
-        return 118.2 + 5.934e-3*T + 7.183e6*T**-2
-
-    def _h_correlation(self, T):
-        """
-        Correlation used to compute specific enthalpy
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        specific enthalpy in [J/kg] : float
-        """
-        return (118.2*(T - BISMUTH_MELTING_TEMPERATURE)
-                + 2.967e-3*(T**2 - BISMUTH_MELTING_TEMPERATURE**2)
-                - 7.183e6*(T**-1 - BISMUTH_MELTING_TEMPERATURE**-1))
-
-    def _mu_correlation(self, T):
-        """
-        Correlation used to compute dynamic viscosity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        dynamic viscosity in [Pa*s] : float
-        """
-        return 4.456e-4*np.exp(780/T)
-
-    def _r_correlation(self, T):
-        """
-        Correlation used to compute electrical resistivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        electrical resistivity in [Ohm*m] : float
-        """
-        return (98.96 + 0.0554*T)*1e-8
-
-    def _k_correlation(self, T):
-        """
-        Correlation used to compute thermal conductivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-
-        Returns
-        -------
-        thermal conductivity in [W/(m*K)] : float
-        """
-        return 7.34 + 9.5e-3*T
