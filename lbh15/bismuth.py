@@ -87,7 +87,7 @@ from .properties.bismuth_properties import PropertiesInterface
 
 class Bismuth(LiquidMetalInterface):
     """
-    Class to model bismuth properties at a given temperature
+    Class to model liquid bismuth properties at a given temperature
 
     Parameters
     ----------

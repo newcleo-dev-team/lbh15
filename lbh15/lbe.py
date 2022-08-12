@@ -89,7 +89,8 @@ from .properties.lbe_properties import PropertiesInterface
 
 class LBE(LiquidMetalInterface):
     """
-    Class to model lead-bismuth eutectic properties at a given temperature
+    Class to model liquid lead-bismuth eutectic properties
+    at a given temperature
 
     Parameters
     ----------

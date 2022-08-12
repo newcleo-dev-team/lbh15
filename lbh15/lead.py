@@ -104,7 +104,7 @@ from .properties.lead_properties import PropertiesInterface
 
 class Lead(LiquidMetalInterface):
     """
-    Class to model lead properties at a given temperature
+    Class to model liquid lead properties at a given temperature
 
     Parameters
     ----------
