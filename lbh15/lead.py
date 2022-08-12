@@ -90,6 +90,8 @@ together with the relative error.
 """
 import sys
 import inspect
+import pathlib
+import pkgutil
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
@@ -97,8 +99,7 @@ from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
 from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
 from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
-from .properties._properties import PropertiesInterface
-import lbh15.properties.lead_properties
+from .properties.lead_properties import PropertiesInterface
 
 
 class Lead(LiquidMetalInterface):

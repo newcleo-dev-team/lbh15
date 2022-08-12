@@ -83,7 +83,7 @@ class cp(PropertiesInterface):
     def __init__(self):
         super().__init__()
         self._range = [400.0, 1100.0]
-        self._units = "[j/kg*K]"
+        self._units = "[J/kg*K]"
         self._long_name = "specific heat capacity"
         self._description = "Liquid lbe " + self._long_name
 
@@ -96,7 +96,7 @@ class h(PropertiesInterface):
     def __init__(self):
         super().__init__()
         self._range = [400.0, 1100.0]
-        self._units = "[1/Pa]"
+        self._units = "[J/kg]"
         self._long_name = "specific enthalpy"
         self._description = "Liquid lbe " + self._long_name
 

@@ -84,8 +84,7 @@ from ._lbh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
 from ._lbh15 import LBE_T_AT_CP_MIN, LBE_CP_MIN
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
-from .properties._properties import PropertiesInterface
-import lbh15.properties.bismuth_properties
+from .properties.lbe_properties import PropertiesInterface
 
 
 class LBE(LiquidMetalInterface):
@@ -155,7 +154,7 @@ class LBE(LiquidMetalInterface):
     @classmethod
     def _load_properties(cls):
         propertyObjectList = []
-        module = 'lbh15.properties.bismuth_properties'
+        module = 'lbh15.properties.lbe_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):
             if inspect.isclass(obj) and obj is not PropertiesInterface:
                 if issubclass(obj, PropertiesInterface):
