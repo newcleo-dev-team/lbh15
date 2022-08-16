@@ -125,7 +125,7 @@ class Bismuth(LiquidMetalInterface):
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
             self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
-        super().__init__(cp_high_range, **kwargs)
+        super().__init__('bismuth', cp_high_range, **kwargs)
 
     @staticmethod
     def T_at_cp_min():
@@ -151,6 +151,15 @@ class Bismuth(LiquidMetalInterface):
 
     @classmethod
     def _load_properties(cls):
+        """
+        Loads property objects corresponding to bismuth liquid metal
+
+        Returns
+        -------
+        list
+            list of property objects, i.e. of classes which inherit from
+            :class:`_properties.PropertiesInterface`
+        """
         propertyObjectList = []
         module = 'lbh15.properties.bismuth_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):

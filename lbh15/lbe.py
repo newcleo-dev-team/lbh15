@@ -128,7 +128,7 @@ class LBE(LiquidMetalInterface):
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
             self._guess = LBE_MELTING_TEMPERATURE*2.0
-        super().__init__(cp_high_range, **kwargs)
+        super().__init__('lbe', cp_high_range, **kwargs)
 
     @staticmethod
     def T_at_cp_min():
@@ -154,6 +154,15 @@ class LBE(LiquidMetalInterface):
 
     @classmethod
     def _load_properties(cls):
+        """
+        Loads property objects corresponding to lbe liquid metal
+
+        Returns
+        -------
+        list
+            list of property objects, i.e. of classes which inherit from
+            :class:`_properties.PropertiesInterface`
+        """
         propertyObjectList = []
         module = 'lbh15.properties.lbe_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):

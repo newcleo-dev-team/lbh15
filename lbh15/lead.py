@@ -152,7 +152,7 @@ class Lead(LiquidMetalInterface):
         else:
             self._guess = LEAD_MELTING_TEMPERATURE*1.7
 
-        super().__init__(cp_high_range=cp_high_range, **kwargs)
+        super().__init__('lead', cp_high_range=cp_high_range, **kwargs)
 
     def __new__(cls, cp_correlation_to_use=SOBOLEV_KEYWORD,
                 cp_high_range=False, **kwargs):
@@ -215,6 +215,15 @@ class Lead(LiquidMetalInterface):
 
     @classmethod
     def _load_properties(cls):
+        """
+        Loads property objects corresponding to lead liquid metal
+
+        Returns
+        -------
+        list
+            list of property objects, i.e. of classes which inherit from
+            :class:`_properties.PropertiesInterface`
+        """
         propertyObjectList = []
         module = 'lbh15.properties.lead_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):

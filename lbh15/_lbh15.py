@@ -104,79 +104,13 @@ class LiquidMetalInterface(ABC):
     __T_assigned = False
     __cp_high_range = False
     __properties = {}
+    __same_name_counter = 0
+    __liquid_metal_name = ''
 
-    def __init__(self, cp_high_range=False, **kwargs):
+    def __init__(self, liquid_metal_name, cp_high_range=False, **kwargs):
         self.__cp_high_range = cp_high_range
+        self.__class__.__liquid_metal_name = liquid_metal_name
         self.__fill_class_attributes(kwargs)
-
-    @classmethod
-    def __addProperty(cls, propertyObject):
-        propDictionary = {}
-        propDictionary['correlation'] = propertyObject.correlation
-        propDictionary['validity_range'] = propertyObject.range
-        propDictionary['units'] = propertyObject.units
-        propDictionary['long_name'] = propertyObject.long_name
-        propDictionary['description'] = propertyObject.description
-        cls.__properties[propertyObject.name] = propDictionary
-
-        @property
-        def new_property(cls):
-            name = propertyObject.name
-            validity_range = cls.__properties[name]['validity_range']
-            long_name = cls.__properties[name]['long_name']
-            cls.__check_validity_range(validity_range, long_name)
-            return cls.__properties[name]['correlation'](cls.__T)
-
-        @classmethod
-        def new_property_print_info(cls, info=''):
-            name = propertyObject.name
-            value = ("Value: {:.4f} {:s}"
-                     .format(cls.__properties[name]['correlation'](cls.__T),
-                             cls.__properties[name]['units']))
-            validity = ("Validity range: [{:.2f}, {:.2f}] K"
-                        .format(cls.__properties[name]['validity_range'][0],
-                                cls.__properties[name]['validity_range'][1]))
-            long_name = ("Long name: {:s}"
-                         .format(cls.__properties[name]['long_name']))
-            units = "Units: {:s}".format(cls.__properties[name]['units'])
-            description = ("Description:\n{:s}{:s}"
-                           .format(2*"\t",
-                                   cls.__properties[name]['description']))
-            if info == '' or info == 'all':
-                print("{:s}:".format(name))
-                print("\t{:s}".format(value))
-                print("\t{:s}".format(validity))
-                print("\t{:s}".format(long_name))
-                print("\t{:s}".format(units))
-                print("\t{:s}".format(description))
-            elif info == 'value':
-                print("{:s}:".format(name))
-                print("\t{:s}".format(value))
-            elif info == 'validity_range':
-                print("{:s}:".format(name))
-                print("\t{:s}".format(validity))
-            elif info == 'long_name':
-                print("{:s}:".format(name))
-                print("\t{:s}".format(long_name))
-            elif info == 'units':
-                print("{:s}:".format(name))
-                print("\t{:s}".format(units))
-            elif info == 'description':
-                print("{:s}:".format(name))
-                print("\t{:s}".format(description))
-            else:
-                print("Type of info not known. "
-                      "Plese select one of the following:\n"
-                      "\t'all' or '' to print all info\n"
-                      "\t'value' to print the value\n"
-                      "\t'validity_range' to print the "
-                      "correlation validity range\n"
-                      "\t'long_name' to print the full name\n"
-                      "\t'description to print the description")
-
-        setattr(cls, propertyObject.name, new_property)
-        setattr(cls, propertyObject.name+"_print_info",
-                new_property_print_info)
 
     def __new__(cls, cp_high_range=False, **kwargs):
         propertyObjectList = cls._load_properties()
@@ -254,33 +188,11 @@ class LiquidMetalInterface(ABC):
         """
         return self.cp * self.mu / self.k
 
-    def __check_validity_range(self, validity_range, property_name):
-        """
-        Checks if temperature is inside validity range of property. If not
-        warns the user.
-
-        Parameters
-        ----------
-        validity_range : list
-            List of two elements with lower and upper bound temperature
-            of property validity range
-        property_name : str
-            name of the property
-        """
-        inside = False
-        if self.T >= validity_range[0] and self.T <= validity_range[1]:
-            inside = True
-        if not inside:
-            warnings.warn("The {:s} is requested at "
-                          "temperature value of {:.2f} K "
-                          "that is not in validity range "
-                          "[{:.2f}, {:.2f}] K"
-                          .format(property_name, self.T,
-                                  validity_range[0], validity_range[1]),
-                          stacklevel=3)
-
     @abstractclassmethod
     def _load_properties(cls):
+        """
+        Loads properties
+        """
         raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
                                   .format(type(cls).__name__))
 
@@ -310,7 +222,7 @@ class LiquidMetalInterface(ABC):
             function_of_T = None
             propertyObjectList = self.__properties
             for key in self.__properties:
-                if input_property == key:
+                if self.__generate_key(input_property) == key:
                     function_of_T = self.__properties[key]['correlation']
                     break
 
@@ -377,7 +289,7 @@ class LiquidMetalInterface(ABC):
         """
         if T > self.T_m0 and T < self.T_b0:
             self._T_assigned = True
-            self.__class__.__T = T
+            self.__T = T
         else:
             if T >= self.T_b0:
                 raise ValueError("Temperature must be smaller than "
@@ -391,3 +303,128 @@ class LiquidMetalInterface(ABC):
                 raise ValueError("Temperature must be "
                                  "strictly positive, "
                                  "{:.2f} [K] was provided".format(T))
+
+    def __check_validity_range(self, validity_range, property_name):
+        """
+        Checks if temperature is inside validity range of property. If not
+        warns the user.
+
+        Parameters
+        ----------
+        validity_range : list
+            List of two elements with lower and upper bound temperature
+            of property validity range
+        property_name : str
+            name of the property
+        """
+        inside = False
+        if self.T >= validity_range[0] and self.T <= validity_range[1]:
+            inside = True
+        if not inside:
+            warnings.warn("The {:s} is requested at "
+                          "temperature value of {:.2f} K "
+                          "that is not in validity range "
+                          "[{:.2f}, {:.2f}] K"
+                          .format(property_name, self.T,
+                                  validity_range[0], validity_range[1]),
+                          stacklevel=3)
+
+    @classmethod
+    def __addProperty(cls, propertyObject):
+        """
+        Adds the property to class attributes. In particular, it adds
+        the value as class property with name '<prpertyObject.name>' and
+        '<prpertyObject.name>_print_info' as class method to get additional
+        information on property
+
+        Parameters
+        ----------
+        propertyObject : :class:`_properties.PropertiesInterface`
+            Object which inherits from :class:`_properties.PropertiesInterface`
+        """
+        propDictionary = {}
+        propDictionary['correlation'] = propertyObject.correlation
+        propDictionary['validity_range'] = propertyObject.range
+        propDictionary['units'] = propertyObject.units
+        propDictionary['long_name'] = propertyObject.long_name
+        propDictionary['description'] = propertyObject.description
+        key = cls.__generate_key(propertyObject.name)
+        cls.__properties[key] = propDictionary
+
+        @property
+        def new_property(cls):
+            name = propertyObject.name
+            validity_range = cls.__properties[key]['validity_range']
+            long_name = cls.__properties[key]['long_name']
+            cls.__check_validity_range(validity_range, long_name)
+            return cls.__properties[key]['correlation'](cls.__T)
+
+        @classmethod
+        def new_property_print_info(cls, info=''):
+            name = propertyObject.name
+            value = ("Value: {:.4f} {:s}"
+                     .format(cls.__properties[key]['correlation'](cls.__T),
+                             cls.__properties[key]['units']))
+            validity = ("Validity range: [{:.2f}, {:.2f}] K"
+                        .format(cls.__properties[key]['validity_range'][0],
+                                cls.__properties[key]['validity_range'][1]))
+            long_name = ("Long name: {:s}"
+                         .format(cls.__properties[key]['long_name']))
+            units = "Units: {:s}".format(cls.__properties[key]['units'])
+            description = ("Description:\n{:s}{:s}"
+                           .format(2*"\t",
+                                   cls.__properties[key]['description']))
+
+            if info == '' or info == 'all':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(value))
+                print("\t{:s}".format(validity))
+                print("\t{:s}".format(long_name))
+                print("\t{:s}".format(units))
+                print("\t{:s}".format(description))
+            elif info == 'value':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(value))
+            elif info == 'validity_range':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(validity))
+            elif info == 'long_name':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(long_name))
+            elif info == 'units':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(units))
+            elif info == 'description':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(description))
+            else:
+                print("Type of info not known. "
+                      "Plese select one of the following:\n"
+                      "\t'all' or '' to print all info\n"
+                      "\t'value' to print the value\n"
+                      "\t'validity_range' to print the "
+                      "correlation validity range\n"
+                      "\t'long_name' to print the full name\n"
+                      "\t'description to print the description")
+
+        setattr(cls, propertyObject.name, new_property)
+        setattr(cls, propertyObject.name+"_print_info",
+                new_property_print_info)
+
+    @classmethod
+    def __generate_key(cls, property_name):
+        """
+        Generates the key that will be used to store the property
+        in class dictionary
+
+        Parameters
+        ----------
+        property_name : str
+            Name of the property
+
+        Returns
+        -------
+        str
+            Generated key
+        """
+        return property_name + '_' + cls.__liquid_metal_name

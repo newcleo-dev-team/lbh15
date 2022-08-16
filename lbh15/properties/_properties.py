@@ -33,7 +33,7 @@ class PropertiesInterface(ABC):
     @property
     def range(self):
         """
-        list : temperature validity range for property correlation 
+        list : temperature validity range for property correlation
         """
         return self._range.copy()
 
