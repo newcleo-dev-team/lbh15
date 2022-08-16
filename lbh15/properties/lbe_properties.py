@@ -86,7 +86,7 @@ class rho(PropertiesInterface):
         -------
         density in [kg/m^3] : float
         """
-        return 10725 - 1.22*T
+        return 11065 - 1.293*T
 
 
 class alpha(PropertiesInterface):
@@ -214,7 +214,8 @@ class h(PropertiesInterface):
         self._range = [400.0, 1100.0]
         self._units = "[J/kg]"
         self._long_name = "specific enthalpy"
-        self._description = "Liquid lbe " + self._long_name
+        self._description = "Liquid lbe " + self._long_name \
+                            + " (as difference with respect to the melting point enthalpy)"
 
     def correlation(self, T):
         """

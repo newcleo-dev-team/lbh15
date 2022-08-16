@@ -1,10 +1,12 @@
 """
-Module with liquid lead properties.
+Module with liquid lead class.
 Lead object can be initialized with the temperature
 or with one of the available properties (see :class:`.Lead` for \
-the full list).
+the full list). In addition to the class attributes that are shown
+in this section, :class:`.Lead` class dynamically adds the properties
+implemented in :py:mod:`lbh15.properties.lead_properties` module.
 
-Each object has the following themophysical properties:
+Therefor the object has the following themophysical properties:
 
     - :math:`T_{m0}` lead melting temperature:
 
@@ -87,6 +89,32 @@ together with the relative error.
 
 .. figure:: figures/cp_correlations.png
    :width: 700
+
+Finally, the object dynamically adds useful
+methods to retrieve more information on specific thermophysical property
+which are named <property_name>_print_info. For instance:
+
+>>> from lbh15 import Lead
+>>> liquid_lead = Lead(T=668.15)
+>>> liquid_lead.mu_print_info()
+mu:
+        Value: 0.0023 [Pa*s]
+        Validity range: [600.60, 1473.00] K
+        Long name: dynamic viscosity
+        Units: [Pa*s]
+        Description:
+                Liquid lead dynamic viscosity
+
+It is possible to retrieve only parts of the information specifying :code:`info='value'`,
+:code:`info='validity_range'`, :code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
+For instance, print the specific enthalpy description:
+
+>>> from lbh15 import Lead
+>>> liquid_lead = Lead(T=668.15)
+>>> liquid_lead.h_print_info(info='description')
+h:
+        Description:
+                Liquid lead specific enthalpy (as difference with respect to the melting point enthalpy)
 """
 import sys
 import inspect
@@ -152,10 +180,12 @@ class Lead(LiquidMetalInterface):
         else:
             self._guess = LEAD_MELTING_TEMPERATURE*1.7
 
-        super().__init__('lead', cp_high_range=cp_high_range, **kwargs)
+        super().__init__(cp_high_range=cp_high_range, **kwargs)
 
     def __new__(cls, cp_correlation_to_use=SOBOLEV_KEYWORD,
                 cp_high_range=False, **kwargs):
+
+        cls._liquid_metal_name = 'lead'
         cls.__cp_correlation_to_use = cp_correlation_to_use
         obj = super().__new__(cls)
 

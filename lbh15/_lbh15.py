@@ -105,11 +105,10 @@ class LiquidMetalInterface(ABC):
     __cp_high_range = False
     __properties = {}
     __same_name_counter = 0
-    __liquid_metal_name = ''
+    _liquid_metal_name = ''
 
-    def __init__(self, liquid_metal_name, cp_high_range=False, **kwargs):
+    def __init__(self, cp_high_range=False, **kwargs):
         self.__cp_high_range = cp_high_range
-        self.__class__.__liquid_metal_name = liquid_metal_name
         self.__fill_class_attributes(kwargs)
 
     def __new__(cls, cp_high_range=False, **kwargs):
@@ -359,7 +358,6 @@ class LiquidMetalInterface(ABC):
             cls.__check_validity_range(validity_range, long_name)
             return cls.__properties[key]['correlation'](cls.__T)
 
-        @classmethod
         def new_property_print_info(cls, info=''):
             name = propertyObject.name
             value = ("Value: {:.4f} {:s}"
@@ -407,6 +405,7 @@ class LiquidMetalInterface(ABC):
                       "\t'long_name' to print the full name\n"
                       "\t'description to print the description")
 
+
         setattr(cls, propertyObject.name, new_property)
         setattr(cls, propertyObject.name+"_print_info",
                 new_property_print_info)
@@ -427,4 +426,4 @@ class LiquidMetalInterface(ABC):
         str
             Generated key
         """
-        return property_name + '_' + cls.__liquid_metal_name
+        return property_name + '_' + cls._liquid_metal_name

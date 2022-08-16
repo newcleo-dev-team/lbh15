@@ -1,10 +1,12 @@
 """
-Module with liquid bismuth properties.
+Module with liquid bismuth class.
 Bismuth object can be initialized with the temperature
 or with one of the available properties (see :class:`.Bismuth` for \
-the full list).
+the full list). In addition to the class attributes that are shown
+in this section, :class:`.Bismuth` class dynamically adds the properties
+implemented in :py:mod:`lbh15.properties.bismuth_properties` module.
 
-Each object has the following themophysical properties:
+Therefor the object has the following themophysical properties:
 
     - :math:`T_{m0}` bismuth melting temperature:
 
@@ -73,7 +75,32 @@ Each object has the following themophysical properties:
 
         :math:`Pr = \\displaystyle\\frac{c_p\\cdot\\mu}{k}`
 
-where :math:`T` is the bismuth temperature in :math:`[K]`
+where :math:`T` is the bismuth temperature in :math:`[K]`.
+
+Finally, the object dynamically adds useful
+methods to retrieve more information on specific thermophysical property
+which are named <property_name>_print_info. For instance:
+
+>>> from lbh15 import Bismuth
+>>> liquid_bismuth = Bismuth(T=668.15)
+>>> liquid_bismuth.rho_print_info()
+rho:
+        Value: 9909.8570 [kg/m^3]
+        Validity range: [544.60, 1831.00] K
+        Long name: density
+        Units: [kg/m^3]
+        Description:
+                Liquid bismuth density
+
+It is possible to retrieve only parts of the information specifying :code:`info='value'`,
+:code:`info='validity_range'`, :code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
+For instance, print the saturation vapour pressure correlation's validity range:
+
+>>> from lbh15 import Bismuth
+>>> liquid_bismuth = Bismuth(T=668.15)
+>>> liquid_bismuth.p_s_print_info(info='validity_range')
+p_s:
+        Validity range: [544.60, 1831.00] K
 """
 import sys
 import inspect
@@ -125,7 +152,14 @@ class Bismuth(LiquidMetalInterface):
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
             self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
-        super().__init__('bismuth', cp_high_range, **kwargs)
+
+        super().__init__(cp_high_range, **kwargs)
+
+    def __new__(cls, cp_high_range=False, **kwargs):
+        cls._liquid_metal_name = 'bismuth'
+        obj = super().__new__(cls)
+
+        return obj
 
     @staticmethod
     def T_at_cp_min():

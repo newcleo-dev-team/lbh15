@@ -1,10 +1,12 @@
 """
-Module with liquid lead-bismuth-eutectic (LBE) properties.
+Module with liquid lead-bismuth-eutectic (LBE) class.
 LBE object can be initialized with the temperature
 or with one of the available properties (see :class:`.LBE` for \
-the full list).
+the full list). In addition to the class attributes that are shown
+in this section, :class:`.LBE` class dynamically adds the properties
+implemented in :py:mod:`lbh15.properties.lbe_properties` module.
 
-Each object has the following themophysical properties:
+Therefor the object has the following themophysical properties:
 
     - :math:`T_{m0}` lbe melting temperature:
 
@@ -75,7 +77,32 @@ Each object has the following themophysical properties:
 
         :math:`Pr = \\displaystyle\\frac{c_p\\cdot\\mu}{k}`
 
-where :math:`T` is the lbe temperature in :math:`[K]`
+where :math:`T` is the lbe temperature in :math:`[K]`.
+
+Finally, the object dynamically adds useful
+methods to retrieve more information on specific thermophysical property
+which are named <property_name>_print_info. For instance:
+
+>>> from lbh15 import LBE
+>>> liquid_lbe = LBE(T=668.15)
+>>> liquid_lbe.k_print_info()
+k:
+        Value: 13.0590 [W/(m*K)]
+        Validity range: [398.00, 1100.00] K
+        Long name: thermal conductivity
+        Units: [W/(m*K)]
+        Description:
+                Liquid lbe thermal conductivity
+
+It is possible to retrieve only parts of the information specifying :code:`info='value'`,
+:code:`info='validity_range'`, :code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
+For instance, print the electrical conductivity units:
+
+>>> from lbh15 import LBE
+>>> liquid_lbe = LBE(T=668.15)
+>>> liquid_lbe.r_print_info(info='units')
+r:
+        Units: [Ohm*m]
 """
 import sys
 import inspect
@@ -128,7 +155,14 @@ class LBE(LiquidMetalInterface):
             self._guess = p_s_initializer(kwargs['p_s'])
         else:
             self._guess = LBE_MELTING_TEMPERATURE*2.0
-        super().__init__('lbe', cp_high_range, **kwargs)
+
+        super().__init__(cp_high_range, **kwargs)
+
+    def __new__(cls, cp_high_range=False, **kwargs):
+        cls._liquid_metal_name = 'lbe'
+        obj = super().__new__(cls)
+
+        return obj
 
     @staticmethod
     def T_at_cp_min():

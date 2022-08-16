@@ -9,3 +9,5 @@ lbh15 package
    bismuth.rst
 
    lbe.rst
+
+   properties.rst

@@ -233,7 +233,8 @@ class h(PropertiesInterface):
         self._range = [T_m0, 2000.0]
         self._units = "[J/kg]"
         self._long_name = "specific enthalpy"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead " + self._long_name \
+                            + " (as difference with respect to the melting point enthalpy)"
 
     def correlation(self, T):
         """
