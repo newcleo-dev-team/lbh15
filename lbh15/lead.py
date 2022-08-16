@@ -105,8 +105,9 @@ mu:
         Description:
                 Liquid lead dynamic viscosity
 
-It is possible to retrieve only parts of the information specifying :code:`info='value'`,
-:code:`info='validity_range'`, :code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
+It is possible to retrieve only parts of the information
+specifying :code:`info='value'`, :code:`info='validity_range'`,
+:code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
 For instance, print the specific enthalpy description:
 
 >>> from lbh15 import Lead
@@ -114,7 +115,8 @@ For instance, print the specific enthalpy description:
 >>> liquid_lead.h_print_info(info='description')
 h:
         Description:
-                Liquid lead specific enthalpy (as difference with respect to the melting point enthalpy)
+                Liquid lead specific enthalpy \
+                (as difference with respect to the melting point enthalpy)
 """
 import sys
 import inspect

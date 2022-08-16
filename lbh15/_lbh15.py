@@ -405,7 +405,6 @@ class LiquidMetalInterface(ABC):
                       "\t'long_name' to print the full name\n"
                       "\t'description to print the description")
 
-
         setattr(cls, propertyObject.name, new_property)
         setattr(cls, propertyObject.name+"_print_info",
                 new_property_print_info)

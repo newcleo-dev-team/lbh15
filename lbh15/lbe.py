@@ -94,8 +94,9 @@ k:
         Description:
                 Liquid lbe thermal conductivity
 
-It is possible to retrieve only parts of the information specifying :code:`info='value'`,
-:code:`info='validity_range'`, :code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
+It is possible to retrieve only parts of the information
+specifying :code:`info='value'`, :code:`info='validity_range'`,
+:code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
 For instance, print the electrical conductivity units:
 
 >>> from lbh15 import LBE

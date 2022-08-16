@@ -188,7 +188,7 @@ class cp(PropertiesInterface):
     def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD):
         super().__init__()
         self._range = [T_m0, 2000.0]
-        self._units = "[J/kg*K]"
+        self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
         self._description = "Liquid lead " + self._long_name
         if cp_correlation_to_use == SOBOLEV_KEYWORD:
@@ -233,8 +233,10 @@ class h(PropertiesInterface):
         self._range = [T_m0, 2000.0]
         self._units = "[J/kg]"
         self._long_name = "specific enthalpy"
-        self._description = "Liquid lead " + self._long_name \
-                            + " (as difference with respect to the melting point enthalpy)"
+        self._description = ("Liquid lead {:s}"
+                             "(as difference with respect to"
+                             "the melting point enthalpy)"
+                             .format(self._long_name))
 
     def correlation(self, T):
         """

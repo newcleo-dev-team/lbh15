@@ -92,9 +92,11 @@ rho:
         Description:
                 Liquid bismuth density
 
-It is possible to retrieve only parts of the information specifying :code:`info='value'`,
-:code:`info='validity_range'`, :code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
-For instance, print the saturation vapour pressure correlation's validity range:
+It is possible to retrieve only parts of the information
+specifying :code:`info='value'`, :code:`info='validity_range'`,
+:code:`info='long_name`, :code:`info='units'` or  :code:`info='description'`.
+For instance, print the saturation vapour pressure correlation's
+validity range:
 
 >>> from lbh15 import Bismuth
 >>> liquid_bismuth = Bismuth(T=668.15)
