@@ -9,7 +9,7 @@ with open('README.rst') as readme_file:
 setup(
     name='lbh15',
     version=lbh15.__version__,
-    packages=['lbh15'],
+    packages=['lbh15', 'lbh15.properties'],
     include_package_data=True,
     author=lbh15.__author__,
     author_email='daniele.panico@newcleo.com, daniele.tomatis@newcleo.com',
