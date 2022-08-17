@@ -1,11 +1,11 @@
 import numpy as np
-from ._properties import PropertiesInterface
+from ._properties import PropertyInterface
 from .._lbh15 import BISMUTH_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import BISMUTH_BOILING_TEMPERATURE as T_b0
 from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 
 
-class p_s(PropertiesInterface):
+class p_s(PropertyInterface):
     """
     Liquid bismuth saturation vapour pressure
     property class
@@ -33,7 +33,7 @@ class p_s(PropertiesInterface):
         return 2.67e10 * np.exp(-22858/T)
 
 
-class sigma(PropertiesInterface):
+class sigma(PropertyInterface):
     """
     Liquid bismuth surface tension
     property class
@@ -61,7 +61,7 @@ class sigma(PropertiesInterface):
         return (420.8 - 0.081*T)*1e-3
 
 
-class rho(PropertiesInterface):
+class rho(PropertyInterface):
     """
     Liquid bismuth density
     property class
@@ -89,7 +89,7 @@ class rho(PropertiesInterface):
         return 10725 - 1.22*T
 
 
-class alpha(PropertiesInterface):
+class alpha(PropertyInterface):
     """
     Liquid bismuth thermal expansion coefficient
     property class
@@ -117,7 +117,7 @@ class alpha(PropertiesInterface):
         return 1/(8791 - T)
 
 
-class u_s(PropertiesInterface):
+class u_s(PropertyInterface):
     """
     Liquid bismuth sound velocity
     property class
@@ -145,7 +145,7 @@ class u_s(PropertiesInterface):
         return 1616 + 0.187*T - 2.2e-4*T**2
 
 
-class beta_s(PropertiesInterface):
+class beta_s(PropertyInterface):
     """
     Liquid bismuth isentropic compressibility
     property class
@@ -175,7 +175,7 @@ class beta_s(PropertiesInterface):
         return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
 
 
-class cp(PropertiesInterface):
+class cp(PropertyInterface):
     """
     Liquid bismuth specific heat capacity
     property class
@@ -203,7 +203,7 @@ class cp(PropertiesInterface):
         return 118.2 + 5.934e-3*T + 7.183e6*T**-2
 
 
-class h(PropertiesInterface):
+class h(PropertyInterface):
     """
     Liquid bismuth specific enthalpy
     property class
@@ -236,7 +236,7 @@ class h(PropertiesInterface):
                 - 7.183e6*(T**-1 - T_m0**-1))
 
 
-class mu(PropertiesInterface):
+class mu(PropertyInterface):
     """
     Liquid bismuth dynamic viscosity
     property class
@@ -264,7 +264,7 @@ class mu(PropertiesInterface):
         return 4.456e-4*np.exp(780/T)
 
 
-class r(PropertiesInterface):
+class r(PropertyInterface):
     """
     Liquid bismuth electrical resistivity
     property class
@@ -292,7 +292,7 @@ class r(PropertiesInterface):
         return (98.96 + 0.0554*T)*1e-8
 
 
-class k(PropertiesInterface):
+class k(PropertyInterface):
     """
     Liquid bismuth thermal conductivity
     property class

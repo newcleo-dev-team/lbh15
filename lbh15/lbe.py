@@ -114,7 +114,7 @@ from ._lbh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
 from ._lbh15 import LBE_T_AT_CP_MIN, LBE_CP_MIN
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
-from .properties.lbe_properties import PropertiesInterface
+from .properties.lbe_properties import PropertyInterface
 
 
 class LBE(LiquidMetalInterface):
@@ -198,13 +198,13 @@ class LBE(LiquidMetalInterface):
         -------
         list
             list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertiesInterface`
+            :class:`_properties.PropertyInterface`
         """
         propertyObjectList = []
         module = 'lbh15.properties.lbe_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertiesInterface:
-                if issubclass(obj, PropertiesInterface):
+            if inspect.isclass(obj) and obj is not PropertyInterface:
+                if issubclass(obj, PropertyInterface):
                     propertyObjectList.append(obj())
         return propertyObjectList
 

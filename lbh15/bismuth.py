@@ -113,7 +113,7 @@ from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
-from .properties.bismuth_properties import PropertiesInterface
+from .properties.bismuth_properties import PropertyInterface
 
 
 class Bismuth(LiquidMetalInterface):
@@ -196,13 +196,13 @@ class Bismuth(LiquidMetalInterface):
         -------
         list
             list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertiesInterface`
+            :class:`_properties.PropertyInterface`
         """
         propertyObjectList = []
         module = 'lbh15.properties.bismuth_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertiesInterface:
-                if issubclass(obj, PropertiesInterface):
+            if inspect.isclass(obj) and obj is not PropertyInterface:
+                if issubclass(obj, PropertyInterface):
                     propertyObjectList.append(obj())
         return propertyObjectList
 

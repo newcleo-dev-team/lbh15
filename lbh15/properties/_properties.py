@@ -2,13 +2,13 @@ from abc import ABC, abstractmethod
 from numpy import inf
 
 
-class PropertiesInterface(ABC):
+class PropertyInterface(ABC):
     def __init__(self):
         self._name = type(self).__name__
         self._range = [-inf, inf]
         self._units = "[-]"
-        self._long_name = "properties interface"
-        self._description = "This is properties interface, override me"
+        self._long_name = "long name of the property interface"
+        self._description = "description of the property interface"
 
     @abstractmethod
     def correlation(self, T):

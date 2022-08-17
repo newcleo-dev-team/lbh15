@@ -1,11 +1,11 @@
 import numpy as np
-from ._properties import PropertiesInterface
+from ._properties import PropertyInterface
 from .._lbh15 import LBE_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import LBE_BOILING_TEMPERATURE as T_b0
 from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 
 
-class p_s(PropertiesInterface):
+class p_s(PropertyInterface):
     """
     Liquid lead-bismuth eutectic saturation vapour pressure
     property class
@@ -33,7 +33,7 @@ class p_s(PropertiesInterface):
         return 1.22e10 * np.exp(-22552/T)
 
 
-class sigma(PropertiesInterface):
+class sigma(PropertyInterface):
     """
     Liquid lead-bismuth eutectic surface tension
     property class
@@ -61,7 +61,7 @@ class sigma(PropertiesInterface):
         return (448.5 - 0.0799*T)*1e-3
 
 
-class rho(PropertiesInterface):
+class rho(PropertyInterface):
     """
     Liquid lead-bismuth eutectic density
     property class
@@ -89,7 +89,7 @@ class rho(PropertiesInterface):
         return 11065 - 1.293*T
 
 
-class alpha(PropertiesInterface):
+class alpha(PropertyInterface):
     """
     Liquid lead-bismuth eutectic thermal expansion coefficient
     property class
@@ -117,7 +117,7 @@ class alpha(PropertiesInterface):
         return 1/(8558 - T)
 
 
-class u_s(PropertiesInterface):
+class u_s(PropertyInterface):
     """
     Liquid lead-bismuth eutectic sound velocity
     property class
@@ -145,7 +145,7 @@ class u_s(PropertiesInterface):
         return 1855 - 0.212*T
 
 
-class beta_s(PropertiesInterface):
+class beta_s(PropertyInterface):
     """
     Liquid lead-bismuth eutectic isentropic compressibility
     property class
@@ -175,7 +175,7 @@ class beta_s(PropertiesInterface):
         return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
 
 
-class cp(PropertiesInterface):
+class cp(PropertyInterface):
     """
     Liquid lead-bismuth eutectic specific heat capacity
     property class
@@ -204,7 +204,7 @@ class cp(PropertiesInterface):
                 - 4.56e5*T**-2)
 
 
-class h(PropertiesInterface):
+class h(PropertyInterface):
     """
     Liquid lead-bismuth eutectic specific enthalpy
     property class
@@ -238,7 +238,7 @@ class h(PropertiesInterface):
                 + 4.56e5*(T**-1 - T_m0**-1))
 
 
-class mu(PropertiesInterface):
+class mu(PropertyInterface):
     """
     Liquid lead-bismuth eutectic dynamic viscosity
     property class
@@ -266,7 +266,7 @@ class mu(PropertiesInterface):
         return 4.94e-4*np.exp(754.1/T)
 
 
-class r(PropertiesInterface):
+class r(PropertyInterface):
     """
     Liquid lead-bismuth eutectic electrical resistivity
     property class
@@ -294,7 +294,7 @@ class r(PropertiesInterface):
         return (90.9 + 0.048*T)*1e-8
 
 
-class k(PropertiesInterface):
+class k(PropertyInterface):
     """
     Liquid lead-bismuth eutectic thermal conductivity
     property class

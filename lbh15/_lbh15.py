@@ -338,8 +338,8 @@ class LiquidMetalInterface(ABC):
 
         Parameters
         ----------
-        propertyObject : :class:`_properties.PropertiesInterface`
-            Object which inherits from :class:`_properties.PropertiesInterface`
+        propertyObject : :class:`_properties.PropertyInterface`
+            Object which inherits from :class:`_properties.PropertyInterface`
         """
         propDictionary = {}
         propDictionary['correlation'] = propertyObject.correlation

@@ -131,7 +131,7 @@ from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
 from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
 from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
 from ._lbh15 import LiquidMetalInterface, p_s_initializer
-from .properties.lead_properties import PropertiesInterface
+from .properties.lead_properties import PropertyInterface
 
 
 class Lead(LiquidMetalInterface):
@@ -256,13 +256,13 @@ class Lead(LiquidMetalInterface):
         -------
         list
             list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertiesInterface`
+            :class:`_properties.PropertyInterface`
         """
         propertyObjectList = []
         module = 'lbh15.properties.lead_properties'
         for name, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertiesInterface:
-                if issubclass(obj, PropertiesInterface):
+            if inspect.isclass(obj) and obj is not PropertyInterface:
+                if issubclass(obj, PropertyInterface):
                     if name != 'cp':
                         instance = obj()
                     else:

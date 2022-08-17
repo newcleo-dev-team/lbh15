@@ -1,11 +1,11 @@
 import numpy as np
-from ._properties import PropertiesInterface
+from ._properties import PropertyInterface
 from .._lbh15 import LEAD_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import LEAD_BOILING_TEMPERATURE as T_b0
 from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 
 
-class p_s(PropertiesInterface):
+class p_s(PropertyInterface):
     """
     Liquid lead saturation vapour pressure
     property class
@@ -33,7 +33,7 @@ class p_s(PropertiesInterface):
         return 5.76e9 * np.exp(-22131/T)
 
 
-class sigma(PropertiesInterface):
+class sigma(PropertyInterface):
     """
     Liquid lead surface tension
     property class
@@ -61,7 +61,7 @@ class sigma(PropertiesInterface):
         return (525.9 - 0.113*T)*1e-3
 
 
-class rho(PropertiesInterface):
+class rho(PropertyInterface):
     """
     Liquid lead density
     property class
@@ -89,7 +89,7 @@ class rho(PropertiesInterface):
         return 11441 - 1.2795*T
 
 
-class alpha(PropertiesInterface):
+class alpha(PropertyInterface):
     """
     Liquid lead thermal expansion coefficient
     property class
@@ -117,7 +117,7 @@ class alpha(PropertiesInterface):
         return 1/(8942 - T)
 
 
-class u_s(PropertiesInterface):
+class u_s(PropertyInterface):
     """
     Liquid lead sound velocity
     property class
@@ -145,7 +145,7 @@ class u_s(PropertiesInterface):
         return 1953 - 0.246*T
 
 
-class beta_s(PropertiesInterface):
+class beta_s(PropertyInterface):
     """
     Liquid lead isentropic compressibility
     property class
@@ -175,7 +175,7 @@ class beta_s(PropertiesInterface):
         return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
 
 
-class cp(PropertiesInterface):
+class cp(PropertyInterface):
     """
     Liquid lead specific heat capacity
     property class
@@ -190,6 +190,8 @@ class cp(PropertiesInterface):
         self._range = [T_m0, 2000.0]
         self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
+        #self._short_name = 'cp'
+        #self._correlation_id = 'sobolev2011'
         self._description = "Liquid lead " + self._long_name
         if cp_correlation_to_use == SOBOLEV_KEYWORD:
             self._cp_correlation_to_use = SOBOLEV_KEYWORD
@@ -223,7 +225,7 @@ class cp(PropertiesInterface):
         return rvalue
 
 
-class h(PropertiesInterface):
+class h(PropertyInterface):
     """
     Liquid lead specific enthalpy
     property class
@@ -257,7 +259,7 @@ class h(PropertiesInterface):
                 + 1.524e6*(T**-1 - T_m0**-1))
 
 
-class mu(PropertiesInterface):
+class mu(PropertyInterface):
     """
     Liquid lead dynamic viscosity
     property class
@@ -285,7 +287,7 @@ class mu(PropertiesInterface):
         return 4.55e-4 * np.exp(1069/T)
 
 
-class r(PropertiesInterface):
+class r(PropertyInterface):
     """
     Liquid lead electrical resistivity
     property class
@@ -313,7 +315,7 @@ class r(PropertiesInterface):
         return (67.0 + 0.0471*T)*1e-8
 
 
-class k(PropertiesInterface):
+class k(PropertyInterface):
     """
     Liquid lead thermal conductivity
     property class
