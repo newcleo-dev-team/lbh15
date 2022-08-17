@@ -2,11 +2,13 @@
 Module with liquid lead class.
 Lead object can be initialized with the temperature
 or with one of the available properties (see :class:`.Lead` for \
-the full list). In addition to the class attributes that are shown
+the full list). It must be underlined that instantiation from properties
+depends on the specific correlation of the properties implemented in 
+lbh15 package. In addition to the class attributes that are shown
 in this section, :class:`.Lead` class dynamically adds the properties
 implemented in :py:mod:`lbh15.properties.lead_properties` module.
 
-Therefor the object has the following themophysical properties:
+Therefore the object has the following themophysical properties:
 
     - :math:`T_{m0}` lead melting temperature:
 
