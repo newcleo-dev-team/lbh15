@@ -274,8 +274,8 @@ class LiquidMetalInterface(ABC):
             propertyObjectList = self.__properties
             for key in self.__properties:
                 if self.__generate_key(input_property) == key:
-                    function_of_T = self.__properties[key]['correlation']
-                    helper = self.__properties[key]['initialization_helper']
+                    function_of_T = self.__properties[key].correlation
+                    helper = self.__properties[key].initialization_helper
                     break
 
             if function_of_T is not None:
@@ -397,42 +397,33 @@ class LiquidMetalInterface(ABC):
         propertyObject : :class:`_properties.PropertyInterface`
             Object which inherits from :class:`_properties.PropertyInterface`
         """
-        propDictionary = {}
-        propDictionary['correlation'] = propertyObject.correlation
-        propDictionary['validity_range'] = propertyObject.range
-        propDictionary['units'] = propertyObject.units
-        propDictionary['long_name'] = propertyObject.long_name
-        propDictionary['description'] = propertyObject.description
-        propDictionary['correlation_name'] = propertyObject.correlation_name
-        helper = propertyObject.initialization_helper
-        propDictionary['initialization_helper'] = helper
         key = cls.__generate_key(propertyObject.name)
-        cls.__properties[key] = propDictionary
+        cls.__properties[key] = propertyObject
 
         @property
         def new_property(cls):
             name = propertyObject.name
-            validity_range = cls.__properties[key]['validity_range']
-            long_name = cls.__properties[key]['long_name']
+            validity_range = cls.__properties[key].range
+            long_name = cls.__properties[key].long_name
             cls.__check_validity_range(validity_range, long_name)
-            return cls.__properties[key]['correlation'](cls.__T)
+            return cls.__properties[key].correlation(cls.__T)
 
         def new_property_print_info(cls, info=''):
             name = propertyObject.name
             value = ("Value: {:.4f} {:s}"
-                     .format(cls.__properties[key]['correlation'](cls.__T),
-                             cls.__properties[key]['units']))
+                     .format(cls.__properties[key].correlation(cls.__T),
+                             cls.__properties[key].units))
             validity = ("Validity range: [{:.2f}, {:.2f}] K"
-                        .format(cls.__properties[key]['validity_range'][0],
-                                cls.__properties[key]['validity_range'][1]))
+                        .format(cls.__properties[key].range[0],
+                                cls.__properties[key].range[1]))
             corr_name = ("Correlation name: '{:s}'"
-                         .format(cls.__properties[key]['correlation_name']))
+                         .format(cls.__properties[key].correlation_name))
             long_name = ("Long name: {:s}"
-                         .format(cls.__properties[key]['long_name']))
-            units = "Units: {:s}".format(cls.__properties[key]['units'])
+                         .format(cls.__properties[key].long_name))
+            units = "Units: {:s}".format(cls.__properties[key].units)
             description = ("Description:\n{:s}{:s}"
                            .format(2*"\t",
-                                   cls.__properties[key]['description']))
+                                   cls.__properties[key].description))
 
             if info == '' or info == 'all':
                 print("{:s}:".format(name))
