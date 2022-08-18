@@ -4,7 +4,7 @@ from numpy import inf
 
 class PropertyInterface(ABC):
     def __init__(self):
-        self._name = type(self).__name__ #this is the name of the variable
+        self._name = type(self).__name__
         self._range = [-inf, inf]
         self._correlation_name = "lbh15"
         self._units = "[-]"
@@ -25,6 +25,20 @@ class PropertyInterface(ABC):
                                   .format(type(self).__name__))
 
     def initialization_helper(self, property_value):
+        """
+        Returns a temperature guess according to the value
+        of the property. Used by root finder algorithm if
+        return is not None, i.e, inheriting classes must override it
+
+        Parameters
+        ----------
+        property_value : float
+            value of the property
+
+        Returns
+        -------
+        None
+        """
         return None
 
     @property

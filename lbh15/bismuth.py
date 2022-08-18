@@ -3,7 +3,7 @@ Module with liquid bismuth class.
 Bismuth object can be initialized with the temperature
 or with one of the available properties (see :class:`.Bismuth` for \
 the full list). It must be underlined that instantiation from properties
-depends on the specific correlation of the properties implemented in 
+depends on the specific correlation of the properties implemented in
 lbh15 package. In addition to the class attributes that are shown
 in this section, :class:`.Bismuth` class dynamically adds the properties
 implemented in :py:mod:`lbh15.properties.bismuth_properties` module.
@@ -151,6 +151,8 @@ class Bismuth(LiquidMetalInterface):
     >>> liquid_bismuth.k  # [W/(m*K)]
     13.705
     """
+    _correlations_to_use = {}
+
     def __init__(self, cp_high_range=False, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(cp_high_range, **kwargs)

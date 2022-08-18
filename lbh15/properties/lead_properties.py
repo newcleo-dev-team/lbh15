@@ -31,7 +31,7 @@ class p_s(PropertyInterface):
         saturation vapour pressure in [Pa] : float
         """
         return 5.76e9 * np.exp(-22131/T)
-    
+
     def initialization_helper(self, property_value):
         """
         Returns a temperature guess according to the value
@@ -229,6 +229,7 @@ class cp_sobolev2011(PropertyInterface):
         return (176.2 - 4.923e-2*T + 1.544e-5*T**2
                 - 1.524e6*T**-2)
 
+
 class cp_gurvich1991(PropertyInterface):
     """
     Liquid lead specific heat capacity
@@ -258,6 +259,7 @@ class cp_gurvich1991(PropertyInterface):
         """
         return (175.1 - 4.961e-2*T + 1.985e-5*T**2
                 - 2.099e-9*T**3 - 1.524e6*T**-2)
+
 
 class h(PropertyInterface):
     """

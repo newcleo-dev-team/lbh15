@@ -3,7 +3,7 @@ Module with liquid lead class.
 Lead object can be initialized with the temperature
 or with one of the available properties (see :class:`.Lead` for \
 the full list). It must be underlined that instantiation from properties
-depends on the specific correlation of the properties implemented in 
+depends on the specific correlation of the properties implemented in
 lbh15 package. In addition to the class attributes that are shown
 in this section, :class:`.Lead` class dynamically adds the properties
 implemented in :py:mod:`lbh15.properties.lead_properties` module.
@@ -175,7 +175,7 @@ class Lead(LiquidMetalInterface):
     >>> liquid_lead_1.cp, liquid_lead_2.cp
     (144.31634999999997, 144.66006199999998)
     """
-    _correlations_to_use = {'cp':'gurvich1991'}
+    _correlations_to_use = {'cp': SOBOLEV_KEYWORD}
 
     def __init__(self, cp_high_range=False, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
@@ -183,7 +183,7 @@ class Lead(LiquidMetalInterface):
 
     def __new__(cls, cp_high_range=False, **kwargs):
         obj = super().__new__(cls)
-        
+
         return obj
 
     @staticmethod

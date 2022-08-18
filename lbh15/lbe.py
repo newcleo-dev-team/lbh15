@@ -3,7 +3,7 @@ Module with liquid lead-bismuth-eutectic (LBE) class.
 LBE object can be initialized with the temperature
 or with one of the available properties (see :class:`.LBE` for \
 the full list). It must be underlined that instantiation from properties
-depends on the specific correlation of the properties implemented in 
+depends on the specific correlation of the properties implemented in
 lbh15 package. In addition to the class attributes that are shown
 in this section, :class:`.LBE` class dynamically adds the properties
 implemented in :py:mod:`lbh15.properties.lbe_properties` module.
@@ -153,6 +153,8 @@ class LBE(LiquidMetalInterface):
     >>> liquid_lbe.mu  # [Pa*s]
     0.001736052003181349
     """
+    _correlations_to_use = {}
+
     def __init__(self, cp_high_range=False, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0
         super().__init__(cp_high_range, **kwargs)
