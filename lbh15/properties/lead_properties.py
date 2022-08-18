@@ -31,6 +31,30 @@ class p_s(PropertyInterface):
         saturation vapour pressure in [Pa] : float
         """
         return 5.76e9 * np.exp(-22131/T)
+    
+    def initialization_helper(self, property_value):
+        """
+        Returns a temperature guess according to the value
+        of the saturation vapour pressure
+
+        Parameters
+        ----------
+        property_value : float
+            saturation vapour pressure in [Pa]
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-2:
+            rvalue = 800
+        elif property_value >= 1e-2 and property_value < 1e2:
+            rvalue = 1200
+        else:
+            rvalue = 2000
+
+        return rvalue
 
 
 class sigma(PropertyInterface):
@@ -175,33 +199,19 @@ class beta_s(PropertyInterface):
         return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
 
 
-class cp(PropertyInterface):
+class cp_sobolev2011(PropertyInterface):
     """
     Liquid lead specific heat capacity
     property class
-
-    Parameters
-    ----------
-    cp_correlation_to_use : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
     """
-    def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD):
+    def __init__(self):
         super().__init__()
+        self._name = "cp"
         self._range = [T_m0, 2000.0]
         self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
-        #self._short_name = 'cp'
-        #self._correlation_id = 'sobolev2011'
+        self._correlation_name = 'sobolev2011'
         self._description = "Liquid lead " + self._long_name
-        if cp_correlation_to_use == SOBOLEV_KEYWORD:
-            self._cp_correlation_to_use = SOBOLEV_KEYWORD
-        elif cp_correlation_to_use == GURVICH_KEYWORD:
-            self._cp_correlation_to_use = GURVICH_KEYWORD
-        else:
-            raise ValueError("cp correlation can be one among: {:s}, "
-                             "{:s}. {:s} was provided"
-                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
-                                     cp_correlation_to_use))
 
     def correlation(self, T):
         """
@@ -216,14 +226,38 @@ class cp(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        if self._cp_correlation_to_use == SOBOLEV_KEYWORD:
-            rvalue = (176.2 - 4.923e-2*T + 1.544e-5*T**2
-                      - 1.524e6*T**-2)
-        else:
-            rvalue = (175.1 - 4.961e-2*T + 1.985e-5*T**2
-                      - 2.099e-9*T**3 - 1.524e6*T**-2)
-        return rvalue
+        return (176.2 - 4.923e-2*T + 1.544e-5*T**2
+                - 1.524e6*T**-2)
 
+class cp_gurvich1991(PropertyInterface):
+    """
+    Liquid lead specific heat capacity
+    property class
+    """
+    def __init__(self):
+        super().__init__()
+        self._name = "cp"
+        self._range = [T_m0, 2000.0]
+        self._units = "[J/(kg*K)]"
+        self._long_name = "specific heat capacity"
+        self._correlation_name = 'gurvich1991'
+        self._description = "Liquid lead " + self._long_name
+
+    def correlation(self, T):
+        """
+        Correlation used to compute specific heat capacity
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+
+        Returns
+        -------
+        specific heat capacity in [J/(kg*K)] : float
+        """
+        return (175.1 - 4.961e-2*T + 1.985e-5*T**2
+                - 2.099e-9*T**3 - 1.524e6*T**-2)
 
 class h(PropertyInterface):
     """

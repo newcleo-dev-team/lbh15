@@ -175,24 +175,15 @@ class Lead(LiquidMetalInterface):
     >>> liquid_lead_1.cp, liquid_lead_2.cp
     (144.31634999999997, 144.66006199999998)
     """
-    __cp_correlation_to_use = ''
+    _correlations_to_use = {'cp':'gurvich1991'}
 
-    def __init__(self, cp_correlation_to_use=SOBOLEV_KEYWORD,
-                 cp_high_range=False, **kwargs):
-        if 'p_s' in kwargs.keys():
-            self._guess = p_s_initializer(kwargs['p_s'])
-        else:
-            self._guess = LEAD_MELTING_TEMPERATURE*1.7
-
+    def __init__(self, cp_high_range=False, **kwargs):
+        self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(cp_high_range=cp_high_range, **kwargs)
 
-    def __new__(cls, cp_correlation_to_use=SOBOLEV_KEYWORD,
-                cp_high_range=False, **kwargs):
-
-        cls._liquid_metal_name = 'lead'
-        cls.__cp_correlation_to_use = cp_correlation_to_use
+    def __new__(cls, cp_high_range=False, **kwargs):
         obj = super().__new__(cls)
-
+        
         return obj
 
     @staticmethod
@@ -263,11 +254,7 @@ class Lead(LiquidMetalInterface):
         for name, obj in inspect.getmembers(sys.modules[module]):
             if inspect.isclass(obj) and obj is not PropertyInterface:
                 if issubclass(obj, PropertyInterface):
-                    if name != 'cp':
-                        instance = obj()
-                    else:
-                        instance = obj(cls.__cp_correlation_to_use)
-                    propertyObjectList.append(instance)
+                    propertyObjectList.append(obj())
         return propertyObjectList
 
     def _set_constants(self):
@@ -278,10 +265,3 @@ class Lead(LiquidMetalInterface):
         self._Q_m0 = LEAD_MELTING_LATENT_HEAT
         self._T_b0 = LEAD_BOILING_TEMPERATURE
         self._Q_b0 = LEAD_VAPORISATION_HEAT
-
-    @property
-    def cp_correlation_used(self):
-        """
-        str : name of cp correlation used
-        """
-        return self.__cp_correlation_to_use

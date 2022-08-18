@@ -4,8 +4,9 @@ from numpy import inf
 
 class PropertyInterface(ABC):
     def __init__(self):
-        self._name = type(self).__name__
+        self._name = type(self).__name__ #this is the name of the variable
         self._range = [-inf, inf]
+        self._correlation_name = "lbh15"
         self._units = "[-]"
         self._long_name = "long name of the property interface"
         self._description = "description of the property interface"
@@ -23,6 +24,9 @@ class PropertyInterface(ABC):
         raise NotImplementedError("{:s}.correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
+    def initialization_helper(self, property_value):
+        return None
+
     @property
     def name(self):
         """
@@ -36,6 +40,13 @@ class PropertyInterface(ABC):
         list : temperature validity range for property correlation
         """
         return self._range.copy()
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return self._correlation_name
 
     @property
     def units(self):

@@ -32,6 +32,30 @@ class p_s(PropertyInterface):
         """
         return 2.67e10 * np.exp(-22858/T)
 
+    def initialization_helper(self, property_value):
+        """
+        Returns a temperature guess according to the value
+        of the saturation vapour pressure
+
+        Parameters
+        ----------
+        property_value : float
+            saturation vapour pressure in [Pa]
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-2:
+            rvalue = 800
+        elif property_value >= 1e-2 and property_value < 1e2:
+            rvalue = 1200
+        else:
+            rvalue = 2000
+
+        return rvalue
+
 
 class sigma(PropertyInterface):
     """

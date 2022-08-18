@@ -106,6 +106,7 @@ class LiquidMetalInterface(ABC):
     __properties = {}
     __same_name_counter = 0
     _liquid_metal_name = ''
+    _correlations_to_use = {}
 
     def __init__(self, cp_high_range=False, **kwargs):
         self.__cp_high_range = cp_high_range
@@ -114,7 +115,29 @@ class LiquidMetalInterface(ABC):
     def __new__(cls, cp_high_range=False, **kwargs):
         propertyObjectList = cls._load_properties()
         for propertyObject in propertyObjectList:
-            cls.__addProperty(propertyObject)
+            # property must be added if its specific correlation is not specified
+            addProperty = (not cls._correlations_to_use or 
+                           propertyObject.name not in cls._correlations_to_use.keys())
+            # if property was specified then check that correlation names match
+            if not addProperty:
+                addProperty = (propertyObject.correlation_name ==
+                               cls._correlations_to_use[propertyObject.name])
+            if addProperty:
+                cls.__addProperty(propertyObject)
+        
+        keys_to_remove = []
+        for key in cls._correlations_to_use.keys():
+            if not hasattr(cls, key):
+                warnings.warn("Could not find property '{:s}' "
+                              "implementing '{:s}' correlation. "
+                              "Property was not added.\nGoing to remove it from "
+                              "correlations_to_use dictionary."
+                              .format(key, cls._correlations_to_use[key]),
+                              stacklevel=4)
+                keys_to_remove.append(key)
+        for key_to_remove in keys_to_remove:
+            cls._correlations_to_use.pop(key_to_remove)
+
         obj = object.__new__(cls)
         return obj
 
@@ -129,6 +152,14 @@ class LiquidMetalInterface(ABC):
         list
         """
         return PROPERTIES_FOR_INITIALIZATION.copy()
+
+    @classmethod
+    def set_correlation_to_use(cls, property_name, correlation_name):
+        cls._correlations_to_use[property_name] = correlation_name
+
+    @classmethod
+    def correlations_to_use(cls):
+        return cls._correlations_to_use
 
     @property
     def T_m0(self):
@@ -219,13 +250,17 @@ class LiquidMetalInterface(ABC):
             rvalue = input_value
         else:
             function_of_T = None
+            initialization_helper = None
             propertyObjectList = self.__properties
             for key in self.__properties:
                 if self.__generate_key(input_property) == key:
                     function_of_T = self.__properties[key]['correlation']
+                    initialization_helper = self.__properties[key]['initialization_helper']
                     break
 
             if function_of_T is not None:
+                if initialization_helper(input_value) is not None:
+                    self._guess = initialization_helper(input_value)
                 def function_to_solve(T, target):
                     return function_of_T(T) - target
 
@@ -347,6 +382,7 @@ class LiquidMetalInterface(ABC):
         propDictionary['units'] = propertyObject.units
         propDictionary['long_name'] = propertyObject.long_name
         propDictionary['description'] = propertyObject.description
+        propDictionary['initialization_helper'] = propertyObject.initialization_helper
         key = cls.__generate_key(propertyObject.name)
         cls.__properties[key] = propDictionary
 
@@ -361,17 +397,17 @@ class LiquidMetalInterface(ABC):
         def new_property_print_info(cls, info=''):
             name = propertyObject.name
             value = ("Value: {:.4f} {:s}"
-                     .format(cls.__properties[key]['correlation'](cls.__T),
-                             cls.__properties[key]['units']))
+                    .format(cls.__properties[key]['correlation'](cls.__T),
+                            cls.__properties[key]['units']))
             validity = ("Validity range: [{:.2f}, {:.2f}] K"
                         .format(cls.__properties[key]['validity_range'][0],
                                 cls.__properties[key]['validity_range'][1]))
             long_name = ("Long name: {:s}"
-                         .format(cls.__properties[key]['long_name']))
+                        .format(cls.__properties[key]['long_name']))
             units = "Units: {:s}".format(cls.__properties[key]['units'])
             description = ("Description:\n{:s}{:s}"
-                           .format(2*"\t",
-                                   cls.__properties[key]['description']))
+                        .format(2*"\t",
+                                cls.__properties[key]['description']))
 
             if info == '' or info == 'all':
                 print("{:s}:".format(name))
@@ -397,13 +433,13 @@ class LiquidMetalInterface(ABC):
                 print("\t{:s}".format(description))
             else:
                 print("Type of info not known. "
-                      "Plese select one of the following:\n"
-                      "\t'all' or '' to print all info\n"
-                      "\t'value' to print the value\n"
-                      "\t'validity_range' to print the "
-                      "correlation validity range\n"
-                      "\t'long_name' to print the full name\n"
-                      "\t'description to print the description")
+                    "Plese select one of the following:\n"
+                    "\t'all' or '' to print all info\n"
+                    "\t'value' to print the value\n"
+                    "\t'validity_range' to print the "
+                    "correlation validity range\n"
+                    "\t'long_name' to print the full name\n"
+                    "\t'description to print the description")
 
         setattr(cls, propertyObject.name, new_property)
         setattr(cls, propertyObject.name+"_print_info",

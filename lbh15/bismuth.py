@@ -152,15 +152,10 @@ class Bismuth(LiquidMetalInterface):
     13.705
     """
     def __init__(self, cp_high_range=False, **kwargs):
-        if 'p_s' in kwargs.keys():
-            self._guess = p_s_initializer(kwargs['p_s'])
-        else:
-            self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
-
+        self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(cp_high_range, **kwargs)
 
     def __new__(cls, cp_high_range=False, **kwargs):
-        cls._liquid_metal_name = 'bismuth'
         obj = super().__new__(cls)
 
         return obj

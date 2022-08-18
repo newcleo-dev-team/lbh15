@@ -154,15 +154,10 @@ class LBE(LiquidMetalInterface):
     0.001736052003181349
     """
     def __init__(self, cp_high_range=False, **kwargs):
-        if 'p_s' in kwargs.keys():
-            self._guess = p_s_initializer(kwargs['p_s'])
-        else:
-            self._guess = LBE_MELTING_TEMPERATURE*2.0
-
+        self._guess = LBE_MELTING_TEMPERATURE*2.0
         super().__init__(cp_high_range, **kwargs)
 
     def __new__(cls, cp_high_range=False, **kwargs):
-        cls._liquid_metal_name = 'lbe'
         obj = super().__new__(cls)
 
         return obj
