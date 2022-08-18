@@ -210,7 +210,7 @@ class cp_sobolev2011(PropertyInterface):
         self._range = [T_m0, 2000.0]
         self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
-        self._correlation_name = 'sobolev2011'
+        self._correlation_name = SOBOLEV_KEYWORD
         self._description = "Liquid lead " + self._long_name
 
     def correlation(self, T):
@@ -241,7 +241,7 @@ class cp_gurvich1991(PropertyInterface):
         self._range = [T_m0, 2000.0]
         self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
-        self._correlation_name = 'gurvich1991'
+        self._correlation_name = GURVICH_KEYWORD
         self._description = "Liquid lead " + self._long_name
 
     def correlation(self, T):

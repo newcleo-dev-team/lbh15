@@ -121,8 +121,8 @@ class LiquidMetalInterface(ABC):
                            name not in cls._correlations_to_use.keys())
             # if correlation was specified, check that correlation names match
             if not addProperty:
-                addProperty = (name ==
-                               cls._correlations_to_use[propertyObject.name])
+                addProperty = (propertyObject.correlation_name ==
+                               cls._correlations_to_use[name])
             if addProperty:
                 cls.__addProperty(propertyObject)
 

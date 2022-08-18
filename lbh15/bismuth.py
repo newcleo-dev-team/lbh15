@@ -158,6 +158,7 @@ class Bismuth(LiquidMetalInterface):
         super().__init__(cp_high_range, **kwargs)
 
     def __new__(cls, cp_high_range=False, **kwargs):
+        cls._liquid_metal_name = 'bismuth'
         obj = super().__new__(cls)
 
         return obj

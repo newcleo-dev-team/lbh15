@@ -7,6 +7,9 @@ import sys
 sys.path.insert(0, '..')
 from lbh15 import Lead
 
+# Specify the correlation to use for cp
+Lead.set_correlation_to_use('cp', 'gurvich1991')
+
 properties_table = numpy.loadtxt("data.dat", comments='#',
                                  skiprows=2, dtype=float)
 celsius_array = properties_table[:, 0]
@@ -22,8 +25,7 @@ class LeadComparisonTester(unittest.TestCase):
     def test_vs_data(self):
         for i in range(len(celsius_array)):
             liquid_lead = Lead(T=convert_temperature(celsius_array[i],
-                                                     'C', 'K'),
-                               cp_correlation_to_use='gurvich1991')
+                                                     'C', 'K'))
             self.assertAlmostEqual(liquid_lead.rho, rho_array[i], tol)
             self.assertAlmostEqual(liquid_lead.k, k_array[i], tol)
             self.assertAlmostEqual(liquid_lead.cp, cp_array[i], tol)
