@@ -403,6 +403,7 @@ class LiquidMetalInterface(ABC):
         propDictionary['units'] = propertyObject.units
         propDictionary['long_name'] = propertyObject.long_name
         propDictionary['description'] = propertyObject.description
+        propDictionary['correlation_name'] = propertyObject.correlation_name
         helper = propertyObject.initialization_helper
         propDictionary['initialization_helper'] = helper
         key = cls.__generate_key(propertyObject.name)
@@ -424,6 +425,8 @@ class LiquidMetalInterface(ABC):
             validity = ("Validity range: [{:.2f}, {:.2f}] K"
                         .format(cls.__properties[key]['validity_range'][0],
                                 cls.__properties[key]['validity_range'][1]))
+            corr_name = ("Correlation name: '{:s}'"
+                         .format(cls.__properties[key]['correlation_name']))
             long_name = ("Long name: {:s}"
                          .format(cls.__properties[key]['long_name']))
             units = "Units: {:s}".format(cls.__properties[key]['units'])
@@ -435,6 +438,7 @@ class LiquidMetalInterface(ABC):
                 print("{:s}:".format(name))
                 print("\t{:s}".format(value))
                 print("\t{:s}".format(validity))
+                print("\t{:s}".format(corr_name))
                 print("\t{:s}".format(long_name))
                 print("\t{:s}".format(units))
                 print("\t{:s}".format(description))
@@ -444,6 +448,9 @@ class LiquidMetalInterface(ABC):
             elif info == 'validity_range':
                 print("{:s}:".format(name))
                 print("\t{:s}".format(validity))
+            elif info == 'correlation_name':
+                print("{:s}:".format(name))
+                print("\t{:s}".format(corr_name))
             elif info == 'long_name':
                 print("{:s}:".format(name))
                 print("\t{:s}".format(long_name))
