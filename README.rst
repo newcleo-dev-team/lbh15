@@ -71,7 +71,7 @@ for instance. The correlations are reported in the doctring documentation for sa
 
 Go to :ref:`Documentation` to see full package documentation.
 
-lbh15 is released under the GNU General Public License 3 (see :any:`License`).
+lbh15 is released under the GNU Lesser General Public License 3 (see :any:`License`).
 
 
 =================
