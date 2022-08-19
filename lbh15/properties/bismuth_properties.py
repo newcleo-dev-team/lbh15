@@ -238,7 +238,7 @@ class h(PropertyInterface):
         self._range = [T_m0, T_b0]
         self._units = "[J/kg]"
         self._long_name = "specific enthalpy"
-        self._description = ("Liquid bismuth {:s}"
+        self._description = ("Liquid bismuth {:s} "
                              "(as difference with respect to"
                              "the melting point enthalpy)"
                              .format(self._long_name))
