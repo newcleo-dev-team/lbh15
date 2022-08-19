@@ -442,7 +442,6 @@ class LiquidMetalInterface(ABC):
 
         @property
         def new_property(cls):
-            name = propertyObject.name
             validity_range = cls.__properties[key].range
             long_name = cls.__properties[key].long_name
             cls.__check_validity_range(validity_range, long_name)

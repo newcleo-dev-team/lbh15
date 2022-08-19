@@ -68,6 +68,8 @@ All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) a
 validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Examples` for more details).
 We also provide an example of instantiation using a target property value, see section :ref:`Initialization from properties` 
 for instance. The correlations are reported in the doctring documentation for sake of completeness.
+The implementation strategy is fully object oriented, that guarantees both an easy package maitainability
+and customization (see :ref:`Advanced usage`).
 
 Go to :ref:`Documentation` to see full package documentation.
 
@@ -359,7 +361,7 @@ such functionality for new implemented properties.
 
 Another important remark is given about the usage of :code:`set_correlation_to_use` and :code:`set_root_to_use`:
 those methods impact on class behaviour not only on instance one, therefore it is suggested to use them only if
-completely aware of its implications.
+completely aware of the implications.
 
 .. _Documentation:
 
