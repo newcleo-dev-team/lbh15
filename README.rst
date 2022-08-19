@@ -168,6 +168,15 @@ This section shows a few example of basic lbh25 usage.
   0.3676999999999999
 
 
+- Get synthetic information liquid metal using :code:`__repr__` (:code:`__str__` is implemented as well):
+
+  >>> from lbh15 import Lead
+  >>> liquid_lead = Lead(T=1000)
+  >>> repr(liquid_lead)
+  'Lead(T=1000.00, alpha=1.26e-04, beta_s=3.38e-11, cp=140.89, h=57656.86, k=20.20, mu=1.33e-03, p_s=1.41, r=1.14e-06, rho=10161.50, sigma=0.41, u_s=1707.00)'
+
+
+
 .. _Initialization from properties:
 
 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -304,7 +313,7 @@ In this section the capability of the package to be easily customised is shown.
 
 
 
-- lbh15 gives also the possibility to add brand new properties to liquid metal objects. The user/developer
+- lbh15 gives also the possibility to add brand new properties to liquid metal objects. The user
   needs to implement it in :py:mod:`lbh15.properties.lead_properties`. For instance, let's implement a property
   that is just the double of the temperature:
 
@@ -343,6 +352,14 @@ In this section the capability of the package to be easily customised is shown.
           Units: [K]
           Description:
                   Liquid lead double of the temperature
+
+All new properties implemented by the user are also available for initialization. It is
+worth to underline once again that package authors can not guarantee correct execution of
+such functionality for new implemented properties.
+
+Another important remark is given about the usage of :code:`set_correlation_to_use` and :code:`set_root_to_use`:
+those methods impact on class behaviour not only on instance one, therefore it is suggested to use them only if
+completely aware of its implications.
 
 .. _Documentation:
 
