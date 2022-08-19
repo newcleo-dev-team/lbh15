@@ -1,4 +1,3 @@
-import numpy as np
 from ._properties import PropertyInterface
 from .._lbh15 import LBE_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import LBE_BOILING_TEMPERATURE as T_b0
@@ -30,6 +29,7 @@ class p_s(PropertyInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
+        import numpy as np
         return 1.22e10 * np.exp(-22552/T)
 
     def initialization_helper(self, property_value):
@@ -288,6 +288,7 @@ class mu(PropertyInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
+        import numpy as np
         return 4.94e-4*np.exp(754.1/T)
 
 

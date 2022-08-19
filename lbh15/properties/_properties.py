@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from numpy import inf
 
 
 class PropertyInterface(ABC):
     def __init__(self):
+        from numpy import inf
         self._name = type(self).__name__
         self._range = [-inf, inf]
         self._correlation_name = "lbh15"

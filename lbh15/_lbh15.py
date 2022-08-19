@@ -1,6 +1,4 @@
 import warnings
-from scipy.optimize import fsolve
-from scipy.constants import atmosphere
 from abc import ABC, abstractmethod, abstractclassmethod
 
 # KEYWORDS
@@ -68,7 +66,7 @@ class LiquidMetalInterface(ABC):
     _liquid_metal_name = ''
     _correlations_to_use = {}
     _roots_to_use = {}
-    __p = atmosphere
+    __p = 0
     __T = 0
     __properties = {}
 
@@ -76,6 +74,8 @@ class LiquidMetalInterface(ABC):
         self.__fill_class_attributes(kwargs)
 
     def __new__(cls, **kwargs):
+        from scipy.constants import atmosphere
+        cls.__p = atmosphere
         propertyObjectList = cls._load_properties()
         for propertyObject in propertyObjectList:
             # always add property if specific correlation is not specified
@@ -117,19 +117,20 @@ class LiquidMetalInterface(ABC):
         rvalue += "\tVaporisation heat: {:.2f} [J/kg]\n".format(self.Q_b0)
         rvalue += "\nThermophysical properties:\n"
         for key in self.__properties.keys():
-            property_name = key.replace("_"+self._liquid_metal_name,"")
-            rvalue += getattr(self, property_name+"_info")(print_info=False, n_tab=1) + "\n"
+            prop_name = key.replace("_"+self._liquid_metal_name, "")
+            info = getattr(self, prop_name+"_info")(print_info=False, n_tab=1)
+            rvalue += info + "\n"
         return rvalue
 
     def __repr__(self):
         rvalue = "{:s}(T={:.2f}, ".format(type(self).__name__, self.T)
         for key in self.__properties.keys():
-            property_name = key.replace("_"+self._liquid_metal_name,"")
+            property_name = key.replace("_"+self._liquid_metal_name, "")
             attrValue = getattr(self, property_name)
             if attrValue < 1e-2:
                 rvalue += "{:s}={:.2e}, ".format(property_name, attrValue)
             else:
-                rvalue += "{:s}={:.2f}, ".format(property_name, attrValue)  
+                rvalue += "{:s}={:.2f}, ".format(property_name, attrValue)
         rvalue = rvalue[:-2]
         rvalue += ")"
         return rvalue
@@ -318,6 +319,8 @@ class LiquidMetalInterface(ABC):
                     break
 
             if function_of_T is not None:
+                from scipy.optimize import fsolve
+
                 if helper(input_value) is not None:
                     self._guess = helper(input_value)
 

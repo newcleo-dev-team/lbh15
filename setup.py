@@ -1,25 +1,27 @@
 #!/usr/bin/python3
 
 from setuptools import setup
-import lbh15
+from lbh15 import __version__
+from lbh15 import __author__
+
 
 with open('README.rst') as readme_file:
     long_description = readme_file.read()
 
 setup(
     name='lbh15',
-    version=lbh15.__version__,
-    packages=['lbh15', 'lbh15.properties'],
+    version=__version__,
+    packages=setuptools.find_packages(),
     include_package_data=True,
-    author=lbh15.__author__,
+    author=__author__,
     author_email='daniele.panico@newcleo.com, daniele.tomatis@newcleo.com',
     description='Python implementation of liquid metal properties from '
                 'Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, '
                 'Materials Compatibility, Thermal-hydraulics and Technologies',
     long_description=long_description,
-    license="lgpl v3",
+    license='lgpl v3',
     python_requires='>=3.8.10',
-    install_requires=["scipy>=1.8.1"],
+    install_requires=['scipy>=1.8.1'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Education",

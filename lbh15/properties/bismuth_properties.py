@@ -1,4 +1,3 @@
-import numpy as np
 from ._properties import PropertyInterface
 from .._lbh15 import BISMUTH_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import BISMUTH_BOILING_TEMPERATURE as T_b0
@@ -30,6 +29,7 @@ class p_s(PropertyInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
+        import numpy as np
         return 2.67e10 * np.exp(-22858/T)
 
     def initialization_helper(self, property_value):
@@ -286,6 +286,7 @@ class mu(PropertyInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
+        import numpy as np
         return 4.456e-4*np.exp(780/T)
 
 
