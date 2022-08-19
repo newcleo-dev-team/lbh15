@@ -29,7 +29,7 @@ class PropertyInterface(ABC):
         """
         Returns a temperature guess according to the value
         of the property. Used by root finder algorithm if
-        return is not None, i.e, inheriting classes must override it
+        return value is not None.
 
         Parameters
         ----------

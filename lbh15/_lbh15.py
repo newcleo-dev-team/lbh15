@@ -189,7 +189,7 @@ class LiquidMetalInterface(ABC):
     def set_root_to_use(cls, property_name, root_index):
         """
         Set which temperature root shall be used for initialization
-        for properties. Temperature roots are sorted in ascending order, i.e,
+        from properties. Temperature roots are sorted in ascending order, i.e,
         T_i <= T_j with i < j. Used only if property correlation
         is not injective
 

@@ -62,11 +62,11 @@ the well known handbook edited by OECD/NEA :cite:`Agency2015`:
      - :math:`k`
      - :math:`[W/(m{\cdot}K)]`
 
-The dimensionless Prandtl number (:math:`Pr`) can be quaried as instance attribute as well.
+The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
 All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) and the correlations'
-validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Examples` for more details).
-We also provide an example of instantiation using a target property value, see section :ref:`Initialization from properties` 
+validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
+We also provide some examples of instantiation using a target property value, see section :ref:`Initialization from properties` 
 for instance. The correlations are reported in the doctring documentation for sake of completeness.
 The implementation strategy is fully object oriented, that guarantees both an easy package maitainability
 and customization (see :ref:`Advanced usage`).
@@ -142,6 +142,8 @@ Examples
 
 Some examples of lbh15 usage and possible package customization.
 More examples can be found in :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE`
+
+.. _Basic usage:
 
 +++++++++++
 Basic usage
@@ -256,7 +258,7 @@ In this section the capability of the package to be easily customised is shown.
   >>> Lead.correlations_available()
   {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': 'lbh15', 'sigma': 'lbh15', 'u_s': 'lbh15'}
   
-  Them the new property shall be implemented in :py:mod:`lbh15.properties.lead_properties`:
+  The new property must be implemented in :py:mod:`lbh15.properties.lead_properties`:
 
   .. code-block:: python
 
@@ -311,12 +313,11 @@ In this section the capability of the package to be easily customised is shown.
         Long name: custom density
         Units: [kg/m^3]
         Description:
-                Liquid lead custom densit
-
+                Liquid lead custom density
 
 
 - lbh15 gives also the possibility to add brand new properties to liquid metal objects. The user
-  needs to implement it in :py:mod:`lbh15.properties.lead_properties`. For instance, let's implement a property
+  must implement it in :py:mod:`lbh15.properties.lead_properties`. For instance, let's implement a property
   that is just the double of the temperature:
 
   .. code-block:: python

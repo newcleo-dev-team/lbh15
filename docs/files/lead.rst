@@ -32,45 +32,45 @@ Therefore the object comes with the following default properties:
 
         :math:`p_s(T) = \displaystyle5.79\cdot10^9\cdot\
         \exp{\Big(-22131/T\Big)}`
-    - :math:`\sigma` lead surface tension \
+    - :math:`\sigma` lead surface tension
       :math:`\Big[\frac{N}{m}\Big]`:
 
-        :math:`\sigma(T) = \displaystyle\Big(525.9 \
+        :math:`\sigma(T) = \displaystyle\Big(525.9
         - 0.113{\cdot}T\Big)\cdot10^{-3}`
-    - :math:`\rho` lead density \
+    - :math:`\rho` lead density
       :math:`\Big[\frac{kg}{m^3}\Big]`:
 
         :math:`\rho(T) = \displaystyle11441 - 1.2795{\cdot}T`
-    - :math:`\alpha` lead thermal expansion coefficient \
+    - :math:`\alpha` lead thermal expansion coefficient
       :math:`\Big[\frac{1}{K}\Big]`:
 
         :math:`\alpha(T) = \displaystyle\Big(8942 - T\Big)^{-1}`
-    - :math:`u_s` speed of sound in lead \
+    - :math:`u_s` speed of sound in lead
       :math:`\Big[\frac{m}{s}\Big]`:
 
         :math:`u_s(T) = \displaystyle1953 - 0.246{\cdot}T`
-    - :math:`\beta_s` lead isentropic compressibility \
+    - :math:`\beta_s` lead isentropic compressibility
       :math:`\Big[\frac{1}{Pa}\Big]`:
 
         :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T){\cdot}u_s(T)^2}`
     - :math:`c_p` lead specific heat capacity :math:`\Big[\
-      \frac{J}{kg{\cdot}K}\Big]`, two correlations are available,\
-      'sobolev2011' and 'gurvich1991'. The first one is the\
+      \frac{J}{kg{\cdot}K}\Big]`, two correlations are available, 
+      'sobolev2011' and 'gurvich1991'. The first one is the 
       default one used by :class:`.Lead` and its inherited classes:
 
-        :math:`c_p(T) = \displaystyle176.2 - 4.923\cdot10^{-2}{\cdot}T \
+        :math:`c_p(T) = \displaystyle176.2 - 4.923\cdot10^{-2}{\cdot}T
         + 1.544\cdot10^{-5}{\cdot}T^2 - 1.524\cdot10^{6}{\cdot}T^{-2}`
 
-        :math:`c_p(T) = \displaystyle175.1 - 4.961\cdot10^{-2}{\cdot}T \
-        + 1.985\cdot10^{-5}{\cdot}T^2 - 2.099\cdot10^{-9}{\cdot}T^3 \
+        :math:`c_p(T) = \displaystyle175.1 - 4.961\cdot10^{-2}{\cdot}T
+        + 1.985\cdot10^{-5}{\cdot}T^2 - 2.099\cdot10^{-9}{\cdot}T^3
         - 1.524\cdot10^{6}{\cdot}T^{-2}`
-    - :math:`h` lead specific enthalpy (as difference with \
-      respect to the melting point enthalpy) \
+    - :math:`h` specific enthalpy (as difference with
+      respect to the melting point enthalpy)
       :math:`\Big[\frac{J}{kg{\cdot}K}\Big]`:
 
-        :math:`h(T) = \displaystyle\
+        :math:`h(T) = \displaystyle
         176.2\cdot\Big(T - T_{m0}\Big) \
-        - 2.4615\cdot10^{-2}\Big(T^2 - T_{m0}^2\Big) \
+        - 2.4615\cdot10^{-2}\Big(T^2 - T_{m0}^2\Big)
         + 5.147\cdot10^{-6}\Big(T^3 - T_{m0}^3\Big)`
 
         :math:`\qquad\qquad+ 1.524\cdot10^6\Big(T^{-1} - T_{m0}^{-1}\Big)`
@@ -80,9 +80,9 @@ Therefore the object comes with the following default properties:
         \exp{\Big(1069/T\Big)}`
     - :math:`r` lead electrical resistivity :math:`[\Omega{\cdot}m]`:
 
-        :math:`r(T) = \displaystyle\Big(67.0 + 0.0471{\cdot}T\Big)\
+        :math:`r(T) = \displaystyle\Big(67.0 + 0.0471{\cdot}T\Big)
         \cdot10^{-8}`
-    - :math:`k` lead thermal conductivity \
+    - :math:`k` lead thermal conductivity
       :math:`\Big[\frac{W}{m{\cdot}K}\Big]`:
 
         :math:`k(T) = \displaystyle9.2 + 0.011{\cdot}T`
