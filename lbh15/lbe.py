@@ -124,11 +124,6 @@ class LBE(LiquidMetalInterface):
 
     Parameters
     ----------
-    cp_high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to cp minumum (if present), False otherwise.
-        It is used if \\**kwargs contains 'cp', i.e., if initialization from
-        specific heat is required
     \\**kwargs : dict
         Dictionary that specifies the quantity from which the object shall
         be initialized. The available ones are:

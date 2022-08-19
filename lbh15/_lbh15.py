@@ -9,10 +9,6 @@ BISMUTH_KEYWORD = "bismuth"
 LBE_KEYWORD = "lbe"
 GURVICH_KEYWORD = 'gurvich1991'
 SOBOLEV_KEYWORD = 'sobolev2011'
-PROPERTIES_FOR_INITIALIZATION = (['T', 'p_s', 'sigma',
-                                  'rho', 'alpha', 'u_s',
-                                  'beta_s', 'cp', 'h',
-                                  'mu', 'r', 'k'])
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE = 600.6  # [K]
@@ -47,11 +43,6 @@ class LiquidMetalInterface(ABC):
 
     Parameters
     ----------
-    cp_high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to cp minumum (if present), False otherwise.
-        It is used if **kwargs contains 'cp', i.e., if initialization from
-        specific heat is required
     **kwargs : dict
         Dictionary that spefifies the quantity from which the parameter shall
         be initialized. The available ones are:
@@ -73,15 +64,13 @@ class LiquidMetalInterface(ABC):
     _Q_m0 = 0
     _T_b0 = 0
     _Q_b0 = 0
-    __p = 0
-    __T = 0
     _guess = 0
-    __T_assigned = False
-    __properties = {}
-    __same_name_counter = 0
     _liquid_metal_name = ''
     _correlations_to_use = {}
     _roots_to_use = {}
+    __p = atmosphere
+    __T = 0
+    __properties = {}
 
     def __init__(self, **kwargs):
         self.__fill_class_attributes(kwargs)
@@ -117,8 +106,8 @@ class LiquidMetalInterface(ABC):
         obj = object.__new__(cls)
         return obj
 
-    @staticmethod
-    def properties_for_initialization():
+    @classmethod
+    def properties_for_initialization(cls):
         """
         List of available properties that can be used for
         initialization
@@ -127,7 +116,31 @@ class LiquidMetalInterface(ABC):
         -------
         list
         """
-        return PROPERTIES_FOR_INITIALIZATION.copy()
+        objList = cls._load_properties()
+        rvalue = ['T'] + [objList[i].name for i in range(len(objList))]
+        return list(dict.fromkeys(rvalue))
+
+    @classmethod
+    def correlations_available(cls):
+        """
+        Dictionary of correlations available for each property
+
+        Returns
+        -------
+        dict
+        """
+        objList = cls._load_properties()
+        rvalue = {}
+        for obj in objList:
+            corr_name = obj.correlation_name
+            if obj.name in rvalue.keys():
+                if type(rvalue[obj.name]) == list:
+                    rvalue[obj.name].append(corr_name)
+                else:
+                    rvalue[obj.name] = [rvalue[obj.name]] + [corr_name]
+            else:
+                rvalue[obj.name] = corr_name
+        return rvalue
 
     @classmethod
     def set_correlation_to_use(cls, property_name, correlation_name):
@@ -228,13 +241,6 @@ class LiquidMetalInterface(ABC):
         return self.__T
 
     @property
-    def T_assigned(self):
-        """
-        bool : true if temperature correctly assigned, false otherwise
-        """
-        return self.__T_assigned
-
-    @property
     def Pr(self):
         """
         float : Prandtl number [-]
@@ -322,7 +328,7 @@ class LiquidMetalInterface(ABC):
                              "time can be used for initialization. "
                              "{:d} were provided".format(len(kwargs)))
         else:
-            valid_prop = LiquidMetalInterface.properties_for_initialization()
+            valid_prop = self.properties_for_initialization()
             input_property = list(kwargs.keys())[0]
             input_value = kwargs[input_property]
             if input_property not in valid_prop:
@@ -335,7 +341,6 @@ class LiquidMetalInterface(ABC):
                                  "{:s} was provided"
                                  .format(list_to_print, input_property))
             else:
-                self.__p = atmosphere
                 self._set_constants()
                 temperature = self.__compute_T(input_value, input_property)
                 self.__assign_T(temperature)
@@ -351,7 +356,6 @@ class LiquidMetalInterface(ABC):
             Temperature in [K]
         """
         if T > self.T_m0 and T < self.T_b0:
-            self._T_assigned = True
             self.__T = T
         else:
             if T >= self.T_b0:

@@ -138,13 +138,6 @@ class Lead(LiquidMetalInterface):
 
     Parameters
     ----------
-    cp_correlation_to_use : str
-        Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-    cp_high_range : bool
-        True to initialize the object with temperature larger than
-        the one corresponding to cp minumum (if present), False otherwise.
-        It is used if \\**kwargs contains 'cp', i.e., if initialization from
-        specific heat is required
     \\**kwargs : dict
         Dictionary that specifies the quantity from which the object shall
         be initialized. The available ones are:
@@ -176,7 +169,7 @@ class Lead(LiquidMetalInterface):
     _correlations_to_use = {'cp': SOBOLEV_KEYWORD}
     _roots_to_use = {'cp': 0}
 
-    def __init__(self, cp_high_range=False, **kwargs):
+    def __init__(self, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(**kwargs)
 
