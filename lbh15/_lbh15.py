@@ -481,7 +481,8 @@ class LiquidMetalInterface(ABC):
 
             if print_info:
                 print(all_info)
-            return all_info
+            else:
+                return all_info
 
         setattr(cls, propertyObject.name, new_property)
         setattr(cls, propertyObject.name+"_info",
