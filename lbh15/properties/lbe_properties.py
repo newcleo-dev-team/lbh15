@@ -210,6 +210,7 @@ class cp(PropertyInterface):
         self._units = "[J/kg*K]"
         self._long_name = "specific heat capacity"
         self._description = "Liquid lbe " + self._long_name
+        self._is_injective = False
 
     def correlation(self, T):
         """

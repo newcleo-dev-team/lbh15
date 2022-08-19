@@ -56,7 +56,8 @@ class LeadTester(unittest.TestCase):
             if first:
                 fromCp = Lead(cp=leadP.cp)
             else:
-                fromCp = Lead(cp=leadP.cp, cp_high_range=True)
+                Lead.set_roots_to_use('cp', 1)
+                fromCp = Lead(cp=leadP.cp)
             first = False
         self.assertAlmostEqual(leadP.T, fromCp.T, tol)
 
@@ -119,7 +120,8 @@ class BismuthTester(unittest.TestCase):
             if first:
                 fromCp = Bismuth(cp=bismuthP.cp)
             else:
-                fromCp = Bismuth(cp=bismuthP.cp, cp_high_range=True)
+                Bismuth.set_roots_to_use('cp', 1)
+                fromCp = Bismuth(cp=bismuthP.cp)
             first = False
         self.assertAlmostEqual(bismuthP.T, fromCp.T, tol)
 
@@ -182,7 +184,8 @@ class LBETester(unittest.TestCase):
             if first:
                 fromCp = LBE(cp=lbeP.cp)
             else:
-                fromCp = LBE(cp=lbeP.cp, cp_high_range=True)
+                LBE.set_roots_to_use('cp', 1)
+                fromCp = LBE(cp=lbeP.cp)
             first = False
             self.assertAlmostEqual(lbeP.T, fromCp.T, tol)
 

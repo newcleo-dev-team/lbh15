@@ -122,15 +122,13 @@ h:
 """
 import sys
 import inspect
-import pathlib
-import pkgutil
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
 from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
 from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
-from ._lbh15 import LiquidMetalInterface, p_s_initializer
+from ._lbh15 import LiquidMetalInterface
 from .properties.lead_properties import PropertyInterface
 
 
@@ -176,12 +174,13 @@ class Lead(LiquidMetalInterface):
     (144.31634999999997, 144.66006199999998)
     """
     _correlations_to_use = {'cp': SOBOLEV_KEYWORD}
+    _roots_to_use = {'cp': 0}
 
     def __init__(self, cp_high_range=False, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
-        super().__init__(cp_high_range=cp_high_range, **kwargs)
+        super().__init__(**kwargs)
 
-    def __new__(cls, cp_high_range=False, **kwargs):
+    def __new__(cls, **kwargs):
         cls._liquid_metal_name = 'lead'
         obj = super().__new__(cls)
 

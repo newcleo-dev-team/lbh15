@@ -112,7 +112,7 @@ from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
 from ._lbh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
-from ._lbh15 import LiquidMetalInterface, p_s_initializer
+from ._lbh15 import LiquidMetalInterface
 from .properties.bismuth_properties import PropertyInterface
 
 
@@ -152,12 +152,13 @@ class Bismuth(LiquidMetalInterface):
     13.705
     """
     _correlations_to_use = {}
+    _roots_to_use = {'cp': 0}
 
-    def __init__(self, cp_high_range=False, **kwargs):
+    def __init__(self, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
-        super().__init__(cp_high_range, **kwargs)
+        super().__init__(**kwargs)
 
-    def __new__(cls, cp_high_range=False, **kwargs):
+    def __new__(cls, **kwargs):
         cls._liquid_metal_name = 'bismuth'
         obj = super().__new__(cls)
 

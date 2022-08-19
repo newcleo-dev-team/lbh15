@@ -212,6 +212,7 @@ class cp_sobolev2011(PropertyInterface):
         self._long_name = "specific heat capacity"
         self._correlation_name = SOBOLEV_KEYWORD
         self._description = "Liquid lead " + self._long_name
+        self._is_injective = False
 
     def correlation(self, T):
         """
@@ -243,6 +244,7 @@ class cp_gurvich1991(PropertyInterface):
         self._long_name = "specific heat capacity"
         self._correlation_name = GURVICH_KEYWORD
         self._description = "Liquid lead " + self._long_name
+        self._is_injective = False
 
     def correlation(self, T):
         """

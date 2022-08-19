@@ -10,6 +10,7 @@ class PropertyInterface(ABC):
         self._units = "[-]"
         self._long_name = "long name of the property interface"
         self._description = "description of the property interface"
+        self._is_injective = True
 
     @abstractmethod
     def correlation(self, T):
@@ -82,3 +83,11 @@ class PropertyInterface(ABC):
         str : property description
         """
         return self._description
+
+    @property
+    def is_injective(self):
+        """
+        bool : True if correlation is injective,
+        False otherwise
+        """
+        return self._is_injective

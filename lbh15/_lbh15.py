@@ -41,31 +41,6 @@ LBE_T_AT_CP_MIN = 1566.510  # [K]
 LBE_CP_MIN = 133.568103  # [J/(kg*K)]
 
 
-def p_s_initializer(p_s):
-    """
-    Returns a temperature guess according to the value
-    of the saturation vapour pressure
-
-    Parameters
-    ----------
-    p_s : float
-        saturation vapour pressure in [Pa]
-
-    Returns
-    -------
-    rvalue : float
-        Temperature guess in [K]
-    """
-    if p_s < 1e-2:
-        rvalue = 800
-    elif p_s >= 1e-2 and p_s < 1e2:
-        rvalue = 1200
-    else:
-        rvalue = 2000
-
-    return rvalue
-
-
 class LiquidMetalInterface(ABC):
     """
     Abstract class that defines liquid metal properties object
@@ -102,17 +77,16 @@ class LiquidMetalInterface(ABC):
     __T = 0
     _guess = 0
     __T_assigned = False
-    __cp_high_range = False
     __properties = {}
     __same_name_counter = 0
     _liquid_metal_name = ''
     _correlations_to_use = {}
+    _roots_to_use = {}
 
-    def __init__(self, cp_high_range=False, **kwargs):
-        self.__cp_high_range = cp_high_range
+    def __init__(self, **kwargs):
         self.__fill_class_attributes(kwargs)
 
-    def __new__(cls, cp_high_range=False, **kwargs):
+    def __new__(cls, **kwargs):
         propertyObjectList = cls._load_properties()
         for propertyObject in propertyObjectList:
             # always add property if specific correlation is not specified
@@ -170,6 +144,23 @@ class LiquidMetalInterface(ABC):
         cls._correlations_to_use[property_name] = correlation_name
 
     @classmethod
+    def set_roots_to_use(cls, property_name, root_index):
+        """
+        Set which temperature root shall be used for initialization
+        for properties. Temperature roots are sorted in ascending order, i.e,
+        T_i <= T_j with i < j. Used only if property correlation
+        is not injective
+
+        Parameters
+        ----------
+        property_name : str
+            Name of the property
+        root_index : int
+            Index used to choose the temperature root
+        """
+        cls._roots_to_use[property_name] = root_index
+
+    @classmethod
     def correlations_to_use(cls):
         """
         Returns the dictionary with the specific
@@ -180,6 +171,18 @@ class LiquidMetalInterface(ABC):
         dict
         """
         return cls._correlations_to_use
+
+    @classmethod
+    def roots_to_use(cls):
+        """
+        Returns the dictionary with temperature
+        roots to use for each specified property
+
+        Returns
+        -------
+        dict
+        """
+        return cls._roots_to_use
 
     @property
     def T_m0(self):
@@ -272,10 +275,12 @@ class LiquidMetalInterface(ABC):
             function_of_T = None
             helper = None
             propertyObjectList = self.__properties
+            is_injective = False
             for key in self.__properties:
                 if self.__generate_key(input_property) == key:
                     function_of_T = self.__properties[key].correlation
                     helper = self.__properties[key].initialization_helper
+                    is_injective = self.__properties[key].is_injective
                     break
 
             if function_of_T is not None:
@@ -285,18 +290,21 @@ class LiquidMetalInterface(ABC):
                 def function_to_solve(T, target):
                     return function_of_T(T) - target
 
-                if input_property != 'cp':
+                if is_injective:
                     res = fsolve(function_to_solve, x0=[self._guess],
                                  args=(input_value), xtol=1e-10)
                     rvalue = res[0]
                 else:
-                    res = fsolve(function_to_solve,
-                                 x0=[self._guess, 4*self._guess],
-                                 args=(input_value), xtol=1e-10)
-                    if len(res) > 0 and self.__cp_high_range:
-                        rvalue = res[1]
-                    else:
-                        rvalue = res[0]
+                    if input_property in self._roots_to_use.keys():
+                        index = self._roots_to_use[input_property]
+                        res = fsolve(function_to_solve,
+                                     x0=[self._guess, 3*self._guess],
+                                     args=(input_value), xtol=1e-10)
+
+                        if len(res) > index - 1:
+                            rvalue = res[index]
+                        else:
+                            rvalue = res[0]
 
         return rvalue
 
