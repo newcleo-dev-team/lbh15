@@ -7,7 +7,12 @@ the full list). It must be underlined that instantiation from properties
 depends on the specific correlation of the properties implemented in
 lbh15 package. In addition to the class attributes that are shown
 in this section, :class:`.Bismuth` class dynamically adds the properties
-implemented in :py:mod:`lbh15.properties.bismuth_properties` module.
+implemented in :py:mod:`lbh15.properties.bismuth_properties` module. For instance:
+
+>>> from lbh15 import Bismuth
+>>> liquid_bismuth = Bismuth(T=668.15)
+>>> liquid_bismuth.rho
+9909.857
 
 Therefore the object comes with the following default properties:
 
@@ -86,7 +91,7 @@ which are named :code:`<property_name>_info`. For instance:
 
 >>> from lbh15 import Bismuth
 >>> liquid_bismuth = Bismuth(T=668.15)
->>> liquid_bismuth.rho_print_info()
+>>> liquid_bismuth.rho_info()
 rho:
         Value: 9909.8570 [kg/m^3]
         Validity range: [544.60, 1831.00] K

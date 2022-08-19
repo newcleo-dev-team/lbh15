@@ -37,12 +37,15 @@ class Lead(LiquidMetalInterface):
     Examples
     --------
     Compare :class:`.lead.Lead` specific heat values at T=800 K
-    with with cp_correlation_to_use equal to 'sobolev2011' and 'gurvich1991':
+    with with using 'sobolev2011' and 'gurvich1991':
 
-    >>> liquid_lead_1 = Lead(T=800)  # cp_correlation_to_use='sobolev2011'
-    >>> liquid_lead_2 = Lead(T=800, cp_correlation_to_use='gurvich1991')
-    >>> liquid_lead_1.cp, liquid_lead_2.cp
-    (144.31634999999997, 144.66006199999998)
+    >>> liquid_lead_1 = Lead(T=800)  # 'sobolev2011'
+    >>> liquid_lead_1.cp
+    144.31634999999997
+    >>> Lead.set_correlation_to_use('cp', 'gurvich1991')
+    >>> liquid_lead_2 = Lead(T=800)
+    >>> liquid_lead_2.cp
+    144.66006199999998
     """
     _correlations_to_use = {'cp': SOBOLEV_KEYWORD}
     _roots_to_use = {'cp': 0}
