@@ -137,6 +137,14 @@ package docs folder:
 ========
 Examples
 ========
+
+Some examples of lbh15 usage and possible package customization.
+More examples can be found in :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE`
+
++++++++++++
+Basic usage
++++++++++++
+
 This section shows a few example of basic lbh25 usage.
 
 - Create an instance :class:`.Lead` object with temperature in Celsius
@@ -171,7 +179,8 @@ properties (see :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` documentatio
 This is accomplished by finding the root of the function used to calculate the target property value.
 This functionality is marked as *experimental* since it depends on the specific mathematical formulation of 
 property correlations that are implemented in lbh15. The authors cannot guarantee its correct behaviour if 
-such implementations are changed by the user.
+such implementations are changed by the user, or if new properties with non injective correlations are implemented
+(see :ref:`Advanced usage` section). 
 
 - Initialize :class:`.LBE`, i.e., lead-bismuth-eutectic object knowing its density
   and retrieve the corresponding temperature in Kelvin:
@@ -199,24 +208,141 @@ such implementations are changed by the user.
 
 - Initialization from specific heat capacity needs some attention because the corresponding function of temperature is not injective, 
   hence for some values of :math:`c_p` two values of temperature are mapped. This is an undesired
-  behaviour. To overcome such difficulty the package provides the possibility to the user to choose if the high or
-  low range of cp values shall be considered, i.e., the one at the left or at the right of the function minimum. The following example
-  shows its usage with :class:`.Lead` (the same is valid for :class:`.Bismuth` and :class:`.LBE`):
+  behaviour. To overcome such difficulty the package provides the possibility to the user to choose which temperature root
+  shall be considered, by providing the index of the function inversion solution array. The default root index is 0, i.e, the lowest temperature.
+  The following example shows its usage with :class:`.Lead` (the same is valid for :class:`.Bismuth` and :class:`.LBE`):
 
   >>> from lbh15 import Lead
   >>> # Visualize temperature in [K] corresponding to cp min
-  >>> Lead.T_at_cp_min()
-  1342.753
+  >>> Lead.T_at_cp_min() # sobolev2011 correlation
+  1568.665
   >>> # Visualize minimum value of cp in [J/(kg*K)]
-  >>> Lead.cp_min()
+  >>> Lead.cp_min() # sobolev2011 correlation
   136.348649
-  >>> # Initialize two objects with cp, one for the low range and one for the high range
-  >>> lead_cp_1 = Lead(cp=136.6, cp_high_range=False)
-  >>> lead_cp_2 = Lead(cp=136.6, cp_high_range=True)
+  >>> # Initialize first object with default index
+  >>> lead_cp_1 = Lead(cp=136.6)
+  >>> # Change default index for selecting second root, root_index=1
+  >>> Lead.set_root_to_use('cp', root_index=1)
+  >>> # Initialize second object
+  >>> lead_cp_2 = Lead(cp=136.6)
   >>> # Print their temperatures in [K]
-  >>> lead_cp_1.T, lead_cp_1.T
-  (1437.4148683655994, 1699.1573335323235)
+  >>> lead_cp_1.T, lead_cp_2.T
+  (1437.4148683663843, 1699.1573335323235)
 
+
+.. _Advanced usage:
+
+++++++++++++++
+Advanced usage
+++++++++++++++
+
+In this section the capability of the package to be easily customised is shown.
+
+- Here it is shown how to define a custom correlation for liquid lead density and use it instead 
+  of the package default one. First let's have a look at available correlations:
+  
+  >>> from lbh15 import Lead
+  >>> Lead.correlations_available()
+  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': 'lbh15', 'sigma': 'lbh15', 'u_s': 'lbh15'}
+  
+  Them the new property shall be implemented in :py:mod:`lbh15.properties.lead_properties`:
+
+  .. code-block:: python
+
+    class rho_custom_corr(PropertyInterface):
+        def __init__(self):
+            super().__init__()
+            self._range = [T_m0, T_b0]
+            self._units = "[kg/m^3]"
+            self._name = "rho"
+            self._long_name = "custom density"
+            self._description = "Liquid lead " + self._long_name
+            self._correlation_name = "custom2022"
+            self._is_injective = True
+
+        def correlation(self, T):
+            return 11400 - 1.2*T
+
+  After having re-installded the package, check that the new correlation is corretly available:
+
+  >>> from lbh15 import Lead
+  >>> Lead.correlations_available()
+  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': ['lbh15', 'custom2022'], 'sigma': 'lbh15', 'u_s': 'lbh15'}
+
+  It is possible to notice that :code:`rho` has to correlations: default :code:`lbh15` and the new :code:`custom2022`.
+  Since two options are available, it is mandatory to specify which one shall be used, otherwise the second one 
+  will be used. Here it is how to use it:
+
+  >>> # Use default one
+  >>> Lead.set_correlation_to_use('rho', 'lbh15')
+  >>> # Get an instance of Lead object at T=1000 k
+  >>> liquid_lead_1 = Lead(T=1000)
+  >>> # Print info about rho
+  >>> liquid_lead_1.rho_info()
+  rho:
+        Value: 10161.50 [kg/m^3]
+        Validity range: [600.60, 2021.00] K
+        Correlation name: 'lbh15'
+        Long name: density
+        Units: [kg/m^3]
+        Description:
+                Liquid lead density
+  >>> # Use the custom implementation of Density
+  >>> Lead.set_correlation_to_use('rho', 'custom2022')
+  >>> # Get another instance of Lead object with new rho
+  >>> liquid_lead_2 = Lead(T=1000)
+  >>> # Print info about rho
+  >>> liquid_lead_2.rho_info()
+  rho:
+        Value: 10200.00 [kg/m^3]
+        Validity range: [600.60, 2021.00] K
+        Correlation name: 'custom2022'
+        Long name: custom density
+        Units: [kg/m^3]
+        Description:
+                Liquid lead custom densit
+
+
+
+- lbh15 gives also the possibility to add brand new properties to liquid metal objects. The user/developer
+  needs to implement it in :py:mod:`lbh15.properties.lead_properties`. For instance, let's implement a property
+  that is just the double of the temperature:
+
+  .. code-block:: python
+
+    class T_double(PropertyInterface):
+      def __init__(self):
+          super().__init__()
+          self._range = [T_m0, T_b0]
+          self._units = "[K]"
+          self._name = "T_double"
+          self._long_name = "double of the temperature"
+          self._description = "Liquid lead " + self._long_name
+          self._correlation_name = "double2022"
+          self._is_injective = True
+
+      def correlation(self, T):
+          return 2*T
+
+  After having re-installded the package the new property will be available with its name as 
+  :class:`.Lead` attribute together with its info:
+
+  >>> from lbh15 import Lead
+  >>> # Initialization of lead object at T=750 k
+  >>> liquid_lead = Lead(T=750)
+  >>> # Get T_double
+  >>> liquid_lead.T_double
+  1500
+  >>> # Get its info
+  >>> liquid_lead.T_double_info()
+  T_double:
+          Value: 1500.00 [K]
+          Validity range: [600.60, 2021.00] K
+          Correlation name: 'double2022'
+          Long name: double of the temperature
+          Units: [K]
+          Description:
+                  Liquid lead double of the temperature
 
 .. _Documentation:
 

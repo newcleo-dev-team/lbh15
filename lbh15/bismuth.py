@@ -16,7 +16,7 @@ class Bismuth(LiquidMetalInterface):
     ----------
     \\**kwargs : dict
         Dictionary that specifies the quantity from which the object shall
-        be initialized. The available ones are:
+        be initialized. The available default ones are:
 
         - **T** (float) : temperature [K]
         - **p_s** (float) : saturation vapour pressure [Pa]

@@ -17,7 +17,7 @@ class LBE(LiquidMetalInterface):
     ----------
     \\**kwargs : dict
         Dictionary that specifies the quantity from which the object shall
-        be initialized. The available ones are:
+        be initialized. The default available ones are:
 
         - **T** (float) : temperature [K]
         - **p_s** (float) : saturation vapour pressure [Pa]

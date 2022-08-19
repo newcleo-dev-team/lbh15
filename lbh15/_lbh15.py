@@ -45,7 +45,7 @@ class LiquidMetalInterface(ABC):
     ----------
     **kwargs : dict
         Dictionary that spefifies the quantity from which the parameter shall
-        be initialized. The available ones are:
+        be initialized. The default available ones are:
 
         - 'T' : temperature [K]
         - 'p_s' : saturation vapour pressure [Pa]
@@ -185,7 +185,7 @@ class LiquidMetalInterface(ABC):
         cls._correlations_to_use[property_name] = correlation_name
 
     @classmethod
-    def set_roots_to_use(cls, property_name, root_index):
+    def set_root_to_use(cls, property_name, root_index):
         """
         Set which temperature root shall be used for initialization
         for properties. Temperature roots are sorted in ascending order, i.e,
