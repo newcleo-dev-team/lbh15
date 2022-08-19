@@ -30,56 +30,56 @@ Therefore the object comes with the following default properties:
         :math:`856.6\cdot10^3 \Big[\frac{J}{kg}\Big]`
     - :math:`p_s` lbe saturation vapour pressure :math:`[Pa]`:
 
-        :math:`p_s(T) = \displaystyle1.22\cdot10^{10}\cdot\
+        :math:`p_s(T) = \displaystyle1.22\cdot10^{10}\cdot
         \exp{\Big(-22852/T\Big)}`
-    - :math:`\sigma` lbe surface tension \
+    - :math:`\sigma` lbe surface tension
       :math:`\Big[\frac{N}{m}\Big]`:
 
-        :math:`\sigma(T) = \displaystyle\Big(448.5 \
+        :math:`\sigma(T) = \displaystyle\Big(448.5
         - 0.0799{\cdot}T\Big)\cdot10^{-3}`
-    - :math:`\rho` lbe density \
+    - :math:`\rho` lbe density
       :math:`\Big[\frac{kg}{m^3}\Big]`:
 
         :math:`\rho(T) = \displaystyle11065 - 1.293{\cdot}T`
-    - :math:`\alpha` lbe thermal expansion coefficient \
+    - :math:`\alpha` lbe thermal expansion coefficient
       :math:`\Big[\frac{1}{K}\Big]`:
 
         :math:`\alpha(T) = \displaystyle\Big(8558 - T\Big)^{-1}`
-    - :math:`u_s` speed of sound in lbe \
+    - :math:`u_s` speed of sound in lbe
       :math:`\Big[\frac{m}{s}\Big]`:
 
         :math:`u_s(T) = \displaystyle1855 - 0.212{\cdot}T`
-    - :math:`\beta_s` lbe isentropic compressibility \
+    - :math:`\beta_s` lbe isentropic compressibility
       :math:`\Big[\frac{1}{Pa}\Big]`:
 
         :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T){\cdot}u_s(T)^2}`
-    - :math:`c_p` lbe specific heat capacity \
+    - :math:`c_p` lbe specific heat capacity
       :math:`\Big[\frac{J}{kg{\cdot}K}\Big]`:
 
-        :math:`c_p(T) = \displaystyle164.8 - 3.94\cdot10^{-2}{\cdot}T \
+        :math:`c_p(T) = \displaystyle164.8 - 3.94\cdot10^{-2}{\cdot}T
         + 1.25\cdot10^{-5}{\cdot}T^2 - 4.56\cdot10^{5}{\cdot}T^{-2}`
-    - :math:`h` lbe specific enthalpy (as difference with \
-      respect to the melting point enthalpy) \
+    - :math:`h` lbe specific enthalpy (as difference with
+      respect to the melting point enthalpy)
       :math:`\Big[\frac{J}{kg{\cdot}K}\Big]`:
 
-        :math:`h(T) = \displaystyle\
-        164.8\cdot\Big(T - T_{m0}\Big) \
-        - 1.97\cdot10^{-2}\Big(T^2 - T_{m0}^2\Big) \
+        :math:`h(T) = \displaystyle
+        164.8\cdot\Big(T - T_{m0}\Big)
+        - 1.97\cdot10^{-2}\Big(T^2 - T_{m0}^2\Big)
         + 4.167\cdot10^{-6}\Big(T^3 - T_{m0}^3\Big)`
 
         :math:`\qquad\qquad- 4.56\cdot10^5\Big(T^{-1} - T_{m0}^{-1}\Big)`
     - :math:`\mu` lbe dynamic visocity :math:`[Pa{\cdot}s]`:
 
-        :math:`\mu(T) = \displaystyle4.94\cdot10^{-4}\cdot\
+        :math:`\mu(T) = \displaystyle4.94\cdot10^{-4}\cdot
         \exp{\Big(754.1/T\Bigg)}`
     - :math:`r` lbe electrical resistivity :math:`[\Omega{\cdot}m]`:
 
-        :math:`r(T) = \displaystyle\Big(90.9 + 0.048{\cdot}T\Big)\
+        :math:`r(T) = \displaystyle\Big(90.9 + 0.048{\cdot}T\Big)
         \cdot10^{-8}`
-    - :math:`k` lbe thermal conductivity \
+    - :math:`k` lbe thermal conductivity
       :math:`\Big[\frac{W}{m{\cdot}K}\Big]`:
 
-        :math:`k(T) = \displaystyle3.284 + 1.617\cdot10^{-2}{\cdot}T \
+        :math:`k(T) = \displaystyle3.284 + 1.617\cdot10^{-2}{\cdot}T
         - 2.305\cdot10^{-6}{\cdot}T^2`
     - :math:`Pr` Prandtl number :math:`[-]`:
 
