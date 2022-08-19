@@ -28,3 +28,18 @@ documentation:
     - public
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+installation:
+  stage: deploy
+  script:
+    - python3 -m venv env_lbh15
+    - source env_lbh15/bin/activate 
+    - pip install wheel
+    - pip install scipy
+    - pip install .
+    - deactivate
+    - rm -rf env_lbh15/
+  tags:
+  - shell_newcleo
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
