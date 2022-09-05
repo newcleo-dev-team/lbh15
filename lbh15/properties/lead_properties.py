@@ -14,7 +14,7 @@ class p_s(PropertyInterface):
         self._range = [T_m0, T_b0]
         self._units = "[Pa]"
         self._long_name = "saturation vapour pressure"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -67,7 +67,7 @@ class sigma(PropertyInterface):
         self._range = [T_m0, 1300.0]
         self._units = "[N/m]"
         self._long_name = "surface tension"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -95,7 +95,7 @@ class rho(PropertyInterface):
         self._range = [T_m0, T_b0]
         self._units = "[kg/m^3]"
         self._long_name = "density"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -123,7 +123,7 @@ class alpha(PropertyInterface):
         self._range = [T_m0, T_b0]
         self._units = "[1/K]"
         self._long_name = "thermal expansion coefficient"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -179,7 +179,7 @@ class beta_s(PropertyInterface):
         self._range = [T_m0, 2000.0]
         self._units = "[1/Pa]"
         self._long_name = "isentropic compressibility"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -211,7 +211,7 @@ class cp_sobolev2011(PropertyInterface):
         self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
         self._correlation_name = SOBOLEV_KEYWORD
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
         self._is_injective = False
 
     def correlation(self, T):
@@ -243,7 +243,7 @@ class cp_gurvich1991(PropertyInterface):
         self._units = "[J/(kg*K)]"
         self._long_name = "specific heat capacity"
         self._correlation_name = GURVICH_KEYWORD
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
         self._is_injective = False
 
     def correlation(self, T):
@@ -307,7 +307,7 @@ class mu(PropertyInterface):
         self._range = [T_m0, 1473.0]
         self._units = "[Pa*s]"
         self._long_name = "dynamic viscosity"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -336,7 +336,7 @@ class r(PropertyInterface):
         self._range = [T_m0, 1273.0]
         self._units = "[Ohm*m]"
         self._long_name = "electrical resistivity"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
@@ -364,7 +364,7 @@ class k(PropertyInterface):
         self._range = [T_m0, 1300.0]
         self._units = "[W/(m*K)]"
         self._long_name = "thermal conductivity"
-        self._description = "Liquid lead " + self._long_name
+        self._description = "Liquid lead {:s}".format(self._long_name)
 
     def correlation(self, T):
         """
