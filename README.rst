@@ -2,7 +2,7 @@
 Introduction
 ============
 
-lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20\ **15**) is a Python library that implements the
+lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20\ **15**) is a Python package that implements the
 thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the well known handbook edited by OECD/NEA :cite:`Agency2015`: 
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
@@ -149,7 +149,7 @@ More examples can be found in :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE
 Basic usage
 +++++++++++
 
-This section shows a few example of basic lbh25 usage.
+This section shows a few example of basic lbh15 usage.
 
 - Create an instance :class:`.Lead` object with temperature in Celsius
   and print its dynamic viscosity:
@@ -221,7 +221,7 @@ such implementations are changed by the user, or if new properties with non inje
 
 - Initialization from specific heat capacity needs some attention because the corresponding function of temperature is not injective, 
   hence for some values of :math:`c_p` two values of temperature are mapped. This is an undesired
-  behaviour. To overcome such difficulty the package provides the possibility to the user to choose which temperature root
+  behaviour. To overcome such difficulty the package provides the possibility for the user to choose which temperature root
   shall be considered, by providing the index of the function inversion solution array. The default root index is 0, i.e, the lowest temperature.
   The following example shows its usage with :class:`.Lead` (the same is valid for :class:`.Bismuth` and :class:`.LBE`):
 
@@ -234,7 +234,7 @@ such implementations are changed by the user, or if new properties with non inje
   136.348649
   >>> # Initialize first object with default index
   >>> lead_cp_1 = Lead(cp=136.6)
-  >>> # Change default index for selecting second root, root_index=1
+  >>> # Change default cp index for selecting second root, root_index=1
   >>> Lead.set_root_to_use('cp', root_index=1)
   >>> # Initialize second object
   >>> lead_cp_2 = Lead(cp=136.6)
@@ -251,8 +251,9 @@ Advanced usage
 
 In this section the capability of the package to be easily customised is shown.
 
-- Here it is shown how to define a custom correlation for liquid lead density and use it instead 
-  of the package default one. First let's have a look at available correlations:
+- The following example shows how to define a custom correlation for liquid lead density and use it instead 
+  of the package default one. First inspect available correlations (if only one correlation is available in :cite:`Agency2015`, 
+  :code:`lbh15` is used as correlation name):
   
   >>> from lbh15 import Lead
   >>> Lead.correlations_available()
@@ -282,13 +283,13 @@ In this section the capability of the package to be easily customised is shown.
   >>> Lead.correlations_available()
   {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': ['lbh15', 'custom2022'], 'sigma': 'lbh15', 'u_s': 'lbh15'}
 
-  It is possible to notice that :code:`rho` has to correlations: default :code:`lbh15` and the new :code:`custom2022`.
+  It is possible to notice that :code:`rho` has two correlations: default :code:`lbh15` and the new :code:`custom2022`.
   Since two options are available, it is mandatory to specify which one shall be used, otherwise the second one 
   will be used. Here it is how to use it:
 
   >>> # Use default one
   >>> Lead.set_correlation_to_use('rho', 'lbh15')
-  >>> # Get an instance of Lead object at T=1000 k
+  >>> # Get an instance of Lead object at T=1000 K
   >>> liquid_lead_1 = Lead(T=1000)
   >>> # Print info about rho
   >>> liquid_lead_1.rho_info()
@@ -300,7 +301,7 @@ In this section the capability of the package to be easily customised is shown.
         Units: [kg/m^3]
         Description:
                 Liquid lead density
-  >>> # Use the custom implementation of Density
+  >>> # Use the custom implementation of density
   >>> Lead.set_correlation_to_use('rho', 'custom2022')
   >>> # Get another instance of Lead object with new rho
   >>> liquid_lead_2 = Lead(T=1000)
@@ -340,7 +341,7 @@ In this section the capability of the package to be easily customised is shown.
   :class:`.Lead` attribute together with its info:
 
   >>> from lbh15 import Lead
-  >>> # Initialization of lead object at T=750 k
+  >>> # Initialization of lead object at T=750 K
   >>> liquid_lead = Lead(T=750)
   >>> # Get T_double
   >>> liquid_lead.T_double
@@ -356,8 +357,8 @@ In this section the capability of the package to be easily customised is shown.
           Description:
                   Liquid lead double of the temperature
 
-All new properties implemented by the user are also available for initialization. It is
-worth to underline once again that package authors can not guarantee correct execution of
+Each new property implemented by the user is also available for initialization. It is
+worth to underline once again that package authors cannot guarantee correct execution of
 such functionality for new implemented properties.
 
 Another important remark is given about the usage of :code:`set_correlation_to_use` and :code:`set_root_to_use`:

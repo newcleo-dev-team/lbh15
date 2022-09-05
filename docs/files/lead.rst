@@ -93,7 +93,7 @@ Therefore the object comes with the following default properties:
 where :math:`T` is the lead temperature in :math:`[K]`.
 
 The two :math:`c_p(T)` correlations are shown below,
-together with the relative difference.
+together with their relative difference.
 
 .. figure:: figures/cp_correlations.png
    :width: 700
