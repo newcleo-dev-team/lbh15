@@ -39,7 +39,7 @@ the well known handbook edited by OECD/NEA :cite:`Agency2015`:
      - :math:`[kg/m^3]`
    * - Thermal expansion coefficient
      - :math:`\alpha`
-     - :math:`[kg/m^3]`
+     - :math:`[1/K]`
    * - Speed of sound
      - :math:`u_s`
      - :math:`[m/s]`
