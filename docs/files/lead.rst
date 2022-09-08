@@ -56,7 +56,7 @@ Therefore the object comes with the following default properties:
     - :math:`c_p` lead specific heat capacity :math:`\Big[\
       \frac{J}{kg{\cdot}K}\Big]`, two correlations are available, 
       'sobolev2011' and 'gurvich1991'. The first one is the 
-      default one used by :class:`.Lead` and its inherited classes:
+      default one used by :class:`.Lead`:
 
         :math:`c_p(T) = \displaystyle176.2 - 4.923\cdot10^{-2}{\cdot}T
         + 1.544\cdot10^{-5}{\cdot}T^2 - 1.524\cdot10^{6}{\cdot}T^{-2}`
