@@ -97,9 +97,9 @@ The project is organized in the following folder structure:
 - docs: contains materials for the generation of the documentation (Sphinx v5.1.0)
 - tests: collection of tests used to verify correct implementation
 
-===========
+============
 Dependencies
-===========
+============
 
 - Python 3.8.10
 - scipy 1.8.1
