@@ -74,7 +74,7 @@ Therefore the object comes with the following default properties:
         + 5.147\cdot10^{-6}\Big(T^3 - T_{m0}^3\Big)`
 
         :math:`\qquad\qquad+ 1.524\cdot10^6\Big(T^{-1} - T_{m0}^{-1}\Big)`
-    - :math:`\mu` lead dynamic visocity :math:`[Pa{\cdot}s]`:
+    - :math:`\mu` lead dynamic viscosity :math:`[Pa{\cdot}s]`:
 
         :math:`\mu(T) = \displaystyle4.55\cdot10^{-4}\cdot\
         \exp{\Big(1069/T\Big)}`

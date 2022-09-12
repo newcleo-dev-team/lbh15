@@ -26,7 +26,7 @@ class Bismuth(LiquidMetalInterface):
         - **u_s** (float) : speed of sound [m/s]
         - **beta_s** (float) : isentropic compressibility [1/Pa]
         - **cp** (float) : specific heat capacity [J/(kg*K)]
-        - **h** (float) : specific hentalpy \
+        - **h** (float) : specific enthalpy \
         (in respect to melting point) [J/kg]
         - **mu** (float) : dynamic viscosity [Pa*s]
         - **r** (float) : electrical resistivity [Ohm*m]

@@ -2,7 +2,7 @@
 Introduction
 ============
 
-lbh15 (**L**\ ead **B**\ ismtuh **H**\ andbook 20\ **15**) is a Python package that implements the
+lbh15 (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
 thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the well known handbook edited by OECD/NEA :cite:`Agency2015`: 
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
@@ -68,7 +68,7 @@ All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) a
 validity range is checked at evaluation raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
 We also provide some examples of instantiation using a target property value, see section :ref:`Initialization from properties` 
 for instance. The correlations are reported in the doctring documentation for sake of completeness.
-The implementation strategy is fully object oriented, that guarantees both an easy package maitainability
+The implementation strategy is fully object oriented, that guarantees both an easy package maintainability
 and customization (see :ref:`Advanced usage`).
 
 Go to :ref:`Documentation` to see full package documentation.
@@ -98,7 +98,7 @@ The project is organized in the following folder structure:
 - tests: collection of tests used to verify correct implementation
 
 ===========
-Dependences
+Dependencies
 ===========
 
 - Python 3.8.10
@@ -121,7 +121,7 @@ After cloning the package, execute the following command inside the base folder:
       pip install .
 
 
-The documenation can be built both in html and latex. To do that execute the following command in
+The documentation can be built both in html and latex. To do that execute the following command in
 package docs folder:
  
   .. code-block:: bash
@@ -277,7 +277,7 @@ In this section the capability of the package to be easily customised is shown.
         def correlation(self, T):
             return 11400 - 1.2*T
 
-  After having re-installded the package, check that the new correlation is corretly available:
+  After having re-installed the package, check that the new correlation is correctly available:
 
   >>> from lbh15 import Lead
   >>> Lead.correlations_available()
@@ -337,7 +337,7 @@ In this section the capability of the package to be easily customised is shown.
       def correlation(self, T):
           return 2*T
 
-  After having re-installded the package the new property will be available with its name as 
+  After having re-installed the package the new property will be available with its name as 
   :class:`.Lead` attribute together with its info:
 
   >>> from lbh15 import Lead
@@ -380,8 +380,8 @@ Documentation
    documentation.rst
 
 
-==============
-Aknowledgments
-==============
-The authors are very thankful to `Juan José Gómez Romera <jjgomera@gmail.com>`_ who mantains `iapws <https://iapws.readthedocs.io/en/latest/>`_
+===============
+Acknowledgments
+===============
+The authors are very thankful to `Juan José Gómez Romera <jjgomera@gmail.com>`_ who maintains `iapws <https://iapws.readthedocs.io/en/latest/>`_
 Python package, since they took inspiration from his work to develop the lbh15 package.

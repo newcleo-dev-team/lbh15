@@ -42,7 +42,7 @@ class LiquidMetalInterface(ABC):
     Parameters
     ----------
     **kwargs : dict
-        Dictionary that spefifies the quantity from which the parameter shall
+        Dictionary that specifies the quantity from which the parameter shall
         be initialized. The default available ones are:
 
         - 'T' : temperature [K]
@@ -53,7 +53,7 @@ class LiquidMetalInterface(ABC):
         - 'u_s': speed of sound [m/s]
         - 'beta_s' : isentropic compressibility [1/Pa]
         - 'cp' : specific heat capacity [J/(kg*K)]
-        - 'h' : specific hentalpy (in respect to melting point) [J/kg]
+        - 'h' : specific enthalpy (in respect to melting point) [J/kg]
         - 'mu' : dynamic viscosity [Pa*s]
         - 'r' : electrical resistivity [Ohm*m]
         - 'k' : thermal conductivity [W/(m*K)]
@@ -395,7 +395,7 @@ class LiquidMetalInterface(ABC):
                                  "[K] was provided".format(self.T_b0, T))
             elif T > 0 and T <= self.T_m0:
                 raise ValueError("Temperature must be larger than "
-                                 "melting temerature ({:.2f} [K]), {:.2f} "
+                                 "melting temperature ({:.2f} [K]), {:.2f} "
                                  "[K] was provided".format(self.T_m0, T))
             else:
                 raise ValueError("Temperature must be "
@@ -431,8 +431,8 @@ class LiquidMetalInterface(ABC):
     def __addProperty(cls, propertyObject):
         """
         Adds the property to class attributes. In particular, it adds
-        the value as class property with name '<prpertyObject.name>' and
-        '<prpertyObject.name>_print_info' as class method to get additional
+        the value as class property with name '<propertyObject.name>' and
+        '<prpertyObject.name>_info' as class method to get additional
         information on property
 
         Parameters

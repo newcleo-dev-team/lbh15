@@ -3,7 +3,7 @@ Welcome to lbh15 documentation!
 
 .. only:: html
 
-   **L**\ ead **B**\ ismtuh **H**\ andbook 20\ **15**
+   **L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**
 
 
 .. toctree::

@@ -28,7 +28,7 @@ class Lead(LiquidMetalInterface):
         - **u_s** (float) : speed of sound [m/s]
         - **beta_s** (float) : isentropic compressibility [1/Pa]
         - **cp** (float) : specific heat capacity [J/(kg*K)]
-        - **h** (float) : specific hentalpy \
+        - **h** (float) : specific enthalpy \
         (in respect to melting point) [J/kg]
         - **mu** (float) : dynamic viscosity [Pa*s]
         - **r** (float) : electrical resistivity [Ohm*m]
@@ -79,7 +79,7 @@ class Lead(LiquidMetalInterface):
         elif cp_correlation_to_use == GURVICH_KEYWORD:
             rvalue = LEAD_T_AT_CP_MIN_GURVICH
         else:
-            raise ValueError("cp correlation can be one among: {:s}, "
+            raise ValueError("cp correlation can be one between: {:s}, "
                              "{:s}. {:s} was provided"
                              .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
                                      cp_correlation_to_use))
@@ -105,7 +105,7 @@ class Lead(LiquidMetalInterface):
         elif cp_correlation_to_use == GURVICH_KEYWORD:
             rvalue = LEAD_CP_MIN_GURVICH
         else:
-            raise ValueError("cp correlation can be one among: {:s}, "
+            raise ValueError("cp correlation can be one between: {:s}, "
                              "{:s}. {:s} was provided"
                              .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
                                      cp_correlation_to_use))

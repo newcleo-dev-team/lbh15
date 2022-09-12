@@ -67,7 +67,7 @@ Therefore the object comes with the following default properties:
         118.2\cdot\Big(T - T_{m0}\Big)
         + 2.967\cdot10^{-3}\Big(T^2 - T_{m0}^2\Big)
         - 7.183\cdot10^6\Big(T^{-1} - T_{m0}^{-1}\Big)`
-    - :math:`\mu` bismuth dynamic visocity :math:`[Pa{\cdot}s]`:
+    - :math:`\mu` bismuth dynamic viscosity :math:`[Pa{\cdot}s]`:
 
         :math:`\mu(T) = \displaystyle4.456\cdot10^{-4}\cdot
         \exp{\Big(780/T\Big)}`

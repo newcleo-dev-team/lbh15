@@ -68,7 +68,7 @@ Therefore the object comes with the following default properties:
         + 4.167\cdot10^{-6}\Big(T^3 - T_{m0}^3\Big)`
 
         :math:`\qquad\qquad- 4.56\cdot10^5\Big(T^{-1} - T_{m0}^{-1}\Big)`
-    - :math:`\mu` lbe dynamic visocity :math:`[Pa{\cdot}s]`:
+    - :math:`\mu` lbe dynamic viscosity :math:`[Pa{\cdot}s]`:
 
         :math:`\mu(T) = \displaystyle4.94\cdot10^{-4}\cdot
         \exp{\Big(754.1/T\Bigg)}`
