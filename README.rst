@@ -103,6 +103,7 @@ Dependencies
 
 - Python 3.8.10
 - scipy 1.8.1
+- numpy 1.22.3
 
 ============
 Installation
