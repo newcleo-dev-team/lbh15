@@ -8,17 +8,17 @@ Welcome to lbh15 documentation!
 
 .. toctree::
    :maxdepth: 3
-   
-   files/readme_link.rst
 
-   files/bibliography.rst
+   source/readme_link.rst
 
-   files/contacts.rst
+   source/bibliography.rst
 
-   files/license.rst
+   source/contacts.rst
+
+   source/license.rst
    
 .. only:: html
-   
+
    Indices and tables
    ==================
 

@@ -276,9 +276,10 @@ In this section the capability of the package to be easily customised is shown.
             self._is_injective = True
 
         def correlation(self, T):
+            "Implement here the user-defined correlation."
             return 11400 - 1.2*T
 
-  After having re-installed the package, check that the new correlation is correctly available:
+  Now, you can check that the new correlation is correctly available:
 
   >>> from lbh15 import Lead
   >>> Lead.correlations_available()
@@ -336,6 +337,7 @@ In this section the capability of the package to be easily customised is shown.
           self._is_injective = True
 
       def correlation(self, T):
+          "Return the temperature value multiplied by 2."
           return 2*T
 
   After having re-installed the package the new property will be available with its name as 
@@ -379,10 +381,3 @@ Documentation
    :maxdepth: 3
 
    documentation.rst
-
-
-===============
-Acknowledgments
-===============
-The authors are very thankful to `Juan José Gómez Romera <jjgomera@gmail.com>`_ who maintains `iapws <https://iapws.readthedocs.io/en/latest/>`_
-Python package, since they took inspiration from his work to develop the lbh15 package.

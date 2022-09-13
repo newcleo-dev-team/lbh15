@@ -40,7 +40,8 @@ extensions = [
     'sphinxcontrib.bibtex'
 ]
 
-bibtex_bibfiles = ['files/lbh15.bib']
+srcdir = 'source'
+bibtex_bibfiles = [os.path.join(srcdir, 'lbh15.bib')]
 
 # Make sure the target is unique
 autosectionlabel_prefix_document = True
@@ -63,7 +64,7 @@ autodoc_default_options = {
 autodoc_member_order = 'bysource'
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+# templates_path = ['_templates']
 
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -95,11 +96,11 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['files/_static/']
+html_static_path = [os.path.join(srcdir, '_static')]
 
-html_css_files = ['css/theme.css']
+html_css_files = [os.path.join(srcdir, 'css', 'theme.css')]
 
-html_logo = 'files/figures/newcleologo.png'
+html_logo = os.path.join(srcdir, 'figures', 'newcleologo.png')
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -151,5 +152,4 @@ latex_documents = [
      lbh15.__author__, 'manual'),
 ]
 
-latex_logo = 'files/figures/newcleologo.png'
-
+latex_logo = html_logo
