@@ -5,10 +5,6 @@ from setuptools import find_packages
 from lbh15 import __version__
 from lbh15 import __author__
 
-
-with open('README.rst') as readme_file:
-    long_description = readme_file.read()
-
 setup(
     name='lbh15',
     version=__version__,
@@ -19,7 +15,8 @@ setup(
     description='Python implementation of liquid metal properties from '
                 'Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, '
                 'Materials Compatibility, Thermal-hydraulics and Technologies',
-    long_description=long_description,
+    long_description_content_type='text/plain',
+    long_description=open('README.rst', 'r').read(),
     license='lgpl v3',
     python_requires='>=3.8.10',
     install_requires=['scipy>=1.8.1'],
