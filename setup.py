@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from setuptools import setup
+from setuptools import find_packages
 from lbh15 import __version__
 from lbh15 import __author__
 
@@ -11,7 +12,7 @@ with open('README.rst') as readme_file:
 setup(
     name='lbh15',
     version=__version__,
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     include_package_data=True,
     author=__author__,
     author_email='daniele.panico@newcleo.com, daniele.tomatis@newcleo.com',
