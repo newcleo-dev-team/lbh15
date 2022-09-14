@@ -1,4 +1,4 @@
-from ._properties import PropertyInterface
+from .interface import PropertyInterface
 from .._lbh15 import LEAD_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import LEAD_BOILING_TEMPERATURE as T_b0
 from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD

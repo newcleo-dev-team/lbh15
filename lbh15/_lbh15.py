@@ -1,5 +1,10 @@
 import warnings
+import sys
+import inspect
+import importlib
+import platform
 from abc import ABC, abstractmethod, abstractclassmethod
+from .properties.interface import PropertyInterface
 
 # KEYWORDS
 LEAD_KEYWORD = "lead"
@@ -69,6 +74,7 @@ class LiquidMetalInterface(ABC):
     __p = 0
     __T = 0
     __properties = {}
+    __custom_properties_path = {}
 
     def __init__(self, **kwargs):
         self.__fill_class_attributes(kwargs)
@@ -77,6 +83,7 @@ class LiquidMetalInterface(ABC):
         from scipy.constants import atmosphere
         cls.__p = atmosphere
         propertyObjectList = cls._load_properties()
+        propertyObjectList += cls.__load_custom_properties()
         for propertyObject in propertyObjectList:
             # always add property if specific correlation is not specified
             name = propertyObject.name
@@ -159,6 +166,7 @@ class LiquidMetalInterface(ABC):
         dict
         """
         objList = cls._load_properties()
+        objList += cls.__load_custom_properties()
         rvalue = {}
         for obj in objList:
             corr_name = obj.correlation_name
@@ -201,6 +209,22 @@ class LiquidMetalInterface(ABC):
             Index used to choose the temperature root
         """
         cls._roots_to_use[property_name] = root_index
+
+    @classmethod
+    def set_custom_properties_path(cls, file_path):
+        """
+        Set absolute path of file where looking for custom properties
+
+        Parameters
+        ----------
+        file_path : str
+            absolute path of file where custom properties are implemented
+        """
+        char = '/' if 'Linux' in platform.system() else '\\'
+        res = file_path.split(char)
+        file_name = res[-1][:-3]
+        path = file_path[:-len(res[-1])]
+        cls.__custom_properties_path[path] = file_name
 
     @classmethod
     def correlations_to_use(cls):
@@ -507,3 +531,26 @@ class LiquidMetalInterface(ABC):
             Generated key
         """
         return property_name + '_' + cls._liquid_metal_name
+
+    @classmethod
+    def __load_custom_properties(cls):
+        """
+        Load custom property objects
+
+        Returns
+        -------
+        list
+            list of property objects, i.e. of classes which inherit from
+            :class:`_properties.PropertyInterface`
+        """
+        customPropertyObjectList = []
+        for path in cls.__custom_properties_path.keys():
+            if path not in sys.path:
+                sys.path.append(path)
+            module_name = cls.__custom_properties_path[path]
+            module = importlib.import_module(module_name)
+            for name, obj in inspect.getmembers(module):
+                if inspect.isclass(obj) and obj is not PropertyInterface:
+                    if issubclass(obj, PropertyInterface):
+                        customPropertyObjectList.append(obj())
+        return customPropertyObjectList
