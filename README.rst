@@ -71,7 +71,7 @@ for instance. The correlations are reported in the doctring documentation for sa
 The implementation strategy is fully object oriented, that guarantees both an easy package maintainability
 and customization (see :ref:`Advanced usage`).
 
-Go to :ref:`Documentation` to see full package documentation.
+Go to :ref:`API Guide` to see full code documentation.
 
 lbh15 is released under the GNU Lesser General Public License 3 (see :any:`License`).
 
@@ -376,14 +376,14 @@ Another important remark is given about the usage of :code:`set_correlation_to_u
 those methods impact on class behaviour not only on instance one, therefore it is suggested to use them only if
 completely aware of the implications.
 
-.. _Documentation:
+.. _API Guide:
 
-=============
-Documentation
-=============
+=========
+API Guide
+=========
 .. only:: html
 
-  You can navigate the full documentation of package:
+  You can navigate the code documentation:
 
 .. toctree::
    :maxdepth: 3
