@@ -21,9 +21,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: python3 -m venv env_lbh15
-      - run: source env_lbh15/bin/activate 
       - run: pip install wheel
       - run: pip install .
-      - run: deactivate
-      - run: rm -rf env_lbh15/
