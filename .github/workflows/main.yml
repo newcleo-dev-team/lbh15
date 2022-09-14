@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./tests
+        working-directory: tests
     steps:
       - run: python3 test_lbh15_fromX.py -v
       - run: python3 test_lbh15_static.py -v
