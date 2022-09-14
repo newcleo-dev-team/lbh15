@@ -1,4 +1,7 @@
 # Test all scripts in tests/ and test installation
+name: main_actions
+
+on: push
 
 jobs:
   test_all_tests:
