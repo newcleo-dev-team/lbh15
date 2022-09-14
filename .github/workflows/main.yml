@@ -31,5 +31,6 @@ jobs:
         working-directory: ./docs
     steps:
       - uses: actions/checkout@v3
+      - run: apt-get install python3-sphinx
       - run: make html
       
