@@ -15,7 +15,7 @@ setup(
     description='Python implementation of liquid metal properties from '
                 'Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, '
                 'Materials Compatibility, Thermal-hydraulics and Technologies',
-    long_description_content_type='text/plain',
+    long_description_content_type='text/x-rst',
     long_description=open('README.rst', 'r').read(),
     license='lgpl v3',
     python_requires='>=3.8.10',
