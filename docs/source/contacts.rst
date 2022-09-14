@@ -8,9 +8,9 @@ suggestions of new development, please contact:
 - `Daniele Panico <daniele.panico@newcleo.com>`_
 - `Daniele Tomatis <daniele.tomatis@newcleo.com>`_
 
-***************
++++++++++++++++
 Acknowledgments
-***************
++++++++++++++++
 
 The authors are very thankful to `Juan José Gómez Romera <jjgomera@gmail.com>`_
 who maintains the Python package `iapws <https://iapws.readthedocs.io/en/latest/>`_

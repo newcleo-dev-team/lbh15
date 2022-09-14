@@ -114,7 +114,7 @@ To install the package lbh15 simply type the following command:
 
       pip install lbh15
 
-Or cloning the package at http://172.16.10.46/gitlab-instance-c126a35e/lbh15.git. 
+Or use https://github.com/newcleo-dev-team/lbh15.git to clone the package.
 After cloning the package, execute the following command inside the base folder:
 
   .. code-block:: bash
@@ -260,14 +260,16 @@ In this section the capability of the package to be easily customised is shown.
   >>> Lead.correlations_available()
   {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': 'lbh15', 'sigma': 'lbh15', 'u_s': 'lbh15'}
   
-  The new property must be implemented in :py:mod:`lbh15.properties.lead_properties`:
+  Implement the new property in :code:`<execution_dir>/custom_lbh15/properties.py` for instance:
 
   .. code-block:: python
+
+    from lbh15.properties.interface import PropertyInterface
 
     class rho_custom_corr(PropertyInterface):
         def __init__(self):
             super().__init__()
-            self._range = [T_m0, T_b0]
+            self._range = [700.0, 1900.0]
             self._units = "[kg/m^3]"
             self._name = "rho"
             self._long_name = "custom density"
@@ -279,9 +281,12 @@ In this section the capability of the package to be easily customised is shown.
             "Implement here the user-defined correlation."
             return 11400 - 1.2*T
 
-  Now, you can check that the new correlation is correctly available:
+  Supoposing that the execution will be performed in :code:`<execution_dir>`, it is possible add the new property  
+  and then check that it is correctly available in the following way:
 
   >>> from lbh15 import Lead
+  >>> import os
+  >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_lbh15/properties.py')
   >>> Lead.correlations_available()
   {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': ['lbh15', 'custom2022'], 'sigma': 'lbh15', 'u_s': 'lbh15'}
 
@@ -319,16 +324,17 @@ In this section the capability of the package to be easily customised is shown.
                 Liquid lead custom density
 
 
-- lbh15 gives also the possibility to add brand new properties to liquid metal objects. The user
-  must implement it in :py:mod:`lbh15.properties.lead_properties`. For instance, let's implement a property
-  that is just the double of the temperature:
+- lbh15 gives also the possibility to add brand new properties to liquid metal objects. For 
+  instance, let's implement a property that is just the double of the temperature in :code:`<execution_dir>/custom_lbh15/properties.py`:
 
   .. code-block:: python
+
+    from lbh15.properties.interface import PropertyInterface
 
     class T_double(PropertyInterface):
       def __init__(self):
           super().__init__()
-          self._range = [T_m0, T_b0]
+          self._range = [700.0, 1900.0]
           self._units = "[K]"
           self._name = "T_double"
           self._long_name = "double of the temperature"
@@ -340,10 +346,12 @@ In this section the capability of the package to be easily customised is shown.
           "Return the temperature value multiplied by 2."
           return 2*T
 
-  After having re-installed the package the new property will be available with its name as 
+  After having added the full path of the filw with the new property, it will be available with its name as 
   :class:`.Lead` attribute together with its info:
 
   >>> from lbh15 import Lead
+  >>> import os
+  >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_lbh15/properties.py')
   >>> # Initialization of lead object at T=750 K
   >>> liquid_lead = Lead(T=750)
   >>> # Get T_double
