@@ -16,3 +16,14 @@ jobs:
       - run: python3 test_lbh15_static.py -v
       - run: python3 test_lead_basics.py -v
       - run: python3 test_custom_properties.py -v
+      
+  test_installation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: python3 -m venv env_lbh15
+      - run: source env_lbh15/bin/activate 
+      - run: pip install wheel
+      - run: pip install .
+      - run: deactivate
+      - run: rm -rf env_lbh15/
