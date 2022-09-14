@@ -1,7 +1,7 @@
 import unittest
 import sys
 import os
-sys.path.insert(0, '..')
+sys.path.insert(0, os.path.abspath('..'))
 from lbh15 import Lead
 
 custom_property_path = os.getcwd() + '/custom_properties/properties.py'

@@ -2,7 +2,7 @@
 import unittest
 from scipy.constants import convert_temperature
 import sys
-sys.path.insert(0, '..')
+sys.path.insert(0, os.path.abspath('..'))
 from lbh15 import Lead
 from lbh15 import Bismuth
 from lbh15 import LBE

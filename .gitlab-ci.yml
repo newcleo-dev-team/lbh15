@@ -7,6 +7,7 @@ test-all-test:
   - python3 test_lbh15_fromX.py -v
   - python3 test_lbh15_static.py -v
   - python3 test_lead_basics.py -v
+  - python3 test_custom_properties.py -v
   tags:
     - shell_newcleo
     
