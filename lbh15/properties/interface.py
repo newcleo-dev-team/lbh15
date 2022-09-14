@@ -2,6 +2,28 @@ from abc import ABC, abstractmethod
 
 
 class PropertyInterface(ABC):
+    """
+    Abstract class that defines thermo-physical property interface.
+    Derived classes must implement :func:`~PropertyInterface.correlation`,
+    and must override members returned by:
+
+        - :attr:`~.PropertyInterface.name`
+        - :attr:`~.PropertyInterface.range`
+        - :attr:`~.PropertyInterface.units`
+        - :attr:`~.PropertyInterface.long_name`
+        - :attr:`~.PropertyInterface.description`
+
+    Instead, it is not mandatory to override the following attributes:
+
+        - :func:`~PropertyInterface.initialization_helper`, override this \
+          method if roots of the function are particulary 'difficult' to find \
+          (see \
+          :func:`lbh15.properties.lead_properties.p_s.initialization_helper`)
+        - :attr:`~.PropertyInterface.correlation_name` to set a \
+          correlation name different from default one
+        - :attr:`~.PropertyInterface.is_injective` if the function \
+          is not injective
+    """
     def __init__(self):
         from numpy import inf
         self._name = type(self).__name__

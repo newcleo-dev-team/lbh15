@@ -8,6 +8,8 @@ and :class:`.LBE`.
 .. toctree::
    :maxdepth: 3
 
+   interface.rst
+
    lead_properties.rst
 
    bismuth_properties.rst
