@@ -7,7 +7,6 @@ class PropertyInterface(ABC):
     Derived classes must implement :func:`~PropertyInterface.correlation`,
     and must override members returned by:
 
-        - :attr:`~.PropertyInterface.name`
         - :attr:`~.PropertyInterface.range`
         - :attr:`~.PropertyInterface.units`
         - :attr:`~.PropertyInterface.long_name`
@@ -18,11 +17,15 @@ class PropertyInterface(ABC):
         - :func:`~PropertyInterface.initialization_helper`, override this \
           method if roots of the function are particulary 'difficult' to find \
           (see \
-          :func:`lbh15.properties.lead_properties.p_s.initialization_helper`)
-        - :attr:`~.PropertyInterface.correlation_name` to set a \
-          correlation name different from default one
-        - :attr:`~.PropertyInterface.is_injective` if the function \
-          is not injective
+          :func:`lbh15.properties.lead_properties.p_s.initialization_helper`).\
+           If not overridden it will be ignored.
+        - :attr:`~.PropertyInterface.name`, override this member to use \
+          a custom name for the property, otherwise the class name will be used
+        - :attr:`~.PropertyInterface.correlation_name` override this member \
+          to set a correlation name different from default one
+        - :attr:`~.PropertyInterface.is_injective` override this member \
+          if the function is not injective, othwerise it will \
+          be considered injective
     """
     def __init__(self):
         from numpy import inf
