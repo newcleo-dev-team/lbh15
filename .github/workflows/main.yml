@@ -7,4 +7,9 @@ jobs:
   test_all_tests:
     runs-on: ubuntu-latest
     steps:
-      - run: ls ${{ github.workspace }}
+      - run: cd ${{ github.workspace }}
+      - run: cd tests/
+      - run: python3 test_lbh15_fromX.py -v
+      - run: python3 test_lbh15_static.py -v
+      - run: python3 test_lead_basics.py -v
+      - run: python3 test_custom_properties.py -v
