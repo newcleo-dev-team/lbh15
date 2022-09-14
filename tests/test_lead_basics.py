@@ -4,6 +4,7 @@ import unittest
 from scipy.constants import convert_temperature
 import numpy
 import sys
+import os
 sys.path.insert(0, os.path.abspath('..'))
 from lbh15 import Lead
 

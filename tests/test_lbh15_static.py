@@ -1,6 +1,7 @@
 # This test is used to check lbh15 static methods
 import unittest
 import sys
+import os
 sys.path.insert(0, os.path.abspath('..'))
 from lbh15 import Lead
 from lbh15 import Bismuth
