@@ -153,6 +153,7 @@ class LiquidMetalInterface(ABC):
         list
         """
         objList = cls._load_properties()
+        objList += cls.__load_custom_properties()
         rvalue = ['T'] + [objList[i].name for i in range(len(objList))]
         return list(dict.fromkeys(rvalue))
 
