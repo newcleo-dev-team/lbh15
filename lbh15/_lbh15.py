@@ -336,12 +336,11 @@ class LiquidMetalInterface(ABC):
             helper = None
             propertyObjectList = self.__properties
             is_injective = False
-            for key in self.__properties:
-                if self.__generate_key(input_property) == key:
-                    function_of_T = self.__properties[key].correlation
-                    helper = self.__properties[key].initialization_helper
-                    is_injective = self.__properties[key].is_injective
-                    break
+            key = self.__generate_key(input_property)
+            if key in self.__properties.keys():
+                function_of_T = self.__properties[key].correlation
+                helper = self.__properties[key].initialization_helper
+                is_injective = self.__properties[key].is_injective
 
             if function_of_T is not None:
                 from scipy.optimize import fsolve
