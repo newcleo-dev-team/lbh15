@@ -7,7 +7,7 @@
   <title>Introduction &mdash; lbh15 1.0.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/source/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/source\css\theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -51,7 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#initialization-from-properties-experimental">Initialization from properties - <em>experimental</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialization-from-properties-experimental">Initialization from properties (<em>experimental</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#advanced-usage">Advanced usage</a></li>
 </ul>
 </li>
@@ -92,9 +92,9 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
 <p>lbh15 (<strong>L</strong>ead <strong>B</strong>ismuth <strong>H</strong>andbook 20<strong>15</strong>) is a Python package that implements the
 thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
-the well known handbook edited by OECD/NEA <span id="id1">[<a class="reference internal" href="bibliography.html#id2" title="C. Fazio et Al. Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies. Technical Report No. 7268, OECD/Nuclear Energy Agency (NEA), Paris, France, 2015.">1</a>]</span>:
+the handbook edited by OECD/NEA <span id="id1">[<a class="reference internal" href="bibliography.html#id2" title="C. Fazio et Al. Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies. Technical Report No. 7268, OECD/Nuclear Energy Agency (NEA), Paris, France, 2015.">1</a>]</span>:
 <a class="reference external" href="https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true">oecd-nea.org</a>
-. The properties implemented in the package are listed in table <a class="reference internal" href="#tableprop"><span class="std std-numref">Table 1</span></a></p>
+. The properties implemented in the package are listed in table <a class="reference internal" href="#tableprop"><span class="std std-numref">Table 1</span></a>.</p>
 <table class="colwidths-given docutils align-default" id="tableprop">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">lbh15 properties from <span id="id2">[<a class="reference internal" href="bibliography.html#id2" title="C. Fazio et Al. Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies. Technical Report No. 7268, OECD/Nuclear Energy Agency (NEA), Paris, France, 2015.">1</a>]</span></span><a class="headerlink" href="#tableprop" title="Permalink to this table"></a></caption>
 <colgroup>
@@ -149,11 +149,11 @@ the well known handbook edited by OECD/NEA <span id="id1">[<a class="reference i
 <td><p><span class="math notranslate nohighlight">\(\beta_s\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\([1/Pa]\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>Specific heat capacity</p></td>
+<tr class="row-even"><td><p>Mass-specific heat capacity</p></td>
 <td><p><span class="math notranslate nohighlight">\(c_p\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\([J/(kg{\cdot}K)]\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>Specific enthalpy</p></td>
+<tr class="row-odd"><td><p>Mass-specific enthalpy</p></td>
 <td><p><span class="math notranslate nohighlight">\(h\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\([J/kg]\)</span></p></td>
 </tr>
@@ -173,17 +173,16 @@ the well known handbook edited by OECD/NEA <span id="id1">[<a class="reference i
 </table>
 <p>The dimensionless Prandtl number (<span class="math notranslate nohighlight">\(Pr\)</span>) can be queried as instance attribute as well.</p>
 <p>All properties are given at atmospheric pressure (<span class="math notranslate nohighlight">\(101325\)</span> <span class="math notranslate nohighlight">\([Pa]\)</span>) and the correlations’
-validity range is checked at evaluation raising a warning in case it is not satisfied (see <a class="reference internal" href="#basic-usage"><span class="std std-ref">Basic usage</span></a> for more details).
-We also provide some examples of instantiation using a target property value, see section <a class="reference internal" href="#initialization-from-properties"><span class="std std-ref">Initialization from properties - experimental</span></a>
-for instance. The correlations are reported in the doctring documentation for sake of completeness.
-The implementation strategy is fully object oriented, that guarantees both an easy package maintainability
-and customization (see <a class="reference internal" href="#advanced-usage"><span class="std std-ref">Advanced usage</span></a>).</p>
-<p>Go to <a class="reference internal" href="#api-guide"><span class="std std-ref">API Guide</span></a> to see full code documentation.</p>
+validity range is checked at evaluation, raising a warning in case it is not satisfied (see <a class="reference internal" href="#basic-usage"><span class="std std-ref">Basic usage</span></a> for more details).
+We also provide some examples of instantiation using a target property value, see section <a class="reference internal" href="#initialization-from-properties"><span class="std std-ref">Initialization from properties (experimental)</span></a>
+for instance. The correlations are also reported in the docstring documentation for sake of completeness.
+The implementation is fully object-oriented to guarantee easy maintainability and customization of the package (see <a class="reference internal" href="#advanced-usage"><span class="std std-ref">Advanced usage</span></a>).</p>
+<p>Go to <a class="reference internal" href="#api-guide"><span class="std std-ref">API Guide</span></a> to see the full code documentation.</p>
 <p>lbh15 is released under the GNU Lesser General Public License 3 (see <a class="reference internal" href="license.html#license"><span class="std std-ref">License</span></a>).</p>
 </section>
 <section id="project-structure">
 <h1>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this heading"></a></h1>
-<p>The project is organized in the following folder structure:</p>
+<p>The project is organized according to the following folder structure:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;lbh15 parent folder&gt;
   ├── docs/
   ├── lbh15/
@@ -196,21 +195,22 @@ and customization (see <a class="reference internal" href="#advanced-usage"><spa
 </div>
 <ul class="simple">
 <li><p>lbh15: contains all modules, classes and methods implemented in lbh15</p></li>
-<li><p>docs: contains materials for the generation of the documentation (Sphinx v5.1.0)</p></li>
-<li><p>tests: collection of tests used to verify correct implementation</p></li>
+<li><p>docs: contains materials for the generation of the documentation by Sphinx</p></li>
+<li><p>tests: collection of tests used to verify the correct implementation</p></li>
 </ul>
 </section>
 <section id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h1>
 <ul class="simple">
-<li><p>Python 3.8.10</p></li>
-<li><p>scipy 1.8.1</p></li>
-<li><p>numpy 1.22.3</p></li>
+<li><p>Python &gt;=3.8.10</p></li>
+<li><p>Sphinx &gt;=5.1.0</p></li>
+<li><p>SciPy &gt;=1.8.1</p></li>
+<li><p>NumPy &gt;=1.22.3</p></li>
 </ul>
 </section>
 <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
-<p>To install the package lbh15 simply type the following command:</p>
+<p>To install the package lbh15, type please the following command:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install lbh15
 </pre></div>
@@ -223,8 +223,8 @@ After cloning the package, execute the following command inside the base folder:
 </pre></div>
 </div>
 </div></blockquote>
-<p>The documentation can be built both in html and latex. To do that execute the following command in
-package docs folder:</p>
+<p>The Sphinx documentation can be built in html and latex by executing
+the following command in the folder <code class="docutils literal notranslate"><span class="pre">docs/</span></code>:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make html
 </pre></div>
@@ -238,11 +238,12 @@ latexmk -pdf -f
 </section>
 <section id="examples">
 <span id="id3"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
-<p>Some examples of lbh15 usage and possible package customization.
-More examples can be found in <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a>, <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> and <a class="reference internal" href="lbe.html#lbh15.lbe.LBE" title="lbh15.lbe.LBE"><code class="xref py py-class docutils literal notranslate"><span class="pre">LBE</span></code></a></p>
+<p>This section contains some examples of basic usage and possible customization
+of the package lbh15. More examples are available in
+<a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a>, <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> and <a class="reference internal" href="lbe.html#lbh15.lbe.LBE" title="lbh15.lbe.LBE"><code class="xref py py-class docutils literal notranslate"><span class="pre">LBE</span></code></a>.</p>
 <section id="basic-usage">
 <span id="id4"></span><h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this heading"></a></h2>
-<p>This section shows a few example of basic lbh15 usage.</p>
+<p>This section shows a few examples of basic usage of lbh15.</p>
 <ul>
 <li><p>Create an instance <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> object with temperature in Celsius
 and print its dynamic viscosity:</p>
@@ -257,7 +258,8 @@ and print its dynamic viscosity:</p>
 </div>
 </li>
 <li><p>Request property outside its range of validity. In this example <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> object is initialized
-using a temperature value that is outside surface tension validity range:</p>
+using a temperature value that is outside the range of physical validity of the surface tension
+correlation:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">liquid_lead</span> <span class="o">=</span> <span class="n">Lead</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mf">1400.0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">liquid_lead</span><span class="o">.</span><span class="n">sigma</span>
@@ -266,7 +268,7 @@ using a temperature value that is outside surface tension validity range:</p>
 </pre></div>
 </div>
 </li>
-<li><p>Get synthetic information liquid metal using <code class="code docutils literal notranslate"><span class="pre">__repr__</span></code> (<code class="code docutils literal notranslate"><span class="pre">__str__</span></code> is implemented as well):</p>
+<li><p>Get short information of the liquid metal using <code class="code docutils literal notranslate"><span class="pre">__repr__</span></code> (<code class="code docutils literal notranslate"><span class="pre">__str__</span></code> is also implemented offering a more detailed print):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">liquid_lead</span> <span class="o">=</span> <span class="n">Lead</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">liquid_lead</span><span class="p">)</span>
@@ -277,14 +279,10 @@ using a temperature value that is outside surface tension validity range:</p>
 </ul>
 </section>
 <section id="initialization-from-properties-experimental">
-<span id="initialization-from-properties"></span><h2>Initialization from properties - <em>experimental</em><a class="headerlink" href="#initialization-from-properties-experimental" title="Permalink to this heading"></a></h2>
-<p>The lbh15 package gives the possibility to instantiate a liquid metal properties object just knowing one of its
+<span id="initialization-from-properties"></span><h2>Initialization from properties (<em>experimental</em>)<a class="headerlink" href="#initialization-from-properties-experimental" title="Permalink to this heading"></a></h2>
+<p>The lbh15 package gives the possibility to instantiate an object with liquid metal properties by simply knowing the value of one of its
 properties (see <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a>, <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> and <a class="reference internal" href="lbe.html#lbh15.lbe.LBE" title="lbh15.lbe.LBE"><code class="xref py py-class docutils literal notranslate"><span class="pre">LBE</span></code></a> documentation for the full list).
-This is accomplished by finding the root of the function used to calculate the target property value.
-This functionality is marked as <em>experimental</em> since it depends on the specific mathematical formulation of
-property correlations that are implemented in lbh15. The authors cannot guarantee its correct behaviour if
-such implementations are changed by the user, or if new properties with non injective correlations are implemented
-(see <a class="reference internal" href="#advanced-usage"><span class="std std-ref">Advanced usage</span></a> section).</p>
+This is accomplished by finding the root of the function matching the target property value. Such function, which constitutes a physical correlation, must be injective in the range considered for the root. Note that this is a necessary but not jointly sufficient condition to find a single root for the function. Since the existence of a (single) root cannot be guaranteed for every correlation, this functionality is marked as <em>experimental</em>: we invite then the user to double-check the result (see <a class="reference internal" href="#advanced-usage"><span class="std std-ref">Advanced usage</span></a> section).</p>
 <ul>
 <li><p>Initialize <a class="reference internal" href="lbe.html#lbh15.lbe.LBE" title="lbh15.lbe.LBE"><code class="xref py py-class docutils literal notranslate"><span class="pre">LBE</span></code></a>, i.e., lead-bismuth-eutectic object knowing its density
 and retrieve the corresponding temperature in Kelvin:</p>
@@ -298,8 +296,7 @@ and retrieve the corresponding temperature in Kelvin:</p>
 </div>
 </li>
 <li><p>Use other liquid metal objects to compare properties at a given temperature. In this
-example <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> object is initialized knowing the conductivity value <span class="math notranslate nohighlight">\(k\)</span>, then its temperature in Kelvin
-is used to initialize a <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> object. Finally, the conductivity of the bismuth object is printed for comparison:</p>
+example <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> object is initialized using a value of the thermal conductivity <span class="math notranslate nohighlight">\(k\)</span>; then, a <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> object is initialized using its temperature in Kelvin. Finally, the conductivity of the bismuth object is printed for comparison:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Bismuth</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Inititialize Lead with k=17.37 [W/(m*K)]</span>
@@ -312,11 +309,11 @@ is used to initialize a <a class="reference internal" href="bismuth.html#lbh15.b
 </pre></div>
 </div>
 </li>
-<li><p>Initialization from specific heat capacity needs some attention because the corresponding function of temperature is not injective,
-hence for some values of <span class="math notranslate nohighlight">\(c_p\)</span> two values of temperature are mapped. This is an undesired
-behaviour. To overcome such difficulty the package provides the possibility for the user to choose which temperature root
-shall be considered, by providing the index of the function inversion solution array. The default root index is 0, i.e, the lowest temperature.
-The following example shows its usage with <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> (the same is valid for <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> and <a class="reference internal" href="lbe.html#lbh15.lbe.LBE" title="lbh15.lbe.LBE"><code class="xref py py-class docutils literal notranslate"><span class="pre">LBE</span></code></a>):</p>
+<li><p>Initialization from mass-specific heat capacity <span class="math notranslate nohighlight">\(c_p\)</span> needs some attention because the corresponding function of temperature is not injective.
+Hence, two temperature values may be possible for the same value of <span class="math notranslate nohighlight">\(c_p\)</span>. This occurrence must be handled carefully.
+Currently, the package allows the user to look for the root in the two distinct ranges where the function is monotone.
+The default range index is 0, which corresponds to the lowest temperature range.
+Here is an example with <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> (the same holds for <a class="reference internal" href="bismuth.html#lbh15.bismuth.Bismuth" title="lbh15.bismuth.Bismuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bismuth</span></code></a> and <a class="reference internal" href="lbe.html#lbh15.lbe.LBE" title="lbh15.lbe.LBE"><code class="xref py py-class docutils literal notranslate"><span class="pre">LBE</span></code></a>):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Visualize temperature in [K] corresponding to cp min</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Lead</span><span class="o">.</span><span class="n">T_at_cp_min</span><span class="p">()</span> <span class="c1"># sobolev2011 correlation</span>
@@ -340,17 +337,18 @@ The following example shows its usage with <a class="reference internal" href="l
 </section>
 <section id="advanced-usage">
 <span id="id5"></span><h2>Advanced usage<a class="headerlink" href="#advanced-usage" title="Permalink to this heading"></a></h2>
-<p>In this section the capability of the package to be easily customised is shown.</p>
+<p>Advanced usage comprises the possibility of adding new properties and physical correlations as follows.</p>
 <ul>
-<li><p>The following example shows how to define a custom correlation for liquid lead density and use it instead
-of the package default one. First inspect available correlations (if only one correlation is available in <span id="id6">[<a class="reference internal" href="bibliography.html#id2" title="C. Fazio et Al. Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies. Technical Report No. 7268, OECD/Nuclear Energy Agency (NEA), Paris, France, 2015.">1</a>]</span>,
-<code class="code docutils literal notranslate"><span class="pre">lbh15</span></code> is used as correlation name):</p>
+<li><p>This example shows how to define a custom correlation for the liquid lead density and use it instead
+of the default one. The names of the available correlations can be queried by a simple function call
+(the generic name <code class="code docutils literal notranslate"><span class="pre">lbh15</span></code> is used in case the correlation’s name is not specified in the
+reference handbook <span id="id6">[<a class="reference internal" href="bibliography.html#id2" title="C. Fazio et Al. Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies. Technical Report No. 7268, OECD/Nuclear Energy Agency (NEA), Paris, France, 2015.">1</a>]</span>):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Lead</span><span class="o">.</span><span class="n">correlations_available</span><span class="p">()</span>
 <span class="go">{&#39;alpha&#39;: &#39;lbh15&#39;, &#39;beta_s&#39;: &#39;lbh15&#39;, &#39;cp&#39;: [&#39;gurvich1991&#39;, &#39;sobolev2011&#39;], &#39;h&#39;: &#39;lbh15&#39;, &#39;k&#39;: &#39;lbh15&#39;, &#39;mu&#39;: &#39;lbh15&#39;, &#39;p_s&#39;: &#39;lbh15&#39;, &#39;r&#39;: &#39;lbh15&#39;, &#39;rho&#39;: &#39;lbh15&#39;, &#39;sigma&#39;: &#39;lbh15&#39;, &#39;u_s&#39;: &#39;lbh15&#39;}</span>
 </pre></div>
 </div>
-<p>Implement the new property in <code class="code docutils literal notranslate"><span class="pre">&lt;execution_dir&gt;/custom_lbh15/properties.py</span></code> for instance:</p>
+<p>Implement the new property in <code class="code docutils literal notranslate"><span class="pre">&lt;execution_dir&gt;/custom_lbh15/properties.py</span></code> as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lbh15.properties.interface</span> <span class="kn">import</span> <span class="n">PropertyInterface</span>
 
 <span class="k">class</span> <span class="nc">rho_custom_corr</span><span class="p">(</span><span class="n">PropertyInterface</span><span class="p">):</span>
@@ -369,8 +367,11 @@ of the package default one. First inspect available correlations (if only one co
         <span class="k">return</span> <span class="mi">11400</span> <span class="o">-</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">T</span>
 </pre></div>
 </div>
-<p>Supoposing that the execution will be performed in <code class="code docutils literal notranslate"><span class="pre">&lt;execution_dir&gt;</span></code>, it is possible add the new property
-and then check that it is correctly available in the following way:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is mandatory to call the method implementing the function <code class="docutils literal notranslate"><span class="pre">correlation</span></code>.</p>
+</div>
+<p>Provided that the execution is performed in <code class="code docutils literal notranslate"><span class="pre">&lt;execution_dir&gt;</span></code>, one can check the correct implementation as follows:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Lead</span><span class="o">.</span><span class="n">set_custom_properties_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;custom_lbh15/properties.py&#39;</span><span class="p">)</span>
@@ -378,9 +379,8 @@ and then check that it is correctly available in the following way:</p>
 <span class="go">{&#39;alpha&#39;: &#39;lbh15&#39;, &#39;beta_s&#39;: &#39;lbh15&#39;, &#39;cp&#39;: [&#39;gurvich1991&#39;, &#39;sobolev2011&#39;], &#39;h&#39;: &#39;lbh15&#39;, &#39;k&#39;: &#39;lbh15&#39;, &#39;mu&#39;: &#39;lbh15&#39;, &#39;p_s&#39;: &#39;lbh15&#39;, &#39;r&#39;: &#39;lbh15&#39;, &#39;rho&#39;: [&#39;lbh15&#39;, &#39;custom2022&#39;], &#39;sigma&#39;: &#39;lbh15&#39;, &#39;u_s&#39;: &#39;lbh15&#39;}</span>
 </pre></div>
 </div>
-<p>It is possible to notice that <code class="code docutils literal notranslate"><span class="pre">rho</span></code> has two correlations: default <code class="code docutils literal notranslate"><span class="pre">lbh15</span></code> and the new <code class="code docutils literal notranslate"><span class="pre">custom2022</span></code>.
-Since two options are available, it is mandatory to specify which one shall be used, otherwise the second one
-will be used. Here it is how to use it:</p>
+<p>It is possible to see that now there are two correlations possible for the density <code class="code docutils literal notranslate"><span class="pre">rho</span></code>: <code class="code docutils literal notranslate"><span class="pre">lbh15</span></code> and <code class="code docutils literal notranslate"><span class="pre">custom2022</span></code>.
+If the density correlation is not specified for a new object instantiation, the last one in the list will be selected as default:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use default one</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Lead</span><span class="o">.</span><span class="n">set_correlation_to_use</span><span class="p">(</span><span class="s1">&#39;rho&#39;</span><span class="p">,</span> <span class="s1">&#39;lbh15&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get an instance of Lead object at T=1000 K</span>
@@ -412,8 +412,8 @@ will be used. Here it is how to use it:</p>
 </pre></div>
 </div>
 </li>
-<li><p>lbh15 gives also the possibility to add brand new properties to liquid metal objects. For
-instance, let’s implement a property that is just the double of the temperature in <code class="code docutils literal notranslate"><span class="pre">&lt;execution_dir&gt;/custom_lbh15/properties.py</span></code>:</p>
+<li><p>lbh15 gives also the possibility to add new properties to the liquid metal objects. For
+instance, let’s implement a property that is simply the double of the temperature in <code class="code docutils literal notranslate"><span class="pre">&lt;execution_dir&gt;/custom_lbh15/properties.py</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lbh15.properties.interface</span> <span class="kn">import</span> <span class="n">PropertyInterface</span>
 
 <span class="k">class</span> <span class="nc">T_double</span><span class="p">(</span><span class="n">PropertyInterface</span><span class="p">):</span>
@@ -432,8 +432,7 @@ instance, let’s implement a property that is just the double of the temperatur
       <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span>
 </pre></div>
 </div>
-<p>After having added the full path of the filw with the new property, it will be available with its name as
-<a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> attribute together with its info:</p>
+<p>The new custom property can be set as <a class="reference internal" href="lead.html#lbh15.lead.Lead" title="lbh15.lead.Lead"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lead</span></code></a> attribute by using the filepath to its module:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lbh15</span> <span class="kn">import</span> <span class="n">Lead</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Lead</span><span class="o">.</span><span class="n">set_custom_properties_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;custom_lbh15/properties.py&#39;</span><span class="p">)</span>
@@ -454,19 +453,18 @@ instance, let’s implement a property that is just the double of the temperatur
 <span class="go">                Liquid lead double of the temperature</span>
 </pre></div>
 </div>
+<p>Each new property implemented by the user is also available at initialization.</p>
 </li>
 </ul>
-<p>Each new property implemented by the user is also available for initialization. It is
-worth to underline once again that package authors cannot guarantee correct execution of
-such functionality for new implemented properties.</p>
-<p>Another important remark is given about the usage of <code class="code docutils literal notranslate"><span class="pre">set_correlation_to_use</span></code> and <code class="code docutils literal notranslate"><span class="pre">set_root_to_use</span></code>:
-those methods impact on class behaviour not only on instance one, therefore it is suggested to use them only if
-completely aware of the implications.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The methods <code class="code docutils literal notranslate"><span class="pre">set_correlation_to_use</span></code> and <code class="code docutils literal notranslate"><span class="pre">set_root_to_use</span></code> affect also the class behaviour (in addition to the one of the instance).</p>
+</div>
 </section>
 </section>
 <section id="api-guide">
 <span id="id7"></span><h1>API Guide<a class="headerlink" href="#api-guide" title="Permalink to this heading"></a></h1>
-<p>You can navigate the code documentation:</p>
+<p>You can navigate the code documentation in the following.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">lbh15 package</a><ul>
