@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lbh15.properties.lead_properties module &mdash; lbh15 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/source\css\theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lbh15.properties.bismuth_properties module" href="bismuth_properties.html" />
+    <link rel="prev" title="properties" href="properties.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> lbh15
+            <img src="../_static/newcleologo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#project-structure">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#examples">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readme_link.html#documentation">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="documentation.html">lbh15 package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lead.html">lbh15.lead module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bismuth.html">lbh15.bismuth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbe.html">lbh15.lbe module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="properties.html">properties</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">lbh15.properties.lead_properties module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bismuth_properties.html">lbh15.properties.bismuth_properties module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lbe_properties.html">lbh15.properties.lbe_properties module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">lbh15</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="readme_link.html">Introduction</a> &raquo;</li>
+          <li><a href="documentation.html">lbh15 package</a> &raquo;</li>
+          <li><a href="lbh15.html">&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="properties.html">properties</a> &raquo;</li>
+      <li>lbh15.properties.lead_properties module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/lead_properties.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-lbh15.properties.lead_properties">
+<span id="lbh15-properties-lead-properties-module"></span><h1>lbh15.properties.lead_properties module<a class="headerlink" href="#module-lbh15.properties.lead_properties" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p_s</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead saturation vapour pressure
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute saturation vapour pressure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>saturation vapour pressure in [Pa]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the saturation vapour pressure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – saturation vapour pressure in [Pa]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rvalue</strong> – Temperature guess in [K]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.p_s.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.p_s.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sigma</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead surface tension
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute surface tension</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surface tension in [N/m]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.sigma.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.sigma.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rho</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead density
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute density</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>density in [kg/m^3]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.rho.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.rho.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead thermal expansion coefficient
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute thermal expansion coefficient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>thermal expansion coefficient in [1/K]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.alpha.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.alpha.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">u_s</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead sound velocity
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute sound velocity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>sound velocity in [m/s]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.u_s.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.u_s.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">beta_s</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead isentropic compressibility
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute isentropic compressibility</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>isentropic compressibility in [1/Pa]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.beta_s.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.beta_s.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cp_sobolev2011</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead specific heat capacity
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute specific heat capacity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>specific heat capacity in [J/(kg*K)]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_sobolev2011.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_sobolev2011.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cp_gurvich1991</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead specific heat capacity
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute specific heat capacity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>specific heat capacity in [J/(kg*K)]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.cp_gurvich1991.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.cp_gurvich1991.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">h</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead specific enthalpy
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.h.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute specific enthalpy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>specific enthalpy in [J/kg]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.h.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.h.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.h.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead dynamic viscosity
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute dynamic viscosity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dynamic viscosity in [Pa*s]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.mu.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.mu.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">r</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead electrical resistivity
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.r.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute electrical resistivity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>electrical resistivity in [Ohm*m]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.r.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.r.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.r.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">k</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k" title="Permalink to this definition"></a></dt>
+<dd><p>Liquid lead thermal conductivity
+property class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.k.correlation" title="Permalink to this definition"></a></dt>
+<dd><p>Correlation used to compute thermal conductivity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em>) – Temperature in [K]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>thermal conductivity in [W/(m*K)]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.correlation_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correlation_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.correlation_name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.description">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.description" title="Permalink to this definition"></a></dt>
+<dd><p>property description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.initialization_helper">
+<span class="sig-name descname"><span class="pre">initialization_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lbh15.properties.lead_properties.k.initialization_helper" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a temperature guess according to the value
+of the property. Used by root finder algorithm if
+return type is not None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>property_value</strong> (<em>float</em>) – value of the property</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.is_injective">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_injective</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.is_injective" title="Permalink to this definition"></a></dt>
+<dd><p>True if correlation is injective,
+False otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.long_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">long_name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.long_name" title="Permalink to this definition"></a></dt>
+<dd><p>property long name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.name" title="Permalink to this definition"></a></dt>
+<dd><p>name of the property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.range">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">range</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.range" title="Permalink to this definition"></a></dt>
+<dd><p>temperature validity range for property correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="lbh15.properties.lead_properties.k.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#lbh15.properties.lead_properties.k.units" title="Permalink to this definition"></a></dt>
+<dd><p>property units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="properties.html" class="btn btn-neutral float-left" title="properties" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bismuth_properties.html" class="btn btn-neutral float-right" title="lbh15.properties.bismuth_properties module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, newcleo.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
