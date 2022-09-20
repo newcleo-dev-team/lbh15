@@ -1,7 +1,4 @@
 **/__pycache__/
-**/_html/
-**/_latex/
-**/build/
-**/_build/
+**/latex/
 **/dist/
 **/lbeh15.egg-info/
