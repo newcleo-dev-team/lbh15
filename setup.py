@@ -19,7 +19,7 @@ setup(
     long_description=open('README.rst', 'r').read(),
     license='lgpl v3',
     python_requires='>=3.8.10',
-    install_requires=['scipy>=1.8.1'],
+    install_requires=['scipy>=1.8.1', 'numpy>=1.22.3'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Education",
