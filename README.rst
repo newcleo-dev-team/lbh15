@@ -58,9 +58,11 @@ After cloning the package, execute the following command inside the base folder:
 
       pip install .
 
+Documentation
+-------------
 
-The documentation can be built both in html and latex. To do that execute the following command in
-package docs folder:
+The documentation is produced by Sphinx both in html and latex. You can execute the following commands in
+package folder `docs`:
  
   .. code-block:: bash
 
@@ -71,3 +73,5 @@ package docs folder:
       make latex
       cd _build/latex
       latexmk -pdf -f
+
+The html documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
