@@ -23,7 +23,7 @@ jobs:
         pre-build-command: pip install sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
         docs_folder: "docs/"
     - name: Upload artifacts
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v1
       with:
         name: html-docs
         path: docs/_build/html/
