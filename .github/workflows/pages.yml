@@ -1,64 +1,25 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Sphinx build
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["master"]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+on: push
 
 jobs:
   build:
-    if: contains( github.ref, 'master')
-    runs-on: ubuntu-latest    
-    defaults: 
-      run:
-        working-directory: ./docs
-    steps:
-      - uses: actions/checkout@v3
-      - run: sudo apt-get install python3-sphinx
-      - run: pip install sphinx-rtd-theme
-      - run: pip install myst-parser
-      - run: pip install sphinxcontrib-bibtex
-      - run: make html
-      - name: 'Upload Artifacts'
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: docs/_build/
-
-  # Single deploy job since we're just deploying
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Download built pages
-        uses: actions/download-artifact@v3
-        with:
-           name: my-artifact
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: 'docs/.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+    - uses: actions/checkout@v3
+    - name: Build HTML
+    - run: pip install sphinx-rtd-theme
+    - run: pip install myst-parser
+    - run: pip install sphinxcontrib-bibtex
+    - uses: ammaraskar/sphinx-action@master
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: html-docs
+        path: docs/_build/html/
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/master'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/_build/html
