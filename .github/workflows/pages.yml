@@ -1,6 +1,9 @@
 name: Sphinx build
 
-on: push
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -11,6 +14,7 @@ jobs:
       uses: ammaraskar/sphinx-action@master
       with:
         pre-build-command: pip install sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
+        docs_folder: "docs/"
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -18,7 +22,6 @@ jobs:
         path: docs/_build/html/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/master'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/_build/html
