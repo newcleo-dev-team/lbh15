@@ -21,6 +21,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build:
+    if: contains( github.ref, 'master')
+    runs-on: ubuntu-latest    
+    defaults: 
+      run:
+        working-directory: ./docs
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo apt-get install python3-sphinx
+      - run: pip install sphinx-rtd-theme
+      - run: pip install myst-parser
+      - run: pip install sphinxcontrib-bibtex
+      - run: make html
+
   # Single deploy job since we're just deploying
   deploy:
     environment:
