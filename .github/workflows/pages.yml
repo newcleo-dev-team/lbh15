@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: ./_build/*
+          path: docs/_build/
 
   # Single deploy job since we're just deploying
   deploy:
