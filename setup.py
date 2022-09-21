@@ -39,6 +39,11 @@ Developers memo:
     - how to upload on PyPI:
         python3 setup.py sdist                     # in project directory
         twine check dist/*                         # check that package is ok
-        twine upload --repository testpypi dist/*  # verify upload is successful on test-PyPI
+        twine upload --repository testpypi dist/*  # verify upload is successful on test-PyPI (see note below)
         twine upload dist/*                        # upload to PyPI: upload fails if version is already on PyPI
+
+    - how to test package installation from test-pypi:
+        - upload the new version of the package but change the package name in setup.py in lbh15_test
+        - install the package from test-pypi using the following command:
+            pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple lbh15_test
 """
