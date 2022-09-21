@@ -33,3 +33,12 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
 )
+
+"""
+Developers memo:
+    - how to upload on PyPI:
+        python3 setup.py sdist                     # in project directory
+        twine check dist/*                         # check that package is ok
+        twine upload --repository testpypi dist/*  # verify upload is successful on test-PyPI
+        twine upload dist/*                        # upload to PyPI: upload fails if version is already on PyPI
+"""
