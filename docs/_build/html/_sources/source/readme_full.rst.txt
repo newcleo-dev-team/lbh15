@@ -276,10 +276,13 @@ Advanced usage comprises the possibility of adding new properties and physical c
             self._is_injective = True
 
         def correlation(self, T):
-            "Implement here the user-defined correlation."
+            """
+            Implement here the user-defined correlation by overriding
+            the original method in the class PropertyInterface.
+            """
             return 11400 - 1.2*T
 
-  .. note:: It is mandatory to call the method implementing the function ``correlation``.
+  .. note:: It is mandatory to override the method with the function ``correlation``.
 
   Provided that the execution is performed in :code:`<execution_dir>`, one can check the correct implementation as follows:
 
@@ -367,6 +370,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
   Each new property implemented by the user is also available at initialization.
 
+.. note:: The filepaths used here must be absolute.
 .. note:: The methods :code:`set_correlation_to_use` and :code:`set_root_to_use` affect also the class behaviour (in addition to the one of the instance).
 
 .. _API Guide:
@@ -376,7 +380,7 @@ API Guide
 =========
 .. only:: html
 
-  You can navigate the code documentation in the following.
+  This section provides the guide for the application programming interface.
 
 .. toctree::
    :maxdepth: 3
