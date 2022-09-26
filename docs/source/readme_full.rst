@@ -317,7 +317,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> liquid_lead_2.rho_info()
   rho:
         Value: 10200.00 [kg/m^3]
-        Validity range: [600.60, 2021.00] K
+        Validity range: [700.00, 1900.00] K
         Correlation name: 'custom2022'
         Long name: custom density
         Units: [kg/m^3]
@@ -361,7 +361,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> liquid_lead.T_double_info()
   T_double:
           Value: 1500.00 [K]
-          Validity range: [600.60, 2021.00] K
+          Validity range: [700.00, 1900.00] K
           Correlation name: 'double2022'
           Long name: double of the temperature
           Units: [K]
