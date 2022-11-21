@@ -110,8 +110,7 @@ class LiquidMetalInterface(ABC):
         for key_to_remove in keys_to_remove:
             cls._correlations_to_use.pop(key_to_remove)
 
-        obj = object.__new__(cls)
-        return obj
+        return super().__new__(cls)
 
     def __str__(self):
         rvalue = ("{:s} liquid metal @T={:.2f} K\n"
@@ -307,7 +306,7 @@ class LiquidMetalInterface(ABC):
         Loads properties
         """
         raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
-                                  .format(type(cls).__name__))
+                                  .format(cls.__name__))
 
     @abstractmethod
     def _set_constants(self):
