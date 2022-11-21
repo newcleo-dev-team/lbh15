@@ -3,6 +3,7 @@ import sys
 import inspect
 import importlib
 import platform
+import copy
 from abc import ABC, abstractmethod, abstractclassmethod
 from .properties.interface import PropertyInterface
 
@@ -236,7 +237,7 @@ class LiquidMetalInterface(ABC):
         -------
         dict
         """
-        return cls._correlations_to_use
+        return copy.deepcopy(cls._correlations_to_use)
 
     @classmethod
     def roots_to_use(cls):
@@ -248,7 +249,7 @@ class LiquidMetalInterface(ABC):
         -------
         dict
         """
-        return cls._roots_to_use
+        return copy.deepcopy(cls._roots_to_use)
 
     @property
     def T_m0(self):
