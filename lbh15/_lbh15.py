@@ -74,44 +74,49 @@ class LiquidMetalInterface(ABC):
     _roots_to_use = {}
     __p = 0
     __T = 0
-    __properties = {}
     __custom_properties_path = {}
 
     def __init__(self, **kwargs):
-        self.__fill_class_attributes(kwargs)
-
-    def __new__(cls, **kwargs):
         from scipy.constants import atmosphere
-        cls.__p = atmosphere
-        propertyObjectList = cls._load_properties()
-        propertyObjectList += cls.__load_custom_properties()
+        self.__p = atmosphere
+        self.__properties = {}
+        self.__fill_class_properties()
+        self.__fill_class_attributes(kwargs)
+    
+    def __getattr__(self, name):
+        key = self.__generate_key(name)
+        if key in self.__properties.keys():
+            return self.__properties[key].correlation(self.__T) 
+
+    def __fill_class_properties(self, **kwargs):
+        propertyObjectList = self.__class__._load_properties()
+        propertyObjectList += self.__class__.__load_custom_properties()
         for propertyObject in propertyObjectList:
             # always add property if specific correlation is not specified
             name = propertyObject.name
-            addProperty = (not cls._correlations_to_use or
-                           name not in cls._correlations_to_use.keys())
+            addProperty = (not self.__class__._correlations_to_use or
+                           name not in self.__class__._correlations_to_use.keys())
             # if correlation was specified, check that correlation names match
             if not addProperty:
                 addProperty = (propertyObject.correlation_name ==
-                               cls._correlations_to_use[name])
+                               self.__class__._correlations_to_use[name])
             if addProperty:
-                cls.__addProperty(propertyObject)
+                self.__addProperty(propertyObject)
 
         keys_to_remove = []
-        for key in cls._correlations_to_use.keys():
-            if not hasattr(cls, key):
+        for key in self._correlations_to_use.keys():
+            prop_key = self.__generate_key(key)
+            if prop_key not in self.__properties.keys():
                 warnings.warn("Could not find property '{:s}' "
                               "implementing '{:s}' correlation. "
                               "Property was not added."
                               "\nGoing to remove it from "
                               "correlations_to_use dictionary."
-                              .format(key, cls._correlations_to_use[key]),
+                              .format(prop_key, self._correlations_to_use[key]),
                               stacklevel=4)
                 keys_to_remove.append(key)
         for key_to_remove in keys_to_remove:
-            cls._correlations_to_use.pop(key_to_remove)
-
-        return super().__new__(cls)
+            self.__class__._correlations_to_use.pop(key_to_remove)
 
     def __str__(self):
         rvalue = ("{:s} liquid metal @T={:.2f} K\n"
@@ -451,8 +456,7 @@ class LiquidMetalInterface(ABC):
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
 
-    @classmethod
-    def __addProperty(cls, propertyObject):
+    def __addProperty(self, propertyObject):
         """
         Adds the property to class attributes. In particular, it adds
         the value as class property with name '<propertyObject.name>' and
@@ -464,38 +468,31 @@ class LiquidMetalInterface(ABC):
         propertyObject : :class:`_properties.PropertyInterface`
             Object which inherits from :class:`_properties.PropertyInterface`
         """
-        key = cls.__generate_key(propertyObject.name)
-        cls.__properties[key] = propertyObject
+        key = self.__generate_key(propertyObject.name)
+        self.__properties[key] = propertyObject
 
-        @property
-        def new_property(cls):
-            validity_range = cls.__properties[key].range
-            long_name = cls.__properties[key].long_name
-            cls.__check_validity_range(validity_range, long_name)
-            return cls.__properties[key].correlation(cls.__T)
-
-        def new_property_info(cls, print_info=True, n_tab=0):
+        def new_property_info(print_info=True, n_tab=0):
             name = propertyObject.name
-            propertyVal = cls.__properties[key].correlation(cls.__T)
+            propertyVal = self.__properties[key].correlation(self.__T)
             if propertyVal < 1e-2:
                 value = ("Value: {:.2e} {:s}"
                          .format(propertyVal,
-                                 cls.__properties[key].units))
+                                 self.__properties[key].units))
             else:
                 value = ("Value: {:.2f} {:s}"
                          .format(propertyVal,
-                                 cls.__properties[key].units))
+                                 self.__properties[key].units))
             validity = ("Validity range: [{:.2f}, {:.2f}] K"
-                        .format(cls.__properties[key].range[0],
-                                cls.__properties[key].range[1]))
+                        .format(self.__properties[key].range[0],
+                                self.__properties[key].range[1]))
             corr_name = ("Correlation name: '{:s}'"
-                         .format(cls.__properties[key].correlation_name))
+                         .format(self.__properties[key].correlation_name))
             long_name = ("Long name: {:s}"
-                         .format(cls.__properties[key].long_name))
-            units = "Units: {:s}".format(cls.__properties[key].units)
+                         .format(self.__properties[key].long_name))
+            units = "Units: {:s}".format(self.__properties[key].units)
             description = ("Description:\n{:s}{:s}"
                            .format((n_tab+2)*"\t",
-                                   cls.__properties[key].description))
+                                   self.__properties[key].description))
 
             all_info = "{:s}{:s}:\n".format(n_tab*"\t", name)
             all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", value)
@@ -510,8 +507,7 @@ class LiquidMetalInterface(ABC):
             else:
                 return all_info
 
-        setattr(cls, propertyObject.name, new_property)
-        setattr(cls, propertyObject.name+"_info",
+        setattr(self, propertyObject.name+"_info",
                 new_property_info)
 
     @classmethod
