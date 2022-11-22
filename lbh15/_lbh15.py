@@ -134,6 +134,7 @@ class LiquidMetalInterface(ABC):
         """
         return self.cp * self.mu / self.k
 
+    @property
     def correlations_used(self):
         """
         Returns the dictionary with the specific
