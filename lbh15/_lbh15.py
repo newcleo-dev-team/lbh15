@@ -69,12 +69,13 @@ class LiquidMetalInterface(ABC):
     _T_b0 = 0
     _Q_b0 = 0
     _guess = 0
+    _liquid_metal_name = ''
     _correlations_to_use = {}
     _roots_to_use = {}
+    _default_corr_to_use = {}
     __p = 0
     __T = 0
     __custom_properties_path = {}
-    _default_corr_to_use = {}
 
     def __init__(self, **kwargs):
         from scipy.constants import atmosphere
@@ -247,7 +248,10 @@ class LiquidMetalInterface(ABC):
         res = file_path.split(char)
         file_name = res[-1][:-3]
         path = file_path[:-len(res[-1])]
-        cls.__custom_properties_path[path] = file_name
+        lm_name = cls._liquid_metal_name
+        if cls._liquid_metal_name not in cls.__custom_properties_path.keys():
+            cls.__custom_properties_path[lm_name] = {}            
+        cls.__custom_properties_path[lm_name][path] = file_name
 
     @classmethod
     def correlations_to_use(cls):
@@ -561,15 +565,17 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         customPropertyObjectList = []
-        for path in cls.__custom_properties_path.keys():
-            if path not in sys.path:
-                sys.path.append(path)
-            module_name = cls.__custom_properties_path[path]
-            module = importlib.import_module(module_name)
-            for name, obj in inspect.getmembers(module):
-                if inspect.isclass(obj) and obj is not PropertyInterface:
-                    if issubclass(obj, PropertyInterface):
-                        customPropertyObjectList.append(obj())
+        if cls._liquid_metal_name in cls.__custom_properties_path.keys():
+            lm_path = cls.__custom_properties_path[cls._liquid_metal_name]
+            for path in lm_path.keys():
+                if path not in sys.path:
+                    sys.path.append(path)
+                module_name = lm_path[path]
+                module = importlib.import_module(module_name)
+                for name, obj in inspect.getmembers(module):
+                    if inspect.isclass(obj) and obj is not PropertyInterface:
+                        if issubclass(obj, PropertyInterface):
+                            customPropertyObjectList.append(obj())
         return customPropertyObjectList
 
     @abstractmethod
@@ -592,6 +598,9 @@ class LiquidMetalInterface(ABC):
         key = self.__generate_key(name)
         if key in self.__properties.keys():
             return self.__properties[key].correlation(self.__T)
+        else:
+            raise AttributeError("'{:s}' object has no attribute '{:s}'"
+                                 .format(type(self).__name__, name))
 
     def __str__(self):
         rvalue = ("{:s} liquid metal @T={:.2f} K\n"

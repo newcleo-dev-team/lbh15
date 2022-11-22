@@ -42,6 +42,7 @@ class LBE(LiquidMetalInterface):
     _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
+    _liquid_metal_name = 'LBE'
 
     def __init__(self, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0

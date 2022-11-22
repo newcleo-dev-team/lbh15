@@ -51,6 +51,7 @@ class Lead(LiquidMetalInterface):
     _default_corr_to_use = {'cp': SOBOLEV_KEYWORD}
     _correlations_to_use = copy.deepcopy(_default_corr_to_use)
     _roots_to_use = {'cp': 0}
+    _liquid_metal_name = 'Lead'
 
     def __init__(self, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7

@@ -41,6 +41,7 @@ class Bismuth(LiquidMetalInterface):
     _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
+    _liquid_metal_name = 'Bismuth'
 
     def __init__(self, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
