@@ -1,4 +1,29 @@
 from abc import ABC, abstractmethod
+import warnings
+
+
+def range_warning(function):
+    """
+    Decorator used to check validity range
+    of correlation
+    """
+    def wrapper(*args):
+        if len(args) == 3:
+            range_lim = args[0].range
+            p_name = args[0].long_name
+            temp = args[1]
+            if hasattr(temp, "__len__"):
+                temp = temp[0]
+            if temp < range_lim[0] or temp > range_lim[1]:
+                warnings.warn("The {:s} is requested at "
+                              "temperature value of {:.2f} K "
+                              "that is not in validity range "
+                              "[{:.2f}, {:.2f}] K"
+                              .format(p_name, temp,
+                                      range_lim[0], range_lim[1]),
+                              stacklevel=3)
+        return function(*args)
+    return wrapper
 
 
 class PropertyInterface(ABC):
@@ -38,7 +63,8 @@ class PropertyInterface(ABC):
         self._is_injective = True
 
     @abstractmethod
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=False):
         """
         Function that implements the property correlation
 

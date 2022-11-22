@@ -1,4 +1,5 @@
 from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.interface import range_warning
 
 
 class rho_custom_corr(PropertyInterface):
@@ -12,7 +13,8 @@ class rho_custom_corr(PropertyInterface):
         self._correlation_name = "custom2022"
         self._is_injective = True
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=False):
         "Implement here the user-defined correlation."
         return 11400 - 1.2*T
 
@@ -28,6 +30,7 @@ class T_double(PropertyInterface):
         self._correlation_name = "double2022"
         self._is_injective = True
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=False):
         "Return the temperature value multiplied by 2."
         return 2*T

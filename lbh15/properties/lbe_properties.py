@@ -1,4 +1,4 @@
-from .interface import PropertyInterface
+from .interface import PropertyInterface, range_warning
 from .._lbh15 import LBE_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import LBE_BOILING_TEMPERATURE as T_b0
 from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
@@ -16,7 +16,8 @@ class p_s(PropertyInterface):
         self._long_name = "saturation vapour pressure"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute saturation vapour pressure
 
@@ -69,7 +70,8 @@ class sigma(PropertyInterface):
         self._long_name = "surface tension"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute surface tension
 
@@ -97,7 +99,8 @@ class rho(PropertyInterface):
         self._long_name = "density"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute density
 
@@ -125,7 +128,8 @@ class alpha(PropertyInterface):
         self._long_name = "thermal expansion coefficient"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute thermal expansion coefficient
 
@@ -153,7 +157,8 @@ class u_s(PropertyInterface):
         self._long_name = "sound velocity"
         self._description = "Sound velocity in liquid lbe"
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute sound velocity
 
@@ -181,7 +186,8 @@ class beta_s(PropertyInterface):
         self._long_name = "isentropic compressibility"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute isentropic compressibility
 
@@ -212,7 +218,8 @@ class cp(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
         self._is_injective = False
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute specific heat capacity
 
@@ -244,7 +251,8 @@ class h(PropertyInterface):
                              "the melting point enthalpy)"
                              .format(self._long_name))
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute specific enthalpy
 
@@ -275,7 +283,8 @@ class mu(PropertyInterface):
         self._long_name = "dynamic viscosity"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute dynamic viscosity
 
@@ -304,7 +313,8 @@ class r(PropertyInterface):
         self._long_name = "electrical resistivity"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute electrical resistivity
 
@@ -332,7 +342,8 @@ class k(PropertyInterface):
         self._long_name = "thermal conductivity"
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
-    def correlation(self, T):
+    @range_warning
+    def correlation(self, T, check_range=True):
         """
         Correlation used to compute thermal conductivity
 

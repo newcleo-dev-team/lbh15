@@ -409,31 +409,6 @@ class LiquidMetalInterface(ABC):
                                  "strictly positive, "
                                  "{:.2f} [K] was provided".format(T))
 
-    def __check_validity_range(self, validity_range, property_name):
-        """
-        Checks if temperature is inside validity range of property. If not
-        warns the user.
-
-        Parameters
-        ----------
-        validity_range : list
-            List of two elements with lower and upper bound temperature
-            of property validity range
-        property_name : str
-            name of the property
-        """
-        inside = False
-        if self.T >= validity_range[0] and self.T <= validity_range[1]:
-            inside = True
-        if not inside:
-            warnings.warn("The {:s} is requested at "
-                          "temperature value of {:.2f} K "
-                          "that is not in validity range "
-                          "[{:.2f}, {:.2f}] K"
-                          .format(property_name, self.T,
-                                  validity_range[0], validity_range[1]),
-                          stacklevel=3)
-
     def __add_property(self, propertyObject):
         """
         Adds the property to class attributes. In particular, it adds
@@ -597,7 +572,7 @@ class LiquidMetalInterface(ABC):
     def __getattr__(self, name):
         key = self.__generate_key(name)
         if key in self.__properties.keys():
-            return self.__properties[key].correlation(self.__T)
+            return self.__properties[key].correlation(self.__T, True)
         else:
             raise AttributeError("'{:s}' object has no attribute '{:s}'"
                                  .format(type(self).__name__, name))
