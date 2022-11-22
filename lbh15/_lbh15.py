@@ -250,7 +250,7 @@ class LiquidMetalInterface(ABC):
         path = file_path[:-len(res[-1])]
         lm_name = cls._liquid_metal_name
         if cls._liquid_metal_name not in cls.__custom_properties_path.keys():
-            cls.__custom_properties_path[lm_name] = {}            
+            cls.__custom_properties_path[lm_name] = {}
         cls.__custom_properties_path[lm_name][path] = file_name
 
     @classmethod
