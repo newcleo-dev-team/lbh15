@@ -39,18 +39,13 @@ class LBE(LiquidMetalInterface):
     >>> liquid_lbe.mu  # [Pa*s]
     0.001736052003181349
     """
+    _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
 
     def __init__(self, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0
         super().__init__(**kwargs)
-
-    def __new__(cls, **kwargs):
-        cls._liquid_metal_name = 'lbe'
-        obj = super().__new__(cls)
-
-        return obj
 
     @staticmethod
     def T_at_cp_min():

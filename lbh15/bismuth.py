@@ -38,18 +38,13 @@ class Bismuth(LiquidMetalInterface):
     >>> liquid_bismuth.k  # [W/(m*K)]
     13.705
     """
+    _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
 
     def __init__(self, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(**kwargs)
-
-    def __new__(cls, **kwargs):
-        cls._liquid_metal_name = 'bismuth'
-        obj = super().__new__(cls)
-
-        return obj
 
     @staticmethod
     def T_at_cp_min():

@@ -69,83 +69,99 @@ class LiquidMetalInterface(ABC):
     _T_b0 = 0
     _Q_b0 = 0
     _guess = 0
-    _liquid_metal_name = ''
     _correlations_to_use = {}
     _roots_to_use = {}
     __p = 0
     __T = 0
     __custom_properties_path = {}
+    _default_corr_to_use = {}
 
     def __init__(self, **kwargs):
         from scipy.constants import atmosphere
         self.__p = atmosphere
         self.__properties = {}
-        self.__fill_class_properties()
+        self.__corr2use = copy.deepcopy(self.__class__._correlations_to_use)
+        self.__fill_instance_properties()
         self.__fill_class_attributes(kwargs)
-    
-    def __getattr__(self, name):
-        key = self.__generate_key(name)
-        if key in self.__properties.keys():
-            return self.__properties[key].correlation(self.__T) 
 
-    def __fill_class_properties(self, **kwargs):
-        propertyObjectList = self.__class__._load_properties()
-        propertyObjectList += self.__class__.__load_custom_properties()
-        for propertyObject in propertyObjectList:
-            # always add property if specific correlation is not specified
-            name = propertyObject.name
-            addProperty = (not self.__class__._correlations_to_use or
-                           name not in self.__class__._correlations_to_use.keys())
-            # if correlation was specified, check that correlation names match
-            if not addProperty:
-                addProperty = (propertyObject.correlation_name ==
-                               self.__class__._correlations_to_use[name])
-            if addProperty:
-                self.__addProperty(propertyObject)
+    @property
+    def T_m0(self):
+        """
+        float : melting temperature [K]
+        """
+        return self._T_m0
 
-        keys_to_remove = []
-        for key in self._correlations_to_use.keys():
-            prop_key = self.__generate_key(key)
-            if prop_key not in self.__properties.keys():
-                warnings.warn("Could not find property '{:s}' "
-                              "implementing '{:s}' correlation. "
-                              "Property was not added."
-                              "\nGoing to remove it from "
-                              "correlations_to_use dictionary."
-                              .format(prop_key, self._correlations_to_use[key]),
-                              stacklevel=4)
-                keys_to_remove.append(key)
-        for key_to_remove in keys_to_remove:
-            self.__class__._correlations_to_use.pop(key_to_remove)
+    @property
+    def Q_m0(self):
+        """
+        float : melting latent heat [J/kg]
+        """
+        return self._Q_m0
 
-    def __str__(self):
-        rvalue = ("{:s} liquid metal @T={:.2f} K\n"
-                  .format(type(self).__name__, self.T))
-        rvalue += "\nConstants:\n"
-        rvalue += "\tPressure: {:.2f} [Pa]\n".format(self.p)
-        rvalue += "\tMelting Temperature: {:.2f} [K]\n".format(self.T_m0)
-        rvalue += "\tBoiling Temperature: {:.2f} [K]\n".format(self.T_b0)
-        rvalue += "\tMelting latent heat: {:.2f} [J/kg]\n".format(self.Q_m0)
-        rvalue += "\tVaporisation heat: {:.2f} [J/kg]\n".format(self.Q_b0)
-        rvalue += "\nThermophysical properties:\n"
-        for key in self.__properties.keys():
-            prop_name = key.replace("_"+self._liquid_metal_name, "")
-            info = getattr(self, prop_name+"_info")(print_info=False, n_tab=1)
-            rvalue += info + "\n"
-        return rvalue
+    @property
+    def T_b0(self):
+        """
+        float : boiling temperature [K]
+        """
+        return self._T_b0
 
-    def __repr__(self):
-        rvalue = "{:s}(T={:.2f}, ".format(type(self).__name__, self.T)
-        for key in self.__properties.keys():
-            property_name = key.replace("_"+self._liquid_metal_name, "")
-            attrValue = getattr(self, property_name)
-            if attrValue < 1e-2:
-                rvalue += "{:s}={:.2e}, ".format(property_name, attrValue)
-            else:
-                rvalue += "{:s}={:.2f}, ".format(property_name, attrValue)
-        rvalue = rvalue[:-2]
-        rvalue += ")"
-        return rvalue
+    @property
+    def Q_b0(self):
+        """
+        float : vaporisation heat [J/kg]
+        """
+        return self._Q_b0
+
+    @property
+    def p(self):
+        """
+        float : pressure adopted for property calculation, i.e.,
+        atmospheric pressure
+        """
+        return self.__p
+
+    @property
+    def T(self):
+        """
+        float : temperature used to compute properties [K]
+        """
+        return self.__T
+
+    @property
+    def Pr(self):
+        """
+        float : Prandtl number [-]
+        """
+        return self.cp * self.mu / self.k
+
+    def correlations_used(self):
+        """
+        Returns the dictionary with the specific
+        correlation used for each specified property
+
+        Returns
+        -------
+        dict
+        """
+        return copy.deepcopy(self.__corr2use)
+
+    def change_correlation_to_use(self, property_name, correlation_name):
+        """
+        Changes property correlation, if property is defined as instance
+        attribute.
+
+        Parameters
+        ----------
+        property_name : str
+            Name of the thermophysical property
+        correlation_name : str
+            Name of the correlation
+        """
+        key = self.__generate_key(property_name)
+        if (key in self.__properties.keys() and
+                self.__properties[key].correlation_name != correlation_name):
+            self._correlations_to_use[property_name] = correlation_name
+            self.__fill_instance_properties()
 
     @classmethod
     def properties_for_initialization(cls):
@@ -256,72 +272,6 @@ class LiquidMetalInterface(ABC):
         """
         return copy.deepcopy(cls._roots_to_use)
 
-    @property
-    def T_m0(self):
-        """
-        float : melting temperature [K]
-        """
-        return self._T_m0
-
-    @property
-    def Q_m0(self):
-        """
-        float : melting latent heat [J/kg]
-        """
-        return self._Q_m0
-
-    @property
-    def T_b0(self):
-        """
-        float : boiling temperature [K]
-        """
-        return self._T_b0
-
-    @property
-    def Q_b0(self):
-        """
-        float : vaporisation heat [J/kg]
-        """
-        return self._Q_b0
-
-    @property
-    def p(self):
-        """
-        float : pressure adopted for property calculation, i.e.,
-        atmospheric pressure
-        """
-        return self.__p
-
-    @property
-    def T(self):
-        """
-        float : temperature used to compute properties [K]
-        """
-        return self.__T
-
-    @property
-    def Pr(self):
-        """
-        float : Prandtl number [-]
-        """
-        return self.cp * self.mu / self.k
-
-    @abstractclassmethod
-    def _load_properties(cls):
-        """
-        Loads properties
-        """
-        raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
-                                  .format(cls.__name__))
-
-    @abstractmethod
-    def _set_constants(self):
-        """
-        Sets the class constants
-        """
-        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
-
     def __compute_T(self, input_value, input_property):
         """
         Computes the temperature in [K] that is then set as value
@@ -373,6 +323,29 @@ class LiquidMetalInterface(ABC):
                             rvalue = res[0]
 
         return rvalue
+
+    def __fill_instance_properties(self, **kwargs):
+        """
+        Fills instance properties.
+        """
+        propertyObjectList = self._load_properties()
+        propertyObjectList += self.__load_custom_properties()
+        for propertyObject in propertyObjectList:
+            # always add property if specific correlation is not specified
+            name = propertyObject.name
+            addProperty = (not self.__corr2use or
+                           name not in self.__corr2use.keys())
+            # if correlation was specified, check that correlation names match
+            if not addProperty:
+                addProperty = (propertyObject.correlation_name ==
+                               self.__corr2use[name])
+            if addProperty:
+                self.__add_property(propertyObject)
+
+        keys_to_remove = self.__check_properties()
+        for key_to_remove in keys_to_remove:
+            self.__corr2use.pop(key_to_remove)
+            self._correlations_to_use.pop(key_to_remove)
 
     def __fill_class_attributes(self, kwargs):
         """
@@ -456,12 +429,13 @@ class LiquidMetalInterface(ABC):
                                   validity_range[0], validity_range[1]),
                           stacklevel=3)
 
-    def __addProperty(self, propertyObject):
+    def __add_property(self, propertyObject):
         """
         Adds the property to class attributes. In particular, it adds
-        the value as class property with name '<propertyObject.name>' and
         '<prpertyObject.name>_info' as class method to get additional
-        information on property
+        information on property. Moreover it adds propertyObject
+        to instance dictionary which will be used in dunder __getattr__
+        to return attribute '<prpertyObject.name>'.
 
         Parameters
         ----------
@@ -510,8 +484,7 @@ class LiquidMetalInterface(ABC):
         setattr(self, propertyObject.name+"_info",
                 new_property_info)
 
-    @classmethod
-    def __generate_key(cls, property_name):
+    def __generate_key(self, property_name):
         """
         Generates the key that will be used to store the property
         in class dictionary
@@ -526,7 +499,54 @@ class LiquidMetalInterface(ABC):
         str
             Generated key
         """
-        return property_name + '_' + cls._liquid_metal_name
+        return property_name + '_' + type(self).__name__
+
+    def __check_properties(self):
+        keys_to_remove = []
+        update_properties = False
+        for key in self.__corr2use.keys():
+            prop_key = self.__generate_key(key)
+            corr_name = self.__corr2use[key]
+            is_in_default = key in self._default_corr_to_use.keys()
+            remove_property = False
+
+            if prop_key not in self.__properties.keys():
+                if not is_in_default:
+                    warnings.warn("Could not find property '{:s}'."
+                                  "Property was not added."
+                                  "\nGoing to remove it from correlations "
+                                  "to use."
+                                  .format(key), stacklevel=5)
+                    remove_property = True
+                else:
+                    def_corr_name = self._default_corr_to_use[key]
+                    warnings.warn("Could not find property '{:s}' "
+                                  "implementing '{:s}' correlation. "
+                                  "\nGoing to restore default correlation "
+                                  "'{:s}'."
+                                  .format(key, corr_name, def_corr_name),
+                                  stacklevel=5)
+                    self.__corr2use[key] = def_corr_name
+                    update_properties = True
+            else:
+                if corr_name != self.__properties[prop_key].correlation_name:
+                    warnings.warn("Could not find property '{:s}' "
+                                  "implementing '{:s}' correlation. "
+                                  "\nGoing to remove it from correlations "
+                                  "to use."
+                                  .format(key, corr_name),
+                                  stacklevel=5)
+                    remove_property = not is_in_default
+                    if not remove_property:
+                        self.__corr2use[key] = self._default_corr_to_use[key]
+
+            if remove_property:
+                keys_to_remove.append(key)
+
+        if update_properties:
+            self.__fill_instance_properties()
+
+        return keys_to_remove
 
     @classmethod
     def __load_custom_properties(cls):
@@ -550,3 +570,53 @@ class LiquidMetalInterface(ABC):
                     if issubclass(obj, PropertyInterface):
                         customPropertyObjectList.append(obj())
         return customPropertyObjectList
+
+    @abstractmethod
+    def _set_constants(self):
+        """
+        Sets the class constants
+        """
+        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractclassmethod
+    def _load_properties(cls):
+        """
+        Loads properties
+        """
+        raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
+                                  .format(cls.__name__))
+
+    def __getattr__(self, name):
+        key = self.__generate_key(name)
+        if key in self.__properties.keys():
+            return self.__properties[key].correlation(self.__T)
+
+    def __str__(self):
+        rvalue = ("{:s} liquid metal @T={:.2f} K\n"
+                  .format(type(self).__name__, self.T))
+        rvalue += "\nConstants:\n"
+        rvalue += "\tPressure: {:.2f} [Pa]\n".format(self.p)
+        rvalue += "\tMelting Temperature: {:.2f} [K]\n".format(self.T_m0)
+        rvalue += "\tBoiling Temperature: {:.2f} [K]\n".format(self.T_b0)
+        rvalue += "\tMelting latent heat: {:.2f} [J/kg]\n".format(self.Q_m0)
+        rvalue += "\tVaporisation heat: {:.2f} [J/kg]\n".format(self.Q_b0)
+        rvalue += "\nThermophysical properties:\n"
+        for key in self.__properties.keys():
+            prop_name = key.replace("_"+self._liquid_metal_name, "")
+            info = getattr(self, prop_name+"_info")(print_info=False, n_tab=1)
+            rvalue += info + "\n"
+        return rvalue
+
+    def __repr__(self):
+        rvalue = "{:s}(T={:.2f}, ".format(type(self).__name__, self.T)
+        for key in self.__properties.keys():
+            property_name = key.replace("_"+self._liquid_metal_name, "")
+            attrValue = getattr(self, property_name)
+            if attrValue < 1e-2:
+                rvalue += "{:s}={:.2e}, ".format(property_name, attrValue)
+            else:
+                rvalue += "{:s}={:.2f}, ".format(property_name, attrValue)
+        rvalue = rvalue[:-2]
+        rvalue += ")"
+        return rvalue

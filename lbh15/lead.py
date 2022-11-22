@@ -1,5 +1,6 @@
 import sys
 import inspect
+import copy
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
@@ -47,18 +48,13 @@ class Lead(LiquidMetalInterface):
     >>> liquid_lead_2.cp
     144.66006199999998
     """
-    _correlations_to_use = {'cp': SOBOLEV_KEYWORD}
+    _default_corr_to_use = {'cp': SOBOLEV_KEYWORD}
+    _correlations_to_use = copy.deepcopy(_default_corr_to_use)
     _roots_to_use = {'cp': 0}
 
     def __init__(self, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(**kwargs)
-
-    def __new__(cls, **kwargs):
-        cls._liquid_metal_name = 'lead'
-        obj = super().__new__(cls)
-
-        return obj
 
     @staticmethod
     def T_at_cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
