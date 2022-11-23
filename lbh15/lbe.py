@@ -3,7 +3,6 @@ import inspect
 from ._lbh15 import LBE_MELTING_TEMPERATURE
 from ._lbh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._lbh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
-from ._lbh15 import LBE_T_AT_CP_MIN, LBE_CP_MIN
 from ._lbh15 import LiquidMetalInterface
 from .properties.lbe_properties import PropertyInterface
 
@@ -47,28 +46,6 @@ class LBE(LiquidMetalInterface):
     def __init__(self, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0
         super().__init__(**kwargs)
-
-    @staticmethod
-    def T_at_cp_min():
-        """
-        Temperature in [K] corresponding to specific heat minimum
-
-        Returns
-        -------
-        float
-        """
-        return LBE_T_AT_CP_MIN
-
-    @staticmethod
-    def cp_min():
-        """
-        Minimum value of cp correlation in [J/(kg*K)]
-
-        Returns
-        -------
-        float
-        """
-        return LBE_CP_MIN
 
     @classmethod
     def _load_properties(cls):

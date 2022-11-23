@@ -1,5 +1,6 @@
-from abc import ABC, abstractmethod
 import warnings
+from abc import ABC, abstractmethod, abstractproperty
+from scipy.optimize import minimize_scalar
 
 
 def range_warning(function):
@@ -30,7 +31,7 @@ class PropertyInterface(ABC):
     """
     Abstract class that defines thermo-physical property interface.
     Derived classes must implement :func:`~PropertyInterface.correlation`,
-    and must override members returned by:
+    and must override:
 
         - :attr:`~.PropertyInterface.range`
         - :attr:`~.PropertyInterface.units`
@@ -54,13 +55,11 @@ class PropertyInterface(ABC):
     """
     def __init__(self):
         from numpy import inf
-        self._name = type(self).__name__
-        self._range = [-inf, inf]
-        self._correlation_name = "lbh15"
-        self._units = "[-]"
-        self._long_name = "long name of the property interface"
-        self._description = "description of the property interface"
-        self._is_injective = True
+        self.__min = -inf
+        self.__max = inf
+        self.__T_at_min = self.range[0]
+        self.__T_at_max = self.range[1]
+        self.__compute_bounds()
 
     @abstractmethod
     @range_warning
@@ -101,42 +100,14 @@ class PropertyInterface(ABC):
         """
         str : name of the property
         """
-        return self._name
-
-    @property
-    def range(self):
-        """
-        list : temperature validity range for property correlation
-        """
-        return self._range.copy()
+        return type(self).__name__
 
     @property
     def correlation_name(self):
         """
         str : name of the correlation
         """
-        return self._correlation_name
-
-    @property
-    def units(self):
-        """
-        str : property units
-        """
-        return self._units
-
-    @property
-    def long_name(self):
-        """
-        str : property long name
-        """
-        return self._long_name
-
-    @property
-    def description(self):
-        """
-        str : property description
-        """
-        return self._description
+        return "lbh15"
 
     @property
     def is_injective(self):
@@ -144,4 +115,95 @@ class PropertyInterface(ABC):
         bool : True if correlation is injective,
         False otherwise
         """
-        return self._is_injective
+        return True
+
+    @property
+    def min(self):
+        """
+        float : minimum of property correlation in validity
+        range
+        """
+        return self.__min
+
+    @property
+    def max(self):
+        """
+        float : maximum of property correlation in validity
+        range
+        """
+        return self.__max
+
+    @property
+    def T_at_min(self):
+        """
+        float : temperature corresponding to the minimum of
+        property correlation in validity range
+        """
+        return self.__T_at_min
+
+    @property
+    def T_at_max(self):
+        """
+        float : temperature corresponding to the maximum of
+        property correlation in validity range
+        """
+        return self.__T_at_max
+
+    @abstractproperty
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        raise NotImplementedError("{:s}.range NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractproperty
+    def units(self):
+        """
+        str : property units
+        """
+        raise NotImplementedError("{:s}.units NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractproperty
+    def long_name(self):
+        """
+        str : property long name
+        """
+        raise NotImplementedError("{:s}.long_name NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    @abstractproperty
+    def description(self):
+        """
+        str : property description
+        """
+        raise NotImplementedError("{:s}.description NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
+
+    def __compute_bounds(self):
+        """
+        Computes the bound of property in validity range, i.e.,
+        the minimum and the maximum of the correlation, together with the
+        corresponding temperature
+        """
+        min_vals = minimize_scalar(self.correlation,
+                                   bounds=self.range,
+                                   method="Bounded")
+        self.__min = min_vals.fun
+        self.__T_at_min = min_vals.x
+        if self.__T_at_min - self.range[0] < 5e-4:
+            self.__T_at_min = self.range[0]
+            self.__min = self.correlation(self.__T_at_min)
+
+        def corr_reciprocal(T):
+            return 1/self.correlation(T)
+
+        max_vals = minimize_scalar(corr_reciprocal,
+                                   bounds=self.range,
+                                   method="Bounded")
+        self.__max = self.correlation(max_vals.x)
+        self.__T_at_max = max_vals.x
+        if self.range[1] - self.__T_at_max < 5e-4:
+            self.__T_at_max = self.range[1]
+            self.__max = self.correlation(self.__T_at_max)

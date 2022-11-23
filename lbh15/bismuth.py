@@ -3,7 +3,6 @@ import inspect
 from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
 from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
-from ._lbh15 import BISMUTH_T_AT_CP_MIN, BISMUTH_CP_MIN
 from ._lbh15 import LiquidMetalInterface
 from .properties.bismuth_properties import PropertyInterface
 
@@ -46,28 +45,6 @@ class Bismuth(LiquidMetalInterface):
     def __init__(self, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(**kwargs)
-
-    @staticmethod
-    def T_at_cp_min():
-        """
-        Temperature in [K] corresponding to specific heat minimum
-
-        Returns
-        -------
-        float
-        """
-        return BISMUTH_T_AT_CP_MIN
-
-    @staticmethod
-    def cp_min():
-        """
-        Minimum value of cp correlation in [J/(kg*K)]
-
-        Returns
-        -------
-        float
-        """
-        return BISMUTH_CP_MIN
 
     @classmethod
     def _load_properties(cls):

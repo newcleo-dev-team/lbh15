@@ -11,10 +11,6 @@ class p_s(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[Pa]"
-        self._long_name = "saturation vapour pressure"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -63,6 +59,34 @@ class p_s(PropertyInterface):
 
         return rvalue
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "saturation vapour pressure"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class sigma(PropertyInterface):
     """
@@ -71,10 +95,6 @@ class sigma(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1300.0]
-        self._units = "[N/m]"
-        self._long_name = "surface tension"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -95,6 +115,34 @@ class sigma(PropertyInterface):
         """
         return (525.9 - 0.113*T)*1e-3
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1300.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[N/m]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "surface tension"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class rho(PropertyInterface):
     """
@@ -103,10 +151,6 @@ class rho(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[kg/m^3]"
-        self._long_name = "density"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -127,6 +171,34 @@ class rho(PropertyInterface):
         """
         return 11441 - 1.2795*T
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[kg/m^3]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "density"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class alpha(PropertyInterface):
     """
@@ -135,10 +207,6 @@ class alpha(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[1/K]"
-        self._long_name = "thermal expansion coefficient"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -159,6 +227,34 @@ class alpha(PropertyInterface):
         """
         return 1/(8942 - T)
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[1/K]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "thermal expansion coefficient"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class u_s(PropertyInterface):
     """
@@ -167,10 +263,6 @@ class u_s(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 2000.0]
-        self._units = "[m/s]"
-        self._long_name = "sound velocity"
-        self._description = "Sound velocity in liquid lead"
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -191,6 +283,34 @@ class u_s(PropertyInterface):
         """
         return 1953 - 0.246*T
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[m/s]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "sound velocity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Sound velocity in liquid lead"
+
 
 class beta_s(PropertyInterface):
     """
@@ -199,10 +319,6 @@ class beta_s(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 2000.0]
-        self._units = "[1/Pa]"
-        self._long_name = "isentropic compressibility"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -225,6 +341,34 @@ class beta_s(PropertyInterface):
         u_s_obj = u_s()
         return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[1/Pa]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "isentropic compressibility"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class cp_sobolev2011(PropertyInterface):
     """
@@ -233,13 +377,6 @@ class cp_sobolev2011(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._name = "cp"
-        self._range = [T_m0, 2000.0]
-        self._units = "[J/(kg*K)]"
-        self._long_name = "specific heat capacity"
-        self._correlation_name = SOBOLEV_KEYWORD
-        self._description = "Liquid lead {:s}".format(self._long_name)
-        self._is_injective = False
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -261,6 +398,56 @@ class cp_sobolev2011(PropertyInterface):
         return (176.2 - 4.923e-2*T + 1.544e-5*T**2
                 - 1.524e6*T**-2)
 
+    @property
+    def name(self):
+        """
+        str : name of the property
+        """
+        return "cp"
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
+
+    @property
+    def is_injective(self):
+        """
+        bool : True if correlation is injective,
+        False otherwise
+        """
+        return False
+
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[J/(kg*K)]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "specific heat capacity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class cp_gurvich1991(PropertyInterface):
     """
@@ -269,13 +456,6 @@ class cp_gurvich1991(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._name = "cp"
-        self._range = [T_m0, 2000.0]
-        self._units = "[J/(kg*K)]"
-        self._long_name = "specific heat capacity"
-        self._correlation_name = GURVICH_KEYWORD
-        self._description = "Liquid lead {:s}".format(self._long_name)
-        self._is_injective = False
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -297,6 +477,56 @@ class cp_gurvich1991(PropertyInterface):
         return (175.1 - 4.961e-2*T + 1.985e-5*T**2
                 - 2.099e-9*T**3 - 1.524e6*T**-2)
 
+    @property
+    def name(self):
+        """
+        str : name of the property
+        """
+        return "cp"
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return GURVICH_KEYWORD
+
+    @property
+    def is_injective(self):
+        """
+        bool : True if correlation is injective,
+        False otherwise
+        """
+        return False
+
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[J/(kg*K)]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "specific heat capacity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class h(PropertyInterface):
     """
@@ -305,13 +535,6 @@ class h(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 2000.0]
-        self._units = "[J/kg]"
-        self._long_name = "specific enthalpy"
-        self._description = ("Liquid lead {:s} "
-                             "(as difference with respect to"
-                             "the melting point enthalpy)"
-                             .format(self._long_name))
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -335,6 +558,37 @@ class h(PropertyInterface):
                 + 5.147e-6*(T**3 - T_m0**3)
                 + 1.524e6*(T**-1 - T_m0**-1))
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[J/kg]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "specific enthalpy"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return ("Liquid lead {:s} "
+                "(as difference with respect to"
+                "the melting point enthalpy)"
+                .format(self.long_name))
+
 
 class mu(PropertyInterface):
     """
@@ -343,10 +597,6 @@ class mu(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1473.0]
-        self._units = "[Pa*s]"
-        self._long_name = "dynamic viscosity"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -368,6 +618,34 @@ class mu(PropertyInterface):
         import numpy as np
         return 4.55e-4 * np.exp(1069/T)
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1473.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[Pa*s]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "dynamic viscosity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class r(PropertyInterface):
     """
@@ -376,10 +654,6 @@ class r(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1273.0]
-        self._units = "[Ohm*m]"
-        self._long_name = "electrical resistivity"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -400,6 +674,34 @@ class r(PropertyInterface):
         """
         return (67.0 + 0.0471*T)*1e-8
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1273.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[Ohm*m]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "electrical resistivity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)
+
 
 class k(PropertyInterface):
     """
@@ -408,10 +710,6 @@ class k(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1300.0]
-        self._units = "[W/(m*K)]"
-        self._long_name = "thermal conductivity"
-        self._description = "Liquid lead {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -431,3 +729,31 @@ class k(PropertyInterface):
         thermal conductivity in [W/(m*K)] : float
         """
         return 9.2 + 0.011*T
+
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1300.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[W/(m*K)]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "thermal conductivity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid lead {:s}".format(self.long_name)

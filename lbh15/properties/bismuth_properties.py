@@ -11,10 +11,6 @@ class p_s(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[Pa]"
-        self._long_name = "saturation vapour pressure"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -63,6 +59,34 @@ class p_s(PropertyInterface):
 
         return rvalue
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "saturation vapour pressure"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class sigma(PropertyInterface):
     """
@@ -71,10 +95,6 @@ class sigma(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1400.0]
-        self._units = "[N/m]"
-        self._long_name = "surface tension"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -95,6 +115,34 @@ class sigma(PropertyInterface):
         """
         return (420.8 - 0.081*T)*1e-3
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1400.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[N/m]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "surface tension"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class rho(PropertyInterface):
     """
@@ -103,10 +151,6 @@ class rho(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[kg/m^3]"
-        self._long_name = "density"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -127,6 +171,34 @@ class rho(PropertyInterface):
         """
         return 10725 - 1.22*T
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[kg/m^3]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "density"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class alpha(PropertyInterface):
     """
@@ -135,10 +207,6 @@ class alpha(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[1/K]"
-        self._long_name = "thermal expansion coefficient"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -159,6 +227,34 @@ class alpha(PropertyInterface):
         """
         return 1/(8791 - T)
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[1/K]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "thermal expansion coefficient"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class u_s(PropertyInterface):
     """
@@ -167,10 +263,6 @@ class u_s(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1800.0]
-        self._units = "[m/s]"
-        self._long_name = "sound velocity"
-        self._description = "Sound velocity in liquid bismuth"
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -191,6 +283,34 @@ class u_s(PropertyInterface):
         """
         return 1616 + 0.187*T - 2.2e-4*T**2
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1800.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[m/s]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "sound velocity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Sound velocity in liquid bismuth"
+
 
 class beta_s(PropertyInterface):
     """
@@ -199,10 +319,6 @@ class beta_s(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1800.0]
-        self._units = "[1/Pa]"
-        self._long_name = "isentropic compressibility"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -225,6 +341,34 @@ class beta_s(PropertyInterface):
         u_s_obj = u_s()
         return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1800.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[1/Pa]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "isentropic compressibility"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class cp(PropertyInterface):
     """
@@ -233,11 +377,6 @@ class cp(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[J/kg*K]"
-        self._long_name = "specific heat capacity"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
-        self._is_injective = False
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -258,6 +397,42 @@ class cp(PropertyInterface):
         """
         return 118.2 + 5.934e-3*T + 7.183e6*T**-2
 
+    @property
+    def is_injective(self):
+        """
+        bool : True if correlation is injective,
+        False otherwise
+        """
+        return False
+
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[J/(kg*K)]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "specific heat capacity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class h(PropertyInterface):
     """
@@ -266,13 +441,6 @@ class h(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, T_b0]
-        self._units = "[J/kg]"
-        self._long_name = "specific enthalpy"
-        self._description = ("Liquid bismuth {:s} "
-                             "(as difference with respect to"
-                             "the melting point enthalpy)"
-                             .format(self._long_name))
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -295,6 +463,37 @@ class h(PropertyInterface):
                 + 2.967e-3*(T**2 - T_m0**2)
                 - 7.183e6*(T**-1 - T_m0**-1))
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, T_b0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[J/kg]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "specific enthalpy"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return ("Liquid bismuth {:s} "
+                "(as difference with respect to"
+                "the melting point enthalpy)"
+                .format(self.long_name))
+
 
 class mu(PropertyInterface):
     """
@@ -303,10 +502,6 @@ class mu(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1300.0]
-        self._units = "[Pa*s]"
-        self._long_name = "dynamic viscosity"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -328,6 +523,34 @@ class mu(PropertyInterface):
         import numpy as np
         return 4.456e-4*np.exp(780/T)
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1300.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[Pa*s]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "dynamic viscosity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class r(PropertyInterface):
     """
@@ -336,10 +559,6 @@ class r(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [545.0, 1423.0]
-        self._units = "[Ohm*m]"
-        self._long_name = "electrical resistivity"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -360,6 +579,34 @@ class r(PropertyInterface):
         """
         return (98.96 + 0.0554*T)*1e-8
 
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [545.0, 1423.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[Ohm*m]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "electrical resistivity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)
+
 
 class k(PropertyInterface):
     """
@@ -368,10 +615,6 @@ class k(PropertyInterface):
     """
     def __init__(self):
         super().__init__()
-        self._range = [T_m0, 1000.0]
-        self._units = "[W/(m*K)]"
-        self._long_name = "thermal conductivity"
-        self._description = "Liquid bismuth {:s}".format(self._long_name)
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -391,3 +634,31 @@ class k(PropertyInterface):
         thermal conductivity in [W/(m*K)] : float
         """
         return 7.34 + 9.5e-3*T
+
+    @property
+    def range(self):
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 1000.0]
+
+    @property
+    def units(self):
+        """
+        str : property units
+        """
+        return "[W/(m*K)]"
+
+    @property
+    def long_name(self):
+        """
+        str : property long name
+        """
+        return "thermal conductivity"
+
+    @property
+    def description(self):
+        """
+        str : property description
+        """
+        return "Liquid bismuth {:s}".format(self.long_name)

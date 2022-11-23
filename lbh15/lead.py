@@ -3,10 +3,8 @@ import inspect
 import copy
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
-from ._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
+from ._lbh15 import SOBOLEV_KEYWORD
 from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
-from ._lbh15 import LEAD_T_AT_CP_MIN_SOBOLEV, LEAD_T_AT_CP_MIN_GURVICH
-from ._lbh15 import LEAD_CP_MIN_SOBOLEV, LEAD_CP_MIN_GURVICH
 from ._lbh15 import LiquidMetalInterface
 from .properties.lead_properties import PropertyInterface
 
@@ -56,58 +54,6 @@ class Lead(LiquidMetalInterface):
     def __init__(self, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(**kwargs)
-
-    @staticmethod
-    def T_at_cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
-        """
-        Temperature in [K] corresponding to specific heat minimum
-
-        Parameters
-        ----------
-        cp_correlation_to_use : str
-            Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-
-        Returns
-        -------
-        float
-        """
-        if cp_correlation_to_use == SOBOLEV_KEYWORD:
-            rvalue = LEAD_T_AT_CP_MIN_SOBOLEV
-        elif cp_correlation_to_use == GURVICH_KEYWORD:
-            rvalue = LEAD_T_AT_CP_MIN_GURVICH
-        else:
-            raise ValueError("cp correlation can be one between: {:s}, "
-                             "{:s}. {:s} was provided"
-                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
-                                     cp_correlation_to_use))
-
-        return rvalue
-
-    @staticmethod
-    def cp_min(cp_correlation_to_use=SOBOLEV_KEYWORD):
-        """
-        Minimum value of cp correlation in [J/(kg*K)]
-
-        Parameters
-        ----------
-        cp_correlation_to_use : str
-            Name of cp correlation, can be 'sobolev2011' or 'gurvich1991'
-
-        Returns
-        -------
-        float
-        """
-        if cp_correlation_to_use == SOBOLEV_KEYWORD:
-            rvalue = LEAD_CP_MIN_SOBOLEV
-        elif cp_correlation_to_use == GURVICH_KEYWORD:
-            rvalue = LEAD_CP_MIN_GURVICH
-        else:
-            raise ValueError("cp correlation can be one between: {:s}, "
-                             "{:s}. {:s} was provided"
-                             .format(SOBOLEV_KEYWORD, GURVICH_KEYWORD,
-                                     cp_correlation_to_use))
-
-        return rvalue
 
     @classmethod
     def _load_properties(cls):
