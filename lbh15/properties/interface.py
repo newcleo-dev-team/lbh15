@@ -8,13 +8,13 @@ def range_warning(function):
     of correlation
     """
     def wrapper(*args):
-        if len(args) == 3:
-            range_lim = args[0].range
-            p_name = args[0].long_name
-            temp = args[1]
-            if hasattr(temp, "__len__"):
-                temp = temp[0]
-            if temp < range_lim[0] or temp > range_lim[1]:
+        range_lim = args[0].range
+        p_name = args[0].long_name
+        temp = args[1]
+        if hasattr(temp, "__len__"):
+            temp = temp[0]
+        if temp < range_lim[0] or temp > range_lim[1]:
+            if len(args) == 3:
                 warnings.warn("The {:s} is requested at "
                               "temperature value of {:.2f} K "
                               "that is not in validity range "
@@ -40,7 +40,7 @@ class PropertyInterface(ABC):
     Instead, it is not mandatory to override the following attributes:
 
         - :func:`~PropertyInterface.initialization_helper`, override this \
-          method if roots of the function are particulary 'difficult' to find \
+          method if function's roots are particularly 'difficult' to find \
           (see \
           :func:`lbh15.properties.lead_properties.p_s.initialization_helper`).\
            If not overridden it will be ignored.
@@ -64,7 +64,7 @@ class PropertyInterface(ABC):
 
     @abstractmethod
     @range_warning
-    def correlation(self, T, check_range=False):
+    def correlation(self, T, verbose=False):
         """
         Function that implements the property correlation
 
@@ -72,6 +72,9 @@ class PropertyInterface(ABC):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
         """
         raise NotImplementedError("{:s}.correlation NOT IMPLEMENTED"
                                   .format(type(self).__name__))

@@ -14,7 +14,7 @@ class rho_custom_corr(PropertyInterface):
         self._is_injective = True
 
     @range_warning
-    def correlation(self, T, check_range=False):
+    def correlation(self, T, verbose=False):
         "Implement here the user-defined correlation."
         return 11400 - 1.2*T
 
@@ -31,6 +31,6 @@ class T_double(PropertyInterface):
         self._is_injective = True
 
     @range_warning
-    def correlation(self, T, check_range=False):
+    def correlation(self, T, verbose=False):
         "Return the temperature value multiplied by 2."
         return 2*T

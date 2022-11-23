@@ -17,7 +17,7 @@ class p_s(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute saturation vapour pressure
 
@@ -25,6 +25,9 @@ class p_s(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -42,6 +45,9 @@ class p_s(PropertyInterface):
         ----------
         property_value : float
             saturation vapour pressure in [Pa]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -71,7 +77,7 @@ class sigma(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute surface tension
 
@@ -79,6 +85,9 @@ class sigma(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -100,7 +109,7 @@ class rho(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute density
 
@@ -108,6 +117,9 @@ class rho(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -129,7 +141,7 @@ class alpha(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute thermal expansion coefficient
 
@@ -137,6 +149,9 @@ class alpha(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -158,7 +173,7 @@ class u_s(PropertyInterface):
         self._description = "Sound velocity in liquid lbe"
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute sound velocity
 
@@ -166,6 +181,9 @@ class u_s(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -187,7 +205,7 @@ class beta_s(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute isentropic compressibility
 
@@ -195,6 +213,9 @@ class beta_s(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -219,7 +240,7 @@ class cp(PropertyInterface):
         self._is_injective = False
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute specific heat capacity
 
@@ -227,6 +248,9 @@ class cp(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -252,7 +276,7 @@ class h(PropertyInterface):
                              .format(self._long_name))
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute specific enthalpy
 
@@ -260,6 +284,9 @@ class h(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -284,7 +311,7 @@ class mu(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute dynamic viscosity
 
@@ -292,6 +319,9 @@ class mu(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -314,7 +344,7 @@ class r(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute electrical resistivity
 
@@ -322,6 +352,9 @@ class r(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
@@ -343,7 +376,7 @@ class k(PropertyInterface):
         self._description = "Liquid lbe {:s}".format(self._long_name)
 
     @range_warning
-    def correlation(self, T, check_range=True):
+    def correlation(self, T, verbose=False):
         """
         Correlation used to compute thermal conductivity
 
@@ -351,6 +384,9 @@ class k(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
 
         Returns
         -------
