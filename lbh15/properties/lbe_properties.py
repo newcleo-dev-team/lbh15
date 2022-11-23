@@ -411,7 +411,7 @@ class cp(PropertyInterface):
         """
         list : temperature validity range for property correlation
         """
-        return [400.0, 2000.0]
+        return [400.0, T_b0]
 
     @property
     def units(self):
@@ -470,7 +470,7 @@ class h(PropertyInterface):
         """
         list : temperature validity range for property correlation
         """
-        return [400.0, 1100.0]
+        return [400.0, T_b0]
 
     @property
     def units(self):
