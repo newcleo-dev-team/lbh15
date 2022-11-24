@@ -199,7 +199,7 @@ class PropertyInterface(ABC):
         key = self.name + "_" + self.correlation_name + "_" + self.description
         key = key.replace(" ", "_")
         bounds = bounds[key]
-        self.__min = bounds['min']
-        self.__T_at_min = bounds["T_at_min"]
-        self.__max = bounds["max"]
-        self.__T_at_max = bounds["T_at_max"]
+        self._min = bounds['min']
+        self._T_at_min = bounds["T_at_min"]
+        self._max = bounds["max"]
+        self._T_at_max = bounds["T_at_max"]
