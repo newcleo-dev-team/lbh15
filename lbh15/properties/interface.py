@@ -53,11 +53,11 @@ class PropertyInterface(ABC):
           be considered injective
     """
     def __init__(self):
-        from numpy import inf
-        self.__min = -inf
-        self.__max = inf
-        self.__T_at_min = -inf
-        self.__T_at_max = inf
+        from numpy import nan
+        self.__min = -nan
+        self.__max = nan
+        self.__T_at_min = -nan
+        self.__T_at_max = nan
 
     def compute_bounds(self):
         """
@@ -65,7 +65,7 @@ class PropertyInterface(ABC):
         the minimum and the maximum of the correlation inside
         the validity range, together with the corresponding temperature.
         If this method is not invoked their default value is
-        -inf and inf respectively.
+        -nan and nan respectively.
         Values are computed using :func:`scipy.optimize.minimize_scalar`
         with "Bounded" solver (for more details please refer to scipy
         documentation)

@@ -224,12 +224,17 @@ This is accomplished by finding the root of the function matching the target pro
   Here is an example with :class:`.Lead` (the same holds for :class:`.Bismuth` and :class:`.LBE`):
 
   >>> from lbh15 import Lead
+  >>> from lbh15 import lead_properties
+  >>> # Get an instance of cp property, sobolev2011 correlation
+  >>> cp = lead_properties.cp_sobolev2011()
+  >>> # Compute correlation bounds (min, max, T_at_min, T_at_max)
+  >>> cp.compute_bounds()
   >>> # Visualize temperature in [K] corresponding to cp min
-  >>> Lead.T_at_cp_min() # sobolev2011 correlation
-  1568.665
+  >>> cp.T_at_min
+  1568.664780487
   >>> # Visualize minimum value of cp in [J/(kg*K)]
-  >>> Lead.cp_min() # sobolev2011 correlation
-  136.348649
+  >>> cp.min
+  136.34864915749822
   >>> # Initialize first object with default index
   >>> lead_cp_1 = Lead(cp=136.6)
   >>> # Change default cp index for selecting second root, root_index=1
@@ -238,7 +243,7 @@ This is accomplished by finding the root of the function matching the target pro
   >>> lead_cp_2 = Lead(cp=136.6)
   >>> # Print their temperatures in [K]
   >>> lead_cp_1.T, lead_cp_2.T
-  (1437.4148683663843, 1699.1573335323235)
+  (1437.4148683663843, 1699.1573335324128)
 
 
 .. _Advanced usage:
@@ -250,7 +255,8 @@ Advanced usage
 Advanced usage comprises the possibility of adding new properties and physical correlations as follows.
 
 - This example shows how to define a custom correlation for the liquid lead density and use it instead 
-  of the default one. The names of the available correlations can be queried by a simple function call
+  of the default one (the same holds :class:`.Bismuth` and :class:`.LBE`).
+  The names of the available correlations can be queried by a simple function call
   (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
   reference handbook :cite:`Agency2015`):
   
@@ -263,26 +269,44 @@ Advanced usage comprises the possibility of adding new properties and physical c
   .. code-block:: python
 
     from lbh15.properties.interface import PropertyInterface
+    from lbh15.properties.interface import range_warning
 
     class rho_custom_corr(PropertyInterface):
-        def __init__(self):
-            super().__init__()
-            self._range = [700.0, 1900.0]
-            self._units = "[kg/m^3]"
-            self._name = "rho"
-            self._long_name = "custom density"
-            self._description = "Liquid lead " + self._long_name
-            self._correlation_name = "custom2022"
-            self._is_injective = True
+      def __init__(self):
+          super().__init__()
 
-        def correlation(self, T):
-            """
-            Implement here the user-defined correlation by overriding
-            the original method in the class PropertyInterface.
-            """
-            return 11400 - 1.2*T
+      @range_warning
+      def correlation(self, T, verbose=False):
+          "Implement here the user-defined correlation."
+          return 11400 - 1.2*T
 
-  .. note:: It is mandatory to override the method with the function ``correlation``.
+      @property
+      def range(self):
+          return [700.0, 1900.0]
+
+      @property
+      def units(self):
+          return "[kg/m^3]"
+
+      @property
+      def name(self):
+          return "rho"
+
+      @property
+      def long_name(self):
+          return "custom density"
+
+      @property
+      def description(self):
+          return "Liquid lead " + self.long_name
+
+      @property
+      def correlation_name(self):
+          return "custom2022"
+
+  .. note:: It is mandatory to override the method ``correlation`` and the properties ``range``, ``units``, ``long_name`` and ``description``.
+
+  .. note:: It is strongly recommended to use decorator ``@range_warning`` so that correlation range is checked when property is queried as liquid metal property and wanrings is preinted as in :ref:`Basic usage`
 
   Provided that the execution is performed in :code:`<execution_dir>`, one can check the correct implementation as follows:
 
@@ -313,17 +337,21 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> Lead.set_correlation_to_use('rho', 'custom2022')
   >>> # Get another instance of Lead object with new rho
   >>> liquid_lead_2 = Lead(T=1000)
-  >>> # Print info about rho
+  >>> # Compare the density of the two objects
+  >>> liquid_lead_1.rho, liquid_lead_2.rho
+  (10161.5 10200.0)
+  >>> # Print full info about density of second instance
   >>> liquid_lead_2.rho_info()
   rho:
         Value: 10200.00 [kg/m^3]
-        Validity range: [600.60, 2021.00] K
+        Validity range: [700.00, 1900.00] K
         Correlation name: 'custom2022'
         Long name: custom density
         Units: [kg/m^3]
         Description:
                 Liquid lead custom density
 
+  It is also possible to change the correlation used by a liquid metal object instance calling the method :code:`change_correlation_to_use`.
 
 - lbh15 gives also the possibility to add new properties to the liquid metal objects. For 
   instance, let's implement a property that is simply the double of the temperature in :code:`<execution_dir>/custom_lbh15/properties.py`:
@@ -331,21 +359,40 @@ Advanced usage comprises the possibility of adding new properties and physical c
   .. code-block:: python
 
     from lbh15.properties.interface import PropertyInterface
+    from lbh15.properties.interface import range_warning
 
     class T_double(PropertyInterface):
       def __init__(self):
           super().__init__()
-          self._range = [700.0, 1900.0]
-          self._units = "[K]"
-          self._name = "T_double"
-          self._long_name = "double of the temperature"
-          self._description = "Liquid lead " + self._long_name
-          self._correlation_name = "double2022"
-          self._is_injective = True
 
-      def correlation(self, T):
+      @range_warning
+      def correlation(self, T, verbose=False):
           "Return the temperature value multiplied by 2."
           return 2*T
+
+      @property
+      def range(self):
+          return [700.0, 1900.0]
+
+      @property
+      def units(self):
+          return "[K]"
+
+      @property
+      def name(self):
+          return "T_double"
+
+      @property
+      def long_name(self):
+          return "double of the temperature"
+
+      @property
+      def description(self):
+          return "Liquid lead " + self.long_name
+
+      @property
+      def correlation_name(self):
+          return "double2022"
 
   The new custom property can be set as :class:`.Lead` attribute by using the filepath to its module:
 
@@ -361,7 +408,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> liquid_lead.T_double_info()
   T_double:
           Value: 1500.00 [K]
-          Validity range: [600.60, 2021.00] K
+          Validity range: [700.00, 1900.00] K
           Correlation name: 'double2022'
           Long name: double of the temperature
           Units: [K]
@@ -371,7 +418,6 @@ Advanced usage comprises the possibility of adding new properties and physical c
   Each new property implemented by the user is also available at initialization.
 
 .. note:: The filepaths used here must be absolute.
-.. note:: The methods :code:`set_correlation_to_use` and :code:`set_root_to_use` affect also the class behaviour (in addition to the one of the instance).
 
 .. _API Guide:
 
@@ -383,6 +429,6 @@ API Guide
   This section provides the guide for the application programming interface.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    documentation.rst

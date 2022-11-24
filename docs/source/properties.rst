@@ -6,7 +6,7 @@ property correlations. They are then dynamically added to :class:`.Lead`, :class
 and :class:`.LBE`.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
    interface.rst
 

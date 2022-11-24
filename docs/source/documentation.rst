@@ -2,6 +2,6 @@ lbh15 package
 =============
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
    lbh15.rst
