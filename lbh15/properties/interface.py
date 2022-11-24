@@ -57,13 +57,14 @@ class PropertyInterface(ABC):
           if the function is not injective, othwerise it will \
           be considered injective
     """
-    def __init__(self):
+    def __init__(self, use_package_bounds=True):
         from numpy import inf
-        self.__min = -inf
-        self.__max = inf
-        self.__T_at_min = self.range[0]
-        self.__T_at_max = self.range[1]
-        self.__compute_bounds()
+        self._min = -inf
+        self._max = inf
+        self._T_at_min = self.range[0]
+        self._T_at_max = self.range[1]
+        if use_package_bounds:
+            self.__read_bounds()
 
     @abstractmethod
     @range_warning
@@ -127,7 +128,7 @@ class PropertyInterface(ABC):
         float : minimum of property correlation in validity
         range
         """
-        return self.__min
+        return self._min
 
     @property
     def max(self):
@@ -135,7 +136,7 @@ class PropertyInterface(ABC):
         float : maximum of property correlation in validity
         range
         """
-        return self.__max
+        return self._max
 
     @property
     def T_at_min(self):
@@ -143,7 +144,7 @@ class PropertyInterface(ABC):
         float : temperature corresponding to the minimum of
         property correlation in validity range
         """
-        return self.__T_at_min
+        return self._T_at_min
 
     @property
     def T_at_max(self):
@@ -151,7 +152,7 @@ class PropertyInterface(ABC):
         float : temperature corresponding to the maximum of
         property correlation in validity range
         """
-        return self.__T_at_max
+        return self._T_at_max
 
     @abstractproperty
     def range(self):
@@ -185,7 +186,7 @@ class PropertyInterface(ABC):
         raise NotImplementedError("{:s}.description NOT IMPLEMENTED"
                                   .format(type(self).__name__))
 
-    def __compute_bounds(self):
+    def __read_bounds(self):
         """
         Computes the bound of property in validity range, i.e.,
         the minimum and the maximum of the correlation, together with the

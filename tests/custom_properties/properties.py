@@ -4,7 +4,11 @@ from lbh15.properties.interface import range_warning
 
 class rho_custom_corr(PropertyInterface):
     def __init__(self):
-        super().__init__()
+        super().__init__(use_package_bounds=False)
+        self._min = self.correlation(self.range[1])
+        self._T_at_min = self.range[1]
+        self._max = self.correlation(self.range[0])
+        self._T_at_max = self.range[1]
 
     @range_warning
     def correlation(self, T, verbose=False):
@@ -41,7 +45,11 @@ class rho_custom_corr(PropertyInterface):
 
 class T_double(PropertyInterface):
     def __init__(self):
-        super().__init__()
+        super().__init__(use_package_bounds=False)
+        self._min = self.correlation(self.range[0])
+        self._T_at_min = self.range[0]
+        self._max = self.correlation(self.range[1])
+        self._T_at_max = self.range[0]
 
     @range_warning
     def correlation(self, T, verbose=False):
