@@ -1,10 +1,5 @@
 import warnings
-import json
-import pathlib
 from abc import ABC, abstractmethod, abstractproperty
-
-
-PROP_PATH = str(pathlib.Path(__file__).parent.resolve())
 
 
 def range_warning(function):
@@ -34,9 +29,9 @@ def range_warning(function):
 class PropertyInterface(ABC):
     """
     Abstract class that defines thermo-physical property interface.
-    Derived classes must implement :func:`~PropertyInterface.correlation`,
-    and must override:
+    Derived classes must override:
 
+        - :func:`~PropertyInterface.correlation`
         - :attr:`~.PropertyInterface.range`
         - :attr:`~.PropertyInterface.units`
         - :attr:`~.PropertyInterface.long_name`
@@ -57,31 +52,45 @@ class PropertyInterface(ABC):
           if the function is not injective, othwerise it will \
           be considered injective
     """
-    def __init__(self, use_package_bounds=True):
+    def __init__(self):
         from numpy import inf
-        self._min = -inf
-        self._max = inf
-        self._T_at_min = self.range[0]
-        self._T_at_max = self.range[1]
-        if use_package_bounds:
-            self.__read_bounds()
+        self.__min = -inf
+        self.__max = inf
+        self.__T_at_min = -inf
+        self.__T_at_max = inf
 
-    @abstractmethod
-    @range_warning
-    def correlation(self, T, verbose=False):
+    def compute_bounds(self):
         """
-        Function that implements the property correlation
+        Computes the bound of property in validity range, i.e.,
+        the minimum and the maximum of the correlation inside
+        the validity range, together with the corresponding temperature.
+        If this method is not invoked their default value is
+        -inf and inf respectively.
+        Values are computed using :func:`scipy.optimize.minimize_scalar`
+        with "Bounded" solver (for more details please refer to scipy
+        documentation)
+        """
+        from scipy.optimize import minimize_scalar
+        min_vals = minimize_scalar(self.correlation,
+                                   bounds=self.range,
+                                   method="Bounded")
+        self.__min = min_vals.fun
+        self.__T_at_min = min_vals.x
+        if self.__T_at_min - self.range[0] < 5e-4:
+            self.__T_at_min = self.range[0]
+            self.__min = self.correlation(self.__T_at_min)
 
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-        """
-        raise NotImplementedError("{:s}.correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        def corr_reciprocal(T):
+            return 1/self.correlation(T)
+
+        max_vals = minimize_scalar(corr_reciprocal,
+                                   bounds=self.range,
+                                   method="Bounded")
+        self.__max = self.correlation(max_vals.x)
+        self.__T_at_max = max_vals.x
+        if self.range[1] - self.__T_at_max < 5e-4:
+            self.__T_at_max = self.range[1]
+            self.__max = self.correlation(self.__T_at_max)
 
     def initialization_helper(self, property_value):
         """
@@ -99,6 +108,23 @@ class PropertyInterface(ABC):
         None
         """
         return None
+
+    @abstractmethod
+    @range_warning
+    def correlation(self, T, verbose=False):
+        """
+        Function that implements the property correlation
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+        """
+        raise NotImplementedError("{:s}.correlation NOT IMPLEMENTED"
+                                  .format(type(self).__name__))
 
     @property
     def name(self):
@@ -128,7 +154,7 @@ class PropertyInterface(ABC):
         float : minimum of property correlation in validity
         range
         """
-        return self._min
+        return self.__min
 
     @property
     def max(self):
@@ -136,7 +162,7 @@ class PropertyInterface(ABC):
         float : maximum of property correlation in validity
         range
         """
-        return self._max
+        return self.__max
 
     @property
     def T_at_min(self):
@@ -144,7 +170,7 @@ class PropertyInterface(ABC):
         float : temperature corresponding to the minimum of
         property correlation in validity range
         """
-        return self._T_at_min
+        return self.__T_at_min
 
     @property
     def T_at_max(self):
@@ -152,7 +178,7 @@ class PropertyInterface(ABC):
         float : temperature corresponding to the maximum of
         property correlation in validity range
         """
-        return self._T_at_max
+        return self.__T_at_max
 
     @abstractproperty
     def range(self):
@@ -185,21 +211,3 @@ class PropertyInterface(ABC):
         """
         raise NotImplementedError("{:s}.description NOT IMPLEMENTED"
                                   .format(type(self).__name__))
-
-    def __read_bounds(self):
-        """
-        Computes the bound of property in validity range, i.e.,
-        the minimum and the maximum of the correlation, together with the
-        corresponding temperature
-        """
-        with open(PROP_PATH + '/properties_bounds.json') as json_file:
-            bounds = json.load(json_file)
-        json_file.close()
-
-        key = self.name + "_" + self.correlation_name + "_" + self.description
-        key = key.replace(" ", "_")
-        bounds = bounds[key]
-        self._min = bounds['min']
-        self._T_at_min = bounds["T_at_min"]
-        self._max = bounds["max"]
-        self._T_at_max = bounds["T_at_max"]
