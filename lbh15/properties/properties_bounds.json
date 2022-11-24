@@ -1,0 +1,206 @@
+{
+   "alpha_lbh15_Liquid_lead_thermal_expansion_coefficient": {
+      "min": 0.00011988395233414056,
+      "T_at_min": 600.6,
+      "max": 0.00014448779078167894,
+      "T_at_max": 2021
+   },
+   "beta_s_lbh15_Liquid_lead_isentropic_compressibility": {
+      "min": 2.875124530491297e-11,
+      "T_at_min": 600.6,
+      "max": 5.274591120102361e-11,
+      "T_at_max": 2000.0
+   },
+   "cp_gurvich1991_Liquid_lead_specific_heat_capacity": {
+      "min": 137.2871331822027,
+      "T_at_min": 1682.5219920079508,
+      "max": 147.78490809276718,
+      "T_at_max": 600.6000136642583
+   },
+   "cp_sobolev2011_Liquid_lead_specific_heat_capacity": {
+      "min": 136.34864915749822,
+      "T_at_min": 1568.664780487,
+      "max": 147.9771047816192,
+      "T_at_max": 600.6000136642583
+   },
+   "h_lbh15_Liquid_lead_specific_enthalpy_(as_difference_with_respect_tothe_melting_point_enthalpy)": {
+      "min": 0.0,
+      "T_at_min": 600.6,
+      "max": 195278.8585315697,
+      "T_at_max": 2000.0
+   },
+   "k_lbh15_Liquid_lead_thermal_conductivity": {
+      "min": 15.8066,
+      "T_at_min": 600.6,
+      "max": 23.5,
+      "T_at_max": 1300.0
+   },
+   "mu_lbh15_Liquid_lead_dynamic_viscosity": {
+      "min": 0.0009401385357903951,
+      "T_at_min": 1472.999957718708,
+      "max": 0.0026977790992534496,
+      "T_at_max": 600.6000138896042
+   },
+   "p_s_lbh15_Liquid_lead_saturation_vapour_pressure": {
+      "min": 5.72102001881117e-07,
+      "T_at_min": 600.6,
+      "max": 101081.63805230144,
+      "T_at_max": 2021
+   },
+   "r_lbh15_Liquid_lead_electrical_resistivity": {
+      "min": 9.528826000000001e-07,
+      "T_at_min": 600.6,
+      "max": 1.269583e-06,
+      "T_at_max": 1273.0
+   },
+   "rho_lbh15_Liquid_lead_density": {
+      "min": 8855.130545461623,
+      "T_at_min": 2020.999964469227,
+      "max": 10672.532282019169,
+      "T_at_max": 600.6000140530139
+   },
+   "sigma_lbh15_Liquid_lead_surface_tension": {
+      "min": 0.37900000364206515,
+      "T_at_min": 1299.999967769335,
+      "max": 0.4580321976327233,
+      "T_at_max": 600.6000209493512
+   },
+   "u_s_lbh15_Sound_velocity_in_liquid_lead": {
+      "min": 1461.0000085668216,
+      "T_at_min": 1999.999965175522,
+      "max": 1805.2523966385925,
+      "T_at_max": 600.6000136642583
+   },
+   "alpha_lbh15_Liquid_bismuth_thermal_expansion_coefficient": {
+      "min": 0.00012126503686457121,
+      "T_at_min": 544.6,
+      "max": 0.00014367816091954023,
+      "T_at_max": 1831
+   },
+   "beta_s_lbh15_Liquid_bismuth_isentropic_compressibility": {
+      "min": 3.639536569936563e-11,
+      "T_at_min": 544.6,
+      "max": 7.627788130220019e-11,
+      "T_at_max": 1800.0
+   },
+   "cp_lbh15_Liquid_bismuth_specific_heat_capacity": {
+      "min": 130.15184377460827,
+      "T_at_min": 1342.7528752590767,
+      "max": 145.65034199737036,
+      "T_at_max": 544.6000155315539
+   },
+   "h_lbh15_Liquid_bismuth_specific_enthalpy_(as_difference_with_respect_tothe_melting_point_enthalpy)": {
+      "min": 0.0,
+      "T_at_min": 544.6,
+      "max": 170386.05242766827,
+      "T_at_max": 1831
+   },
+   "k_lbh15_Liquid_bismuth_thermal_conductivity": {
+      "min": 12.5137,
+      "T_at_min": 544.6,
+      "max": 16.84,
+      "T_at_max": 1000.0
+   },
+   "mu_lbh15_Liquid_bismuth_dynamic_viscosity": {
+      "min": 0.0008119361511735447,
+      "T_at_min": 1299.9999633891703,
+      "max": 0.0018662110498092151,
+      "T_at_max": 544.6000226267372
+   },
+   "p_s_lbh15_Liquid_bismuth_saturation_vapour_pressure": {
+      "min": 1.578571839545427e-08,
+      "T_at_min": 544.6,
+      "max": 101117.7356957024,
+      "T_at_max": 1831
+   },
+   "r_lbh15_Liquid_bismuth_electrical_resistivity": {
+      "min": 1.29153e-06,
+      "T_at_min": 545.0,
+      "max": 1.7779419999999998e-06,
+      "T_at_max": 1423.0
+   },
+   "rho_lbh15_Liquid_bismuth_density": {
+      "min": 8491.180038862554,
+      "T_at_min": 1830.9999681454472,
+      "max": 10060.587984868343,
+      "T_at_max": 544.6000124029974
+   },
+   "sigma_lbh15_Liquid_bismuth_surface_tension": {
+      "min": 0.3074000033580477,
+      "T_at_min": 1399.9999585426215,
+      "max": 0.37668739884890806,
+      "T_at_max": 544.6000142110119
+   },
+   "u_s_lbh15_Sound_velocity_in_liquid_bismuth": {
+      "min": 1239.8000186412155,
+      "T_at_min": 1799.999969188073,
+      "max": 1652.5905841775043,
+      "T_at_max": 544.6000118291203
+   },
+   "alpha_lbh15_Liquid_lbe_thermal_expansion_coefficient": {
+      "min": 0.00012254901960784314,
+      "T_at_min": 398.0,
+      "max": 0.00015080681646810435,
+      "T_at_max": 1927
+   },
+   "beta_s_lbh15_Liquid_lbe_isentropic_compressibility": {
+      "min": 3.0254741091880614e-11,
+      "T_at_min": 400.0,
+      "max": 3.9428181989352115e-11,
+      "T_at_max": 1100.0
+   },
+   "cp_lbh15_Liquid_lbe_specific_heat_capacity": {
+      "min": 133.5681031653219,
+      "T_at_min": 1566.510189586438,
+      "max": 148.18999973531987,
+      "T_at_max": 400.00001747063567
+   },
+   "h_lbh15_Liquid_lbe_specific_enthalpy_(as_difference_with_respect_tothe_melting_point_enthalpy)": {
+      "min": 296.41050851991963,
+      "T_at_min": 400.0,
+      "max": 210592.70109267058,
+      "T_at_max": 1927
+   },
+   "k_lbh15_Liquid_lbe_thermal_conductivity": {
+      "min": 9.35453878,
+      "T_at_min": 398.0,
+      "max": 18.28195,
+      "T_at_max": 1100.0
+   },
+   "mu_lbh15_Liquid_lbe_dynamic_viscosity": {
+      "min": 0.0008823708740733831,
+      "T_at_min": 1299.99995628413,
+      "max": 0.0032854504860740656,
+      "T_at_max": 398.0000166979766
+   },
+   "p_s_lbh15_Liquid_lbe_saturation_vapour_pressure": {
+      "min": 3.00465153845262e-15,
+      "T_at_min": 398.0,
+      "max": 100864.79608380087,
+      "T_at_max": 1927
+   },
+   "r_lbh15_Liquid_lbe_electrical_resistivity": {
+      "min": 1.10004e-06,
+      "T_at_min": 398.0,
+      "max": 1.4370000000000002e-06,
+      "T_at_max": 1100.0
+   },
+   "rho_lbh15_Liquid_lbe_density": {
+      "min": 8573.389054549563,
+      "T_at_min": 1926.9999578116299,
+      "max": 10550.385977380882,
+      "T_at_max": 398.00001749351793
+   },
+   "sigma_lbh15_Liquid_lbe_surface_tension": {
+      "min": 0.3366400019546521,
+      "T_at_min": 1399.999975536269,
+      "max": 0.416699799255926,
+      "T_at_max": 398.0000093125659
+   },
+   "u_s_lbh15_Sound_velocity_in_liquid_lbe": {
+      "min": 1621.8000071922784,
+      "T_at_min": 1099.9999660741585,
+      "max": 1770.1999975193814,
+      "T_at_max": 400.0000117010308
+   }
+}

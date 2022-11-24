@@ -1,6 +1,10 @@
 import warnings
+import json
+import pathlib
 from abc import ABC, abstractmethod, abstractproperty
-from scipy.optimize import minimize_scalar
+
+
+PROP_PATH = str(pathlib.Path(__file__).parent.resolve())
 
 
 def range_warning(function):
@@ -187,23 +191,14 @@ class PropertyInterface(ABC):
         the minimum and the maximum of the correlation, together with the
         corresponding temperature
         """
-        min_vals = minimize_scalar(self.correlation,
-                                   bounds=self.range,
-                                   method="Bounded")
-        self.__min = min_vals.fun
-        self.__T_at_min = min_vals.x
-        if self.__T_at_min - self.range[0] < 5e-4:
-            self.__T_at_min = self.range[0]
-            self.__min = self.correlation(self.__T_at_min)
+        with open(PROP_PATH + '/properties_bounds.json') as json_file:
+            bounds = json.load(json_file)
+        json_file.close()
 
-        def corr_reciprocal(T):
-            return 1/self.correlation(T)
-
-        max_vals = minimize_scalar(corr_reciprocal,
-                                   bounds=self.range,
-                                   method="Bounded")
-        self.__max = self.correlation(max_vals.x)
-        self.__T_at_max = max_vals.x
-        if self.range[1] - self.__T_at_max < 5e-4:
-            self.__T_at_max = self.range[1]
-            self.__max = self.correlation(self.__T_at_max)
+        key = self.name + "_" + self.correlation_name + "_" + self.description
+        key = key.replace(" ", "_")
+        bounds = bounds[key]
+        self.__min = bounds['min']
+        self.__T_at_min = bounds["T_at_min"]
+        self.__max = bounds["max"]
+        self.__T_at_max = bounds["T_at_max"]
