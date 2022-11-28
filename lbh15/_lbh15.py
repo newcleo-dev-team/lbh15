@@ -61,7 +61,6 @@ class LiquidMetalInterface(ABC):
     _T_b0 = 0
     _Q_b0 = 0
     _guess = 0
-    _liquid_metal_name = ''
     _correlations_to_use = {}
     _roots_to_use = {}
     _default_corr_to_use = {}
@@ -240,8 +239,8 @@ class LiquidMetalInterface(ABC):
         res = file_path.split(char)
         file_name = res[-1][:-3]
         path = file_path[:-len(res[-1])]
-        lm_name = cls._liquid_metal_name
-        if cls._liquid_metal_name not in cls.__custom_properties_path.keys():
+        lm_name = cls.__name__
+        if lm_name not in cls.__custom_properties_path.keys():
             cls.__custom_properties_path[lm_name] = {}
         cls.__custom_properties_path[lm_name][path] = file_name
 
@@ -532,8 +531,8 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         customPropertyObjectList = []
-        if cls._liquid_metal_name in cls.__custom_properties_path.keys():
-            lm_path = cls.__custom_properties_path[cls._liquid_metal_name]
+        if cls.__name__ in cls.__custom_properties_path.keys():
+            lm_path = cls.__custom_properties_path[cls.__name__]
             for path in lm_path.keys():
                 if path not in sys.path:
                     sys.path.append(path)
