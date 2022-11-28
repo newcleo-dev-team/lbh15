@@ -262,7 +262,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   
   >>> from lbh15 import Lead
   >>> Lead.correlations_available()
-  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': 'lbh15', 'sigma': 'lbh15', 'u_s': 'lbh15'}
+  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'sobolev2011', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'sobolev2011', 'r': 'lbh15', 'rho': 'sobolev2008a', 'sigma': 'jauch1986', 'u_s': 'sobolev2011'}
   
   Implement the new property in :code:`<execution_dir>/custom_lbh15/properties.py` as:
 
@@ -314,13 +314,13 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> import os
   >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_lbh15/properties.py')
   >>> Lead.correlations_available()
-  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'lbh15', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'lbh15', 'r': 'lbh15', 'rho': ['lbh15', 'custom2022'], 'sigma': 'lbh15', 'u_s': 'lbh15'}
+  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'sobolev2011', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'sobolev2011', 'r': 'lbh15', 'rho': ['sobolev2008a','custom2022'], 'sigma': 'jauch1986', 'u_s': 'sobolev2011'}
 
-  It is possible to see that now there are two correlations possible for the density :code:`rho`: :code:`lbh15` and :code:`custom2022`.
+  It is possible to see that now there are two correlations possible for the density :code:`rho`: :code:`sobolev2008a` and :code:`custom2022`.
   If the density correlation is not specified for a new object instantiation, the last one in the list will be selected as default:
 
   >>> # Use default one
-  >>> Lead.set_correlation_to_use('rho', 'lbh15')
+  >>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
   >>> # Get an instance of Lead object at T=1000 K
   >>> liquid_lead_1 = Lead(T=1000)
   >>> # Print info about rho
@@ -328,7 +328,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   rho:
         Value: 10161.50 [kg/m^3]
         Validity range: [600.60, 2021.00] K
-        Correlation name: 'lbh15'
+        Correlation name: 'sobolev2008a'
         Long name: density
         Units: [kg/m^3]
         Description:
