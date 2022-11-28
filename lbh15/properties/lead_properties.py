@@ -60,6 +60,13 @@ class p_s(PropertyInterface):
         return rvalue
 
     @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
+
+    @property
     def range(self):
         """
         list : temperature validity range for property correlation
@@ -116,6 +123,13 @@ class sigma(PropertyInterface):
         return (525.9 - 0.113*T)*1e-3
 
     @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "jauch1986"
+
+    @property
     def range(self):
         """
         list : temperature validity range for property correlation
@@ -170,6 +184,13 @@ class rho(PropertyInterface):
         density in [kg/m^3] : float
         """
         return 11441 - 1.2795*T
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "sobolev2008a"
 
     @property
     def range(self):
@@ -282,6 +303,13 @@ class u_s(PropertyInterface):
         sound velocity in [m/s] : float
         """
         return 1953 - 0.246*T
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
 
     @property
     def range(self):
@@ -557,6 +585,13 @@ class h(PropertyInterface):
                 - 2.4615e-2*(T**2 - T_m0**2)
                 + 5.147e-6*(T**3 - T_m0**3)
                 + 1.524e6*(T**-1 - T_m0**-1))
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
 
     @property
     def range(self):

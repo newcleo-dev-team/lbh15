@@ -1,7 +1,7 @@
 from .interface import PropertyInterface, range_warning
 from .._lbh15 import BISMUTH_MELTING_TEMPERATURE as T_m0
 from .._lbh15 import BISMUTH_BOILING_TEMPERATURE as T_b0
-from .._lbh15 import SOBOLEV_KEYWORD, GURVICH_KEYWORD
+from .._lbh15 import SOBOLEV_KEYWORD
 
 
 class p_s(PropertyInterface):
@@ -60,6 +60,13 @@ class p_s(PropertyInterface):
         return rvalue
 
     @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
+
+    @property
     def range(self):
         """
         list : temperature validity range for property correlation
@@ -116,6 +123,13 @@ class sigma(PropertyInterface):
         return (420.8 - 0.081*T)*1e-3
 
     @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
+
+    @property
     def range(self):
         """
         list : temperature validity range for property correlation
@@ -170,6 +184,13 @@ class rho(PropertyInterface):
         density in [kg/m^3] : float
         """
         return 10725 - 1.22*T
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "imbeni1998"
 
     @property
     def range(self):
@@ -282,6 +303,13 @@ class u_s(PropertyInterface):
         sound velocity in [m/s] : float
         """
         return 1616 + 0.187*T - 2.2e-4*T**2
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
 
     @property
     def range(self):
@@ -398,6 +426,13 @@ class cp(PropertyInterface):
         return 118.2 + 5.934e-3*T + 7.183e6*T**-2
 
     @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "imbeni1998"
+
+    @property
     def is_injective(self):
         """
         bool : True if correlation is injective,
@@ -410,7 +445,7 @@ class cp(PropertyInterface):
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, 2000.0]
+        return [T_m0, T_b0]
 
     @property
     def units(self):
@@ -462,6 +497,13 @@ class h(PropertyInterface):
         return (118.2*(T - T_m0)
                 + 2.967e-3*(T**2 - T_m0**2)
                 - 7.183e6*(T**-1 - T_m0**-1))
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return SOBOLEV_KEYWORD
 
     @property
     def range(self):
@@ -522,6 +564,13 @@ class mu(PropertyInterface):
         """
         import numpy as np
         return 4.456e-4*np.exp(780/T)
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "lucas1984b"
 
     @property
     def range(self):
@@ -634,6 +683,13 @@ class k(PropertyInterface):
         thermal conductivity in [W/(m*K)] : float
         """
         return 7.34 + 9.5e-3*T
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "touloukian1970b"
 
     @property
     def range(self):
