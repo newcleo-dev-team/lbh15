@@ -1,9 +1,6 @@
-import sys
-import inspect
 from ._lbh15 import LBE_MELTING_TEMPERATURE
 from ._lbh15 import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
-from ._lbh15 import LBE_VAPORISATION_HEAT, LBE_KEYWORD
-from ._lbh15 import LiquidMetalInterface
+from ._lbh15 import LBE_VAPORISATION_HEAT, LiquidMetalInterface
 from .properties.lbe_properties import PropertyInterface
 
 
@@ -41,6 +38,7 @@ class LBE(LiquidMetalInterface):
     _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
+    _properties_module = 'lbh15.properties.lbe_properties'
 
     def __init__(self, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0

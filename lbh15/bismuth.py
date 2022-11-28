@@ -1,9 +1,6 @@
-import sys
-import inspect
 from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
 from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
-from ._lbh15 import BISMUTH_VAPORISATION_HEAT, BISMUTH_KEYWORD
-from ._lbh15 import LiquidMetalInterface
+from ._lbh15 import BISMUTH_VAPORISATION_HEAT, LiquidMetalInterface
 from .properties.bismuth_properties import PropertyInterface
 
 
@@ -40,29 +37,11 @@ class Bismuth(LiquidMetalInterface):
     _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
+    _properties_module = 'lbh15.properties.bismuth_properties'
 
     def __init__(self, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(**kwargs)
-
-    @classmethod
-    def _load_properties(cls):
-        """
-        Loads property objects corresponding to bismuth liquid metal
-
-        Returns
-        -------
-        list
-            list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertyInterface`
-        """
-        propertyObjectList = []
-        module = 'lbh15.properties.bismuth_properties'
-        for name, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertyInterface:
-                if issubclass(obj, PropertyInterface):
-                    propertyObjectList.append(obj())
-        return propertyObjectList
 
     def _set_constants(self):
         """

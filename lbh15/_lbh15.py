@@ -4,7 +4,7 @@ import inspect
 import importlib
 import platform
 import copy
-from abc import ABC, abstractmethod, abstractclassmethod
+from abc import ABC, abstractmethod
 from .properties.interface import PropertyInterface
 
 # KEYWORDS
@@ -64,6 +64,7 @@ class LiquidMetalInterface(ABC):
     _correlations_to_use = {}
     _roots_to_use = {}
     _default_corr_to_use = {}
+    _properties_module = ""
     __p = 0
     __T = 0
     __custom_properties_path = {}
@@ -166,7 +167,7 @@ class LiquidMetalInterface(ABC):
         -------
         list
         """
-        objList = cls._load_properties()
+        objList = cls.__load_properties()
         objList += cls.__load_custom_properties()
         rvalue = ['T'] + [objList[i].name for i in range(len(objList))]
         return list(dict.fromkeys(rvalue))
@@ -180,7 +181,7 @@ class LiquidMetalInterface(ABC):
         -------
         dict
         """
-        objList = cls._load_properties()
+        objList = cls.__load_properties()
         objList += cls.__load_custom_properties()
         rvalue = {}
         for obj in objList:
@@ -324,7 +325,7 @@ class LiquidMetalInterface(ABC):
         """
         Fills instance properties.
         """
-        propertyObjectList = self._load_properties()
+        propertyObjectList = self.__load_properties()
         propertyObjectList += self.__load_custom_properties()
         for propertyObject in propertyObjectList:
             # always add property if specific correlation is not specified
@@ -520,6 +521,25 @@ class LiquidMetalInterface(ABC):
         return keys_to_remove
 
     @classmethod
+    def __load_properties(cls):
+        """
+        Loads property objects corresponding to liquid metal
+
+        Returns
+        -------
+        list
+            list of property objects, i.e. of classes which inherit from
+            :class:`_properties.PropertyInterface`
+        """
+        propertyObjectList = []
+        module = cls._properties_module
+        for name, obj in inspect.getmembers(sys.modules[module]):
+            if inspect.isclass(obj) and obj is not PropertyInterface:
+                if issubclass(obj, PropertyInterface):
+                    propertyObjectList.append(obj())
+        return propertyObjectList
+
+    @classmethod
     def __load_custom_properties(cls):
         """
         Load custom property objects
@@ -551,14 +571,6 @@ class LiquidMetalInterface(ABC):
         """
         raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
                                   .format(type(self).__name__))
-
-    @abstractclassmethod
-    def _load_properties(cls):
-        """
-        Loads properties
-        """
-        raise NotImplementedError("{:s}._load_properties NOT IMPLEMENTED"
-                                  .format(cls.__name__))
 
     def __getattr__(self, name):
         key = self.__generate_key(name)

@@ -1,10 +1,7 @@
-import sys
-import inspect
 import copy
 from ._lbh15 import LEAD_MELTING_TEMPERATURE
 from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
-from ._lbh15 import SOBOLEV_KEYWORD
-from ._lbh15 import LEAD_VAPORISATION_HEAT, LEAD_KEYWORD
+from ._lbh15 import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT
 from ._lbh15 import LiquidMetalInterface
 from .properties.lead_properties import PropertyInterface
 
@@ -49,29 +46,11 @@ class Lead(LiquidMetalInterface):
     _default_corr_to_use = {'cp': SOBOLEV_KEYWORD}
     _correlations_to_use = copy.deepcopy(_default_corr_to_use)
     _roots_to_use = {'cp': 0}
+    _properties_module = 'lbh15.properties.lead_properties'
 
     def __init__(self, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(**kwargs)
-
-    @classmethod
-    def _load_properties(cls):
-        """
-        Loads property objects corresponding to lead liquid metal
-
-        Returns
-        -------
-        list
-            list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertyInterface`
-        """
-        propertyObjectList = []
-        module = 'lbh15.properties.lead_properties'
-        for name, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertyInterface:
-                if issubclass(obj, PropertyInterface):
-                    propertyObjectList.append(obj())
-        return propertyObjectList
 
     def _set_constants(self):
         """
