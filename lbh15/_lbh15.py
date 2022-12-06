@@ -8,9 +8,6 @@ from abc import ABC, abstractmethod
 from .properties.interface import PropertyInterface
 
 # KEYWORDS
-LEAD_KEYWORD = "lead"
-BISMUTH_KEYWORD = "bismuth"
-LBE_KEYWORD = "lbe"
 GURVICH_KEYWORD = 'gurvich1991'
 SOBOLEV_KEYWORD = 'sobolev2011'
 
