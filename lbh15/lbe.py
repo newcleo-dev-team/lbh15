@@ -44,25 +44,6 @@ class LBE(LiquidMetalInterface):
         self._guess = LBE_MELTING_TEMPERATURE*2.0
         super().__init__(**kwargs)
 
-    @classmethod
-    def _load_properties(cls):
-        """
-        Loads property objects corresponding to lbe liquid metal
-
-        Returns
-        -------
-        list
-            list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertyInterface`
-        """
-        propertyObjectList = []
-        module = 'lbh15.properties.lbe_properties'
-        for name, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertyInterface:
-                if issubclass(obj, PropertyInterface):
-                    propertyObjectList.append(obj())
-        return propertyObjectList
-
     def _set_constants(self):
         """
         Sets the class constants
