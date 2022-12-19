@@ -165,13 +165,16 @@ This section shows a few examples of basic usage of lbh15.
   >>> liquid_lead.mu
   0.0022534948395446985
 
-- Create two instances of :class:`.Lead`, one at atmospheric pressure and one at ten times the 
+- Create two instances of :class:`.Lead`, one at atmospheric pressure and one at twenty times the 
   atmospheric pressure. Then compare their density:
 
   >>> from lbh15 import Lead
   >>> from lbh15 import P_ATM
+  >>> # Initialize first object, default pressure is P_ATM 
   >>> liquid_lead = Lead(T=800)
+  >>> # Initialize the second object specifying the pressure
   >>> liquid_lead_2 = Lead(T=800, p=20*P_ATM)
+  >>> # Compare their density
   >>> liquid_lead.rho, liquid_lead_2.rho
   (10417.4, 10418.185181757714)
 
