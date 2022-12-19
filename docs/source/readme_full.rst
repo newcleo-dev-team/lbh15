@@ -66,6 +66,7 @@ The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribu
 
 All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) by default and the correlations'
 validity range is checked at evaluation, raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
+The pressure at which evaluate the properties can be specified at object's initialization.
 We also provide some examples of instantiation using a target property value, see section :ref:`Initialization from properties` 
 for instance. The correlations are also reported in the docstring documentation for sake of completeness.
 The implementation is fully object-oriented to guarantee easy maintainability and customization of the package (see :ref:`Advanced usage`).
@@ -163,6 +164,16 @@ This section shows a few examples of basic usage of lbh15.
   >>> # Print lead dynamic viscosity in [Pa*s]
   >>> liquid_lead.mu
   0.0022534948395446985
+
+- Create two instances of :class:`.Lead`, one at atmospheric pressure and one at ten times the 
+  atmospheric pressure. Then compare their density:
+
+  >>> from lbh15 import Lead
+  >>> from lbh15 import P_ATM
+  >>> liquid_lead = Lead(T=800)
+  >>> liquid_lead_2 = Lead(T=800, p=20*P_ATM)
+  >>> liquid_lead.rho, liquid_lead_2.rho
+  (10417.4, 10418.185181757714)
 
 - Request property outside its range of validity. In this example :class:`.Lead` object is initialized
   using a temperature value that is outside the range of physical validity of the surface tension
