@@ -195,7 +195,7 @@ class rho(PropertyInterface):
         import numpy as np
         rho_0 =  11065 - 1.293*T
         u_s_val = u_s().correlation(T)
-        cp_val = cp.correlation(T)
+        cp_val = cp().correlation(T)
         alpha_val = alpha().correlation(T)
         return rho_0 + ((np.power(u_s_val, -2)
                         + T*np.power(alpha_val, 2)/cp_val)*(p - P_ATM))
