@@ -1,5 +1,6 @@
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
+from lbh15 import P_ATM
 
 
 class rho_custom_corr(PropertyInterface):
@@ -7,7 +8,7 @@ class rho_custom_corr(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         "Implement here the user-defined correlation."
         return 11400 - 1.2*T
 
@@ -41,7 +42,7 @@ class T_double(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         "Return the temperature value multiplied by 2."
         return 2*T
 

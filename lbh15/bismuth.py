@@ -1,6 +1,7 @@
-from ._lbh15 import BISMUTH_MELTING_TEMPERATURE
-from ._lbh15 import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
-from ._lbh15 import BISMUTH_VAPORISATION_HEAT, LiquidMetalInterface
+from ._constants import BISMUTH_MELTING_TEMPERATURE
+from ._constants import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
+from ._constants import BISMUTH_VAPORISATION_HEAT, P_ATM
+from ._lbh15 import LiquidMetalInterface
 from .properties.bismuth_properties import PropertyInterface
 
 
@@ -10,6 +11,9 @@ class Bismuth(LiquidMetalInterface):
 
     Parameters
     ----------
+    p : float, optional
+        Pressure in [Pa], by default atmospheric pressure, i.e.,
+        101325.0 Pa
     \\**kwargs : dict
         Dictionary that specifies the quantity from which the object shall
         be initialized. The available default ones are:
@@ -39,7 +43,7 @@ class Bismuth(LiquidMetalInterface):
     _roots_to_use = {'cp': 0}
     _properties_module = 'lbh15.properties.bismuth_properties'
 
-    def __init__(self, **kwargs):
+    def __init__(self, p=P_ATM, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(**kwargs)
 

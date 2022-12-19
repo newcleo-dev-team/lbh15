@@ -1,5 +1,6 @@
 import warnings
 from abc import ABC, abstractmethod, abstractproperty
+from .._constants import P_ATM
 
 
 def range_warning(function):
@@ -14,7 +15,7 @@ def range_warning(function):
         if hasattr(temp, "__len__"):
             temp = temp[0]
         if temp < range_lim[0] or temp > range_lim[1]:
-            if len(args) == 3:
+            if len(args) == 4:
                 warnings.warn("The {:s} is requested at "
                               "temperature value of {:.2f} K "
                               "that is not in validity range "
@@ -111,7 +112,7 @@ class PropertyInterface(ABC):
 
     @abstractmethod
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Function that implements the property correlation
 
@@ -119,6 +120,9 @@ class PropertyInterface(ABC):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False

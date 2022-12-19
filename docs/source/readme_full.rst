@@ -64,7 +64,7 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
 
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
-All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) and the correlations'
+All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) by default and the correlations'
 validity range is checked at evaluation, raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
 We also provide some examples of instantiation using a target property value, see section :ref:`Initialization from properties` 
 for instance. The correlations are also reported in the docstring documentation for sake of completeness.
@@ -254,8 +254,8 @@ Advanced usage
 
 Advanced usage comprises the possibility of adding new properties and physical correlations as follows.
 
-- This example shows how to define a custom correlation for the liquid lead density and use it instead 
-  of the default one (the same holds :class:`.Bismuth` and :class:`.LBE`).
+- This example shows how to define a custom correlation for the liquid lead density that 
+  does not depend on pressure and use it instead of the default one (the same holds :class:`.Bismuth` and :class:`.LBE`).
   The names of the available correlations can be queried by a simple function call
   (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
   reference handbook :cite:`Agency2015`):
@@ -270,13 +270,14 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
     from lbh15.properties.interface import PropertyInterface
     from lbh15.properties.interface import range_warning
+    from lbh15 import P_ATM
 
     class rho_custom_corr(PropertyInterface):
       def __init__(self):
           super().__init__()
 
       @range_warning
-      def correlation(self, T, verbose=False):
+      def correlation(self, T, p=P_ATM, verbose=False):
           "Implement here the user-defined correlation."
           return 11400 - 1.2*T
 
@@ -360,13 +361,14 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
     from lbh15.properties.interface import PropertyInterface
     from lbh15.properties.interface import range_warning
+    from lbh15 import P_ATM
 
     class T_double(PropertyInterface):
       def __init__(self):
           super().__init__()
 
       @range_warning
-      def correlation(self, T, verbose=False):
+      def correlation(self, T, p=P_ATM, verbose=False):
           "Return the temperature value multiplied by 2."
           return 2*T
 

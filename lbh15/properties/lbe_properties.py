@@ -1,7 +1,7 @@
 from .interface import PropertyInterface, range_warning
-from .._lbh15 import LBE_MELTING_TEMPERATURE as T_m0
-from .._lbh15 import LBE_BOILING_TEMPERATURE as T_b0
-from .._lbh15 import SOBOLEV_KEYWORD
+from .._constants import LBE_MELTING_TEMPERATURE as T_m0
+from .._constants import LBE_BOILING_TEMPERATURE as T_b0
+from .._constants import SOBOLEV_KEYWORD, P_ATM
 
 
 class p_s(PropertyInterface):
@@ -13,7 +13,7 @@ class p_s(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute saturation vapour pressure
 
@@ -21,6 +21,9 @@ class p_s(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -104,7 +107,7 @@ class sigma(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute surface tension
 
@@ -112,6 +115,9 @@ class sigma(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -167,7 +173,7 @@ class rho(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute density
 
@@ -223,7 +229,7 @@ class alpha(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute thermal expansion coefficient
 
@@ -231,6 +237,9 @@ class alpha(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -279,7 +288,7 @@ class u_s(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute sound velocity
 
@@ -287,6 +296,9 @@ class u_s(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -342,7 +354,7 @@ class beta_s(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute isentropic compressibility
 
@@ -350,6 +362,9 @@ class beta_s(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -400,7 +415,7 @@ class cp(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute specific heat capacity
 
@@ -408,6 +423,9 @@ class cp(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -472,7 +490,7 @@ class h(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute specific enthalpy
 
@@ -480,6 +498,9 @@ class h(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -541,7 +562,7 @@ class mu(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute dynamic viscosity
 
@@ -549,6 +570,9 @@ class mu(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -598,7 +622,7 @@ class r(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute electrical resistivity
 
@@ -606,6 +630,9 @@ class r(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -654,7 +681,7 @@ class k(PropertyInterface):
         super().__init__()
 
     @range_warning
-    def correlation(self, T, verbose=False):
+    def correlation(self, T, p=P_ATM, verbose=False):
         """
         Correlation used to compute thermal conductivity
 
@@ -662,6 +689,9 @@ class k(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False

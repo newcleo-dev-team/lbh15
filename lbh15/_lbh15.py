@@ -6,28 +6,7 @@ import platform
 import copy
 from abc import ABC, abstractmethod
 from .properties.interface import PropertyInterface
-
-# KEYWORDS
-GURVICH_KEYWORD = 'gurvich1991'
-SOBOLEV_KEYWORD = 'sobolev2011'
-
-# LEAD CONSTANTS
-LEAD_MELTING_TEMPERATURE = 600.6  # [K]
-LEAD_MELTING_LATENT_HEAT = 23.07e3  # [J/kg]
-LEAD_BOILING_TEMPERATURE = 2021  # [K]
-LEAD_VAPORISATION_HEAT = 858.6e3  # [J/kg]
-
-# BISMUTH CONSTANTS
-BISMUTH_MELTING_TEMPERATURE = 544.6  # [K]
-BISMUTH_MELTING_LATENT_HEAT = 53.3e3  # [J/kg]
-BISMUTH_BOILING_TEMPERATURE = 1831  # [K]
-BISMUTH_VAPORISATION_HEAT = 856.2e3  # [J/kg]
-
-# LEAD-BISMUTH-EUTECTIC CONSTANTS
-LBE_MELTING_TEMPERATURE = 398.0  # [K]
-LBE_MELTING_LATENT_HEAT = 38.6e3  # [J/kg]
-LBE_BOILING_TEMPERATURE = 1927  # [K]
-LBE_VAPORISATION_HEAT = 856.6e3  # [J/kg]
+from ._constants import P_ATM
 
 
 class LiquidMetalInterface(ABC):
@@ -36,6 +15,9 @@ class LiquidMetalInterface(ABC):
 
     Parameters
     ----------
+    p : float, optional
+        Pressure in [Pa], by default atmospheric pressure, i.e.,
+        101325.0 Pa
     **kwargs : dict
         Dictionary that specifies the quantity from which the parameter shall
         be initialized. The default available ones are:
@@ -66,9 +48,8 @@ class LiquidMetalInterface(ABC):
     __T = 0
     __custom_properties_path = {}
 
-    def __init__(self, **kwargs):
-        from scipy.constants import atmosphere
-        self.__p = atmosphere
+    def __init__(self, p=P_ATM, **kwargs):
+        self.__p = p
         self.__properties = {}
         self.__corr2use = copy.deepcopy(self.__class__._correlations_to_use)
         self.__fill_instance_properties()
@@ -572,7 +553,7 @@ class LiquidMetalInterface(ABC):
     def __getattr__(self, name):
         key = self.__generate_key(name)
         if key in self.__properties.keys():
-            return self.__properties[key].correlation(self.__T, True)
+            return self.__properties[key].correlation(self.__T, self.__p, True)
         else:
             raise AttributeError("'{:s}' object has no attribute '{:s}'"
                                  .format(type(self).__name__, name))

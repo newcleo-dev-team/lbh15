@@ -1,7 +1,7 @@
 import copy
-from ._lbh15 import LEAD_MELTING_TEMPERATURE
-from ._lbh15 import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
-from ._lbh15 import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT
+from ._constants import LEAD_MELTING_TEMPERATURE
+from ._constants import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
+from ._constants import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT, P_ATM
 from ._lbh15 import LiquidMetalInterface
 from .properties.lead_properties import PropertyInterface
 
@@ -12,6 +12,9 @@ class Lead(LiquidMetalInterface):
 
     Parameters
     ----------
+    p : float, optional
+        Pressure in [Pa], by default atmospheric pressure, i.e.,
+        101325.0 Pa
     \\**kwargs : dict
         Dictionary that specifies the quantity from which the object shall
         be initialized. The default available ones are:
@@ -48,7 +51,7 @@ class Lead(LiquidMetalInterface):
     _roots_to_use = {'cp': 0}
     _properties_module = 'lbh15.properties.lead_properties'
 
-    def __init__(self, **kwargs):
+    def __init__(self, p=P_ATM, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(**kwargs)
 
