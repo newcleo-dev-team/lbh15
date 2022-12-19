@@ -181,6 +181,9 @@ class rho(PropertyInterface):
         ----------
         T : float
             Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
         verbose : bool, optional
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
@@ -189,7 +192,13 @@ class rho(PropertyInterface):
         -------
         density in [kg/m^3] : float
         """
-        return 11065 - 1.293*T
+        import numpy as np
+        rho_0 =  11065 - 1.293*T
+        u_s_val = u_s().correlation(T)
+        cp_val = cp_sobolev2011().correlation(T)
+        alpha_val = alpha().correlation(T)
+        return rho_0 + ((np.power(u_s_val, -2)
+                        + T*np.power(alpha_val, 2)/cp_val)*(p - P_ATM))
 
     @property
     def range(self):

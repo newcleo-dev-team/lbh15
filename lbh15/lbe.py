@@ -46,7 +46,7 @@ class LBE(LiquidMetalInterface):
 
     def __init__(self, p=P_ATM, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0
-        super().__init__(**kwargs)
+        super().__init__(p=p, **kwargs)
 
     def _set_constants(self):
         """

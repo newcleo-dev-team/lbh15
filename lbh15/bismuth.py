@@ -1,5 +1,6 @@
 from ._constants import BISMUTH_MELTING_TEMPERATURE
-from ._constants import BISMUTH_MELTING_LATENT_HEAT, BISMUTH_BOILING_TEMPERATURE
+from ._constants import BISMUTH_MELTING_LATENT_HEAT
+from ._constants import BISMUTH_BOILING_TEMPERATURE
 from ._constants import BISMUTH_VAPORISATION_HEAT, P_ATM
 from ._lbh15 import LiquidMetalInterface
 from .properties.bismuth_properties import PropertyInterface
@@ -45,7 +46,7 @@ class Bismuth(LiquidMetalInterface):
 
     def __init__(self, p=P_ATM, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
-        super().__init__(**kwargs)
+        super().__init__(p=p, **kwargs)
 
     def _set_constants(self):
         """

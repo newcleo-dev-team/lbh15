@@ -53,7 +53,7 @@ class Lead(LiquidMetalInterface):
 
     def __init__(self, p=P_ATM, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
-        super().__init__(**kwargs)
+        super().__init__(p=p, **kwargs)
 
     def _set_constants(self):
         """

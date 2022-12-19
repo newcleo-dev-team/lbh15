@@ -175,7 +175,9 @@ class rho(PropertyInterface):
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
-        Correlation used to compute density
+        Correlation used to compute density. sobolev2011 correlation
+        is used as specific heat capacity in pressure dependent
+        term of the correlation.
 
         Parameters
         ----------
@@ -192,7 +194,13 @@ class rho(PropertyInterface):
         -------
         density in [kg/m^3] : float
         """
-        return 11441 - 1.2795*T
+        import numpy as np
+        rho_0 = 11441 - 1.2795*T
+        u_s_val = u_s().correlation(T)
+        cp_val = cp_sobolev2011().correlation(T)
+        alpha_val = alpha().correlation(T)
+        return rho_0 + ((np.power(u_s_val, -2)
+                        + T*np.power(alpha_val, 2)/cp_val)*(p - P_ATM))
 
     @property
     def correlation_name(self):
