@@ -49,7 +49,7 @@ class LiquidMetalInterface(ABC):
     __custom_properties_path = {}
 
     def __init__(self, p=P_ATM, **kwargs):
-        self.__p = p
+        self.__assign_p(p)
         self.__properties = {}
         self.__corr2use = copy.deepcopy(self.__class__._correlations_to_use)
         self.__fill_instance_properties()
@@ -91,12 +91,36 @@ class LiquidMetalInterface(ABC):
         """
         return self.__p
 
+    @p.setter
+    def p(self, p):
+        """
+        Set liquid metal pressure
+
+        Parameters
+        ----------
+        p : float
+            Pressure in [Pa]
+        """
+        self.__assign_p(p)
+
     @property
     def T(self):
         """
         float : temperature used to compute properties [K]
         """
         return self.__T
+
+    @T.setter
+    def T(self, T):
+        """
+        Set liquid metal temperature
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        """
+        self.__assign_T(T)
 
     @property
     def Pr(self):
@@ -355,8 +379,9 @@ class LiquidMetalInterface(ABC):
 
     def __assign_T(self, T):
         """
-        Function used to set class temperature, checking if
-        temperature value in K is strictly positive
+        Function used to set temperature, checking if temperature value
+        is valid, i.e., strictly positive and (if yes) inside
+        the range of melting and boiling temperature.
 
         Parameters
         ----------
@@ -378,6 +403,23 @@ class LiquidMetalInterface(ABC):
                 raise ValueError("Temperature must be "
                                  "strictly positive, "
                                  "{:.2f} [K] was provided".format(T))
+
+    def __assign_p(self, p):
+        """
+        Function used to set pressure, checking if
+        pressure value is valid, i.e., strictly positive.
+
+        Parameters
+        ----------
+            p : float
+            Pressure in [Pa]
+        """
+        if p > 0:
+            self.__p = p
+        else:
+            raise ValueError("Pressure must be "
+                             "strictly positive, "
+                             "{:.2f} [Pa] was provided".format(T))
 
     def __add_property(self, propertyObject):
         """
