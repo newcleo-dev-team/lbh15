@@ -192,13 +192,11 @@ class rho(PropertyInterface):
         -------
         density in [kg/m^3] : float
         """
-        import numpy as np
         rho_0 = 10725 - 1.22*T
         u_s_val = u_s().correlation(T)
         cp_val = cp().correlation(T)
         alpha_val = alpha().correlation(T)
-        return rho_0 + ((np.power(u_s_val, -2)
-                        + T*np.power(alpha_val, 2)/cp_val)*(p - P_ATM))
+        return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - P_ATM))
 
     @property
     def correlation_name(self):
