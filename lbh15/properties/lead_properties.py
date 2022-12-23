@@ -196,7 +196,7 @@ class rho(PropertyInterface):
         """
         rho_0 = 11441 - 1.2795*T
         u_s_val = u_s().correlation(T)
-        cp_val = cp().correlation(T)
+        cp_val = cp_sobolev2011().correlation(T)
         alpha_val = alpha().correlation(T)
         return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - P_ATM))
 
