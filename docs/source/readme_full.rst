@@ -178,6 +178,17 @@ This section shows a few examples of basic usage of lbh15.
   >>> liquid_lead.rho, liquid_lead_2.rho
   (10417.4, 10418.185181757714)
 
+- Create an instance of :class:`.Lead` at a given temperature, than change it. Compare the conductivity
+  value at the two temperatures:
+
+  >>> from lbh15 import Lead
+  >>> liquid_lead = Lead(T=750)
+  >>> liquid_lead.k
+  17.45
+  >>> liquid_lead.T = 1200
+  >>> liquid_lead.k
+  22.4
+
 - Request property outside its range of validity. In this example :class:`.Lead` object is initialized
   using a temperature value that is outside the range of physical validity of the surface tension
   correlation:
