@@ -344,7 +344,8 @@ class LiquidMetalInterface(ABC):
         keys_to_remove = self.__check_properties()
         for key_to_remove in keys_to_remove:
             self.__corr2use.pop(key_to_remove)
-            self._correlations_to_use.pop(key_to_remove)
+            if key_to_remove in self._correlations_to_use.keys():
+                self._correlations_to_use.pop(key_to_remove)
 
     def __fill_class_attributes(self, kwargs):
         """
@@ -504,12 +505,17 @@ class LiquidMetalInterface(ABC):
 
             if prop_key not in self.__properties.keys():
                 if not is_in_default:
-                    warnings.warn("Could not find property '{:s}'."
-                                  "Property was not added."
-                                  "\nGoing to remove it from correlations "
-                                  "to use."
-                                  .format(key), stacklevel=5)
+                    warnings.warn("Could not find property '{:s}' "
+                                  "implementing '{:s}' correlation. "
+                                  "\nGoing to restore package default one, if any."
+                                  .format(key, corr_name),
+                                  stacklevel=5)
                     remove_property = True
+                    corr_avail = self.correlations_available()
+                    if key in corr_avail.keys():
+                        self.__corr2use[key] = (corr_avail[key] if isinstance(corr_avail[key], str)
+                                                else corr_avail[key][-1])
+                        update_properties = True
                 else:
                     def_corr_name = self._default_corr_to_use[key]
                     warnings.warn("Could not find property '{:s}' "
@@ -519,6 +525,7 @@ class LiquidMetalInterface(ABC):
                                   .format(key, corr_name, def_corr_name),
                                   stacklevel=5)
                     self.__corr2use[key] = def_corr_name
+                    remove_property = True
                     update_properties = True
             else:
                 if corr_name != self.__properties[prop_key].correlation_name:
