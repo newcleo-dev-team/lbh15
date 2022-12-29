@@ -195,9 +195,9 @@ class rho(PropertyInterface):
         density in [kg/m^3] : float
         """
         rho_0 = 11441 - 1.2795*T
-        u_s_val = u_s().correlation(T)
-        cp_val = cp_sobolev2011().correlation(T)
-        alpha_val = alpha().correlation(T)
+        u_s_val = u_s().correlation(T, p)
+        cp_val = cp_sobolev2011().correlation(T, p)
+        alpha_val = alpha().correlation(T, p)
         return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - P_ATM))
 
     @property
@@ -391,7 +391,7 @@ class beta_s(PropertyInterface):
         """
         rho_obj = rho()
         u_s_obj = u_s()
-        return 1/(rho_obj.correlation(T) * u_s_obj.correlation(T)**2)
+        return 1/(rho_obj.correlation(T, p) * u_s_obj.correlation(T, p)**2)
 
     @property
     def range(self):
