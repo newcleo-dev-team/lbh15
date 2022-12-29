@@ -156,7 +156,7 @@ class LiquidMetalInterface(ABC):
         key = self.__generate_key(property_name)
         if (key in self.__properties.keys() and
                 self.__properties[key].correlation_name != correlation_name):
-            self._correlations_to_use[property_name] = correlation_name
+            self.__corr2use[property_name] = correlation_name
             self.__fill_instance_properties()
 
     @classmethod
