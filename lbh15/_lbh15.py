@@ -303,7 +303,7 @@ class LiquidMetalInterface(ABC):
                     self._guess = helper(input_value)
 
                 def function_to_solve(T, target):
-                    return function_of_T(T) - target
+                    return function_of_T(T, self.__p) - target
 
                 if is_injective:
                     res = fsolve(function_to_solve, x0=[self._guess],
