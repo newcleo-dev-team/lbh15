@@ -797,4 +797,4 @@ class k(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {self.long_name}"
+        return f"Liquid lead {self.long_name}"
