@@ -1,3 +1,5 @@
+"""__init__ module of lbh15 package"""
+
 __version__ = "1.0.0"
 __author__ = "Daniele Panico and Daniele Tomatis"
 __company__ = "newcleo"

@@ -1,3 +1,4 @@
+"""Module with the definition of thermophysical property objects for lead"""
 from .interface import PropertyInterface, range_warning
 from .._constants import LEAD_MELTING_TEMPERATURE as T_m0
 from .._constants import LEAD_BOILING_TEMPERATURE as T_b0
@@ -9,9 +10,6 @@ class p_s(PropertyInterface):
     Liquid lead saturation vapour pressure
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -55,7 +53,7 @@ class p_s(PropertyInterface):
         """
         if property_value < 1e-2:
             rvalue = 800
-        elif property_value >= 1e-2 and property_value < 1e2:
+        elif 1e-2 <= property_value < 1e2:
             rvalue = 1200
         else:
             rvalue = 2000
@@ -95,7 +93,7 @@ class p_s(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class sigma(PropertyInterface):
@@ -103,9 +101,6 @@ class sigma(PropertyInterface):
     Liquid lead surface tension
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -161,7 +156,7 @@ class sigma(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class rho(PropertyInterface):
@@ -169,9 +164,6 @@ class rho(PropertyInterface):
     Liquid lead density
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -233,7 +225,7 @@ class rho(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class alpha(PropertyInterface):
@@ -241,9 +233,6 @@ class alpha(PropertyInterface):
     Liquid lead thermal expansion coefficient
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -292,7 +281,7 @@ class alpha(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class u_s(PropertyInterface):
@@ -300,9 +289,6 @@ class u_s(PropertyInterface):
     Liquid lead sound velocity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -366,9 +352,6 @@ class beta_s(PropertyInterface):
     Liquid lead isentropic compressibility
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -419,7 +402,7 @@ class beta_s(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class cp_sobolev2011(PropertyInterface):
@@ -427,9 +410,6 @@ class cp_sobolev2011(PropertyInterface):
     Liquid lead specific heat capacity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -501,7 +481,7 @@ class cp_sobolev2011(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class cp_gurvich1991(PropertyInterface):
@@ -509,9 +489,6 @@ class cp_gurvich1991(PropertyInterface):
     Liquid lead specific heat capacity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -583,7 +560,7 @@ class cp_gurvich1991(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class h(PropertyInterface):
@@ -591,9 +568,6 @@ class h(PropertyInterface):
     Liquid lead specific enthalpy
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -652,10 +626,9 @@ class h(PropertyInterface):
         """
         str : property description
         """
-        return ("Liquid lead {:s} "
+        return (f"Liquid lead {self.long_name} "
                 "(as difference with respect to"
-                "the melting point enthalpy)"
-                .format(self.long_name))
+                "the melting point enthalpy)")
 
 
 class mu(PropertyInterface):
@@ -663,9 +636,6 @@ class mu(PropertyInterface):
     Liquid lead dynamic viscosity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -715,7 +685,7 @@ class mu(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class r(PropertyInterface):
@@ -723,9 +693,6 @@ class r(PropertyInterface):
     Liquid lead electrical resistivity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -774,7 +741,7 @@ class r(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return f"Liquid lead {self.long_name}"
 
 
 class k(PropertyInterface):
@@ -782,9 +749,6 @@ class k(PropertyInterface):
     Liquid lead thermal conductivity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -833,4 +797,4 @@ class k(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lead {:s}".format(self.long_name)
+        return "Liquid lead {self.long_name}"

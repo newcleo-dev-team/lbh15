@@ -1,3 +1,5 @@
+"""Module with the definition of thermophysical property objects
+for lead-bismuth eutectic"""
 from .interface import PropertyInterface, range_warning
 from .._constants import LBE_MELTING_TEMPERATURE as T_m0
 from .._constants import LBE_BOILING_TEMPERATURE as T_b0
@@ -9,9 +11,6 @@ class p_s(PropertyInterface):
     Liquid lead-bismuth eutectic saturation vapour pressure
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -55,7 +54,7 @@ class p_s(PropertyInterface):
         """
         if property_value < 1e-2:
             rvalue = 800
-        elif property_value >= 1e-2 and property_value < 1e2:
+        elif 1e-2 <= property_value < 1e2:
             rvalue = 1200
         else:
             rvalue = 2000
@@ -95,7 +94,7 @@ class p_s(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class sigma(PropertyInterface):
@@ -103,9 +102,6 @@ class sigma(PropertyInterface):
     Liquid lead-bismuth eutectic surface tension
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -161,7 +157,7 @@ class sigma(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class rho(PropertyInterface):
@@ -169,9 +165,6 @@ class rho(PropertyInterface):
     Liquid lead-bismuth eutectic density
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -224,7 +217,7 @@ class rho(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class alpha(PropertyInterface):
@@ -232,9 +225,6 @@ class alpha(PropertyInterface):
     Liquid lead-bismuth eutectic thermal expansion coefficient
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -283,7 +273,7 @@ class alpha(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class u_s(PropertyInterface):
@@ -291,9 +281,6 @@ class u_s(PropertyInterface):
     Liquid lead-bismuth eutectic sound velocity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -357,9 +344,6 @@ class beta_s(PropertyInterface):
     Liquid lead-bismuth eutectic isentropic compressibility
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -410,7 +394,7 @@ class beta_s(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class cp(PropertyInterface):
@@ -418,9 +402,6 @@ class cp(PropertyInterface):
     Liquid lead-bismuth eutectic specific heat capacity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -485,7 +466,7 @@ class cp(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class h(PropertyInterface):
@@ -493,9 +474,6 @@ class h(PropertyInterface):
     Liquid lead-bismuth eutectic specific enthalpy
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -554,10 +532,9 @@ class h(PropertyInterface):
         """
         str : property description
         """
-        return ("Liquid lbe {:s} "
+        return (f"Liquid lbe {self.long_name} "
                 "(as difference with respect to"
-                "the melting point enthalpy)"
-                .format(self.long_name))
+                "the melting point enthalpy)")
 
 
 class mu(PropertyInterface):
@@ -565,9 +542,6 @@ class mu(PropertyInterface):
     Liquid lead-bismuth eutectic dynamic viscosity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -617,7 +591,7 @@ class mu(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class r(PropertyInterface):
@@ -625,9 +599,6 @@ class r(PropertyInterface):
     Liquid lead-bismuth eutectic electrical resistivity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -676,7 +647,7 @@ class r(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"
 
 
 class k(PropertyInterface):
@@ -684,9 +655,6 @@ class k(PropertyInterface):
     Liquid lead-bismuth eutectic thermal conductivity
     property class
     """
-    def __init__(self):
-        super().__init__()
-
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):
         """
@@ -742,4 +710,4 @@ class k(PropertyInterface):
         """
         str : property description
         """
-        return "Liquid lbe {:s}".format(self.long_name)
+        return f"Liquid lbe {self.long_name}"

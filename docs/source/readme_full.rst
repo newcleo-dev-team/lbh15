@@ -298,9 +298,6 @@ Advanced usage comprises the possibility of adding new properties and physical c
     from lbh15 import P_ATM
 
     class rho_custom_corr(PropertyInterface):
-      def __init__(self):
-          super().__init__()
-
       @range_warning
       def correlation(self, T, p=P_ATM, verbose=False):
           "Implement here the user-defined correlation."
@@ -389,9 +386,6 @@ Advanced usage comprises the possibility of adding new properties and physical c
     from lbh15 import P_ATM
 
     class T_double(PropertyInterface):
-      def __init__(self):
-          super().__init__()
-
       @range_warning
       def correlation(self, T, p=P_ATM, verbose=False):
           "Return the temperature value multiplied by 2."

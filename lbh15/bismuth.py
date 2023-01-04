@@ -1,9 +1,10 @@
+"""Module with the definition of bismuth liquid metal object class,
+i.e., Bismuth"""
 from ._constants import BISMUTH_MELTING_TEMPERATURE
 from ._constants import BISMUTH_MELTING_LATENT_HEAT
 from ._constants import BISMUTH_BOILING_TEMPERATURE
 from ._constants import BISMUTH_VAPORISATION_HEAT, P_ATM
 from ._lbh15 import LiquidMetalInterface
-from .properties.bismuth_properties import PropertyInterface
 
 
 class Bismuth(LiquidMetalInterface):

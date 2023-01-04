@@ -1,9 +1,10 @@
+"""Module with the definition of lead liquid metal object class,
+i.e., Lead"""
 import copy
 from ._constants import LEAD_MELTING_TEMPERATURE
 from ._constants import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._constants import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT, P_ATM
 from ._lbh15 import LiquidMetalInterface
-from .properties.lead_properties import PropertyInterface
 
 
 class Lead(LiquidMetalInterface):

@@ -1,3 +1,5 @@
+"""Module with the definition of liquid metal object base class,
+i.e., LiquidMetalInterface"""
 import warnings
 import sys
 import inspect
@@ -154,7 +156,7 @@ class LiquidMetalInterface(ABC):
             Name of the correlation
         """
         key = self.__generate_key(property_name)
-        if (key in self.__properties.keys() and
+        if (key in self.__properties and
                 self.__properties[key].correlation_name != correlation_name):
             self.__corr2use[property_name] = correlation_name
             self.__fill_instance_properties()
@@ -169,9 +171,9 @@ class LiquidMetalInterface(ABC):
         -------
         list
         """
-        objList = cls.__load_properties()
-        objList += cls.__load_custom_properties()
-        rvalue = ['T'] + [objList[i].name for i in range(len(objList))]
+        obj_list = cls.__load_properties()
+        obj_list += cls.__load_custom_properties()
+        rvalue = ['T'] + [obj_list[i].name for i in range(len(obj_list))]
         return list(dict.fromkeys(rvalue))
 
     @classmethod
@@ -183,13 +185,13 @@ class LiquidMetalInterface(ABC):
         -------
         dict
         """
-        objList = cls.__load_properties()
-        objList += cls.__load_custom_properties()
+        obj_list = cls.__load_properties()
+        obj_list += cls.__load_custom_properties()
         rvalue = {}
-        for obj in objList:
+        for obj in obj_list:
             corr_name = obj.correlation_name
-            if obj.name in rvalue.keys():
-                if type(rvalue[obj.name]) == list:
+            if obj.name in rvalue:
+                if isinstance(rvalue[obj.name], list):
                     rvalue[obj.name].append(corr_name)
                 else:
                     rvalue[obj.name] = [rvalue[obj.name]] + [corr_name]
@@ -243,7 +245,7 @@ class LiquidMetalInterface(ABC):
         file_name = res[-1][:-3]
         path = file_path[:-len(res[-1])]
         lm_name = cls.__name__
-        if lm_name not in cls.__custom_properties_path.keys():
+        if lm_name not in cls.__custom_properties_path:
             cls.__custom_properties_path[lm_name] = {}
         cls.__custom_properties_path[lm_name][path] = file_name
 
@@ -288,10 +290,9 @@ class LiquidMetalInterface(ABC):
         else:
             function_of_T = None
             helper = None
-            propertyObjectList = self.__properties
             is_injective = False
             key = self.__generate_key(input_property)
-            if key in self.__properties.keys():
+            if key in self.__properties:
                 function_of_T = self.__properties[key].correlation
                 helper = self.__properties[key].initialization_helper
                 is_injective = self.__properties[key].is_injective
@@ -310,7 +311,7 @@ class LiquidMetalInterface(ABC):
                                  args=(input_value), xtol=1e-10)
                     rvalue = res[0]
                 else:
-                    if input_property in self._roots_to_use.keys():
+                    if input_property in self._roots_to_use:
                         index = self._roots_to_use[input_property]
                         res = fsolve(function_to_solve,
                                      x0=[self._guess, 3*self._guess],
@@ -323,28 +324,28 @@ class LiquidMetalInterface(ABC):
 
         return rvalue
 
-    def __fill_instance_properties(self, **kwargs):
+    def __fill_instance_properties(self):
         """
         Fills instance properties.
         """
-        propertyObjectList = self.__load_properties()
-        propertyObjectList += self.__load_custom_properties()
-        for propertyObject in propertyObjectList:
+        property_obj_list = self.__load_properties()
+        property_obj_list += self.__load_custom_properties()
+        for property_object in property_obj_list:
             # always add property if specific correlation is not specified
-            name = propertyObject.name
-            addProperty = (not self.__corr2use or
-                           name not in self.__corr2use.keys())
+            name = property_object.name
+            add_property = (not self.__corr2use or
+                            name not in self.__corr2use.keys())
             # if correlation was specified, check that correlation names match
-            if not addProperty:
-                addProperty = (propertyObject.correlation_name ==
-                               self.__corr2use[name])
-            if addProperty:
-                self.__add_property(propertyObject)
+            if not add_property:
+                add_property = (property_object.correlation_name ==
+                                self.__corr2use[name])
+            if add_property:
+                self.__add_property(property_object)
 
         keys_to_remove = self.__check_properties()
         for key_to_remove in keys_to_remove:
             self.__corr2use.pop(key_to_remove)
-            if key_to_remove in self._correlations_to_use.keys():
+            if key_to_remove in self._correlations_to_use:
                 self._correlations_to_use.pop(key_to_remove)
 
     def __fill_class_attributes(self, kwargs):
@@ -359,24 +360,23 @@ class LiquidMetalInterface(ABC):
         if len(kwargs) != 1:
             raise ValueError("One and only one property at "
                              "time can be used for initialization. "
-                             "{:d} were provided".format(len(kwargs)))
-        else:
-            valid_prop = self.properties_for_initialization()
-            input_property = list(kwargs.keys())[0]
-            input_value = kwargs[input_property]
-            if input_property not in valid_prop:
-                list_to_print = "\n\n"
-                for sym in valid_prop:
-                    list_to_print += sym+"\n"
-                list_to_print += "\n"
-                raise ValueError("Initialization can be done only with one of "
-                                 "the following properties:{:s}"
-                                 "{:s} was provided"
-                                 .format(list_to_print, input_property))
-            else:
-                self._set_constants()
-                temperature = self.__compute_T(input_value, input_property)
-                self.__assign_T(temperature)
+                             f"{len(kwargs)} were provided")
+
+        valid_prop = self.properties_for_initialization()
+        input_property = list(kwargs.keys())[0]
+        input_value = kwargs[input_property]
+        if input_property not in valid_prop:
+            list_to_print = "\n\n"
+            for sym in valid_prop:
+                list_to_print += sym+"\n"
+            list_to_print += "\n"
+            raise ValueError("Initialization can be done only with one of "
+                             f"the following properties:{list_to_print}"
+                             f"{input_property} was provided")
+
+        self._set_constants()
+        temperature = self.__compute_T(input_value, input_property)
+        self.__assign_T(temperature)
 
     def __assign_T(self, T):
         """
@@ -389,21 +389,20 @@ class LiquidMetalInterface(ABC):
         T : float
             Temperature in [K]
         """
-        if T > self.T_m0 and T < self.T_b0:
+        if self.T_m0 < T < self.T_b0:
             self.__T = T
         else:
             if T >= self.T_b0:
                 raise ValueError("Temperature must be smaller than "
-                                 "boiling temperature ({:.2f} [K]), {:.2f} "
-                                 "[K] was provided".format(self.T_b0, T))
-            elif T > 0 and T <= self.T_m0:
+                                 f"boiling temperature ({self.T_b0:.2f} [K]), "
+                                 f"{T:.2f} [K] was provided")
+            if 0 < T <= self.T_m0:
                 raise ValueError("Temperature must be larger than "
-                                 "melting temperature ({:.2f} [K]), {:.2f} "
-                                 "[K] was provided".format(self.T_m0, T))
-            else:
-                raise ValueError("Temperature must be "
-                                 "strictly positive, "
-                                 "{:.2f} [K] was provided".format(T))
+                                 f"melting temperature ({self.T_m0:.2f} [K]), "
+                                 f"{T:.2f} [K] was provided")
+            raise ValueError("Temperature must be "
+                             "strictly positive, "
+                             f"{T:.2f} [K] was provided")
 
     def __assign_p(self, p):
         """
@@ -420,43 +419,41 @@ class LiquidMetalInterface(ABC):
         else:
             raise ValueError("Pressure must be "
                              "strictly positive, "
-                             "{:.2f} [Pa] was provided".format(T))
+                             f"{p:.2f} [Pa] was provided")
 
-    def __add_property(self, propertyObject):
+    def __add_property(self, property_object):
         """
         Adds the property to class attributes. In particular, it adds
         '<prpertyObject.name>_info' as class method to get additional
-        information on property. Moreover it adds propertyObject
+        information on property. Moreover it adds property_object
         to instance dictionary which will be used in dunder __getattr__
         to return attribute '<prpertyObject.name>'.
 
         Parameters
         ----------
-        propertyObject : :class:`_properties.PropertyInterface`
+        property_object : :class:`_properties.PropertyInterface`
             Object which inherits from :class:`_properties.PropertyInterface`
         """
-        key = self.__generate_key(propertyObject.name)
-        self.__properties[key] = propertyObject
+        key = self.__generate_key(property_object.name)
+        self.__properties[key] = property_object
 
         def new_property_info(print_info=True, n_tab=0):
-            name = propertyObject.name
-            propertyVal = self.__properties[key].correlation(self.__T)
-            if propertyVal < 1e-2:
-                value = ("Value: {:.2e} {:s}"
-                         .format(propertyVal,
-                                 self.__properties[key].units))
+            name = property_object.name
+            property_val = self.__properties[key].correlation(self.__T)
+            if property_val < 1e-2:
+                value = (f"Value: {property_val:.2e} "
+                         f"{self.__properties[key].units}")
             else:
-                value = ("Value: {:.2f} {:s}"
-                         .format(propertyVal,
-                                 self.__properties[key].units))
-            validity = ("Validity range: [{:.2f}, {:.2f}] K"
-                        .format(self.__properties[key].range[0],
-                                self.__properties[key].range[1]))
-            corr_name = ("Correlation name: '{:s}'"
-                         .format(self.__properties[key].correlation_name))
-            long_name = ("Long name: {:s}"
-                         .format(self.__properties[key].long_name))
-            units = "Units: {:s}".format(self.__properties[key].units)
+                value = (f"Value: {property_val:.2f} "
+                         f"{self.__properties[key].units}")
+            validity = ("Validity range: "
+                        f"[{self.__properties[key].range[0]:.2f}, "
+                        f"{self.__properties[key].range[1]:.2f}] K")
+            corr_name = ("Correlation name: "
+                         f"'{self.__properties[key].correlation_name}'")
+            long_name = ("Long name: "
+                         f"{self.__properties[key].long_name}")
+            units = f"Units: {self.__properties[key].units}"
             description = ("Description:\n{:s}{:s}"
                            .format((n_tab+2)*"\t",
                                    self.__properties[key].description))
@@ -469,12 +466,14 @@ class LiquidMetalInterface(ABC):
             all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", units)
             all_info += "{:s}{:s}".format((n_tab+1)*"\t", description)
 
+            rvalue = None
             if print_info:
                 print(all_info)
             else:
-                return all_info
+                rvalue = all_info
+            return rvalue
 
-        setattr(self, propertyObject.name+"_info",
+        setattr(self, property_object.name+"_info",
                 new_property_info)
 
     def __generate_key(self, property_name):
@@ -500,40 +499,39 @@ class LiquidMetalInterface(ABC):
         for key in self.__corr2use.keys():
             prop_key = self.__generate_key(key)
             corr_name = self.__corr2use[key]
-            is_in_default = key in self._default_corr_to_use.keys()
+            is_in_default = key in self._default_corr_to_use
             remove_property = False
 
-            if prop_key not in self.__properties.keys():
+            if prop_key not in self.__properties:
                 if not is_in_default:
-                    warnings.warn("Could not find property '{:s}' "
-                                  "implementing '{:s}' correlation. "
-                                  "\nGoing to restore package default one, if any."
-                                  .format(key, corr_name),
+                    warnings.warn(f"Could not find property '{key}' "
+                                  f"implementing '{corr_name}' correlation. "
+                                  "\nGoing to restore package default one, "
+                                  "if any.",
                                   stacklevel=5)
                     remove_property = True
                     corr_avail = self.correlations_available()
-                    if key in corr_avail.keys():
-                        self.__corr2use[key] = (corr_avail[key] if isinstance(corr_avail[key], str)
+                    if key in corr_avail:
+                        isstr = isinstance(corr_avail[key], str)
+                        self.__corr2use[key] = (corr_avail[key] if isstr
                                                 else corr_avail[key][-1])
                         update_properties = True
                 else:
                     def_corr_name = self._default_corr_to_use[key]
-                    warnings.warn("Could not find property '{:s}' "
-                                  "implementing '{:s}' correlation. "
+                    warnings.warn(f"Could not find property '{key}' "
+                                  f"implementing '{corr_name}' correlation. "
                                   "\nGoing to restore default correlation "
-                                  "'{:s}'."
-                                  .format(key, corr_name, def_corr_name),
+                                  f"'{def_corr_name}'.",
                                   stacklevel=5)
                     self.__corr2use[key] = def_corr_name
                     remove_property = True
                     update_properties = True
             else:
                 if corr_name != self.__properties[prop_key].correlation_name:
-                    warnings.warn("Could not find property '{:s}' "
-                                  "implementing '{:s}' correlation. "
+                    warnings.warn(f"Could not find property '{key}' "
+                                  f"implementing '{corr_name}' correlation. "
                                   "\nGoing to remove it from correlations "
-                                  "to use."
-                                  .format(key, corr_name),
+                                  "to use.",
                                   stacklevel=5)
                     remove_property = not is_in_default
                     if not remove_property:
@@ -558,13 +556,13 @@ class LiquidMetalInterface(ABC):
             list of property objects, i.e. of classes which inherit from
             :class:`_properties.PropertyInterface`
         """
-        propertyObjectList = []
+        property_obj_list = []
         module = cls._properties_module
-        for name, obj in inspect.getmembers(sys.modules[module]):
+        for _, obj in inspect.getmembers(sys.modules[module]):
             if inspect.isclass(obj) and obj is not PropertyInterface:
                 if issubclass(obj, PropertyInterface):
-                    propertyObjectList.append(obj())
-        return propertyObjectList
+                    property_obj_list.append(obj())
+        return property_obj_list
 
     @classmethod
     def __load_custom_properties(cls):
@@ -577,61 +575,61 @@ class LiquidMetalInterface(ABC):
             list of property objects, i.e. of classes which inherit from
             :class:`_properties.PropertyInterface`
         """
-        customPropertyObjectList = []
-        if cls.__name__ in cls.__custom_properties_path.keys():
+        customproperty_obj_list = []
+        if cls.__name__ in cls.__custom_properties_path:
             lm_path = cls.__custom_properties_path[cls.__name__]
             for path in lm_path.keys():
                 if path not in sys.path:
                     sys.path.append(path)
                 module_name = lm_path[path]
                 module = importlib.import_module(module_name)
-                for name, obj in inspect.getmembers(module):
+                for _, obj in inspect.getmembers(module):
                     if inspect.isclass(obj) and obj is not PropertyInterface:
                         if issubclass(obj, PropertyInterface):
-                            customPropertyObjectList.append(obj())
-        return customPropertyObjectList
+                            customproperty_obj_list.append(obj())
+        return customproperty_obj_list
 
     @abstractmethod
     def _set_constants(self):
         """
         Sets the class constants
         """
-        raise NotImplementedError("{:s}._set_constants NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        raise NotImplementedError(f"{type(self).__name__}._set_constants "
+                                  "NOT IMPLEMENTED")
 
     def __getattr__(self, name):
         key = self.__generate_key(name)
-        if key in self.__properties.keys():
-            return self.__properties[key].correlation(self.__T, self.__p, True)
-        else:
-            raise AttributeError("'{:s}' object has no attribute '{:s}'"
-                                 .format(type(self).__name__, name))
+        if key not in self.__properties:
+            raise AttributeError(f"'{type(self).__name__}' object "
+                                 f"has no attribute '{name}'")
+
+        return self.__properties[key].correlation(self.__T, self.__p, True)
 
     def __str__(self):
-        rvalue = ("{:s} liquid metal @T={:.2f} K\n"
-                  .format(type(self).__name__, self.T))
+        rvalue = (f"{type(self).__name__} liquid metal "
+                  f"@T={self.T:.2f} K\n")
         rvalue += "\nConstants:\n"
-        rvalue += "\tPressure: {:.2f} [Pa]\n".format(self.p)
-        rvalue += "\tMelting Temperature: {:.2f} [K]\n".format(self.T_m0)
-        rvalue += "\tBoiling Temperature: {:.2f} [K]\n".format(self.T_b0)
-        rvalue += "\tMelting latent heat: {:.2f} [J/kg]\n".format(self.Q_m0)
-        rvalue += "\tVaporisation heat: {:.2f} [J/kg]\n".format(self.Q_b0)
+        rvalue += f"\tPressure: {self.p:.2f} [Pa]\n"
+        rvalue += f"\tMelting Temperature: {self.T_m0:.2f} [K]\n"
+        rvalue += f"\tBoiling Temperature: {self.T_b0:.2f} [K]\n"
+        rvalue += f"\tMelting latent heat: {self.Q_m0:.2f} [J/kg]\n"
+        rvalue += f"\tVaporisation heat: {self.Q_b0:.2f} [J/kg]\n"
         rvalue += "\nThermophysical properties:\n"
-        for key in self.__properties.keys():
-            prop_name = key.replace("_"+self._liquid_metal_name, "")
+        for key in self.__properties:
+            prop_name = key.replace("_"+type(self).__name__, "")
             info = getattr(self, prop_name+"_info")(print_info=False, n_tab=1)
             rvalue += info + "\n"
         return rvalue
 
     def __repr__(self):
-        rvalue = "{:s}(T={:.2f}, ".format(type(self).__name__, self.T)
-        for key in self.__properties.keys():
+        rvalue = f"{type(self).__name__}(T={self.T:.2f}, "
+        for key in self.__properties:
             property_name = key.replace("_"+self._liquid_metal_name, "")
-            attrValue = getattr(self, property_name)
-            if attrValue < 1e-2:
-                rvalue += "{:s}={:.2e}, ".format(property_name, attrValue)
+            attr_value = getattr(self, property_name)
+            if attr_value < 1e-2:
+                rvalue += f"{property_name}={attr_value:.2e}, "
             else:
-                rvalue += "{:s}={:.2f}, ".format(property_name, attrValue)
+                rvalue += f"{property_name}={attr_value:.2f}, "
         rvalue = rvalue[:-2]
         rvalue += ")"
         return rvalue

@@ -1,5 +1,8 @@
+"""Module with the definition of thermophysical property object base class,
+i.e., PropertyInterface. Definition of decorator
+for validity range check as well."""
 import warnings
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from .._constants import P_ATM
 
 
@@ -16,12 +19,10 @@ def range_warning(function):
             temp = temp[0]
         if temp < range_lim[0] or temp > range_lim[1]:
             if len(args) == 4:
-                warnings.warn("The {:s} is requested at "
-                              "temperature value of {:.2f} K "
+                warnings.warn(f"The {p_name} is requested at "
+                              f"temperature value of {temp:.2f} K "
                               "that is not in validity range "
-                              "[{:.2f}, {:.2f}] K"
-                              .format(p_name, temp,
-                                      range_lim[0], range_lim[1]),
+                              f"[{range_lim[0]:.2f}, {range_lim[1]:.2f}] K",
                               stacklevel=3)
         return function(*args)
     return wrapper
@@ -127,8 +128,8 @@ class PropertyInterface(ABC):
             True to tell decorator to print warning about
             range check failing, False otherwise. By default False
         """
-        raise NotImplementedError("{:s}.correlation NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        raise NotImplementedError(f"{type(self).__name__}.correlation "
+                                  "NOT IMPLEMENTED")
 
     @property
     def name(self):
@@ -184,34 +185,38 @@ class PropertyInterface(ABC):
         """
         return self.__T_at_max
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def range(self):
         """
         list : temperature validity range for property correlation
         """
-        raise NotImplementedError("{:s}.range NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        raise NotImplementedError(f"{type(self).__name__}.range "
+                                  "NOT IMPLEMENTED")
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def units(self):
         """
         str : property units
         """
-        raise NotImplementedError("{:s}.units NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        raise NotImplementedError(f"{type(self).__name__}.units "
+                                  "NOT IMPLEMENTED")
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def long_name(self):
         """
         str : property long name
         """
-        raise NotImplementedError("{:s}.long_name NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        raise NotImplementedError(f"{type(self).__name__}.long_name "
+                                  "NOT IMPLEMENTED")
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def description(self):
         """
         str : property description
         """
-        raise NotImplementedError("{:s}.description NOT IMPLEMENTED"
-                                  .format(type(self).__name__))
+        raise NotImplementedError(f"{type(self).__name__}.description "
+                                  "NOT IMPLEMENTED")
