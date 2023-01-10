@@ -21,7 +21,7 @@ setup(
     python_requires='>=3.8.10',
     install_requires=['scipy>=1.8.1', 'numpy>=1.22.3'],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
