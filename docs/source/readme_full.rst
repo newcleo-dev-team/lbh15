@@ -289,7 +289,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> Lead.correlations_available()
   {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'sobolev2011', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'sobolev2011', 'r': 'lbh15', 'rho': 'sobolev2008a', 'sigma': 'jauch1986', 'u_s': 'sobolev2011'}
   
-  Implement the new property in :code:`<execution_dir>/custom_lbh15/properties.py` as:
+  Implement the new property in :code:`<execution_dir>/custom_property/custom_density.py` as:
 
   .. code-block:: python
 
@@ -335,7 +335,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
   >>> from lbh15 import Lead
   >>> import os
-  >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_lbh15/properties.py')
+  >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_property/custom_density.py')
   >>> Lead.correlations_available()
   {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'sobolev2011', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'sobolev2011', 'r': 'lbh15', 'rho': ['sobolev2008a','custom2022'], 'sigma': 'jauch1986', 'u_s': 'sobolev2011'}
 
@@ -377,7 +377,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   It is also possible to change the correlation used by a liquid metal object instance calling the method :code:`change_correlation_to_use`.
 
 - lbh15 gives also the possibility to add new properties to the liquid metal objects. For 
-  instance, let's implement a property that is simply the double of the temperature in :code:`<execution_dir>/custom_lbh15/properties.py`:
+  instance, let's implement a property that is simply the double of the temperature in :code:`<execution_dir>/custom_property/double_T.py`:
 
   .. code-block:: python
 
@@ -419,7 +419,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
   >>> from lbh15 import Lead
   >>> import os
-  >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_lbh15/properties.py')
+  >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_property/double_T.py')
   >>> # Initialization of lead object at T=750 K
   >>> liquid_lead = Lead(T=750)
   >>> # Get T_double
