@@ -624,7 +624,7 @@ class LiquidMetalInterface(ABC):
     def __repr__(self):
         rvalue = f"{type(self).__name__}(T={self.T:.2f}, "
         for key in self.__properties:
-            property_name = key.replace("_"+self._liquid_metal_name, "")
+            property_name = key.replace("_"+type(self).__name__, "")
             attr_value = getattr(self, property_name)
             if attr_value < 1e-2:
                 rvalue += f"{property_name}={attr_value:.2e}, "
