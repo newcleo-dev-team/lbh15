@@ -161,6 +161,45 @@ class LiquidMetalInterface(ABC):
             self.__corr2use[property_name] = correlation_name
             self.__fill_instance_properties()
 
+    def check_temperature(self, T):
+        """
+        Checks that the provided temperature
+        belongs to the correct temperature range, i.e.,
+        liquid temperature range.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+
+        Returns
+        -------
+        rvalue : bool
+            True if check is ok, False otherwise
+        error_message : str
+            Contains the error message (if any) associated
+            to the temperature check
+        """
+        if self.T_m0 < T < self.T_b0:
+            rvalue = True
+            error_message = ""
+        else:
+            rvalue = False
+            if T >= self.T_b0:
+                error_message = ("Temperature must be smaller than "
+                                 f"boiling temperature ({self.T_b0:.2f} [K]), "
+                                 f"{T:.2f} [K] was provided")
+            elif 0 < T <= self.T_m0:
+                error_message = ("Temperature must be larger than "
+                                 f"melting temperature ({self.T_m0:.2f} [K]), "
+                                 f"{T:.2f} [K] was provided")
+            else:
+                error_message = ("Temperature must be "
+                                 "strictly positive, "
+                                 f"{T:.2f} [K] was provided")
+
+        return rvalue, error_message
+
     @classmethod
     def properties_for_initialization(cls):
         """
@@ -389,20 +428,11 @@ class LiquidMetalInterface(ABC):
         T : float
             Temperature in [K]
         """
-        if self.T_m0 < T < self.T_b0:
+        temp_ok, error_message = self.check_temperature(T)
+        if temp_ok:
             self.__T = T
         else:
-            if T >= self.T_b0:
-                raise ValueError("Temperature must be smaller than "
-                                 f"boiling temperature ({self.T_b0:.2f} [K]), "
-                                 f"{T:.2f} [K] was provided")
-            if 0 < T <= self.T_m0:
-                raise ValueError("Temperature must be larger than "
-                                 f"melting temperature ({self.T_m0:.2f} [K]), "
-                                 f"{T:.2f} [K] was provided")
-            raise ValueError("Temperature must be "
-                             "strictly positive, "
-                             f"{T:.2f} [K] was provided")
+            raise ValueError(error_message)
 
     def __assign_p(self, p):
         """
