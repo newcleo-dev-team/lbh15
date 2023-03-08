@@ -558,10 +558,11 @@ class LiquidMetalInterface(ABC):
         """
         property_obj_list = []
         module = cls._properties_module
-        for _, obj in inspect.getmembers(sys.modules[module]):
-            if inspect.isclass(obj) and obj is not PropertyInterface:
-                if issubclass(obj, PropertyInterface):
-                    property_obj_list.append(obj())
+        if module:
+            for _, obj in inspect.getmembers(sys.modules[module]):
+                if inspect.isclass(obj) and obj is not PropertyInterface:
+                    if issubclass(obj, PropertyInterface):
+                        property_obj_list.append(obj())
         return property_obj_list
 
     @classmethod
