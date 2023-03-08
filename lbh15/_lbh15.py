@@ -350,16 +350,16 @@ class LiquidMetalInterface(ABC):
                                  args=(input_value), xtol=1e-10)
                     rvalue = res[0]
                 else:
-                    if input_property in self._roots_to_use:
-                        index = self._roots_to_use[input_property]
-                        res = fsolve(function_to_solve,
-                                     x0=[self._guess, 3*self._guess],
-                                     args=(input_value), xtol=1e-10)
-
-                        if len(res) > index - 1:
-                            rvalue = res[index]
-                        else:
-                            rvalue = res[0]
+                    index = (self._roots_to_use[input_property]
+                             if input_property in self._roots_to_use
+                             else 0)
+                    res = fsolve(function_to_solve,
+                                 x0=[self._guess, 3*self._guess],
+                                 args=(input_value), xtol=1e-10)
+                    if len(res) > index - 1:
+                        rvalue = res[index]
+                    else:
+                        rvalue = res[0]
 
         return rvalue
 
