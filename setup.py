@@ -72,5 +72,6 @@ Developers memo for release:
                 ```
 
     4. Upload the package on PyPI:
-        a. twine upload dist/*             
+        a. repeat step 2.b and 2.c
+        b. twine upload dist/*             
 """
