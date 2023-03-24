@@ -35,15 +35,42 @@ setup(
 )
 
 """
-Developers memo:
-    - how to upload on PyPI:
-        python3 setup.py sdist                     # in project directory
-        twine check dist/*                         # check that package is ok
-        twine upload --repository testpypi dist/*  # verify upload is successful on test-PyPI (see note below)
-        twine upload dist/*                        # upload to PyPI: upload fails if version is already on PyPI
+Developers memo for release:
+    1. Update package information (on master):
+        - Change version in lbh15/__init__.py
+        - Change date in lbh15/__init__.py
+        - Change date in README.rst
 
-    - how to test package installation from test-pypi:
-        - upload the new version of the package but change the package name in setup.py in lbh15_test
-        - install the package from test-pypi using the following command:
-            pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple lbh15_test
+    2. Test the package build and install on test-pypi:
+        a. Change the name of the package in setup.py in 'lbh15-test'
+        b. python3 setup.py sdist                     # in project directory
+        c. twine check dist/*                         # check that package is ok
+        d. twine upload --repository testpypi dist/*  # verify upload is successful on test-PyPI
+        e. crete a python3 virtual enviroment and verify the correct package installation form test-pypi:
+            python3 -m venv venv_install
+            source venv_install/bn/activate
+            pip3 install wheel
+            pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple lbh15-test
+            cd tests/
+            <execute tests>
+        f. If every thing is ok change back the package name in 'lbh15'
+        
+    3. Create tag (on master):
+        a. git tag v<version>
+        b. git push <origin_name> <tag_name>
+        c. git diff --stat=200 <previous_tag> <tag_name> > log.diff.<tag_name>
+        d. You should see the tag on github page as well. Then on github do:
+            - https://github.com/newcleo-dev-team/lbh15/releases
+            - Click on "Draft a new release"
+            - Choose the tag
+            - Insert the title name as "Release v<version>"
+            - In the description write:
+                Changelog between v<previous varsion> and v<version>
+
+                ```
+                < content of  log.diff.<tag_name> >
+                ```
+
+    4. Upload the package on PyPI:
+        a. twine upload dist/*             
 """
