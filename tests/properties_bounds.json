@@ -23,7 +23,7 @@
       "max": 147.9771047816192,
       "T_at_max": 600.6000136642583
    },
-   "h_sobolev2011_Liquid_lead_specific_enthalpy_(as_difference_with_respect_tothe_melting_point_enthalpy)": {
+   "h_sobolev2011_Liquid_lead_specific_enthalpy_(as_difference_with_respect_to_the_melting_point_enthalpy)": {
       "min": 0.0,
       "T_at_min": 600.6,
       "max": 195278.8585315697,
@@ -89,7 +89,7 @@
       "max": 145.65034225706302,
       "T_at_max": 544.6000124029974
    },
-   "h_sobolev2011_Liquid_bismuth_specific_enthalpy_(as_difference_with_respect_tothe_melting_point_enthalpy)": {
+   "h_sobolev2011_Liquid_bismuth_specific_enthalpy_(as_difference_with_respect_to_the_melting_point_enthalpy)": {
       "min": 0.0,
       "T_at_min": 544.6,
       "max": 170386.05242766827,
@@ -155,7 +155,7 @@
       "max": 148.18999973531987,
       "T_at_max": 400.00001747063567
    },
-   "h_sobolev2011_Liquid_lbe_specific_enthalpy_(as_difference_with_respect_tothe_melting_point_enthalpy)": {
+   "h_sobolev2011_Liquid_lbe_specific_enthalpy_(as_difference_with_respect_to_the_melting_point_enthalpy)": {
       "min": 296.41050851991963,
       "T_at_min": 400.0,
       "max": 210592.70109267058,

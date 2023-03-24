@@ -468,40 +468,8 @@ class LiquidMetalInterface(ABC):
         self.__properties[key] = property_object
 
         def new_property_info(print_info=True, n_tab=0):
-            name = property_object.name
-            property_val = self.__properties[key].correlation(self.__T)
-            if property_val < 1e-2:
-                value = (f"Value: {property_val:.2e} "
-                         f"{self.__properties[key].units}")
-            else:
-                value = (f"Value: {property_val:.2f} "
-                         f"{self.__properties[key].units}")
-            validity = ("Validity range: "
-                        f"[{self.__properties[key].range[0]:.2f}, "
-                        f"{self.__properties[key].range[1]:.2f}] K")
-            corr_name = ("Correlation name: "
-                         f"'{self.__properties[key].correlation_name}'")
-            long_name = ("Long name: "
-                         f"{self.__properties[key].long_name}")
-            units = f"Units: {self.__properties[key].units}"
-            description = ("Description:\n{:s}{:s}"
-                           .format((n_tab+2)*"\t",
-                                   self.__properties[key].description))
-
-            all_info = "{:s}{:s}:\n".format(n_tab*"\t", name)
-            all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", value)
-            all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", validity)
-            all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", corr_name)
-            all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", long_name)
-            all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", units)
-            all_info += "{:s}{:s}".format((n_tab+1)*"\t", description)
-
-            rvalue = None
-            if print_info:
-                print(all_info)
-            else:
-                rvalue = all_info
-            return rvalue
+            return self.__properties[key].info(self.__T, self.__p,
+                                               print_info, n_tab)
 
         setattr(self, property_object.name+"_info",
                 new_property_info)
@@ -638,9 +606,8 @@ class LiquidMetalInterface(ABC):
 
     def __str__(self):
         rvalue = (f"{type(self).__name__} liquid metal "
-                  f"@T={self.T:.2f} K\n")
+                  f"@(T={self.T:.2f} [K], p={self.p:.2f} [Pa])\n")
         rvalue += "\nConstants:\n"
-        rvalue += f"\tPressure: {self.p:.2f} [Pa]\n"
         rvalue += f"\tMelting Temperature: {self.T_m0:.2f} [K]\n"
         rvalue += f"\tBoiling Temperature: {self.T_b0:.2f} [K]\n"
         rvalue += f"\tMelting latent heat: {self.Q_m0:.2f} [J/kg]\n"

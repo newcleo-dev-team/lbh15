@@ -111,6 +111,58 @@ class PropertyInterface(ABC):
         """
         return None
 
+    def info(self, T, p=P_ATM, print_info=True, n_tab=0):
+        """
+        Method used to print information about the property
+        and the correlation used to compute its value.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default P_ATM, i.e., 101325.0 Pa
+        print_info : bool, optional
+            True to print to console, False for getting the
+            string, by default True
+        n_tab : int, optional
+            Number of tabs used to format the information, by default 0
+
+        Returns
+        -------
+        str, None
+            Returns None id print_info=True, otherwise returns the content
+            of the information.
+        """
+        name = self.name
+        property_val = self.correlation(T, p)
+        if property_val < 1e-2:
+            value = f"Value: {property_val:.2e} {self.units}"
+        else:
+            value = f"Value: {property_val:.2f} {self.units}"
+        validity = ("Validity range: "
+                    f"[{self.range[0]:.2f}, {self.range[1]:.2f}] K")
+        corr_name = f"Correlation name: '{self.correlation_name}'"
+        long_name = f"Long name: {self.long_name}"
+        units = f"Units: {self.units}"
+        description = ("Description:\n{:s}{:s}"
+                       .format((n_tab+2)*"\t", self.description))
+
+        all_info = "{:s}{:s}:\n".format(n_tab*"\t", name)
+        all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", value)
+        all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", validity)
+        all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", corr_name)
+        all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", long_name)
+        all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", units)
+        all_info += "{:s}{:s}".format((n_tab+1)*"\t", description)
+
+        rvalue = None
+        if print_info:
+            print(all_info)
+        else:
+            rvalue = all_info
+        return rvalue
+
     @abstractmethod
     @range_warning
     def correlation(self, T, p=P_ATM, verbose=False):

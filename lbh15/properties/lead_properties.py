@@ -627,7 +627,7 @@ class h(PropertyInterface):
         str : property description
         """
         return (f"Liquid lead {self.long_name} "
-                "(as difference with respect to"
+                "(as difference with respect to "
                 "the melting point enthalpy)")
 
 
