@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lbh15"
+version = "1.1.1"
+authors = [
+  { name="Daniele Panico", email="daniele.panico@newcleo.com" },
+  { name="Daniele Tomatis", email="daniele.tomatis@newcleo.com" },
+]
+description= "lbh15 (Lead Bismuth Handbook 2015) is a python package of lead, bismuth and lead bismuth eutectic (lbe) metal alloy from the OECD/NEA Handbook"
+readme = "README.rst"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Operating System :: OS Independent",
+]
