@@ -6,8 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "lbh15"
 version = "1.1.1"
 authors = [
-    {name = "Daniele Panico and Daniele Tomatis", email = "daniele.panico@newcleo.com"},
-    {email = "daniele.tomatis@newcleo.com"},
+    {name = "Daniele Panico", email = "daniele.panico@newcleo.com"},
+    {name = "Daniele Tomatis", email = "daniele.tomatis@newcleo.com"},
 ]
 license = {text = "lgpl v3"}
 description = "Python implementation of liquid metal properties from Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
