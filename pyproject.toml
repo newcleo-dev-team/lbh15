@@ -1,18 +1,37 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "lbh15"
 version = "1.1.1"
 authors = [
-  { name="Daniele Panico", email="daniele.panico@newcleo.com" },
-  { name="Daniele Tomatis", email="daniele.tomatis@newcleo.com" },
+    {name = "Daniele Panico and Daniele Tomatis", email = "daniele.panico@newcleo.com"},
+    {email = "daniele.tomatis@newcleo.com"},
 ]
-description= "lbh15 (Lead Bismuth Handbook 2015) is a python package of lead, bismuth and lead bismuth eutectic (lbe) metal alloy from the OECD/NEA Handbook"
-readme = "README.rst"
+license = {text = "lgpl v3"}
+description = "Python implementation of liquid metal properties from Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, Materials Compatibility, Thermal-hydraulics and Technologies"
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Natural Language :: English",
     "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+requires-python = ">=3.8.10"
+dependencies = ["scipy>=1.8.1", "numpy>=1.22.3"]
+
+[project.readme]
+file = "README.rst"
+content-type = "text/x-rst"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages]
+find = {namespaces = false}
