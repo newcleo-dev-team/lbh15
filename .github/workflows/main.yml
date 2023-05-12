@@ -30,10 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          python-version: "3.7"
       - run: pip install wheel
-      - run: pip install .
+      - run: pip install . --no-use-pep517
 
   test_documentation:
     if: contains( github.ref, 'master')
