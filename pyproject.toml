@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lbh15"
-version = "1.1.1"
+dynamic = ["version"]
 authors = [
     {name = "Daniele Panico", email = "daniele.panico@newcleo.com"},
     {name = "Daniele Tomatis", email = "daniele.tomatis@newcleo.com"},
@@ -35,3 +35,6 @@ include-package-data = true
 
 [tool.setuptools.packages]
 find = {namespaces = false}
+
+[tool.setuptools.dynamic]
+version = {attr = "lbh15.__version__"}
