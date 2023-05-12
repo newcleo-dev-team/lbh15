@@ -2,15 +2,28 @@
 
 from setuptools import setup
 from setuptools import find_packages
-from lbh15 import __version__
-from lbh15 import __author__
+import codecs
+import os.path
+
+def read(rel_path):
+    here = os.path.abspath(os.path.dirname(__file__))
+    with codecs.open(os.path.join(here, rel_path), 'r') as fp:
+        return fp.read()
+
+def get_info(rel_path, info):
+    for line in read(rel_path).splitlines():
+        if line.startswith(f'__{info}__'):
+            delim = '"' if '"' in line else "'"
+            return line.split(delim)[1]
+    else:
+        raise RuntimeError(f"Unable to find {info} string.")
 
 setup(
     name='lbh15',
-    version=__version__,
+    version=get_info('lbh15/__init__.py', 'version'),
     packages=find_packages(),
     include_package_data=True,
-    author=__author__,
+    author=get_info('lbh15/__init__.py', 'author'),
     author_email='daniele.panico@newcleo.com, daniele.tomatis@newcleo.com',
     description='Python implementation of liquid metal properties from '
                 'Handbook on Lead-bismuth Eutectic Alloy and Lead Properties, '
