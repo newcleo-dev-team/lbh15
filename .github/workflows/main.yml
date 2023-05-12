@@ -25,6 +25,16 @@ jobs:
       - run: pip install wheel
       - run: pip install .
 
+  test_installation_legacy:
+    if: contains( github.ref, 'master')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          python-version: "3.8.10"
+      - run: pip install wheel
+      - run: pip install .
+
   test_documentation:
     if: contains( github.ref, 'master')
     runs-on: ubuntu-latest    
