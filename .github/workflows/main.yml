@@ -30,8 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          python-version: "3.4.10"
+      - run: rm pyproject.toml
       - run: pip install wheel
       - run: pip install .
 
