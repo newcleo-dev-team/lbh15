@@ -8,7 +8,7 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
 . The properties implemented in the package are listed in table :numref:`tableprop`.
 
-.. list-table:: lbh15 properties from :cite:\protect `Agency2015`
+.. list-table:: lbh15 properties from the handbook edited by OECD/NEA  
    :widths: 50 25 25
    :name: tableprop
    :header-rows: 1
