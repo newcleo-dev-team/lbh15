@@ -8,7 +8,7 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
 . The properties implemented in the package are listed in table :numref:`tableprop`.
 
-.. list-table:: lbh15 properties from :cite:`Agency2015`
+.. list-table:: lbh15 properties from :cite:\protect `Agency2015`
    :widths: 50 25 25
    :name: tableprop
    :header-rows: 1
@@ -283,7 +283,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   does not depend on pressure and use it instead of the default one (the same holds :class:`.Bismuth` and :class:`.LBE`).
   The names of the available correlations can be queried by a simple function call
   (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
-  reference handbook :cite:`Agency2015`):
+  reference handbook :cite: `Agency2015`):
   
   >>> from lbh15 import Lead
   >>> Lead.correlations_available()
