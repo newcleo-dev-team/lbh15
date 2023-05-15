@@ -169,11 +169,11 @@ This section shows a few examples of basic usage of lbh15.
   atmospheric pressure. Then compare their density:
 
   >>> from lbh15 import Lead
-  >>> from lbh15 import P_ATM
-  >>> # Initialize first object, default pressure is P_ATM 
+  >>> from scipy.constants import atm
+  >>> # Initialize first object, default pressure is atm
   >>> liquid_lead = Lead(T=800)
   >>> # Initialize the second object specifying the pressure
-  >>> liquid_lead_2 = Lead(T=800, p=20*P_ATM)
+  >>> liquid_lead_2 = Lead(T=800, p=20*atm)
   >>> # Compare their density
   >>> liquid_lead.rho, liquid_lead_2.rho
   (10417.4, 10418.185181757714)
@@ -293,13 +293,13 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
   .. code-block:: python
 
+    from scipy.constants import atm
     from lbh15.properties.interface import PropertyInterface
     from lbh15.properties.interface import range_warning
-    from lbh15 import P_ATM
 
     class rho_custom_corr(PropertyInterface):
       @range_warning
-      def correlation(self, T, p=P_ATM, verbose=False):
+      def correlation(self, T, p=atm, verbose=False):
           "Implement here the user-defined correlation."
           return 11400 - 1.2*T
 
@@ -381,13 +381,13 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
   .. code-block:: python
 
+    from scipy.constants import atm
     from lbh15.properties.interface import PropertyInterface
     from lbh15.properties.interface import range_warning
-    from lbh15 import P_ATM
 
     class T_double(PropertyInterface):
       @range_warning
-      def correlation(self, T, p=P_ATM, verbose=False):
+      def correlation(self, T, p=atm, verbose=False):
           "Return the temperature value multiplied by 2."
           return 2*T
 

@@ -1,9 +1,10 @@
 """Module with the definition of bismuth liquid metal object class,
 i.e., Bismuth"""
+from scipy.constants import atm
 from ._constants import BISMUTH_MELTING_TEMPERATURE
 from ._constants import BISMUTH_MELTING_LATENT_HEAT
 from ._constants import BISMUTH_BOILING_TEMPERATURE
-from ._constants import BISMUTH_VAPORISATION_HEAT, P_ATM
+from ._constants import BISMUTH_VAPORISATION_HEAT
 from ._lbh15 import LiquidMetalInterface
 
 
@@ -45,7 +46,7 @@ class Bismuth(LiquidMetalInterface):
     _roots_to_use = {'cp': 0}
     _properties_module = 'lbh15.properties.bismuth_properties'
 
-    def __init__(self, p=P_ATM, **kwargs):
+    def __init__(self, p=atm, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
         super().__init__(p=p, **kwargs)
 
