@@ -583,7 +583,9 @@ class LiquidMetalInterface(ABC):
                 module_name = lm_path[path]
                 module = importlib.import_module(module_name)
                 for _, obj in inspect.getmembers(module):
-                    if inspect.isclass(obj) and obj is not PropertyInterface:
+                    if (inspect.isclass(obj)
+                            and obj is not PropertyInterface
+                            and not inspect.isabstract(obj)):
                         if issubclass(obj, PropertyInterface):
                             customproperty_obj_list.append(obj())
         return customproperty_obj_list
