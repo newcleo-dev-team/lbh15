@@ -15,18 +15,22 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-import lbh15
+from setup import get_info
+
+__company__ = get_info('lbh15/__init__.py', 'company')
+__author__ = get_info('lbh15/__init__.py', 'author')
+__version__ = get_info('lbh15/__init__.py', 'version')
 
 # -- Project information -----------------------------------------------------
 
 project = 'lbh15'
-copyright = '2022, ' + lbh15.__company__
-author = lbh15.__author__
+copyright = '2022, ' + __company__
+author = __author__
 
 # The short X.Y version
-version = str(lbh15.__version__)
+version = str(__version__)
 # The full version, including alpha/beta/rc tags
-release = str(lbh15.__version__)
+release = str(__version__)
 
 
 # -- General configuration ---------------------------------------------------
@@ -54,7 +58,7 @@ napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = False
 add_module_names = False
 
-autodoc_mock_imports = []
+autodoc_mock_imports = ["numpy", "scipy"]
 
 autodoc_default_options = {
     'members': True,
@@ -149,7 +153,7 @@ latex_elements = {
 latex_documents = [
     (master_doc, 'lbh15.tex', 'lbh15: collection of properties from \
     the lead-bismuth eutectic alloy and lead OECD/NEA handbook',
-     lbh15.__author__, 'manual'),
+     __author__, 'manual'),
 ]
 
 latex_logo = html_logo
