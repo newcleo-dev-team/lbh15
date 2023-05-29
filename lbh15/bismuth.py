@@ -1,10 +1,10 @@
 """Module with the definition of bismuth liquid metal object class,
 i.e., Bismuth"""
 from scipy.constants import atm
-from ._constants import BISMUTH_MELTING_TEMPERATURE
-from ._constants import BISMUTH_MELTING_LATENT_HEAT
-from ._constants import BISMUTH_BOILING_TEMPERATURE
-from ._constants import BISMUTH_VAPORISATION_HEAT
+from ._commons import BISMUTH_MELTING_TEMPERATURE
+from ._commons import BISMUTH_MELTING_LATENT_HEAT
+from ._commons import BISMUTH_BOILING_TEMPERATURE
+from ._commons import BISMUTH_VAPORISATION_HEAT
 from ._lbh15 import LiquidMetalInterface
 
 

@@ -1,4 +1,4 @@
-"""Module with the definition of constants for lbh15 package"""
+"""Module with the definition of common objects for lbh15 package"""
 # KEYWORDS
 GURVICH_KEYWORD = 'gurvich1991'
 SOBOLEV_KEYWORD = 'sobolev2011'

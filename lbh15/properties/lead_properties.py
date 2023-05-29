@@ -2,9 +2,9 @@
 import numpy as np
 from scipy.constants import atm
 from .interface import PropertyInterface, range_warning
-from .._constants import LEAD_MELTING_TEMPERATURE as T_m0
-from .._constants import LEAD_BOILING_TEMPERATURE as T_b0
-from .._constants import SOBOLEV_KEYWORD, GURVICH_KEYWORD
+from .._commons import LEAD_MELTING_TEMPERATURE as T_m0
+from .._commons import LEAD_BOILING_TEMPERATURE as T_b0
+from .._commons import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 
 
 class p_s(PropertyInterface):

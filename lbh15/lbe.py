@@ -1,9 +1,9 @@
 """Module with the definition of lead-bismuth eutectic
 liquid metal object class, i.e., LBE"""
 from scipy.constants import atm
-from ._constants import LBE_MELTING_TEMPERATURE
-from ._constants import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
-from ._constants import LBE_VAPORISATION_HEAT
+from ._commons import LBE_MELTING_TEMPERATURE
+from ._commons import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
+from ._commons import LBE_VAPORISATION_HEAT
 from ._lbh15 import LiquidMetalInterface
 
 

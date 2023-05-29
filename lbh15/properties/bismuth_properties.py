@@ -2,9 +2,9 @@
 import numpy as np
 from scipy.constants import atm
 from .interface import PropertyInterface, range_warning
-from .._constants import BISMUTH_MELTING_TEMPERATURE as T_m0
-from .._constants import BISMUTH_BOILING_TEMPERATURE as T_b0
-from .._constants import SOBOLEV_KEYWORD
+from .._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
+from .._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
+from .._commons import SOBOLEV_KEYWORD
 
 
 class p_s(PropertyInterface):
