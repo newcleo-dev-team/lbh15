@@ -71,8 +71,6 @@ the following command in the folder ``docs/``:
  
   .. code-block:: bash
 
-      make latex
-      cd _build/latex
-      latexmk -pdf -f
+      make latexpdf
 
 The html documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.

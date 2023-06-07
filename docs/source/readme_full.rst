@@ -132,9 +132,7 @@ the following command in the folder ``docs/``:
  
   .. code-block:: bash
 
-      make latex
-      cd _build/latex
-      latexmk -pdf -f
+      make latexpdf
 
 .. _Examples:
 
