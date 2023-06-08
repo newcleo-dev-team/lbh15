@@ -17,6 +17,7 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 import lbh15
 
+
 # -- Project information -----------------------------------------------------
 
 project = 'lbh15'
@@ -64,7 +65,7 @@ autodoc_default_options = {
 autodoc_member_order = 'bysource'
 
 # Add any paths that contain templates here, relative to this directory.
-# templates_path = ['_templates']
+#templates_path = [os.path.join(srcdir,'_templates')]
 
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -126,19 +127,20 @@ latex_elements = {
 
     'papersize': 'letterpaper',
 
+    #'passoptionstopackages' : '\PassOptionsToPackage{techdoc}{nwcldocs}',  
     # The font size ('10pt', '11pt' or '12pt').
 
     'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
-
     'preamble': r'''
-\renewcommand{\hyperref}[2][]{#2}
-''',
+    \renewcommand{\hyperref}[2][]{#2}
+    ''',
 
     'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
 
     # Latex figure (float) alignment
+    #'docclass' : 'nwcldocs',
 
     'figure_align': 'tbp',
 }
@@ -146,10 +148,26 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
+latex_toplevel_sectioning = 'section'
+
 latex_documents = [
     (master_doc, 'lbh15.tex', 'lbh15: collection of properties from \
     the lead-bismuth eutectic alloy and lead OECD/NEA handbook',
      lbh15.__author__, 'manual'),
 ]
 
+#latex_docclass = {
+#   'manual': 'nwcldocs',
+#   'howto' : 'nwcldocs',
+#}
+
+#latex_additional_files = [f'{srcdir}/_latex_additional_files/nwcldocs.cls',
+#                         # f'{srcdir}/_latex_additional_files/nwclcolors.tex',
+#                          f'{srcdir}/_latex_additional_files/img/footrule_green.png',
+#                          f'{srcdir}/_latex_additional_files/img/footrule_orange.png',
+#                          f'{srcdir}/_latex_additional_files/img/newcleo_logo.png']
+
+#latex_theme = 'howto'
 latex_logo = html_logo
+
+#autoclass_content = "init"
