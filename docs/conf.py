@@ -125,7 +125,7 @@ htmlhelp_basename = 'lbh15 documentation'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
 
-    'papersize': 'letterpaper',
+    'papersize': 'techdoc',
 
     #'passoptionstopackages' : '\PassOptionsToPackage{techdoc}{nwcldocs}',  
     # The font size ('10pt', '11pt' or '12pt').
@@ -136,11 +136,10 @@ latex_elements = {
     'preamble': r'''
     \renewcommand{\hyperref}[2][]{#2}
     ''',
-
     'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
 
     # Latex figure (float) alignment
-    #'docclass' : 'nwcldocs',
+    'docclass' : 'nwcldocs',
 
     'figure_align': 'tbp',
 }
@@ -153,13 +152,13 @@ latex_toplevel_sectioning = 'section'
 latex_documents = [
     (master_doc, 'lbh15.tex', 'lbh15: collection of properties from \
     the lead-bismuth eutectic alloy and lead OECD/NEA handbook',
-     lbh15.__author__, 'manual'),
+     lbh15.__author__, 'howto'),
 ]
 
-#latex_docclass = {
-#   'manual': 'nwcldocs',
-#   'howto' : 'nwcldocs',
-#}
+latex_docclass = {
+   'manual': 'nwcldocs',
+      'howto' : 'nwcldocs',
+}
 
 #latex_additional_files = [f'{srcdir}/_latex_additional_files/nwcldocs.cls',
 #                         # f'{srcdir}/_latex_additional_files/nwclcolors.tex',
@@ -167,7 +166,7 @@ latex_documents = [
 #                          f'{srcdir}/_latex_additional_files/img/footrule_orange.png',
 #                          f'{srcdir}/_latex_additional_files/img/newcleo_logo.png']
 
-#latex_theme = 'howto'
+latex_theme = 'nwcldocs'
 latex_logo = html_logo
 
 #autoclass_content = "init"
