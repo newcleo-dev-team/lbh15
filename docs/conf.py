@@ -101,7 +101,7 @@ html_static_path = [os.path.join(srcdir, '_static')]
 
 html_css_files = [os.path.join(srcdir, 'css', 'theme.css')]
 
-html_logo = os.path.join(srcdir, 'figures', 'newcleologo.png')
+html_logo = os.path.join(srcdir, 'figures', 'newcleo_logo.png')
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -122,10 +122,11 @@ htmlhelp_basename = 'lbh15 documentation'
 
 # -- Options for LaTeX output ------------------------------------------------
 
+
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
 
-    'papersize': 'techdoc',
+    'papersize': 'letterpaper',
 
     #'passoptionstopackages' : '\PassOptionsToPackage{techdoc}{nwcldocs}',  
     # The font size ('10pt', '11pt' or '12pt').
@@ -139,7 +140,7 @@ latex_elements = {
     'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
 
     # Latex figure (float) alignment
-    'docclass' : 'nwcldocs',
+    #'docclass' : 'nwcldocs',
 
     'figure_align': 'tbp',
 }
@@ -157,16 +158,9 @@ latex_documents = [
 
 latex_docclass = {
    'manual': 'nwcldocs',
-      'howto' : 'nwcldocs',
+   'howto' : 'nwcldocs',
 }
-
-#latex_additional_files = [f'{srcdir}/_latex_additional_files/nwcldocs.cls',
-#                         # f'{srcdir}/_latex_additional_files/nwclcolors.tex',
-#                          f'{srcdir}/_latex_additional_files/img/footrule_green.png',
-#                          f'{srcdir}/_latex_additional_files/img/footrule_orange.png',
-#                          f'{srcdir}/_latex_additional_files/img/newcleo_logo.png']
 
 latex_theme = 'nwcldocs'
 latex_logo = html_logo
 
-#autoclass_content = "init"
