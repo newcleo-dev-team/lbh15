@@ -56,7 +56,7 @@ class LeadTester(unittest.TestCase):
             val, key = get_val(prop, "max")
             self.assertAlmostEqual(val, prop.max, tol, key+" FAILED")
 
-    def test_T_at_min(self):
+    def test_T_at_max(self):
         for prop in self.properties:
             prop.compute_bounds()
             val, key = get_val(prop, "T_at_max")
@@ -85,7 +85,7 @@ class BismuthTester(unittest.TestCase):
             val, key = get_val(prop, "max")
             self.assertAlmostEqual(val, prop.max, tol, key+" FAILED")
 
-    def test_T_at_min(self):
+    def test_T_at_max(self):
         for prop in self.properties:
             prop.compute_bounds()
             val, key = get_val(prop, "T_at_max")
@@ -114,7 +114,7 @@ class LBETester(unittest.TestCase):
             val, key = get_val(prop, "max")
             self.assertAlmostEqual(val, prop.max, tol, key+" FAILED")
 
-    def test_T_at_min(self):
+    def test_T_at_max(self):
         for prop in self.properties:
             prop.compute_bounds()
             val, key = get_val(prop, "T_at_max")
