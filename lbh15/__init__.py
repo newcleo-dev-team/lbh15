@@ -11,3 +11,4 @@ from .lbe import LBE
 from .properties import lead_properties
 from .properties import bismuth_properties
 from .properties import lbe_properties
+from .properties import bismuth_thermochemical_properties
