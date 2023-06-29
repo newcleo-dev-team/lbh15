@@ -13,7 +13,8 @@ def load_prop(module_name):
     propertyObjectList = []
     module = module_name
     for name, obj in inspect.getmembers(sys.modules[module]):
-        if inspect.isclass(obj) and obj is not PropertyInterface and not inspect.isabstract(obj): #attention j'ai ajouté des trucs
+        if (inspect.isclass(obj) and obj is not PropertyInterface
+                and not inspect.isabstract(obj)):
             if issubclass(obj, PropertyInterface):
                 propertyObjectList.append(obj())
     return propertyObjectList
@@ -27,7 +28,7 @@ def get_val(prop_object, what):
     return file_bounds[key][what], key
 
 
-with open("result.json", "r") as json_file:  #attention je fais un changement la normalement il faut mettre properties_bounds.json
+with open("properties_bounds.json", "r") as json_file:
     file_bounds = json.load(json_file)
 
 
@@ -119,6 +120,7 @@ class LBETester(unittest.TestCase):
             prop.compute_bounds()
             val, key = get_val(prop, "T_at_max")
             self.assertAlmostEqual(val, prop.T_at_max, tol, key+" FAILED")
+
 
 class BismuthThermochemicalTester(unittest.TestCase):
 
