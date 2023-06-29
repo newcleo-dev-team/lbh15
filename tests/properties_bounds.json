@@ -202,5 +202,23 @@
       "T_at_min": 1099.9999660741585,
       "max": 1770.1999975193814,
       "T_at_max": 400.0000117010308
+   },
+   "fe_sol_gosse2014_iron_solubility_in_liquid_bismuth": {
+      "min": 9.74969041635797e-06,
+      "T_at_min": 545.0,
+      "max": 0.07073207003754707,
+      "T_at_max": 1173.0
+   },
+   "fe_sol_massalski1990_iron_solubility_in_liquid_bismuth": {
+      "min": 0.012290175027587117,
+      "T_at_min": 973.0,
+      "max": 0.06123371694653792,
+      "T_at_max": 1173.0
+   },
+   "fe_sol_weeks1998_iron_solubility_in_liquid_bismuth": {
+      "min": 0.000628549392448033,
+      "T_at_min": 713.0,
+      "max": 0.01721105986599177,
+      "T_at_max": 998.0
    }
 }

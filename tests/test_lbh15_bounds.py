@@ -13,7 +13,7 @@ def load_prop(module_name):
     propertyObjectList = []
     module = module_name
     for name, obj in inspect.getmembers(sys.modules[module]):
-        if inspect.isclass(obj) and obj is not PropertyInterface:
+        if inspect.isclass(obj) and obj is not PropertyInterface and not inspect.isabstract(obj): #attention j'ai ajouté des trucs
             if issubclass(obj, PropertyInterface):
                 propertyObjectList.append(obj())
     return propertyObjectList
@@ -27,7 +27,7 @@ def get_val(prop_object, what):
     return file_bounds[key][what], key
 
 
-with open("properties_bounds.json", "r") as json_file:
+with open("result.json", "r") as json_file:  #attention je fais un changement la normalement il faut mettre properties_bounds.json
     file_bounds = json.load(json_file)
 
 
@@ -95,6 +95,34 @@ class BismuthTester(unittest.TestCase):
 class LBETester(unittest.TestCase):
 
     properties = load_prop('lbh15.properties.lbe_properties')
+
+    def test_min(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "min")
+            self.assertAlmostEqual(val, prop.min, tol, key+" FAILED")
+
+    def test_T_at_min(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "T_at_min")
+            self.assertAlmostEqual(val, prop.T_at_min, tol, key+" FAILED")
+
+    def test_max(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "max")
+            self.assertAlmostEqual(val, prop.max, tol, key+" FAILED")
+
+    def test_T_at_max(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "T_at_max")
+            self.assertAlmostEqual(val, prop.T_at_max, tol, key+" FAILED")
+
+class BismuthThermochemicalTester(unittest.TestCase):
+
+    properties = load_prop('lbh15.properties.bismuth_thermochemical_properties')
 
     def test_min(self):
         for prop in self.properties:
