@@ -203,6 +203,24 @@
       "max": 1770.1999975193814,
       "T_at_max": 400.0000117010308
    },
+   "cr_sol_gosse2014_chromium_solubility_in_liquid_bismuth": {
+      "min": 5.201717818397841e-05,
+      "T_at_min": 545.0,
+      "max": 2.0132744835789955,
+      "T_at_max": 1773.0
+   },
+   "cr_sol_venkatraman1988_chromium_solubility_in_liquid_bismuth": {
+      "min": 0.0007139664618826822,
+      "T_at_min": 658.0,
+      "max": 0.02154471395999033,
+      "T_at_max": 901.0
+   },
+   "cr_sol_weeks1998_chromium_solubility_in_liquid_bismuth": {
+      "min": 0.0007828258502515459,
+      "T_at_min": 663.0,
+      "max": 0.05964184945842467,
+      "T_at_max": 998.0
+   },
    "fe_sol_gosse2014_iron_solubility_in_liquid_bismuth": {
       "min": 9.74969041635797e-06,
       "T_at_min": 545.0,
@@ -220,5 +238,17 @@
       "T_at_min": 713.0,
       "max": 0.01721105986599177,
       "T_at_max": 998.0
+   },
+   "ni_sol_gosse2014_nickel_solubility_in_liquid_bismuth": {
+      "min": 0.2171218341593895,
+      "T_at_min": 543.0,
+      "max": 8.657306217170486,
+      "T_at_max": 1173.0
+   },
+   "ni_sol_weeks1998_nickel_solubility_in_liquid_bismuth": {
+      "min": 3.0391519934505205,
+      "T_at_min": 723.0,
+      "max": 8.068419732341223,
+      "T_at_max": 903.0
    }
 }
