@@ -75,6 +75,7 @@ Standard pdf documentation:
       make latexpdf
 
 Documentation with newcleo company template (available only to people affiliated with the company)
+
   .. code-block:: bash
 
       make latexpdf_nwcl

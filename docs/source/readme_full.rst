@@ -129,10 +129,19 @@ the following command in the folder ``docs/``:
   .. code-block:: bash
 
       make html
- 
-  .. code-block:: bash
+
+Standard pdf documentation:
+
+.. code-block:: bash
 
       make latexpdf
+
+Documentation with newcleo company template (available only to people affiliated with the company):
+
+.. code-block:: bash
+
+      make latexpdf_nwcl
+
 
 .. _Examples:
 
