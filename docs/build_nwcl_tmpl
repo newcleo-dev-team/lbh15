@@ -1,0 +1,24 @@
+#!/bin/bash
+ 
+BUILDDIR=$1 
+SOURCELATEX=$2
+TEXFILE=$3
+REV_N=$4
+DATE=$5
+PAGES=$6
+DESCR=$7
+
+TABLE_FILL="\\setrevhistory{% \n \\begin{tabularx}{.95\\textwidth}{c | c | c | C}\\ \hline \n
+REV. N0. & DATE & PAGES & DESCRIPTION OF THE CHANGES\\ \\hline \n
+${REV_N} &  ${DATE} &  ${PAGES} &  ${DESCR}\\ \hline \n \end{tabularx} \n"
+
+
+sed -i  's/letterpaper/techdoc/g' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/sphinxhowto/nwcldocs/g' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/sphinxmanual/nwcldocs/g' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/\\pagestyle{empty}//g'  ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/pagestyle{plain}/mkWorkflowTable/g' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+#sed -i  's/\mkWorkflowTable/\mkWorkflowTable\n\\\setrevhistory{%\n\\begin{tabularx}{.95\\textwidth}{c | c | c | C}\\\\ \\hline\nREV. N0. \& DATE \& PAGES \& DESCRIPTION OF THE CHANGES\\\\ \\hline \n${REV_N} \&  ${DATE} \&  ${PAGES} \&  ${DESCR}\\\\ \\hline\n\\end{tabularx}/' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/sphinxtableofcontents/mkDistributionList/g' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/pagestyle{normal}/newpage\n\\mkRevisionHistory\n\\newpage/' ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}
+sed -i  's/\\phantomsection\\label{\\detokenize{index::doc}}/\\tableofcontents\n\\newpage/'  ${BUILDDIR}/${SOURCELATEX}/${TEXFILE}

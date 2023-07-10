@@ -69,10 +69,15 @@ the following command in the folder ``docs/``:
 
       make html
  
+Standard pdf documentation:
   .. code-block:: bash
 
-      make latex
-      cd _build/latex
-      latexmk -pdf -f
+      make latexpdf
 
+Documentation with newcleo company template (available only to people affiliated with the company)
+  .. code-block:: bash
+
+      make latexpdf_nwcl
+
+The pdf documentation is available on the folder "_build/latex"
 The html documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
