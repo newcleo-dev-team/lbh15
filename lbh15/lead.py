@@ -1,9 +1,10 @@
 """Module with the definition of lead liquid metal object class,
 i.e., Lead"""
 import copy
-from ._constants import LEAD_MELTING_TEMPERATURE
-from ._constants import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
-from ._constants import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT, P_ATM
+from scipy.constants import atm
+from ._commons import LEAD_MELTING_TEMPERATURE
+from ._commons import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
+from ._commons import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT
 from ._lbh15 import LiquidMetalInterface
 
 
@@ -52,7 +53,7 @@ class Lead(LiquidMetalInterface):
     _roots_to_use = {'cp': 0}
     _properties_module = 'lbh15.properties.lead_properties'
 
-    def __init__(self, p=P_ATM, **kwargs):
+    def __init__(self, p=atm, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
         super().__init__(p=p, **kwargs)
 

@@ -1,9 +1,11 @@
 """Module with the definition of thermophysical property objects
 for lead-bismuth eutectic"""
+import numpy as np
+from scipy.constants import atm
 from .interface import PropertyInterface, range_warning
-from .._constants import LBE_MELTING_TEMPERATURE as T_m0
-from .._constants import LBE_BOILING_TEMPERATURE as T_b0
-from .._constants import SOBOLEV_KEYWORD, P_ATM
+from .._commons import LBE_MELTING_TEMPERATURE as T_m0
+from .._commons import LBE_BOILING_TEMPERATURE as T_b0
+from .._commons import SOBOLEV_KEYWORD
 
 
 class p_s(PropertyInterface):
@@ -12,7 +14,7 @@ class p_s(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute saturation vapour pressure
 
@@ -31,7 +33,6 @@ class p_s(PropertyInterface):
         -------
         saturation vapour pressure in [Pa] : float
         """
-        import numpy as np
         return 1.22e10 * np.exp(-22552/T)
 
     def initialization_helper(self, property_value):
@@ -103,7 +104,7 @@ class sigma(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute surface tension
 
@@ -166,7 +167,7 @@ class rho(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute density
 
@@ -189,7 +190,7 @@ class rho(PropertyInterface):
         u_s_val = u_s().correlation(T, p)
         cp_val = cp().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - P_ATM))
+        return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - atm))
 
     @property
     def range(self):
@@ -226,7 +227,7 @@ class alpha(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute thermal expansion coefficient
 
@@ -282,7 +283,7 @@ class u_s(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute sound velocity
 
@@ -345,7 +346,7 @@ class beta_s(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute isentropic compressibility
 
@@ -403,7 +404,7 @@ class cp(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute specific heat capacity
 
@@ -475,7 +476,7 @@ class h(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute specific enthalpy
 
@@ -543,7 +544,7 @@ class mu(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute dynamic viscosity
 
@@ -562,7 +563,6 @@ class mu(PropertyInterface):
         -------
         dynamic viscosity in [Pa*s] : float
         """
-        import numpy as np
         return 4.94e-4*np.exp(754.1/T)
 
     @property
@@ -600,7 +600,7 @@ class r(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute electrical resistivity
 
@@ -656,7 +656,7 @@ class k(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute thermal conductivity
 

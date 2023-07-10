@@ -1,11 +1,11 @@
+from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
-from lbh15 import P_ATM
 
 
 class rho_custom_corr(PropertyInterface):
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         "Implement here the user-defined correlation."
         return 11400 - 1.2*T
 
@@ -36,7 +36,7 @@ class rho_custom_corr(PropertyInterface):
 
 class T_double(PropertyInterface):
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         "Return the temperature value multiplied by 2."
         return 2*T
 

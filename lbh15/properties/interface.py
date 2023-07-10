@@ -3,7 +3,9 @@ i.e., PropertyInterface. Definition of decorator
 for validity range check as well."""
 import warnings
 from abc import ABC, abstractmethod
-from .._constants import P_ATM
+from numpy import nan
+from scipy.optimize import minimize_scalar
+from scipy.constants import atm
 
 
 def range_warning(function):
@@ -55,7 +57,6 @@ class PropertyInterface(ABC):
           be considered injective
     """
     def __init__(self):
-        from numpy import nan
         self.__min = -nan
         self.__max = nan
         self.__T_at_min = -nan
@@ -72,7 +73,6 @@ class PropertyInterface(ABC):
         with "Bounded" solver (for more details please refer to scipy
         documentation)
         """
-        from scipy.optimize import minimize_scalar
         min_vals = minimize_scalar(self.correlation,
                                    bounds=self.range,
                                    method="Bounded")
@@ -111,7 +111,7 @@ class PropertyInterface(ABC):
         """
         return None
 
-    def info(self, T, p=P_ATM, print_info=True, n_tab=0):
+    def info(self, T, p=atm, print_info=True, n_tab=0):
         """
         Method used to print information about the property
         and the correlation used to compute its value.
@@ -121,7 +121,7 @@ class PropertyInterface(ABC):
         T : float
             Temperature in [K]
         p : float, optional
-            Pressure in [Pa], by default P_ATM, i.e., 101325.0 Pa
+            Pressure in [Pa], by default atm, i.e., 101325.0 Pa
         print_info : bool, optional
             True to print to console, False for getting the
             string, by default True
@@ -165,7 +165,7 @@ class PropertyInterface(ABC):
 
     @abstractmethod
     @range_warning
-    def correlation(self, T, p=P_ATM, verbose=False):
+    def correlation(self, T, p=atm, verbose=False):
         """
         Function that implements the property correlation
 

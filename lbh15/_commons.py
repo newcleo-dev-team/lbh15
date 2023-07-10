@@ -1,4 +1,4 @@
-"""Module with the definition of constants for lbh15 package"""
+"""Module with the definition of common objects for lbh15 package"""
 # KEYWORDS
 GURVICH_KEYWORD = 'gurvich1991'
 SOBOLEV_KEYWORD = 'sobolev2011'
@@ -20,6 +20,3 @@ LBE_MELTING_TEMPERATURE = 398.0  # [K]
 LBE_MELTING_LATENT_HEAT = 38.6e3  # [J/kg]
 LBE_BOILING_TEMPERATURE = 1927  # [K]
 LBE_VAPORISATION_HEAT = 856.6e3  # [J/kg]
-
-# ATMOSPHERIC PRESSURE
-P_ATM = 101325.0  # [Pa]

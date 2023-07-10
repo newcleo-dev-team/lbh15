@@ -7,8 +7,9 @@ import importlib
 import platform
 import copy
 from abc import ABC, abstractmethod
+from scipy.constants import atm
+from scipy.optimize import fsolve
 from .properties.interface import PropertyInterface
-from ._constants import P_ATM
 
 
 class LiquidMetalInterface(ABC):
@@ -50,7 +51,7 @@ class LiquidMetalInterface(ABC):
     __T = 0
     __custom_properties_path = {}
 
-    def __init__(self, p=P_ATM, **kwargs):
+    def __init__(self, p=atm, **kwargs):
         self.__assign_p(p)
         self.__properties = {}
         self.__corr2use = copy.deepcopy(self.__class__._correlations_to_use)
@@ -337,8 +338,6 @@ class LiquidMetalInterface(ABC):
                 is_injective = self.__properties[key].is_injective
 
             if function_of_T is not None:
-                from scipy.optimize import fsolve
-
                 if helper(input_value) is not None:
                     self._guess = helper(input_value)
 
@@ -583,7 +582,9 @@ class LiquidMetalInterface(ABC):
                 module_name = lm_path[path]
                 module = importlib.import_module(module_name)
                 for _, obj in inspect.getmembers(module):
-                    if inspect.isclass(obj) and obj is not PropertyInterface:
+                    if (inspect.isclass(obj)
+                            and obj is not PropertyInterface
+                            and not inspect.isabstract(obj)):
                         if issubclass(obj, PropertyInterface):
                             customproperty_obj_list.append(obj())
         return customproperty_obj_list
