@@ -191,7 +191,8 @@ class rho(PropertyInterface):
         u_s_val = u_s().correlation(T, p)
         cp_val = cp_sobolev2011().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - atm))
+        return rho_0 + ((1.0/u_s_val/u_s_val + T*alpha_val*alpha_val/cp_val)
+                        * (p - atm))
 
     @property
     def correlation_name(self):
@@ -373,9 +374,9 @@ class beta_s(PropertyInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        rho_obj = rho()
-        u_s_obj = u_s()
-        return 1/(rho_obj.correlation(T, p) * u_s_obj.correlation(T, p)**2)
+        rho_val = rho().correlation(T, p)
+        u_s_val = u_s().correlation(T, p)
+        return 1/(rho_val * u_s_val*u_s_val)
 
     @property
     def range(self):
@@ -431,8 +432,8 @@ class cp_sobolev2011(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (176.2 - 4.923e-2*T + 1.544e-5*T**2
-                - 1.524e6*T**-2)
+        return (176.2 - 4.923e-2*T + 1.544e-5*T*T
+                - 1.524e6/T/T)
 
     @property
     def name(self):
@@ -510,8 +511,8 @@ class cp_gurvich1991(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (175.1 - 4.961e-2*T + 1.985e-5*T**2
-                - 2.099e-9*T**3 - 1.524e6*T**-2)
+        return (175.1 - 4.961e-2*T + 1.985e-5*T*T
+                - 2.099e-9*T*T*T - 1.524e6/T/T)
 
     @property
     def name(self):
@@ -590,9 +591,9 @@ class h(PropertyInterface):
         specific enthalpy in [J/kg] : float
         """
         return (176.2*(T - T_m0)
-                - 2.4615e-2*(T**2 - T_m0**2)
-                + 5.147e-6*(T**3 - T_m0**3)
-                + 1.524e6*(T**-1 - T_m0**-1))
+                - 2.4615e-2*(T*T - T_m0*T_m0)
+                + 5.147e-6*(T*T*T - T_m0*T_m0*T_m0)
+                + 1.524e6*(1/T - 1/T_m0))
 
     @property
     def correlation_name(self):
