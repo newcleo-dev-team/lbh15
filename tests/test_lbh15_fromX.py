@@ -3,12 +3,12 @@ import unittest
 import sys
 import os
 import inspect
+sys.path.insert(0, os.path.abspath('..'))
 from lbh15.properties.interface import PropertyInterface
 from lbh15 import Lead
 from lbh15 import Bismuth
 from lbh15 import LBE
 from scipy.constants import convert_temperature
-sys.path.insert(0, os.path.abspath('..'))
 
 
 def load_prop(module_name):
