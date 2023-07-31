@@ -61,7 +61,7 @@ Developers memo for release:
         - Change date in README.rst
 
     2. Test the package build and install on test-pypi:
-        a. Change the name of the package in setup.py in 'lbh15-test'
+        a. Change the name of the package in setup.py and pyproject.toml in 'lbh15-test'
         b. python3 setup.py sdist                     # in project directory
         c. twine check dist/*                         # check that package is ok
         d. twine upload --repository testpypi dist/*  # verify upload is successful on test-PyPI
@@ -75,10 +75,11 @@ Developers memo for release:
         f. If every thing is ok change back the package name in 'lbh15'
 
     3. Create tag (on master):
-        a. git tag v<version>
-        b. git push <origin_name> <tag_name>
-        c. git diff --stat=200 <previous_tag> <tag_name> > log.diff.<tag_name>
-        d. You should see the tag on github page as well. Then on github do:
+        a. commit previous release info modifications
+        b. git tag v<version>
+        c. git push <origin_name> <tag_name>
+        d. git diff --stat=200 <previous_tag> <tag_name> > log.diff.<tag_name>
+        e. You should see the tag on github page as well. Then on github do:
             - https://github.com/newcleo-dev-team/lbh15/releases
             - Click on "Draft a new release"
             - Choose the tag

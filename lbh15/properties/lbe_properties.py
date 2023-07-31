@@ -190,7 +190,8 @@ class rho(PropertyInterface):
         u_s_val = u_s().correlation(T, p)
         cp_val = cp().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((u_s_val**-2 + T*alpha_val**2/cp_val) * (p - atm))
+        return rho_0 + ((1/u_s_val/u_s_val + T*alpha_val*alpha_val/cp_val)
+                        * (p - atm))
 
     @property
     def range(self):
@@ -365,9 +366,9 @@ class beta_s(PropertyInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        rho_obj = rho()
-        u_s_obj = u_s()
-        return 1/(rho_obj.correlation(T, p) * u_s_obj.correlation(T, p)**2)
+        rho_val = rho().correlation(T, p)
+        u_s_val = u_s().correlation(T, p)
+        return 1/(rho_val * u_s_val*u_s_val)
 
     @property
     def range(self):
@@ -423,8 +424,8 @@ class cp(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (164.8 - 3.94e-2*T + 1.25e-5*T**2
-                - 4.56e5*T**-2)
+        return (164.8 - 3.94e-2*T + 1.25e-5*T*T
+                - 4.56e5/T/T)
 
     @property
     def correlation_name(self):
@@ -496,9 +497,9 @@ class h(PropertyInterface):
         specific enthalpy in [J/kg] : float
         """
         return (164.8*(T - T_m0)
-                - 1.97e-2*(T**2 - T_m0**2)
-                + 4.167e-6*(T**3 - T_m0**3)
-                + 4.56e5*(T**-1 - T_m0**-1))
+                - 1.97e-2*(T*T - T_m0*T_m0)
+                + 4.167e-6*(T*T*T - T_m0*T_m0*T_m0)
+                + 4.56e5*(1/T - 1/T_m0))
 
     @property
     def correlation_name(self):
@@ -675,7 +676,7 @@ class k(PropertyInterface):
         -------
         thermal conductivity in [W/(m*K)] : float
         """
-        return 3.284 + 1.617e-2*T - 2.305e-6*T**2
+        return 3.284 + 1.617e-2*T - 2.305e-6*T*T
 
     @property
     def correlation_name(self):
