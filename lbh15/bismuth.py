@@ -1,10 +1,13 @@
 """Module with the definition of bismuth liquid metal object class,
-i.e., Bismuth"""
+i.e., Bismuth and the definition of bismuth liquid metal object class with 
+the thermochemical properties, i.e., Bismuth_Thermochemical"""
 from scipy.constants import atm
 from ._commons import BISMUTH_MELTING_TEMPERATURE
 from ._commons import BISMUTH_MELTING_LATENT_HEAT
 from ._commons import BISMUTH_BOILING_TEMPERATURE
 from ._commons import BISMUTH_VAPORISATION_HEAT
+from ._commons import BISMUTH_MOLAR_MASS
+from ._commons import OXYGEN_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
 
 
@@ -44,7 +47,10 @@ class Bismuth(LiquidMetalInterface):
     _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
-    _properties_module = 'lbh15.properties.bismuth_properties'
+    _properties_modules_dict = {'Bismuth': ['lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth',\
+                                            'lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth',\
+                                            'lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical',\
+                                            'lbh15.properties.bismuth_properties']}
 
     def __init__(self, p=atm, **kwargs):
         self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
@@ -58,3 +64,5 @@ class Bismuth(LiquidMetalInterface):
         self._Q_m0 = BISMUTH_MELTING_LATENT_HEAT
         self._T_b0 = BISMUTH_BOILING_TEMPERATURE
         self._Q_b0 = BISMUTH_VAPORISATION_HEAT
+        self._M_Bi = BISMUTH_MOLAR_MASS
+        self._M_O = OXYGEN_MOLAR_MASS

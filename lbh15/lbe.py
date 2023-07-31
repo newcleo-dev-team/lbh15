@@ -4,6 +4,7 @@ from scipy.constants import atm
 from ._commons import LBE_MELTING_TEMPERATURE
 from ._commons import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
 from ._commons import LBE_VAPORISATION_HEAT
+from ._commons import LBE_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
 
 
@@ -44,7 +45,11 @@ class LBE(LiquidMetalInterface):
     _default_corr_to_use = {}
     _correlations_to_use = {}
     _roots_to_use = {'cp': 0}
-    _properties_module = 'lbh15.properties.lbe_properties'
+    _properties_modules_dict = {'LBE': ['lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe',
+                                        'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
+                                        'lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical',
+                                        'lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits',
+                                        'lbh15.properties.lbe_properties']}
 
     def __init__(self, p=atm, **kwargs):
         self._guess = LBE_MELTING_TEMPERATURE*2.0
@@ -58,3 +63,4 @@ class LBE(LiquidMetalInterface):
         self._Q_m0 = LBE_MELTING_LATENT_HEAT
         self._T_b0 = LBE_BOILING_TEMPERATURE
         self._Q_b0 = LBE_VAPORISATION_HEAT
+        self._M = LBE_MOLAR_MASS
