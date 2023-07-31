@@ -67,8 +67,8 @@ class OxygenPartialPressure(PropertyInterface):
         """
         str : property long name
         """
-        return "oxygen partial pressure divided by the \
-                oxygen concentration squared"
+        return ("Oxygen partial pressure divided by the"
+                " oxygen concentration squared")
 
     @property
     def description(self):
