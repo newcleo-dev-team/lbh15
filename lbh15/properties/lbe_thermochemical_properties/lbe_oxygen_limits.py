@@ -78,8 +78,8 @@ class LowerLimitSaturationIron(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit for \
-              iron at its saturation concentration"
+        return ("Oxygen concentration lower limit for"
+                "iron at its saturation concentration")
 
     @property
     def description(self):
@@ -151,8 +151,8 @@ class LowerLimitSaturationChromium(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit for \
-              chromium at its saturation concentration"
+        return ("Oxygen concentration lower limit for"
+                "chromium at its saturation concentration")
 
     @property
     def description(self):
@@ -224,8 +224,8 @@ class LowerLimitSaturationNickel(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit for \
-              nickel at its saturation concentration"
+        return ("Oxygen concentration lower limit for"
+                " nickel at its saturation concentration")
 
     @property
     def description(self):
@@ -297,8 +297,8 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit for \
-              silicon at its saturation concentration"
+        return ("Oxygen concentration lower limit for"
+                " silicon at its saturation concentration")
 
     @property
     def description(self):
@@ -370,8 +370,8 @@ class LowerLimitSaturationZirconium(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit for \
-              zirconium at its saturation concentration"
+        return ("Oxygen concentration lower limit for"
+                " zirconium at its saturation concentration")
 
     @property
     def description(self):
@@ -422,7 +422,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         """
         str : name of the property
         """
-        return "lim_si_sat"
+        return "lim_al_sat"
 
     @property
     def units(self):
@@ -443,8 +443,8 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit for \
-              aluminium at its saturation concentration"
+        return ("Oxygen concentration lower limit for"
+                " aluminium at its saturation concentration")
 
     @property
     def description(self):
@@ -479,8 +479,8 @@ class LowerLimitChromiumInterface(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit times \
-                chromium concentration"
+        return ("Oxygen concentration lower limit times"
+                " chromium concentration")
 
     @property
     def description(self):
@@ -662,8 +662,8 @@ class LowerLimitNickelInterface(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit times \
-                nickel concentration"
+        return ("Oxygen concentration lower limit times"
+                "nickel concentration")
 
     @property
     def description(self):
@@ -796,8 +796,8 @@ class LowerLimitIronInterface(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit times \
-                iron concentration"
+        return ("Oxygen concentration lower limit times"
+                " iron concentration")
 
     @property
     def description(self):
@@ -964,8 +964,8 @@ class LowerLimitZirconium(PropertyInterface):
         """
         str : property long name
         """
-        return "Oxygen concentration lower limit times \
-                zirconium concentration"
+        return ("Oxygen concentration lower limit times"
+                " zirconium concentration")
 
     @property
     def description(self):
