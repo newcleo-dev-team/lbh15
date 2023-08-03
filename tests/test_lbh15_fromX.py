@@ -50,6 +50,66 @@ class LeadTester(unittest.TestCase):
             first = False
 
 
+class LeadSolubilityTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for leadP in leadPs:
+            properties = load_prop('lbh15.properties.lead_thermochemical_properties.solubility_in_lead')
+            for prop in properties:
+                name = prop.name
+                val = getattr(leadP, name)
+                init_dict = {name: val}
+                fromX = Lead(**init_dict)
+                self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LeadDiffusivityTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for leadP in leadPs:
+            properties = load_prop('lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead')
+            for prop in properties:
+                name = prop.name
+                val = getattr(leadP, name)
+                init_dict = {name: val}
+                fromX = Lead(**init_dict)
+                self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LeadThermochemicalTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for leadP in leadPs:
+            properties = load_prop('lbh15.properties.lead_thermochemical_properties.lead_thermochemical')
+            for prop in properties:
+                name = prop.name
+                val = getattr(leadP, name)
+                init_dict = {name: val}
+                fromX = Lead(**init_dict)
+                self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LeadLimitsTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for leadP in leadPs:
+            properties = load_prop('lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits')
+            for prop in properties:
+                name = prop.name
+                val = getattr(leadP, name)
+                init_dict = {name: val}
+                fromX = Lead(**init_dict)
+                self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
 class BismuthTester(unittest.TestCase):
 
     def test_init_fromX(self):
@@ -67,6 +127,51 @@ class BismuthTester(unittest.TestCase):
             first = False
 
 
+class BismuthSolubilityTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for bismuthP in bismuthPs:
+            properties = load_prop('lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth')
+            for prop in properties:
+                name = prop.name
+                val = getattr(bismuthP, name)
+                init_dict = {name: val}
+                fromX = Bismuth(**init_dict)
+                self.assertAlmostEqual(bismuthP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class BismuthDiffusivityTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for bismuthP in bismuthPs:
+            properties = load_prop('lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth')
+            for prop in properties:
+                name = prop.name
+                val = getattr(bismuthP, name)
+                init_dict = {name: val}
+                fromX = Bismuth(**init_dict)
+                self.assertAlmostEqual(bismuthP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class BismuthThermochemicalTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for bismuthP in bismuthPs:
+            properties = load_prop('lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical')
+            for prop in properties:
+                name = prop.name
+                val = getattr(bismuthP, name)
+                init_dict = {name: val}
+                fromX = Bismuth(**init_dict)
+                self.assertAlmostEqual(bismuthP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
 class LBETester(unittest.TestCase):
 
     def test_init_fromX(self):
@@ -79,6 +184,66 @@ class LBETester(unittest.TestCase):
                 init_dict = {name: val}
                 if not first and name == 'cp':
                     LBE.set_root_to_use('cp', 1)
+                fromX = LBE(**init_dict)
+                self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LBESolubilityTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for lbeP in lbePs:
+            properties = load_prop('lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe')
+            for prop in properties:
+                name = prop.name
+                val = getattr(lbeP, name)
+                init_dict = {name: val}
+                fromX = LBE(**init_dict)
+                self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LBEDiffusivityTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for lbeP in lbePs:
+            properties = load_prop('lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe')
+            for prop in properties:
+                name = prop.name
+                val = getattr(lbeP, name)
+                init_dict = {name: val}
+                fromX = LBE(**init_dict)
+                self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LBEThermochemicalTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for lbeP in lbePs:
+            properties = load_prop('lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical')
+            for prop in properties:
+                name = prop.name
+                val = getattr(lbeP, name)
+                init_dict = {name: val}
+                fromX = LBE(**init_dict)
+                self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
+            first = False
+
+
+class LBELimitsTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        first = True
+        for lbeP in lbePs:
+            properties = load_prop('lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits')
+            for prop in properties:
+                name = prop.name
+                val = getattr(lbeP, name)
+                init_dict = {name: val}
                 fromX = LBE(**init_dict)
                 self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
             first = False
