@@ -42,6 +42,7 @@ class LiquidMetalInterface(ABC):
     _Q_m0 = 0
     _T_b0 = 0
     _Q_b0 = 0
+    _M = 0
     _guess = 0
     _correlations_to_use = {}
     _roots_to_use = {}
@@ -85,6 +86,13 @@ class LiquidMetalInterface(ABC):
         float : vaporisation heat [J/kg]
         """
         return self._Q_b0
+
+    @property
+    def M(self):
+        """
+        float : metal molar mass [g/mol]
+        """
+        return self._M
 
     @property
     def p(self):
@@ -554,12 +562,9 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         property_obj_list = []
-        module = cls._properties_module
-        if module:
-            for _, obj in inspect.getmembers(sys.modules[module]):
-                if inspect.isclass(obj) and obj is not PropertyInterface:
-                    if issubclass(obj, PropertyInterface):
-                        property_obj_list.append(obj())
+        if cls.__name__ in cls._properties_modules_dict:
+            modules = cls._properties_modules_dict[cls.__name__]
+            property_obj_list = cls.__property_list(modules)
         return property_obj_list
 
     @classmethod
@@ -574,20 +579,36 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         customproperty_obj_list = []
+        modules = []
         if cls.__name__ in cls.__custom_properties_path:
             lm_path = cls.__custom_properties_path[cls.__name__]
             for path in lm_path.keys():
                 if path not in sys.path:
                     sys.path.append(path)
                 module_name = lm_path[path]
-                module = importlib.import_module(module_name)
-                for _, obj in inspect.getmembers(module):
+                importlib.import_module(module_name)
+                modules.append(module_name)
+            customproperty_obj_list += cls.__property_list(modules)
+        return customproperty_obj_list
+
+    @classmethod
+    def __property_list(cls, modules):
+        obj_list = []
+        eff_modules = [module for module in modules if module]
+        if len(eff_modules) > 0:
+            for module in eff_modules:
+                mod = inspect.getmembers(sys.modules[module])
+                for _, obj in mod:
                     if (inspect.isclass(obj)
                             and obj is not PropertyInterface
-                            and not inspect.isabstract(obj)):
-                        if issubclass(obj, PropertyInterface):
-                            customproperty_obj_list.append(obj())
-        return customproperty_obj_list
+                            and not inspect.isabstract(obj)
+                            and issubclass(obj, PropertyInterface)):
+                        new_obj = obj()
+                        new_cl_name = type(new_obj).__name__
+                        cls_names = [type(_).__name__ for _ in obj_list]
+                        if new_cl_name not in cls_names:
+                            obj_list.append(new_obj)
+        return obj_list
 
     @abstractmethod
     def _set_constants(self):
@@ -613,6 +634,7 @@ class LiquidMetalInterface(ABC):
         rvalue += f"\tBoiling Temperature: {self.T_b0:.2f} [K]\n"
         rvalue += f"\tMelting latent heat: {self.Q_m0:.2f} [J/kg]\n"
         rvalue += f"\tVaporisation heat: {self.Q_b0:.2f} [J/kg]\n"
+        rvalue += f"\tMolar mass: {self.M:.2f} [g/mol]\n"
         rvalue += "\nThermophysical properties:\n"
         for key in self.__properties:
             prop_name = key.replace("_"+type(self).__name__, "")

@@ -5,6 +5,7 @@ from scipy.constants import atm
 from ._commons import LEAD_MELTING_TEMPERATURE
 from ._commons import LEAD_MELTING_LATENT_HEAT, LEAD_BOILING_TEMPERATURE
 from ._commons import SOBOLEV_KEYWORD, LEAD_VAPORISATION_HEAT
+from ._commons import LEAD_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
 
 
@@ -48,10 +49,16 @@ class Lead(LiquidMetalInterface):
     >>> liquid_lead_2.cp
     144.66006199999998
     """
-    _default_corr_to_use = {'cp': SOBOLEV_KEYWORD}
+    _default_corr_to_use = {'cp': SOBOLEV_KEYWORD, 'cr_sol': "gosse2014",
+                            'o_pp': "alcock1964", 'o_dif': "gromov1996",
+                            'lim_cr': "gosse2014"}
     _correlations_to_use = copy.deepcopy(_default_corr_to_use)
     _roots_to_use = {'cp': 0}
-    _properties_module = 'lbh15.properties.lead_properties'
+    _properties_modules_dict = {'Lead': ['lbh15.properties.lead_thermochemical_properties.solubility_in_lead',
+                                         'lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead',
+                                         'lbh15.properties.lead_thermochemical_properties.lead_thermochemical',
+                                         'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
+                                         'lbh15.properties.lead_properties']}
 
     def __init__(self, p=atm, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE*1.7
@@ -65,3 +72,4 @@ class Lead(LiquidMetalInterface):
         self._Q_m0 = LEAD_MELTING_LATENT_HEAT
         self._T_b0 = LEAD_BOILING_TEMPERATURE
         self._Q_b0 = LEAD_VAPORISATION_HEAT
+        self._M = LEAD_MOLAR_MASS
