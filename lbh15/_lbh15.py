@@ -86,7 +86,7 @@ class LiquidMetalInterface(ABC):
         float : vaporisation heat [J/kg]
         """
         return self._Q_b0
-    
+
     @property
     def M(self):
         """
@@ -562,14 +562,9 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         property_obj_list = []
-        module = cls._properties_modules_dict
         if cls.__name__ in cls._properties_modules_dict:
             modules = cls._properties_modules_dict[cls.__name__]
-            if len(modules) > 0:
-                for module in modules:
-                    if module:
-                        property_obj_list += (
-                        cls.__property_list(inspect.getmembers(sys.modules[module])))
+            property_obj_list = cls.__property_list(modules)
         return property_obj_list
 
     @classmethod
@@ -584,26 +579,35 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         customproperty_obj_list = []
+        modules = []
         if cls.__name__ in cls.__custom_properties_path:
             lm_path = cls.__custom_properties_path[cls.__name__]
             for path in lm_path.keys():
                 if path not in sys.path:
                     sys.path.append(path)
                 module_name = lm_path[path]
-                module = importlib.import_module(module_name)
-                customproperty_obj_list += (
-                cls.__property_list(inspect.getmembers(module)))
+                importlib.import_module(module_name)
+                modules.append(module_name)
+            customproperty_obj_list += cls.__property_list(modules)
         return customproperty_obj_list
 
     @classmethod
-    def __property_list(cls, mod):
+    def __property_list(cls, modules):
         obj_list = []
-        for _, obj in mod:
-            if (inspect.isclass(obj)
-                    and obj is not PropertyInterface
-                    and not inspect.isabstract(obj)):
-                if issubclass(obj, PropertyInterface):
-                    obj_list.append(obj())
+        eff_modules = [module for module in modules if module]
+        if len(eff_modules) > 0:
+            for module in eff_modules:
+                mod = inspect.getmembers(sys.modules[module])
+                for _, obj in mod:
+                    if (inspect.isclass(obj)
+                            and obj is not PropertyInterface
+                            and not inspect.isabstract(obj)
+                            and issubclass(obj, PropertyInterface)):
+                        new_obj = obj()
+                        new_cl_name = type(new_obj).__name__
+                        cls_names = [type(_).__name__ for _ in obj_list]
+                        if new_cl_name not in cls_names:
+                            obj_list.append(new_obj)
         return obj_list
 
     @abstractmethod
