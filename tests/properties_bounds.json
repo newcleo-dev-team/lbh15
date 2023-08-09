@@ -13,7 +13,7 @@
    },
    "cp_gurvich1991_Liquid_lead_specific_heat_capacity": {
       "min": 137.2871331822027,
-      "T_at_min": 1682.5219920079508,
+      "T_at_min": 1682.5219920085838,
       "max": 147.78490809276718,
       "T_at_max": 600.6000136642583
    },
@@ -89,13 +89,13 @@
       "max": 0.13736682921954058,
       "T_at_max": 1473.0
    },
-   "fe_sol_lbh15_f{self.long_name}_in_liquid_lead": {
+   "fe_sol_gosse2014_f{self.long_name}_in_liquid_lead": {
       "min": 2.5215446725117147e-07,
       "T_at_min": 600.0,
       "max": 0.004524905859631333,
       "T_at_max": 1173.0
    },
-   "ni_sol_lbh15_f{self.long_name}_in_liquid_lead": {
+   "ni_sol_gosse2014_f{self.long_name}_in_liquid_lead": {
       "min": 0.10646922192605927,
       "T_at_min": 598.0,
       "max": 0.6898187669628476,
@@ -336,7 +336,7 @@
       "T_at_max": 1831
    },
    "beta_s_lbh15_Liquid_bismuth_isentropic_compressibility": {
-      "min": 3.639536569936563e-11,
+      "min": 3.639536569936564e-11,
       "T_at_min": 544.6,
       "max": 7.627788130220019e-11,
       "T_at_max": 1800.0
@@ -510,7 +510,7 @@
       "T_at_max": 1927
    },
    "beta_s_lbh15_Liquid_lbe_isentropic_compressibility": {
-      "min": 3.0254741091880614e-11,
+      "min": 3.025474109188061e-11,
       "T_at_min": 400.0,
       "max": 3.9428181989352115e-11,
       "T_at_max": 1100.0
@@ -617,12 +617,6 @@
       "max": 0.015063879095492961,
       "T_at_max": 1013.0
    },
-   "zr_sol_lbh15_f{self.long_name}_in_liquid_lbe": {
-      "min": 6.397348354826489e-07,
-      "T_at_min": 500.0,
-      "max": 0.0009367922443357757,
-      "T_at_max": 998.0
-   },
    "fe_dif_lbh15_f{self.long_name}_in_liquid_lbe": {
       "min": 2.144447996897877e-05,
       "T_at_min": 973.0,
@@ -641,7 +635,7 @@
       "max": 0.00040834804977894144,
       "T_at_max": 1273
    },
-   "bi_a_lbh15_Bismuth_chemical_activity_in_liquid_lbe": {
+   "bi_a_gosse2014_Bismuth_chemical_activity_in_liquid_lbe": {
       "min": 0.39295786967418544,
       "T_at_min": 399,
       "max": 0.4858986615515771,
@@ -653,7 +647,7 @@
       "max": -0.15472376900174112,
       "T_at_max": 400.00001747063567
    },
-   "pb_a_lbh15_lead_chemical_activity_in_liquid_lbe": {
+   "pb_a_gosse2014_lead_chemical_activity_in_liquid_lbe": {
       "min": 0.2636640100250627,
       "T_at_min": 399,
       "max": 0.3681810571184996,
@@ -748,17 +742,5 @@
       "T_at_min": 673,
       "max": 7.097195734320282e-16,
       "T_at_max": 1000
-   },
-   "lim_zr_sat_lbh15_Oxygen_concentration_lower_limit_for_zirconium_at_its_saturation_concentration_in_liquid_lbe": {
-      "min": 5219.263972039422,
-      "T_at_min": 999.9999721169588,
-      "max": 57409.41345665657,
-      "T_at_max": 673.0000256429498
-   },
-   "lim_fe_lbh15_Oxygen_concentration_lower_limit_times_zirconium_concentration_in_lbe": {
-      "min": 161.3365968863298,
-      "T_at_min": 997.9999768986689,
-      "max": 300.17257825712755,
-      "T_at_max": 673.0000254861123
    }
 }
