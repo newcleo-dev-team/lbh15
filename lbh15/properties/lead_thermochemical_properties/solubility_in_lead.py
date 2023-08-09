@@ -1,5 +1,5 @@
-"""Module with the definition of chemical property objects
-for bismuth"""
+"""Module with the definition of solubility
+property objects for bismuth"""
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface, range_warning
@@ -44,6 +44,13 @@ class IronSolubility(PropertyInterface):
         str : property units
         """
         return "[wt.%]"
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "gosse2014"
 
     @property
     def range(self):
@@ -106,6 +113,13 @@ class NickelSolubility(PropertyInterface):
         str : property units
         """
         return "[wt.%]"
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "gosse2014"
 
     @property
     def range(self):
