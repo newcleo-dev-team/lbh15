@@ -1,4 +1,4 @@
-"""Module with the definition of thermochemical
+"""Module with the definition of solubility
 property objects for lead-bismuth eutectic"""
 import numpy as np
 from scipy.constants import atm
@@ -476,69 +476,6 @@ class OxygenSolubility(PropertyInterface):
         str : property long name
         """
         return "oxygen solubility"
-
-    @property
-    def description(self):
-        """
-        str : property description
-        """
-        return "f{self.long_name} in liquid lbe"
-
-
-class ZirconiumSolubility(PropertyInterface):
-    """
-    Zirconium solubility in liquid lead-bismuth
-    eutectic property class
-    """
-    @range_warning
-    def correlation(self, T, p=atm, verbose=False):
-        """
-        Correlation used to compute oxygen solubility in liquid bismuth
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        solubility [wt.%] : float
-        """
-        return np.exp((0.15-3172/T)*np.log(10))
-
-    @property
-    def name(self):
-        """
-        str : name of the property
-        """
-        return "zr_sol"
-
-    @property
-    def units(self):
-        """
-        str : property units
-        """
-        return "[wt.%]"
-
-    @property
-    def range(self):
-        """
-        list : temperature validity range for property correlation
-        """
-        return [500.0, 998.0]
-
-    @property
-    def long_name(self):
-        """
-        str : property long name
-        """
-        return "zirconium solubility"
 
     @property
     def description(self):
