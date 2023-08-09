@@ -121,6 +121,13 @@ class LeadChemicalActivity(PropertyInterface):
         return "[-]"
 
     @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "gosse2014"
+
+    @property
     def range(self):
         """
         list : temperature validity range for property correlation
@@ -183,6 +190,13 @@ class BismuthChemicalActivity(PropertyInterface):
         str : property units
         """
         return "[-]"
+
+    @property
+    def correlation_name(self):
+        """
+        str : name of the correlation
+        """
+        return "gosse2014"
 
     @property
     def range(self):
