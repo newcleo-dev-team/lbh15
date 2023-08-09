@@ -1,6 +1,5 @@
 """Module with the definition of oxygen
-concentration limits property objects
-for lead-bismuth eutectic"""
+concentration limits objects for lead-bismuth eutectic"""
 import numpy as np
 from scipy.constants import atm, R
 from ..interface import PropertyInterface, range_warning
@@ -12,7 +11,6 @@ from .solubility_in_lbe import NickelSolubilityGosse2014
 from .solubility_in_lbe import NickelSolubilityMartinelli2010
 from .solubility_in_lbe import IronSolubilityGosse2014
 from .solubility_in_lbe import IronSolubilityWeeks1969
-from .solubility_in_lbe import ZirconiumSolubility
 from .lbe_thermochemical import LeadChemicalActivity
 
 
@@ -299,79 +297,6 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         """
         return ("Oxygen concentration lower limit for"
                 " silicon at its saturation concentration")
-
-    @property
-    def description(self):
-        """
-        str : property description
-        """
-        return f"{self.long_name} in liquid lbe"
-
-
-class LowerLimitSaturationZirconium(PropertyInterface):
-    """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film in liquid lead-bismuth
-    eutectic considering zirconium is at its saturation
-    concentration property class
-    """
-    @range_warning
-    def correlation(self, T, p=atm, verbose=False):
-        """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid
-        lead-bismuth eutectic considering zirconium is at its
-        saturation concentration
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        concentration [wt.%] : float
-        """
-        o_sol_obj = OxygenSolubility()
-        pb_a_obj = LeadChemicalActivity()
-        return np.exp((243070/(2*R*T))-(11.89/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p))
-                      + np.log(pb_a_obj.correlation(T, p)))
-
-    @property
-    def name(self):
-        """
-        str : name of the property
-        """
-        return "lim_zr_sat"
-
-    @property
-    def units(self):
-        """
-        str : property units
-        """
-        return "[wt.%]"
-
-    @property
-    def range(self):
-        """
-        list : temperature validity range for property correlation
-        """
-        return [673, 1000]
-
-    @property
-    def long_name(self):
-        """
-        str : property long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " zirconium at its saturation concentration")
 
     @property
     def description(self):
@@ -903,73 +828,3 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
         list : temperature validity range for property correlation
         """
         return [673, 1000]
-
-
-class LowerLimitZirconium(PropertyInterface):
-    """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the zirconium concentration
-    in liquid lead-bismuth eutectic property class
-    """
-    @range_warning
-    def correlation(self, T, p=atm, verbose=False):
-        """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        zirconium concentration in liquid lead-bismuth eutectic
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        concentration [wt.%] : float
-        """
-        lim_zr_sat_obj = LowerLimitSaturationZirconium()
-        zr_sol_obj = ZirconiumSolubility()
-        return (np.exp((1/2)*np.log(zr_sol_obj.correlation(T, p)))
-                * lim_zr_sat_obj.correlation(T, p))
-
-    @property
-    def name(self):
-        """
-        str : name of the property
-        """
-        return "lim_fe"
-
-    @property
-    def units(self):
-        """
-        str : property units
-        """
-        return "[wt.%]"
-
-    @property
-    def range(self):
-        """
-        list : temperature validity range for property correlation
-        """
-        return [673, 998]
-
-    @property
-    def long_name(self):
-        """
-        str : property long name
-        """
-        return ("Oxygen concentration lower limit times"
-                " zirconium concentration")
-
-    @property
-    def description(self):
-        """
-        str : property description
-        """
-        return f"{self.long_name} in lbe"
