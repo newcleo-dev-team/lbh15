@@ -1,5 +1,5 @@
-"""Module with the definition of chemical property objects
-for lead"""
+"""Module with the definition of diffusivity
+property objects for lead"""
 import numpy as np
 from scipy.constants import atm, R
 from lbh15.properties.interface import PropertyInterface, range_warning
