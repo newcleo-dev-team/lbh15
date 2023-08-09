@@ -1,5 +1,5 @@
-"""Module with the definition of chemical property objects
-for bismuth"""
+"""Module with the definition of thermochemical
+property objects for bismuth"""
 import numpy as np
 from scipy.constants import atm, R
 from ..interface import PropertyInterface, range_warning
