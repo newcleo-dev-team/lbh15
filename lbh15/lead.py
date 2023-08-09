@@ -49,7 +49,9 @@ class Lead(LiquidMetalInterface):
     >>> liquid_lead_2.cp
     144.66006199999998
     """
-    _default_corr_to_use = {'cp': SOBOLEV_KEYWORD}
+    _default_corr_to_use = {'cp': SOBOLEV_KEYWORD, 'cr_sol': "gosse2014",
+                            'o_pp': "alcock1964", 'o_dif': "gromov1996",
+                            'lim_cr': "gosse2014"}
     _correlations_to_use = copy.deepcopy(_default_corr_to_use)
     _roots_to_use = {'cp': 0}
     _properties_modules_dict = {'Lead': ['lbh15.properties.lead_thermochemical_properties.solubility_in_lead',
