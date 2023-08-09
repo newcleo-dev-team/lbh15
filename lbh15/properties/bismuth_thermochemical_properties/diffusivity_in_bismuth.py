@@ -1,5 +1,5 @@
-"""Module with the definition of chemical property objects
-for bismuth"""
+"""Module with the definition of diffusivity
+property objects for bismuth"""
 import numpy as np
 from scipy.constants import atm, R
 from lbh15.properties.interface import PropertyInterface, range_warning
