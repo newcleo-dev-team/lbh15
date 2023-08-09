@@ -1,5 +1,6 @@
 """Module with the definition of lead-bismuth eutectic
 liquid metal object class, i.e., LBE"""
+import copy
 from scipy.constants import atm
 from ._commons import LBE_MELTING_TEMPERATURE
 from ._commons import LBE_MELTING_LATENT_HEAT, LBE_BOILING_TEMPERATURE
@@ -42,8 +43,11 @@ class LBE(LiquidMetalInterface):
     >>> liquid_lbe.mu  # [Pa*s]
     0.001736052003181349
     """
-    _default_corr_to_use = {}
-    _correlations_to_use = {}
+    _default_corr_to_use = {'fe_sol': "gosse2014", 'ni_sol': "gosse2014",
+                            'cr_sol': 'gosse2014', 'o_dif': "gromov1996",
+                            'lim_cr': "gosse2014", 'lim_ni': "gosse2014",
+                            'lim_fe': "gosse2014"}
+    _correlations_to_use = copy.deepcopy(_default_corr_to_use)
     _roots_to_use = {'cp': 0}
     _properties_modules_dict = {'LBE': ['lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe',
                                         'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
