@@ -1,5 +1,5 @@
 """Module with the definition of oxygen
-concentration limits property objects for lead"""
+concentration limits objects for lead"""
 import numpy as np
 from scipy.constants import atm, R
 from ..interface import PropertyInterface, range_warning
