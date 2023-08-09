@@ -1,4 +1,4 @@
-"""Module with the definition of thermochemical
+"""Module with the definition of diffusivity
 property objects for lead-bismuth eutectic"""
 import numpy as np
 from scipy.constants import atm, R
