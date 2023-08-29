@@ -288,75 +288,6 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class LowerLimitSaturationZirconium(PropertyInterface):
-    """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film in liquid lead considering
-    zirconium is at its saturation concentration property class
-    """
-    @range_warning
-    def correlation(self, T, p=atm, verbose=False):
-        """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid lead
-        considering zirconium is at its saturation concentration
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        concentration [wt.%] : float
-        """
-        o_sol_obj = OxygenSolubility()
-        return np.exp((243070/(2*R*T))-(11.89/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p)))
-
-    @property
-    def name(self):
-        """
-        str : name of the property
-        """
-        return "lim_zr_sat"
-
-    @property
-    def units(self):
-        """
-        str : property units
-        """
-        return "[wt.%]"
-
-    @property
-    def range(self):
-        """
-        list : temperature validity range for property correlation
-        """
-        return [673, 1000]
-
-    @property
-    def long_name(self):
-        """
-        str : property long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " zirconium at its saturation concentration")
-
-    @property
-    def description(self):
-        """
-        str : property description
-        """
-        return f"{self.long_name} in liquid lead"
-
-
 class LowerLimitSaturationAluminium(PropertyInterface):
     """
     Lower limit of oxygen concentration to promote a
@@ -430,7 +361,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead property class
+    raised to 2/3 in liquid lead property class
     """
     @property
     def name(self):
@@ -452,7 +383,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
         str : property long name
         """
         return ("Oxygen concentration lower limit times"
-                " chromium concentration")
+                " chromium concentration raised to 2/3")
 
     @property
     def description(self):
@@ -466,7 +397,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead property class
+    raised to 2/3 in liquid lead property class
     implementing correlation by gosse2014
     """
     @range_warning
@@ -474,7 +405,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        chromium concentration in liquid lead
+        chromium concentration raised to 2/3 in liquid lead
 
         Parameters
         ----------
@@ -515,7 +446,7 @@ class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead property class
+    raised to 2/3 in liquid lead property class
     implementing correlation by venkatraman1988
     """
     @range_warning
@@ -523,7 +454,7 @@ class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        chromium concentration in liquid lead
+        chromium concentration raised to 2/3 in liquid lead
 
         Parameters
         ----------
@@ -564,7 +495,7 @@ class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead property class
+    raised to 2/3 in liquid lead property class
     implementing correlation by alden1958
     """
     @range_warning
@@ -572,7 +503,7 @@ class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        chromium concentration in liquid lead
+        chromium concentration raised to 2/3 in liquid lead
 
         Parameters
         ----------
@@ -683,14 +614,14 @@ class LowerLimitIron(PropertyInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the iron concentration
-    in liquid lead property class
+    raised to 3/4 in liquid lead property class
     """
     @range_warning
     def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        iron concentration in liquid lead
+        iron concentration raised to 3/4 in liquid lead
 
         Parameters
         ----------
@@ -739,7 +670,7 @@ class LowerLimitIron(PropertyInterface):
         str : property long name
         """
         return ("Oxygen concentration lower limit times"
-                " iron concentration")
+                " iron concentration raised to 3/4")
 
     @property
     def description(self):
@@ -753,14 +684,14 @@ class LowerLimitSilicon(PropertyInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the silicon concentration
-    in liquid lead property class
+    raised to 1/2 in liquid lead property class
     """
     @range_warning
     def correlation(self, T, p=atm, verbose=False):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        silicon concentration in liquid lead
+        silicon concentration raised to 1/2 in liquid lead
 
         Parameters
         ----------
@@ -809,7 +740,7 @@ class LowerLimitSilicon(PropertyInterface):
         str : property long name
         """
         return ("Oxygen concentration lower limit times"
-                " silicon concentration")
+                " silicon concentration raised to 1/2")
 
     @property
     def description(self):
