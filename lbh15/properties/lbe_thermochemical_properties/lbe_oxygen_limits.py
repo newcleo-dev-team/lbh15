@@ -383,7 +383,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 2/3 in liquid lead-bismuth eutectic property class
     """
     @property
     def name(self):
@@ -405,7 +405,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
         str : property long name
         """
         return ("Oxygen concentration lower limit times"
-                " chromium concentration")
+                " chromium concentration raised to 2/3")
 
     @property
     def description(self):
@@ -419,7 +419,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 2/3 in liquid lead-bismuth eutectic property class
     implementing correlation by gosse2014
     """
     @range_warning
@@ -427,7 +427,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        chromium concentration in liquid lead-bismuth eutectic
+        chromium concentration raised to 2/3 in liquid lead-bismuth eutectic
 
         Parameters
         ----------
@@ -468,7 +468,7 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 2/3 in liquid lead-bismuth eutectic property class
     implementing correlation by courouau2004
     """
     @range_warning
@@ -476,7 +476,7 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        chromium concentration in liquid lead-bismuth eutectic
+        chromium concentration raised to 2/3 in liquid lead-bismuth eutectic
 
         Parameters
         ----------
@@ -517,7 +517,7 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the chromium concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 2/3 in liquid lead-bismuth eutectic property class
     implementing correlation by martynov1998
     """
     @range_warning
@@ -525,7 +525,7 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        chromium concentration in liquid lead-bismuth eutectic
+        chromium concentration raised to 2/3 in liquid lead-bismuth eutectic
 
         Parameters
         ----------
@@ -700,7 +700,7 @@ class LowerLimitIronInterface(PropertyInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the iron concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 3/4 in liquid lead-bismuth eutectic property class
     """
     @property
     def name(self):
@@ -722,7 +722,7 @@ class LowerLimitIronInterface(PropertyInterface):
         str : property long name
         """
         return ("Oxygen concentration lower limit times"
-                " iron concentration")
+                " iron concentration raised to 3/4")
 
     @property
     def description(self):
@@ -736,7 +736,7 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the iron concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 3/4 in liquid lead-bismuth eutectic property class
     implementing correlation by gosse2014
     """
     @range_warning
@@ -744,7 +744,8 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        iron concentration in liquid lead-bismuth eutectic
+        iron concentration raised to 3/4 in liquid lead-bismuth
+        eutectic
 
         Parameters
         ----------
@@ -785,7 +786,7 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
     """
     Lower limit of oxygen concentration to promote a
     protective oxide film times the iron concentration
-    in liquid lead-bismuth eutectic property class
+    raised to 3/4 in liquid lead-bismuth eutectic property class
     implementing correlation by weeks1969
     """
     @range_warning
@@ -793,7 +794,8 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
-        iron concentration in liquid lead-bismuth eutectic
+        iron concentration raised to 3/4 in liquid lead-bismuth
+        eutectic
 
         Parameters
         ----------
