@@ -3,7 +3,7 @@ Introduction
 ============
 
 lbh15 (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
-thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
+thermo-physical and thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by OECD/NEA :cite:`Agency2015`: 
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
 . The properties implemented in the package are listed in table :numref:`tableprop`.
@@ -15,7 +15,7 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
 
    * - Property
      - Symbol
-     - Units 
+     - Units
    * - Melting temperature
      - :math:`T_{m0}`
      - :math:`[K]`
@@ -63,6 +63,212 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
      - :math:`[W/(m{\cdot}K)]`
 
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
+
+The properties implemented in the updated package are listed in table :numref:`tablethermochemicalprop`.
+
+.. list-table:: lbh15 thermochemical properties from the handbook edited by OECD/NEA  
+   :widths: 50 25 25 25 25 25
+   :name: tablethermochemicalprop
+   :header-rows: 1
+
+   * - Property
+     - Symbol
+     - Units
+     - Lead
+     - LBE
+     - Bismuth
+   * - Molar-specific enthalpy
+     - :math:`H`
+     - :math:`[J/mol]`
+     - ✔
+     - ✔
+     - ✔
+   * - Molar-specific entropy
+     - :math:`S`
+     - :math:`[J/(mol.K)]`
+     - ✔
+     - ✔
+     - ✔
+   * - Gibbs free energy
+     - :math:`G`
+     - :math:`[J/mol]`
+     - ✔
+     - ✔
+     - ✔
+   * - Lead chemical activity in LBE
+     - :math:`\alpha_{Pb}`
+     - :math:`[-]`
+     - :math:`-`
+     - ✔
+     - :math:`-`
+   * - Bismuth chemical activity in LBE
+     - :math:`\alpha_{Bi}`
+     - :math:`[-]`
+     - :math:`-`
+     - ✔
+     - :math:`-`
+   * - Iron solubility
+     - :math:`S_{Fe}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - ✔
+   * - Nickel solubility
+     - :math:`S_{Ni}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - ✔
+   * - Chromium solubility
+     - :math:`S_{Cr}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - ✔
+   * - Silicon solubility in liquid lead
+     - :math:`S_{Si}`
+     - :math:`[wt.\%]`
+     - ✔
+     - :math:`-`
+     - :math:`-`
+   * - Oxygen solubility
+     - :math:`S_{O}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - ✔
+   * - Oxygen partial pressure divided by the oxygen concentration squared
+     - :math:`P_{O_2}`
+     - :math:`[atm/wt.\%^2]`
+     - ✔
+     - ✔
+     - ✔
+   * - Oxygen diffusivity
+     - :math:`D_{Fe}`
+     - :math:`[cm^2/s]`
+     - ✔
+     - ✔
+     - ✔
+   * - Iron diffusivity in lead and LBE
+     - :math:`D_{Fe}`
+     - :math:`[cm^2/s]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Cobalt diffusivity in lead
+     - :math:`D_{Co}`
+     - :math:`[cm^2/s]`
+     - ✔
+     - :math:`-`
+     - :math:`-`
+   * - Selenium diffusivity in lead
+     - :math:`D_{Se}`
+     - :math:`[cm^2/s]`
+     - ✔
+     - :math:`-`
+     - :math:`-`
+   * - Indium diffusivity in lead
+     - :math:`D_{In}`
+     - :math:`[cm^2/s]`
+     - ✔
+     - :math:`-`
+     - :math:`-`
+   * - Tellurium diffusivity in lead
+     - :math:`D_{Tl}`
+     - :math:`[cm^2/s]`
+     - ✔
+     - :math:`-`
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control with
+   
+       iron, the structural material, at its saturation concentration
+       
+       in the liquid metal, lead or LBE.
+     - :math:`C_{O_2, Fe(sat)}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control with
+   
+       nickel, the structural material, at its saturation concentration
+       
+       in the liquid metal, lead or LBE.
+     - :math:`C_{O_2, Ni(sat)}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control with
+   
+       chromium, the structural material, at its saturation concentration
+       
+       in the liquid metal, lead or LBE.
+     - :math:`C_{O_2, Cr(sat)}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control with
+   
+       silicon (the structural material) at its saturation concentration
+       
+       in the liquid metal, lead or LBE.
+     - :math:`C_{O_2, Si(sat)}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control with
+   
+       aluminium, the structural material, at its saturation concentration
+       
+       in the liquid metal, lead or LBE.
+     - :math:`C_{O_2, Al(sat)}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control
+
+       times the iron (the structural material) concentration
+       
+       in the liquid metal, lead or LBE, raised to 3/4. 
+     - :math:`C_{O_2}.C_{Fe}^{3/4}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control
+
+       times the nickel (the structural material) concentration
+       
+       in the liquid metal, lead or LBE. 
+     - :math:`C_{O_2}.C_{Ni}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control
+
+       times the chromium (the structural material) concentration
+       
+       in the liquid metal, lead or LBE, raised to 2/3. 
+     - :math:`C_{O_2}.C_{Cr}^{2/3}`
+     - :math:`[wt.\%]`
+     - ✔
+     - ✔
+     - :math:`-`
+   * - Lower limit of oxygen concentration for operational control
+
+       times the silicon (the structural material) concentration
+       
+       in the liquid metal, lead, raised to 1/2. 
+     - :math:`C_{O_2}.C_{Si}^{1/2}`
+     - :math:`[wt.\%]`
+     - ✔
+     - :math:`-`
+     - :math:`-`
 
 All properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) by default and the correlations'
 validity range is checked at evaluation, raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
@@ -187,6 +393,17 @@ This section shows a few examples of basic usage of lbh15.
   >>> liquid_lead.k
   22.4
 
+- Create an instance of :class:`.Lead` at a given temperature, than change it. Compare the oxygen
+  diffusivity value at the two temperatures:
+
+  >>> from lbh15 import Lead
+  >>> liquid_lead = Lead(T=700)
+  >>> liquid_lead.o_dif
+  4.11000872874867e-06
+  >>> liquid_lead.T = 850
+  >>> liquid_lead.o_dif
+  6.708316471487037e-06
+
 - Request property outside its range of validity. In this example :class:`.Lead` object is initialized
   using a temperature value that is outside the range of physical validity of the surface tension
   correlation:
@@ -203,7 +420,7 @@ This section shows a few examples of basic usage of lbh15.
   >>> from lbh15 import Lead
   >>> liquid_lead = Lead(T=1000)
   >>> repr(liquid_lead)
-  'Lead(T=1000.00, alpha=1.26e-04, beta_s=3.38e-11, cp=140.89, h=57656.86, k=20.20, mu=1.33e-03, p_s=1.41, r=1.14e-06, rho=10161.50, sigma=0.41, u_s=1707.00)'
+  'Lead(T=1000.00, cr_sol=9.38e-04, fe_sol=7.67e-04, ni_sol=0.92, o_sol=0.02, si_sol=5.08e-04, co_dif=3.20e-05, in_dif=5.90e-05, fe_dif=2.48e-05, o_dif=9.45e-06, se_dif=7.16e-05, te_dif=4.59e-05, G=-3.34e+03, H=11946.50, S=15.28, o_pp=1.06e-09, h=57656.86, lim_cr=1.43e-13, lim_fe=5.77e-09, lim_ni=3.97e-04, lim_al_sat=5.24e-20, lim_cr_sat=1.49e-11, lim_fe_sat=1.25e-06, lim_ni_sat=4.30e-04, lim_si_sat=2.28e-15, lim_zr_sat=16775.84, lim_si=5.14e-17, alpha=1.26e-04, beta_s=3.38e-11, cp=140.89, k=20.20, mu=1.33e-03, p_s=1.41, r=1.14e-06, rho=10161.50, sigma=0.41, u_s=1707.00)'
 
 
 
@@ -281,7 +498,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   does not depend on pressure and use it instead of the default one (the same holds :class:`.Bismuth` and :class:`.LBE`).
   The names of the available correlations can be queried by a simple function call
   (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
-  reference handbook :cite: `Agency2015`):
+  reference handbook :cite:`Agency2015`):
   
   >>> from lbh15 import Lead
   >>> Lead.correlations_available()
@@ -335,7 +552,7 @@ Advanced usage comprises the possibility of adding new properties and physical c
   >>> import os
   >>> Lead.set_custom_properties_path(os.getcwd() + 'custom_property/custom_density.py')
   >>> Lead.correlations_available()
-  {'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'h': 'sobolev2011', 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'sobolev2011', 'r': 'lbh15', 'rho': ['sobolev2008a','custom2022'], 'sigma': 'jauch1986', 'u_s': 'sobolev2011'}
+  {'cr_sol': ['alden1958', 'gosse2014', 'venkatraman1988'], 'fe_sol': 'gosse2014', 'ni_sol': 'gosse2014', 'o_sol': 'lbh15', 'si_sol': 'lbh15', 'co_dif': 'lbh15', 'in_dif': 'lbh15', 'fe_dif': 'lbh15', 'o_dif': ['arcella1968', 'charle1976', 'ganesan2006b', 'gromov1996', 'homna1971', 'otsuka1975', 'swzarc1972'], 'se_dif': 'lbh15', 'te_dif': 'lbh15', 'G': 'lbh15', 'H': 'lbh15', 'S': 'lbh15', 'o_pp': ['alcock1964', 'charle1976', 'fisher1966', 'ganesan2006', 'isecke1977', 'otsuka1979', 'otsuka1981', 'szwarc1972', 'taskinen1979'], 'h': 'sobolev2011', 'lim_cr': ['alden1958', 'gosse2014', 'venkatraman1988'], 'lim_fe': 'lbh15', 'lim_ni': 'lbh15', 'lim_al_sat': 'lbh15', 'lim_cr_sat': 'lbh15', 'lim_fe_sat': 'lbh15', 'lim_ni_sat': 'lbh15', 'lim_si_sat': 'lbh15', 'lim_zr_sat': 'lbh15', 'lim_si': 'lbh15', 'alpha': 'lbh15', 'beta_s': 'lbh15', 'cp': ['gurvich1991', 'sobolev2011'], 'k': 'lbh15', 'mu': 'lbh15', 'p_s': 'sobolev2011', 'r': 'lbh15', 'rho': 'sobolev2008a', 'sigma': 'jauch1986', 'u_s': 'sobolev2011'}
 
   It is possible to see that now there are two correlations possible for the density :code:`rho`: :code:`sobolev2008a` and :code:`custom2022`.
   If the density correlation is not specified for a new object instantiation, the last one in the list will be selected as default:
@@ -438,6 +655,19 @@ Advanced usage comprises the possibility of adding new properties and physical c
 
 .. note:: The filepaths used here must be absolute.
 
+.. _Learn more:
+
+==========
+Learn more
+==========
+
+This section contains in a first part some informations about the correlations linked to the oxygen control
+in lead and LBE systems. More precisely, we develop how to obtain the relations provided in the lbh15.
+The second part contains an example of application of the complete package, simulating an heat variation and 
+some of its consequences in a liquid lead system.
+
+.. include:: learn_more.rst
+ 
 .. _API Guide:
 
 =========

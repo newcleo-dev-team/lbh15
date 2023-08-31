@@ -1,5 +1,5 @@
-properties
-==========
+lbh15.properties
+================
 In this section of the lbh15 package there is the documentation 
 of properties objects, i.e., the classes that actually implements thermophysical and thermochemical
 property correlations. They are then dynamically added to :class:`.Lead`, :class:`.Bismuth`
