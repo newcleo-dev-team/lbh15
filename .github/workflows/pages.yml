@@ -1,15 +1,15 @@
 name: Sphinx build
 
-on: push 
-  #push:
-    #branches:
-    #  - master
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-    #permissions:
-    #  pages: write      # to deploy to Pages
-    #  id-token: write   # to verify the deployment originates from an appropriate source
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -20,11 +20,11 @@ jobs:
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
       with:
-        pre-build-command: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
+        pre-build-command: pip install sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
         docs-folder: "docs/"
-    #- name: Upload artifacts
-    #  uses: actions/upload-pages-artifact@v1
-    #  with:
-    #    path: docs/_build/html/
-    #- name: Deploy
-    #  uses: actions/deploy-pages@v1
+    - name: Upload artifacts
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: docs/_build/html/
+    - name: Deploy
+      uses: actions/deploy-pages@v1
