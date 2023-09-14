@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build HTML
-      uses: ammaraskar/sphinx-action@master
       with:
         pre-build-command: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
+        build-command: sphinx-build -b html . _build
         docs-folder: "docs/"
