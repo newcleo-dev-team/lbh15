@@ -3,12 +3,15 @@ name: test_build
 on: push
 
 jobs:
-  test_build:
-    runs-on: ubuntu-latest
+  test_build:    
+    runs-on: ubuntu-latest    
+    defaults: 
+      run:
+        working-directory: ./docs
     steps:
-    - uses: actions/checkout@v3
-    - name: Build HTML
-      with:
-        pre-build-command: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
-        build-command: sphinx-build -b html . _build
-        docs-folder: "docs/"
+      - uses: actions/checkout@v3
+      - run: sudo apt-get install python3-sphinx
+      - run: pip install sphinx-rtd-theme
+      - run: pip install myst-parser
+      - run: pip install sphinxcontrib-bibtex
+      - run: make html
