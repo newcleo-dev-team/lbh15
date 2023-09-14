@@ -10,5 +10,5 @@ jobs:
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
       with:
-        pre-build-command: pip install sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
+        pre-build-command: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
         docs-folder: "docs/"
