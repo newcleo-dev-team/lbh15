@@ -19,8 +19,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build HTML
       working-directory: ./docs
-      run: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex 
-      run: make html
+      run: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex && make html
     - name: Upload artifacts
       uses: actions/upload-pages-artifact@v1
       with:
