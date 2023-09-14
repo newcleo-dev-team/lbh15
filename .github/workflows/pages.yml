@@ -19,11 +19,7 @@ jobs:
     - name: Build HTML
       working-directory: ./docs
       uses: actions/checkout@v3
-      run: sudo apt-get install python3-sphinx
-      run: pip install sphinx-rtd-theme
-      run: pip install myst-parser
-      run: pip install sphinxcontrib-bibtex
-      run: make html
+      run: sudo apt-get install python3-sphinx & pip install sphinx-rtd-theme & pip install myst-parser & pip install sphinxcontrib-bibtex & make html
     - name: Upload artifacts
       uses: actions/upload-pages-artifact@v1
       with:
