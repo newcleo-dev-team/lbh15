@@ -21,13 +21,12 @@ jobs:
       defaults: 
         run:
           working-directory: ./docs
-      steps:
-        - uses: actions/checkout@v3
-        - run: sudo apt-get install python3-sphinx
-        - run: pip install sphinx-rtd-theme
-        - run: pip install myst-parser
-        - run: pip install sphinxcontrib-bibtex
-        - run: make html
+      - uses: actions/checkout@v3
+      - run: sudo apt-get install python3-sphinx
+      - run: pip install sphinx-rtd-theme
+      - run: pip install myst-parser
+      - run: pip install sphinxcontrib-bibtex
+      - run: make html
       #uses: ammaraskar/sphinx-action@master
       #with:
       #  pre-build-command: pip install sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
