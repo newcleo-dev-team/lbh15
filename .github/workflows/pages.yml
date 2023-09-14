@@ -16,9 +16,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Build HTML
       working-directory: ./docs
-      uses: actions/checkout@v3
       run: sudo apt-get install python3-sphinx & pip install sphinx-rtd-theme & pip install myst-parser & pip install sphinxcontrib-bibtex & make html
     - name: Upload artifacts
       uses: actions/upload-pages-artifact@v1
