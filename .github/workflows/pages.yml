@@ -18,10 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build HTML
-      uses: ammaraskar/sphinx-action@master
-      with:
-        pre-build-command: pip install sphinx-rtd-theme myst-parser sphinxcontrib-bibtex
-        docs-folder: "docs/"
+      working-directory: ./docs
+      run: pip install Sphinx sphinx-rtd-theme myst-parser sphinxcontrib-bibtex && make html
     - name: Upload artifacts
       uses: actions/upload-pages-artifact@v1
       with:

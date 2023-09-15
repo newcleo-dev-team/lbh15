@@ -134,6 +134,8 @@ the following command in the folder ``docs/``:
 
       make latexpdf
 
+The html documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
+
 .. _Examples:
 
 ========
