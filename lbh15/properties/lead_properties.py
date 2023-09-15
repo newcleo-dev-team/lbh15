@@ -1,4 +1,6 @@
 """Module with the definition of thermophysical property objects for lead"""
+from typing import Sequence
+from typing import Union
 import numpy as np
 from scipy.constants import atm
 from .interface import PropertyInterface, range_warning
@@ -13,7 +15,8 @@ class p_s(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute saturation vapour pressure
 
@@ -34,7 +37,8 @@ class p_s(PropertyInterface):
         """
         return 5.76e9 * np.exp(-22131/T)
 
-    def initialization_helper(self, property_value):
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
         """
         Returns a temperature guess according to the value
         of the saturation vapour pressure
@@ -62,35 +66,35 @@ class p_s(PropertyInterface):
         return rvalue
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, T_b0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[Pa]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "saturation vapour pressure"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -103,7 +107,8 @@ class sigma(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute surface tension
 
@@ -125,35 +130,35 @@ class sigma(PropertyInterface):
         return (525.9 - 0.113*T)*1e-3
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "jauch1986"
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 1300.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[N/m]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "surface tension"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -166,7 +171,8 @@ class rho(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute density. sobolev2011 correlation
         is used as specific heat capacity in pressure dependent
@@ -195,35 +201,35 @@ class rho(PropertyInterface):
                         * (p - atm))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "sobolev2008a"
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, T_b0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[kg/m^3]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "density"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -236,7 +242,8 @@ class alpha(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute thermal expansion coefficient
 
@@ -258,28 +265,28 @@ class alpha(PropertyInterface):
         return 1/(8942 - T)
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, T_b0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[1/K]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "thermal expansion coefficient"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -292,7 +299,8 @@ class u_s(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute sound velocity
 
@@ -314,35 +322,35 @@ class u_s(PropertyInterface):
         return 1953 - 0.246*T
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[m/s]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "sound velocity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -355,7 +363,8 @@ class beta_s(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute isentropic compressibility
 
@@ -379,28 +388,28 @@ class beta_s(PropertyInterface):
         return 1/(rho_val * u_s_val*u_s_val)
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[1/Pa]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "isentropic compressibility"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -413,7 +422,8 @@ class cp_sobolev2011(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute specific heat capacity
 
@@ -436,21 +446,21 @@ class cp_sobolev2011(PropertyInterface):
                 - 1.524e6/T/T)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "cp"
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return SOBOLEV_KEYWORD
 
     @property
-    def is_injective(self):
+    def is_injective(self) -> bool:
         """
         bool : True if correlation is injective,
         False otherwise
@@ -458,28 +468,28 @@ class cp_sobolev2011(PropertyInterface):
         return False
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/(kg*K)]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "specific heat capacity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -492,7 +502,8 @@ class cp_gurvich1991(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute specific heat capacity
 
@@ -515,21 +526,21 @@ class cp_gurvich1991(PropertyInterface):
                 - 2.099e-9*T*T*T - 1.524e6/T/T)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "cp"
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return GURVICH_KEYWORD
 
     @property
-    def is_injective(self):
+    def is_injective(self) -> bool:
         """
         bool : True if correlation is injective,
         False otherwise
@@ -537,28 +548,28 @@ class cp_gurvich1991(PropertyInterface):
         return False
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/(kg*K)]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "specific heat capacity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -571,7 +582,8 @@ class h(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute specific enthalpy
 
@@ -596,35 +608,35 @@ class h(PropertyInterface):
                 + 1.524e6*(1/T - 1/T_m0))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/kg]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "specific enthalpy"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -639,7 +651,8 @@ class mu(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute dynamic viscosity
 
@@ -661,28 +674,28 @@ class mu(PropertyInterface):
         return 4.55e-4 * np.exp(1069/T)
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 1473.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[Pa*s]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "dynamic viscosity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -695,7 +708,8 @@ class r(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute electrical resistivity
 
@@ -717,28 +731,28 @@ class r(PropertyInterface):
         return (67.0 + 0.0471*T)*1e-8
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 1273.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[Ohm*m]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "electrical resistivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -751,7 +765,8 @@ class k(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute thermal conductivity
 
@@ -773,28 +788,28 @@ class k(PropertyInterface):
         return 9.2 + 0.011*T
 
     @property
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 1300.0]
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[W/(m*K)]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "thermal conductivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
