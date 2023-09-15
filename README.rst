@@ -74,3 +74,18 @@ the following command in the folder ``docs/``:
       make latexpdf
 
 The html documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
+
+
+.. rubric:: *Recommended publication for citing*
+
+.. code-block:: latex
+
+  @inproceedings{NURETH20lbh15,
+    author = {Panico, Daniele and Tomatis, Daniele},
+    title = {{lbh15: a Python package implementing lead, bismuth, and lead-bismuth eutectic thermophysical properties for fast reactor applications}},
+    booktitle = {Proc. of 20th International Topical Meeting on Nuclear Reactor Thermal Hydraulics (NURETH-20), Washington DC, USA},
+    pages = {1--12},
+    year = {2023},
+    month = {Aug 20--25},
+    editor = {ANS}
+  }
