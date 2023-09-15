@@ -4,7 +4,6 @@ for validity range check as well."""
 import warnings
 from abc import ABC
 from abc import abstractmethod
-from typing import Callable
 from typing import Sequence
 from typing import Union
 from numpy import nan
@@ -85,7 +84,7 @@ class PropertyInterface(ABC):
             self.__T_at_min = self.range[0]
             self.__min = self.correlation(self.__T_at_min)
 
-        def corr_reciprocal(T: float) -> Callable:
+        def corr_reciprocal(T: float) -> float:
             return 1/self.correlation(T)
 
         max_vals = minimize_scalar(corr_reciprocal,
@@ -171,7 +170,7 @@ class PropertyInterface(ABC):
     @abstractmethod
     @range_warning
     def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> Callable:
+                    verbose: bool = False) -> float:
         """
         Function that implements the property correlation
 
