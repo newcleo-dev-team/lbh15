@@ -2,11 +2,14 @@
 i.e., PropertyInterface. Definition of decorator
 for validity range check as well."""
 import warnings
-from abc import ABC, abstractmethod
+from abc import ABC
+from abc import abstractmethod
+from typing import Callable
+from typing import Sequence
+from typing import Union
 from numpy import nan
 from scipy.optimize import minimize_scalar
 from scipy.constants import atm
-
 
 def range_warning(function):
     """
@@ -57,12 +60,12 @@ class PropertyInterface(ABC):
           be considered injective
     """
     def __init__(self):
-        self.__min = -nan
-        self.__max = nan
-        self.__T_at_min = -nan
-        self.__T_at_max = nan
+        self.__min: float = -nan
+        self.__max: float = nan
+        self.__T_at_min: float = -nan
+        self.__T_at_max: float = nan
 
-    def compute_bounds(self):
+    def compute_bounds(self) -> None:
         """
         Computes the bound of property in validity range, i.e.,
         the minimum and the maximum of the correlation inside
@@ -82,7 +85,7 @@ class PropertyInterface(ABC):
             self.__T_at_min = self.range[0]
             self.__min = self.correlation(self.__T_at_min)
 
-        def corr_reciprocal(T):
+        def corr_reciprocal(T: float) -> Callable:
             return 1/self.correlation(T)
 
         max_vals = minimize_scalar(corr_reciprocal,
@@ -94,7 +97,8 @@ class PropertyInterface(ABC):
             self.__T_at_max = self.range[1]
             self.__max = self.correlation(self.__T_at_max)
 
-    def initialization_helper(self, property_value):
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
         """
         Returns a temperature guess according to the value
         of the property. Used by root finder algorithm if
@@ -111,7 +115,8 @@ class PropertyInterface(ABC):
         """
         return None
 
-    def info(self, T, p=atm, print_info=True, n_tab=0):
+    def info(self, T: float, p: float = atm,
+             print_info: bool = True, n_tab: int = 0) -> Union[None, str]:
         """
         Method used to print information about the property
         and the correlation used to compute its value.
@@ -165,7 +170,8 @@ class PropertyInterface(ABC):
 
     @abstractmethod
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> Callable:
         """
         Function that implements the property correlation
 
@@ -184,21 +190,21 @@ class PropertyInterface(ABC):
                                   "NOT IMPLEMENTED")
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return type(self).__name__
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "lbh15"
 
     @property
-    def is_injective(self):
+    def is_injective(self) -> bool:
         """
         bool : True if correlation is injective,
         False otherwise
@@ -206,7 +212,7 @@ class PropertyInterface(ABC):
         return True
 
     @property
-    def min(self):
+    def min(self) -> float:
         """
         float : minimum of property correlation in validity
         range
@@ -214,7 +220,7 @@ class PropertyInterface(ABC):
         return self.__min
 
     @property
-    def max(self):
+    def max(self) -> float:
         """
         float : maximum of property correlation in validity
         range
@@ -222,7 +228,7 @@ class PropertyInterface(ABC):
         return self.__max
 
     @property
-    def T_at_min(self):
+    def T_at_min(self) -> float:
         """
         float : temperature corresponding to the minimum of
         property correlation in validity range
@@ -230,7 +236,7 @@ class PropertyInterface(ABC):
         return self.__T_at_min
 
     @property
-    def T_at_max(self):
+    def T_at_max(self) -> float:
         """
         float : temperature corresponding to the maximum of
         property correlation in validity range
@@ -239,7 +245,7 @@ class PropertyInterface(ABC):
 
     @property
     @abstractmethod
-    def range(self):
+    def range(self) -> Sequence[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -248,7 +254,7 @@ class PropertyInterface(ABC):
 
     @property
     @abstractmethod
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
@@ -257,7 +263,7 @@ class PropertyInterface(ABC):
 
     @property
     @abstractmethod
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -266,7 +272,7 @@ class PropertyInterface(ABC):
 
     @property
     @abstractmethod
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
