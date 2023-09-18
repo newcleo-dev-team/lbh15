@@ -3,7 +3,9 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from .interface import PropertyInterface, range_warning
+from .interface import PropertyInterface
+from .interface import range_warning
+from .._decorators import typecheck_for_method
 from .._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
 from .._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from .._commons import SOBOLEV_KEYWORD
@@ -15,6 +17,7 @@ class p_s(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -37,6 +40,7 @@ class p_s(PropertyInterface):
         """
         return 2.67e10 * np.exp(-22858/T)
 
+    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
@@ -107,6 +111,7 @@ class sigma(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -171,6 +176,7 @@ class rho(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -240,6 +246,7 @@ class alpha(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -297,6 +304,7 @@ class u_s(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -361,6 +369,7 @@ class beta_s(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -420,6 +429,7 @@ class cp(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -492,6 +502,7 @@ class h(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -560,6 +571,7 @@ class mu(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -624,6 +636,7 @@ class r(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -681,6 +694,7 @@ class k(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

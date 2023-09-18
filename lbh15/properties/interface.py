@@ -9,6 +9,7 @@ from typing import Union
 from numpy import nan
 from scipy.optimize import minimize_scalar
 from scipy.constants import atm
+from .._decorators import typecheck_for_method
 
 def range_warning(function):
     """
@@ -96,6 +97,7 @@ class PropertyInterface(ABC):
             self.__T_at_max = self.range[1]
             self.__max = self.correlation(self.__T_at_max)
 
+    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> float:
         """
@@ -114,6 +116,7 @@ class PropertyInterface(ABC):
         """
         return 0
 
+    @typecheck_for_method
     def info(self, T: float, p: float = atm,
              print_info: bool = True, n_tab: int = 0) -> Union[None, str]:
         """
