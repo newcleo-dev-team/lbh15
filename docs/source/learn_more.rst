@@ -256,120 +256,120 @@ criterion. We invite the user to check the ranges of validity of the correlation
 his application. If the user wants to work with other correlations, it is possible as explained in the "Advanced usage" section.
 
 
-+++++++++
-Tutorials
-+++++++++
-
-This section contains an example of the application of the complete package.
-We chose to performed this tutorial considering a liquid lead system, in a cylindrical iron thank.
-
-This tutorial is aimed to compute:
-  - the temperature variation over time
-
-  - the level of the liquid metal over temperature
-
-  - the oxygen concentration limits over temperature
-
-  - the mean limit oxygen concentration over temperature
-
-
-The user can define:
-  - the mass of the system
-
-  - the initial temperature
-
-  - the simulation duration
-
-  - the power variation
-
-  - the starting and ending time of this varition
-
-  - the radius of the tank
-
-
-- The first step is to import all the modules needed and to set the constants:
-
-  .. code-block:: python
-
-    """Tutorial using thermophysical and thermochemical
-    correlations of the lbh15 python package"""
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from lbh15 import Lead
-
-
-    if __name__ == "__main__":
-
-        # Setting of the constants
-        T_0 = 683  # [K]
-        SIMULATION_TIME = 100  # [s]
-        STEP_SIZE = 0.1  # [s]
-        MASS = 100  # [kg]
-        #  Power variation
-        NET_POWER = 43000  # [W]
-        VARIATION_START = 20  # [s]
-        VARIATION_END = 70  # [s]
-        RADIUS = 1  # [m]
-
-- We then have to create all the arrays that will contain the values we are interested in:
-
-  .. code-block:: python
-
-    # Creation of the arrays
-    # Array containing the time values
-    time = np.arange(0, SIMULATION_TIME, STEP_SIZE)
-    # Array containing the heat variation values
-    heat_variation = np.zeros(len(time)-1)
-    # Array containing the temperature values
-    temperature = np.zeros_like(time)
-    # Array containing the lower oxygen concentration values
-    lower_oxygen_concentration = np.zeros_like(time)
-    # Array containing the upper oxygen concentration values
-    upper_oxygen_concentration = np.zeros_like(time)
-    # Array containing the level of the liquid metal in the tank
-    level = np.zeros_like(time)
-
-- Before starting the loop which wil computes our results, we have to initialize the temperature
-  and the power variation, such that at each time step of the total variation time,
-  the power will have the same variation value. 
-
-  .. code-block:: python
-
-        # Filling of the heat variation array,
-        # computed according to the power variation
-        VAR_START_IDX = int(VARIATION_START/STEP_SIZE)
-        VAR_END_IDX = int(VARIATION_END/STEP_SIZE)
-        heat_variation[VAR_START_IDX:VAR_END_IDX] = (
-            NET_POWER * STEP_SIZE)
-
-        # Initialization
-        temperature[0] = T_0
-        system = Lead(T=T_0)
-        h_0 = system.h
-        upper_oxygen_concentration[0] = system.o_sol
-        lower_oxygen_concentration[0] = system.lim_fe_sat
-        volume = MASS / system.rho
-        level[0] = volume / (np.pi * (RADIUS**2))
-
-        # Looping
-        for i in range(1, len(time)):
-            # Solving heat balance
-            h_i = np.sum(heat_variation[0:i])/MASS + h_0
-            # Creation of an object at a T temperature deduced from the h value
-            system = Lead(h=h_i)
-            temperature[i] = system.T
-            # Updating the lower oxygen concentration
-            lower_oxygen_concentration[i] = system.lim_fe_sat
-            # Updating the upper oxygen concentration
-            upper_oxygen_concentration[i] = system.o_sol
-            # Updating the volume of the system
-            volume = MASS / system.rho
-            # Updating the level of the liquid metal
-            level[i] = volume / (np.pi * (RADIUS**2))
-
-- Finally, we have to plot the graphs we are interested in. Here an example of what can be obtained:
- 
-.. figure:: figures/tutorials.png
-   :width: 700
-
-.. note:: This example can be used with Bismuth or LBE and considering an other metal than iron for the thank.
+.. +++++++++
+   Tutorials
+   +++++++++
+   
+   This section contains an example of the application of the complete package.
+   We chose to performed this tutorial considering a liquid lead system, in a cylindrical iron thank.
+   
+   This tutorial is aimed to compute:
+     - the temperature variation over time
+   
+     - the level of the liquid metal over temperature
+   
+     - the oxygen concentration limits over temperature
+   
+     - the mean limit oxygen concentration over temperature
+   
+   
+   The user can define:
+     - the mass of the system
+   
+     - the initial temperature
+   
+     - the simulation duration
+   
+     - the power variation
+   
+     - the starting and ending time of this varition
+   
+     - the radius of the tank
+   
+   
+   - The first step is to import all the modules needed and to set the constants:
+   
+     .. code-block:: python
+   
+       """Tutorial using thermophysical and thermochemical
+       correlations of the lbh15 python package"""
+       import numpy as np
+       import matplotlib.pyplot as plt
+       from lbh15 import Lead
+   
+   
+       if __name__ == "__main__":
+   
+           # Setting of the constants
+           T_0 = 683  # [K]
+           SIMULATION_TIME = 100  # [s]
+           STEP_SIZE = 0.1  # [s]
+           MASS = 100  # [kg]
+           #  Power variation
+           NET_POWER = 43000  # [W]
+           VARIATION_START = 20  # [s]
+           VARIATION_END = 70  # [s]
+           RADIUS = 1  # [m]
+   
+   - We then have to create all the arrays that will contain the values we are interested in:
+   
+     .. code-block:: python
+   
+       # Creation of the arrays
+       # Array containing the time values
+       time = np.arange(0, SIMULATION_TIME, STEP_SIZE)
+       # Array containing the heat variation values
+       heat_variation = np.zeros(len(time)-1)
+       # Array containing the temperature values
+       temperature = np.zeros_like(time)
+       # Array containing the lower oxygen concentration values
+       lower_oxygen_concentration = np.zeros_like(time)
+       # Array containing the upper oxygen concentration values
+       upper_oxygen_concentration = np.zeros_like(time)
+       # Array containing the level of the liquid metal in the tank
+       level = np.zeros_like(time)
+   
+   - Before starting the loop which wil computes our results, we have to initialize the temperature
+     and the power variation, such that at each time step of the total variation time,
+     the power will have the same variation value. 
+   
+     .. code-block:: python
+   
+           # Filling of the heat variation array,
+           # computed according to the power variation
+           VAR_START_IDX = int(VARIATION_START/STEP_SIZE)
+           VAR_END_IDX = int(VARIATION_END/STEP_SIZE)
+           heat_variation[VAR_START_IDX:VAR_END_IDX] = (
+               NET_POWER * STEP_SIZE)
+   
+           # Initialization
+           temperature[0] = T_0
+           system = Lead(T=T_0)
+           h_0 = system.h
+           upper_oxygen_concentration[0] = system.o_sol
+           lower_oxygen_concentration[0] = system.lim_fe_sat
+           volume = MASS / system.rho
+           level[0] = volume / (np.pi * (RADIUS**2))
+   
+           # Looping
+           for i in range(1, len(time)):
+               # Solving heat balance
+               h_i = np.sum(heat_variation[0:i])/MASS + h_0
+               # Creation of an object at a T temperature deduced from the h value
+               system = Lead(h=h_i)
+               temperature[i] = system.T
+               # Updating the lower oxygen concentration
+               lower_oxygen_concentration[i] = system.lim_fe_sat
+               # Updating the upper oxygen concentration
+               upper_oxygen_concentration[i] = system.o_sol
+               # Updating the volume of the system
+               volume = MASS / system.rho
+               # Updating the level of the liquid metal
+               level[i] = volume / (np.pi * (RADIUS**2))
+   
+   - Finally, we have to plot the graphs we are interested in. Here an example of what can be obtained:
+    
+   .. figure:: figures/tutorials.png
+      :width: 700
+   
+   .. note:: This example can be used with Bismuth or LBE and considering an other metal than iron for the thank.
