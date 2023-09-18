@@ -7,6 +7,10 @@ import importlib
 import platform
 import copy
 from abc import ABC, abstractmethod
+from typing import Dict
+from typing import List
+from typing import Tuple
+from typing import Union
 from scipy.constants import atm
 from scipy.optimize import fsolve
 from .properties.interface import PropertyInterface
@@ -38,64 +42,66 @@ class LiquidMetalInterface(ABC):
         - 'r' : electrical resistivity [Ohm*m]
         - 'k' : thermal conductivity [W/(m*K)]
     """
-    _T_m0 = 0
-    _Q_m0 = 0
-    _T_b0 = 0
-    _Q_b0 = 0
-    _M = 0
-    _guess = 0
-    _correlations_to_use = {}
-    _roots_to_use = {}
-    _default_corr_to_use = {}
-    _properties_module = ""
-    __p = 0
-    __T = 0
-    __custom_properties_path = {}
+    _T_m0: float = 0
+    _Q_m0: float = 0
+    _T_b0: float = 0
+    _Q_b0: float = 0
+    _M: float = 0
+    _guess: float = 0
+    _correlations_to_use: Dict[str, str] = {}
+    _roots_to_use: Dict[str, int] = {}
+    _default_corr_to_use: Dict[str, str] = {}
+    _properties_module: str = ""
+    __p: float = 0
+    __T: float = 0
+    __custom_properties_path: \
+        Dict[str, Dict[str, str]] = {}
 
-    def __init__(self, p=atm, **kwargs):
+    def __init__(self, p: float = atm, **kwargs):
         self.__assign_p(p)
-        self.__properties = {}
-        self.__corr2use = copy.deepcopy(self.__class__._correlations_to_use)
+        self.__properties: Dict[str, PropertyInterface] = {}
+        self.__corr2use: Dict[str, str] = \
+            copy.deepcopy(self.__class__._correlations_to_use)
         self.__fill_instance_properties()
         self.__fill_class_attributes(kwargs)
 
     @property
-    def T_m0(self):
+    def T_m0(self) -> float:
         """
         float : melting temperature [K]
         """
         return self._T_m0
 
     @property
-    def Q_m0(self):
+    def Q_m0(self) -> float:
         """
         float : melting latent heat [J/kg]
         """
         return self._Q_m0
 
     @property
-    def T_b0(self):
+    def T_b0(self) -> float:
         """
         float : boiling temperature [K]
         """
         return self._T_b0
 
     @property
-    def Q_b0(self):
+    def Q_b0(self) -> float:
         """
         float : vaporisation heat [J/kg]
         """
         return self._Q_b0
 
     @property
-    def M(self):
+    def M(self) -> float:
         """
         float : metal molar mass [g/mol]
         """
         return self._M
 
     @property
-    def p(self):
+    def p(self) -> float:
         """
         float : pressure adopted for property calculation, i.e.,
         atmospheric pressure
@@ -103,7 +109,7 @@ class LiquidMetalInterface(ABC):
         return self.__p
 
     @p.setter
-    def p(self, p):
+    def p(self, p: float) -> None:
         """
         Set liquid metal pressure
 
@@ -115,14 +121,14 @@ class LiquidMetalInterface(ABC):
         self.__assign_p(p)
 
     @property
-    def T(self):
+    def T(self) -> float:
         """
         float : temperature used to compute properties [K]
         """
         return self.__T
 
     @T.setter
-    def T(self, T):
+    def T(self, T: float) -> None:
         """
         Set liquid metal temperature
 
@@ -134,14 +140,14 @@ class LiquidMetalInterface(ABC):
         self.__assign_T(T)
 
     @property
-    def Pr(self):
+    def Pr(self) -> float:
         """
         float : Prandtl number [-]
         """
         return self.cp * self.mu / self.k
 
     @property
-    def correlations_used(self):
+    def correlations_used(self) -> Dict[str, str]:
         """
         Returns the dictionary with the specific
         correlation used for each specified property
@@ -152,7 +158,8 @@ class LiquidMetalInterface(ABC):
         """
         return copy.deepcopy(self.__corr2use)
 
-    def change_correlation_to_use(self, property_name, correlation_name):
+    def change_correlation_to_use(self, property_name: str,
+                                  correlation_name: str) -> None:
         """
         Changes property correlation, if property is defined as instance
         attribute.
@@ -170,7 +177,7 @@ class LiquidMetalInterface(ABC):
             self.__corr2use[property_name] = correlation_name
             self.__fill_instance_properties()
 
-    def check_temperature(self, T):
+    def check_temperature(self, T: float) -> Tuple[bool, str]:
         """
         Checks that the provided temperature
         belongs to the correct temperature range, i.e.,
@@ -210,7 +217,7 @@ class LiquidMetalInterface(ABC):
         return rvalue, error_message
 
     @classmethod
-    def properties_for_initialization(cls):
+    def properties_for_initialization(cls) -> List[str]:
         """
         List of available properties that can be used for
         initialization
@@ -225,7 +232,7 @@ class LiquidMetalInterface(ABC):
         return list(dict.fromkeys(rvalue))
 
     @classmethod
-    def correlations_available(cls):
+    def correlations_available(cls) -> Dict[str, str]:
         """
         Dictionary of correlations available for each property
 
@@ -248,7 +255,8 @@ class LiquidMetalInterface(ABC):
         return rvalue
 
     @classmethod
-    def set_correlation_to_use(cls, property_name, correlation_name):
+    def set_correlation_to_use(cls, property_name: str,
+                               correlation_name: str) -> None:
         """
         Set specific correlation to use for property
 
@@ -262,7 +270,7 @@ class LiquidMetalInterface(ABC):
         cls._correlations_to_use[property_name] = correlation_name
 
     @classmethod
-    def set_root_to_use(cls, property_name, root_index):
+    def set_root_to_use(cls, property_name: str, root_index: int) -> None:
         """
         Set which temperature root shall be used for initialization
         from property. Temperature roots are sorted in ascending order, i.e,
@@ -279,7 +287,7 @@ class LiquidMetalInterface(ABC):
         cls._roots_to_use[property_name] = root_index
 
     @classmethod
-    def set_custom_properties_path(cls, file_path):
+    def set_custom_properties_path(cls, file_path: str) -> None:
         """
         Set absolute path of file where looking for custom properties
 
@@ -298,7 +306,7 @@ class LiquidMetalInterface(ABC):
         cls.__custom_properties_path[lm_name][path] = file_name
 
     @classmethod
-    def correlations_to_use(cls):
+    def correlations_to_use(cls) -> Dict[str, str]:
         """
         Returns the dictionary with the specific
         correlation to use for each specified property
@@ -310,7 +318,7 @@ class LiquidMetalInterface(ABC):
         return copy.deepcopy(cls._correlations_to_use)
 
     @classmethod
-    def roots_to_use(cls):
+    def roots_to_use(cls) -> Dict[str, int]:
         """
         Returns the dictionary with temperature
         roots to use for each specified property
@@ -321,7 +329,7 @@ class LiquidMetalInterface(ABC):
         """
         return copy.deepcopy(cls._roots_to_use)
 
-    def __compute_T(self, input_value, input_property):
+    def __compute_T(self, input_value: float, input_property: str) -> float:
         """
         Computes the temperature in [K] that is then set as value
         of the object property
@@ -345,32 +353,36 @@ class LiquidMetalInterface(ABC):
                 helper = self.__properties[key].initialization_helper
                 is_injective = self.__properties[key].is_injective
 
-            if function_of_T is not None:
-                if helper(input_value) is not None:
-                    self._guess = helper(input_value)
+            if function_of_T is None:
+                raise UnboundLocalError("No correlation found for property "
+                                        f"{input_property}! The temperature "
+                                        "value can not be computed!")
 
-                def function_to_solve(T, target):
-                    return function_of_T(T, self.__p) - target
+            if helper(input_value) is not None:
+                self._guess = helper(input_value)
 
-                if is_injective:
-                    res = fsolve(function_to_solve, x0=[self._guess],
-                                 args=(input_value), xtol=1e-10)
-                    rvalue = res[0]
+            def function_to_solve(T: float, target: float) -> float:
+                return function_of_T(T, self.__p) - target
+
+            if is_injective:
+                res = fsolve(function_to_solve, x0=[self._guess],
+                                args=(input_value), xtol=1e-10)
+                rvalue = res[0]
+            else:
+                index = (self._roots_to_use[input_property]
+                            if input_property in self._roots_to_use
+                            else 0)
+                res, _, _, _ = fsolve(function_to_solve,
+                                x0=[self._guess, 3*self._guess],
+                                args=(input_value), xtol=1e-10,
+                                full_output=True)
+                if len(res) > index - 1:
+                    rvalue = res[index]
                 else:
-                    index = (self._roots_to_use[input_property]
-                             if input_property in self._roots_to_use
-                             else 0)
-                    res = fsolve(function_to_solve,
-                                 x0=[self._guess, 3*self._guess],
-                                 args=(input_value), xtol=1e-10)
-                    if len(res) > index - 1:
-                        rvalue = res[index]
-                    else:
-                        rvalue = res[0]
-
+                    rvalue = res[0]
         return rvalue
 
-    def __fill_instance_properties(self):
+    def __fill_instance_properties(self) -> None:
         """
         Fills instance properties.
         """
@@ -394,7 +406,7 @@ class LiquidMetalInterface(ABC):
             if key_to_remove in self._correlations_to_use:
                 self._correlations_to_use.pop(key_to_remove)
 
-    def __fill_class_attributes(self, kwargs):
+    def __fill_class_attributes(self, kwargs) -> None:
         """
         Fills all the class attributes.
 
@@ -424,7 +436,7 @@ class LiquidMetalInterface(ABC):
         temperature = self.__compute_T(input_value, input_property)
         self.__assign_T(temperature)
 
-    def __assign_T(self, T):
+    def __assign_T(self, T: float) -> None:
         """
         Function used to set temperature, checking if temperature value
         is valid, i.e., strictly positive and (if yes) inside
@@ -441,7 +453,7 @@ class LiquidMetalInterface(ABC):
         else:
             raise ValueError(error_message)
 
-    def __assign_p(self, p):
+    def __assign_p(self, p: float) -> None:
         """
         Function used to set pressure, checking if
         pressure value is valid, i.e., strictly positive.
@@ -458,7 +470,7 @@ class LiquidMetalInterface(ABC):
                              "strictly positive, "
                              f"{p:.2f} [Pa] was provided")
 
-    def __add_property(self, property_object):
+    def __add_property(self, property_object: PropertyInterface) -> None:
         """
         Adds the property to class attributes. In particular, it adds
         '<prpertyObject.name>_info' as class method to get additional
@@ -474,14 +486,15 @@ class LiquidMetalInterface(ABC):
         key = self.__generate_key(property_object.name)
         self.__properties[key] = property_object
 
-        def new_property_info(print_info=True, n_tab=0):
+        def new_property_info(print_info: bool =True,
+                              n_tab: int = 0) -> Union[str, None]:
             return self.__properties[key].info(self.__T, self.__p,
                                                print_info, n_tab)
 
         setattr(self, property_object.name+"_info",
                 new_property_info)
 
-    def __generate_key(self, property_name):
+    def __generate_key(self, property_name: str) -> str:
         """
         Generates the key that will be used to store the property
         in class dictionary
@@ -498,7 +511,7 @@ class LiquidMetalInterface(ABC):
         """
         return property_name + '_' + type(self).__name__
 
-    def __check_properties(self):
+    def __check_properties(self) -> List[str]:
         keys_to_remove = []
         update_properties = False
         for key in self.__corr2use.keys():
@@ -551,7 +564,7 @@ class LiquidMetalInterface(ABC):
         return keys_to_remove
 
     @classmethod
-    def __load_properties(cls):
+    def __load_properties(cls) -> List[PropertyInterface]:
         """
         Loads property objects corresponding to liquid metal
 
@@ -568,7 +581,7 @@ class LiquidMetalInterface(ABC):
         return property_obj_list
 
     @classmethod
-    def __load_custom_properties(cls):
+    def __load_custom_properties(cls) -> List[PropertyInterface]:
         """
         Load custom property objects
 
@@ -592,7 +605,8 @@ class LiquidMetalInterface(ABC):
         return customproperty_obj_list
 
     @classmethod
-    def __property_list(cls, modules):
+    def __property_list(cls,
+                        modules: List[str]) -> List[PropertyInterface]:
         obj_list = []
         eff_modules = [module for module in modules if module]
         if len(eff_modules) > 0:
@@ -611,14 +625,14 @@ class LiquidMetalInterface(ABC):
         return obj_list
 
     @abstractmethod
-    def _set_constants(self):
+    def _set_constants(self) -> None:
         """
         Sets the class constants
         """
         raise NotImplementedError(f"{type(self).__name__}._set_constants "
                                   "NOT IMPLEMENTED")
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str) -> float:
         key = self.__generate_key(name)
         if key not in self.__properties:
             raise AttributeError(f"'{type(self).__name__}' object "
@@ -626,7 +640,7 @@ class LiquidMetalInterface(ABC):
 
         return self.__properties[key].correlation(self.__T, self.__p, True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         rvalue = (f"{type(self).__name__} liquid metal "
                   f"@(T={self.T:.2f} [K], p={self.p:.2f} [Pa])\n")
         rvalue += "\nConstants:\n"
@@ -642,7 +656,7 @@ class LiquidMetalInterface(ABC):
             rvalue += info + "\n"
         return rvalue
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         rvalue = f"{type(self).__name__}(T={self.T:.2f}, "
         for key in self.__properties:
             property_name = key.replace("_"+type(self).__name__, "")

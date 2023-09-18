@@ -4,7 +4,7 @@ for validity range check as well."""
 import warnings
 from abc import ABC
 from abc import abstractmethod
-from typing import Sequence
+from typing import List
 from typing import Union
 from numpy import nan
 from scipy.optimize import minimize_scalar
@@ -97,7 +97,7 @@ class PropertyInterface(ABC):
             self.__max = self.correlation(self.__T_at_max)
 
     def initialization_helper(self,
-                              property_value: float) -> Union[None, float]:
+                              property_value: float) -> float:
         """
         Returns a temperature guess according to the value
         of the property. Used by root finder algorithm if
@@ -112,7 +112,7 @@ class PropertyInterface(ABC):
         -------
         None
         """
-        return None
+        return 0
 
     def info(self, T: float, p: float = atm,
              print_info: bool = True, n_tab: int = 0) -> Union[None, str]:
@@ -244,7 +244,7 @@ class PropertyInterface(ABC):
 
     @property
     @abstractmethod
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """

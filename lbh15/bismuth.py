@@ -1,6 +1,8 @@
 """Module with the definition of bismuth liquid metal object class,
 i.e., Bismuth"""
 import copy
+from typing import Dict
+from typing import List
 from scipy.constants import atm
 from ._commons import BISMUTH_MELTING_TEMPERATURE
 from ._commons import BISMUTH_MELTING_LATENT_HEAT
@@ -43,21 +45,23 @@ class Bismuth(LiquidMetalInterface):
     >>> liquid_bismuth.k  # [W/(m*K)]
     13.705
     """
-    _default_corr_to_use = {'fe_sol': "gosse2014", 'ni_sol': "gosse2014",
-                            'cr_sol': "gosse2014", 'o_dif': "fitzner1980",
-                            'o_pp': "isecke1979"}
-    _correlations_to_use = copy.deepcopy(_default_corr_to_use)
-    _roots_to_use = {'cp': 0}
-    _properties_modules_dict = {'Bismuth': ['lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth',
-                                            'lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth',
-                                            'lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical',
-                                            'lbh15.properties.bismuth_properties']}
+    _default_corr_to_use: Dict[str, str] = \
+        {'fe_sol': "gosse2014", 'ni_sol': "gosse2014",
+         'cr_sol': "gosse2014", 'o_dif': "fitzner1980",
+         'o_pp': "isecke1979"}
+    _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
+    _roots_to_use: Dict[str, int] = {'cp': 0}
+    _properties_modules_dict: Dict[str, List[str]] = \
+        {'Bismuth': ['lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth',
+                     'lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth',
+                     'lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical',
+                     'lbh15.properties.bismuth_properties']}
 
-    def __init__(self, p=atm, **kwargs):
-        self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
+    def __init__(self, p: float = atm, **kwargs):
+        self._guess = BISMUTH_MELTING_TEMPERATURE * 1.5
         super().__init__(p=p, **kwargs)
 
-    def _set_constants(self):
+    def _set_constants(self) -> None:
         """
         Sets the class constants
         """

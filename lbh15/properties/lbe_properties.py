@@ -1,6 +1,6 @@
 """Module with the definition of thermophysical property objects
 for lead-bismuth eutectic"""
-from typing import Sequence
+from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
@@ -74,7 +74,7 @@ class p_s(PropertyInterface):
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -138,7 +138,7 @@ class sigma(PropertyInterface):
         return "plevachuk2008"
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -200,7 +200,7 @@ class rho(PropertyInterface):
                         * (p - atm))
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -257,7 +257,7 @@ class alpha(PropertyInterface):
         return 1/(8558 - T)
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -321,7 +321,7 @@ class u_s(PropertyInterface):
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -380,7 +380,7 @@ class beta_s(PropertyInterface):
         return 1/(rho_val * u_s_val*u_s_val)
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -453,7 +453,7 @@ class cp(PropertyInterface):
         return False
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -520,7 +520,7 @@ class h(PropertyInterface):
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -579,7 +579,7 @@ class mu(PropertyInterface):
         return 4.94e-4*np.exp(754.1/T)
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -636,7 +636,7 @@ class r(PropertyInterface):
         return (90.9 + 0.048*T)*1e-8
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -700,7 +700,7 @@ class k(PropertyInterface):
         return SOBOLEV_KEYWORD
 
     @property
-    def range(self) -> Sequence[float]:
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
