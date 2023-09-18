@@ -1,5 +1,5 @@
-lead thermochemical properties
-==============================
+lbh15.properties.lead_thermochemical_properties module
+======================================================
 In this section of the lbh15 package there is the documentation 
 of lead properties objects, i.e., the classes that actually 
 implements lead thermochemical property correlations. They 

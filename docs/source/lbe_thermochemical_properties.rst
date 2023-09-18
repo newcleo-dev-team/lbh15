@@ -1,5 +1,5 @@
-lbe thermochemical properties
-=============================
+lbh15.properties.lbe_thermochemical_properties module
+=====================================================
 In this section of the lbh15 package there is the documentation 
 of lbe properties objects, i.e., the classes that actually 
 implements lbe thermochemical property correlations. They 

@@ -257,25 +257,25 @@
       "max": 2.603687779787837e-07,
       "T_at_max": 1203
    },
-   "lim_cr_alden1958_Oxygen_concentration_lower_limit_times_chromium_concentration_in_lead": {
+   "lim_cr_alden1958_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
       "min": 3.146516041206245e-22,
       "T_at_min": 673,
       "max": 1.4703549276749e-13,
       "T_at_max": 1000
    },
-   "lim_cr_gosse2014_Oxygen_concentration_lower_limit_times_chromium_concentration_in_lead": {
+   "lim_cr_gosse2014_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
       "min": 3.30270716814519e-22,
       "T_at_min": 673,
       "max": 1.43028367386254e-13,
       "T_at_max": 1000
    },
-   "lim_cr_venkatraman1988_Oxygen_concentration_lower_limit_times_chromium_concentration_in_lead": {
+   "lim_cr_venkatraman1988_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
       "min": 3.1686988447416764e-22,
       "T_at_min": 673,
       "max": 1.447956499540085e-13,
       "T_at_max": 1000
    },
-   "lim_fe_lbh15_Oxygen_concentration_lower_limit_times_iron_concentration_in_lead": {
+   "lim_fe_lbh15_Oxygen_concentration_lower_limit_times_iron_concentration_raised_to_3/4_in_lead": {
       "min": 9.02724561932829e-15,
       "T_at_min": 673,
       "max": 5.772711861136356e-09,
@@ -317,13 +317,7 @@
       "max": 2.2811914231582528e-15,
       "T_at_max": 1000
    },
-   "lim_zr_sat_lbh15_Oxygen_concentration_lower_limit_for_zirconium_at_its_saturation_concentration_in_liquid_lead": {
-      "min": 16775.836326868226,
-      "T_at_min": 999.9999766745652,
-      "max": 72254.73815957598,
-      "T_at_max": 673.0000256429498
-   },
-   "lim_si_lbh15_Oxygen_concentration_lower_limit_times_silicon_concentration_in_lead": {
+   "lim_si_lbh15_Oxygen_concentration_lower_limit_times_silicon_concentration_raised_to_1/2_in_lead": {
       "min": 3.393483327233162e-27,
       "T_at_min": 673,
       "max": 5.142351156509144e-17,
@@ -671,31 +665,31 @@
       "max": 8.78918256125585e-09,
       "T_at_max": 1008
    },
-   "lim_cr_courouau2004_Oxygen_concentration_lower_limit_times_chromium_concentration_in_lbe": {
+   "lim_cr_courouau2004_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
       "min": 2.045804178916863e-20,
       "T_at_min": 673,
       "max": 1.062768741790789e-16,
       "T_at_max": 813
    },
-   "lim_cr_gosse2014_Oxygen_concentration_lower_limit_times_chromium_concentration_in_lbe": {
+   "lim_cr_gosse2014_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
       "min": 2.0441716227583606e-20,
       "T_at_min": 673,
       "max": 2.3787414163842897e-13,
       "T_at_max": 1000
    },
-   "lim_cr_martynov1998_Oxygen_concentration_lower_limit_times_chromium_concentration_in_lbe": {
+   "lim_cr_martynov1998_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
       "min": 2.0855217815135295e-20,
       "T_at_min": 673,
       "max": 1.0364243294814482e-17,
       "T_at_max": 773
    },
-   "lim_fe_gosse2014_Oxygen_concentration_lower_limit_times_iron_concentration_in_lbe": {
+   "lim_fe_gosse2014_Oxygen_concentration_lower_limit_times_iron_concentration_raised_to_3/4_in_lbe": {
       "min": 4.939435119320073e-14,
       "T_at_min": 673,
       "max": 6.184504836367033e-09,
       "T_at_max": 1000
    },
-   "lim_fe_weeks1969_Oxygen_concentration_lower_limit_times_iron_concentration_in_lbe": {
+   "lim_fe_weeks1969_Oxygen_concentration_lower_limit_times_iron_concentration_raised_to_3/4_in_lbe": {
       "min": 6.967297547640853e-14,
       "T_at_min": 673,
       "max": 7.1623400021688526e-09,
