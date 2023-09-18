@@ -15,6 +15,8 @@ the handbook edited by
 
 lbh15 is released under the GNU Lesser General Public License 3.
 
+lbh15 is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE<https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
+
 
 Project Structure
 -----------------
