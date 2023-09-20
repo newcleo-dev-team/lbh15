@@ -1,8 +1,11 @@
 """Module with the definition of diffusivity
 property objects for bismuth"""
+from typing import List
 import numpy as np
-from scipy.constants import atm, R
-from lbh15.properties.interface import PropertyInterface, range_warning
+from scipy.constants import atm
+from scipy.constants import R
+from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.interface import range_warning
 
 
 class OxygenDiffusivityInterface(PropertyInterface):
@@ -10,28 +13,28 @@ class OxygenDiffusivityInterface(PropertyInterface):
     Oxygen diffusivity in liquid bismuth property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "o_dif"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[cm^2.s^-1]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "oxygen diffusivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -44,7 +47,8 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
     implementing correlation by fitzner1980
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen diffusivity in liquid bismuth
 
@@ -67,14 +71,14 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
         return np.exp(-49229/(R*T))*1.07e-2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "fitzner1980"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -87,7 +91,8 @@ class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
     implementing correlation by heshmatpour1981
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen diffusivity in liquid bismuth
 
@@ -110,14 +115,14 @@ class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
         return np.exp(-26610/(R*T))*1.98e-4
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "heshmatpour1981"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """

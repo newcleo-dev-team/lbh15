@@ -1,8 +1,11 @@
 """Module with the definition of oxygen
 concentration limits objects for lead-bismuth eutectic"""
+from typing import List
 import numpy as np
-from scipy.constants import atm, R
-from ..interface import PropertyInterface, range_warning
+from scipy.constants import atm
+from scipy.constants import R
+from ..interface import PropertyInterface
+from ..interface import range_warning
 from .solubility_in_lbe import OxygenSolubility
 from .solubility_in_lbe import ChromiumSolubilityGosse2014
 from .solubility_in_lbe import ChromiumSolubilityCourouau2004
@@ -22,7 +25,8 @@ class LowerLimitSaturationIron(PropertyInterface):
     concentration property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film in liquid
@@ -51,28 +55,28 @@ class LowerLimitSaturationIron(PropertyInterface):
                       + np.log(pb_a_obj.correlation(T, p)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_fe_sat"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [673, 1000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -80,7 +84,7 @@ class LowerLimitSaturationIron(PropertyInterface):
                 "iron at its saturation concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -95,7 +99,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
     concentration property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm, verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film in liquid
@@ -124,28 +128,28 @@ class LowerLimitSaturationChromium(PropertyInterface):
                       + np.log(pb_a_obj.correlation(T, p)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_cr_sat"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [673, 1000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -153,7 +157,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
                 "chromium at its saturation concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -168,7 +172,8 @@ class LowerLimitSaturationNickel(PropertyInterface):
     concentration property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film in liquid
@@ -197,28 +202,28 @@ class LowerLimitSaturationNickel(PropertyInterface):
                       + np.log(pb_a_obj.correlation(T, p)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_ni_sat"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [673, 1000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -226,7 +231,7 @@ class LowerLimitSaturationNickel(PropertyInterface):
                 " nickel at its saturation concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -241,7 +246,8 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     concentration property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film in liquid
@@ -270,28 +276,28 @@ class LowerLimitSaturationSilicon(PropertyInterface):
                       + np.log(pb_a_obj.correlation(T, p)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_si_sat"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [673, 1000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -299,7 +305,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
                 " silicon at its saturation concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -314,7 +320,8 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     concentration property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film in liquid
@@ -343,28 +350,28 @@ class LowerLimitSaturationAluminium(PropertyInterface):
                       + np.log(pb_a_obj.correlation(T, p)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_al_sat"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [673, 1000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -372,7 +379,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
                 " aluminium at its saturation concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -386,21 +393,21 @@ class LowerLimitChromiumInterface(PropertyInterface):
     in liquid lead-bismuth eutectic property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_cr"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -408,7 +415,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
                 " chromium concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -423,7 +430,8 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     implementing correlation by gosse2014
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -450,14 +458,14 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
                 * lim_cr_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -472,7 +480,8 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
     implementing correlation by courouau2004
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -499,14 +508,14 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
                 * lim_cr_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "courouau2004"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -521,7 +530,8 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
     implementing correlation by martynov1998
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -548,14 +558,14 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
                 * lim_cr_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "martynov1998"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -569,21 +579,21 @@ class LowerLimitNickelInterface(PropertyInterface):
     in liquid lead-bismuth eutectic property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_ni"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -591,7 +601,7 @@ class LowerLimitNickelInterface(PropertyInterface):
                 "nickel concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -606,7 +616,8 @@ class LowerLimitNickelMartinelli2010(LowerLimitNickelInterface):
     implementing correlation by martinelli2010
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -633,14 +644,14 @@ class LowerLimitNickelMartinelli2010(LowerLimitNickelInterface):
                 * lim_ni_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "martinelli2010"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -655,7 +666,8 @@ class LowerLimitNickelGosse2014(LowerLimitNickelInterface):
     implementing correlation by gosse2014
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -682,14 +694,14 @@ class LowerLimitNickelGosse2014(LowerLimitNickelInterface):
                 * lim_ni_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -703,21 +715,21 @@ class LowerLimitIronInterface(PropertyInterface):
     in liquid lead-bismuth eutectic property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "lim_fe"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -725,7 +737,7 @@ class LowerLimitIronInterface(PropertyInterface):
                 " iron concentration")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -740,7 +752,8 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
     implementing correlation by gosse2014
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -767,14 +780,14 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
                 * lim_fe_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -789,7 +802,8 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
     implementing correlation by weeks1969
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film times
@@ -816,14 +830,14 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
                 * lim_fe_sat_obj.correlation(T, p))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "weeks1969"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """

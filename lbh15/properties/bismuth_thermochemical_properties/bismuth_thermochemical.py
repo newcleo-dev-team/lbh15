@@ -1,8 +1,11 @@
 """Module with the definition of thermochemical
 property objects for bismuth"""
+from typing import List
 import numpy as np
-from scipy.constants import atm, R
-from ..interface import PropertyInterface, range_warning
+from scipy.constants import atm
+from scipy.constants import R
+from ..interface import PropertyInterface
+from ..interface import range_warning
 from ..bismuth_properties import h
 from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
@@ -16,21 +19,21 @@ class OxygenPartialPressureInterface(PropertyInterface):
     oxygen concentration in liquid bismuth squared property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "o_pp"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[atm.wt.%^-2]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -38,7 +41,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
                 " oxygen concentration squared")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -52,7 +55,8 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
     class implementing correlation by fitzner1980
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         bismuth divided by the oxygen concentration in liquid bismuth squared
@@ -76,14 +80,14 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-95502/T)+9.69))*(M/M_O)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "fitzner1980"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -97,7 +101,8 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
     class implementing correlation by isecke1979
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         bismuth divided by the oxygen concentration in liquid bismuth squared
@@ -122,14 +127,14 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-101098/T)+15.66))*(M/M_O)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "isecke1979"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -143,7 +148,8 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
     class implementing correlation by hahn1979
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         bismuth divided by the oxygen concentration in liquid bismuth squared
@@ -168,14 +174,14 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-68156/T)+14.14))*(M/M_O)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "hahn1979"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -189,7 +195,8 @@ class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
     class implementing correlation by heshmatpour1981
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         bismuth divided by the oxygen concentration in liquid bismuth squared
@@ -214,14 +221,14 @@ class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-95437/T)+3.78))*(M/M_O)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "heshmatpour1981"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -234,7 +241,8 @@ class MolarEnthalpy(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute molar enthalpy variation
         in liquid bismuth
@@ -258,35 +266,35 @@ class MolarEnthalpy(PropertyInterface):
         return h_obj.correlation(T, p)*(M*10**(-3))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "H"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J.mol^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, T_b0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "molar enthalpy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -299,7 +307,8 @@ class MolarEntropy(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute molar entropy
         variation in liquid bismuth
@@ -325,35 +334,35 @@ class MolarEntropy(PropertyInterface):
                 + ((7.183e6)/-2)*((1/(T*T)) - T_m0**-2)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "S"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/(mol.K)]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, T_b0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "molar entropy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -366,7 +375,8 @@ class GibbsFreeEnergy(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute Gibbs free energy
         variation in liquid bismuth
@@ -391,35 +401,35 @@ class GibbsFreeEnergy(PropertyInterface):
         return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "G"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/mol]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, T_b0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "Gibbs free energy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
