@@ -1,13 +1,17 @@
 """Module with the definition of thermochemical
 property objects for lead-bismuth eutectic"""
+from typing import List
 import numpy as np
-from scipy.constants import atm, R
-from ..interface import PropertyInterface, range_warning
+from scipy.constants import atm
+from scipy.constants import R
+from ..interface import PropertyInterface
+from ..interface import range_warning
 from ..lbe_properties import h
 from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
 from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
 from ..._commons import LBE_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_o
+from ..._decorators import typecheck_for_method
 
 
 class OxygenPartialPressure(PropertyInterface):
@@ -17,7 +21,9 @@ class OxygenPartialPressure(PropertyInterface):
     lead-bismuth eutectic squared property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure
         in liquid lead-bismuth eutectic divided by the oxygen
@@ -42,28 +48,28 @@ class OxygenPartialPressure(PropertyInterface):
         return np.exp((2/R)*((-127398/T)+27.938))*(M/M_o)**2
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "o_pp"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[atm.wt.%^-2]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [812, 1008]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -71,7 +77,7 @@ class OxygenPartialPressure(PropertyInterface):
                 " oxygen concentration squared")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -84,7 +90,9 @@ class LeadChemicalActivity(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute lead chemical activity
         in liquid lead-bismuth eutectic
@@ -107,42 +115,42 @@ class LeadChemicalActivity(PropertyInterface):
         return 0.42206-63.2/T
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "pb_a"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[-]"
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [399, 1173]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "lead chemical activity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -155,7 +163,9 @@ class BismuthChemicalActivity(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute Bismuth chemical activity
         in liquid lead-bismuth eutectic
@@ -178,42 +188,42 @@ class BismuthChemicalActivity(PropertyInterface):
         return 0.53381-56.2/T
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "bi_a"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[-]"
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [399, 1173]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "Bismuth chemical activity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -226,7 +236,9 @@ class MolarEnthalpy(PropertyInterface):
     enthalpy variation property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute molar enthalpy variation
         in liquid lead-bismuth eutectic
@@ -250,35 +262,35 @@ class MolarEnthalpy(PropertyInterface):
         return h_obj.correlation(T, p)*(M*10**(-3))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "H"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J.mol^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [400.0, T_b0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "molar enthalpy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -291,7 +303,9 @@ class MolarEntropy(PropertyInterface):
     entropy variation property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute molar entropy
         variation in liquid lead-bismuth eutectic
@@ -318,35 +332,35 @@ class MolarEntropy(PropertyInterface):
                 - ((4.56e5)/-2)*((1/(T*T)) - T_m0**-2)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "S"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/(mol.K)]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [400, T_b0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "molar entropy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -359,7 +373,9 @@ class GibbsFreeEnergy(PropertyInterface):
     energy variation property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute Gibbs free energy
         variation in liquid lead-bismuth eutectic
@@ -384,35 +400,35 @@ class GibbsFreeEnergy(PropertyInterface):
         return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "G"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/mol]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [400, T_b0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "Gibbs free energy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """

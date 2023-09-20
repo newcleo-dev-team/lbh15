@@ -1,8 +1,11 @@
 """Module with the definition of solubility
 property objects for lead-bismuth eutectic"""
+from typing import List
 import numpy as np
 from scipy.constants import atm
-from lbh15.properties.interface import PropertyInterface, range_warning
+from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.interface import range_warning
+from ..._decorators import typecheck_for_method
 
 
 class IronSolubilityInterface(PropertyInterface):
@@ -11,28 +14,28 @@ class IronSolubilityInterface(PropertyInterface):
     eutectic property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "fe_sol"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "iron solubility"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -45,7 +48,9 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
     property class implementing correlation by gosse2014
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute iron solubility in liquid
         lead-bismuth eutectic
@@ -69,14 +74,14 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
         return np.exp((2.00-4399/T)*np.log(10))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -89,7 +94,9 @@ class IronSolubilityWeeks1969(IronSolubilityInterface):
     property class implementing correlation by weeks1969
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute iron solubility in liquid
         lead-bismuth eutectic
@@ -113,14 +120,14 @@ class IronSolubilityWeeks1969(IronSolubilityInterface):
         return np.exp((1.85-4164/T)*np.log(10))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "weeks1969"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -133,28 +140,28 @@ class NickelSolubilityInterface(PropertyInterface):
     eutectic property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "ni_sol"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "nickel solubility"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -167,7 +174,9 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
     property class implementing correlation by martinelli2010
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute nickel solubility in liquid
         lead-bismuth eutectic
@@ -194,14 +203,14 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
         return rvalue
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "martinelli2010"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -214,7 +223,9 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
     property class implementing correlation by gosse2014
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute nickel solubility in liquid
         lead-bismuth eutectic
@@ -241,14 +252,14 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         return rvalue
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -261,28 +272,28 @@ class ChromiumSolubilityInterface(PropertyInterface):
     eutectic property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "cr_sol"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "cr solubility"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -295,7 +306,9 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
     property class implementing correlation by gosse2014
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute chromium solubility in liquid
         lead-bismuth eutectic
@@ -319,14 +332,14 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         return np.exp((1.12-3056/T)*np.log(10))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "gosse2014"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -339,7 +352,9 @@ class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
     property class implementing correlation by courouau2004
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute chromium solubility in liquid
         lead-bismuth eutectic
@@ -363,14 +378,14 @@ class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
         return np.exp((1.07-3022/T)*np.log(10))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "courouau2004"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -383,7 +398,9 @@ class ChromiumSolubilityMartynov1998(ChromiumSolubilityInterface):
     property class implementing correlation by martynov1998
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute chromium solubility in liquid
         lead-bismuth eutectic
@@ -407,14 +424,14 @@ class ChromiumSolubilityMartynov1998(ChromiumSolubilityInterface):
         return np.exp((-0.02-2280/T)*np.log(10))
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "martynov1998"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -427,7 +444,9 @@ class OxygenSolubility(PropertyInterface):
     eutectic property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen solubility in
         liquid lead-bismuth eutectic
@@ -450,35 +469,35 @@ class OxygenSolubility(PropertyInterface):
         return np.exp((2.25-4125/T)*np.log(10))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "o_sol"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[wt.%]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [673.0, 1013.0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "oxygen solubility"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """

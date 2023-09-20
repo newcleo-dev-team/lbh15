@@ -1,12 +1,16 @@
 """Module with the definition of thermochemical property
 objects for lead"""
+from typing import List
 import numpy as np
-from scipy.constants import atm, R
-from lbh15.properties.interface import PropertyInterface, range_warning
+from scipy.constants import atm
+from scipy.constants import R
+from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.interface import range_warning
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_o
+from ..._decorators import typecheck_for_method
 
 
 class OxygenPartialPressureInterface(PropertyInterface):
@@ -15,21 +19,21 @@ class OxygenPartialPressureInterface(PropertyInterface):
     oxygen concentration in liquid lead squared property class
     """
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "o_pp"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[atm.wt.%^-2]"
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
@@ -37,7 +41,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
                 " oxygen concentration squared")
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -51,7 +55,9 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
     class implementing correlation by otsuka1979
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -75,14 +81,14 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-118600/T)+14.1))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "otsuka1979"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -96,7 +102,9 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
     class implementing correlation by otsuka1981
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -120,14 +128,14 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-117170/T)+12.9))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "otsuka1981"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -141,7 +149,9 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
     class implementing correlation by ganesan2006
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -165,14 +175,14 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-121349/T)+16.906))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "ganesan2006"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -186,7 +196,9 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
     class implementing correlation by alcock1964
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -210,14 +222,14 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-119411/T)+12.222))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "alcock1964"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -231,7 +243,9 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
     class implementing correlation by szwarc1972
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -255,14 +269,14 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-105855/T)+18.661))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "szwarc1972"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -276,7 +290,9 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
     class implementing correlation by charle1976
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -300,14 +316,14 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-119840/T)+15.794))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "charle1976"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -321,7 +337,9 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
     class implementing correlation by isecke1977
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -345,14 +363,14 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-120376/T)+16.255))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "isecke1977"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -366,7 +384,9 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
     class implementing correlation by taskinen1979
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -390,14 +410,14 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-116717/T)+12.699))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "taskinen1979"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -411,7 +431,9 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
     class implementing correlation by fisher1966
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen partial pressure in liquid
         lead divided by the oxygen concentration in liquid lead squared
@@ -435,14 +457,14 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
         return np.exp((2/R)*((-106395/T)+10.254))*(M/M_o)**2
 
     @property
-    def correlation_name(self):
+    def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
         return "fisher1966"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
@@ -455,7 +477,9 @@ class MolarEnthalpy(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute molar enthalpy variation
         in liquid lead
@@ -479,35 +503,35 @@ class MolarEnthalpy(PropertyInterface):
         return h_obj.correlation(T, p)*(M*10**-3)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "H"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J.mol^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "molar enthalpy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -520,7 +544,9 @@ class MolarEntropy(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute molar entropy
         variation in liquid lead
@@ -547,35 +573,35 @@ class MolarEntropy(PropertyInterface):
                 - ((1.524e6)/-2)*((1/(T*T)) - T_m0**-2)))
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "S"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/(mol.K)]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "molar entropy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -588,7 +614,9 @@ class GibbsFreeEnergy(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute Gibbs free energy
         variation in liquid lead
@@ -613,35 +641,35 @@ class GibbsFreeEnergy(PropertyInterface):
         return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "G"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[J/mol]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [T_m0, 2000]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "Gibbs free energy variation"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """

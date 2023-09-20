@@ -11,6 +11,7 @@ from ._commons import SOBOLEV_KEYWORD
 from ._commons import LEAD_VAPORISATION_HEAT
 from ._commons import LEAD_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
+from ._decorators import typecheck_for_method
 
 
 class Lead(LiquidMetalInterface):
@@ -66,6 +67,7 @@ class Lead(LiquidMetalInterface):
                   'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
                   'lbh15.properties.lead_properties']}
 
+    @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LEAD_MELTING_TEMPERATURE * 1.7
         super().__init__(p=p, **kwargs)
