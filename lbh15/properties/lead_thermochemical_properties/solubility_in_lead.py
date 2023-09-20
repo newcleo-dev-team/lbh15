@@ -5,6 +5,7 @@ import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
+from ..._decorators import typecheck_for_method
 
 
 class IronSolubility(PropertyInterface):
@@ -12,6 +13,7 @@ class IronSolubility(PropertyInterface):
     Iron solubility in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -82,6 +84,7 @@ class NickelSolubility(PropertyInterface):
     Nickel solubility in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -186,6 +189,7 @@ class ChromiumSolubilityAlden1958(ChromiumSolubilityInterface):
     implementing correlation by alden1958
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -230,6 +234,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
     implementing correlation by venkatraman1988
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool =False) -> float:
         """
@@ -274,6 +279,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
     implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -317,6 +323,7 @@ class SiliconSolubility(PropertyInterface):
     Silicon solubility in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -380,6 +387,7 @@ class OxygenSolubility(PropertyInterface):
     Oxygen solubility in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

@@ -5,6 +5,7 @@ import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
+from ..._decorators import typecheck_for_method
 
 
 class IronSolubilityInterface(PropertyInterface):
@@ -47,6 +48,7 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
     property class implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -92,6 +94,7 @@ class IronSolubilityWeeks1969(IronSolubilityInterface):
     property class implementing correlation by weeks1969
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -171,6 +174,7 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
     property class implementing correlation by martinelli2010
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -219,6 +223,7 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
     property class implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -301,6 +306,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
     property class implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -346,6 +352,7 @@ class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
     property class implementing correlation by courouau2004
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -391,6 +398,7 @@ class ChromiumSolubilityMartynov1998(ChromiumSolubilityInterface):
     property class implementing correlation by martynov1998
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -436,6 +444,7 @@ class OxygenSolubility(PropertyInterface):
     eutectic property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

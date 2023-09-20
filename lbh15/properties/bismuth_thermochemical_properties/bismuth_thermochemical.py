@@ -11,6 +11,7 @@ from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
 from ..._commons import BISMUTH_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_O
+from ..._decorators import typecheck_for_method
 
 
 class OxygenPartialPressureInterface(PropertyInterface):
@@ -55,6 +56,7 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
     class implementing correlation by fitzner1980
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -101,6 +103,7 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
     class implementing correlation by isecke1979
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -148,6 +151,7 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
     class implementing correlation by hahn1979
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -195,6 +199,7 @@ class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
     class implementing correlation by heshmatpour1981
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -241,6 +246,7 @@ class MolarEnthalpy(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -307,6 +313,7 @@ class MolarEntropy(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -375,6 +382,7 @@ class GibbsFreeEnergy(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

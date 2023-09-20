@@ -15,6 +15,7 @@ from .solubility_in_lbe import NickelSolubilityMartinelli2010
 from .solubility_in_lbe import IronSolubilityGosse2014
 from .solubility_in_lbe import IronSolubilityWeeks1969
 from .lbe_thermochemical import LeadChemicalActivity
+from ..._decorators import typecheck_for_method
 
 
 class LowerLimitSaturationIron(PropertyInterface):
@@ -25,6 +26,7 @@ class LowerLimitSaturationIron(PropertyInterface):
     concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -99,7 +101,9 @@ class LowerLimitSaturationChromium(PropertyInterface):
     concentration property class
     """
     @range_warning
-    def correlation(self, T: float, p: float = atm, verbose: bool = False) -> float:
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute oxygen concentration lower
         limit to promote a protective oxide film in liquid
@@ -172,6 +176,7 @@ class LowerLimitSaturationNickel(PropertyInterface):
     concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -246,6 +251,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -320,6 +326,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -430,6 +437,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -480,6 +488,7 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
     implementing correlation by courouau2004
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -530,6 +539,7 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
     implementing correlation by martynov1998
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -616,6 +626,7 @@ class LowerLimitNickelMartinelli2010(LowerLimitNickelInterface):
     implementing correlation by martinelli2010
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -666,6 +677,7 @@ class LowerLimitNickelGosse2014(LowerLimitNickelInterface):
     implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -752,6 +764,7 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
     implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -802,6 +815,7 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
     implementing correlation by weeks1969
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

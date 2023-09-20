@@ -6,6 +6,7 @@ from scipy.constants import atm
 from scipy.constants import R
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
+from ..._decorators import typecheck_for_method
 
 
 class OxygenDiffusivityInterface(PropertyInterface):
@@ -47,6 +48,7 @@ class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
     implementing correlation by arcella1968
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -91,6 +93,7 @@ class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
     implementing correlation by homna1971
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -135,6 +138,7 @@ class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
     implementing correlation by swzarc1972
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -179,6 +183,7 @@ class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
     implementing correlation by otsuka1975
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -223,6 +228,7 @@ class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
     implementing correlation by charle1976
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -267,6 +273,7 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
     implementing correlation by gromov1996
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -311,6 +318,7 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
     implementing correlation by ganesan2006b
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -355,6 +363,7 @@ class IronDiffusivity(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -420,7 +429,9 @@ class CobaltDiffusivity(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute cobalt diffusivity
         in liquid lead
@@ -443,35 +454,35 @@ class CobaltDiffusivity(PropertyInterface):
         return np.exp(-22154/(R*T))*4.6e-4
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "co_dif"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[cm^2.s^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [1023.0, 1273.0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "cobalt diffusivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -484,7 +495,9 @@ class SeleniumDiffusivity(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute selenium diffusivity
         in liquid lead
@@ -507,35 +520,35 @@ class SeleniumDiffusivity(PropertyInterface):
         return np.exp(-12958/(R*T))*3.4e-4
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "se_dif"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[cm^2.s^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [823.0, 1173.0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "selenium diffusivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -548,7 +561,9 @@ class IndiumDiffusivity(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute indium diffusivity
         in liquid lead
@@ -571,35 +586,35 @@ class IndiumDiffusivity(PropertyInterface):
         return np.exp(-13794/(R*T))*3.1e-4
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "in_dif"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[cm^2.s^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [723.0, 1173.0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "indium diffusivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """
@@ -612,7 +627,9 @@ class TelluriumDiffusivity(PropertyInterface):
     property class
     """
     @range_warning
-    def correlation(self, T, p=atm, verbose=False):
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute tellurium diffusivity
         in liquid lead
@@ -635,35 +652,35 @@ class TelluriumDiffusivity(PropertyInterface):
         return np.exp(-15884/(R*T))*3.1e-4
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         str : name of the property
         """
         return "te_dif"
 
     @property
-    def units(self):
+    def units(self) -> str:
         """
         str : property units
         """
         return "[cm^2.s^-1]"
 
     @property
-    def range(self):
+    def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
         return [723.0, 1173.0]
 
     @property
-    def long_name(self):
+    def long_name(self) -> str:
         """
         str : property long name
         """
         return "tellurium diffusivity"
 
     @property
-    def description(self):
+    def description(self) -> str:
         """
         str : property description
         """

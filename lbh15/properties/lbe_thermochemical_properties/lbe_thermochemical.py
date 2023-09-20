@@ -11,6 +11,7 @@ from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
 from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
 from ..._commons import LBE_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_o
+from ..._decorators import typecheck_for_method
 
 
 class OxygenPartialPressure(PropertyInterface):
@@ -20,6 +21,7 @@ class OxygenPartialPressure(PropertyInterface):
     lead-bismuth eutectic squared property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -88,6 +90,7 @@ class LeadChemicalActivity(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -160,6 +163,7 @@ class BismuthChemicalActivity(PropertyInterface):
     property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -232,6 +236,7 @@ class MolarEnthalpy(PropertyInterface):
     enthalpy variation property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -298,6 +303,7 @@ class MolarEntropy(PropertyInterface):
     entropy variation property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -367,6 +373,7 @@ class GibbsFreeEnergy(PropertyInterface):
     energy variation property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

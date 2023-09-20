@@ -13,6 +13,7 @@ from .solubility_in_lead import ChromiumSolubilityVenkatraman1988
 from .solubility_in_lead import NickelSolubility
 from .solubility_in_lead import IronSolubility
 from .solubility_in_lead import SiliconSolubility
+from ..._decorators import typecheck_for_method
 
 
 class LowerLimitSaturationIron(PropertyInterface):
@@ -22,6 +23,7 @@ class LowerLimitSaturationIron(PropertyInterface):
     iron is at its saturation concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -92,6 +94,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
     chromium is at its saturation concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -162,6 +165,7 @@ class LowerLimitSaturationNickel(PropertyInterface):
     nickel is at its saturation concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -232,6 +236,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     silicon is at its saturation concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -302,6 +307,7 @@ class LowerLimitSaturationZirconium(PropertyInterface):
     zirconium is at its saturation concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -372,6 +378,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     aluminium is at its saturation concentration property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -479,6 +486,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     implementing correlation by gosse2014
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -529,6 +537,7 @@ class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
     implementing correlation by venkatraman1988
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -579,6 +588,7 @@ class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
     implementing correlation by alden1958
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -628,6 +638,7 @@ class LowerLimitNickel(PropertyInterface):
     in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -699,6 +710,7 @@ class LowerLimitIron(PropertyInterface):
     in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -770,6 +782,7 @@ class LowerLimitSilicon(PropertyInterface):
     in liquid lead property class
     """
     @range_warning
+    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
