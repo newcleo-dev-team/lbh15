@@ -1,6 +1,8 @@
 """Module with the definition of decorators supporting the,
 implementation of package functions"""
+import collections.abc
 import inspect
+import numpy as np
 
 def _check_instance_type(parameter_name: str,
                          parameter_type, arg_value) -> None:
@@ -26,7 +28,13 @@ def _check_instance_type(parameter_name: str,
     if parameter_type == inspect.Parameter.empty:
         return
     if not isinstance(arg_value, parameter_type):
+        # Accept INT arg when FLOAT is required
         if ((parameter_type == float) and (isinstance(arg_value, int))):
+            return
+        # Analyse CONTAINERS recursively when made by only one element
+        if isinstance(arg_value, (collections.abc.Sequence, np.ndarray)) \
+                and (len(arg_value) == 1):
+            _check_instance_type(parameter_name, parameter_type, arg_value[0])
             return
         raise TypeError(f"Argument '{parameter_name}' must be of "
                         f"type '{parameter_type.__name__}'")
