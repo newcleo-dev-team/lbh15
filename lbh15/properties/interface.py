@@ -23,7 +23,7 @@ def range_warning(function):
         if hasattr(temp, "__len__"):
             temp = temp[0]
         if temp < range_lim[0] or temp > range_lim[1]:
-            if len(args) == 4:
+            if (len(args) == 4) and args[3]:
                 warnings.warn(f"The {p_name} is requested at "
                               f"temperature value of {temp:.2f} K "
                               "that is not in validity range "
