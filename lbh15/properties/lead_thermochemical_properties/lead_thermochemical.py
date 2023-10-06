@@ -1,27 +1,66 @@
-"""Module with the definition of thermophysical property objects for bismuth"""
+"""Module with the definition of thermochemical property
+objects for lead"""
 from typing import List
-from typing import Union
 import numpy as np
 from scipy.constants import atm
-from .interface import PropertyInterface
-from .interface import range_warning
-from .._decorators import typecheck_for_method
-from .._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
-from .._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
-from .._commons import SOBOLEV_KEYWORD
+from scipy.constants import R
+from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.interface import range_warning
+from ..lead_properties import h
+from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
+from ..._commons import LEAD_MOLAR_MASS as M
+from ..._commons import OXYGEN_MOLAR_MASS as M_o
+from ..._decorators import typecheck_for_method
 
 
-class p_s(PropertyInterface):
+class OxygenPartialPressureInterface(PropertyInterface):
     """
-    Liquid bismuth saturation vapour pressure
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property class
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : name of the property
+        """
+        return "o_pp"
+
+    @property
+    def units(self) -> str:
+        """
+        str : property units
+        """
+        return "[atm.wt.%^-2]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : property long name
+        """
+        return ("Oxygen partial pressure divided by the"
+                " oxygen concentration squared")
+
+    @property
+    def description(self) -> str:
+        """
+        str : property description
+        """
+        return f"{self.long_name} in liquid lead"
+
+
+class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
+    """
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by otsuka1979
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute saturation vapour pressure
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -36,86 +75,39 @@ class p_s(PropertyInterface):
 
         Returns
         -------
-        saturation vapour pressure in [Pa] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        return 2.67e10 * np.exp(-22858/T)
-
-    @typecheck_for_method
-    def initialization_helper(self,
-                              property_value: float) -> Union[None, float]:
-        """
-        Returns a temperature guess according to the value
-        of the saturation vapour pressure
-
-        Parameters
-        ----------
-        property_value : float
-            saturation vapour pressure in [Pa]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        rvalue : float
-            Temperature guess in [K]
-        """
-        if property_value < 1e-2:
-            rvalue = 800
-        elif 1e-2 <= property_value < 1e2:
-            rvalue = 1200
-        else:
-            rvalue = 2000
-
-        return rvalue
+        return np.exp((2/R)*((-118600/T)+14.1))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return "otsuka1979"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "saturation vapour pressure"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
+        return [1073, 1673]
 
 
-class sigma(PropertyInterface):
+class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
     """
-    Liquid bismuth surface tension
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by otsuka1981
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute surface tension
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -130,57 +122,39 @@ class sigma(PropertyInterface):
 
         Returns
         -------
-        surface tension in [N/m] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        return (420.8 - 0.081*T)*1e-3
+        return np.exp((2/R)*((-117170/T)+12.9))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return "otsuka1981"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, 1400.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[N/m]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "surface tension"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
+        return [1023, 1273]
 
 
-class rho(PropertyInterface):
+class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
     """
-    Liquid bismuth density
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by ganesan2006
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute density
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -195,62 +169,39 @@ class rho(PropertyInterface):
 
         Returns
         -------
-        density in [kg/m^3] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        rho_0 = 10725 - 1.22*T
-        u_s_val = u_s().correlation(T, p)
-        cp_val = cp().correlation(T, p)
-        alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((1/u_s_val/u_s_val + \
-                         T*alpha_val*alpha_val/cp_val) * (p - atm))
+        return np.exp((2/R)*((-121349/T)+16.906))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return "imbeni1998"
+        return "ganesan2006"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[kg/m^3]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "density"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
+        return [815, 1090]
 
 
-class alpha(PropertyInterface):
+class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
     """
-    Liquid bismuth thermal expansion coefficient
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by alcock1964
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute thermal expansion coefficient
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -265,115 +216,39 @@ class alpha(PropertyInterface):
 
         Returns
         -------
-        thermal expansion coefficient in [1/K] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        return 1/(8791 - T)
-
-    @property
-    def range(self) -> List[float]:
-        """
-        list : temperature validity range for property correlation
-        """
-        return [T_m0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[1/K]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "thermal expansion coefficient"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
-
-
-class u_s(PropertyInterface):
-    """
-    Liquid bismuth sound velocity
-    property class
-    """
-    @range_warning
-    @typecheck_for_method
-    def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
-        """
-        Correlation used to compute sound velocity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        sound velocity in [m/s] : float
-        """
-        return 1616 + 0.187*T - 2.2e-4*T*T
+        return np.exp((2/R)*((-119411/T)+12.222))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return "alcock1964"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, 1800.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[m/s]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "sound velocity"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return "Sound velocity in liquid bismuth"
+        return [783, 973]
 
 
-class beta_s(PropertyInterface):
+class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
     """
-    Liquid bismuth isentropic compressibility
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by szwarc1972
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute isentropic compressibility
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -388,125 +263,39 @@ class beta_s(PropertyInterface):
 
         Returns
         -------
-        isentropic compressibility in [1/Pa] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        rho_val = rho().correlation(T, p)
-        u_s_val = u_s().correlation(T, p)
-        return 1/(rho_val * u_s_val*u_s_val)
-
-    @property
-    def range(self) -> List[float]:
-        """
-        list : temperature validity range for property correlation
-        """
-        return [T_m0, 1800.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[1/Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "isentropic compressibility"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
-
-
-class cp(PropertyInterface):
-    """
-    Liquid bismuth specific heat capacity
-    property class
-    """
-    @range_warning
-    @typecheck_for_method
-    def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
-        """
-        Correlation used to compute specific heat capacity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        specific heat capacity in [J/(kg*K)] : float
-        """
-        return 118.2 + 5.934e-3*T + 7.183e6/T/T
+        return np.exp((2/R)*((-105855/T)+18.661))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return "imbeni1998"
-
-    @property
-    def is_injective(self) -> bool:
-        """
-        bool : True if correlation is injective,
-        False otherwise
-        """
-        return False
+        return "szwarc1972"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[J/(kg*K)]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "specific heat capacity"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
+        return [1012, 1353]
 
 
-class h(PropertyInterface):
+class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
     """
-    Liquid bismuth specific enthalpy
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by charle1976
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute specific enthalpy
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -521,61 +310,39 @@ class h(PropertyInterface):
 
         Returns
         -------
-        specific enthalpy in [J/kg] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        return (118.2*(T - T_m0)
-                + 2.967e-3*(T*T - T_m0*T_m0)
-                - 7.183e6*(1/T - 1/T_m0))
+        return np.exp((2/R)*((-119840/T)+15.794))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return "charle1976"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[J/kg]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "specific enthalpy"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return (f"Liquid bismuth {self.long_name} "
-                "(as difference with respect to "
-                "the melting point enthalpy)")
+        return [1173, 1373]
 
 
-class mu(PropertyInterface):
+class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
     """
-    Liquid bismuth dynamic viscosity
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by isecke1977
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute dynamic viscosity
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -590,57 +357,39 @@ class mu(PropertyInterface):
 
         Returns
         -------
-        dynamic viscosity in [Pa*s] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        return 4.456e-4*np.exp(780/T)
+        return np.exp((2/R)*((-120376/T)+16.255))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return "lucas1984b"
+        return "isecke1977"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, 1300.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[Pa*s]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "dynamic viscosity"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
+        return [1173, 1373]
 
 
-class r(PropertyInterface):
+class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
     """
-    Liquid bismuth electrical resistivity
-    property class
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by taskinen1979
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute electrical resistivity
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
 
         Parameters
         ----------
@@ -655,99 +404,273 @@ class r(PropertyInterface):
 
         Returns
         -------
-        electrical resistivity in [Ohm*m] : float
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
         """
-        return (98.96 + 0.0554*T)*1e-8
-
-    @property
-    def range(self) -> List[float]:
-        """
-        list : temperature validity range for property correlation
-        """
-        return [545.0, 1423.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : property units
-        """
-        return "[Ohm*m]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : property long name
-        """
-        return "electrical resistivity"
-
-    @property
-    def description(self) -> str:
-        """
-        str : property description
-        """
-        return f"Liquid bismuth {self.long_name}"
-
-
-class k(PropertyInterface):
-    """
-    Liquid bismuth thermal conductivity
-    property class
-    """
-    @range_warning
-    @typecheck_for_method
-    def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
-        """
-        Correlation used to compute thermal conductivity
-
-        Parameters
-        ----------
-        T : float
-            Temperature in [K]
-        p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
-
-        Returns
-        -------
-        thermal conductivity in [W/(m*K)] : float
-        """
-        return 7.34 + 9.5e-3*T
+        return np.exp((2/R)*((-116717/T)+12.699))*(M/M_o)**2
 
     @property
     def correlation_name(self) -> str:
         """
         str : name of the correlation
         """
-        return "touloukian1970b"
+        return "taskinen1979"
 
     @property
     def range(self) -> List[float]:
         """
         list : temperature validity range for property correlation
         """
-        return [T_m0, 1000.0]
+        return [1073, 1203]
+
+
+class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
+    """
+    Oxygen partial pressure in liquid lead divided by the
+    oxygen concentration in liquid lead squared property
+    class implementing correlation by fisher1966
+    """
+    @range_warning
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Correlation used to compute oxygen partial pressure in liquid
+        lead divided by the oxygen concentration in liquid lead squared
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        partial pressure divided by concentration
+        squared [atm.wt.%^-2] : float
+        """
+        return np.exp((2/R)*((-106395/T)+10.254))*(M/M_o)**2
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : name of the correlation
+        """
+        return "fisher1966"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        list : temperature validity range for property correlation
+        """
+        return [903, 1253]
+
+
+class MolarEnthalpy(PropertyInterface):
+    """
+    Liquid lead molar enthalpy variation
+    property class
+    """
+    @range_warning
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Correlation used to compute molar enthalpy variation
+        in liquid lead
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        concentration [J.mol^-1] : float
+        """
+        h_obj = h()
+        return h_obj.correlation(T, p)*(M*10**-3)
+
+    @property
+    def name(self) -> str:
+        """
+        str : name of the property
+        """
+        return "H"
 
     @property
     def units(self) -> str:
         """
         str : property units
         """
-        return "[W/(m*K)]"
+        return "[J.mol^-1]"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000]
 
     @property
     def long_name(self) -> str:
         """
         str : property long name
         """
-        return "thermal conductivity"
+        return "molar enthalpy variation"
 
     @property
     def description(self) -> str:
         """
         str : property description
         """
-        return f"Liquid bismuth {self.long_name}"
+        return f"{self.long_name} in liquid lead"
+
+
+class MolarEntropy(PropertyInterface):
+    """
+    Liquid lead molar entropy variation
+    property class
+    """
+    @range_warning
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Correlation used to compute molar entropy
+        variation in liquid lead
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        concentration [J/(mol.K)] : float
+        """
+        return ((M*10**-3)*(
+                176.2*np.log(T/T_m0)
+                - 4.923e-2*(T - T_m0)
+                + ((1.544e-5)/2)*((T*T) - T_m0**2)
+                - ((1.524e6)/-2)*((1/(T*T)) - T_m0**-2)))
+
+    @property
+    def name(self) -> str:
+        """
+        str : name of the property
+        """
+        return "S"
+
+    @property
+    def units(self) -> str:
+        """
+        str : property units
+        """
+        return "[J/(mol.K)]"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000]
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : property long name
+        """
+        return "molar entropy variation"
+
+    @property
+    def description(self) -> str:
+        """
+        str : property description
+        """
+        return f"{self.long_name} in liquid lead"
+
+
+class GibbsFreeEnergy(PropertyInterface):
+    """
+    Liquid lead Gibbs free energy variation
+    property class
+    """
+    @range_warning
+    @typecheck_for_method
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Correlation used to compute Gibbs free energy
+        variation in liquid lead
+
+        Parameters
+        ----------
+        T : float
+            Temperature in [K]
+        p : float, optional
+            Pressure in [Pa], by default atmospheric pressure, i.e.,
+            101325.0 Pa
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        concentration [J/mol] : float
+        """
+        H_obj = MolarEnthalpy()
+        S_obj = MolarEntropy()
+        return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
+
+    @property
+    def name(self) -> str:
+        """
+        str : name of the property
+        """
+        return "G"
+
+    @property
+    def units(self) -> str:
+        """
+        str : property units
+        """
+        return "[J/mol]"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        list : temperature validity range for property correlation
+        """
+        return [T_m0, 2000]
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : property long name
+        """
+        return "Gibbs free energy variation"
+
+    @property
+    def description(self) -> str:
+        """
+        str : property description
+        """
+        return f"{self.long_name} in liquid lead"

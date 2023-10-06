@@ -54,16 +54,11 @@ Therefore the object comes with the following default properties:
 
         :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T){\cdot}u_s(T)^2}`
     - :math:`c_p` lead specific heat capacity :math:`\Big[\
-      \frac{J}{kg{\cdot}K}\Big]`, two correlations are available, 
-      'sobolev2011' and 'gurvich1991'. The first one is the 
-      default one used by :class:`.Lead`:
+      \frac{J}{kg{\cdot}K}\Big]`, two correlations are available,
+      'sobolev2011' is the default one:
 
         :math:`c_p(T) = \displaystyle176.2 - 4.923\cdot10^{-2}{\cdot}T
         + 1.544\cdot10^{-5}{\cdot}T^2 - 1.524\cdot10^{6}{\cdot}T^{-2}`
-
-        :math:`c_p(T) = \displaystyle175.1 - 4.961\cdot10^{-2}{\cdot}T
-        + 1.985\cdot10^{-5}{\cdot}T^2 - 2.099\cdot10^{-9}{\cdot}T^3
-        - 1.524\cdot10^{6}{\cdot}T^{-2}`
     - :math:`h` specific enthalpy (as difference with
       respect to the melting point enthalpy)
       :math:`\Big[\frac{J}{kg{\cdot}K}\Big]`:
@@ -87,7 +82,6 @@ Therefore the object comes with the following default properties:
 
         :math:`k(T) = \displaystyle9.2 + 0.011{\cdot}T`
     - :math:`Pr` Prandtl number :math:`[-]`:
-
         :math:`Pr = \displaystyle\frac{c_p\cdot\mu}{k}`
 
 where :math:`T` is the lead temperature in :math:`[K]`.

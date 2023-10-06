@@ -1,11 +1,16 @@
 """Module with the definition of bismuth liquid metal object class,
 i.e., Bismuth"""
+import copy
+from typing import Dict
+from typing import List
 from scipy.constants import atm
 from ._commons import BISMUTH_MELTING_TEMPERATURE
 from ._commons import BISMUTH_MELTING_LATENT_HEAT
 from ._commons import BISMUTH_BOILING_TEMPERATURE
 from ._commons import BISMUTH_VAPORISATION_HEAT
+from ._commons import BISMUTH_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
+from ._decorators import typecheck_for_method
 
 
 class Bismuth(LiquidMetalInterface):
@@ -41,16 +46,24 @@ class Bismuth(LiquidMetalInterface):
     >>> liquid_bismuth.k  # [W/(m*K)]
     13.705
     """
-    _default_corr_to_use = {}
-    _correlations_to_use = {}
-    _roots_to_use = {'cp': 0}
-    _properties_module = 'lbh15.properties.bismuth_properties'
+    _default_corr_to_use: Dict[str, str] = \
+        {'fe_sol': "gosse2014", 'ni_sol': "gosse2014",
+         'cr_sol': "gosse2014", 'o_dif': "fitzner1980",
+         'o_pp': "isecke1979"}
+    _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
+    _roots_to_use: Dict[str, int] = {'cp': 0}
+    _properties_modules_dict: Dict[str, List[str]] = \
+        {'Bismuth': ['lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth',
+                     'lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth',
+                     'lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical',
+                     'lbh15.properties.bismuth_properties']}
 
-    def __init__(self, p=atm, **kwargs):
-        self._guess = BISMUTH_MELTING_TEMPERATURE*1.5
+    @typecheck_for_method
+    def __init__(self, p: float = atm, **kwargs):
+        self._guess = BISMUTH_MELTING_TEMPERATURE * 1.5
         super().__init__(p=p, **kwargs)
 
-    def _set_constants(self):
+    def _set_constants(self) -> None:
         """
         Sets the class constants
         """
@@ -58,3 +71,4 @@ class Bismuth(LiquidMetalInterface):
         self._Q_m0 = BISMUTH_MELTING_LATENT_HEAT
         self._T_b0 = BISMUTH_BOILING_TEMPERATURE
         self._Q_b0 = BISMUTH_VAPORISATION_HEAT
+        self._M = BISMUTH_MOLAR_MASS
