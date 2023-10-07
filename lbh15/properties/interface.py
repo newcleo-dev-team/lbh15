@@ -82,9 +82,6 @@ class PropertyInterface(ABC):
         if res.success:
             self.__min = res.fun
             self.__T_at_min = res.x
-            if self.__T_at_min - self.range[0] < 5e-4:
-                self.__T_at_min = self.range[0]
-                self.__min = self.correlation(self.__T_at_min)
         else:
             raise RuntimeError("Unable to find the minimum point: " \
                                + res.message)
@@ -98,9 +95,6 @@ class PropertyInterface(ABC):
         if res.success:
             self.__max = self.correlation(res.x)
             self.__T_at_max = res.x
-            if self.range[1] - self.__T_at_max < 5e-4:
-                self.__T_at_max = self.range[1]
-                self.__max = self.correlation(self.__T_at_max)
         else:
             raise RuntimeError("Unable to find the maximum point: " \
                                + res.message)
