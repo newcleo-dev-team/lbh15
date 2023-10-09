@@ -76,26 +76,30 @@ class PropertyInterface(ABC):
         with "Bounded" solver (for more details please refer to scipy
         documentation)
         """
-        min_vals = minimize_scalar(self.correlation,
-                                   bounds=self.range,
-                                   method="Bounded")
-        self.__min = min_vals.fun
-        self.__T_at_min = min_vals.x
-        if self.__T_at_min - self.range[0] < 5e-4:
-            self.__T_at_min = self.range[0]
-            self.__min = self.correlation(self.__T_at_min)
+        res = minimize_scalar(self.correlation,
+                              bounds=self.range,
+                              method="Bounded",
+                              options={'xatol':1e-10})
+        if res.success:
+            self.__min = res.fun
+            self.__T_at_min = res.x
+        else:
+            raise RuntimeError("Unable to find the minimum point: " \
+                               + res.message)
 
-        def corr_reciprocal(T: float) -> float:
-            return 1/self.correlation(T)
+        def corr_opposite(T: float) -> float:
+            return -self.correlation(T)
 
-        max_vals = minimize_scalar(corr_reciprocal,
-                                   bounds=self.range,
-                                   method="Bounded")
-        self.__max = self.correlation(max_vals.x)
-        self.__T_at_max = max_vals.x
-        if self.range[1] - self.__T_at_max < 5e-4:
-            self.__T_at_max = self.range[1]
-            self.__max = self.correlation(self.__T_at_max)
+        res = minimize_scalar(corr_opposite,
+                              bounds=self.range,
+                              method="Bounded",
+                              options={'xatol':1e-10})
+        if res.success:
+            self.__max = -res.fun
+            self.__T_at_max = res.x
+        else:
+            raise RuntimeError("Unable to find the maximum point: " \
+                               + res.message)
 
     @typecheck_for_method
     def initialization_helper(self,
