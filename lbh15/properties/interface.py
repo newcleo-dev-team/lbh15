@@ -145,7 +145,6 @@ class PropertyInterface(ABC):
             Returns None id print_info=True, otherwise returns the content
             of the information.
         """
-        name = self.name
         property_val = self.correlation(T, p)
         if property_val < 1e-2:
             value = f"Value: {property_val:.2e} {self.units}"
@@ -159,7 +158,7 @@ class PropertyInterface(ABC):
         description = ("Description:\n{:s}{:s}"
                        .format((n_tab+2)*"\t", self.description))
 
-        all_info = "{:s}{:s}:\n".format(n_tab*"\t", name)
+        all_info = "{:s}{:s}:\n".format(n_tab*"\t", self.name)
         all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", value)
         all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", validity)
         all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", corr_name)
@@ -167,12 +166,9 @@ class PropertyInterface(ABC):
         all_info += "{:s}{:s}\n".format((n_tab+1)*"\t", units)
         all_info += "{:s}{:s}".format((n_tab+1)*"\t", description)
 
-        rvalue = None
         if print_info:
-            print(all_info)
-        else:
-            rvalue = all_info
-        return rvalue
+            return print(all_info)
+        return all_info
 
     @abstractmethod
     @range_warning
