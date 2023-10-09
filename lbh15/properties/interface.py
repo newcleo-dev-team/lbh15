@@ -87,15 +87,15 @@ class PropertyInterface(ABC):
             raise RuntimeError("Unable to find the minimum point: " \
                                + res.message)
 
-        def corr_reciprocal(T: float) -> float:
-            return 1/self.correlation(T)
+        def corr_opposite(T: float) -> float:
+            return -self.correlation(T)
 
-        res = minimize_scalar(corr_reciprocal,
+        res = minimize_scalar(corr_opposite,
                               bounds=self.range,
                               method="Bounded",
                               options={'xatol':1e-10})
         if res.success:
-            self.__max = self.correlation(res.x)
+            self.__max = -res.fun
             self.__T_at_max = res.x
         else:
             raise RuntimeError("Unable to find the maximum point: " \

@@ -26,8 +26,8 @@
    "h_sobolev2011_Liquid_lead_specific_enthalpy_(as_difference_with_respect_to_the_melting_point_enthalpy)": {
       "min": 0.0023692295,
       "T_at_min": 600.6000160107,
-      "max": 195278.8512393387,
-      "T_at_max": 1999.9999475843
+      "max": 195278.8532229452,
+      "T_at_max": 1999.9999618422
    },
    "k_lbh15_Liquid_lead_thermal_conductivity": {
       "min": 15.8066001325,
@@ -44,8 +44,8 @@
    "p_s_sobolev2011_Liquid_lead_saturation_vapour_pressure": {
       "min": 5.721e-07,
       "T_at_min": 600.6000113097,
-      "max": 101081.6076497326,
-      "T_at_max": 2020.9999444902
+      "max": 101081.6167665516,
+      "T_at_max": 2020.9999611359
    },
    "r_lbh15_Liquid_lead_electrical_resistivity": {
       "min": 9.529e-07,
@@ -74,26 +74,26 @@
    "cr_sol_alden1958_chromium_solubility_in_liquid_lead": {
       "min": 0.0105804651,
       "T_at_min": 1181.000020802,
-      "max": 0.1543175414,
-      "T_at_max": 1482.9999743022
+      "max": 0.1543175276,
+      "T_at_max": 1482.9999616809
    },
    "cr_sol_gosse2014_chromium_solubility_in_liquid_lead": {
       "min": 3.62e-08,
       "T_at_min": 601.0000169449,
-      "max": 0.7420324693,
-      "T_at_max": 1772.9999514852
+      "max": 0.7420325344,
+      "T_at_max": 1772.9999694963
    },
    "cr_sol_venkatraman1988_chromium_solubility_in_liquid_lead": {
       "min": 0.0093562075,
       "T_at_min": 1173.0000206669,
-      "max": 0.1373668038,
-      "T_at_max": 1472.9999740019
+      "max": 0.1373667919,
+      "T_at_max": 1472.9999619347
    },
    "fe_sol_gosse2014_f{self.long_name}_in_liquid_lead": {
       "min": 2.522e-07,
       "T_at_min": 600.0000166405,
-      "max": 0.0045249045,
-      "T_at_max": 1172.9999662734
+      "max": 0.0045249048,
+      "T_at_max": 1172.9999724645
    },
    "ni_sol_gosse2014_f{self.long_name}_in_liquid_lead": {
       "min": 0.1064692367,
@@ -104,8 +104,8 @@
    "o_sol_lbh15_f{self.long_name}_in_liquid_lead": {
       "min": 5.45364e-05,
       "T_at_min": 673.0000180825,
-      "max": 0.3605960945,
-      "T_at_max": 1372.999961548
+      "max": 0.3605961046,
+      "T_at_max": 1372.9999660742
    },
    "si_sol_lbh15_f{self.long_name}_in_liquid_lead": {
       "min": 0.028770034,
@@ -188,140 +188,140 @@
    "G_lbh15_Gibbs_free_energy_variation_in_liquid_lead": {
       "min": -29673.2366576338,
       "T_at_min": 1999.9999618422,
-      "max": -1e-09,
-      "T_at_max": 600.6029408342
+      "max": 5.47e-08,
+      "T_at_max": 600.6014729651
    },
    "H_lbh15_molar_enthalpy_variation_in_liquid_lead": {
       "min": 0.0004909043,
       "T_at_min": 600.6000160107,
-      "max": 40461.777976791,
-      "T_at_max": 1999.9999475843
+      "max": 40461.7783877942,
+      "T_at_max": 1999.9999618422
    },
    "S_lbh15_molar_entropy_variation_in_liquid_lead": {
       "min": 8.174e-07,
       "T_at_min": 600.6000160107,
-      "max": 35.0675080527,
-      "T_at_max": 1999.9999521907
+      "max": 35.0675081918,
+      "T_at_max": 1999.9999618422
    },
    "o_pp_alcock1964_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 0.0,
       "T_at_min": 783.0000201474,
       "max": 5e-10,
-      "T_at_max": 972.999974054
+      "T_at_max": 972.999975892
    },
    "o_pp_charle1976_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 1.591e-07,
       "T_at_min": 1173.0000284823,
       "max": 5.7049e-06,
-      "T_at_max": 1372.9999617619
+      "T_at_max": 1372.9999793043
    },
    "o_pp_fisher1966_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 1e-09,
       "T_at_min": 903.000025394,
       "max": 2.662e-06,
-      "T_at_max": 1252.9999650341
+      "T_at_max": 1252.9999741755
    },
    "o_pp_ganesan2006_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 0.0,
       "T_at_min": 815.0000172208,
       "max": 2.29e-08,
-      "T_at_max": 1089.9999723849
+      "T_at_max": 1089.9999812742
    },
    "o_pp_isecke1977_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 1.592e-07,
       "T_at_min": 1173.0000288784,
       "max": 5.8026e-06,
-      "T_at_max": 1372.999961471
+      "T_at_max": 1372.9999793043
    },
    "o_pp_otsuka1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 1.41e-08,
       "T_at_min": 1073.0000286761,
       "max": 0.0001957855,
-      "T_at_max": 1672.9999673938
+      "T_at_max": 1672.9999529487
    },
    "o_pp_otsuka1981_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 4e-09,
       "T_at_min": 1023.0000267604,
       "max": 9.052e-07,
-      "T_at_max": 1272.9999718908
+      "T_at_max": 1272.9999682789
    },
    "o_pp_szwarc1972_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 1.765e-07,
       "T_at_min": 1012.0000243902,
       "max": 0.0001001781,
-      "T_at_max": 1352.9999779402
+      "T_at_max": 1352.9999768007
    },
    "o_pp_taskinen1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 1.54e-08,
       "T_at_min": 1073.0000266894,
       "max": 2.604e-07,
-      "T_at_max": 1202.999967098
+      "T_at_max": 1202.999974659
    },
    "lim_cr_alden1958_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
       "min": 0.0,
       "T_at_min": 673.0000133819,
       "max": 0.0,
-      "T_at_max": 999.9999717413
+      "T_at_max": 999.9999743571
    },
    "lim_cr_gosse2014_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
       "min": 0.0,
       "T_at_min": 673.0000124208,
       "max": 0.0,
-      "T_at_max": 999.9999721221
+      "T_at_max": 999.9999743571
    },
    "lim_cr_venkatraman1988_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
       "min": 0.0,
       "T_at_min": 673.0000131001,
       "max": 0.0,
-      "T_at_max": 999.999971853
+      "T_at_max": 999.9999743571
    },
    "lim_fe_lbh15_Oxygen_concentration_lower_limit_times_iron_concentration_raised_to_3/4_in_lead": {
       "min": 0.0,
       "T_at_min": 673.000017791,
       "max": 5.8e-09,
-      "T_at_max": 999.9999712767
+      "T_at_max": 999.9999743571
    },
    "lim_ni_lbh15_Oxygen_concentration_lower_limit_times_nickel_concentration_in_lead": {
       "min": 1.029e-07,
       "T_at_min": 673.0000121086,
       "max": 8.52242e-05,
-      "T_at_max": 916.9999757576
+      "T_at_max": 916.9999826416
    },
    "lim_al_sat_lbh15_Oxygen_concentration_lower_limit_for_aluminium_at_its_saturation_concentration_in_liquid_lead": {
       "min": 0.0,
       "T_at_min": 673.0000133122,
       "max": 0.0,
-      "T_at_max": 999.9999776418
+      "T_at_max": 999.9999743571
    },
    "lim_cr_sat_lbh15_Oxygen_concentration_lower_limit_for_chromium_at_its_saturation_concentration_in_liquid_lead": {
       "min": 0.0,
       "T_at_min": 673.0000155753,
       "max": 0.0,
-      "T_at_max": 999.9999757984
+      "T_at_max": 999.9999743571
    },
    "lim_fe_sat_lbh15_Oxygen_concentration_lower_limit_for_iron_at_its_saturation_concentration_in_liquid_lead": {
       "min": 2e-10,
       "T_at_min": 673.0000121095,
       "max": 1.2521e-06,
-      "T_at_max": 999.9999744144
+      "T_at_max": 999.9999743571
    },
    "lim_ni_sat_lbh15_Oxygen_concentration_lower_limit_for_nickel_at_its_saturation_concentration_in_liquid_lead": {
       "min": 5.314e-07,
       "T_at_min": 673.0000180933,
       "max": 0.0004301025,
-      "T_at_max": 999.9999716415
+      "T_at_max": 999.9999743571
    },
    "lim_si_sat_lbh15_Oxygen_concentration_lower_limit_for_silicon_at_its_saturation_concentration_in_liquid_lead": {
       "min": 0.0,
       "T_at_min": 673.0000163988,
       "max": 0.0,
-      "T_at_max": 999.9999744985
+      "T_at_max": 999.9999743571
    },
    "lim_si_lbh15_Oxygen_concentration_lower_limit_times_silicon_concentration_raised_to_1/2_in_lead": {
       "min": 0.0,
       "T_at_min": 673.000012831,
       "max": 0.0,
-      "T_at_max": 999.9999707273
+      "T_at_max": 999.9999743571
    },
    "alpha_lbh15_Liquid_bismuth_thermal_expansion_coefficient": {
       "min": 0.000121265,
@@ -344,8 +344,8 @@
    "h_sobolev2011_Liquid_bismuth_specific_enthalpy_(as_difference_with_respect_to_the_melting_point_enthalpy)": {
       "min": 0.0021436665,
       "T_at_min": 544.6000147179,
-      "max": 170386.0462070691,
-      "T_at_max": 1830.9999525897
+      "max": 170386.0478107512,
+      "T_at_max": 1830.9999648121
    },
    "k_touloukian1970b_Liquid_bismuth_thermal_conductivity": {
       "min": 12.5137001296,
@@ -362,8 +362,8 @@
    "p_s_sobolev2011_Liquid_bismuth_saturation_vapour_pressure": {
       "min": 1.58e-08,
       "T_at_min": 544.6000099395,
-      "max": 101117.7112342743,
-      "T_at_max": 1830.9999645192
+      "max": 101117.711436216,
+      "T_at_max": 1830.9999648121
    },
    "r_lbh15_Liquid_bismuth_electrical_resistivity": {
       "min": 1.2915e-06,
@@ -392,26 +392,26 @@
    "cr_sol_gosse2014_chromium_solubility_in_liquid_bismuth": {
       "min": 5.20172e-05,
       "T_at_min": 545.0000150386,
-      "max": 2.0132743219,
-      "T_at_max": 1772.9999696316
+      "max": 2.0132743067,
+      "T_at_max": 1772.9999667823
    },
    "cr_sol_venkatraman1988_chromium_solubility_in_liquid_bismuth": {
       "min": 0.0007139667,
       "T_at_min": 658.0000183323,
-      "max": 0.0215447106,
-      "T_at_max": 900.9999846477
+      "max": 0.0215447101,
+      "T_at_max": 900.9999825311
    },
    "cr_sol_weeks1998_chromium_solubility_in_liquid_bismuth": {
       "min": 0.000782826,
       "T_at_min": 663.0000124151,
-      "max": 0.05964184,
-      "T_at_max": 997.9999814996
+      "max": 0.059641836,
+      "T_at_max": 997.9999737297
    },
    "fe_sol_gosse2014_iron_solubility_in_liquid_bismuth": {
       "min": 9.7497e-06,
       "T_at_min": 545.0000085106,
-      "max": 0.0707320546,
-      "T_at_max": 1172.9999667493
+      "max": 0.0707320559,
+      "T_at_max": 1172.9999695637
    },
    "fe_sol_massalski1990_iron_solubility_in_liquid_bismuth": {
       "min": 0.012290178,
@@ -422,14 +422,14 @@
    "fe_sol_weeks1998_iron_solubility_in_liquid_bismuth": {
       "min": 0.0006285495,
       "T_at_min": 713.0000117738,
-      "max": 0.0172110573,
-      "T_at_max": 997.9999823036
+      "max": 0.0172110568,
+      "T_at_max": 997.9999786407
    },
    "ni_sol_gosse2014_nickel_solubility_in_liquid_bismuth": {
       "min": 0.2171218787,
       "T_at_min": 543.0000108166,
-      "max": 8.6573060031,
-      "T_at_max": 1172.9999694667
+      "max": 8.6573059971,
+      "T_at_max": 1172.9999686173
    },
    "ni_sol_weeks1998_nickel_solubility_in_liquid_bismuth": {
       "min": 3.0391522429,
@@ -440,8 +440,8 @@
    "o_sol_lbh15_f{self.long_name}_in_liquid_bismuth": {
       "min": 1.59961e-05,
       "T_at_min": 573.0000087999,
-      "max": 0.9597291234,
-      "T_at_max": 1572.9999555243
+      "max": 0.9597292065,
+      "T_at_max": 1572.9999748659
    },
    "o_dif_fitzner1980_oxygen_diffusivity_in_liquid_bismuth": {
       "min": 2.11584e-05,
@@ -464,20 +464,20 @@
    "H_lbh15_molar_enthalpy_variation_in_liquid_bismuth": {
       "min": 0.0004479834,
       "T_at_min": 544.6000147179,
-      "max": 35607.2759363533,
-      "T_at_max": 1830.9999525897
+      "max": 35607.2762714908,
+      "T_at_max": 1830.9999648121
    },
    "S_lbh15_molar_entropy_variation_in_liquid_bismuth": {
       "min": 8.226e-07,
       "T_at_min": 544.6000147179,
-      "max": 33.8541047292,
-      "T_at_max": 1830.999957904
+      "max": 33.8541048327,
+      "T_at_max": 1830.9999648121
    },
    "o_pp_fitzner1980_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
       "min": 1.4e-07,
       "T_at_min": 988.0000170072,
       "max": 6.2586e-06,
-      "T_at_max": 1180.999976589
+      "T_at_max": 1180.9999778936
    },
    "o_pp_hahn1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
       "min": 0.0011843248,
@@ -489,13 +489,13 @@
       "min": 7.6e-08,
       "T_at_min": 1023.0000181045,
       "max": 6.2364e-06,
-      "T_at_max": 1272.9999792705
+      "T_at_max": 1272.9999682789
    },
    "o_pp_isecke1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
       "min": 1.031e-07,
       "T_at_min": 973.0000149732,
-      "max": 0.000498785,
-      "T_at_max": 1472.9999677707
+      "max": 0.0004987849,
+      "T_at_max": 1472.9999607906
    },
    "alpha_lbh15_Liquid_lbe_thermal_expansion_coefficient": {
       "min": 0.000122549,
@@ -518,8 +518,8 @@
    "h_sobolev2011_Liquid_lbe_specific_enthalpy_(as_difference_with_respect_to_the_melting_point_enthalpy)": {
       "min": 296.4121085953,
       "T_at_min": 400.0000107974,
-      "max": 210592.6934084684,
-      "T_at_max": 1926.9999431531
+      "max": 210592.6949524394,
+      "T_at_max": 1926.9999545753
    },
    "k_sobolev2011_Liquid_lbe_thermal_conductivity": {
       "min": 9.3545389082,
@@ -536,8 +536,8 @@
    "p_s_sobolev2011_Liquid_lbe_saturation_vapour_pressure": {
       "min": 0.0,
       "T_at_min": 398.000009158,
-      "max": 100864.7621133532,
-      "T_at_max": 1926.9999445451
+      "max": 100864.76819824,
+      "T_at_max": 1926.9999544783
    },
    "r_lbh15_Liquid_lbe_electrical_resistivity": {
       "min": 1.101e-06,
@@ -572,8 +572,8 @@
    "cr_sol_gosse2014_cr_solubility_in_liquid_lbe": {
       "min": 2.89e-07,
       "T_at_min": 399.0000097679,
-      "max": 0.0327125463,
-      "T_at_max": 1172.9999742327
+      "max": 0.0327125472,
+      "T_at_max": 1172.9999798861
    },
    "cr_sol_martynov1998_cr_solubility_in_liquid_lbe": {
       "min": 0.0003910068,
@@ -584,20 +584,20 @@
    "fe_sol_gosse2014_iron_solubility_in_liquid_lbe": {
       "min": 9e-10,
       "T_at_min": 399.0000102451,
-      "max": 0.0177740652,
-      "T_at_max": 1172.9999681291
+      "max": 0.0177740668,
+      "T_at_max": 1172.9999798861
    },
    "fe_sol_weeks1969_iron_solubility_in_liquid_lbe": {
       "min": 0.000617251,
       "T_at_min": 823.0000169763,
       "max": 0.0078629214,
-      "T_at_max": 1052.9999698701
+      "T_at_max": 1052.9999708166
    },
    "ni_sol_gosse2014_nickel_solubility_in_liquid_lbe": {
       "min": 0.0582204939,
       "T_at_min": 528.0000121669,
-      "max": 7.6272848612,
-      "T_at_max": 1172.9999659401
+      "max": 7.6272848972,
+      "T_at_max": 1172.9999687398
    },
    "ni_sol_martinelli2010_nickel_solubility_in_liquid_lbe": {
       "min": 0.2487072182,
@@ -608,8 +608,8 @@
    "o_sol_lbh15_f{self.long_name}_in_liquid_lbe": {
       "min": 0.0001320469,
       "T_at_min": 673.0000169974,
-      "max": 0.0150638761,
-      "T_at_max": 1012.9999786219
+      "max": 0.0150638754,
+      "T_at_max": 1012.9999733376
    },
    "fe_dif_lbh15_f{self.long_name}_in_liquid_lbe": {
       "min": 2.14445e-05,
@@ -650,91 +650,91 @@
    "H_lbh15_molar_enthalpy_variation_in_liquid_lbe": {
       "min": 61.7067763553,
       "T_at_min": 400.0000107974,
-      "max": 43840.9763210816,
-      "T_at_max": 1926.9999431531
+      "max": 43840.9766425039,
+      "T_at_max": 1926.9999545753
    },
    "S_lbh15_molar_entropy_variation_in_liquid_lbe": {
       "min": 0.1546537436,
       "T_at_min": 400.0000107974,
-      "max": 45.9100128913,
-      "T_at_max": 1926.999951387
+      "max": 45.9100129378,
+      "T_at_max": 1926.9999545753
    },
    "o_pp_lbh15_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lbe": {
       "min": 0.0,
       "T_at_min": 812.0000219292,
       "max": 8.8e-09,
-      "T_at_max": 1007.9999713521
+      "T_at_max": 1007.9999751307
    },
    "lim_cr_courouau2004_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000197495,
       "max": 0.0,
-      "T_at_max": 812.9999789999
+      "T_at_max": 812.9999833163
    },
    "lim_cr_gosse2014_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000160904,
       "max": 0.0,
-      "T_at_max": 999.9999757879
+      "T_at_max": 999.9999743571
    },
    "lim_cr_martynov1998_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000162616,
       "max": 0.0,
-      "T_at_max": 772.9999784356
+      "T_at_max": 772.9999794697
    },
    "lim_fe_gosse2014_Oxygen_concentration_lower_limit_times_iron_concentration_raised_to_3/4_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000190104,
       "max": 6.2e-09,
-      "T_at_max": 999.9999770696
+      "T_at_max": 999.9999743571
    },
    "lim_fe_weeks1969_Oxygen_concentration_lower_limit_times_iron_concentration_raised_to_3/4_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000144612,
       "max": 7.2e-09,
-      "T_at_max": 999.9999782927
+      "T_at_max": 999.9999743571
    },
    "lim_ni_gosse2014_Oxygen_concentration_lower_limit_timesnickel_concentration_in_lbe": {
       "min": 3.868e-07,
       "T_at_min": 673.0000145852,
-      "max": 0.0007252656,
-      "T_at_max": 999.9999826794
+      "max": 0.0007252655,
+      "T_at_max": 999.9999743571
    },
    "lim_ni_martinelli2010_Oxygen_concentration_lower_limit_timesnickel_concentration_in_lbe": {
       "min": 4.216e-07,
       "T_at_min": 673.0000198925,
-      "max": 0.0006568967,
-      "T_at_max": 999.9999826129
+      "max": 0.0006568966,
+      "T_at_max": 999.9999743571
    },
    "lim_al_sat_lbh15_Oxygen_concentration_lower_limit_for_aluminium_at_its_saturation_concentration_in_liquid_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000160986,
       "max": 0.0,
-      "T_at_max": 999.999981084
+      "T_at_max": 999.9999743571
    },
    "lim_cr_sat_lbh15_Oxygen_concentration_lower_limit_forchromium_at_its_saturation_concentration_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000111399,
       "max": 0.0,
-      "T_at_max": 999.999984403
+      "T_at_max": 999.9999743571
    },
    "lim_fe_sat_lbh15_Oxygen_concentration_lower_limit_foriron_at_its_saturation_concentration_in_liquid_lbe": {
       "min": 1e-10,
       "T_at_min": 673.0000161601,
       "max": 3.895e-07,
-      "T_at_max": 999.9999827364
+      "T_at_max": 999.9999743571
    },
    "lim_ni_sat_lbh15_Oxygen_concentration_lower_limit_for_nickel_at_its_saturation_concentration_in_liquid_lbe": {
       "min": 4.222e-07,
       "T_at_min": 673.0000190285,
       "max": 0.0001338126,
-      "T_at_max": 999.9999753632
+      "T_at_max": 999.9999743571
    },
    "lim_si_sat_lbh15_Oxygen_concentration_lower_limit_for_silicon_at_its_saturation_concentration_in_liquid_lbe": {
       "min": 0.0,
       "T_at_min": 673.00001951,
       "max": 0.0,
-      "T_at_max": 999.9999820312
+      "T_at_max": 999.9999743571
    }
 }
