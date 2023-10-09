@@ -78,7 +78,8 @@ class PropertyInterface(ABC):
         """
         res = minimize_scalar(self.correlation,
                               bounds=self.range,
-                              method="Bounded")
+                              method="Bounded",
+                              options={'xatol':1e-10})
         if res.success:
             self.__min = res.fun
             self.__T_at_min = res.x
@@ -91,7 +92,8 @@ class PropertyInterface(ABC):
 
         res = minimize_scalar(corr_reciprocal,
                               bounds=self.range,
-                              method="Bounded")
+                              method="Bounded",
+                              options={'xatol':1e-10})
         if res.success:
             self.__max = self.correlation(res.x)
             self.__T_at_max = res.x
