@@ -236,7 +236,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
-                    verbose: bool =False) -> float:
+                    verbose: bool = False) -> float:
         """
         Correlation used to compute chromium solubility in liquid lead
 
