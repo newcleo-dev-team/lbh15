@@ -434,7 +434,7 @@ Initialization from properties (*experimental*)
 
 The lbh15 package gives the possibility to instantiate an object with liquid metal properties by simply knowing the value of one of its
 properties (see :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` documentation for the full list). 
-This is accomplished by finding the root of the function matching the target property value. Such function, which constitutes a physical correlation, must be injective in the range considered for the root. Note that this is a necessary but not jointly sufficient condition to find a single root for the function. Since the existence of a (single) root cannot be guaranteed for every correlation, this functionality is marked as *experimental*: we invite then the user to double-check the result (see :ref:`Advanced usage` section). 
+This is accomplished by finding the root of the function matching the target property value. Such function, which constitutes a physical correlation, must be invertible in the range considered for the root. Note that this is a necessary but not jointly sufficient condition to find a single root for the function. Since the existence of a (single) root cannot be guaranteed for every correlation, this functionality is marked as *experimental*: we invite then the user to double-check the result (see :ref:`Advanced usage` section). 
 
 - Initialize :class:`.LBE`, i.e., lead-bismuth-eutectic object knowing its density
   and retrieve the corresponding temperature in Kelvin:
@@ -459,7 +459,7 @@ This is accomplished by finding the root of the function matching the target pro
   >>> liquid_bismuth.k
   14.395909090909093
 
-- Initialization from mass-specific heat capacity :math:`c_p` needs some attention because the corresponding function of temperature is not injective.
+- Initialization from mass-specific heat capacity :math:`c_p` needs some attention because the corresponding function of temperature is not invertible.
   Hence, two temperature values may be possible for the same value of :math:`c_p`. This occurrence must be handled carefully.
   Currently, the package allows the user to look for the root in the two distinct ranges where the function is monotone.
   The default range index is 0, which corresponds to the lowest temperature range.

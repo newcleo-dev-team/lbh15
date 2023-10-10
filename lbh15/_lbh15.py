@@ -284,7 +284,7 @@ class LiquidMetalInterface(ABC):
         Set which temperature root shall be used for initialization
         from property. Temperature roots are sorted in ascending order, i.e,
         T_i <= T_j with i < j. Used only if property correlation
-        is not injective
+        is not invertible
 
         Parameters
         ----------
@@ -356,12 +356,12 @@ class LiquidMetalInterface(ABC):
         else:
             function_of_T = None
             helper = None
-            is_injective = False
+            is_invertible = False
             key = self.__generate_key(input_property)
             if key in self.__properties:
                 function_of_T = self.__properties[key].correlation
                 helper = self.__properties[key].initialization_helper
-                is_injective = self.__properties[key].is_injective
+                is_invertible = self.__properties[key].is_invertible
 
             if function_of_T is None:
                 raise UnboundLocalError("No correlation found for property "
@@ -374,7 +374,7 @@ class LiquidMetalInterface(ABC):
             def function_to_solve(T: float, target: float) -> float:
                 return function_of_T(T, self.__p) - target
 
-            if is_injective:
+            if is_invertible:
                 res = fsolve(function_to_solve, x0=[self._guess],
                                 args=(input_value), xtol=1e-10)
                 rvalue = res[0]

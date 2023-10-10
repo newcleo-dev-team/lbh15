@@ -55,9 +55,9 @@ class PropertyInterface(ABC):
           a custom name for the property, otherwise the class name will be used
         - :attr:`~.PropertyInterface.correlation_name` override this member \
           to set a correlation name different from default one
-        - :attr:`~.PropertyInterface.is_injective` override this member \
-          if the function is not injective, othwerise it will \
-          be considered injective
+        - :attr:`~.PropertyInterface.is_invertible` override this member \
+          if the function is not invertible, othwerise it will \
+          be considered invertible
     """
     def __init__(self):
         self.__min: float = -nan
@@ -206,9 +206,9 @@ class PropertyInterface(ABC):
         return "lbh15"
 
     @property
-    def is_injective(self) -> bool:
+    def is_invertible(self) -> bool:
         """
-        bool : True if correlation is injective,
+        bool : True if correlation is invertible,
         False otherwise
         """
         return True

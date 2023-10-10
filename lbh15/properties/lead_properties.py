@@ -470,9 +470,9 @@ class cp_sobolev2011(PropertyInterface):
         return SOBOLEV_KEYWORD
 
     @property
-    def is_injective(self) -> bool:
+    def is_invertible(self) -> bool:
         """
-        bool : True if correlation is injective,
+        bool : True if correlation is invertible,
         False otherwise
         """
         return False
@@ -551,9 +551,9 @@ class cp_gurvich1991(PropertyInterface):
         return GURVICH_KEYWORD
 
     @property
-    def is_injective(self) -> bool:
+    def is_invertible(self) -> bool:
         """
-        bool : True if correlation is injective,
+        bool : True if correlation is invertible,
         False otherwise
         """
         return False

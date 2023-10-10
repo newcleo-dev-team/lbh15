@@ -460,9 +460,9 @@ class cp(PropertyInterface):
         return "imbeni1998"
 
     @property
-    def is_injective(self) -> bool:
+    def is_invertible(self) -> bool:
         """
-        bool : True if correlation is injective,
+        bool : True if correlation is invertible,
         False otherwise
         """
         return False
