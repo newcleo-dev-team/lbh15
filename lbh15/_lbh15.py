@@ -177,9 +177,9 @@ class LiquidMetalInterface(ABC):
         correlation_name : str
             Name of the correlation
         """
-        key = self.__generate_key(property_name)
-        if (key in self.__properties and
-                self.__properties[key].correlation_name != correlation_name):
+        if (property_name in self.__properties and
+                self.__properties[property_name].correlation_name != \
+                    correlation_name):
             self.__corr2use[property_name] = correlation_name
             self.__fill_instance_properties()
 
@@ -357,11 +357,11 @@ class LiquidMetalInterface(ABC):
             function_of_T = None
             helper = None
             is_injective = False
-            key = self.__generate_key(input_property)
-            if key in self.__properties:
-                function_of_T = self.__properties[key].correlation
-                helper = self.__properties[key].initialization_helper
-                is_injective = self.__properties[key].is_injective
+            if input_property in self.__properties:
+                function_of_T = self.__properties[input_property].correlation
+                helper = \
+                    self.__properties[input_property].initialization_helper
+                is_injective = self.__properties[input_property].is_injective
 
             if function_of_T is None:
                 raise UnboundLocalError("No correlation found for property "
@@ -493,7 +493,7 @@ class LiquidMetalInterface(ABC):
         property_object : :class:`_properties.PropertyInterface`
             Object which inherits from :class:`_properties.PropertyInterface`
         """
-        key = self.__generate_key(property_object.name)
+        key = property_object.name
         self.__properties[key] = property_object
 
         def new_property_info(print_info: bool =True,
@@ -504,33 +504,15 @@ class LiquidMetalInterface(ABC):
         setattr(self, property_object.name+"_info",
                 new_property_info)
 
-    def __generate_key(self, property_name: str) -> str:
-        """
-        Generates the key that will be used to store the property
-        in class dictionary
-
-        Parameters
-        ----------
-        property_name : str
-            Name of the property
-
-        Returns
-        -------
-        str
-            Generated key
-        """
-        return property_name + '_' + type(self).__name__
-
     def __check_properties(self) -> List[str]:
         keys_to_remove = []
         update_properties = False
         for key in self.__corr2use.keys():
-            prop_key = self.__generate_key(key)
             corr_name = self.__corr2use[key]
             is_in_default = key in self._default_corr_to_use
             remove_property = False
 
-            if prop_key not in self.__properties:
+            if key not in self.__properties:
                 if not is_in_default:
                     warnings.warn(f"Could not find property '{key}' "
                                   f"implementing '{corr_name}' correlation. "
@@ -555,7 +537,7 @@ class LiquidMetalInterface(ABC):
                     remove_property = True
                     update_properties = True
             else:
-                if corr_name != self.__properties[prop_key].correlation_name:
+                if corr_name != self.__properties[key].correlation_name:
                     warnings.warn(f"Could not find property '{key}' "
                                   f"implementing '{corr_name}' correlation. "
                                   "\nGoing to remove it from correlations "
@@ -643,12 +625,11 @@ class LiquidMetalInterface(ABC):
                                   "NOT IMPLEMENTED")
 
     def __getattr__(self, name: str) -> float:
-        key = self.__generate_key(name)
-        if key not in self.__properties:
+        if name not in self.__properties:
             raise AttributeError(f"'{type(self).__name__}' object "
                                  f"has no attribute '{name}'")
 
-        return self.__properties[key].correlation(self.__T, self.__p, True)
+        return self.__properties[name].correlation(self.__T, self.__p, True)
 
     def __str__(self) -> str:
         rvalue = (f"{type(self).__name__} liquid metal "
