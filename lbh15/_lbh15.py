@@ -53,7 +53,7 @@ class LiquidMetalInterface(ABC):
     _correlations_to_use: Dict[str, str] = {}
     _roots_to_use: Dict[str, int] = {}
     _default_corr_to_use: Dict[str, str] = {}
-    _properties_module: str = ""
+    _properties_modules_list: List[str] = []
     __p: float = 0
     __T: float = 0
     __custom_properties_path: \
@@ -585,9 +585,8 @@ class LiquidMetalInterface(ABC):
             :class:`_properties.PropertyInterface`
         """
         property_obj_list = []
-        if cls.__name__ in cls._properties_modules_dict:
-            modules = cls._properties_modules_dict[cls.__name__]
-            property_obj_list = cls.__property_list(modules)
+        modules = cls._properties_modules_list
+        property_obj_list = cls.__property_list(modules)
         return property_obj_list
 
     @classmethod

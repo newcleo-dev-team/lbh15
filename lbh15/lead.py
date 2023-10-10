@@ -60,12 +60,12 @@ class Lead(LiquidMetalInterface):
          'lim_cr': "gosse2014"}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
-    _properties_modules_dict: Dict[str, List[str]] = \
-        {'Lead': ['lbh15.properties.lead_thermochemical_properties.solubility_in_lead',
-                  'lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead',
-                  'lbh15.properties.lead_thermochemical_properties.lead_thermochemical',
-                  'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
-                  'lbh15.properties.lead_properties']}
+    _properties_modules_list: List[str] = \
+        ['lbh15.properties.lead_thermochemical_properties.solubility_in_lead',
+         'lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead',
+         'lbh15.properties.lead_thermochemical_properties.lead_thermochemical',
+         'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
+         'lbh15.properties.lead_properties']
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
