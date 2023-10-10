@@ -52,11 +52,11 @@ class Bismuth(LiquidMetalInterface):
          'o_pp': "isecke1979"}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
-    _properties_modules_dict: Dict[str, List[str]] = \
-        {'Bismuth': ['lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth',
-                     'lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth',
-                     'lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical',
-                     'lbh15.properties.bismuth_properties']}
+    _properties_modules_list: List[str] = \
+        ['lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth',
+         'lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth',
+         'lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical',
+         'lbh15.properties.bismuth_properties']
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
