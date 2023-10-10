@@ -54,12 +54,12 @@ class LBE(LiquidMetalInterface):
          'lim_fe': "gosse2014"}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
-    _properties_modules_dict: Dict[str, List[str]] = \
-        {'LBE': ['lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe',
-                 'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
-                 'lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical',
-                 'lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits',
-                 'lbh15.properties.lbe_properties']}
+    _properties_modules_list: List[str] = \
+        ['lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe',
+         'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
+         'lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical',
+         'lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits',
+         'lbh15.properties.lbe_properties']
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
