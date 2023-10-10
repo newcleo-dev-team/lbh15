@@ -556,22 +556,6 @@ class LiquidMetalInterface(ABC):
         return keys_to_remove
 
     @classmethod
-    def __load_properties(cls) -> List[PropertyInterface]:
-        """
-        Loads property objects corresponding to liquid metal
-
-        Returns
-        -------
-        list
-            list of property objects, i.e. of classes which inherit from
-            :class:`_properties.PropertyInterface`
-        """
-        property_obj_list = []
-        modules = cls._properties_modules_list
-        property_obj_list = cls.__property_list(modules)
-        return property_obj_list
-
-    @classmethod
     def __load_custom_properties(cls) -> List[PropertyInterface]:
         """
         Load custom property objects
@@ -592,12 +576,32 @@ class LiquidMetalInterface(ABC):
                 module_name = lm_path[path]
                 importlib.import_module(module_name)
                 modules.append(module_name)
-            customproperty_obj_list += cls.__property_list(modules)
+            customproperty_obj_list += cls.__load_properties(modules)
         return customproperty_obj_list
 
     @classmethod
-    def __property_list(cls,
-                        modules: List[str]) -> List[PropertyInterface]:
+    def __load_properties(cls,
+                          modules: Union[List[str], None] = None) -> \
+                            List[PropertyInterface]:
+        """
+        Loads property objects corresponding to liquid metal. The list of
+        module names can be passed as argument, otherwise the class-related
+        list is adopted.
+
+        Parameters
+        ----------
+        modules : optional
+            list of module names to read the property objects from; if
+            not passed, the class-related list is adopted
+
+        Returns
+        -------
+        list
+            list of property objects, i.e. of classes which inherit from
+            :class:`_properties.PropertyInterface`
+        """
+        if modules is None:
+            modules = cls._properties_modules_list
         obj_list = []
         eff_modules = [module for module in modules if module]
         if len(eff_modules) > 0:
