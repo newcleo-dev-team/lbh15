@@ -178,8 +178,8 @@ class LiquidMetalInterface(ABC):
             Name of the correlation
         """
         if (property_name in self.__properties and
-                self.__properties[property_name].correlation_name != \
-                    correlation_name):
+                self.__properties[property_name].correlation_name !=
+                correlation_name):
             self.__corr2use[property_name] = correlation_name
             self.__fill_instance_properties()
 
@@ -376,16 +376,15 @@ class LiquidMetalInterface(ABC):
 
             if is_injective:
                 res = fsolve(function_to_solve, x0=[self._guess],
-                                args=(input_value), xtol=1e-10)
+                             args=(input_value), xtol=1e-10)
                 rvalue = res[0]
             else:
                 index = (self._roots_to_use[input_property]
-                            if input_property in self._roots_to_use
-                            else 0)
+                         if input_property in self._roots_to_use else 0)
                 res, _, _, _ = fsolve(function_to_solve,
-                                x0=[self._guess, 3*self._guess],
-                                args=(input_value), xtol=1e-10,
-                                full_output=True)
+                                      x0=[self._guess, 3*self._guess],
+                                      args=(input_value), xtol=1e-10,
+                                      full_output=True)
                 if len(res) > index - 1:
                     rvalue = res[index]
                 else:
@@ -496,7 +495,7 @@ class LiquidMetalInterface(ABC):
         key = property_object.name
         self.__properties[key] = property_object
 
-        def new_property_info(print_info: bool =True,
+        def new_property_info(print_info: bool = True,
                               n_tab: int = 0) -> Union[str, None]:
             return self.__properties[key].info(self.__T, self.__p,
                                                print_info, n_tab)
@@ -581,8 +580,8 @@ class LiquidMetalInterface(ABC):
 
     @classmethod
     def __load_properties(cls,
-                          modules: Union[List[str], None] = None) -> \
-                            List[PropertyInterface]:
+                          modules: Union[List[str], None] = None
+                          ) -> List[PropertyInterface]:
         """
         Loads property objects corresponding to liquid metal. The list of
         module names can be passed as argument, otherwise the class-related
@@ -590,9 +589,10 @@ class LiquidMetalInterface(ABC):
 
         Parameters
         ----------
-        modules : optional
+        modules : :obj:`typing.List`, optional
             list of module names to read the property objects from; if
-            not passed, the class-related list is adopted
+            `None`, the class-related list is adopted. By default, `None`
+            is passed.
 
         Returns
         -------

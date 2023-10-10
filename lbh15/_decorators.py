@@ -4,6 +4,7 @@ import collections.abc
 import inspect
 import numpy as np
 
+
 def _check_instance_type(parameter_name: str,
                          parameter_type, arg_value) -> None:
     """
@@ -38,6 +39,7 @@ def _check_instance_type(parameter_name: str,
             return
         raise TypeError(f"Argument '{parameter_name}' must be of "
                         f"type '{parameter_type.__name__}'")
+
 
 def typecheck_for_method(func):
     """

@@ -11,6 +11,7 @@ from scipy.optimize import minimize_scalar
 from scipy.constants import atm
 from .._decorators import typecheck_for_method
 
+
 def range_warning(function):
     """
     Decorator used to check validity range
@@ -79,12 +80,12 @@ class PropertyInterface(ABC):
         res = minimize_scalar(self.correlation,
                               bounds=self.range,
                               method="Bounded",
-                              options={'xatol':1e-10})
+                              options={'xatol': 1e-10})
         if res.success:
             self.__min = res.fun
             self.__T_at_min = res.x
         else:
-            raise RuntimeError("Unable to find the minimum point: " \
+            raise RuntimeError("Unable to find the minimum point: "
                                + res.message)
 
         def corr_opposite(T: float) -> float:
@@ -93,12 +94,12 @@ class PropertyInterface(ABC):
         res = minimize_scalar(corr_opposite,
                               bounds=self.range,
                               method="Bounded",
-                              options={'xatol':1e-10})
+                              options={'xatol': 1e-10})
         if res.success:
             self.__max = -res.fun
             self.__T_at_max = res.x
         else:
-            raise RuntimeError("Unable to find the maximum point: " \
+            raise RuntimeError("Unable to find the maximum point: "
                                + res.message)
 
     @typecheck_for_method

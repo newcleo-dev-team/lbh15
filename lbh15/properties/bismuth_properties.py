@@ -201,7 +201,7 @@ class rho(PropertyInterface):
         u_s_val = u_s().correlation(T, p)
         cp_val = cp().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((1/u_s_val/u_s_val + \
+        return rho_0 + ((1/u_s_val/u_s_val +
                          T*alpha_val*alpha_val/cp_val) * (p - atm))
 
     @property
