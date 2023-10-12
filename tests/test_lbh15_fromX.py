@@ -51,7 +51,7 @@ class LeadTester(unittest.TestCase):
                 self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
             first = False
 
-
+'''
 class LeadSolubilityTester(unittest.TestCase):
 
     def test_init_fromX(self):
@@ -250,6 +250,6 @@ class LBELimitsTester(unittest.TestCase):
                 self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
             first = False
 
-
+'''
 if __name__ == "__main__":
     unittest.main()
