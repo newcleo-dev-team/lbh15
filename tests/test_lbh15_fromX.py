@@ -13,12 +13,14 @@ from scipy.constants import convert_temperature
 
 def load_prop(module_name):
     propertyObjectList = []
-    module = module_name
-    for obj in inspect.getmembers(sys.modules[module]):
-        if (inspect.isclass(obj) and obj is not PropertyInterface
-                and not inspect.isabstract(obj)):
-            if issubclass(obj, PropertyInterface):
-                propertyObjectList.append(obj())
+
+    def is_valid(obj):
+        return inspect.isclass(obj) and obj is not PropertyInterface \
+            and not inspect.isabstract(obj) \
+            and issubclass(obj, PropertyInterface)
+
+    for _, obj in inspect.getmembers(sys.modules[module_name], is_valid):
+        propertyObjectList.append(obj())
     return propertyObjectList
 
 
