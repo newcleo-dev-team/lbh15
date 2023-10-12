@@ -603,26 +603,27 @@ class LiquidMetalInterface(ABC):
         # Consider default modules if none is provided
         if modules is None:
             modules = cls._properties_modules_list
-        obj_list = []
 
         def is_valid(obj):
             '''
             Predicate for filtering the modules to load
             '''
-            return inspect.isclass(obj) and obj is not PropertyInterface and\
-            not inspect.isabstract(obj) and issubclass(obj, PropertyInterface)
+            return inspect.isclass(obj) and obj is not PropertyInterface \
+                and not inspect.isabstract(obj) \
+                and issubclass(obj, PropertyInterface)
 
         # Filter any empty module
         eff_modules = [module for module in modules if module]
+        # Collect all valid properties neglecting duplicates
+        mod = []
         for module in eff_modules:
-            mod = inspect.getmembers(sys.modules[module], is_valid)
-            for _, obj in mod:
-                new_obj = obj()
-                new_cl_name = type(new_obj).__name__
-                cls_names = [type(_).__name__ for _ in obj_list]
-                if new_cl_name not in cls_names:
-                    obj_list.append(new_obj)
-        return obj_list
+            mod += inspect.getmembers(sys.modules[module], is_valid)
+        mod_set = set(list(map(list, zip(*mod)))[1])
+        # Build property instances and add them to the list to return
+        prop_list = []
+        for prop in mod_set:
+            prop_list.append(prop())
+        return prop_list
 
     @abstractmethod
     def _set_constants(self) -> None:
