@@ -600,23 +600,24 @@ class LiquidMetalInterface(ABC):
             list of property objects, i.e. of classes which inherit from
             :class:`_properties.PropertyInterface`
         """
+        # Consider default modules if none is provided
         if modules is None:
             modules = cls._properties_modules_list
         obj_list = []
+        # Filter any empty module
         eff_modules = [module for module in modules if module]
-        if len(eff_modules) > 0:
-            for module in eff_modules:
-                mod = inspect.getmembers(sys.modules[module])
-                for _, obj in mod:
-                    if (inspect.isclass(obj)
-                            and obj is not PropertyInterface
-                            and not inspect.isabstract(obj)
-                            and issubclass(obj, PropertyInterface)):
-                        new_obj = obj()
-                        new_cl_name = type(new_obj).__name__
-                        cls_names = [type(_).__name__ for _ in obj_list]
-                        if new_cl_name not in cls_names:
-                            obj_list.append(new_obj)
+        for module in eff_modules:
+            mod = inspect.getmembers(sys.modules[module])
+            for _, obj in mod:
+                if (inspect.isclass(obj)
+                        and obj is not PropertyInterface
+                        and not inspect.isabstract(obj)
+                        and issubclass(obj, PropertyInterface)):
+                    new_obj = obj()
+                    new_cl_name = type(new_obj).__name__
+                    cls_names = [type(_).__name__ for _ in obj_list]
+                    if new_cl_name not in cls_names:
+                        obj_list.append(new_obj)
         return obj_list
 
     @abstractmethod
