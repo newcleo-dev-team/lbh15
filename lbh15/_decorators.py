@@ -30,12 +30,13 @@ def _check_instance_type(parameter_name: str,
         return
     if not isinstance(arg_value, parameter_type):
         # Accept INT arg when FLOAT is required
-        if ((parameter_type == float) and (isinstance(arg_value, int))):
+        if ((parameter_type == float) \
+            and isinstance(arg_value, (int, np.integer))):
             return
         # Analyse CONTAINERS recursively when made by only one element
-        if isinstance(arg_value, (collections.abc.Sequence, np.ndarray)) \
-                and (len(arg_value) == 1):
-            _check_instance_type(parameter_name, parameter_type, arg_value[0])
+        if isinstance(arg_value, (collections.abc.Sequence, np.ndarray)):
+            for arg in arg_value:
+                _check_instance_type(parameter_name, parameter_type, arg)
             return
         raise TypeError(f"Argument '{parameter_name}' must be of "
                         f"type '{parameter_type.__name__}'")

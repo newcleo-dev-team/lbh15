@@ -104,7 +104,7 @@ class PropertyInterface(ABC):
 
     @typecheck_for_method
     def initialization_helper(self,
-                              property_value: float) -> float:
+                              property_value: float) -> Union[float, None]:
         """
         Returns a temperature guess according to the value
         of the property. Used by root finder algorithm if
@@ -119,7 +119,7 @@ class PropertyInterface(ABC):
         -------
         None
         """
-        return 0
+        return None
 
     @typecheck_for_method
     def info(self, T: float, p: float = atm,
