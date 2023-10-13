@@ -1,6 +1,7 @@
 """Module with the definition of thermochemical
 property objects for lead-bismuth eutectic"""
 from typing import List
+from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
@@ -20,6 +21,37 @@ class OxygenPartialPressure(PropertyInterface):
     divided by the oxygen concentration in liquid
     lead-bismuth eutectic squared property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the oxygen partial pressure in liquid lead-bismuth eutectic
+        divided by the oxygen concentration in liquid
+        lead-bismuth eutectic squared
+
+        Parameters
+        ----------
+        property_value : float
+            oxygen partial pressure in liquid lead-bismuth eutectic
+            divided by the oxygen concentration in liquid
+            lead-bismuth eutectic squared in [atm.wt.%^-2]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-3:
+            rvalue = 650
+        else:
+            rvalue = 1500
+
+        return rvalue
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,

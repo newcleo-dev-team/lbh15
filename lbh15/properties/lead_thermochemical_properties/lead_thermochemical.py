@@ -1,6 +1,7 @@
 """Module with the definition of thermochemical property
 objects for lead"""
 from typing import List
+from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
@@ -8,6 +9,7 @@ from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
+from ..._commons import LEAD_BOILING_TEMPERATURE as T_b
 from ..._commons import LEAD_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_o
 from ..._decorators import typecheck_for_method
@@ -18,6 +20,35 @@ class OxygenPartialPressureInterface(PropertyInterface):
     Oxygen partial pressure in liquid lead divided by the
     oxygen concentration in liquid lead squared property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the oxygen partial pressure in liquid lead divided by the
+        oxygen concentration in liquid lead squared
+
+        Parameters
+        ----------
+        property_value : float
+            oxygen partial pressure in liquid lead divided by the
+            oxygen concentration in liquid lead squared in [atm.wt.%^-2]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-4:
+            rvalue = 650
+        else:
+            rvalue = 1500
+
+        return rvalue
+
     @property
     def name(self) -> str:
         """

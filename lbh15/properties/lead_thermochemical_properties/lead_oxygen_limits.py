@@ -1,6 +1,7 @@
 """Module with the definition of oxygen
 concentration limits objects for lead"""
 from typing import List
+from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
@@ -93,6 +94,37 @@ class LowerLimitSaturationChromium(PropertyInterface):
     protective oxide film in liquid lead considering
     chromium is at its saturation concentration property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the lower limit of oxygen concentration to promote a
+        protective oxide film in liquid lead considering
+        chromium is at its saturation concentration
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of oxygen concentration to promote a
+            protective oxide film in liquid lead considering
+            chromium is at its saturation concentration in [wt.%]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-7:
+            rvalue = 650
+        else:
+            rvalue = 1700
+
+        return rvalue
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
@@ -235,6 +267,37 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     protective oxide film in liquid lead considering
     silicon is at its saturation concentration property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the lower limit of oxygen concentration to promote a
+        protective oxide film in liquid lead considering
+        silicon is at its saturation concentration
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of oxygen concentration to promote a
+            protective oxide film in liquid lead considering
+            silicon is at its saturation concentration in [wt.%]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-8:
+            rvalue = 650
+        else:
+            rvalue = 1700
+
+        return rvalue
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
@@ -306,6 +369,37 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     protective oxide film in liquid lead considering
     aluminium is at its saturation concentration property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the lower limit of oxygen concentration to promote a
+        protective oxide film in liquid lead considering
+        aluminium is at its saturation concentration
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of oxygen concentration to promote a
+            protective oxide film in liquid lead considering
+            aluminium is at its saturation concentration in [wt.%]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-10:
+            rvalue = 650
+        else:
+            rvalue = 1700
+
+        return rvalue
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
@@ -377,6 +471,37 @@ class LowerLimitChromiumInterface(PropertyInterface):
     protective oxide film times the chromium concentration
     raised to 2/3 in liquid lead property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the lower limit of oxygen concentration to promote a
+        protective oxide film times the chromium concentration
+        raised to 2/3 in liquid lead
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of oxygen concentration to promote a
+            protective oxide film times the chromium concentration
+            raised to 2/3 in liquid lead in [wt.%]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-6:
+            rvalue = 650
+        else:
+            rvalue = 1700
+
+        return rvalue
+
     @property
     def name(self) -> str:
         """
@@ -638,6 +763,37 @@ class LowerLimitIron(PropertyInterface):
     protective oxide film times the iron concentration
     raised to 3/4 in liquid lead property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the lower limit of oxygen concentration to promote a
+        protective oxide film times the iron concentration
+        raised to 3/4 in liquid lead
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of oxygen concentration to promote a
+            protective oxide film times the iron concentration
+            raised to 3/4 in liquid lead in [wt.%]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-4:
+            rvalue = 650
+        else:
+            rvalue = 1700
+
+        return rvalue
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
@@ -710,6 +866,37 @@ class LowerLimitSilicon(PropertyInterface):
     protective oxide film times the silicon concentration
     raised to 1/2 in liquid lead property class
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns a temperature guess according to the value
+        of the lower limit of oxygen concentration to promote a
+        protective oxide film times the silicon concentration
+        raised to 1/2 in liquid lead
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of oxygen concentration to promote a
+            protective oxide film times the silicon concentration
+            raised to 1/2 in liquid lead in [wt.%]
+        verbose : bool, optional
+            True to tell decorator to print warning about
+            range check failing, False otherwise. By default False
+
+        Returns
+        -------
+        rvalue : float
+            Temperature guess in [K]
+        """
+        if property_value < 1e-8:
+            rvalue = 650
+        else:
+            rvalue = 1700
+
+        return rvalue
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
