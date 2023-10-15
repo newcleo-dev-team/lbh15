@@ -57,7 +57,7 @@ class LiquidMetalInterface(ABC):
     __p: float = 0
     __T: float = 0
     __custom_properties_path: \
-        Dict[str, Dict[str, str]] = {}
+        Dict[str, List[str]] = {}
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
@@ -310,10 +310,10 @@ class LiquidMetalInterface(ABC):
         res = file_path.split(char)
         file_name = res[-1][:-3]
         path = file_path[:-len(res[-1])]
-        lm_name = cls.__name__
-        if lm_name not in cls.__custom_properties_path:
-            cls.__custom_properties_path[lm_name] = {}
-        cls.__custom_properties_path[lm_name][path] = file_name
+        if path not in cls.__custom_properties_path:
+            cls.__custom_properties_path[path] = [file_name]
+        else:
+            cls.__custom_properties_path[path].append(file_name)
 
     @classmethod
     def correlations_to_use(cls) -> Dict[str, str]:
@@ -567,14 +567,12 @@ class LiquidMetalInterface(ABC):
         """
         customproperty_obj_list = []
         modules = []
-        if cls.__name__ in cls.__custom_properties_path:
-            lm_path = cls.__custom_properties_path[cls.__name__]
-            for path in lm_path.keys():
-                if path not in sys.path:
-                    sys.path.append(path)
-                module_name = lm_path[path]
-                importlib.import_module(module_name)
-                modules.append(module_name)
+        for path, modules_list in cls.__custom_properties_path.items():
+            if path not in sys.path:
+                sys.path.append(path)
+            for module in modules_list:
+                importlib.import_module(module)
+                modules.append(module)
             customproperty_obj_list += cls.__load_properties(modules)
         return customproperty_obj_list
 
