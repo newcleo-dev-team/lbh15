@@ -9,7 +9,6 @@ from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.interface import range_warning
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
-from ..._commons import LEAD_BOILING_TEMPERATURE as T_b
 from ..._commons import LEAD_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_o
 from ..._decorators import typecheck_for_method
