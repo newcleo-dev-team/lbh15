@@ -54,10 +54,9 @@ class LiquidMetalInterface(ABC):
     _roots_to_use: Dict[str, int] = {}
     _default_corr_to_use: Dict[str, str] = {}
     _properties_modules_list: List[str] = []
+    _custom_properties_path: Dict[str, List[str]] = {}
     __p: float = 0
     __T: float = 0
-    __custom_properties_path: \
-        Dict[str, List[str]] = {}
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
@@ -310,10 +309,10 @@ class LiquidMetalInterface(ABC):
         res = file_path.split(char)
         file_name = res[-1][:-3]
         path = file_path[:-len(res[-1])]
-        if path not in cls.__custom_properties_path:
-            cls.__custom_properties_path[path] = [file_name]
+        if path not in cls._custom_properties_path:
+            cls._custom_properties_path[path] = [file_name]
         else:
-            cls.__custom_properties_path[path].append(file_name)
+            cls._custom_properties_path[path].append(file_name)
 
     @classmethod
     def correlations_to_use(cls) -> Dict[str, str]:
@@ -567,7 +566,7 @@ class LiquidMetalInterface(ABC):
         """
         customproperty_obj_list = []
         modules = []
-        for path, modules_list in cls.__custom_properties_path.items():
+        for path, modules_list in cls._custom_properties_path.items():
             if path not in sys.path:
                 sys.path.append(path)
             for module in modules_list:
