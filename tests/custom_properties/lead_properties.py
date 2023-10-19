@@ -27,7 +27,7 @@ class rho_custom_corr(PropertyInterface):
 
     @property
     def description(self):
-        return "Liquid lead " + self.long_name
+        return "Liquid Lead " + self.long_name
 
     @property
     def correlation_name(self):
