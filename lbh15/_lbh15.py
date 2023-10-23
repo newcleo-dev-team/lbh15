@@ -12,6 +12,7 @@ from typing import Dict
 from typing import List
 from typing import Tuple
 from typing import Union
+from contextlib import suppress
 from scipy.constants import atm
 from scipy.optimize import fsolve
 from ._decorators import typecheck_for_method
@@ -55,6 +56,7 @@ class LiquidMetalInterface(ABC):
     _default_corr_to_use: Dict[str, str] = {}
     _properties_modules_list: List[str] = []
     _custom_properties_path: Dict[str, List[str]] = {}
+    _available_properties_dict: Dict[str, PropertyInterface] = {}
     __p: float = 0
     __T: float = 0
 
@@ -222,20 +224,20 @@ class LiquidMetalInterface(ABC):
 
         return rvalue, error_message
 
-    @classmethod
-    def properties_for_initialization(cls) -> List[str]:
-        """
-        List of available properties that can be used for
-        initialization
-
-        Returns
-        -------
-        list
-        """
-        obj_list = cls.__load_properties()
-        obj_list += cls.__load_custom_properties()
-        rvalue = ['T'] + [obj_list[i].name for i in range(len(obj_list))]
-        return list(dict.fromkeys(rvalue))
+#    @classmethod
+#    def properties_for_initialization(cls) -> List[str]:
+#        """
+#        List of available properties that can be used for
+#        initialization
+#
+#        Returns
+#        -------
+#        list
+#        """
+#        obj_list = cls.__load_properties()
+#        obj_list += cls.__load_custom_properties()
+#        rvalue = ['T'] + [obj_list[i].name for i in range(len(obj_list))]
+#        return list(dict.fromkeys(rvalue))
 
     @classmethod
     def correlations_available(cls) -> Dict[str, str]:
@@ -394,11 +396,17 @@ class LiquidMetalInterface(ABC):
         """
         Fills instance properties.
         """
-        property_obj_list = self.__load_properties()
-        property_obj_list += self.__load_custom_properties()
-        for property_object in property_obj_list:
+        # Build the instance dict where storing the property objects as
+        # values together with their name as keys
+        if len(self._available_properties_dict) == 0:
+            available_properties = self.__load_properties()
+            available_properties += self.__load_custom_properties()
+            self._available_properties_dict = \
+                {elem.name + "__" + elem.correlation_name:elem for elem in available_properties}
+
+        for key, property_object in self._available_properties_dict.items():
+            name = key.split("__")[0]
             # always add property if specific correlation is not specified
-            name = property_object.name
             add_property = (not self.__corr2use or
                             name not in self.__corr2use.keys())
             # if correlation was specified, check that correlation names match
@@ -428,7 +436,8 @@ class LiquidMetalInterface(ABC):
                              "time can be used for initialization. "
                              f"{len(kwargs)} were provided")
 
-        valid_prop = self.properties_for_initialization()
+        valid_prop = ['T'] + [e.split("__")[0] for e in \
+                              list(self._available_properties_dict.keys())]
         input_property = list(kwargs.keys())[0]
         input_value = kwargs[input_property]
         if input_property not in valid_prop:
@@ -518,11 +527,14 @@ class LiquidMetalInterface(ABC):
                                   "if any.",
                                   stacklevel=5)
                     remove_property = True
-                    corr_avail = self.correlations_available()
-                    if key in corr_avail:
-                        isstr = isinstance(corr_avail[key], str)
-                        self.__corr2use[key] = (corr_avail[key] if isstr
-                                                else corr_avail[key][-1])
+
+                    with suppress(ValueError):
+                        self.__corr2use[key] = list(
+                            self._available_properties_dict.keys())[
+                                len(self._available_properties_dict) - 1 
+                                - list(self._available_properties_dict.keys()
+                                       )[::-1].index(key + '__')]\
+                        .split('__')[1]
                         update_properties = True
                 else:
                     def_corr_name = self._default_corr_to_use[key]
