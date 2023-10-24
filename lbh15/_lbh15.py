@@ -8,6 +8,7 @@ import platform
 import copy
 from abc import ABC
 from abc import abstractmethod
+from collections import defaultdict
 from typing import Dict
 from typing import List
 from typing import Tuple
@@ -239,7 +240,7 @@ class LiquidMetalInterface(ABC):
         return list(dict.fromkeys(rvalue))
 
     @classmethod
-    def correlations_available(cls) -> Dict[str, str]:
+    def correlations_available(cls) -> Dict[str, List[str]]:
         """
         Dictionary of correlations available for each property
 
@@ -249,17 +250,7 @@ class LiquidMetalInterface(ABC):
         """
         obj_list = cls.__load_properties()
         obj_list += cls.__load_custom_properties()
-        rvalue = {}
-        for obj in obj_list:
-            corr_name = obj.correlation_name
-            if obj.name in rvalue:
-                if isinstance(rvalue[obj.name], list):
-                    rvalue[obj.name].append(corr_name)
-                else:
-                    rvalue[obj.name] = [rvalue[obj.name]] + [corr_name]
-            else:
-                rvalue[obj.name] = corr_name
-        return rvalue
+        return cls.__extract_available_correlations(obj_list)
 
     @classmethod
     @typecheck_for_method
@@ -523,12 +514,10 @@ class LiquidMetalInterface(ABC):
                                   "if any.",
                                   stacklevel=5)
                     remove_property = True
-
-                    corr_avail = self.correlations_available()
+                    corr_avail = self.__extract_available_correlations(
+                        self._available_properties_list)
                     if key in corr_avail:
-                        isstr = isinstance(corr_avail[key], str)
-                        self.__corr2use[key] = (corr_avail[key] if isstr
-                                                else corr_avail[key][-1])
+                        self.__corr2use[key] = corr_avail[key][-1]
                         update_properties = True
                 else:
                     def_corr_name = self._default_corr_to_use[key]
@@ -627,6 +616,31 @@ class LiquidMetalInterface(ABC):
         for prop in mod_set:
             prop_list.append(prop())
         return prop_list
+
+    @staticmethod
+    def __extract_available_correlations(
+        prop_obj_list: List[PropertyInterface]) -> Dict[str, List[str]]:
+        """
+        Private static method for extracting the available correlations
+        from the list collecting all the available property classes.
+
+        Parameters
+        ----------
+        prop_obj_list : :obj:`typing.List`
+            list of :class:`_properties.PropertyInterface` instances
+            which to extract the available correlations from
+
+        Returns
+        -------
+        dict
+            dictionary collecting all the property class names as keys
+            together with the list collecting the corresponding
+            available correlation names as values
+        """
+        avail_corrs = defaultdict(list)
+        for prop in prop_obj_list:
+            avail_corrs[prop.name].append(prop.correlation_name)
+        return avail_corrs
 
     @abstractmethod
     def _set_constants(self) -> None:
