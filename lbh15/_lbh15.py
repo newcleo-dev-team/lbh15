@@ -57,6 +57,7 @@ class LiquidMetalInterface(ABC):
     _properties_modules_list: List[str] = []
     _custom_properties_path: Dict[str, List[str]] = {}
     _available_properties_list: List[PropertyInterface] = []
+    _available_correlations_dict: Dict[str, List[str]] = {}
     __p: float = 0
     __T: float = 0
 
@@ -391,6 +392,9 @@ class LiquidMetalInterface(ABC):
         if len(self._available_properties_list) == 0:
             self._available_properties_list = self.__load_properties()
             self._available_properties_list += self.__load_custom_properties()
+            self._available_correlations_dict = \
+                self.__extract_available_correlations(
+                    self._available_properties_list)
 
         for property_object in self._available_properties_list:
             name = property_object.name
@@ -514,10 +518,9 @@ class LiquidMetalInterface(ABC):
                                   "if any.",
                                   stacklevel=5)
                     remove_property = True
-                    corr_avail = self.__extract_available_correlations(
-                        self._available_properties_list)
-                    if key in corr_avail:
-                        self.__corr2use[key] = corr_avail[key][-1]
+                    if key in self._available_correlations_dict:
+                        self.__corr2use[key] = \
+                            self._available_correlations_dict[key][-1]
                         update_properties = True
                 else:
                     def_corr_name = self._default_corr_to_use[key]

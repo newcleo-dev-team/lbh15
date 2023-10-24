@@ -57,6 +57,7 @@ class LBE(LiquidMetalInterface):
     _roots_to_use: Dict[str, int] = {'cp': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
     _available_properties_list: List[PropertyInterface] = []
+    _available_correlations_dict: Dict[str, List[str]] = {}
     _properties_modules_list: List[str] = \
         ['lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe',
          'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
