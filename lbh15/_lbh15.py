@@ -409,7 +409,7 @@ class LiquidMetalInterface(ABC):
                 property_object.correlation_name == self.__corr2use[name]:
                 self.__add_property(property_object)
 
-        self.__check_properties()
+        self.__align_corrs_to_properties()
 
     def __fill_class_attributes(self, kwargs) -> None:
         """
@@ -495,7 +495,7 @@ class LiquidMetalInterface(ABC):
                 lambda : self.__properties[key].info(self.__T, self.__p,
                                                      True, 0))
 
-    def __check_properties(self) -> None:
+    def __align_corrs_to_properties(self) -> None:
         keys_to_remove = []
         update_properties = False
         for key in self.__corr2use.keys():
