@@ -501,11 +501,9 @@ class LiquidMetalInterface(ABC):
         aligning it to the instance property objects dict.
         """
         keys_to_remove = []
-        update_properties = False
         for key in self.__corr2use.keys():
             corr_name = self.__corr2use[key]
             is_in_default = key in self._default_corr_to_use
-            remove_property = False
 
             if key not in self.__properties:
                 if not is_in_default:
@@ -514,11 +512,11 @@ class LiquidMetalInterface(ABC):
                                   "\nGoing to restore package default one, "
                                   "if any.",
                                   stacklevel=5)
-                    remove_property = True
+                    keys_to_remove.append(key)
                     if key in self._available_correlations_dict:
                         self.__corr2use[key] = \
                             self._available_correlations_dict[key][-1]
-                        update_properties = True
+                        self.__fill_instance_properties()
                 else:
                     def_corr_name = self._default_corr_to_use[key]
                     warnings.warn(f"Could not find property '{key}' "
@@ -527,8 +525,8 @@ class LiquidMetalInterface(ABC):
                                   f"'{def_corr_name}'.",
                                   stacklevel=5)
                     self.__corr2use[key] = def_corr_name
-                    remove_property = True
-                    update_properties = True
+                    keys_to_remove.append(key)
+                    self.__fill_instance_properties()
             else:
                 if corr_name != self.__properties[key].correlation_name:
                     warnings.warn(f"Could not find property '{key}' "
@@ -539,12 +537,8 @@ class LiquidMetalInterface(ABC):
                     remove_property = not is_in_default
                     if not remove_property:
                         self.__corr2use[key] = self._default_corr_to_use[key]
-
-            if remove_property:
-                keys_to_remove.append(key)
-
-        if update_properties:
-            self.__fill_instance_properties()
+                    if remove_property:
+                        keys_to_remove.append(key)
 
         for key in keys_to_remove:
             self.__corr2use.pop(key)
