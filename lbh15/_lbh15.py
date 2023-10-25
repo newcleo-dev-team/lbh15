@@ -496,6 +496,10 @@ class LiquidMetalInterface(ABC):
                                                      True, 0))
 
     def __align_corrs_to_properties(self) -> None:
+        """
+        This method updates the instance correlation dictionary by
+        aligning it to the instance property objects dict.
+        """
         keys_to_remove = []
         update_properties = False
         for key in self.__corr2use.keys():
