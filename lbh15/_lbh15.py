@@ -347,35 +347,35 @@ class LiquidMetalInterface(ABC):
         input_property : str
             name of the property used to perform the calculation
         """
+        # Manage the simplest case
         if input_property == 'T':
             return input_value
 
-        function_of_T = None
-        helper = None
-        is_injective = False
-        if input_property in self.__properties:
-            function_of_T = self.__properties[input_property].correlation
-            helper = self.__properties[input_property].initialization_helper
-            is_injective = self.__properties[input_property].is_injective
-
+        # Retrieve the correlation to solve
+        function_of_T = self.__properties[input_property].correlation
         if function_of_T is None:
             raise UnboundLocalError("No correlation found for property "
                                     f"{input_property}! The temperature "
                                     "value can not be computed!")
 
-        if helper(input_value) is not None:
-            self._guess = helper(input_value)
-
         def function_to_solve(T: float, target: float) -> float:
             return function_of_T(T, self.__p) - target
 
-        if is_injective:
-            res = fsolve(function_to_solve, x0=[self._guess],
-                            args=(input_value), xtol=1e-10)
+        # Retrieve the initial guess, if any
+        helper = self.__properties[input_property].initialization_helper
+        if helper is not None and helper(input_value) is not None:
+            self._guess = helper(input_value) or 0.0
+
+        # Solve the correlation-derived function depending on the
+        # injectivity of the property correlation
+        if self.__properties[input_property].is_injective:
+            res, _, _, _ = fsolve(function_to_solve, x0=[self._guess],
+                                  args=(input_value), xtol=1e-10,
+                                  full_output=True)
             return res[0]
         else:
-            index = (self._roots_to_use[input_property]
-                        if input_property in self._roots_to_use else 0)
+            index = (self._roots_to_use[input_property] 
+                     if input_property in self._roots_to_use else 0)
             res, _, _, _ = fsolve(function_to_solve,
                                   x0=[self._guess, 3*self._guess],
                                   args=(input_value), xtol=1e-10,
