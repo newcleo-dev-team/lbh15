@@ -205,11 +205,12 @@ class LiquidMetalInterface(ABC):
 
         Returns
         -------
-        rvalue : bool
-            True if check is ok, False otherwise
-        error_message : str
-            Contains the error message (if any) associated
-            to the temperature check
+        (bool, str): tuple
+            bool:
+                True if check is ok, False otherwise
+            str:
+                error message (if any) associated
+                to the temperature check
         """
         # Manage acceptable value
         if self.T_m0 < T < self.T_b0:
@@ -217,15 +218,15 @@ class LiquidMetalInterface(ABC):
         # Manage value outside the acceptable range
         if T >= self.T_b0:
             error_message = ("Temperature must be smaller than "
-                                f"boiling temperature ({self.T_b0:.2f} [K]), "
-                                f"{T:.2f} [K] was provided")
+                             f"boiling temperature ({self.T_b0:.2f} [K]), "
+                             f"{T:.2f} [K] was provided")
         elif 0 < T <= self.T_m0:
             error_message = ("Temperature must be larger than "
-                                f"melting temperature ({self.T_m0:.2f} [K]), "
-                                f"{T:.2f} [K] was provided")
+                             f"melting temperature ({self.T_m0:.2f} [K]), "
+                             f"{T:.2f} [K] was provided")
         else:
             error_message = ("Temperature must be strictly positive, "
-                                f"{T:.2f} [K] was provided")
+                             f"{T:.2f} [K] was provided")
         return False, error_message
 
     @classmethod
@@ -417,7 +418,7 @@ class LiquidMetalInterface(ABC):
         self.__align_corrs_to_properties()
 
     def __fill_instance_attributes(self, property_name: str,
-                                property_value: float) -> None:
+                                   property_value: float) -> None:
         """
         Fills all the class attributes.
 
@@ -426,7 +427,6 @@ class LiquidMetalInterface(ABC):
         property_name : str
             name of the property the liquid metal instance
             is initialized upon
-        
         property_value: float
             value of the property the liquid metal instance
             is initialized upon
