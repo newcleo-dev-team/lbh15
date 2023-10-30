@@ -532,8 +532,9 @@ class LiquidMetalInterface(ABC):
                                   f"'{def_corr_name}'.",
                                   stacklevel=5)
                     self.__corr2use[key] = def_corr_name
-                    keys_to_remove.append(key)
-                    self.__fill_instance_properties()
+                    self.__add_property(
+                        self._available_properties_dict[
+                            key + "__" + def_corr_name])
             else:
                 if corr_name != self.__properties[key].correlation_name:
                     warnings.warn(f"Could not find property '{key}' "
