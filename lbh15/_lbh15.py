@@ -473,12 +473,10 @@ class LiquidMetalInterface(ABC):
             p : float
             Pressure in [Pa]
         """
-        if p > 0:
-            self.__p = p
-        else:
-            raise ValueError("Pressure must be "
-                             "strictly positive, "
+        if p <= 0:
+            raise ValueError("Pressure must be strictly positive, "
                              f"{p:.2f} [Pa] was provided")
+        self.__p = p
 
     def __add_property(self, property_object: PropertyInterface) -> None:
         """
