@@ -72,6 +72,7 @@ class LiquidMetalInterface(ABC):
         self.__corr2use: Dict[str, str] = \
             copy.deepcopy(self.__class__._correlations_to_use)
         self.__fill_instance_properties()
+        self._set_constants()
         name, value = kwargs.popitem()
         self.__fill_class_attributes(name, value)
 
@@ -443,7 +444,6 @@ class LiquidMetalInterface(ABC):
                              f"the following properties:{list_to_print}"
                              f"{property_name} was provided")
 
-        self._set_constants()
         temperature = self.__compute_T(property_value, property_name)
         self.__assign_T(temperature)
 
