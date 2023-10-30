@@ -63,12 +63,17 @@ class LiquidMetalInterface(ABC):
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
+        if len(kwargs) != 1:
+            raise ValueError("One and only one property at "
+                             "time can be used for initialization. "
+                             f"{len(kwargs)} were provided")
         self.__assign_p(p)
         self.__properties: Dict[str, PropertyInterface] = {}
         self.__corr2use: Dict[str, str] = \
             copy.deepcopy(self.__class__._correlations_to_use)
         self.__fill_instance_properties()
-        self.__fill_class_attributes(kwargs)
+        name, value = kwargs.popitem()
+        self.__fill_class_attributes(name, value)
 
     @property
     def T_m0(self) -> float:
@@ -413,35 +418,34 @@ class LiquidMetalInterface(ABC):
 
         self.__align_corrs_to_properties()
 
-    def __fill_class_attributes(self, kwargs) -> None:
+    def __fill_class_attributes(self, property_name: str,
+                                property_value: float) -> None:
         """
         Fills all the class attributes.
 
         Parameters
         ----------
-        T : float
-            Temperature in [K]
+        property_name : str
+            name of the property the liquid metal instance
+            is initialized upon
+        
+        property_value: float
+            value of the property the liquid metal instance
+            is initialized upon
         """
-        if len(kwargs) != 1:
-            raise ValueError("One and only one property at "
-                             "time can be used for initialization. "
-                             f"{len(kwargs)} were provided")
-
-        valid_prop = ['T'] + [p.split("__")[0] for p in
-                              self._available_properties_dict]
-        input_property = list(kwargs.keys())[0]
-        input_value = kwargs[input_property]
-        if input_property not in valid_prop:
+        valid_prop = set(['T'] + [p.split("__")[0] for p in
+                              self._available_properties_dict])
+        if property_name not in valid_prop:
             list_to_print = "\n\n"
             for sym in valid_prop:
                 list_to_print += sym+"\n"
             list_to_print += "\n"
             raise ValueError("Initialization can be done only with one of "
                              f"the following properties:{list_to_print}"
-                             f"{input_property} was provided")
+                             f"{property_name} was provided")
 
         self._set_constants()
-        temperature = self.__compute_T(input_value, input_property)
+        temperature = self.__compute_T(property_value, property_name)
         self.__assign_T(temperature)
 
     def __assign_T(self, T: float) -> None:
