@@ -374,7 +374,7 @@ class LiquidMetalInterface(ABC):
                                       args=(input_value), xtol=1e-10,
                                       full_output=True)
         else:
-            index = (self._roots_to_use[input_property] 
+            index = (self._roots_to_use[input_property]
                      if input_property in self._roots_to_use else 0)
             res, _, ier, msg = fsolve(function_to_solve,
                                       x0=[self._guess, 3*self._guess],
@@ -387,8 +387,7 @@ class LiquidMetalInterface(ABC):
         # Select the desired root
         if len(res) > index - 1:
             return res[index]
-        else:
-            return res[0]
+        return res[0]
 
     def __fill_instance_properties(self) -> None:
         """
