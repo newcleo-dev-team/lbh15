@@ -369,21 +369,26 @@ class LiquidMetalInterface(ABC):
         # Solve the correlation-derived function depending on the
         # injectivity of the property correlation
         if self.__properties[input_property].is_injective:
-            res, _, _, _ = fsolve(function_to_solve, x0=[self._guess],
-                                  args=(input_value), xtol=1e-10,
-                                  full_output=True)
-            return res[0]
+            index = 0
+            res, _, ier, msg = fsolve(function_to_solve, x0=[self._guess],
+                                      args=(input_value), xtol=1e-10,
+                                      full_output=True)
         else:
             index = (self._roots_to_use[input_property] 
                      if input_property in self._roots_to_use else 0)
-            res, _, _, _ = fsolve(function_to_solve,
-                                  x0=[self._guess, 3*self._guess],
-                                  args=(input_value), xtol=1e-10,
-                                  full_output=True)
-            if len(res) > index - 1:
-                return res[index]
-            else:
-                return res[0]
+            res, _, ier, msg = fsolve(function_to_solve,
+                                      x0=[self._guess, 3*self._guess],
+                                      args=(input_value), xtol=1e-10,
+                                      full_output=True)
+        # Raise an exception in case the solver did not converge
+        if ier == 0:
+            raise RuntimeError(f"Error: {msg}\n"
+                               "The temperature value can not be computed!")
+        # Select the desired root
+        if len(res) > index - 1:
+            return res[index]
+        else:
+            return res[0]
 
     def __fill_instance_properties(self) -> None:
         """
