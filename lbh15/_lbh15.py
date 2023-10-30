@@ -74,7 +74,7 @@ class LiquidMetalInterface(ABC):
         self.__fill_instance_properties()
         self._set_constants()
         name, value = kwargs.popitem()
-        self.__fill_class_attributes(name, value)
+        self.__fill_instance_attributes(name, value)
 
     @property
     def T_m0(self) -> float:
@@ -211,25 +211,22 @@ class LiquidMetalInterface(ABC):
             Contains the error message (if any) associated
             to the temperature check
         """
+        # Manage acceptable value
         if self.T_m0 < T < self.T_b0:
-            rvalue = True
-            error_message = ""
+            return True, ""
+        # Manage value outside the acceptable range
+        if T >= self.T_b0:
+            error_message = ("Temperature must be smaller than "
+                                f"boiling temperature ({self.T_b0:.2f} [K]), "
+                                f"{T:.2f} [K] was provided")
+        elif 0 < T <= self.T_m0:
+            error_message = ("Temperature must be larger than "
+                                f"melting temperature ({self.T_m0:.2f} [K]), "
+                                f"{T:.2f} [K] was provided")
         else:
-            rvalue = False
-            if T >= self.T_b0:
-                error_message = ("Temperature must be smaller than "
-                                 f"boiling temperature ({self.T_b0:.2f} [K]), "
-                                 f"{T:.2f} [K] was provided")
-            elif 0 < T <= self.T_m0:
-                error_message = ("Temperature must be larger than "
-                                 f"melting temperature ({self.T_m0:.2f} [K]), "
-                                 f"{T:.2f} [K] was provided")
-            else:
-                error_message = ("Temperature must be "
-                                 "strictly positive, "
-                                 f"{T:.2f} [K] was provided")
-
-        return rvalue, error_message
+            error_message = ("Temperature must be strictly positive, "
+                                f"{T:.2f} [K] was provided")
+        return False, error_message
 
     @classmethod
     def properties_for_initialization(cls) -> List[str]:
@@ -419,7 +416,7 @@ class LiquidMetalInterface(ABC):
 
         self.__align_corrs_to_properties()
 
-    def __fill_class_attributes(self, property_name: str,
+    def __fill_instance_attributes(self, property_name: str,
                                 property_value: float) -> None:
         """
         Fills all the class attributes.
