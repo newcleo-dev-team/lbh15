@@ -544,11 +544,8 @@ class LiquidMetalInterface(ABC):
                                   "\nGoing to remove it from correlations "
                                   "to use.",
                                   stacklevel=5)
-                    remove_property = not is_in_default
-                    if not remove_property:
-                        self.__corr2use[key] = self._default_corr_to_use[key]
-                    if remove_property:
-                        keys_to_remove.append(key)
+                    self.__corr2use[key] = \
+                        self.__properties[key].correlation_name
 
         for key in keys_to_remove:
             self.__corr2use.pop(key)
