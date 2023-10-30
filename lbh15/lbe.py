@@ -67,7 +67,7 @@ class LBE(LiquidMetalInterface):
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
-        self._guess = LBE_MELTING_TEMPERATURE * 2.0
+        self._guess = LBE_BOILING_TEMPERATURE / 2.0
         super().__init__(p=p, **kwargs)
 
     def _set_constants(self) -> None:
