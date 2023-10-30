@@ -458,10 +458,9 @@ class LiquidMetalInterface(ABC):
             Temperature in [K]
         """
         temp_ok, error_message = self.check_temperature(T)
-        if temp_ok:
-            self.__T = T
-        else:
+        if not temp_ok:
             raise ValueError(error_message)
+        self.__T = T
 
     def __assign_p(self, p: float) -> None:
         """
