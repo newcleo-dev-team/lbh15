@@ -434,12 +434,11 @@ class LiquidMetalInterface(ABC):
             is initialized upon
         """
         valid_prop = set(['T'] + [p.split("__")[0] for p in
-                              self._available_properties_dict])
+                                  self._available_properties_dict])
         if property_name not in valid_prop:
             list_to_print = "\n\n"
-            for sym in valid_prop:
-                list_to_print += sym+"\n"
-            list_to_print += "\n"
+            list_to_print += '\n'.join(valid_prop)
+            list_to_print += "\n\n"
             raise ValueError("Initialization can be done only with one of "
                              f"the following properties:{list_to_print}"
                              f"{property_name} was provided")
