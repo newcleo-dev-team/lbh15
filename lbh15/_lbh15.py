@@ -498,24 +498,29 @@ class LiquidMetalInterface(ABC):
     def __align_corrs_to_properties(self) -> None:
         """
         This method updates the instance correlation dictionary by
-        aligning it to the instance property objects dict.
+        aligning it to the instance property objects dict. In particular,
+        it cleans the dict containing the correlations to use and,
+        accordingly, it adapts the property objects dict
         """
+        # Copy the corrs dict for freezing the dict to loop over
+        __corr2use_ref = copy.deepcopy(self.__corr2use)
         keys_to_remove = []
-        for key in self.__corr2use.keys():
-            corr_name = self.__corr2use[key]
+        for key in __corr2use_ref.keys():
+            corr_name = __corr2use_ref[key]
             is_in_default = key in self._default_corr_to_use
 
             if key not in self.__properties:
                 if not is_in_default:
-                    warnings.warn(f"Could not find property '{key}' "
+                    warnings.warn(f"Could not find '{key}' property "
                                   f"implementing '{corr_name}' correlation. "
-                                  "\nGoing to restore package default one, "
+                                  f"\nGoing to restore {key} property from "
+                                  f"the {type(self)}-related modules, "
                                   "if any.",
                                   stacklevel=5)
-                    keys_to_remove.append(key)
+                    self.__remove_property(key)
                     if key in self._available_correlations_dict:
-                        self.__corr2use[key] = \
-                            self._available_correlations_dict[key][-1]
+                        if len(self._available_correlations_dict[key]) > 1:
+                            self.__corr2use[key] = self._available_correlations_dict[key][-1]
                         self.__fill_instance_properties()
                 else:
                     def_corr_name = self._default_corr_to_use[key]
@@ -637,6 +642,27 @@ class LiquidMetalInterface(ABC):
         for prop in prop_obj_list:
             avail_corrs[prop.name].append(prop.correlation_name)
         return avail_corrs
+
+    def __remove_property(self, property_name: str) -> None:
+        """
+        Private method for removing the property name passed
+        as argument from both the instance and the class dicts
+        storing the properties currently used together with
+        their corresponding correlation.
+
+        Parameters
+        ----------
+        property_name : str
+            name of the property to remove from both the instance and
+            the class dicts storing the properties currently used together with
+            their corresponding correlation.
+
+        Returns
+        -------
+        None
+        """
+        self.__corr2use.pop(property_name)
+        self._correlations_to_use.pop(property_name)
 
     @abstractmethod
     def _set_constants(self) -> None:
