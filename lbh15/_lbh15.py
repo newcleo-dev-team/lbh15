@@ -395,8 +395,8 @@ class LiquidMetalInterface(ABC):
         if len(self._available_properties_dict) == 0:
             available_properties_list = self.__load_properties()
             available_properties_list += self.__load_custom_properties()
-            self._available_properties_dict = {e.name + '__' + 
-                                               e.correlation_name:e for e in
+            self._available_properties_dict = {e.name + '__' +
+                                               e.correlation_name: e for e in
                                                available_properties_list}
             self._available_correlations_dict = \
                 self.__extract_available_correlations(
@@ -407,8 +407,8 @@ class LiquidMetalInterface(ABC):
             # Add the property in case the specific correlation is not
             # specified or it is specified and the correlation names
             # does not match with what already stored
-            if not self.__corr2use or name not in self.__corr2use.keys() or \
-                key.split("__")[1] == self.__corr2use[name]:
+            if not self.__corr2use or name not in self.__corr2use.keys()\
+                    or key.split("__")[1] == self.__corr2use[name]:
                 self.__add_property(property_object)
 
         self.__align_corrs_to_properties()
@@ -493,10 +493,9 @@ class LiquidMetalInterface(ABC):
         """
         key = property_object.name
         self.__properties[key] = property_object
-        
         setattr(self, property_object.name+"_info",
-                lambda : self.__properties[key].info(self.__T, self.__p,
-                                                     True, 0))
+                lambda: self.__properties[key].info(self.__T, self.__p,
+                                                    True, 0))
 
     def __align_corrs_to_properties(self) -> None:
         """
@@ -507,7 +506,6 @@ class LiquidMetalInterface(ABC):
         """
         # Copy the corrs dict for freezing the dict to loop over
         __corr2use_ref = copy.deepcopy(self.__corr2use)
-        keys_to_remove = []
         for key in __corr2use_ref.keys():
             corr_name = __corr2use_ref[key]
             is_in_default = key in self._default_corr_to_use
@@ -546,10 +544,6 @@ class LiquidMetalInterface(ABC):
                                   stacklevel=5)
                     self.__corr2use[key] = \
                         self.__properties[key].correlation_name
-
-        for key in keys_to_remove:
-            self.__corr2use.pop(key)
-            self._correlations_to_use.pop(key)
 
     @classmethod
     def __load_custom_properties(cls) -> List[PropertyInterface]:
@@ -622,7 +616,7 @@ class LiquidMetalInterface(ABC):
 
     @staticmethod
     def __extract_available_correlations(
-        prop_obj_list: List[PropertyInterface]) -> Dict[str, List[str]]:
+            prop_obj_list: List[PropertyInterface]) -> Dict[str, List[str]]:
         """
         Private static method for extracting the available correlations
         from the list collecting all the available property classes.
