@@ -9,7 +9,6 @@ import copy
 from abc import ABC
 from abc import abstractmethod
 from collections import defaultdict
-from functools import partial
 from typing import Dict
 from typing import List
 from typing import Tuple
@@ -57,7 +56,7 @@ class LiquidMetalInterface(ABC):
     _default_corr_to_use: Dict[str, str] = {}
     _properties_modules_list: List[str] = []
     _custom_properties_path: Dict[str, List[str]] = {}
-    _available_properties_list: List[PropertyInterface] = []
+    _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}
     __p: float = 0
     __T: float = 0
@@ -388,25 +387,28 @@ class LiquidMetalInterface(ABC):
         """
         Fills instance properties.
         """
-        # Build the list attribute storing all the property objects
+        # Build the dict attribute storing all the property objects
         # loaded from loaded modules and the dict attribute storing
         # all the corresponding available correlations. Both these actions
         # are performed only once, when an instance is built, that is,
-        # when the list attribute is empty.
-        if len(self._available_properties_list) == 0:
-            self._available_properties_list = self.__load_properties()
-            self._available_properties_list += self.__load_custom_properties()
+        # when the property dict attribute is empty.
+        if len(self._available_properties_dict) == 0:
+            available_properties_list = self.__load_properties()
+            available_properties_list += self.__load_custom_properties()
+            self._available_properties_dict = {e.name + '__' + 
+                                               e.correlation_name:e for e in
+                                               available_properties_list}
             self._available_correlations_dict = \
                 self.__extract_available_correlations(
-                    self._available_properties_list)
+                    available_properties_list)
 
-        for property_object in self._available_properties_list:
-            name = property_object.name
+        for key, property_object in self._available_properties_dict.items():
+            name = key.split("__")[0]
             # Add the property in case the specific correlation is not
             # specified or it is specified and the correlation names
             # does not match with what already stored
             if not self.__corr2use or name not in self.__corr2use.keys() or \
-                property_object.correlation_name == self.__corr2use[name]:
+                key.split("__")[1] == self.__corr2use[name]:
                 self.__add_property(property_object)
 
         self.__align_corrs_to_properties()
@@ -425,7 +427,8 @@ class LiquidMetalInterface(ABC):
                              "time can be used for initialization. "
                              f"{len(kwargs)} were provided")
 
-        valid_prop = ['T'] + [p.name for p in self._available_properties_list]
+        valid_prop = ['T'] + [p.split("__")[0] for p in
+                              self._available_properties_dict]
         input_property = list(kwargs.keys())[0]
         input_value = kwargs[input_property]
         if input_property not in valid_prop:
