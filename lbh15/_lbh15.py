@@ -541,8 +541,11 @@ class LiquidMetalInterface(ABC):
                                   "\nGoing to remove it from correlations "
                                   "to use.",
                                   stacklevel=5)
-                    self.__corr2use[key] = \
-                        self.__properties[key].correlation_name
+                    if is_in_default:
+                        self.__corr2use[key] = \
+                            self.__properties[key].correlation_name
+                    else:
+                        self.__remove_property(key)
 
     @classmethod
     def __load_custom_properties(cls) -> List[PropertyInterface]:
@@ -657,7 +660,7 @@ class LiquidMetalInterface(ABC):
         None
         """
         self.__corr2use.pop(property_name)
-        self._correlations_to_use.pop(property_name)
+        self._correlations_to_use.pop(property_name, None)
 
     @abstractmethod
     def _set_constants(self) -> None:
