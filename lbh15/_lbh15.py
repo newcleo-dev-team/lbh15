@@ -185,11 +185,31 @@ class LiquidMetalInterface(ABC):
         correlation_name : str
             Name of the correlation
         """
-        if (property_name in self.__properties and
-                self.__properties[property_name].correlation_name !=
-                correlation_name):
+        # Manage the case the property is not among the currently used ones
+        if (property_name not in self.__properties):
+            warnings.warn(f"'{property_name}' property not in use."
+                          "\nNothing to change.", stacklevel=5)
+            return
+        # Manage the case the input correlation is already used
+        if (self.__properties[property_name].correlation_name\
+                == correlation_name):
+            warnings.warn(f"'{property_name}' property "
+                          f"implementing '{correlation_name}' correlation "
+                          "already in use. \nNothing to change.",
+                          stacklevel=5)
+            return
+        # Manage the case the input correlation not among the available ones
+        key = property_name + "__" + correlation_name
+        if key not in self._available_properties_dict:
+            warnings.warn(f"'{property_name}' property implementing "
+                          f"'{correlation_name}' correlation not among"
+                          "the available ones. \nNothing to change.",
+                          stacklevel=5)
+            return
+        # If here, the input correlation is to apply
+        self.__add_property(self._available_properties_dict[key])
+        if property_name in self._default_corr_to_use:
             self.__corr2use[property_name] = correlation_name
-            self.__fill_instance_properties()
 
     @typecheck_for_method
     def check_temperature(self, T: float) -> Tuple[bool, str]:
