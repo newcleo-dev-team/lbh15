@@ -186,12 +186,12 @@ class LiquidMetalInterface(ABC):
             Name of the correlation
         """
         # Manage the case the property is not among the currently used ones
-        if (property_name not in self.__properties):
+        if property_name not in self.__properties:
             warnings.warn(f"'{property_name}' property not in use."
                           "\nNothing to change.", stacklevel=5)
             return
         # Manage the case the input correlation is already used
-        if (self.__properties[property_name].correlation_name\
+        if (self.__properties[property_name].correlation_name
                 == correlation_name):
             warnings.warn(f"'{property_name}' property "
                           f"implementing '{correlation_name}' correlation "
