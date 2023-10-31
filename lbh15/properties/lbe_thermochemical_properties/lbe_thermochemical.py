@@ -291,8 +291,7 @@ class MolarEnthalpy(PropertyInterface):
         -------
         molar enthalpy [J/mol] : float
         """
-        h_obj = h()
-        return h_obj.correlation(T, p)*(M*10**(-3))
+        return h().correlation(T, p)*(M*10**(-3))
 
     @property
     def name(self) -> str:
