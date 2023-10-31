@@ -109,7 +109,8 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-95502/T)+9.69))*(M/M_O)**2
+        return np.power(10, 2 / 2.3 / R * (-95502 / T + 9.69))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -156,8 +157,8 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-
-        return np.exp((2/R)*((-101098/T)+15.66))*(M/M_O)**2
+        return np.power(10, 2 / 2.3 / R * (-101098 / T + 15.66))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -204,8 +205,8 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-
-        return np.exp((2/R)*((-68156/T)+14.14))*(M/M_O)**2
+        return np.power(10, 2 / 2.3 / R * (-68156 / T + 14.14))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -252,8 +253,8 @@ class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-
-        return np.exp((2/R)*((-95437/T)+3.78))*(M/M_O)**2
+        return np.power(10, 2 / 2.3 / R * (-95437 / T + 3.78))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:

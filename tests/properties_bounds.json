@@ -205,56 +205,56 @@
    },
    "o_pp_alcock1964_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 0.0,
-      "T_at_min": 783.0000201474,
+      "T_at_min": 783.0000202001,
       "max": 5e-10,
       "T_at_max": 972.999975892
    },
    "o_pp_charle1976_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.591e-07,
-      "T_at_min": 1173.0000284823,
-      "max": 5.7049e-06,
+      "min": 1.554e-07,
+      "T_at_min": 1173.0000285823,
+      "max": 5.5957e-06,
       "T_at_max": 1372.9999793043
    },
    "o_pp_fisher1966_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1e-09,
-      "T_at_min": 903.000025394,
-      "max": 2.662e-06,
+      "min": 9e-10,
+      "T_at_min": 903.0000255083,
+      "max": 2.6088e-06,
       "T_at_max": 1252.9999741755
    },
    "o_pp_ganesan2006_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
       "min": 0.0,
-      "T_at_min": 815.0000172208,
-      "max": 2.29e-08,
+      "T_at_min": 815.0000172979,
+      "max": 2.24e-08,
       "T_at_max": 1089.9999812742
    },
    "o_pp_isecke1977_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.592e-07,
-      "T_at_min": 1173.0000288784,
-      "max": 5.8026e-06,
+      "min": 1.555e-07,
+      "T_at_min": 1173.0000289778,
+      "max": 5.6917e-06,
       "T_at_max": 1372.9999793043
    },
    "o_pp_otsuka1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.41e-08,
-      "T_at_min": 1073.0000286761,
-      "max": 0.0001957855,
+      "min": 1.38e-08,
+      "T_at_min": 1073.0000287357,
+      "max": 0.0001928023,
       "T_at_max": 1672.9999529487
    },
    "o_pp_otsuka1981_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 4e-09,
-      "T_at_min": 1023.0000267604,
-      "max": 9.052e-07,
+      "min": 3.9e-09,
+      "T_at_min": 1023.0000267898,
+      "max": 8.86e-07,
       "T_at_max": 1272.9999682789
    },
    "o_pp_szwarc1972_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.765e-07,
-      "T_at_min": 1012.0000243902,
-      "max": 0.0001001781,
+      "min": 1.724e-07,
+      "T_at_min": 1012.0000245197,
+      "max": 9.85775e-05,
       "T_at_max": 1352.9999768007
    },
    "o_pp_taskinen1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.54e-08,
+      "min": 1.5e-08,
       "T_at_min": 1073.0000266894,
-      "max": 2.604e-07,
+      "max": 2.545e-07,
       "T_at_max": 1202.999974659
    },
    "lim_cr_alden1958_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
@@ -474,27 +474,27 @@
       "T_at_max": 1830.9999648121
    },
    "o_pp_fitzner1980_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 1.4e-07,
-      "T_at_min": 988.0000170072,
-      "max": 6.2586e-06,
+      "min": 1.368e-07,
+      "T_at_min": 988.0000170986,
+      "max": 6.1393e-06,
       "T_at_max": 1180.9999778936
    },
    "o_pp_hahn1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 0.0011843248,
+      "min": 0.0011686189,
       "T_at_min": 1073.0000307955,
-      "max": 0.0077148896,
+      "max": 0.0076286298,
       "T_at_max": 1222.9999692045
    },
    "o_pp_heshmatpour1981_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 7.6e-08,
-      "T_at_min": 1023.0000181045,
-      "max": 6.2364e-06,
+      "min": 7.42e-08,
+      "T_at_min": 1023.0000181672,
+      "max": 6.1175e-06,
       "T_at_max": 1272.9999682789
    },
    "o_pp_isecke1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 1.031e-07,
-      "T_at_min": 973.0000149732,
-      "max": 0.0004987849,
+      "min": 1.007e-07,
+      "T_at_min": 973.0000150658,
+      "max": 0.0004916922,
       "T_at_max": 1472.9999607906
    },
    "alpha_lbh15_Liquid_lbe_thermal_expansion_coefficient": {
@@ -661,8 +661,8 @@
    },
    "o_pp_lbh15_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lbe": {
       "min": 0.0,
-      "T_at_min": 812.0000219292,
-      "max": 8.8e-09,
+      "T_at_min": 812.000021982,
+      "max": 8.6e-09,
       "T_at_max": 1007.9999751307
    },
    "lim_cr_courouau2004_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {

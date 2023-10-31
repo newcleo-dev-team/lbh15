@@ -11,7 +11,7 @@ from ..lbe_properties import h
 from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
 from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
 from ..._commons import LBE_MOLAR_MASS as M
-from ..._commons import OXYGEN_MOLAR_MASS as M_o
+from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import typecheck_for_method
 
 
@@ -77,7 +77,8 @@ class OxygenPartialPressure(PropertyInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-127398/T)+27.938))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-127398 / T + 27.938))\
+            * M * M / M_O / M_O
 
     @property
     def name(self) -> str:
