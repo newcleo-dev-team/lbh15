@@ -1,7 +1,5 @@
 """Module with the definition of common objects for lbh15 package"""
 # KEYWORDS
-GURVICH_KEYWORD: str = 'gurvich1991'
-SOBOLEV_KEYWORD: str = 'sobolev2011'
 
 # LEAD CONSTANTS
 LEAD_MELTING_TEMPERATURE: float = 600.6  # [K]

@@ -8,7 +8,6 @@ from .interface import range_warning
 from .._decorators import typecheck_for_method
 from .._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from .._commons import LEAD_BOILING_TEMPERATURE as T_b0
-from .._commons import SOBOLEV_KEYWORD, GURVICH_KEYWORD
 
 
 class p_s(PropertyInterface):
@@ -74,7 +73,7 @@ class p_s(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:
@@ -334,7 +333,7 @@ class u_s(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:
@@ -467,7 +466,7 @@ class cp_sobolev2011(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def is_injective(self) -> bool:
@@ -548,7 +547,7 @@ class cp_gurvich1991(PropertyInterface):
         """
         str : name of the correlation
         """
-        return GURVICH_KEYWORD
+        return 'gurvich1991'
 
     @property
     def is_injective(self) -> bool:
@@ -624,7 +623,7 @@ class h(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:

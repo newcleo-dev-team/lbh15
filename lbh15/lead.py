@@ -7,7 +7,6 @@ from scipy.constants import atm
 from ._commons import LEAD_MELTING_TEMPERATURE
 from ._commons import LEAD_MELTING_LATENT_HEAT
 from ._commons import LEAD_BOILING_TEMPERATURE
-from ._commons import SOBOLEV_KEYWORD
 from ._commons import LEAD_VAPORISATION_HEAT
 from ._commons import LEAD_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
@@ -56,7 +55,7 @@ class Lead(LiquidMetalInterface):
     144.66006199999998
     """
     _default_corr_to_use: Dict[str, str] = \
-        {'cp': SOBOLEV_KEYWORD, 'cr_sol': "gosse2014",
+        {'cp': 'sobolev2011', 'cr_sol': "gosse2014",
          'o_pp': "alcock1964", 'o_dif': "gromov1996",
          'lim_cr': "gosse2014"}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
