@@ -536,7 +536,7 @@ class MolarEnthalpy(PropertyInterface):
 
         Returns
         -------
-        concentration [J.mol^-1] : float
+        molar enthalpy [J/mol] : float
         """
         return h().correlation(T, p)*(M*10**-3)
 
@@ -602,7 +602,7 @@ class MolarEntropy(PropertyInterface):
 
         Returns
         -------
-        concentration [J/(mol.K)] : float
+        molar entropy [J/(mol*K)] : float
         """
         return ((M*10**-3)*(
                 176.2*np.log(T/T_m0)
@@ -672,7 +672,7 @@ class GibbsFreeEnergy(PropertyInterface):
 
         Returns
         -------
-        concentration [J/mol] : float
+        gibbs free energy [J/mol] : float
         """
         H_obj = MolarEnthalpy()
         S_obj = MolarEntropy()
