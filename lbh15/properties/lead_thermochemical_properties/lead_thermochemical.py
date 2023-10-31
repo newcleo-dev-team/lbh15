@@ -587,7 +587,8 @@ class MolarEntropy(PropertyInterface):
                     verbose: bool = False) -> float:
         """
         Correlation used to compute molar entropy
-        variation in liquid lead
+        variation in liquid lead. Heat capacity correlation
+        by Sobolev2011 is adopted
 
         Parameters
         ----------
@@ -657,7 +658,8 @@ class GibbsFreeEnergy(PropertyInterface):
                     verbose: bool = False) -> float:
         """
         Correlation used to compute Gibbs free energy
-        variation in liquid lead
+        variation in liquid lead. Heat capacity correlation
+        by Sobolev2011 is adopted
 
         Parameters
         ----------
