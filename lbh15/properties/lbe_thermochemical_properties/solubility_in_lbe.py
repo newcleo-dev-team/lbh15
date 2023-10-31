@@ -195,10 +195,8 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
         solubility [wt.%] : float
         """
         if T <= 712:
-            rvalue = np.power(10, 5.2-3500/T)
-        else:
-            rvalue = np.power(10, 1.7-1009/T)
-        return rvalue
+            return np.power(10, 5.2-3500/T)
+        return np.power(10, 1.7-1009/T)
 
     @property
     def correlation_name(self) -> str:
@@ -244,10 +242,8 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         solubility [wt.%] : float
         """
         if T <= 742:
-            rvalue = np.power(10, 4.32-2933/T)
-        else:
-            rvalue = np.power(10, 1.74-1006/T)
-        return rvalue
+            return np.power(10, 4.32-2933/T)
+        return np.power(10, 1.74-1006/T)
 
     @property
     def correlation_name(self) -> str:

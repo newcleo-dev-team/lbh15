@@ -278,12 +278,10 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         solubility [wt.%] : float
         """
         if T <= 738:
-            rvalue = np.power(10, 3.81-2429/T)
-        elif 738 < T <= 918:
-            rvalue = np.power(10, 2.05-1131/T)
-        else:
-            rvalue = np.power(10, 1.35-484/T)
-        return rvalue
+            return np.power(10, 3.81-2429/T)
+        if 738 < T <= 918:
+            return np.power(10, 2.05-1131/T)
+        return np.power(10, 1.35-484/T)
 
     @property
     def correlation_name(self) -> str:
@@ -492,10 +490,8 @@ class OxygenSolubility(PropertyInterface):
         solubility [wt.%] : float
         """
         if T <= 1002:
-            rvalue = np.power(10, 2.30-4066/T)
-        else:
-            rvalue = np.power(10, 3.04-4810/T)
-        return rvalue
+            return np.power(10, 2.30-4066/T)
+        return np.power(10, 3.04-4810/T)
 
     @property
     def name(self) -> str:
