@@ -68,8 +68,7 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((2.20-3930/T)*np.log(10))
+        return np.power(10, 2.20-3930/T)
 
     @property
     def correlation_name(self) -> str:
@@ -113,8 +112,7 @@ class IronSolubilityMassalski1990(IronSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((2.18-3980/T)*np.log(10))
+        return np.power(10, 2.18-3980/T)
 
     @property
     def correlation_name(self) -> str:
@@ -158,8 +156,7 @@ class IronSolubilityWeeks1998(IronSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((1.832-3589/T)*np.log(10))
+        return np.power(10, 1.832-3589/T)
 
     @property
     def correlation_name(self) -> str:
@@ -236,8 +233,7 @@ class NickelSolubilityWeeks1998(NickelSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((2.61-1538/T)*np.log(10))
+        return np.power(10, 2.61-1538/T)
 
     @property
     def correlation_name(self) -> str:
@@ -282,11 +278,11 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         solubility [wt.%] : float
         """
         if T <= 738:
-            rvalue = np.exp((3.81-2429/T)*np.log(10))
+            rvalue = np.power(10, 3.81-2429/T)
         elif 738 < T <= 918:
-            rvalue = np.exp((2.05-1131/T)*np.log(10))
+            rvalue = np.power(10, 2.05-1131/T)
         else:
-            rvalue = np.exp((1.35-484/T)*np.log(10))
+            rvalue = np.power(10, 1.35-484/T)
         return rvalue
 
     @property
@@ -364,8 +360,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((2.34-3610/T)*np.log(10))
+        return np.power(10, 2.34-3610/T)
 
     @property
     def correlation_name(self) -> str:
@@ -409,8 +404,7 @@ class ChromiumSolubilityWeeks1998(ChromiumSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((2.5-3717/T)*np.log(10))
+        return np.power(10, 2.5-3717/T)
 
     @property
     def correlation_name(self) -> str:
@@ -454,8 +448,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-
-        return np.exp((2.34-3610/T)*np.log(10))
+        return np.power(10, 2.34-3610/T)
 
     @property
     def correlation_name(self) -> str:
@@ -499,9 +492,9 @@ class OxygenSolubility(PropertyInterface):
         solubility [wt.%] : float
         """
         if T <= 1002:
-            rvalue = np.exp((2.30-4066/T)*np.log(10))
+            rvalue = np.power(10, 2.30-4066/T)
         else:
-            rvalue = np.exp((3.04-4810/T)*np.log(10))
+            rvalue = np.power(10, 3.04-4810/T)
         return rvalue
 
     @property
