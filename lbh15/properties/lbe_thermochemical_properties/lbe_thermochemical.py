@@ -46,11 +46,8 @@ class OxygenPartialPressure(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-3:
-            rvalue = 650
-        else:
-            rvalue = 1500
-
-        return rvalue
+            return 650
+        return 1500
 
     @range_warning
     @typecheck_for_method
@@ -145,7 +142,7 @@ class LeadChemicalActivity(PropertyInterface):
         -------
         chemical activity [-] : float
         """
-        return 0.42206-63.2/T
+        return 0.42206 - 63.2 / T
 
     @property
     def name(self) -> str:
@@ -218,7 +215,7 @@ class BismuthChemicalActivity(PropertyInterface):
         -------
         chemical activity [-] : float
         """
-        return 0.53381-56.2/T
+        return 0.53381 - 56.2 / T
 
     @property
     def name(self) -> str:
@@ -291,7 +288,7 @@ class MolarEnthalpy(PropertyInterface):
         -------
         molar enthalpy [J/mol] : float
         """
-        return h().correlation(T, p)*(M*10**(-3))
+        return h().correlation(T, p) * M / 1000
 
     @property
     def name(self) -> str:
@@ -357,11 +354,10 @@ class MolarEntropy(PropertyInterface):
         -------
         molar entropy [J/(mol*K)] : float
         """
-        return ((M*10**-3)*(
-                164.8*np.log(T/T_m0)
-                - 3.94e-2*(T - T_m0)
-                + ((1.25e-5)/2)*((T*T) - T_m0**2)
-                - ((4.56e5)/-2)*((1/(T*T)) - T_m0**-2)))
+        return M / 1000 * (164.8 * np.log(T / T_m0)
+                           - 3.94e-2 * (T - T_m0)
+                           + 1.25e-5 / 2 * (T * T - T_m0 * T_m0)
+                           + 4.56e5 / 2 * (1 / T / T - 1 / T_m0 / T_m0))
 
     @property
     def name(self) -> str:
@@ -429,7 +425,7 @@ class GibbsFreeEnergy(PropertyInterface):
         """
         H_obj = MolarEnthalpy()
         S_obj = MolarEntropy()
-        return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
+        return H_obj.correlation(T, p) - T * S_obj.correlation(T, p)
 
     @property
     def name(self) -> str:

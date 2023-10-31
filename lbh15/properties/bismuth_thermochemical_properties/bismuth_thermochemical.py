@@ -43,11 +43,8 @@ class OxygenPartialPressureInterface(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-4:
-            rvalue = 650
-        else:
-            rvalue = 1500
-
-        return rvalue
+            return 650
+        return 1500
 
     @property
     def name(self) -> str:
@@ -299,7 +296,7 @@ class MolarEnthalpy(PropertyInterface):
         -------
         molar enthalpy [J/mol] : float
         """
-        return h().correlation(T, p)*(M*10**(-3))
+        return h().correlation(T, p) * M / 1000
 
     @property
     def name(self) -> str:
@@ -365,10 +362,9 @@ class MolarEntropy(PropertyInterface):
         -------
         molar entropy [J/(mol*K)] : float
         """
-        return ((M*10**-3)*(
-                118.2*np.log(T/T_m0)
-                + 5.934e-3*(T - T_m0)
-                + ((7.183e6)/-2)*((1/(T*T)) - T_m0**-2)))
+        return M / 1000 * (118.2 * np.log(T / T_m0)
+                           + 5.934e-3 * (T - T_m0)
+                           - 7.183e6 / 2 * (1 / T / T - 1 / T_m0 / T_m0))
 
     @property
     def name(self) -> str:
@@ -436,7 +432,7 @@ class GibbsFreeEnergy(PropertyInterface):
         """
         H_obj = MolarEnthalpy()
         S_obj = MolarEntropy()
-        return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
+        return H_obj.correlation(T, p) - T * S_obj.correlation(T, p)
 
     @property
     def name(self) -> str:
