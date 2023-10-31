@@ -69,8 +69,7 @@ class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-14979/(R*T))*6.32e-5
+        return np.exp(-14979 / R / T) * 6.32e-5
 
     @property
     def correlation_name(self) -> str:
@@ -114,8 +113,7 @@ class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-20083/(R*T))*9.65e-5
+        return np.exp(-20083 / R / T) * 9.65e-5
 
     @property
     def correlation_name(self) -> str:
@@ -159,8 +157,7 @@ class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-25942/(R*T))*1.44e-3
+        return np.exp(-25942 / R / T) * 1.44e-3
 
     @property
     def correlation_name(self) -> str:
@@ -204,8 +201,7 @@ class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-19497/(R*T))*1.48e-3
+        return np.exp(-19497 / R / T) * 1.48e-3
 
     @property
     def correlation_name(self) -> str:
@@ -249,8 +245,7 @@ class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-20927/(R*T))*1.90e-3
+        return np.exp(-20927 / R / T) * 1.90e-3
 
     @property
     def correlation_name(self) -> str:
@@ -294,8 +289,7 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-16158/(R*T))*6.6e-5
+        return np.exp(-16158 / R / T) * 6.6e-5
 
     @property
     def correlation_name(self) -> str:
@@ -339,8 +333,7 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-45587/(R*T))*2.79e-3
+        return np.exp(-45587 / R / T) * 2.79e-3
 
     @property
     def correlation_name(self) -> str:
@@ -385,7 +378,7 @@ class IronDiffusivity(PropertyInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-        return np.exp((-2.31-2295/T)*np.log(10))
+        return np.power(10, - 2.31 - 2295 / T)
 
     @property
     def name(self) -> str:
@@ -451,7 +444,7 @@ class CobaltDiffusivity(PropertyInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-        return np.exp(-22154/(R*T))*4.6e-4
+        return np.exp(-22154 / R / T) * 4.6e-4
 
     @property
     def name(self) -> str:
@@ -517,7 +510,7 @@ class SeleniumDiffusivity(PropertyInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-        return np.exp(-12958/(R*T))*3.4e-4
+        return np.exp(-12958 / R / T) * 3.4e-4
 
     @property
     def name(self) -> str:
@@ -583,7 +576,8 @@ class IndiumDiffusivity(PropertyInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-        return np.exp(-13794/(R*T))*3.1e-4
+        return np.exp(-13794 / R / T) * 3.1e-4
+#        return np.exp(-13794/(R*T))*3.1e-4
 
     @property
     def name(self) -> str:
@@ -649,7 +643,7 @@ class TelluriumDiffusivity(PropertyInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-        return np.exp(-15884/(R*T))*3.1e-4
+        return np.exp(-15884 / R / T) * 3.1e-4
 
     @property
     def name(self) -> str:

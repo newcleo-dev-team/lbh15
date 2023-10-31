@@ -69,8 +69,7 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-49229/(R*T))*1.07e-2
+        return np.exp(-49229 / R / T) * 1.07e-2
 
     @property
     def correlation_name(self) -> str:
@@ -114,8 +113,7 @@ class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
         -------
         diffusivity [cm^2.s^-1] : float
         """
-
-        return np.exp(-26610/(R*T))*1.98e-4
+        return np.exp(-26610 / R / T) * 1.98e-4
 
     @property
     def correlation_name(self) -> str:
