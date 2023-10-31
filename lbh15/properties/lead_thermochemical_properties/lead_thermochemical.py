@@ -672,9 +672,8 @@ class GibbsFreeEnergy(PropertyInterface):
         -------
         gibbs free energy [J/mol] : float
         """
-        H_obj = MolarEnthalpy()
-        S_obj = MolarEntropy()
-        return H_obj.correlation(T, p) - T * S_obj.correlation(T, p)
+        return MolarEnthalpy().correlation(T, p)\
+            - T * MolarEntropy().correlation(T, p)
 
     @property
     def name(self) -> str:
