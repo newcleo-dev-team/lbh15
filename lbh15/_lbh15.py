@@ -6,6 +6,7 @@ import inspect
 import importlib
 import platform
 import copy
+import asyncio
 from abc import ABC
 from abc import abstractmethod
 from collections import defaultdict
@@ -428,14 +429,28 @@ class LiquidMetalInterface(ABC):
                 self.__extract_available_correlations(
                     available_properties_list)
 
-        for key, property_object in self._available_properties_dict.items():
-            name = key.split("__")[0]
-            # Add the property in case the specific correlation is not
-            # specified or it is specified and the correlation names
-            # does not match with what already stored
-            if not self.__corr2use or name not in self.__corr2use.keys()\
+#        for key, property_object in self._available_properties_dict.items():
+#            name = key.split("__")[0]
+#            # Add the property in case the specific correlation is not
+#            # specified or it is specified and the correlation names
+#            # does not match with what already stored
+#            if not self.__corr2use or name not in self.__corr2use.keys()\
+#                    or key.split("__")[1] == self.__corr2use[name]:
+#                self.__add_property(property_object)
+
+        async def prop_list_adder():
+
+            async def properties_builder_async(key, property_object):
+                if not self.__corr2use or name not in self.__corr2use.keys()\
                     or key.split("__")[1] == self.__corr2use[name]:
-                self.__add_property(property_object)
+                    self.__add_property(property_object)
+
+            for key, property_object in self._available_properties_dict.items():
+                name = key.split("__")[0]
+                await properties_builder_async(key, property_object)
+
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(prop_list_adder())
 
         self.__align_corrs_to_properties()
 
@@ -525,47 +540,96 @@ class LiquidMetalInterface(ABC):
         """
         # Copy the corrs dict for freezing the dict to loop over
         __corr2use_ref = copy.deepcopy(self.__corr2use)
-        for key in __corr2use_ref.keys():
-            corr_name = __corr2use_ref[key]
-            is_in_default = key in self._default_corr_to_use
+#        for key in __corr2use_ref.keys():
+#            corr_name = __corr2use_ref[key]
+#            is_in_default = key in self._default_corr_to_use
+#
+#            if key not in self.__properties:
+#                if not is_in_default:
+#                    warnings.warn(f"Could not find '{key}' property "
+#                                  f"implementing '{corr_name}' correlation. "
+#                                  f"\nGoing to restore {key} property from "
+#                                  f"the {type(self)}-related modules, "
+#                                  "if any.",
+#                                  stacklevel=5)
+#                    self.__remove_property(key)
+#                    if key in self._available_correlations_dict:
+#                        self.__add_property(
+#                            self._available_properties_dict[
+#                                key + "__" +
+#                                self._available_correlations_dict[key][-1]])
+#                else:
+#                    def_corr_name = self._default_corr_to_use[key]
+#                    warnings.warn(f"Could not find property '{key}' "
+#                                  f"implementing '{corr_name}' correlation. "
+#                                  "\nGoing to restore default correlation "
+#                                  f"'{def_corr_name}'.",
+#                                  stacklevel=5)
+#                    self.__corr2use[key] = def_corr_name
+#                    self.__add_property(
+#                        self._available_properties_dict[
+#                            key + "__" + def_corr_name])
+#            else:
+#                if corr_name != self.__properties[key].correlation_name:
+#                    warnings.warn(f"Could not find property '{key}' "
+#                                  f"implementing '{corr_name}' correlation. "
+#                                  "\nGoing to remove it from correlations "
+#                                  "to use.",
+#                                  stacklevel=5)
+#                    if is_in_default:
+#                        self.__corr2use[key] = \
+#                            self.__properties[key].correlation_name
+#                    else:
+#                        self.__remove_property(key)
+        
+        async def corrs_vs_props_checker():
 
-            if key not in self.__properties:
-                if not is_in_default:
-                    warnings.warn(f"Could not find '{key}' property "
-                                  f"implementing '{corr_name}' correlation. "
-                                  f"\nGoing to restore {key} property from "
-                                  f"the {type(self)}-related modules, "
-                                  "if any.",
-                                  stacklevel=5)
-                    self.__remove_property(key)
-                    if key in self._available_correlations_dict:
+            async def checker_async(key, corr_name, is_in_default):
+                if key not in self.__properties:
+                    if not is_in_default:
+                        warnings.warn(f"Could not find '{key}' property "
+                                    f"implementing '{corr_name}' correlation. "
+                                    f"\nGoing to restore {key} property from "
+                                    f"the {type(self)}-related modules, "
+                                    "if any.",
+                                    stacklevel=5)
+                        self.__remove_property(key)
+                        if key in self._available_correlations_dict:
+                            self.__add_property(
+                                self._available_properties_dict[
+                                    key + "__" +
+                                    self._available_correlations_dict[key][-1]])
+                    else:
+                        def_corr_name = self._default_corr_to_use[key]
+                        warnings.warn(f"Could not find property '{key}' "
+                                    f"implementing '{corr_name}' correlation. "
+                                    "\nGoing to restore default correlation "
+                                    f"'{def_corr_name}'.",
+                                    stacklevel=5)
+                        self.__corr2use[key] = def_corr_name
                         self.__add_property(
                             self._available_properties_dict[
-                                key + "__" +
-                                self._available_correlations_dict[key][-1]])
+                                key + "__" + def_corr_name])
                 else:
-                    def_corr_name = self._default_corr_to_use[key]
-                    warnings.warn(f"Could not find property '{key}' "
-                                  f"implementing '{corr_name}' correlation. "
-                                  "\nGoing to restore default correlation "
-                                  f"'{def_corr_name}'.",
-                                  stacklevel=5)
-                    self.__corr2use[key] = def_corr_name
-                    self.__add_property(
-                        self._available_properties_dict[
-                            key + "__" + def_corr_name])
-            else:
-                if corr_name != self.__properties[key].correlation_name:
-                    warnings.warn(f"Could not find property '{key}' "
-                                  f"implementing '{corr_name}' correlation. "
-                                  "\nGoing to remove it from correlations "
-                                  "to use.",
-                                  stacklevel=5)
-                    if is_in_default:
-                        self.__corr2use[key] = \
-                            self.__properties[key].correlation_name
-                    else:
-                        self.__remove_property(key)
+                    if corr_name != self.__properties[key].correlation_name:
+                        warnings.warn(f"Could not find property '{key}' "
+                                    f"implementing '{corr_name}' correlation. "
+                                    "\nGoing to remove it from correlations "
+                                    "to use.",
+                                    stacklevel=5)
+                        if is_in_default:
+                            self.__corr2use[key] = \
+                                self.__properties[key].correlation_name
+                        else:
+                            self.__remove_property(key)
+
+            for key in __corr2use_ref.keys():
+                corr_name = __corr2use_ref[key]
+                is_in_default = key in self._default_corr_to_use
+                await checker_async(key, corr_name, is_in_default)
+
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(corrs_vs_props_checker())
 
     @classmethod
     def __load_custom_properties(cls) -> List[PropertyInterface]:
@@ -631,9 +695,23 @@ class LiquidMetalInterface(ABC):
             mod += inspect.getmembers(sys.modules[module], is_valid)
         mod_set = set(list(map(list, zip(*mod)))[1])
         # Build property instances and add them to the list to return
-        prop_list = []
-        for prop in mod_set:
-            prop_list.append(prop())
+#        prop_list = []
+#        for prop in mod_set:
+#            prop_list.append(prop())
+
+        async def prop_list_assembler(mod_set):
+            prop_list = []
+
+            async def instantiation_async(prop):
+                return prop()
+
+            for prop in mod_set:
+                prop_inst = await instantiation_async(prop)
+                prop_list.append(prop_inst)
+            return prop_list
+
+        loop = asyncio.get_event_loop()
+        prop_list = loop.run_until_complete(prop_list_assembler(mod_set))
         return prop_list
 
     @staticmethod
