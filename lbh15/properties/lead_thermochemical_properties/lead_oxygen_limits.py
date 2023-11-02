@@ -47,9 +47,8 @@ class LowerLimitSaturationIron(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        o_sol_obj = OxygenSolubility()
-        return np.exp((-114380/(2*R*T))-(42.2/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p)))
+        return np.exp(-114380 / 2 / R / T - 42.2 / 2 / R
+                      + np.log(OxygenSolubility().correlation(T, p)))
 
     @property
     def name(self) -> str:
@@ -119,11 +118,8 @@ class LowerLimitSaturationChromium(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-7:
-            rvalue = 650
-        else:
-            rvalue = 1700
-
-        return rvalue
+            return 650
+        return 1700
 
     @range_warning
     @typecheck_for_method
@@ -149,9 +145,8 @@ class LowerLimitSaturationChromium(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        o_sol_obj = OxygenSolubility()
-        return np.exp((-317800/(2*R*T))-(27.3/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p)))
+        return np.exp(-317800 / 2 / R / T - 27.3 / 2 / R
+                      + np.log(OxygenSolubility().correlation(T, p)))
 
     @property
     def name(self) -> str:
@@ -220,9 +215,8 @@ class LowerLimitSaturationNickel(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        o_sol_obj = OxygenSolubility()
-        return np.exp((-36080/(2*R*T))-(23.4/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p)))
+        return np.exp(-36080 / 2 / R / T - 23.4 / 2 / R
+                      + np.log(OxygenSolubility().correlation(T, p)))
 
     @property
     def name(self) -> str:
@@ -292,11 +286,8 @@ class LowerLimitSaturationSilicon(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-8:
-            rvalue = 650
-        else:
-            rvalue = 1700
-
-        return rvalue
+            return 650
+        return 1700
 
     @range_warning
     @typecheck_for_method
@@ -322,9 +313,8 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        o_sol_obj = OxygenSolubility()
-        return np.exp((-471710/(2*R*T))-(19.5/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p)))
+        return np.exp(-471710 / 2 / R / T - 19.5 / 2 / R
+                      + np.log(OxygenSolubility().correlation(T, p)))
 
     @property
     def name(self) -> str:
@@ -394,11 +384,8 @@ class LowerLimitSaturationAluminium(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-10:
-            rvalue = 650
-        else:
-            rvalue = 1700
-
-        return rvalue
+            return 650
+        return 1700
 
     @range_warning
     @typecheck_for_method
@@ -424,9 +411,8 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        o_sol_obj = OxygenSolubility()
-        return np.exp((-679540/(2*R*T))-(-10.7/(2*R))
-                      + np.log(o_sol_obj.correlation(T, p)))
+        return np.exp(-679540 / 2 / R / T + 10.7 / 2 / R
+                      + np.log(OxygenSolubility().correlation(T, p)))
 
     @property
     def name(self) -> str:
@@ -496,11 +482,8 @@ class LowerLimitChromiumInterface(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-6:
-            rvalue = 650
-        else:
-            rvalue = 1700
-
-        return rvalue
+            return 650
+        return 1700
 
     @property
     def name(self) -> str:
@@ -563,10 +546,10 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
         -------
         concentration [wt.%] : float
         """
-        lim_cr_sat_obj = LowerLimitSaturationChromium()
-        cr_sol_obj = ChromiumSolubilityGosse2014()
-        return (np.exp((2/3)*np.log(cr_sol_obj.correlation(T, p)))
-                * lim_cr_sat_obj.correlation(T, p))
+        return np.exp(
+            2 / 3 *
+            np.log(ChromiumSolubilityGosse2014().correlation(T, p)))\
+            * LowerLimitSaturationChromium().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -614,10 +597,10 @@ class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
         -------
         concentration [wt.%] : float
         """
-        lim_cr_sat_obj = LowerLimitSaturationChromium()
-        cr_sol_obj = ChromiumSolubilityVenkatraman1988()
-        return (np.exp((2/3)*np.log(cr_sol_obj.correlation(T, p)))
-                * lim_cr_sat_obj.correlation(T, p))
+        return np.exp(
+            2 / 3 *
+            np.log(ChromiumSolubilityVenkatraman1988().correlation(T, p)))\
+            * LowerLimitSaturationChromium().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -665,10 +648,10 @@ class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
         -------
         concentration [wt.%] : float
         """
-        lim_cr_sat_obj = LowerLimitSaturationChromium()
-        cr_sol_obj = ChromiumSolubilityAlden1958()
-        return (np.exp((2/3)*np.log(cr_sol_obj.correlation(T, p)))
-                * lim_cr_sat_obj.correlation(T, p))
+        return np.exp(
+            2 / 3 *
+            np.log(ChromiumSolubilityAlden1958().correlation(T, p)))\
+            * LowerLimitSaturationChromium().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -715,10 +698,9 @@ class LowerLimitNickel(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        lim_ni_sat_obj = LowerLimitSaturationNickel()
-        ni_sol_obj = NickelSolubility()
-        return (np.exp(np.log(ni_sol_obj.correlation(T, p)))
-                * lim_ni_sat_obj.correlation(T, p))
+        return np.exp(
+            np.log(NickelSolubility().correlation(T, p)))\
+            * LowerLimitSaturationNickel().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -788,11 +770,8 @@ class LowerLimitIron(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-4:
-            rvalue = 650
-        else:
-            rvalue = 1700
-
-        return rvalue
+            return 650
+        return 1700
 
     @range_warning
     @typecheck_for_method
@@ -818,10 +797,10 @@ class LowerLimitIron(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        lim_fe_sat_obj = LowerLimitSaturationIron()
-        fe_sol_obj = IronSolubility()
-        return (np.exp((3/4)*np.log(fe_sol_obj.correlation(T, p)))
-                * lim_fe_sat_obj.correlation(T, p))
+        return np.exp(
+            3 / 4 *
+            np.log(IronSolubility().correlation(T, p)))\
+            * LowerLimitSaturationIron().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -891,11 +870,8 @@ class LowerLimitSilicon(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-8:
-            rvalue = 650
-        else:
-            rvalue = 1700
-
-        return rvalue
+            return 650
+        return 1700
 
     @range_warning
     @typecheck_for_method
@@ -921,10 +897,9 @@ class LowerLimitSilicon(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        lim_si_sat_obj = LowerLimitSaturationSilicon()
-        si_sol_obj = SiliconSolubility()
-        return (np.exp((1/2)*np.log(si_sol_obj.correlation(T, p)))
-                * lim_si_sat_obj.correlation(T, p))
+        return np.exp(
+            0.5 * np.log(SiliconSolubility().correlation(T, p)))\
+            * LowerLimitSaturationSilicon().correlation(T, p)
 
     @property
     def name(self) -> str:
