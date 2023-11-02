@@ -324,7 +324,8 @@ class u_s(PropertyInterface):
         -------
         sound velocity in [m/s] : float
         """
-        return 1616 + 0.187*T - 2.2e-4*T*T
+        return 1616 + T*(0.187 - 2.2e-4*T)
+#        return 1616 + 0.187*T - 2.2e-4*T*T
 
     @property
     def correlation_name(self) -> str:
@@ -522,9 +523,8 @@ class h(PropertyInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return (118.2*(T - T_m0)
-                + 2.967e-3*(T*T - T_m0*T_m0)
-                - 7.183e6*(1/T - 1/T_m0))
+        return T * (118.2 + 2.967e-3 * T) - T_m0 * (118.2 + 2.967e-3 * T_m0)\
+            - 7.183e6 * (1 / T - 1 / T_m0)
 
     @property
     def correlation_name(self) -> str:

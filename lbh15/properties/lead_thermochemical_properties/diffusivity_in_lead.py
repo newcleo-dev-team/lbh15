@@ -577,7 +577,6 @@ class IndiumDiffusivity(PropertyInterface):
         diffusivity [cm^2.s^-1] : float
         """
         return np.exp(-13794 / R / T) * 3.1e-4
-#        return np.exp(-13794/(R*T))*3.1e-4
 
     @property
     def name(self) -> str:

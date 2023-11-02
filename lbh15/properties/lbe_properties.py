@@ -443,8 +443,7 @@ class cp(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (164.8 - 3.94e-2*T + 1.25e-5*T*T
-                - 4.56e5/T/T)
+        return 164.8 - T * (3.94e-2 - 1.25e-5 * T) - 4.56e5 / T / T
 
     @property
     def correlation_name(self) -> str:
@@ -517,10 +516,9 @@ class h(PropertyInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return (164.8*(T - T_m0)
-                - 1.97e-2*(T*T - T_m0*T_m0)
-                + 4.167e-6*(T*T*T - T_m0*T_m0*T_m0)
-                + 4.56e5*(1/T - 1/T_m0))
+        return T * (164.8 - T * (1.97e-2 - 4.167e-6 * T))\
+            - T_m0 * (164.8 - T_m0 * (1.97e-2 - 4.167e-6 * T_m0))\
+            + 4.56e5 * (1 / T - 1 / T_m0)
 
     @property
     def correlation_name(self) -> str:
@@ -703,7 +701,8 @@ class k(PropertyInterface):
         -------
         thermal conductivity in [W/(m*K)] : float
         """
-        return 3.284 + 1.617e-2*T - 2.305e-6*T*T
+        return 3.284 + T * (1.617e-2 - 2.305e-6 * T)
+#        return 3.284 + 1.617e-2*T - 2.305e-6*T*T
 
     @property
     def correlation_name(self) -> str:
