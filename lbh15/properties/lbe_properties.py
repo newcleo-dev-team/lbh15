@@ -61,13 +61,10 @@ class p_s(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-2:
-            rvalue = 800
-        elif 1e-2 <= property_value < 1e2:
-            rvalue = 1200
-        else:
-            rvalue = 2000
-
-        return rvalue
+            return 800
+        if 1e-2 <= property_value < 1e2:
+            return 1200
+        return 2000
 
     @property
     def correlation_name(self) -> str:
@@ -199,10 +196,10 @@ class rho(PropertyInterface):
         """
         rho_0 = 11065 - 1.293*T
         u_s_val = u_s().correlation(T, p)
-        cp_val = cp().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((1/u_s_val/u_s_val + T*alpha_val*alpha_val/cp_val)
-                        * (p - atm))
+        return rho_0 +\
+            (1 / u_s_val / u_s_val +
+             T * alpha_val * alpha_val / cp().correlation(T, p)) * (p - atm)
 
     @property
     def range(self) -> List[float]:
@@ -383,9 +380,8 @@ class beta_s(PropertyInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        rho_val = rho().correlation(T, p)
         u_s_val = u_s().correlation(T, p)
-        return 1/(rho_val * u_s_val*u_s_val)
+        return 1 / (rho().correlation(T, p) * u_s_val * u_s_val)
 
     @property
     def range(self) -> List[float]:
@@ -702,7 +698,6 @@ class k(PropertyInterface):
         thermal conductivity in [W/(m*K)] : float
         """
         return 3.284 + T * (1.617e-2 - 2.305e-6 * T)
-#        return 3.284 + 1.617e-2*T - 2.305e-6*T*T
 
     @property
     def correlation_name(self) -> str:

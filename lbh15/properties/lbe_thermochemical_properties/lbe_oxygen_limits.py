@@ -51,7 +51,7 @@ class LowerLimitSaturationIron(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-114380 / 2 / R / T - 42.2 / 2 / R
+        return np.exp(-57190 / R / T - 21.1 / R
                       + np.log(OxygenSolubility().correlation(T, p))
                       + np.log(LeadChemicalActivity().correlation(T, p)))
 
@@ -152,7 +152,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-317800 / 2 / R / T - 27.3 / 2 / R
+        return np.exp(-158900 / R / T - 13.65 / R
                       + np.log(OxygenSolubility().correlation(T, p))
                       + np.log(LeadChemicalActivity().correlation(T, p)))
 
@@ -225,7 +225,7 @@ class LowerLimitSaturationNickel(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-36080 / 2 / R / T - 23.4 / 2 / R
+        return np.exp(-18040 / R / T - 11.7 / R
                       + np.log(OxygenSolubility().correlation(T, p))
                       + np.log(LeadChemicalActivity().correlation(T, p)))
 
@@ -326,7 +326,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-471710 / 2 / R / T - 19.5 / 2 / R
+        return np.exp(-235855 / R / T - 9.75 / R
                       + np.log(OxygenSolubility().correlation(T, p))
                       + np.log(LeadChemicalActivity().correlation(T, p)))
 
@@ -427,7 +427,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-679540 / 2 / R / T + 10.7 / 2 / R
+        return np.exp(-339770 / R / T + 5.35 / R
                       + np.log(OxygenSolubility().correlation(T, p))
                       + np.log(LeadChemicalActivity().correlation(T, p)))
 
@@ -918,8 +918,7 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
         concentration [wt.%] : float
         """
         return np.exp(
-            3 / 4 *
-            np.log(IronSolubilityGosse2014().correlation(T, p)))\
+            0.75 * np.log(IronSolubilityGosse2014().correlation(T, p)))\
             * LowerLimitSaturationIron().correlation(T, p)
 
     @property
@@ -970,8 +969,7 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
         concentration [wt.%] : float
         """
         return np.exp(
-            3 / 4 *
-            np.log(IronSolubilityWeeks1969().correlation(T, p)))\
+            0.75 * np.log(IronSolubilityWeeks1969().correlation(T, p)))\
             * LowerLimitSaturationIron().correlation(T, p)
 
     @property

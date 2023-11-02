@@ -356,8 +356,8 @@ class MolarEntropy(PropertyInterface):
         """
         return M / 1000 * (164.8 * np.log(T / T_m0)
                            - 3.94e-2 * (T - T_m0)
-                           + 1.25e-5 / 2 * (T * T - T_m0 * T_m0)
-                           + 4.56e5 / 2 * (1 / T / T - 1 / T_m0 / T_m0))
+                           + 6.25e-6 * (T * T - T_m0 * T_m0)
+                           + 2.28e5 * (1 / T / T - 1 / T_m0 / T_m0))
 
     @property
     def name(self) -> str:
