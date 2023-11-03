@@ -1,6 +1,7 @@
 """Module with the definition of solubility
 property objects for bismuth"""
 from typing import List
+from typing import Union
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
@@ -258,7 +259,7 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
+                    verbose: bool = False) -> Union[float, np.ndarray]:
         """
         Correlation used to compute nickel solubility in liquid bismuth
 
@@ -277,11 +278,9 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-        if T <= 738:
-            return np.power(10, 3.81-2429/T)
-        if 738 < T <= 918:
-            return np.power(10, 2.05-1131/T)
-        return np.power(10, 1.35-484/T)
+        return np.where(T <= 738, np.power(10, 3.81-2429/T),
+                        np.where(T <= 918, np.power(10, 2.05-1131/T),
+                                 np.power(10, 1.35-484/T)))[()]
 
     @property
     def correlation_name(self) -> str:
@@ -470,7 +469,7 @@ class OxygenSolubility(PropertyInterface):
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
+                    verbose: bool = False) -> Union[float, np.ndarray]:
         """
         Correlation used to compute oxygen solubility in liquid bismuth
 
@@ -489,9 +488,8 @@ class OxygenSolubility(PropertyInterface):
         -------
         solubility [wt.%] : float
         """
-        if T <= 1002:
-            return np.power(10, 2.30-4066/T)
-        return np.power(10, 3.04-4810/T)
+        return np.where(T <= 1002, np.power(10, 2.30-4066/T),
+                        np.power(10, 3.04-4810/T))[()]
 
     @property
     def name(self) -> str:
