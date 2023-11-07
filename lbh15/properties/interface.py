@@ -11,6 +11,8 @@ from scipy.optimize import minimize_scalar
 from scipy.constants import atm
 from .._decorators import typecheck_for_method
 
+warnings.simplefilter("always")
+
 
 def range_warning(function):
     """

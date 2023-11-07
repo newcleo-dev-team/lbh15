@@ -18,6 +18,8 @@ from scipy.optimize import fsolve
 from ._decorators import typecheck_for_method
 from .properties.interface import PropertyInterface
 
+warnings.simplefilter("always")
+
 
 class LiquidMetalInterface(ABC):
     """
