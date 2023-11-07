@@ -1,6 +1,7 @@
 """Module with the definition of solubility
 property objects for lead-bismuth eutectic"""
 from typing import List
+from typing import Union
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
@@ -174,7 +175,7 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
+                    verbose: bool = False) -> Union[float, np.ndarray]:
         """
         Correlation used to compute nickel solubility in liquid
         lead-bismuth eutectic
@@ -194,9 +195,8 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-        if T <= 712:
-            return np.power(10, 5.2-3500/T)
-        return np.power(10, 1.7-1009/T)
+        return np.where(T <= 712, np.power(10, 5.2-3500/T),
+                        np.power(10, 1.7-1009/T))[()]
 
     @property
     def correlation_name(self) -> str:
@@ -221,7 +221,7 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
+                    verbose: bool = False) -> Union[float, np.ndarray]:
         """
         Correlation used to compute nickel solubility in liquid
         lead-bismuth eutectic
@@ -241,9 +241,8 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         -------
         solubility [wt.%] : float
         """
-        if T <= 742:
-            return np.power(10, 4.32-2933/T)
-        return np.power(10, 1.74-1006/T)
+        return np.where(T <= 742, np.power(10, 4.32-2933/T),
+                        np.power(10, 1.74-1006/T))[()]
 
     @property
     def correlation_name(self) -> str:
