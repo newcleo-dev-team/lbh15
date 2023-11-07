@@ -458,10 +458,9 @@ class LiquidMetalInterface(ABC):
             Temperature in [K]
         """
         temp_ok, error_message = self.check_temperature(T)
-        if temp_ok:
-            self.__T = T
-        else:
+        if not temp_ok:
             raise ValueError(error_message)
+        self.__T = T
 
     def __assign_p(self, p: float) -> None:
         """
@@ -473,12 +472,10 @@ class LiquidMetalInterface(ABC):
             p : float
             Pressure in [Pa]
         """
-        if p > 0:
-            self.__p = p
-        else:
-            raise ValueError("Pressure must be "
-                             "strictly positive, "
+        if p <= 0:
+            raise ValueError("Pressure must be strictly positive, "
                              f"{p:.2f} [Pa] was provided")
+        self.__p = p
 
     def __add_property(self, property_object: PropertyInterface) -> None:
         """
