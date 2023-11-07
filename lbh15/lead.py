@@ -73,7 +73,7 @@ class Lead(LiquidMetalInterface):
 
     @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
-        self._guess = LEAD_MELTING_TEMPERATURE * 1.7
+        self._guess = LEAD_BOILING_TEMPERATURE / 2.0
         super().__init__(p=p, **kwargs)
 
     def _set_constants(self) -> None:

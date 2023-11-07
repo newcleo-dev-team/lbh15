@@ -347,45 +347,47 @@ class LiquidMetalInterface(ABC):
         input_property : str
             name of the property used to perform the calculation
         """
+        # Manage the simplest case
         if input_property == 'T':
-            rvalue = input_value
+            return input_value
+
+        # Retrieve the correlation to solve
+        function_of_T = self.__properties[input_property].correlation
+        if function_of_T is None:
+            raise UnboundLocalError("No correlation found for property "
+                                    f"{input_property}! The temperature "
+                                    "value can not be computed!")
+
+        def function_to_solve(T: float, target: float) -> float:
+            return function_of_T(T, self.__p) - target
+
+        # Retrieve the initial guess, if any
+        helper = self.__properties[input_property].initialization_helper
+        if helper is not None and helper(input_value) is not None:
+            self._guess = helper(input_value) or 0.0
+
+        # Solve the correlation-derived function depending on the
+        # injectivity of the property correlation
+        if self.__properties[input_property].is_injective:
+            index = 0
+            res, _, ier, msg = fsolve(function_to_solve, x0=[self._guess],
+                                      args=(input_value), xtol=1e-10,
+                                      full_output=True)
         else:
-            function_of_T = None
-            helper = None
-            is_injective = False
-            if input_property in self.__properties:
-                function_of_T = self.__properties[input_property].correlation
-                helper = \
-                    self.__properties[input_property].initialization_helper
-                is_injective = self.__properties[input_property].is_injective
-
-            if function_of_T is None:
-                raise UnboundLocalError("No correlation found for property "
-                                        f"{input_property}! The temperature "
-                                        "value can not be computed!")
-
-            if helper(input_value) is not None:
-                self._guess = helper(input_value)
-
-            def function_to_solve(T: float, target: float) -> float:
-                return function_of_T(T, self.__p) - target
-
-            if is_injective:
-                res = fsolve(function_to_solve, x0=[self._guess],
-                             args=(input_value), xtol=1e-10)
-                rvalue = res[0]
-            else:
-                index = (self._roots_to_use[input_property]
-                         if input_property in self._roots_to_use else 0)
-                res, _, _, _ = fsolve(function_to_solve,
+            index = (self._roots_to_use[input_property]
+                     if input_property in self._roots_to_use else 0)
+            res, _, ier, msg = fsolve(function_to_solve,
                                       x0=[self._guess, 3*self._guess],
                                       args=(input_value), xtol=1e-10,
                                       full_output=True)
-                if len(res) > index - 1:
-                    rvalue = res[index]
-                else:
-                    rvalue = res[0]
-        return rvalue
+        # Raise an exception in case the solver did not converge
+        if ier == 0:
+            raise RuntimeError(f"Error: {msg}\n"
+                               "The temperature value can not be computed!")
+        # Select the desired root
+        if len(res) > index - 1:
+            return res[index]
+        return res[0]
 
     def __fill_instance_properties(self) -> None:
         """
