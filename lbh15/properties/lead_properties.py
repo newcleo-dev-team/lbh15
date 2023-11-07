@@ -60,13 +60,10 @@ class p_s(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-2:
-            rvalue = 800
-        elif 1e-2 <= property_value < 1e2:
-            rvalue = 1200
-        else:
-            rvalue = 2000
-
-        return rvalue
+            return 800
+        if 1e-2 <= property_value < 1e2:
+            return 1200
+        return 2000
 
     @property
     def correlation_name(self) -> str:
@@ -200,10 +197,11 @@ class rho(PropertyInterface):
         """
         rho_0 = 11441 - 1.2795*T
         u_s_val = u_s().correlation(T, p)
-        cp_val = cp_sobolev2011().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((1.0/u_s_val/u_s_val + T*alpha_val*alpha_val/cp_val)
-                        * (p - atm))
+        return rho_0 +\
+            (1.0 / u_s_val / u_s_val +
+             T * alpha_val * alpha_val /
+             cp_sobolev2011().correlation(T, p)) * (p - atm)
 
     @property
     def correlation_name(self) -> str:
@@ -391,9 +389,8 @@ class beta_s(PropertyInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        rho_val = rho().correlation(T, p)
         u_s_val = u_s().correlation(T, p)
-        return 1/(rho_val * u_s_val*u_s_val)
+        return 1 / (rho().correlation(T, p) * u_s_val * u_s_val)
 
     @property
     def range(self) -> List[float]:
@@ -451,8 +448,7 @@ class cp_sobolev2011(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (176.2 - 4.923e-2*T + 1.544e-5*T*T
-                - 1.524e6/T/T)
+        return 176.2 - T * (4.923e-2 - 1.544e-5 * T) - 1.524e6 / T / T
 
     @property
     def name(self) -> str:
@@ -532,8 +528,8 @@ class cp_gurvich1991(PropertyInterface):
         -------
         specific heat capacity in [J/(kg*K)] : float
         """
-        return (175.1 - 4.961e-2*T + 1.985e-5*T*T
-                - 2.099e-9*T*T*T - 1.524e6/T/T)
+        return 175.1 - T * (4.961e-2 - T * (1.985e-5 - 2.099e-9 * T))\
+            - 1.524e6 / T / T
 
     @property
     def name(self) -> str:
@@ -613,10 +609,9 @@ class h(PropertyInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return (176.2*(T - T_m0)
-                - 2.4615e-2*(T*T - T_m0*T_m0)
-                + 5.147e-6*(T*T*T - T_m0*T_m0*T_m0)
-                + 1.524e6*(1/T - 1/T_m0))
+        return T * (176.2 - T * (2.4615e-2 - 5.147e-6 * T))\
+            - T_m0 * (176.2 - T_m0 * (2.4615e-2 - 5.147e-6 * T_m0))\
+            + 1.524e6 * (1 / T - 1 / T_m0)
 
     @property
     def correlation_name(self) -> str:

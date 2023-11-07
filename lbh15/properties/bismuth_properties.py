@@ -60,13 +60,10 @@ class p_s(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-2:
-            rvalue = 800
-        elif 1e-2 <= property_value < 1e2:
-            rvalue = 1200
-        else:
-            rvalue = 2000
-
-        return rvalue
+            return 800
+        if 1e-2 <= property_value < 1e2:
+            return 1200
+        return 2000
 
     @property
     def correlation_name(self) -> str:
@@ -196,12 +193,12 @@ class rho(PropertyInterface):
         -------
         density in [kg/m^3] : float
         """
-        rho_0 = 10725 - 1.22*T
+        rho_0 = 10725 - 1.22 * T
         u_s_val = u_s().correlation(T, p)
-        cp_val = cp().correlation(T, p)
         alpha_val = alpha().correlation(T, p)
-        return rho_0 + ((1/u_s_val/u_s_val +
-                         T*alpha_val*alpha_val/cp_val) * (p - atm))
+        return rho_0 +\
+            (1 / u_s_val / u_s_val
+             + T * alpha_val * alpha_val / cp().correlation(T, p)) * (p - atm)
 
     @property
     def correlation_name(self) -> str:
@@ -324,7 +321,7 @@ class u_s(PropertyInterface):
         -------
         sound velocity in [m/s] : float
         """
-        return 1616 + 0.187*T - 2.2e-4*T*T
+        return 1616 + T * (0.187 - 2.2e-4 * T)
 
     @property
     def correlation_name(self) -> str:
@@ -389,9 +386,8 @@ class beta_s(PropertyInterface):
         -------
         isentropic compressibility in [1/Pa] : float
         """
-        rho_val = rho().correlation(T, p)
         u_s_val = u_s().correlation(T, p)
-        return 1/(rho_val * u_s_val*u_s_val)
+        return 1 / (rho().correlation(T, p) * u_s_val * u_s_val)
 
     @property
     def range(self) -> List[float]:
@@ -522,9 +518,8 @@ class h(PropertyInterface):
         -------
         specific enthalpy in [J/kg] : float
         """
-        return (118.2*(T - T_m0)
-                + 2.967e-3*(T*T - T_m0*T_m0)
-                - 7.183e6*(1/T - 1/T_m0))
+        return T * (118.2 + 2.967e-3 * T) - T_m0 * (118.2 + 2.967e-3 * T_m0)\
+            - 7.183e6 * (1 / T - 1 / T_m0)
 
     @property
     def correlation_name(self) -> str:

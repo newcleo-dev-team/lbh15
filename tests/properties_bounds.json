@@ -13,13 +13,13 @@
    },
    "cp_gurvich1991_Liquid_lead_specific_heat_capacity": {
       "min": 137.2871331822,
-      "T_at_min": 1682.5219886753,
+      "T_at_min": 1682.5219138071,
       "max": 147.78490806,
       "T_at_max": 600.6000160107
    },
    "cp_sobolev2011_Liquid_lead_specific_heat_capacity": {
       "min": 136.3486491575,
-      "T_at_min": 1568.664780487,
+      "T_at_min": 1568.6647571773,
       "max": 147.9771047426,
       "T_at_max": 600.6000160107
    },
@@ -189,7 +189,7 @@
       "min": -29673.2366576338,
       "T_at_min": 1999.9999618422,
       "max": 5.47e-08,
-      "T_at_max": 600.6014729651
+      "T_at_max": 600.6014640717
    },
    "H_lbh15_molar_enthalpy_variation_in_liquid_lead": {
       "min": 0.0004909043,
@@ -386,7 +386,7 @@
    "u_s_sobolev2011_Sound_velocity_in_liquid_bismuth": {
       "min": 1239.8000206579,
       "T_at_min": 1799.9999658548,
-      "max": 1652.5905840442,
+      "max": 1652.5905840441,
       "T_at_max": 544.6000143632
    },
    "cr_sol_gosse2014_chromium_solubility_in_liquid_bismuth": {
