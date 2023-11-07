@@ -714,14 +714,13 @@ class LiquidMetalInterface(ABC):
         return rvalue
 
     def __repr__(self) -> str:
-        rvalue = f"{type(self).__name__}(T={self.T:.2f}, "
+        rvalue = f"{type(self).__name__}(T={self.T:.2f}, p={self.p:.2f}, "
         for key in self.__properties:
-            property_name = key.replace("_"+type(self).__name__, "")
-            attr_value = getattr(self, property_name)
+            attr_value = getattr(self, key)
             if attr_value < 1e-2:
-                rvalue += f"{property_name}={attr_value:.2e}, "
+                rvalue += f"{key}={attr_value:.2e}, "
             else:
-                rvalue += f"{property_name}={attr_value:.2f}, "
+                rvalue += f"{key}={attr_value:.2f}, "
         rvalue = rvalue[:-2]
         rvalue += ")"
         return rvalue
