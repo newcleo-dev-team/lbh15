@@ -387,8 +387,11 @@ class LiquidMetalInterface(ABC):
         """
         Fills instance properties.
         """
-        # Build the instance dict where storing the property objects as
-        # values together with their name as keys
+        # Build the list attribute storing all the property objects
+        # loaded from loaded modules and the dict attribute storing
+        # all the corresponding available correlations. Both these actions
+        # are performed only once, when an instance is built, that is,
+        # when the list attribute is empty.
         if len(self._available_properties_list) == 0:
             self._available_properties_list = self.__load_properties()
             self._available_properties_list += self.__load_custom_properties()
@@ -398,21 +401,14 @@ class LiquidMetalInterface(ABC):
 
         for property_object in self._available_properties_list:
             name = property_object.name
-            # always add property if specific correlation is not specified
-            add_property = (not self.__corr2use or
-                            name not in self.__corr2use.keys())
-            # if correlation was specified, check that correlation names match
-            if not add_property:
-                add_property = (property_object.correlation_name ==
-                                self.__corr2use[name])
-            if add_property:
+            # Add the property in case the specific correlation is not
+            # specified or it is specified and the correlation names
+            # does not match with what already stored
+            if not self.__corr2use or name not in self.__corr2use.keys() or \
+                property_object.correlation_name == self.__corr2use[name]:
                 self.__add_property(property_object)
 
-        keys_to_remove = self.__check_properties()
-        for key_to_remove in keys_to_remove:
-            self.__corr2use.pop(key_to_remove)
-            if key_to_remove in self._correlations_to_use:
-                self._correlations_to_use.pop(key_to_remove)
+        self.__check_properties()
 
     def __fill_class_attributes(self, kwargs) -> None:
         """
@@ -502,7 +498,7 @@ class LiquidMetalInterface(ABC):
         setattr(self, property_object.name+"_info",
                 new_property_info)
 
-    def __check_properties(self) -> List[str]:
+    def __check_properties(self) -> None:
         keys_to_remove = []
         update_properties = False
         for key in self.__corr2use.keys():
@@ -549,7 +545,9 @@ class LiquidMetalInterface(ABC):
         if update_properties:
             self.__fill_instance_properties()
 
-        return keys_to_remove
+        for key in keys_to_remove:
+            self.__corr2use.pop(key)
+            self._correlations_to_use.pop(key)
 
     @classmethod
     def __load_custom_properties(cls) -> List[PropertyInterface]:
