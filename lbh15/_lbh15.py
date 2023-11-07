@@ -9,6 +9,7 @@ import copy
 from abc import ABC
 from abc import abstractmethod
 from collections import defaultdict
+from functools import partial
 from typing import Dict
 from typing import List
 from typing import Tuple
@@ -489,14 +490,10 @@ class LiquidMetalInterface(ABC):
         """
         key = property_object.name
         self.__properties[key] = property_object
-
-        def new_property_info(print_info: bool = True,
-                              n_tab: int = 0) -> Union[str, None]:
-            return self.__properties[key].info(self.__T, self.__p,
-                                               print_info, n_tab)
-
+        
         setattr(self, property_object.name+"_info",
-                new_property_info)
+                lambda : self.__properties[key].info(self.__T, self.__p,
+                                                     True, 0))
 
     def __check_properties(self) -> None:
         keys_to_remove = []
