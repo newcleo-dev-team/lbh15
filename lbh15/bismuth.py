@@ -54,7 +54,7 @@ class Bismuth(LiquidMetalInterface):
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
-    _available_properties_list: List[PropertyInterface] = []
+    _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}
     _properties_modules_list: List[str] = \
         ['lbh15.properties.bismuth_thermochemical_properties\

@@ -9,7 +9,6 @@ import copy
 from abc import ABC
 from abc import abstractmethod
 from collections import defaultdict
-from functools import partial
 from typing import Dict
 from typing import List
 from typing import Tuple
@@ -57,7 +56,7 @@ class LiquidMetalInterface(ABC):
     _default_corr_to_use: Dict[str, str] = {}
     _properties_modules_list: List[str] = []
     _custom_properties_path: Dict[str, List[str]] = {}
-    _available_properties_list: List[PropertyInterface] = []
+    _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}
     __p: float = 0
     __T: float = 0
@@ -388,28 +387,31 @@ class LiquidMetalInterface(ABC):
         """
         Fills instance properties.
         """
-        # Build the list attribute storing all the property objects
+        # Build the dict attribute storing all the property objects
         # loaded from loaded modules and the dict attribute storing
         # all the corresponding available correlations. Both these actions
         # are performed only once, when an instance is built, that is,
-        # when the list attribute is empty.
-        if len(self._available_properties_list) == 0:
-            self._available_properties_list = self.__load_properties()
-            self._available_properties_list += self.__load_custom_properties()
+        # when the property dict attribute is empty.
+        if len(self._available_properties_dict) == 0:
+            available_properties_list = self.__load_properties()
+            available_properties_list += self.__load_custom_properties()
+            self._available_properties_dict = {e.name + '__' +
+                                               e.correlation_name: e for e in
+                                               available_properties_list}
             self._available_correlations_dict = \
                 self.__extract_available_correlations(
-                    self._available_properties_list)
+                    available_properties_list)
 
-        for property_object in self._available_properties_list:
-            name = property_object.name
+        for key, property_object in self._available_properties_dict.items():
+            name = key.split("__")[0]
             # Add the property in case the specific correlation is not
             # specified or it is specified and the correlation names
             # does not match with what already stored
-            if not self.__corr2use or name not in self.__corr2use.keys() or \
-                property_object.correlation_name == self.__corr2use[name]:
+            if not self.__corr2use or name not in self.__corr2use.keys()\
+                    or key.split("__")[1] == self.__corr2use[name]:
                 self.__add_property(property_object)
 
-        self.__check_properties()
+        self.__align_corrs_to_properties()
 
     def __fill_class_attributes(self, kwargs) -> None:
         """
@@ -425,7 +427,8 @@ class LiquidMetalInterface(ABC):
                              "time can be used for initialization. "
                              f"{len(kwargs)} were provided")
 
-        valid_prop = ['T'] + [p.name for p in self._available_properties_list]
+        valid_prop = ['T'] + [p.split("__")[0] for p in
+                              self._available_properties_dict]
         input_property = list(kwargs.keys())[0]
         input_value = kwargs[input_property]
         if input_property not in valid_prop:
@@ -490,31 +493,37 @@ class LiquidMetalInterface(ABC):
         """
         key = property_object.name
         self.__properties[key] = property_object
-        
         setattr(self, property_object.name+"_info",
-                lambda : self.__properties[key].info(self.__T, self.__p,
-                                                     True, 0))
+                lambda: self.__properties[key].info(self.__T, self.__p,
+                                                    True, 0))
 
-    def __check_properties(self) -> None:
-        keys_to_remove = []
-        update_properties = False
-        for key in self.__corr2use.keys():
-            corr_name = self.__corr2use[key]
+    def __align_corrs_to_properties(self) -> None:
+        """
+        This method updates the instance correlation dictionary by
+        aligning it to the instance property objects dict. In particular,
+        it cleans the dict containing the correlations to use and,
+        accordingly, it adapts the property objects dict
+        """
+        # Copy the corrs dict for freezing the dict to loop over
+        __corr2use_ref = copy.deepcopy(self.__corr2use)
+        for key in __corr2use_ref.keys():
+            corr_name = __corr2use_ref[key]
             is_in_default = key in self._default_corr_to_use
-            remove_property = False
 
             if key not in self.__properties:
                 if not is_in_default:
-                    warnings.warn(f"Could not find property '{key}' "
+                    warnings.warn(f"Could not find '{key}' property "
                                   f"implementing '{corr_name}' correlation. "
-                                  "\nGoing to restore package default one, "
+                                  f"\nGoing to restore {key} property from "
+                                  f"the {type(self)}-related modules, "
                                   "if any.",
                                   stacklevel=5)
-                    remove_property = True
+                    self.__remove_property(key)
                     if key in self._available_correlations_dict:
-                        self.__corr2use[key] = \
-                            self._available_correlations_dict[key][-1]
-                        update_properties = True
+                        self.__add_property(
+                            self._available_properties_dict[
+                                key + "__" +
+                                self._available_correlations_dict[key][-1]])
                 else:
                     def_corr_name = self._default_corr_to_use[key]
                     warnings.warn(f"Could not find property '{key}' "
@@ -523,8 +532,9 @@ class LiquidMetalInterface(ABC):
                                   f"'{def_corr_name}'.",
                                   stacklevel=5)
                     self.__corr2use[key] = def_corr_name
-                    remove_property = True
-                    update_properties = True
+                    self.__add_property(
+                        self._available_properties_dict[
+                            key + "__" + def_corr_name])
             else:
                 if corr_name != self.__properties[key].correlation_name:
                     warnings.warn(f"Could not find property '{key}' "
@@ -532,19 +542,8 @@ class LiquidMetalInterface(ABC):
                                   "\nGoing to remove it from correlations "
                                   "to use.",
                                   stacklevel=5)
-                    remove_property = not is_in_default
-                    if not remove_property:
-                        self.__corr2use[key] = self._default_corr_to_use[key]
-
-            if remove_property:
-                keys_to_remove.append(key)
-
-        if update_properties:
-            self.__fill_instance_properties()
-
-        for key in keys_to_remove:
-            self.__corr2use.pop(key)
-            self._correlations_to_use.pop(key)
+                    self.__corr2use[key] = \
+                        self.__properties[key].correlation_name
 
     @classmethod
     def __load_custom_properties(cls) -> List[PropertyInterface]:
@@ -617,7 +616,7 @@ class LiquidMetalInterface(ABC):
 
     @staticmethod
     def __extract_available_correlations(
-        prop_obj_list: List[PropertyInterface]) -> Dict[str, List[str]]:
+            prop_obj_list: List[PropertyInterface]) -> Dict[str, List[str]]:
         """
         Private static method for extracting the available correlations
         from the list collecting all the available property classes.
@@ -639,6 +638,27 @@ class LiquidMetalInterface(ABC):
         for prop in prop_obj_list:
             avail_corrs[prop.name].append(prop.correlation_name)
         return avail_corrs
+
+    def __remove_property(self, property_name: str) -> None:
+        """
+        Private method for removing the property name passed
+        as argument from both the instance and the class dicts
+        storing the properties currently used together with
+        their corresponding correlation.
+
+        Parameters
+        ----------
+        property_name : str
+            name of the property to remove from both the instance and
+            the class dicts storing the properties currently used together with
+            their corresponding correlation.
+
+        Returns
+        -------
+        None
+        """
+        self.__corr2use.pop(property_name)
+        self._correlations_to_use.pop(property_name)
 
     @abstractmethod
     def _set_constants(self) -> None:
