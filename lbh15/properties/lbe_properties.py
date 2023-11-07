@@ -9,7 +9,6 @@ from .interface import range_warning
 from .._decorators import typecheck_for_method
 from .._commons import LBE_MELTING_TEMPERATURE as T_m0
 from .._commons import LBE_BOILING_TEMPERATURE as T_b0
-from .._commons import SOBOLEV_KEYWORD
 
 
 class p_s(PropertyInterface):
@@ -75,7 +74,7 @@ class p_s(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:
@@ -326,7 +325,7 @@ class u_s(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:
@@ -452,7 +451,7 @@ class cp(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def is_injective(self) -> bool:
@@ -528,7 +527,7 @@ class h(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:
@@ -711,7 +710,7 @@ class k(PropertyInterface):
         """
         str : name of the correlation
         """
-        return SOBOLEV_KEYWORD
+        return 'sobolev2011'
 
     @property
     def range(self) -> List[float]:
