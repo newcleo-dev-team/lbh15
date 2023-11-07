@@ -10,7 +10,7 @@ from lbh15.properties.interface import range_warning
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M
-from ..._commons import OXYGEN_MOLAR_MASS as M_o
+from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import typecheck_for_method
 
 
@@ -42,11 +42,8 @@ class OxygenPartialPressureInterface(PropertyInterface):
             Temperature guess in [K]
         """
         if property_value < 1e-4:
-            rvalue = 650
-        else:
-            rvalue = 1500
-
-        return rvalue
+            return 650
+        return 1500
 
     @property
     def name(self) -> str:
@@ -108,7 +105,8 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-118600/T)+14.1))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-118600 / T + 14.1))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -155,7 +153,8 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-117170/T)+12.9))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-117170 / T + 12.9))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -202,7 +201,8 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-121349/T)+16.906))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-121349 / T + 16.906))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -249,7 +249,8 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-119411/T)+12.222))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-119411 / T + 12.222))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -296,7 +297,8 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-105855/T)+18.661))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-105855 / T + 18.661))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -343,7 +345,8 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-119840/T)+15.794))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-119840 / T + 15.794))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -390,7 +393,8 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-120376/T)+16.255))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-120376 / T + 16.255))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -437,7 +441,8 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-116717/T)+12.699))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-116717 / T + 12.699))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -484,7 +489,8 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
         partial pressure divided by concentration
         squared [atm.wt.%^-2] : float
         """
-        return np.exp((2/R)*((-106395/T)+10.254))*(M/M_o)**2
+        return np.power(10, 2 / 2.3 / R * (-106395 / T + 10.254))\
+            * M * M / M_O / M_O
 
     @property
     def correlation_name(self) -> str:
@@ -527,10 +533,9 @@ class MolarEnthalpy(PropertyInterface):
 
         Returns
         -------
-        concentration [J.mol^-1] : float
+        molar enthalpy [J/mol] : float
         """
-        h_obj = h()
-        return h_obj.correlation(T, p)*(M*10**-3)
+        return h().correlation(T, p) * M / 1000
 
     @property
     def name(self) -> str:
@@ -579,7 +584,8 @@ class MolarEntropy(PropertyInterface):
                     verbose: bool = False) -> float:
         """
         Correlation used to compute molar entropy
-        variation in liquid lead
+        variation in liquid lead. Heat capacity correlation
+        by Sobolev2011 is adopted
 
         Parameters
         ----------
@@ -594,13 +600,12 @@ class MolarEntropy(PropertyInterface):
 
         Returns
         -------
-        concentration [J/(mol.K)] : float
+        molar entropy [J/(mol*K)] : float
         """
-        return ((M*10**-3)*(
-                176.2*np.log(T/T_m0)
-                - 4.923e-2*(T - T_m0)
-                + ((1.544e-5)/2)*((T*T) - T_m0**2)
-                - ((1.524e6)/-2)*((1/(T*T)) - T_m0**-2)))
+        return M / 1000 * (176.2 * np.log(T / T_m0)
+                           - 4.923e-2 * (T - T_m0)
+                           + 1.544e-5 / 2 * (T * T - T_m0 * T_m0)
+                           + 1.524e6 / 2 * (1 / T / T - 1 / T_m0 / T_m0))
 
     @property
     def name(self) -> str:
@@ -649,7 +654,8 @@ class GibbsFreeEnergy(PropertyInterface):
                     verbose: bool = False) -> float:
         """
         Correlation used to compute Gibbs free energy
-        variation in liquid lead
+        variation in liquid lead. Heat capacity correlation
+        by Sobolev2011 is adopted
 
         Parameters
         ----------
@@ -664,11 +670,10 @@ class GibbsFreeEnergy(PropertyInterface):
 
         Returns
         -------
-        concentration [J/mol] : float
+        gibbs free energy [J/mol] : float
         """
-        H_obj = MolarEnthalpy()
-        S_obj = MolarEntropy()
-        return H_obj.correlation(T, p) - T*S_obj.correlation(T, p)
+        return MolarEnthalpy().correlation(T, p)\
+            - T * MolarEntropy().correlation(T, p)
 
     @property
     def name(self) -> str:
