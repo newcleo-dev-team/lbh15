@@ -281,6 +281,8 @@ Go to :ref:`API Guide` to see the full code documentation.
 
 lbh15 is released under the GNU Lesser General Public License 3 (see :any:`License`).
 
+lbh15 is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
+
 
 =================
 Project Structure
