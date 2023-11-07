@@ -11,6 +11,7 @@ from ._commons import BISMUTH_VAPORISATION_HEAT
 from ._commons import BISMUTH_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
 from ._decorators import typecheck_for_method
+from .properties.interface import PropertyInterface
 
 
 class Bismuth(LiquidMetalInterface):
@@ -53,6 +54,7 @@ class Bismuth(LiquidMetalInterface):
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
+    _available_properties_list: List[PropertyInterface] = []
     _properties_modules_list: List[str] = \
         ['lbh15.properties.bismuth_thermochemical_properties\
 .solubility_in_bismuth',
