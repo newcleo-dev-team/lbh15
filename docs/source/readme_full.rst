@@ -684,10 +684,14 @@ Advanced usage includes the possibility of adding new properties and new physica
 Learn More
 ==========
 
-This section contains in a first part some informations about the correlations linked to the oxygen control
-in lead and LBE systems. More precisely, we develop how to obtain the relations provided in the lbh15.
-The second part contains an example of application of the complete package, simulating an heat variation and 
-some of its consequences in a liquid lead system.
+This section can be subdivided into two parts:
+
+- the first one describes the oxygen-related correlations implemented in *lbh15*
+  and how they have been obtained;
+
+- the second one describes a tutorial application coming together with *lbh15*,
+  which is a representation of a simple oxygen control system applied to a
+  liquid lead volume.
 
 .. include:: learn_more.rst
  
