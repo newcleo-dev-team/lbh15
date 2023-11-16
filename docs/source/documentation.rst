@@ -1,4 +1,4 @@
-lbh15 package
+lbh15 Package
 =============
 
 .. toctree::

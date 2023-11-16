@@ -433,7 +433,7 @@ This section shows a few examples of basic usage of *lbh15*.
 .. _Initialization from properties:
 
 +++++++++++++++++++++++++++++++++++++++++++++++
-Initialization from properties (*experimental*)
+Initialization from Properties (*experimental*)
 +++++++++++++++++++++++++++++++++++++++++++++++
 
 The *lbh15* package gives the possibility to instantiate a liquid metal object by simply knowing the value of one of its
@@ -702,7 +702,7 @@ API Guide
 =========
 .. only:: html
 
-  This section provides the guide for the application programming interface.
+  This section provides the guide for the Application Programming Interface.
 
 .. toctree::
    :maxdepth: 2
