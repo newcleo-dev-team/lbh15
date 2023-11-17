@@ -51,9 +51,9 @@ class LowerLimitSaturationIron(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-57190 / R / T - 21.1 / R
-                      + np.log(OxygenSolubility().correlation(T, p))
-                      + np.log(LeadChemicalActivity().correlation(T, p)))
+        return np.exp(-57190 / R / T - 21.1 / R)\
+            * OxygenSolubility().correlation(T, p)\
+            * LeadChemicalActivity().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -152,9 +152,9 @@ class LowerLimitSaturationChromium(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-158900 / R / T - 13.65 / R
-                      + np.log(OxygenSolubility().correlation(T, p))
-                      + np.log(LeadChemicalActivity().correlation(T, p)))
+        return np.exp(-158900 / R / T - 13.65 / R)\
+            * OxygenSolubility().correlation(T, p)\
+            * LeadChemicalActivity().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -225,9 +225,9 @@ class LowerLimitSaturationNickel(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-18040 / R / T - 11.7 / R
-                      + np.log(OxygenSolubility().correlation(T, p))
-                      + np.log(LeadChemicalActivity().correlation(T, p)))
+        return np.exp(-18040 / R / T - 11.7 / R)\
+            * OxygenSolubility().correlation(T, p)\
+            * LeadChemicalActivity().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -326,9 +326,9 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-235855 / R / T - 9.75 / R
-                      + np.log(OxygenSolubility().correlation(T, p))
-                      + np.log(LeadChemicalActivity().correlation(T, p)))
+        return np.exp(-235855 / R / T - 9.75 / R)\
+            * OxygenSolubility().correlation(T, p)\
+            * LeadChemicalActivity().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -427,9 +427,9 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(-339770 / R / T + 5.35 / R
-                      + np.log(OxygenSolubility().correlation(T, p))
-                      + np.log(LeadChemicalActivity().correlation(T, p)))
+        return np.exp(-339770 / R / T + 5.35 / R)\
+            * OxygenSolubility().correlation(T, p)\
+            * LeadChemicalActivity().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -563,10 +563,8 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            2 / 3 *
-            np.log(ChromiumSolubilityGosse2014().correlation(T, p)))\
-            * LowerLimitSaturationChromium().correlation(T, p)
+        return LowerLimitSaturationChromium().correlation(T, p)\
+            * np.power(ChromiumSolubilityGosse2014().correlation(T, p), 2 / 3)
 
     @property
     def correlation_name(self) -> str:
@@ -614,10 +612,9 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            2 / 3 *
-            np.log(ChromiumSolubilityCourouau2004().correlation(T, p)))\
-            * LowerLimitSaturationChromium().correlation(T, p)
+        return LowerLimitSaturationChromium().correlation(T, p)\
+            * np.power(ChromiumSolubilityCourouau2004().correlation(T, p),
+                       2 / 3)
 
     @property
     def correlation_name(self) -> str:
@@ -665,10 +662,9 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            2 / 3 *
-            np.log(ChromiumSolubilityMartynov1998().correlation(T, p)))\
-            * LowerLimitSaturationChromium().correlation(T, p)
+        return LowerLimitSaturationChromium().correlation(T, p)\
+            * np.power(ChromiumSolubilityMartynov1998().correlation(T, p),
+                       2 / 3)
 
     @property
     def correlation_name(self) -> str:
@@ -752,9 +748,8 @@ class LowerLimitNickelMartinelli2010(LowerLimitNickelInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            np.log(NickelSolubilityMartinelli2010().correlation(T, p)))\
-            * LowerLimitSaturationNickel().correlation(T, p)
+        return LowerLimitSaturationNickel().correlation(T, p)\
+            * NickelSolubilityMartinelli2010().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -802,9 +797,8 @@ class LowerLimitNickelGosse2014(LowerLimitNickelInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            np.log(NickelSolubilityGosse2014().correlation(T, p)))\
-            * LowerLimitSaturationNickel().correlation(T, p)
+        return LowerLimitSaturationNickel().correlation(T, p)\
+            * NickelSolubilityGosse2014().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -917,9 +911,8 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            0.75 * np.log(IronSolubilityGosse2014().correlation(T, p)))\
-            * LowerLimitSaturationIron().correlation(T, p)
+        return LowerLimitSaturationIron().correlation(T, p)\
+            * np.power(IronSolubilityGosse2014().correlation(T, p), 0.75)
 
     @property
     def correlation_name(self) -> str:
@@ -968,9 +961,8 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
         -------
         concentration [wt.%] : float
         """
-        return np.exp(
-            0.75 * np.log(IronSolubilityWeeks1969().correlation(T, p)))\
-            * LowerLimitSaturationIron().correlation(T, p)
+        return LowerLimitSaturationIron().correlation(T, p)\
+            * np.power(IronSolubilityWeeks1969().correlation(T, p), 0.75)
 
     @property
     def correlation_name(self) -> str:
