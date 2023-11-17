@@ -177,10 +177,8 @@ mu:
 
 ----
 
-.. _ Lead class attributes:
-
 :class:`.Lead` Class Attributes
-===============================
+*******************************
 
 .. automodule:: lbh15.lead
     :members:

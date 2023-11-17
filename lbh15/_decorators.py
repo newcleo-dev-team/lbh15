@@ -3,6 +3,7 @@ implementation of package functions"""
 import collections.abc
 import inspect
 import warnings
+from functools import wraps
 import numpy as np
 
 warnings.simplefilter("always")
@@ -53,6 +54,7 @@ def typecheck_for_method(function):
     applied to the same method, the current one must be applied
     as first.
     """
+    @wraps(function)
     def wrapper(*args, **kwargs):
         # Retrieve the parameters that should be passed to the function
         signature = inspect.signature(function)
@@ -81,6 +83,7 @@ def range_warning(function):
     Decorator used to check validity range
     of correlation
     """
+    @wraps(function)
     def wrapper(*args):
         range_lim = args[0].range
         p_name = args[0].long_name

@@ -28,11 +28,11 @@ class LiquidMetalInterface(ABC):
     Parameters
     ----------
     p : float, optional
-        Pressure in [Pa], by default atmospheric pressure, i.e.,
+        Pressure in [Pa], by default the atmospheric pressure value, i.e.,
         101325.0 Pa
     **kwargs : dict
-        Dictionary that specifies the quantity from which the parameter shall
-        be initialized. The default available ones are:
+        One-item dictionary that specifies the quantity which the object shall
+        be initialized from. The default available ones are:
 
         - 'T' : temperature [K]
         - 'p_s' : saturation vapour pressure [Pa]
@@ -81,43 +81,43 @@ class LiquidMetalInterface(ABC):
     @property
     def T_m0(self) -> float:
         """
-        float : melting temperature [K]
+        float : melting temperature :math:`[K]`
         """
         return self._T_m0
 
     @property
     def Q_m0(self) -> float:
         """
-        float : melting latent heat [J/kg]
+        float : melting latent heat :math:`[J/kg]`
         """
         return self._Q_m0
 
     @property
     def T_b0(self) -> float:
         """
-        float : boiling temperature [K]
+        float : boiling temperature :math:`[K]`
         """
         return self._T_b0
 
     @property
     def Q_b0(self) -> float:
         """
-        float : vaporisation heat [J/kg]
+        float : vaporisation heat :math:`[J/kg]`
         """
         return self._Q_b0
 
     @property
     def M(self) -> float:
         """
-        float : metal molar mass [g/mol]
+        float : metal molar mass :math:`[g/mol]`
         """
         return self._M
 
     @property
     def p(self) -> float:
         """
-        float : pressure adopted for property calculation, i.e.,
-        atmospheric pressure
+        float : pressure adopted for property calculation :math:`[Pa]`, \
+            i.e., atmospheric pressure
         """
         return self.__p
 
@@ -125,6 +125,8 @@ class LiquidMetalInterface(ABC):
     @typecheck_for_method
     def p(self, p: float) -> None:
         """
+        p(p: float) -> None
+
         Set liquid metal pressure
 
         Parameters
@@ -137,7 +139,7 @@ class LiquidMetalInterface(ABC):
     @property
     def T(self) -> float:
         """
-        float : temperature used to compute properties [K]
+        float : temperature used to compute properties :math:`[K]`
         """
         return self.__T
 
@@ -157,19 +159,20 @@ class LiquidMetalInterface(ABC):
     @property
     def Pr(self) -> float:
         """
-        float : Prandtl number [-]
+        float : Prandtl number :math:`[-]`
         """
         return self.cp * self.mu / self.k
 
     @property
     def correlations_used(self) -> Dict[str, str]:
         """
-        Returns the dictionary with the specific
-        correlation used for each specified property
+        Returns the dictionary defining the correlation used for the \
+        corresponding property. Only properties are considered for \
+        which a specific correlation has been chosen a priori.
 
         Returns
         -------
-        dict
+        Dict[str, str]
         """
         return copy.deepcopy(self.__corr2use)
 
@@ -177,13 +180,14 @@ class LiquidMetalInterface(ABC):
     def change_correlation_to_use(self, property_name: str,
                                   correlation_name: str) -> None:
         """
-        Changes property correlation, if property is defined as instance
-        attribute.
+        Changes property correlation if property is defined as instance
+        attribute, otherwise a warning message is returned without
+        applying any change.
 
         Parameters
         ----------
         property_name : str
-            Name of the thermophysical property
+            Name of the property
         correlation_name : str
             Name of the correlation
         """
@@ -216,20 +220,19 @@ class LiquidMetalInterface(ABC):
     @typecheck_for_method
     def check_temperature(self, T: float) -> Tuple[bool, str]:
         """
-        Checks that the provided temperature
-        belongs to the correct temperature range, i.e.,
-        liquid temperature range.
+        Checks whether the provided temperature value belongs to the valid \
+            temperature range, i.e., the liquid temperature range.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
 
         Returns
         -------
-        (bool, str): tuple
+        Tuple[bool, str]:
             bool:
-                True if check is ok, False otherwise
+                `True` if check is ok, `False` otherwise
             str:
                 error message (if any) associated
                 to the temperature check
@@ -254,12 +257,12 @@ class LiquidMetalInterface(ABC):
     @classmethod
     def properties_for_initialization(cls) -> List[str]:
         """
-        List of available properties that can be used for
-        initialization
+        Returns the list of the available properties an instance can be
+        initialized from.
 
         Returns
         -------
-        list
+        List[str]
         """
         obj_list = cls.__load_properties()
         obj_list += cls.__load_custom_properties()
@@ -269,11 +272,12 @@ class LiquidMetalInterface(ABC):
     @classmethod
     def correlations_available(cls) -> Dict[str, List[str]]:
         """
-        Dictionary of correlations available for each property
+        Returns the dictionary containing the available correlations \
+        for each property.
 
         Returns
         -------
-        dict
+        Dict[str, List[str]]
         """
         obj_list = cls.__load_properties()
         obj_list += cls.__load_custom_properties()
@@ -284,7 +288,7 @@ class LiquidMetalInterface(ABC):
     def set_correlation_to_use(cls, property_name: str,
                                correlation_name: str) -> None:
         """
-        Set specific correlation to use for property
+        Sets the correlation to use for the specified property.
 
         Parameters
         ----------
@@ -299,17 +303,18 @@ class LiquidMetalInterface(ABC):
     @typecheck_for_method
     def set_root_to_use(cls, property_name: str, root_index: int) -> None:
         """
-        Set which temperature root shall be used for initialization
-        from property. Temperature roots are sorted in ascending order, i.e,
-        T_i <= T_j with i < j. Used only if property correlation
-        is not injective
+        Sets the index of the root to use for computing the temperature \
+        from the correlation function of the property the instantiation \
+        is based on. Temperature roots are sorted in ascending order, i.e, \
+        :math:`T_i <= T_j`, with :math:`i < j`. Used only if property \
+        correlation is not injective.
 
         Parameters
         ----------
         property_name : str
             Name of the property
         root_index : int
-            Index used to choose the temperature root
+            Index of the temperature root to use
         """
         cls._roots_to_use[property_name] = root_index
 
@@ -317,12 +322,13 @@ class LiquidMetalInterface(ABC):
     @typecheck_for_method
     def set_custom_properties_path(cls, file_path: str) -> None:
         """
-        Set absolute path of file where looking for custom properties
+        Sets the absolute path of the file where looking for \
+        custom properties.
 
         Parameters
         ----------
         file_path : str
-            absolute path of file where custom properties are implemented
+            absolute path of the file where custom properties are implemented
         """
         char = '/' if 'Linux' in platform.system() else '\\'
         res = file_path.split(char)
@@ -336,24 +342,27 @@ class LiquidMetalInterface(ABC):
     @classmethod
     def correlations_to_use(cls) -> Dict[str, str]:
         """
-        Returns the dictionary with the specific
-        correlation to use for each specified property
+        Returns the dictionary defining the correlation used for the \
+        corresponding property. Only properties are considered for \
+        which a specific correlation has been chosen a priori.
 
         Returns
         -------
-        dict
+        Dict[str, str]
         """
         return copy.deepcopy(cls._correlations_to_use)
 
     @classmethod
     def roots_to_use(cls) -> Dict[str, int]:
         """
-        Returns the dictionary with temperature
-        roots to use for each specified property
+        Returns the dictionary containing, for each specified property, \
+        the index of the root to use for identifying the temperature \
+        of the liquid metal. Useful when the initialization is \
+        performed from a property whose correlation is not injective.
 
         Returns
         -------
-        dict
+        Dict[str, int]
         """
         return copy.deepcopy(cls._roots_to_use)
 
