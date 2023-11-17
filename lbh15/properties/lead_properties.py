@@ -4,7 +4,7 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from .interface import PropertyInterface
-from .interface import range_warning
+from .._decorators import range_warning
 from .._decorators import typecheck_for_method
 from .._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from .._commons import LEAD_BOILING_TEMPERATURE as T_b0

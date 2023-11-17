@@ -6,7 +6,6 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from ..interface import PropertyInterface
-from ..interface import range_warning
 from .solubility_in_lead import OxygenSolubility
 from .solubility_in_lead import ChromiumSolubilityGosse2014
 from .solubility_in_lead import ChromiumSolubilityAlden1958
@@ -14,6 +13,7 @@ from .solubility_in_lead import ChromiumSolubilityVenkatraman1988
 from .solubility_in_lead import NickelSolubility
 from .solubility_in_lead import IronSolubility
 from .solubility_in_lead import SiliconSolubility
+from ..._decorators import range_warning
 from ..._decorators import typecheck_for_method
 
 

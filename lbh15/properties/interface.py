@@ -1,7 +1,6 @@
 """Module with the definition of thermophysical property object base class,
 i.e., PropertyInterface. Definition of decorator
 for validity range check as well."""
-import warnings
 from abc import ABC
 from abc import abstractmethod
 from typing import List
@@ -9,31 +8,8 @@ from typing import Union
 from numpy import nan
 from scipy.optimize import minimize_scalar
 from scipy.constants import atm
+from .._decorators import range_warning
 from .._decorators import typecheck_for_method
-
-warnings.simplefilter("always")
-
-
-def range_warning(function):
-    """
-    Decorator used to check validity range
-    of correlation
-    """
-    def wrapper(*args):
-        range_lim = args[0].range
-        p_name = args[0].long_name
-        temp = args[1]
-        if hasattr(temp, "__len__"):
-            temp = temp[0]
-        if temp < range_lim[0] or temp > range_lim[1]:
-            if (len(args) == 4) and args[3]:
-                warnings.warn(f"The {p_name} is requested at "
-                              f"temperature value of {temp:.2f} K "
-                              "that is not in validity range "
-                              f"[{range_lim[0]:.2f}, {range_lim[1]:.2f}] K",
-                              stacklevel=3)
-        return function(*args)
-    return wrapper
 
 
 class PropertyInterface(ABC):

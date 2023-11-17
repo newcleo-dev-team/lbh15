@@ -6,12 +6,12 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from ..interface import PropertyInterface
-from ..interface import range_warning
 from ..bismuth_properties import h
 from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
 from ..._commons import BISMUTH_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_O
+from ..._decorators import range_warning
 from ..._decorators import typecheck_for_method
 
 

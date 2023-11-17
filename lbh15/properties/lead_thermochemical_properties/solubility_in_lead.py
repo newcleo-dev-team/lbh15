@@ -4,7 +4,7 @@ from typing import List
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
-from lbh15.properties.interface import range_warning
+from ..._decorators import range_warning
 from ..._decorators import typecheck_for_method
 
 
