@@ -42,39 +42,39 @@ class Lead(LiquidMetalInterface):
         - **mu** (float) : dynamic viscosity :math:`[Pa \cdot s]`
         - **r** (float) : electrical resistivity :math:`[Ohm \cdot m]`
         - **k** (float) : thermal conductivity :math:`[W/(m \cdot K)]`
-        - **H** : molar enthalpy :math:`[J/mol]`
-        - **S** : molar entropy :math:`[J/(mol \cdot K)]`
-        - **G** : Gibbs free energy :math:`[J/mol]`
-        - **fe_sol** : Iron solubility :math:`[wt.\%]`
-        - **ni_sol** : Nickel solubility :math:`[wt.\%]`
-        - **cr_sol** : Chromium solubility :math:`[wt.\%]`
-        - **si_sol** : Silicon solubility :math:`[wt.\%]`
-        - **o_sol** : Oxygen solubility :math:`[wt.\%]`
-        - **o_dif** : Oxygen diffusivity :math:`[cm^2 / s]`
-        - **fe_dif** : Iron diffusivity :math:`[cm^2 / s]`
-        - **co_dif** : Cobalt diffusivity :math:`[cm^2 / s]`
-        - **se_dif** : Selenium diffusivity :math:`[cm^2 / s]`
-        - **in_dif** : Indium diffusivity :math:`[cm^2 / s]`
-        - **te_dif** : Tellurium diffusivity :math:`[cm^2 / s]`
-        - **o_pp** : Oxygen partial pressure divided by Oxygen concentration \
-            squared :math:`[atm / wt.\%^2]`
-        - **lim_fe_sat** : Lower limit of Oxygen concentration with \
+        - **H** (float) : molar enthalpy :math:`[J/mol]`
+        - **S** (float) : molar entropy :math:`[J/(mol \cdot K)]`
+        - **G** (float) : Gibbs free energy :math:`[J/mol]`
+        - **fe_sol** (float) : Iron solubility :math:`[wt.\%]`
+        - **ni_sol** (float) : Nickel solubility :math:`[wt.\%]`
+        - **cr_sol** (float) : Chromium solubility :math:`[wt.\%]`
+        - **si_sol** (float) : Silicon solubility :math:`[wt.\%]`
+        - **o_sol** (float) : Oxygen solubility :math:`[wt.\%]`
+        - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
+        - **fe_dif** (float) : Iron diffusivity :math:`[cm^2 / s]`
+        - **co_dif** (float) : Cobalt diffusivity :math:`[cm^2 / s]`
+        - **se_dif** (float) : Selenium diffusivity :math:`[cm^2 / s]`
+        - **in_dif** (float) : Indium diffusivity :math:`[cm^2 / s]`
+        - **te_dif** (float) : Tellurium diffusivity :math:`[cm^2 / s]`
+        - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
+            concentration squared :math:`[atm / wt.\%^2]`
+        - **lim_fe_sat** (float) : Lower limit of Oxygen concentration with \
             Iron at saturation :math:`[wt.\%]`
-        - **lim_cr_sat** : Lower limit of Oxygen concentration with \
+        - **lim_cr_sat** (float) : Lower limit of Oxygen concentration with \
             Chromium at saturation :math:`[wt.\%]`
-        - **lim_ni_sat** : Lower limit of Oxygen concentration with \
+        - **lim_ni_sat** (float) : Lower limit of Oxygen concentration with \
             Nickel at saturation :math:`[wt.\%]`
-        - **lim_si_sat** : Lower limit of Oxygen concentration with \
+        - **lim_si_sat** (float) : Lower limit of Oxygen concentration with \
             Silicon at saturation :math:`[wt.\%]`
-        - **lim_al_sat** : Lower limit of Oxygen concentration with \
+        - **lim_al_sat** (float) : Lower limit of Oxygen concentration with \
             Aluminium at saturation :math:`[wt.\%]`
-        - **lim_cr** : Lower limit of Oxygen concentration times \
+        - **lim_cr** (float) : Lower limit of Oxygen concentration times \
             Chromium concentration raised to :math:`2/3` :math:`[wt.\%]`
-        - **lim_ni** : Lower limit of Oxygen concentration times \
+        - **lim_ni** (float) : Lower limit of Oxygen concentration times \
             Nickel concentration :math:`[wt.\%]`
-        - **lim_fe** : Lower limit of Oxygen concentration times \
+        - **lim_fe** (float) : Lower limit of Oxygen concentration times \
             Iron concentration raised to :math:`3/4` :math:`[wt.\%]`
-        - **lim_si** : Lower limit of Oxygen concentration times \
+        - **lim_si** (float) : Lower limit of Oxygen concentration times \
             Silicon concentration raised to :math:`1/2` :math:`[wt.\%]`
 
     Example

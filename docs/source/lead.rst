@@ -54,7 +54,9 @@ In detail, a :class:`.Lead` object comes with the following default properties:
 
         :math:`\rho_0(T) = \displaystyle11441 - 1.2795{\cdot}T`
 
-        :math:`\rho(T,p) = \displaystyle\rho_0(T) + \Big( \frac{1}{u_s(T)^2} + T \cdot \frac{\alpha(T)^2}{c_p(T)} \Big) \cdot ( p - p_{atm} )`, :math:`\quad p_{atm}=101325.00 [Pa]`
+        :math:`\rho(T,p) = \displaystyle\rho_0(T) + \Big( \frac{1}{u_s(T)^2} + T \cdot \frac{\alpha(T)^2}{c_p(T)} \Big) \cdot ( p - p_{atm} )`, :math:`\quad` where:
+        
+        :math:`\quad p_{atm}=101325.00 [Pa]`
     - :math:`\beta_s` isentropic compressibility :math:`\Big[\frac{1}{Pa}\Big]`:
 
         :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T,p) \cdot u_s(T)^2}`
@@ -144,16 +146,16 @@ In detail, a :class:`.Lead` object comes with the following default properties:
         :math:`lim\_al\_sat(T) = \displaystyle o\_sol(T) \cdot \exp{\left( - \frac{679540}{2 R T} + \frac{10.7}{2R} \right)}`
     - :math:`lim\_cr` Lower limit of Ox concentration times Chromium concentration raised to :math:`2/3` :math:`[wt.\%]`:
 
-        :math:`lim\_cr(T) = \displaystyle lim\_cr\_sat(T) \cdot cr\_sol^{2/3}`
+        :math:`lim\_cr(T) = \displaystyle lim\_cr\_sat(T) \cdot cr\_sol(T)^{2/3}`
     - :math:`lim\_ni` Lower limit of Ox concentration times Nickel concentration :math:`[wt.\%]`:
 
-        :math:`lim\_ni(T) = \displaystyle lim\_ni\_sat(T) \cdot ni\_sol`
+        :math:`lim\_ni(T) = \displaystyle lim\_ni\_sat(T) \cdot ni\_sol(T)`
     - :math:`lim\_fe` Lower limit of Ox concentration times Iron concentration raised to :math:`3/4` :math:`[wt.\%]`:
 
-        :math:`lim\_fe(T) = \displaystyle lim\_fe\_sat(T) \cdot fe\_sol^{3/4}`
+        :math:`lim\_fe(T) = \displaystyle lim\_fe\_sat(T) \cdot fe\_sol(T)^{3/4}`
     - :math:`lim\_si` Lower limit of Ox concentration times Silicon concentration raised to :math:`1/2` :math:`[wt.\%]`:
 
-        :math:`lim\_si(T) = \displaystyle lim\_si\_sat(T) \cdot si\_sol^{1/2}`
+        :math:`lim\_si(T) = \displaystyle lim\_si\_sat(T) \cdot si\_sol(T)^{1/2}`
 
 where :math:`T` is the lead temperature in :math:`[K]`, :math:`p` is the lead pressure in :math:`[Pa]` and
 :math:`R` is the molar gas constant in :math:`[J/(mol K)]`.

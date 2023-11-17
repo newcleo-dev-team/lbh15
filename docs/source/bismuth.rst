@@ -58,7 +58,7 @@ In detail, a :class:`.Bismuth` object comes with the following default propertie
         :math:`\quad p_{atm}=101325.00 [Pa]`
     - :math:`\beta_s` isentropic compressibility :math:`\Big[\frac{1}{Pa}\Big]`:
 
-        :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T) \cdot u_s(T)^2}`
+        :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T,p) \cdot u_s(T)^2}`
     - :math:`h` specific enthalpy (as difference with respect to the melting point enthalpy) :math:`\Big[\frac{J}{kg}\Big]`:
 
         :math:`h(T) = \displaystyle118.2 \cdot \Big(T - T_{m0}\Big) + 2.967 \cdot 10^{-3} \cdot \Big(T^2 - T_{m0}^2\Big)`
