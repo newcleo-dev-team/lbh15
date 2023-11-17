@@ -83,11 +83,9 @@ In detail, a :class:`.Lead` object comes with the following default properties:
     - :math:`H` molar enthalpy :math:`\Big[\frac{J}{mol}\Big]`:
 
         :math:`H(T) = \displaystyle h(T) \cdot \frac{M}{1000}`
-
     - :math:`S` molar entropy :math:`\Big[\frac{J}{mol \cdot K}\Big]`:
 
         :math:`S(T) = \displaystyle \frac{M}{1000} \cdot \int_{T_{m0}}^T \frac{c_p(T)}{T} dT`
-
     - :math:`G` Gibbs free energy :math:`\Big[\frac{J}{mol}\Big]`:
 
         :math:`G(T) = \displaystyle H(T) - T \cdot S(T)`
@@ -108,22 +106,22 @@ In detail, a :class:`.Lead` object comes with the following default properties:
         :math:`o\_sol(T) = \displaystyle10^{3.23 - 5043 / T}`
     - :math:`o\_dif` Oxygen diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
 
-        :math:`o\_dif(T) = \displaystyle6.6 \cdot 10^{-5} \cdot e^{ - 16158 /(RT) }`
+        :math:`o\_dif(T) = \displaystyle6.6 \cdot 10^{-5} \cdot \exp{ - 16158 /(RT) }`
     - :math:`fe\_dif` Iron diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
 
         :math:`fe\_dif(T) = \displaystyle10^{- 2.31 - 2295 / T}`
     - :math:`co\_dif` Cobalt diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
 
-        :math:`co\_dif(T) = \displaystyle4.6 \cdot 10^{-4} \cdot e^{ - 22154 /(RT) }`
+        :math:`co\_dif(T) = \displaystyle4.6 \cdot 10^{-4} \cdot \exp{ - 22154 /(RT) }`
     - :math:`se\_dif` Selenium diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
 
-        :math:`co\_dif(T) = \displaystyle3.4 \cdot 10^{-4} \cdot e^{ - 12958 /(RT) }`
+        :math:`co\_dif(T) = \displaystyle3.4 \cdot 10^{-4} \cdot \exp{ - 12958 /(RT) }`
     - :math:`in\_dif` Indium diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
 
-        :math:`in\_dif(T) = \displaystyle3.1 \cdot 10^{-4} \cdot e^{ - 13794 /(RT) }`
+        :math:`in\_dif(T) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{ - 13794 /(RT) }`
     - :math:`te\_dif` Tellurium diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
 
-        :math:`te\_dif(T) = \displaystyle3.1 \cdot 10^{-4} \cdot e^{ - 15884 /(RT) }`
+        :math:`te\_dif(T) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{ - 15884 /(RT) }`
     - :math:`o\_pp` Oxygen partial pressure divided by Oxygen concentration squared :math:`\Big[ \frac{atm}{wt.\%^2} \Big]`:
 
         :math:`o\_pp(T) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /(2.3 \cdot R) \cdot ( - 119411 / T + 12.222 ) }`, :math:`\quad` where:

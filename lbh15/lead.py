@@ -18,7 +18,7 @@ class Lead(LiquidMetalInterface):
     """
     Class to model liquid lead properties either at a given temperature or
     at a given value of a specific property to choose among a list of
-    available properties
+    available properties.
 
     Parameters
     ----------
@@ -27,7 +27,7 @@ class Lead(LiquidMetalInterface):
         101325.0 Pa
     \\**kwargs : dict
         One-item dictionary that specifies the quantity which the object shall
-        be initialized from. The default available ones are:
+        be initialized from. The available ones by default are:
 
         - **T** (float) : temperature :math:`[K]`
         - **p_s** (float) : saturation vapour pressure :math:`[Pa]`
