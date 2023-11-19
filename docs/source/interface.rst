@@ -1,5 +1,5 @@
-lbh15.properties.interface module
-=================================
+*interface* Module
+==================
 
 .. automodule:: lbh15.properties.interface
     :members:

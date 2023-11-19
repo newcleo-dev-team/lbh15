@@ -1,5 +1,5 @@
-Welcome to lbh15 documentation!
-===============================
+Welcome to *lbh15* documentation!
+=================================
 
 .. only:: html
 
