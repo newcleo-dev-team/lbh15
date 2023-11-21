@@ -1,5 +1,5 @@
-"""Module with the definition of oxygen
-concentration limits objects for lead"""
+"""Module with the definition of the *Oxygen concentration lower limits*
+objects for *lead*."""
 from typing import List
 from typing import Union
 import numpy as np
@@ -19,33 +19,35 @@ from ..._decorators import typecheck_for_method
 
 class LowerLimitSaturationIron(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
+    *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
-    iron is at its saturation concentration property class
+    *Iron at its saturation concentration* property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid lead
-        considering iron is at its saturation concentration
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film in liquid lead
+        considering *Iron at its saturation concentration* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return np.exp(-57190 / R / T - 21.1 / R)\
             * OxygenSolubility().correlation(T, p)
@@ -53,28 +55,29 @@ class LowerLimitSaturationIron(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_fe_sat"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit for"
                 " iron at its saturation concentration")
@@ -82,40 +85,39 @@ class LowerLimitSaturationIron(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in liquid lead"
 
 
 class LowerLimitSaturationChromium(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
+    *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
-    chromium is at its saturation concentration property class
+    *Chromium at its saturation concentration* property class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the lower limit of oxygen concentration to promote a
-        protective oxide film in liquid lead considering
-        chromium is at its saturation concentration
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film in liquid lead considering Chromium at its saturation
+        concentration passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            lower limit of oxygen concentration to promote a
+            lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lead considering
-            chromium is at its saturation concentration in [wt.%]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            Chromium at its saturation concentration
+            in :math:`[wt.\%]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-7:
             return 650
@@ -126,24 +128,26 @@ class LowerLimitSaturationChromium(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid lead
-        considering chromium is at its saturation concentration
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film in liquid lead
+        considering *Chromium at its saturation concentration* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return np.exp(-158900 / R / T - 13.65 / R)\
             * OxygenSolubility().correlation(T, p)
@@ -151,28 +155,29 @@ class LowerLimitSaturationChromium(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_cr_sat"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit for"
                 " chromium at its saturation concentration")
@@ -180,40 +185,42 @@ class LowerLimitSaturationChromium(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in liquid lead"
 
 
 class LowerLimitSaturationNickel(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
+    *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
-    nickel is at its saturation concentration property class
+    *Nickel at its saturation concentration* property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid lead
-        considering nickel is at its saturation concentration
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film in liquid lead
+        considering *Nickel at its saturation concentration* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return np.exp(-18040 / R / T - 11.7 / R)\
             * OxygenSolubility().correlation(T, p)
@@ -221,28 +228,29 @@ class LowerLimitSaturationNickel(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_ni_sat"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit for"
                 " nickel at its saturation concentration")
@@ -250,40 +258,39 @@ class LowerLimitSaturationNickel(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in liquid lead"
 
 
 class LowerLimitSaturationSilicon(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
+    *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
-    silicon is at its saturation concentration property class
+    *Silicon at its saturation concentration* property class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the lower limit of oxygen concentration to promote a
-        protective oxide film in liquid lead considering
-        silicon is at its saturation concentration
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film in liquid lead considering Silicon at its saturation
+        concentration passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            lower limit of oxygen concentration to promote a
+            lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lead considering
-            silicon is at its saturation concentration in [wt.%]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            Silicon at its saturation concentration
+            in :math:`[wt.\%]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-8:
             return 650
@@ -294,24 +301,26 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid lead
-        considering silicon is at its saturation concentration
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film in liquid lead
+        considering *Silicon at its saturation concentration* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return np.exp(-235855 / R / T - 9.75 / R)\
             * OxygenSolubility().correlation(T, p)
@@ -319,28 +328,29 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_si_sat"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit for"
                 " silicon at its saturation concentration")
@@ -348,40 +358,39 @@ class LowerLimitSaturationSilicon(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in liquid lead"
 
 
 class LowerLimitSaturationAluminium(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
+    *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
-    aluminium is at its saturation concentration property class
+    *Aluminium at its saturation concentration* property class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the lower limit of oxygen concentration to promote a
-        protective oxide film in liquid lead considering
-        aluminium is at its saturation concentration
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film in liquid lead considering Aluminium at its saturation
+        concentration passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            lower limit of oxygen concentration to promote a
+            lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lead considering
-            aluminium is at its saturation concentration in [wt.%]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            Silicon at its saturation concentration
+            in :math:`[wt.\%]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-10:
             return 650
@@ -392,24 +401,26 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film in liquid lead
-        considering aluminium is at its saturation concentration
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film in liquid lead
+        considering *Aluminium at its saturation concentration* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return np.exp(-339770 / R / T + 5.35 / R)\
             * OxygenSolubility().correlation(T, p)
@@ -417,28 +428,29 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_al_sat"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit for"
                 " aluminium at its saturation concentration")
@@ -446,40 +458,39 @@ class LowerLimitSaturationAluminium(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in liquid lead"
 
 
 class LowerLimitChromiumInterface(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the chromium concentration
-    raised to 2/3 in liquid lead property class
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Chromium concentration*
+    raised to :math:`2/3` in liquid lead property abstract class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the lower limit of oxygen concentration to promote a
-        protective oxide film times the chromium concentration
-        raised to 2/3 in liquid lead
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film times the Chromium concentration raised to :math:`2/3`
+        in liquid lead passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            lower limit of oxygen concentration to promote a
-            protective oxide film times the chromium concentration
-            raised to 2/3 in liquid lead in [wt.%]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            lower limit of Oxygen concentration to promote a
+            protective oxide film times the Chromium concentration
+            raised to :math:`2/3` in liquid lead
+            in :math:`[wt.\%]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-6:
             return 650
@@ -488,21 +499,21 @@ class LowerLimitChromiumInterface(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_cr"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit times"
                 " chromium concentration raised to 2/3")
@@ -510,41 +521,43 @@ class LowerLimitChromiumInterface(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in lead"
 
 
 class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the chromium concentration
-    raised to 2/3 in liquid lead property class
-    implementing correlation by gosse2014
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Chromium concentration*
+    raised to :math:`2/3` in liquid lead property class
+    implementing the correlation by *gosse2014*.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        chromium concentration raised to 2/3 in liquid lead
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film times Chromium
+        concentration raised to :math:`2/3` in liquid lead
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return LowerLimitSaturationChromium().correlation(T, p)\
             * np.power(ChromiumSolubilityGosse2014().correlation(T, p), 2 / 3)
@@ -552,48 +565,51 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
     @property
     def correlation_name(self) -> str:
         """
-        str : name of the correlation
+        str : Name of the correlation
         """
         return "gosse2014"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
 
 class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the chromium concentration
-    raised to 2/3 in liquid lead property class
-    implementing correlation by venkatraman1988
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Chromium concentration*
+    raised to :math:`2/3` in liquid lead property class
+    implementing the correlation by *venkatraman1988*.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        chromium concentration raised to 2/3 in liquid lead
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film times Chromium
+        concentration raised to :math:`2/3` in liquid lead
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return LowerLimitSaturationChromium().correlation(T, p)\
             * np.power(ChromiumSolubilityVenkatraman1988().correlation(T, p),
@@ -602,48 +618,51 @@ class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
     @property
     def correlation_name(self) -> str:
         """
-        str : name of the correlation
+        str : Name of the correlation
         """
         return "venkatraman1988"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
 
 class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the chromium concentration
-    raised to 2/3 in liquid lead property class
-    implementing correlation by alden1958
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Chromium concentration*
+    raised to :math:`2/3` in liquid lead property class
+    implementing the correlation by *alden1958*.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        chromium concentration raised to 2/3 in liquid lead
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film times Chromium
+        concentration raised to :math:`2/3` in liquid lead
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return LowerLimitSaturationChromium().correlation(T, p)\
             * np.power(ChromiumSolubilityAlden1958().correlation(T, p), 2 / 3)
@@ -651,47 +670,50 @@ class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
     @property
     def correlation_name(self) -> str:
         """
-        str : name of the correlation
+        str : Name of the correlation
         """
         return "alden1958"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
 
 class LowerLimitNickel(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the nickel concentration
-    in liquid lead property class
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Nickel concentration*
+    in liquid lead property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        nickel concentration in liquid lead
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film times Nickel
+        concentration in liquid lead
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return LowerLimitSaturationNickel().correlation(T, p)\
             * NickelSolubility().correlation(T, p)
@@ -699,28 +721,29 @@ class LowerLimitNickel(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_ni"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 917]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit times"
                 " nickel concentration")
@@ -728,40 +751,39 @@ class LowerLimitNickel(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in lead"
 
 
 class LowerLimitIron(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the iron concentration
-    raised to 3/4 in liquid lead property class
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Iron concentration*
+    raised to :math:`3/4` in liquid lead property class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the lower limit of oxygen concentration to promote a
-        protective oxide film times the iron concentration
-        raised to 3/4 in liquid lead
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film times the Iron concentration raised to :math:`3/4`
+        in liquid lead passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            lower limit of oxygen concentration to promote a
-            protective oxide film times the iron concentration
-            raised to 3/4 in liquid lead in [wt.%]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            lower limit of Oxygen concentration to promote a
+            protective oxide film times the Iron concentration
+            raised to :math:`3/4` in liquid lead
+            in :math:`[wt.\%]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-4:
             return 650
@@ -772,24 +794,26 @@ class LowerLimitIron(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        iron concentration raised to 3/4 in liquid lead
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film times Iron
+        concentration raised to :math:`3/4` in liquid lead
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return LowerLimitSaturationIron().correlation(T, p)\
             * np.power(IronSolubility().correlation(T, p), 0.75)
@@ -797,28 +821,29 @@ class LowerLimitIron(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_fe"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit times"
                 " iron concentration raised to 3/4")
@@ -826,40 +851,39 @@ class LowerLimitIron(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in lead"
 
 
 class LowerLimitSilicon(PropertyInterface):
     """
-    Lower limit of oxygen concentration to promote a
-    protective oxide film times the silicon concentration
-    raised to 1/2 in liquid lead property class
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Silicon concentration*
+    raised to :math:`1/2` in liquid lead property class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the lower limit of oxygen concentration to promote a
-        protective oxide film times the silicon concentration
-        raised to 1/2 in liquid lead
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film times the Silicon concentration raised to :math:`1/2`
+        in liquid lead passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            lower limit of oxygen concentration to promote a
-            protective oxide film times the silicon concentration
-            raised to 1/2 in liquid lead in [wt.%]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            lower limit of Oxygen concentration to promote a
+            protective oxide film times the Silicon concentration
+            raised to :math:`1/2` in liquid lead
+            in :math:`[wt.\%]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-8:
             return 650
@@ -870,24 +894,26 @@ class LowerLimitSilicon(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen concentration lower
-        limit to promote a protective oxide film times
-        silicon concentration raised to 1/2 in liquid lead
+        Returns the value of the *Oxygen concentration lower
+        limit* to promote a protective oxide film times Silicon
+        concentration raised to :math:`1/2` in liquid lead
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        concentration [wt.%] : float
+        float:
+            Oxygen concentration in :math:`[wt.\%]`
         """
         return LowerLimitSaturationSilicon().correlation(T, p)\
             * np.power(SiliconSolubility().correlation(T, p), 0.5)
@@ -895,28 +921,29 @@ class LowerLimitSilicon(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "lim_si"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen concentration lower limit unit
         """
         return "[wt.%]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen concentration
+        lower limit correlation function
         """
         return [673, 1000]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen concentration lower limit long name
         """
         return ("Oxygen concentration lower limit times"
                 " silicon concentration raised to 1/2")
@@ -924,6 +951,6 @@ class LowerLimitSilicon(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen concentration lower limit description
         """
         return f"{self.long_name} in lead"

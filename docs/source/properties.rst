@@ -7,7 +7,7 @@ These classes represent the properties dynamically loaded by the :class:`.Lead`,
 :class:`.Bismuth` and the :class:`.LBE` classes.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    interface.rst
 
