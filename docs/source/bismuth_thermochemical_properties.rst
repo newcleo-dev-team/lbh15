@@ -1,12 +1,12 @@
-lbh15.properties.bismuth_thermochemical_properties module
-=========================================================
-In this section of the lbh15 package there is the documentation 
-of bismuth properties objects, i.e., the classes that actually 
-implements bismuth thermochemical property correlations. They 
-are then dynamically added to :class:`.Bismuth`.
+*bismuth_thermochemical_properties* Modules
+===========================================
+
+This section focuses on documenting the thermo-chemical properties of liquid
+bismuth. They are among the classes dynamically loaded by the :class:`.Bismuth`
+class.
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     diffusivity_in_bismuth.rst
 
