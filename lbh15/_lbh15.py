@@ -4,6 +4,7 @@ import warnings
 import sys
 import inspect
 import importlib
+import os.path
 import platform
 import copy
 from abc import ABC
@@ -330,6 +331,12 @@ class LiquidMetalInterface(ABC):
         file_path : str
             absolute path of the file where custom properties are implemented
         """
+        # Exit if the file passed as argument does not exist
+        if (not os.path.isfile(file_path)):
+            warnings.warn(f"'{file_path}' provided file not found!"
+                          "\nPlease check the file path and try again!"
+                          "\nNo custom property added.", stacklevel=5)
+            return
         char = '/' if 'Linux' in platform.system() else '\\'
         res = file_path.split(char)
         file_name = res[-1][:-3]
