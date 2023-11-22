@@ -1,5 +1,5 @@
-lbe_thermochemical_properties.lbe_oxygen_limits module
-=======================================================
+*lbe_oxygen_limits* Module
+==========================
 
 .. automodule:: lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits
     :members:

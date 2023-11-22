@@ -384,7 +384,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         property_value : float
             lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lead considering
-            Silicon at its saturation concentration
+            Aluminium at its saturation concentration
             in :math:`[wt.\%]`
 
         Returns

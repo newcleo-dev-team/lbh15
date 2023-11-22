@@ -1,5 +1,5 @@
-"""Module with the definition of thermochemical
-property objects for lead-bismuth eutectic"""
+"""Module with the definition of the *thermo-chemical*
+property objects for *lead-bismuth eutectic* (*lbe*)."""
 from typing import List
 from typing import Union
 import numpy as np
@@ -17,33 +17,29 @@ from ..._decorators import typecheck_for_method
 
 class OxygenPartialPressure(PropertyInterface):
     """
-    Oxygen partial pressure in liquid lead-bismuth eutectic
-    divided by the oxygen concentration in liquid
-    lead-bismuth eutectic squared property class
+    *Oxygen partial pressure in liquid lbe divided by the
+    Oxygen concentration in liquid lbe squared* property class.
     """
     @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
-        Returns a temperature guess according to the value
-        of the oxygen partial pressure in liquid lead-bismuth eutectic
-        divided by the oxygen concentration in liquid
-        lead-bismuth eutectic squared
+        Returns the temperature guess value according to the value
+        of the Oxygen partial pressure in liquid lbe divided by the
+        Oxygen concentration in liquid lbe squared passed as argument.
+        It is used by the root finder algorithm.
 
         Parameters
         ----------
         property_value : float
-            oxygen partial pressure in liquid lead-bismuth eutectic
-            divided by the oxygen concentration in liquid
-            lead-bismuth eutectic squared in [atm.wt.%^-2]
-        verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            oxygen partial pressure in liquid lbe divided by the
+            oxygen concentration in liquid lbe squared
+            in :math:`[atm. /wt.\%^2]`
 
         Returns
         -------
-        rvalue : float
-            Temperature guess in [K]
+        float
+            Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-3:
             return 650
@@ -54,25 +50,26 @@ class OxygenPartialPressure(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute oxygen partial pressure
-        in liquid lead-bismuth eutectic divided by the oxygen
-        concentration in liquid lead-bismuth eutectic squared
+        Returns the value of the *Oxygen partial pressure in liquid lbe
+        divided by the Oxygen concentration in liquid lbe squared* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        partial pressure divided by concentration
-        squared [atm.wt.%^-2] : float
+        float:
+            Oxygen partial pressure divided by Oxygen concentration
+            squared in :math:`[atm. / wt.\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-127398 / T + 27.938))\
             * M * M / M_O / M_O
@@ -80,28 +77,32 @@ class OxygenPartialPressure(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "o_pp"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Oxygen partial pressure in liquid lbe divided by the
+        Oxygen concentration in liquid lbe squared unit
         """
         return "[atm.wt.%^-2]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Oxygen partial
+        pressure divided by the Oxygen concentration squared
+        correlation function
         """
         return [812, 1008]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Oxygen partial pressure in liquid lbe divided by the
+        Oxygen concentration in liquid lbe squared long name
         """
         return ("Oxygen partial pressure divided by the"
                 " oxygen concentration squared")
@@ -109,250 +110,254 @@ class OxygenPartialPressure(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Oxygen partial pressure in liquid lbe divided by the
+        Oxygen concentration in liquid lbe squared description
         """
         return f"{self.long_name} in liquid lbe"
 
 
 class LeadChemicalActivity(PropertyInterface):
     """
-    Lead chemical activity in liquid lead-bismuth eutectic
-    property class
+    *Lead chemical activity* in liquid lbe property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute lead chemical activity
-        in liquid lead-bismuth eutectic
+        Returns the value of the *lead chemical activity* in liquid lbe
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        chemical activity [-] : float
+        float:
+            Lead chemical activity in :math:`[-]`
         """
         return 0.42206 - 63.2 / T
 
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "pb_a"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Lead chemical activity unit
         """
         return "[-]"
 
     @property
     def correlation_name(self) -> str:
         """
-        str : name of the correlation
+        str : Name of the correlation
         """
         return "gosse2014"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the lead chemical
+        activity correlation function
         """
         return [399, 1173]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Lead chemical activity long name
         """
         return "lead chemical activity"
 
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Lead chemical activity description
         """
         return f"{self.long_name} in liquid lbe"
 
 
 class BismuthChemicalActivity(PropertyInterface):
     """
-    Bismuth chemical activity in liquid lead-bismuth eutectic
-    property class
+    *Bismuth chemical activity* in liquid lbe property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute Bismuth chemical activity
-        in liquid lead-bismuth eutectic
+        Returns the value of the *bismuth chemical activity* in liquid lbe
+        by applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        chemical activity [-] : float
+        float:
+            Bismuth chemical activity in :math:`[-]`
         """
         return 0.53381 - 56.2 / T
 
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "bi_a"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Bismuth chemical activity unit
         """
         return "[-]"
 
     @property
     def correlation_name(self) -> str:
         """
-        str : name of the correlation
+        str : Name of the correlation
         """
         return "gosse2014"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the bismuth chemical
+        activity correlation function
         """
         return [399, 1173]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Bismuth chemical activity long name
         """
         return "Bismuth chemical activity"
 
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Bismuth chemical activity description
         """
         return f"{self.long_name} in liquid lbe"
 
 
 class MolarEnthalpy(PropertyInterface):
     """
-    Liquid lead-bismuth eutectic molar
-    enthalpy variation property class
+    Liquid lbe *molar enthalpy variation* property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute molar enthalpy variation
-        in liquid lead-bismuth eutectic
+        Returns the value of the *molar enthalpy variation* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        molar enthalpy [J/mol] : float
+        float:
+            molar enthalpy in :math:`[J/mol]`
         """
         return h().correlation(T, p) * M / 1000
 
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "H"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Molar enthalpy variation unit
         """
         return "[J.mol^-1]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the molar enthalpy
+        variation correlation function
         """
         return [400.0, T_b0]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Molar enthalpy variation long name
         """
         return "molar enthalpy variation"
 
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Molar enthalpy variation description
         """
         return f"{self.long_name} in liquid lbe"
 
 
 class MolarEntropy(PropertyInterface):
     """
-    Liquid lead-bismuth eutectic molar
-    entropy variation property class
+    Liquid lbe *molar entropy variation* property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute molar entropy
-        variation in liquid lead-bismuth eutectic
+        Returns the value of the *molar entropy variation* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        molar entropy [J/(mol*K)] : float
+        float:
+            molar entropy in :math:`[J/(mol \cdot K)]`
         """
         return M / 1000 * (164.8 * np.log(T / T_m0)
                            - 3.94e-2 * (T - T_m0)
@@ -362,66 +367,67 @@ class MolarEntropy(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "S"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Molar entropy variation unit
         """
         return "[J/(mol.K)]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the molar entropy
+        variation correlation function
         """
         return [400, T_b0]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Molar entropy variation long name
         """
         return "molar entropy variation"
 
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Molar entropy variation description
         """
         return f"{self.long_name} in liquid lbe"
 
 
 class GibbsFreeEnergy(PropertyInterface):
     """
-    Liquid lead-bimuth eutectic Gibbs free
-    energy variation property class
+    Liquid lbe *Gibbs free energy variation* property class.
     """
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Correlation used to compute Gibbs free energy
-        variation in liquid lead-bismuth eutectic
+        Returns the value of the *Gibbs free energy variation* by
+        applying the property correlation.
 
         Parameters
         ----------
         T : float
-            Temperature in [K]
+            Temperature in :math:`[K]`
         p : float, optional
-            Pressure in [Pa], by default atmospheric pressure, i.e.,
-            101325.0 Pa
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
         verbose : bool, optional
-            True to tell decorator to print warning about
-            range check failing, False otherwise. By default False
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
 
         Returns
         -------
-        gibbs free energy [J/mol] : float
+        float:
+            Gibbs free energy in :math:`[J/mol)]`
         """
         return MolarEnthalpy().correlation(T, p)\
             - T * MolarEntropy().correlation(T, p)
@@ -429,34 +435,35 @@ class GibbsFreeEnergy(PropertyInterface):
     @property
     def name(self) -> str:
         """
-        str : name of the property
+        str : Name of the property
         """
         return "G"
 
     @property
     def units(self) -> str:
         """
-        str : property units
+        str : Gibbs free energy unit
         """
         return "[J/mol]"
 
     @property
     def range(self) -> List[float]:
         """
-        list : temperature validity range for property correlation
+        List[float] : Temperature validity range of the Gibbs free energy
+        variation correlation function
         """
         return [400, T_b0]
 
     @property
     def long_name(self) -> str:
         """
-        str : property long name
+        str : Gibbs free energy long name
         """
         return "Gibbs free energy variation"
 
     @property
     def description(self) -> str:
         """
-        str : property description
+        str : Gibbs free energy description
         """
         return f"{self.long_name} in liquid lbe"
