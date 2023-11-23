@@ -12,7 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: pip install scipy
-      - run: python3 test_lbh15_fromX.py -v
+      - run: python3 test_bismuth_fromX_spanT.py -v
+      - run: python3 test_lead_fromX_spanT.py -v
+      - run: python3 test_lbe_fromX_spanT.py -v
       - run: python3 test_lbh15_bounds.py -v
       - run: python3 test_lead_basics.py -v
       - run: python3 test_custom_properties.py -v
