@@ -1,12 +1,13 @@
-lbh15.properties
-================
-In this section of the lbh15 package there is the documentation 
-of properties objects, i.e., the classes that actually implements thermophysical and thermochemical
-property correlations. They are then dynamically added to :class:`.Lead`, :class:`.Bismuth`
-and :class:`.LBE`.
+*properties* Modules
+====================
+
+This section focuses on documenting the properties classes, that is, the classes that
+actually implements the thermo-physical and the thermo-chemical properties correlations.
+These classes represent the properties dynamically loaded by the :class:`.Lead`, the
+:class:`.Bismuth` and the :class:`.LBE` classes.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    interface.rst
 

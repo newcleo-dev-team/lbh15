@@ -1,5 +1,5 @@
-lbh15.properties.lbe_properties module
-======================================
+*lbe_properties* Module
+=======================
 
 .. automodule:: lbh15.properties.lbe_properties
     :members:

@@ -1,5 +1,5 @@
-Welcome to lbh15 documentation!
-===============================
+Welcome to *lbh15* documentation!
+=================================
 
 .. only:: html
 
@@ -7,7 +7,7 @@ Welcome to lbh15 documentation!
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
    source/readme_full.rst
 

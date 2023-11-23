@@ -1,5 +1,5 @@
-lead_thermochemical_properties.lead_oxygen_limits module
-========================================================
+*lead_oxygen_limits* Module
+===========================
 
 .. automodule:: lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits
     :members:

@@ -1,5 +1,5 @@
-lbh15.properties.bismuth_properties module
-==========================================
+*bismuth_properties* Module
+===========================
 
 .. automodule:: lbh15.properties.bismuth_properties
     :members:

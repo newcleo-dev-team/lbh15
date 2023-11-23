@@ -16,33 +16,45 @@ from .properties.interface import PropertyInterface
 
 class Bismuth(LiquidMetalInterface):
     """
-    Class to model liquid bismuth properties at a given temperature
+    Class to model liquid bismuth properties either at a given temperature or
+    at a given value of a specific property to choose among a list of
+    available properties.
 
     Parameters
     ----------
     p : float, optional
-        Pressure in [Pa], by default atmospheric pressure, i.e.,
+        Pressure in [Pa], by default the atmospheric pressure value, i.e.,
         101325.0 Pa
     \\**kwargs : dict
-        Dictionary that specifies the quantity from which the object shall
-        be initialized. The available default ones are:
+        One-item dictionary that specifies the quantity which the object shall
+        be initialized from. The available ones by default are:
 
-        - **T** (float) : temperature [K]
-        - **p_s** (float) : saturation vapour pressure [Pa]
-        - **sigma** (float) : surface tension [N/m]
-        - **rho** (float) : density [Kg/m^3]
-        - **alpha** (float) : thermal expansion coefficient [1/K]
-        - **u_s** (float) : speed of sound [m/s]
-        - **beta_s** (float) : isentropic compressibility [1/Pa]
-        - **cp** (float) : specific heat capacity [J/(kg*K)]
+        - **T** (float) : temperature :math:`[K]`
+        - **p_s** (float) : saturation vapour pressure :math:`[Pa]`
+        - **sigma** (float) : surface tension :math:`[N/m]`
+        - **rho** (float) : density :math:`[kg/m^3]`
+        - **alpha** (float) : thermal expansion coefficient :math:`[1/K]`
+        - **u_s** (float) : speed of sound :math:`[m/s]`
+        - **beta_s** (float) : isentropic compressibility :math:`[1/Pa]`
+        - **cp** (float) : specific heat capacity :math:`[J/(kg \cdot K)]`
         - **h** (float) : specific enthalpy \
-        (in respect to melting point) [J/kg]
-        - **mu** (float) : dynamic viscosity [Pa*s]
-        - **r** (float) : electrical resistivity [Ohm*m]
-        - **k** (float) : thermal conductivity [W/(m*K)]
+            (with respect to melting point) :math:`[J/kg]`
+        - **mu** (float) : dynamic viscosity :math:`[Pa \cdot s]`
+        - **r** (float) : electrical resistivity :math:`[Ohm \cdot m]`
+        - **k** (float) : thermal conductivity :math:`[W/(m \cdot K)]`
+        - **H** (float) : molar enthalpy :math:`[J/mol]`
+        - **S** (float) : molar entropy :math:`[J/(mol \cdot K)]`
+        - **G** (float) : Gibbs free energy :math:`[J/mol]`
+        - **fe_sol** (float) : Iron solubility :math:`[wt.\%]`
+        - **ni_sol** (float) : Nickel solubility :math:`[wt.\%]`
+        - **cr_sol** (float) : Chromium solubility :math:`[wt.\%]`
+        - **o_sol** (float) : Oxygen solubility :math:`[wt.\%]`
+        - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
+        - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
+            concentration squared :math:`[atm / wt.\%^2]`
 
-    Examples
-    --------
+    Example
+    -------
     >>> liquid_bismuth = Bismuth(T=670.0)
     >>> liquid_bismuth.k  # [W/(m*K)]
     13.705

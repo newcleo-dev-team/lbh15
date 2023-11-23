@@ -2,7 +2,11 @@
 implementation of package functions"""
 import collections.abc
 import inspect
+import warnings
+from functools import wraps
 import numpy as np
+
+warnings.simplefilter("always")
 
 
 def _check_instance_type(parameter_name: str,
@@ -30,8 +34,8 @@ def _check_instance_type(parameter_name: str,
         return
     if not isinstance(arg_value, parameter_type):
         # Accept INT arg when FLOAT is required
-        if ((parameter_type == float) \
-            and isinstance(arg_value, (int, np.integer))):
+        if ((parameter_type == float)
+                and isinstance(arg_value, (int, np.integer))):
             return
         # Analyse CONTAINERS recursively when made by only one element
         if isinstance(arg_value, (collections.abc.Sequence, np.ndarray)):
@@ -42,7 +46,7 @@ def _check_instance_type(parameter_name: str,
                         f"type '{parameter_type.__name__}'")
 
 
-def typecheck_for_method(func):
+def typecheck_for_method(function):
     """
     Decorator for performing type checking on input arguments
     which type hints are applied to. It works only for class
@@ -50,9 +54,10 @@ def typecheck_for_method(func):
     applied to the same method, the current one must be applied
     as first.
     """
+    @wraps(function)
     def wrapper(*args, **kwargs):
         # Retrieve the parameters that should be passed to the function
-        signature = inspect.signature(func)
+        signature = inspect.signature(function)
         parameters = signature.parameters
 
         # Handle POSITIONAL arguments
@@ -68,6 +73,29 @@ def typecheck_for_method(func):
             parameter_type = parameters[parameter_name].annotation
             _check_instance_type(parameter_name, parameter_type, passed_value)
 
-        return func(*args, **kwargs)
+        return function(*args, **kwargs)
 
+    return wrapper
+
+
+def range_warning(function):
+    """
+    Decorator used to check validity range
+    of correlation
+    """
+    @wraps(function)
+    def wrapper(*args):
+        range_lim = args[0].range
+        p_name = args[0].long_name
+        temp = args[1]
+        if hasattr(temp, "__len__"):
+            temp = temp[0]
+        if temp < range_lim[0] or temp > range_lim[1]:
+            if (len(args) == 4) and args[3]:
+                warnings.warn(f"The {p_name} is requested at "
+                              f"temperature value of {temp:.2f} K "
+                              "that is not in validity range "
+                              f"[{range_lim[0]:.2f}, {range_lim[1]:.2f}] K",
+                              stacklevel=3)
+        return function(*args)
     return wrapper

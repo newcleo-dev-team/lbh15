@@ -1,5 +1,5 @@
-bismuth_thermochemical_properties.bismuth_thermochemical module
-===============================================================
+*bismuth_thermochemical* Module
+===============================
 
 .. automodule:: lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical
     :members:

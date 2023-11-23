@@ -1,5 +1,5 @@
-lead_thermochemical_properties.lead_thermochemical module
-=========================================================
+*lead_thermochemical* Module
+============================
 
 .. automodule:: lbh15.properties.lead_thermochemical_properties.lead_thermochemical
     :members:

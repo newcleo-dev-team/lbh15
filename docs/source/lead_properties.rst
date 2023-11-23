@@ -1,5 +1,5 @@
-lbh15.properties.lead_properties module
-=======================================
+*lead_properties* Module
+========================
 
 .. automodule:: lbh15.properties.lead_properties
     :members:

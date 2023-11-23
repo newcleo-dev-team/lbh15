@@ -1,12 +1,12 @@
-lbh15.properties.lbe_thermochemical_properties module
-=====================================================
-In this section of the lbh15 package there is the documentation 
-of lbe properties objects, i.e., the classes that actually 
-implements lbe thermochemical property correlations. They 
-are then dynamically added to :class:`.LBE`.
+*lbe_thermochemical_properties* Modules
+=======================================
+
+This section focuses on documenting the thermo-chemical properties of liquid
+lead-bismuth eutectic. They are among the classes dynamically loaded by the
+:class:`.LBE` class.
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     diffusivity_in_lbe.rst
 
