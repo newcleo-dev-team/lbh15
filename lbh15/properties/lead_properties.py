@@ -699,6 +699,28 @@ class mu(PropertyInterface):
         """
         return 4.55e-4 * np.exp(1069/T)
 
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of the dynamic viscosity passed as argument.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            dynamic viscosity in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        if property_value < 2e-3:
+            return 800
+        return 1600
+
     @property
     def range(self) -> List[float]:
         """

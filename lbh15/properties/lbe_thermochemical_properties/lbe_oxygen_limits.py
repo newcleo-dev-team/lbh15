@@ -25,6 +25,31 @@ class LowerLimitSaturationIron(PropertyInterface):
     protective oxide film in liquid lbe considering
     *Iron at its saturation concentration* property class.
     """
+    @typecheck_for_method
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of the lower limit of Oxygen concentration to promote a protective
+        oxide film in liquid lbe considering Iron at its saturation
+        concentration passed as argument.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            lower limit of Oxygen concentration to promote a
+            protective oxide film in liquid lbe considering
+            Iron at its saturation concentration
+            in :math:`[wt.\%]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        return 1700
+
     @range_warning
     @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
@@ -122,8 +147,6 @@ class LowerLimitSaturationChromium(PropertyInterface):
         float
             Temperature guess value in :math:`[K]`
         """
-        if property_value < 1e-7:
-            return 650
         return 1700
 
     @range_warning
@@ -298,7 +321,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
             Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-9:
-            return 650
+            return 1400
         return 1700
 
     @range_warning
@@ -399,8 +422,8 @@ class LowerLimitSaturationAluminium(PropertyInterface):
             Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-11:
-            return 650
-        return 1700
+            return 1500
+        return 1800
 
     @range_warning
     @typecheck_for_method
@@ -500,7 +523,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
             Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-7:
-            return 650
+            return 1400
         return 1700
 
     @property
@@ -861,7 +884,7 @@ class LowerLimitIronInterface(PropertyInterface):
             Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-6:
-            return 650
+            return 1200
         return 1700
 
     @property

@@ -42,7 +42,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
             Temperature guess value in :math:`[K]`
         """
         if property_value < 1e-4:
-            return 650
+            return 1200
         return 1500
 
     @property
