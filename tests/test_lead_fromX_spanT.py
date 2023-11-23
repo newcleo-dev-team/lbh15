@@ -23,7 +23,7 @@ def load_prop(module_name):
 
 
 tol = 8
-Ts = [330] + list(range(350, 1750, 50)) + [1745]
+Ts = [330.0] + list((range(350, 1750, 50))) + [1745.0]
 Ts = list(map(lambda x: convert_temperature(x, 'C', 'K'), Ts))
 leadPs = []
 for T in Ts:
@@ -37,7 +37,7 @@ class LeadTester(unittest.TestCase):
             properties = load_prop('lbh15.properties.lead_properties')
             for prop in properties:
                 name = prop.name
-                if name in Lead.roots_to_use().keys() or name == 'mu':
+                if name in Lead.roots_to_use().keys():
                     continue
                 val = getattr(leadP, name)
                 init_dict = {name: val}
