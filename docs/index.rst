@@ -7,7 +7,7 @@ Welcome to *lbh15* documentation!
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    source/readme_full.rst
 
