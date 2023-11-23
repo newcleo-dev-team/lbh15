@@ -41,9 +41,7 @@ class OxygenPartialPressure(PropertyInterface):
         float
             Temperature guess value in :math:`[K]`
         """
-        if property_value < 1e-3:
-            return 650
-        return 1500
+        return 1600
 
     @range_warning
     @typecheck_for_method

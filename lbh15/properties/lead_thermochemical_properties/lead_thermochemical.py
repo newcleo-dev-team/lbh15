@@ -40,9 +40,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         float
             Temperature guess value in :math:`[K]`
         """
-        if property_value < 1e-4:
-            return 650
-        return 1500
+        return 1600
 
     @property
     def name(self) -> str:
