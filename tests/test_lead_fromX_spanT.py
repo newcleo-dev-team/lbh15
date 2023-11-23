@@ -6,6 +6,7 @@ import inspect
 sys.path.insert(0, os.path.abspath('..'))
 from lbh15.properties.interface import PropertyInterface
 from lbh15 import Lead
+from lbh15 import lead_properties
 from scipy.constants import convert_temperature
 
 
@@ -29,6 +30,14 @@ leadPs = []
 for T in Ts:
     leadPs.append(Lead(T=T))
 
+# Compute temperature discriminants for cp root index identification
+cp_sobolev2011 = lead_properties.cp_sobolev2011()
+cp_sobolev2011.compute_bounds()
+T_change_sobolev2011 = cp_sobolev2011.T_at_min
+cp_gurvich1991 = lead_properties.cp_gurvich1991()
+cp_gurvich1991.compute_bounds()
+T_change_gurvich1991 = cp_gurvich1991.T_at_min
+
 
 class LeadTester(unittest.TestCase):
 
@@ -37,8 +46,13 @@ class LeadTester(unittest.TestCase):
             properties = load_prop('lbh15.properties.lead_properties')
             for prop in properties:
                 name = prop.name
-                if name in Lead.roots_to_use().keys():
-                    continue
+                if name == 'cp' and\
+                        ((prop.correlation_name == 'sobolev2011' \
+                        and leadP.T > T_change_sobolev2011) \
+                        or \
+                        (prop.correlation_name == 'gurvich1991' \
+                        and leadP.T > T_change_gurvich1991)):
+                    Lead.set_root_to_use('cp', 1)
                 val = getattr(leadP, name)
                 init_dict = {name: val}
                 fromX = Lead(**init_dict)
