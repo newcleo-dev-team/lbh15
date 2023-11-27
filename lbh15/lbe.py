@@ -36,41 +36,41 @@ class LBE(LiquidMetalInterface):
         - **alpha** (float) : thermal expansion coefficient :math:`[1/K]`
         - **u_s** (float) : speed of sound :math:`[m/s]`
         - **beta_s** (float) : isentropic compressibility :math:`[1/Pa]`
-        - **cp** (float) : specific heat capacity :math:`[J/(kg \cdot K)]`
+        - **cp** (float) : specific heat capacity :math:`[J/(kg \\cdot K)]`
         - **h** (float) : specific enthalpy \
             (with respect to melting point) :math:`[J/kg]`
-        - **mu** (float) : dynamic viscosity :math:`[Pa \cdot s]`
-        - **r** (float) : electrical resistivity :math:`[Ohm \cdot m]`
-        - **k** (float) : thermal conductivity :math:`[W/(m \cdot K)]`
+        - **mu** (float) : dynamic viscosity :math:`[Pa \\cdot s]`
+        - **r** (float) : electrical resistivity :math:`[Ohm \\cdot m]`
+        - **k** (float) : thermal conductivity :math:`[W/(m \\cdot K)]`
         - **H** (float) : molar enthalpy :math:`[J/mol]`
-        - **S** (float) : molar entropy :math:`[J/(mol \cdot K)]`
+        - **S** (float) : molar entropy :math:`[J/(mol \\cdot K)]`
         - **G** (float) : Gibbs free energy :math:`[J/mol]`
         - **pb_a** (float) : Lead chemical activity :math:`[-]`
         - **bi_a** (float) : Bismuth chemical activity :math:`[-]`
-        - **fe_sol** (float) : Iron solubility :math:`[wt.\%]`
-        - **ni_sol** (float) : Nickel solubility :math:`[wt.\%]`
-        - **cr_sol** (float) : Chromium solubility :math:`[wt.\%]`
-        - **o_sol** (float) : Oxygen solubility :math:`[wt.\%]`
+        - **fe_sol** (float) : Iron solubility :math:`[wt.\\%]`
+        - **ni_sol** (float) : Nickel solubility :math:`[wt.\\%]`
+        - **cr_sol** (float) : Chromium solubility :math:`[wt.\\%]`
+        - **o_sol** (float) : Oxygen solubility :math:`[wt.\\%]`
         - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
         - **fe_dif** (float) : Iron diffusivity :math:`[cm^2 / s]`
         - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
-            concentration squared :math:`[atm / wt.\%^2]`
+            concentration squared :math:`[atm / wt.\\%^2]`
         - **lim_fe_sat** (float) : Lower limit of Oxygen concentration with \
-            Iron at saturation :math:`[wt.\%]`
+            Iron at saturation :math:`[wt.\\%]`
         - **lim_cr_sat** (float) : Lower limit of Oxygen concentration with \
-            Chromium at saturation :math:`[wt.\%]`
+            Chromium at saturation :math:`[wt.\\%]`
         - **lim_ni_sat** (float) : Lower limit of Oxygen concentration with \
-            Nickel at saturation :math:`[wt.\%]`
+            Nickel at saturation :math:`[wt.\\%]`
         - **lim_si_sat** (float) : Lower limit of Oxygen concentration with \
-            Silicon at saturation :math:`[wt.\%]`
+            Silicon at saturation :math:`[wt.\\%]`
         - **lim_al_sat** (float) : Lower limit of Oxygen concentration with \
-            Aluminium at saturation :math:`[wt.\%]`
+            Aluminium at saturation :math:`[wt.\\%]`
         - **lim_cr** (float) : Lower limit of Oxygen concentration times \
-            Chromium concentration raised to :math:`2/3` :math:`[wt.\%]`
+            Chromium concentration raised to :math:`2/3` :math:`[wt.\\%]`
         - **lim_ni** (float) : Lower limit of Oxygen concentration times \
-            Nickel concentration :math:`[wt.\%]`
+            Nickel concentration :math:`[wt.\\%]`
         - **lim_fe** (float) : Lower limit of Oxygen concentration times \
-            Iron concentration raised to :math:`3/4` :math:`[wt.\%]`
+            Iron concentration raised to :math:`3/4` :math:`[wt.\\%]`
 
     Example
     -------

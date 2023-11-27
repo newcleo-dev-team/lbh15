@@ -42,7 +42,7 @@ class LiquidMetalInterface(ABC):
         - 'alpha' : thermal expansion coefficient [1/K]
         - 'u_s': speed of sound [m/s]
         - 'beta_s' : isentropic compressibility [1/Pa]
-        - 'cp' : specific heat capacity [J/(kg*K)]
+        - 'cp' : specific heat capacity [J/(kg \\cdot K)]
         - 'h' : specific enthalpy (in respect to melting point) [J/kg]
         - 'mu' : dynamic viscosity [Pa*s]
         - 'r' : electrical resistivity [Ohm*m]
