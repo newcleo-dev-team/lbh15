@@ -564,6 +564,8 @@ Advanced usage includes the possibility of adding new properties and new physica
 
   .. note:: It is mandatory to override the ``correlation`` method and the ``range``, ``units``, ``long_name`` and ``description`` properties.
 
+  .. note:: Properties are not allowed having the name starting with ``__``. This means that neither the name of the corresponding class nor the name provided by the ``name`` attribute must start with ``__``.
+
   .. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :ref:`Basic usage`.
 
   Then, provided that the execution is performed in :code:`<execution_dir>`, one can check the correct implementation as follows:

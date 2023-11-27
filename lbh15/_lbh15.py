@@ -651,7 +651,10 @@ class LiquidMetalInterface(ABC):
         # Build property instances and add them to the list to return
         prop_list = []
         for prop in mod_set:
-            prop_list.append(prop())
+            prop_obj = prop()
+            # Not allowed properties whose name begins with "__"
+            if not prop_obj.name[:2] == '__':
+                prop_list.append(prop_obj)
         return prop_list
 
     @staticmethod
@@ -708,8 +711,8 @@ class LiquidMetalInterface(ABC):
         raise NotImplementedError(f"{type(self).__name__}._set_constants "
                                   "NOT IMPLEMENTED")
 
-    def __getattr__(self, name: str) -> float:
-        if name not in self.__properties:
+    def __getattr__(self, name: str):
+        if name[:2] == '__' or name not in self.__properties:
             raise AttributeError(f"'{type(self).__name__}' object "
                                  f"has no attribute '{name}'")
 
