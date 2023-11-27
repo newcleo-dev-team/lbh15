@@ -36,22 +36,22 @@ class Bismuth(LiquidMetalInterface):
         - **alpha** (float) : thermal expansion coefficient :math:`[1/K]`
         - **u_s** (float) : speed of sound :math:`[m/s]`
         - **beta_s** (float) : isentropic compressibility :math:`[1/Pa]`
-        - **cp** (float) : specific heat capacity :math:`[J/(kg \cdot K)]`
+        - **cp** (float) : specific heat capacity :math:`[J/(kg \\cdot K)]`
         - **h** (float) : specific enthalpy \
             (with respect to melting point) :math:`[J/kg]`
-        - **mu** (float) : dynamic viscosity :math:`[Pa \cdot s]`
-        - **r** (float) : electrical resistivity :math:`[Ohm \cdot m]`
-        - **k** (float) : thermal conductivity :math:`[W/(m \cdot K)]`
+        - **mu** (float) : dynamic viscosity :math:`[Pa \\cdot s]`
+        - **r** (float) : electrical resistivity :math:`[Ohm \\cdot m]`
+        - **k** (float) : thermal conductivity :math:`[W/(m \\cdot K)]`
         - **H** (float) : molar enthalpy :math:`[J/mol]`
-        - **S** (float) : molar entropy :math:`[J/(mol \cdot K)]`
+        - **S** (float) : molar entropy :math:`[J/(mol \\cdot K)]`
         - **G** (float) : Gibbs free energy :math:`[J/mol]`
-        - **fe_sol** (float) : Iron solubility :math:`[wt.\%]`
-        - **ni_sol** (float) : Nickel solubility :math:`[wt.\%]`
-        - **cr_sol** (float) : Chromium solubility :math:`[wt.\%]`
-        - **o_sol** (float) : Oxygen solubility :math:`[wt.\%]`
+        - **fe_sol** (float) : Iron solubility :math:`[wt.\\%]`
+        - **ni_sol** (float) : Nickel solubility :math:`[wt.\\%]`
+        - **cr_sol** (float) : Chromium solubility :math:`[wt.\\%]`
+        - **o_sol** (float) : Oxygen solubility :math:`[wt.\\%]`
         - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
         - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
-            concentration squared :math:`[atm / wt.\%^2]`
+            concentration squared :math:`[atm / wt.\\%^2]`
 
     Example
     -------

@@ -450,7 +450,7 @@ class cp(PropertyInterface):
         Returns
         -------
         float:
-            specific heat capacity in :math:`[J/(kg \cdot K)]`
+            specific heat capacity in :math:`[J/(kg \\cdot K)]`
         """
         return 164.8 - T * (3.94e-2 - 1.25e-5 * T) - 4.56e5 / T / T
 
@@ -596,7 +596,7 @@ class mu(PropertyInterface):
         Returns
         -------
         float:
-            dynamic viscosity in :math:`[Pa \cdot s]`
+            dynamic viscosity in :math:`[Pa \\cdot s]`
         """
         return 4.94e-4*np.exp(754.1/T)
 
@@ -656,7 +656,7 @@ class r(PropertyInterface):
         Returns
         -------
         float:
-            electrical resistivity in :math:`[Ohm \cdot m]`
+            electrical resistivity in :math:`[Ohm \\cdot m]`
         """
         return (90.9 + 0.048*T)*1e-8
 
@@ -716,7 +716,7 @@ class k(PropertyInterface):
         Returns
         -------
         float:
-            thermal conductivity in :math:`[W/(m \cdot K)]`
+            thermal conductivity in :math:`[W/(m \\cdot K)]`
         """
         return 3.284 + T * (1.617e-2 - 2.305e-6 * T)
 

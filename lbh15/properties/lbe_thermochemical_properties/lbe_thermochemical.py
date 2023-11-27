@@ -34,7 +34,7 @@ class OxygenPartialPressure(PropertyInterface):
         property_value : float
             oxygen partial pressure in liquid lbe divided by the
             oxygen concentration in liquid lbe squared
-            in :math:`[atm. /wt.\%^2]`
+            in :math:`[atm. /wt.\\%^2]`
 
         Returns
         -------
@@ -67,7 +67,7 @@ class OxygenPartialPressure(PropertyInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\%^2]`
+            squared in :math:`[atm. / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-127398 / T + 27.938))\
             * M * M / M_O / M_O
@@ -355,7 +355,7 @@ class MolarEntropy(PropertyInterface):
         Returns
         -------
         float:
-            molar entropy in :math:`[J/(mol \cdot K)]`
+            molar entropy in :math:`[J/(mol \\cdot K)]`
         """
         return M / 1000 * (164.8 * np.log(T / T_m0)
                            - 3.94e-2 * (T - T_m0)

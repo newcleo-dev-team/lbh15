@@ -69,7 +69,7 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.20-3930/T)
 
@@ -116,7 +116,7 @@ class IronSolubilityMassalski1990(IronSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.18-3980/T)
 
@@ -163,7 +163,7 @@ class IronSolubilityWeeks1998(IronSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 1.832-3589/T)
 
@@ -243,7 +243,7 @@ class NickelSolubilityWeeks1998(NickelSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.61-1538/T)
 
@@ -290,7 +290,7 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.where(T <= 738, np.power(10, 3.81-2429/T),
                         np.where(T <= 918, np.power(10, 2.05-1131/T),
@@ -372,7 +372,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.34-3610/T)
 
@@ -419,7 +419,7 @@ class ChromiumSolubilityWeeks1998(ChromiumSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.5-3717/T)
 
@@ -466,7 +466,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.34-3610/T)
 
@@ -512,7 +512,7 @@ class OxygenSolubility(PropertyInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.where(T <= 1002, np.power(10, 2.30-4066/T),
                         np.power(10, 3.04-4810/T))[()]

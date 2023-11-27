@@ -41,7 +41,7 @@ class LowerLimitSaturationIron(PropertyInterface):
             lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lbe considering
             Iron at its saturation concentration
-            in :math:`[wt.\%]`
+            in :math:`[wt.\\%]`
 
         Returns
         -------
@@ -74,7 +74,7 @@ class LowerLimitSaturationIron(PropertyInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return np.exp(-57190 / R / T - 21.1 / R)\
             * OxygenSolubility().correlation(T, p)\
@@ -140,7 +140,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
             lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lbe considering
             Chromium at its saturation concentration
-            in :math:`[wt.\%]`
+            in :math:`[wt.\\%]`
 
         Returns
         -------
@@ -173,7 +173,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return np.exp(-158900 / R / T - 13.65 / R)\
             * OxygenSolubility().correlation(T, p)\
@@ -247,7 +247,7 @@ class LowerLimitSaturationNickel(PropertyInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return np.exp(-18040 / R / T - 11.7 / R)\
             * OxygenSolubility().correlation(T, p)\
@@ -313,7 +313,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
             lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lbe considering
             Silicon at its saturation concentration
-            in :math:`[wt.\%]`
+            in :math:`[wt.\\%]`
 
         Returns
         -------
@@ -348,7 +348,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return np.exp(-235855 / R / T - 9.75 / R)\
             * OxygenSolubility().correlation(T, p)\
@@ -414,7 +414,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
             lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lbe considering
             Aluminium at its saturation concentration
-            in :math:`[wt.\%]`
+            in :math:`[wt.\\%]`
 
         Returns
         -------
@@ -449,7 +449,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return np.exp(-339770 / R / T + 5.35 / R)\
             * OxygenSolubility().correlation(T, p)\
@@ -515,7 +515,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
             lower limit of Oxygen concentration to promote a
             protective oxide film times the Chromium concentration
             raised to :math:`2/3` in liquid lbe
-            in :math:`[wt.\%]`
+            in :math:`[wt.\\%]`
 
         Returns
         -------
@@ -587,7 +587,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationChromium().correlation(T, p)\
             * np.power(ChromiumSolubilityGosse2014().correlation(T, p), 2 / 3)
@@ -639,7 +639,7 @@ class LowerLimitChromiumCourouau2004(LowerLimitChromiumInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationChromium().correlation(T, p)\
             * np.power(ChromiumSolubilityCourouau2004().correlation(T, p),
@@ -692,7 +692,7 @@ class LowerLimitChromiumMartynov1998(LowerLimitChromiumInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationChromium().correlation(T, p)\
             * np.power(ChromiumSolubilityMartynov1998().correlation(T, p),
@@ -781,7 +781,7 @@ class LowerLimitNickelMartinelli2010(LowerLimitNickelInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationNickel().correlation(T, p)\
             * NickelSolubilityMartinelli2010().correlation(T, p)
@@ -833,7 +833,7 @@ class LowerLimitNickelGosse2014(LowerLimitNickelInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationNickel().correlation(T, p)\
             * NickelSolubilityGosse2014().correlation(T, p)
@@ -876,7 +876,7 @@ class LowerLimitIronInterface(PropertyInterface):
             lower limit of Oxygen concentration to promote a
             protective oxide film times the Iron concentration
             raised to :math:`3/4` in liquid lbe
-            in :math:`[wt.\%]`
+            in :math:`[wt.\\%]`
 
         Returns
         -------
@@ -948,7 +948,7 @@ class LowerLimitIronGosse2014(LowerLimitIronInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationIron().correlation(T, p)\
             * np.power(IronSolubilityGosse2014().correlation(T, p), 0.75)
@@ -1000,7 +1000,7 @@ class LowerLimitIronWeeks1969(LowerLimitIronInterface):
         Returns
         -------
         float:
-            Oxygen concentration in :math:`[wt.\%]`
+            Oxygen concentration in :math:`[wt.\\%]`
         """
         return LowerLimitSaturationIron().correlation(T, p)\
             * np.power(IronSolubilityWeeks1969().correlation(T, p), 0.75)

@@ -34,7 +34,7 @@ class IronSolubility(PropertyInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.11-5225/T)
 
@@ -108,7 +108,7 @@ class NickelSolubility(PropertyInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 1.36-1395/T)
 
@@ -216,7 +216,7 @@ class ChromiumSolubilityAlden1958(ChromiumSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 3.74-6750/T)
 
@@ -263,7 +263,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 3.7-6720/T)
 
@@ -310,7 +310,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 3.62-6648/T)
 
@@ -356,7 +356,7 @@ class SiliconSolubility(PropertyInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 3.886-7180/T)
 
@@ -423,7 +423,7 @@ class OxygenSolubility(PropertyInterface):
         Returns
         -------
         float:
-            solubility in :math:`[wt.\%]`
+            solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 3.23-5043/T)
 

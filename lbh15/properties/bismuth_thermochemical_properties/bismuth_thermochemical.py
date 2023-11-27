@@ -34,7 +34,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         property_value : float
             oxygen partial pressure in liquid bismuth divided by the
             oxygen concentration in liquid bismuth squared
-            in :math:`[atm. /wt.\%^2]`
+            in :math:`[atm. /wt.\\%^2]`
 
         Returns
         -------
@@ -108,7 +108,7 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\%^2]`
+            squared in :math:`[atm. / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-95502 / T + 9.69))\
             * M * M / M_O / M_O
@@ -160,7 +160,7 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\%^2]`
+            squared in :math:`[atm. / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-101098 / T + 15.66))\
             * M * M / M_O / M_O
@@ -212,7 +212,7 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\%^2]`
+            squared in :math:`[atm. / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-68156 / T + 14.14))\
             * M * M / M_O / M_O
@@ -264,7 +264,7 @@ class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\%^2]`
+            squared in :math:`[atm. / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-95437 / T + 3.78))\
             * M * M / M_O / M_O
@@ -379,7 +379,7 @@ class MolarEntropy(PropertyInterface):
         Returns
         -------
         float:
-            molar entropy in :math:`[J/(mol \cdot K)]`
+            molar entropy in :math:`[J/(mol \\cdot K)]`
         """
         return M / 1000 * (118.2 * np.log(T / T_m0)
                            + 5.934e-3 * (T - T_m0)
