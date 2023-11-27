@@ -37,6 +37,10 @@ class PropertyInterface(ABC):
         - :attr:`~.PropertyInterface.is_injective`: override this member only \
           in case the correlation function is not injective by returning the
           `False` value, otherwise it is considered injective.
+
+    Derived classes are not allowed having either the name starting with
+    :attr:`__` or overriding the :attr:`~.PropertyInterface.name` attribute
+    for providing a name starting with :attr:`__`.
     """
     def __init__(self):
         self.__min: float = -nan
