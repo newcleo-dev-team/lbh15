@@ -297,15 +297,18 @@ The project is organized according to the following folder structure:
     ├── docs/
     ├── lbh15/
     ├── tests/
+    ├── tutorials/
     ├── LICENSE
     ├── MANIFEST.in
     ├── README.rst
+    ├── pyproject.toml
     └── setup.py
     
 
 - ``lbh15``: contains all modules, classes and methods implemented in *lbh15*
 - ``docs``: contains materials for the generation of the documentation by Sphinx
 - ``tests``: collection of tests used to verify the correct implementation
+- ``tutorials``: collection of tutorials, each one into a dedicated sub-folder
 
 ============
 Dependencies
