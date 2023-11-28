@@ -236,121 +236,240 @@ The user is invited to check the ranges of validity of the correlations she/he i
 application requirements. In case other correlations are needed that are different from the ones already implemented in *lbh15*, please see
 the "Advanced Usage" section.
 
-.. YET TO CHECK
-.. +++++++++
-   Tutorials
-   +++++++++
-   
-   This section contains an example of the application of the complete package.
-   We chose to performed this tutorial considering a liquid lead system, in a cylindrical iron thank.
-   
-   This tutorial is aimed to compute:
-     - the temperature variation over time
-   
-     - the level of the liquid metal over temperature
-   
-     - the oxygen concentration limits over temperature
-   
-     - the mean limit oxygen concentration over temperature
-   
-   
-   The user can define:
-     - the mass of the system
-   
-     - the initial temperature
-   
-     - the simulation duration
-   
-     - the power variation
-   
-     - the starting and ending time of this varition
-   
-     - the radius of the tank
-   
-   
-   - The first step is to import all the modules needed and to set the constants:
-   
-     .. code-block:: python
-   
-       """Tutorial using thermophysical and thermochemical
-       correlations of the lbh15 python package"""
-       import numpy as np
-       import matplotlib.pyplot as plt
-       from lbh15 import Lead
-   
-   
-       if __name__ == "__main__":
-   
-           # Setting of the constants
-           T_0 = 683  # [K]
-           SIMULATION_TIME = 100  # [s]
-           STEP_SIZE = 0.1  # [s]
-           MASS = 100  # [kg]
-           #  Power variation
-           NET_POWER = 43000  # [W]
-           VARIATION_START = 20  # [s]
-           VARIATION_END = 70  # [s]
-           RADIUS = 1  # [m]
-   
-   - We then have to create all the arrays that will contain the values we are interested in:
-   
-     .. code-block:: python
-   
-       # Creation of the arrays
-       # Array containing the time values
-       time = np.arange(0, SIMULATION_TIME, STEP_SIZE)
-       # Array containing the heat variation values
-       heat_variation = np.zeros(len(time)-1)
-       # Array containing the temperature values
-       temperature = np.zeros_like(time)
-       # Array containing the lower oxygen concentration values
-       lower_oxygen_concentration = np.zeros_like(time)
-       # Array containing the upper oxygen concentration values
-       upper_oxygen_concentration = np.zeros_like(time)
-       # Array containing the level of the liquid metal in the tank
-       level = np.zeros_like(time)
-   
-   - Before starting the loop which wil computes our results, we have to initialize the temperature
-     and the power variation, such that at each time step of the total variation time,
-     the power will have the same variation value. 
-   
-     .. code-block:: python
-   
-           # Filling of the heat variation array,
-           # computed according to the power variation
-           VAR_START_IDX = int(VARIATION_START/STEP_SIZE)
-           VAR_END_IDX = int(VARIATION_END/STEP_SIZE)
-           heat_variation[VAR_START_IDX:VAR_END_IDX] = (
-               NET_POWER * STEP_SIZE)
-   
-           # Initialization
-           temperature[0] = T_0
-           system = Lead(T=T_0)
-           h_0 = system.h
-           upper_oxygen_concentration[0] = system.o_sol
-           lower_oxygen_concentration[0] = system.lim_fe_sat
-           volume = MASS / system.rho
-           level[0] = volume / (np.pi * (RADIUS**2))
-   
-           # Looping
-           for i in range(1, len(time)):
-               # Solving heat balance
-               h_i = np.sum(heat_variation[0:i])/MASS + h_0
-               # Creation of an object at a T temperature deduced from the h value
-               system = Lead(h=h_i)
-               temperature[i] = system.T
-               # Updating the lower oxygen concentration
-               lower_oxygen_concentration[i] = system.lim_fe_sat
-               # Updating the upper oxygen concentration
-               upper_oxygen_concentration[i] = system.o_sol
-               # Updating the volume of the system
-               volume = MASS / system.rho
-               # Updating the level of the liquid metal
-               level[i] = volume / (np.pi * (RADIUS**2))
-   
-   - Finally, we have to plot the graphs we are interested in. Here an example of what can be obtained:
+
++++++++++
+Tutorials
++++++++++
+
+.. _ Control of Oxygen Concentration:
+
+Control of Oxygen Concentration
+===============================
+
+This section describes a simple, but meaningful example application where the *lbh15* package features are exploited.
+A generic volume of liquid lead is subject to a constant heat dissipation. At a specified time, instantaneously,
+a heat load is applied that remains constant for the rest of the simulation.
+
+The system behavior can be described by the following heat balance equation, where the transient term on the left
+hand side is present, together with the above mentioned heat source terms on the right hand side:
+
+.. math::
+
+  \displaystyle \frac{d \left( \rho h \right)}{d t} \quad = \quad Q_{in} + Q_{out},
+
+where:
+
+- :math:`\rho = \rho(T)` is the lead density :math:`[kg / m^3]`;
+- :math:`h = c_p(T) \cdot T` is the specific enthalpy :math:`[J / kg]` of lead;
+- :math:`Q_{out}` is the dissipated heat in :math:`[W / m^3]`, that is kept constant throughout the entire simulation;
+- :math:`Q_{in}` is the heat load in :math:`[W / m^3]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
+  initial value is kept constant till the instantaneous change, after which it reaches a constant positive value, as illustrated in the following picture:
+
+  .. figure:: figures/time_Qin.png
+    :width: 500
+    :align: Center
+
+    Time history of the heat load applied to the lead volume.
+
+Let suppose that the lead volume works in an environment where the creation of an Iron oxyde layer must be guaranteed on the bounding walls. This requires
+the Oxygen concentration within the lead to be always within the admissible range having the Oxygen solubility value as upper limit and, as lower limit, the Oxygen
+lower limit for the oxyde layer formation with Iron at saturation. The choice of the Iron oxyde is just for illustrative purposes, the same goes for any other oxyde formation.
+The Oxygen concentration must then be controlled by supposing the application of an ideal device able to add and subtract Oxygen to/from the lead volume.
+
+The system enabling this kind of control is depicted in the following figure:
+
+.. figure:: figures/controlSchema.png
+    :width: 500
+    :align: Center
+
+    Control schema of the Oxygen concentration within the lead volume.
+
+In detail:
+
+- the *Lead Volume* behaves as stated by the above mentioned heat balance equation, thus providing the actual temperature and Oxygen concentration values;
+- the *PID Controller* estimates the Oxygen concentration value to assure within the *Lead Volume*;
+- the *setpoint* the controller should follow is computed as the middle value of the admissibile Oxygen concentration range, and it is computed by exploiting the
+  actual temperature value of the *Lead Volume*;
+- the *PID Controller* tries to reach the setpoint value which changes in time according to the evolution of the *Lead Volume*.
+
+The provided tutorial implements the just described system by extracting the thermo-physical and the thermo-chemical properties of the lead volume by means
+of the *lbh15* package. The user can try more configurations than the one already implemented by changing the value of the following variables:
+
+- Lead initial temperature in :math:`[K]`;
+- Maximum value of the heat load applied to the lead volume in :math:`[W / m^3]`;
+- Constant dissipated heat power in :math:`[W / m^3]`;
+- Oxygen initial concentration in :math:`[wt.\%]`;
+- PID controller settings, that is, the *proportional*, the *integral* and the *derivative* coefficients;
+- Simulation duration;
+- Number of integration time steps.
+
+By looking into the code implementation, the following sections are identified:
+
+- Modules importing:
+
+  .. code-block:: python
+
+    import numpy as np
+    from lbh15 import Lead # LBH15 package
+    from simple_pid import PID # PID controller
+    import support # Supporting functions
+  
+  where:
+
+  - the lead-related module is imported from the *lbh15* package;
+  - the *PID* module is imported from the *simple_pid* package, which is available at:
+    `https://pypi.org/project/simple-pid/ <https://pypi.org/project/simple-pid/>`_
+    and which can be installed by applying the following instruction:
+
+    .. code-block:: console
+
+      python -m pip install simple-pid
     
-   .. figure:: figures/tutorials.png
-      :width: 700
-   
-   .. note:: This example can be used with Bismuth or LBE and considering an other metal than iron for the thank.
+    *simple-pid* :math:`>= 2.0.0` is required;
+  - the *support* module collects all the functions that are used in the remaining portion of the code;
+
+- Constant and initial values setting:
+
+  .. code-block:: python
+
+    ######
+    # Data
+    # Operating conditions
+    T_start = 800 # Initial lead temperature [K]
+    Qin_max: float = 2.1e6 # Maximum value of heat load [W/m3]
+    Qout: float = -1e6 # Value of dissipated heat power [W/m3]
+    Ox_start = 7e-4 # Initial oxygen concentration [wt.%]
+    # PID controller settings
+    P_coeff: float = 0.75 # Proportial coefficient [-]
+    I_coeff: float = 0.9 # Integral coefficient [-]
+    D_coeff: float = 0.0 # Derivative coefficient [-]
+    # Simulation settings
+    start_time: float = 0 # Start time of the simulation [s]
+    end_time: float = 200 # End time of the simulation [s]
+    time_steps_num: float = 1000 # Number of integration time steps [-]
+
+- Declaration and initialization of support and solution arrays:
+
+  .. code-block:: python
+
+    #####################
+    # Arrays of variables
+    # Time
+    time, delta_t = np.linspace(start_time, end_time, time_steps_num, retstep=True)
+    # Heat load time history
+    Qin_signal = Qin_max * np.heaviside(time - (end_time-start_time)/2.0, 0.5)
+    Qin = {t:q for t,q in zip(time, Qin_signal)}
+    # Lead temperature
+    T_sol = np.zeros(len(time))
+    # Oxygen concentrations
+    Ox_stp = np.zeros(len(time))
+    Ox_sol = np.zeros(len(time))
+
+  where:
+
+  - ``time`` contains all the time instants hich the solution is computed at;
+  - ``delta_t`` is the integration time step;
+  - ``Qin`` is a dictionary containing for each time instant (key) the corresponding heat load value; values coincide with the Heaviside function values stored in ``Qin_signal``;
+  - ``T_sol`` is the array where the lead temperature time history will be stored;
+  - ``Ox_stp`` is the array where the Oxygen concentration setpoint values will be stored that will be followed by the PID controller;
+  - ``Ox_sol`` is the array where the Oxygen concentration values will be stored that will be suggested by the PID controller;
+
+- Solutions initialization and *lead* object instantiation:
+
+  .. code-block:: python
+
+    ########################
+    # Set the initial values
+    T_sol[0] = T_start
+    lead = Lead(T=T_start)
+    Ox_stp[0] = support.ox_concentration_setpoint(lead)
+    Ox_sol[0] = Ox_start
+  
+  where:
+
+  - ``lead`` object is instantiated at a reference temperature equal to the initial temperature of the lead volume;
+  - the initial value of the Oxygen concentration setpoint is taken equal to the middle value of the admissibile operative range of the Oxygen concentration as function of temperature;
+
+- PID controller setup:
+
+  .. code-block:: python
+
+    ########################
+    # Set the PID controller
+    pid = PID(P_coeff, I_coeff, D_coeff,
+              setpoint=Ox_stp[0], starting_output=Ox_start/2)
+    pid.sample_time = None
+    pid.time_fn = support.sim_time
+    pid.output_limits = (0, Ox_start)
+
+  where:
+
+  - the time function ``sim_time`` is imposed to the PID controller, that makes it operate in the simulation time framework;
+
+- Controller system evolution in time:
+
+  .. code-block:: python
+
+    # Solve the balance equation in T and control the oxygen concentration
+    i = 1
+    for t in time[1:]:
+        lead.T = T_sol[i-1]
+        T_sol[i], Ox_stp[i], Ox_sol[i] = \
+            support.integrate_in_time(lead, t, float(delta_t), Qin[t],
+                                      Qout, Ox_sol[i-1])
+        pid.setpoint = Ox_stp[i]
+        Ox_sol[i] = pid(Ox_sol[i])
+        i += 1
+
+  where there is a loop over all the required time instants; for each *i*-th instant:
+
+  - an explicit call is made to the time integration function;
+  - the Oxygen concentration setpoint is updated correspondingly;
+  - the PID is asked to provide the new Oxygen concentration value to guarantee within the lead volume;
+
+- Results plotting:
+
+  .. code-block:: python
+
+    #######
+    # Plots
+    # Qin signal
+    support.plotTimeHistory(1, time, np.array(list(Qin.values())),
+                            "time [$s$]", "Qin [$W/m^3$]",
+                            "Heat Load Time History",
+                            "time_Qin.png")
+    # T_sol
+    support.plotTimeHistory(2, time, T_sol,
+                            "time [$s$]", "T [$K$]",
+                            "Lead Temperature Time History",
+                            "time_T.png")
+    # Ox_sol overlapped to Ox_stp
+    support.plot2TimeHistories(3, time, Ox_sol, "Control",
+                              time, Ox_stp, "Set-Point",
+                              "time [$s$]", "Oxygen Concentration [$wt.\\%$]",
+                              "Oxygen Concentration vs Setpoint Time History",
+                              "time_OxVsOxStp.png")
+  
+  where:
+
+  - the first call to ``plotTimeHistory()`` returns the 2D plot shown above, where the heat load time history is depicted;
+  - the second call to ``plotTimeHistory()`` returns the 2D plot where the temperature time history is depicted of the lead volume, that is:
+  
+    .. figure:: figures/time_T.png
+      :width: 500
+      :align: Center
+
+      Time evolution of the temperature of the lead volume.
+  
+  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the Oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual Oxygen concentration:
+
+    .. figure:: figures/time_OxVsOxStp.png
+      :width: 500
+      :align: Center
+
+      Time evolution of the Oxygen concentrations within the lead volume: the Oxygen concentration setpoint (yellow) and the actual controlled Oxygen concentration (blue).
+
+    After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (yellow curve).
+    The overlapping of the two Oxygen concentration curves can be improved or worsened by varying the PID coefficients.
+
+.. note:: This tutorial works even by substituting the *lead* object with either an instance of the ``Bismuth`` or of the ``LBE`` classes.
