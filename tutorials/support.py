@@ -16,12 +16,11 @@ def ox_concentration_setpoint(lead: __main__.Lead) -> float:
 def eqn_to_solve(T_new: float, lead: __main__.Lead, delta_t: float,
                  Qin: float, Qout_max: float) -> float:
     T_old = lead.T
-    rho_old = lead.rho
-    cp_old = lead.cp
-    lead_new = copy.deepcopy(lead)
-    lead_new.T = T_new
-    return (lead_new.rho * lead_new.cp * T_new -
-            rho_old * cp_old * T_old) / delta_t - Qin - Qout_max
+    T_avg = (T_old + T_new) / 2.0
+    lead_avg = copy.deepcopy(lead)
+    lead_avg.T = T_avg
+    return lead_avg.rho * lead_avg.cp * (T_new - T_old) / delta_t \
+        - Qin - Qout_max
 
 #########################################################
 # Function integrating the system over a single time-step

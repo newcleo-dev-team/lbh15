@@ -272,9 +272,13 @@ where:
     Time history of the heat load applied to the lead volume.
 
 Let suppose that the lead volume works in an environment where the creation of an Iron oxyde layer must be guaranteed on the bounding walls. This requires
-the Oxygen concentration within the lead to be always within the admissible range having the Oxygen solubility value as upper limit and, as lower limit, the Oxygen
-lower limit for the oxyde layer formation with Iron at saturation. The choice of the Iron oxyde is just for illustrative purposes, the same goes for any other oxyde formation.
-The Oxygen concentration must then be controlled by supposing the application of an ideal device able to add and subtract Oxygen to/from the lead volume.
+the Oxygen concentration within the lead to be always within the admissible range having the
+:class:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead.OxygenSolubility`
+value as upper limit and, as lower limit, the
+:class:`lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits.LowerLimitIron`
+value. The choice of the Iron oxyde is just for illustrative
+purposes, the same goes for any other oxyde formation. The Oxygen concentration must then be controlled by supposing the application of an ideal device able
+to add and subtract Oxygen to/from the lead volume.
 
 The system enabling this kind of control is depicted in the following figure:
 
@@ -297,6 +301,7 @@ of the *lbh15* package. The user can try more configurations than the one alread
 
 - Lead initial temperature in :math:`[K]`;
 - Maximum value of the heat load applied to the lead volume in :math:`[W / m^3]`;
+- Time instant when the heat load changes instantaneously in :math:`[s]`;
 - Constant dissipated heat power in :math:`[W / m^3]`;
 - Oxygen initial concentration in :math:`[wt.\%]`;
 - PID controller settings, that is, the *proportional*, the *integral* and the *derivative* coefficients;
@@ -337,12 +342,14 @@ By looking into the code implementation, the following sections are identified:
     # Operating conditions
     T_start = 800 # Initial lead temperature [K]
     Qin_max: float = 2.1e6 # Maximum value of heat load [W/m3]
+    t_jump: float = 100 # Time instant when the heat load jump happens [s]
     Qout: float = -1e6 # Value of dissipated heat power [W/m3]
     Ox_start = 7e-4 # Initial oxygen concentration [wt.%]
     # PID controller settings
     P_coeff: float = 0.75 # Proportial coefficient [-]
     I_coeff: float = 0.9 # Integral coefficient [-]
     D_coeff: float = 0.0 # Derivative coefficient [-]
+    max_output: float = Ox_start # Maximum value of the output [wt.%]
     # Simulation settings
     start_time: float = 0 # Start time of the simulation [s]
     end_time: float = 200 # End time of the simulation [s]
@@ -357,7 +364,9 @@ By looking into the code implementation, the following sections are identified:
     # Time
     time, delta_t = np.linspace(start_time, end_time, time_steps_num, retstep=True)
     # Heat load time history
-    Qin_signal = Qin_max * np.heaviside(time - (end_time-start_time)/2.0, 0.5)
+    t_jump = t_jump if start_time < t_jump and end_time > t_jump else\
+        (end_time-start_time)/2.0
+    Qin_signal = Qin_max * np.heaviside(time - t_jump, 0.5)
     Qin = {t:q for t,q in zip(time, Qin_signal)}
     # Lead temperature
     T_sol = np.zeros(len(time))
@@ -400,7 +409,7 @@ By looking into the code implementation, the following sections are identified:
               setpoint=Ox_stp[0], starting_output=Ox_start/2)
     pid.sample_time = None
     pid.time_fn = support.sim_time
-    pid.output_limits = (0, Ox_start)
+    pid.output_limits = (0, max_output)
 
   where:
 
@@ -472,4 +481,4 @@ By looking into the code implementation, the following sections are identified:
     After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (yellow curve).
     The overlapping of the two Oxygen concentration curves can be improved or worsened by varying the PID coefficients.
 
-.. note:: This tutorial works even by substituting the *lead* object with either an instance of the ``Bismuth`` or of the ``LBE`` classes.
+.. note:: This tutorial works even by substituting the *lead* object with either an instance of the :class:`.Bismuth` or of the :class:`.LBE` classes.
