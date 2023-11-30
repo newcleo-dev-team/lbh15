@@ -63,6 +63,7 @@ In detail, a :class:`.Lead` object comes with the following default properties:
     - :math:`h` specific enthalpy (as difference with respect to the melting point enthalpy) :math:`\Big[\frac{J}{kg}\Big]`:
 
         :math:`h(T) = \displaystyle176.2 \cdot \Big(T - T_{m0}\Big) - 2.4615 \cdot 10^{-2} \cdot \Big(T^2 - T_{m0}^2\Big)`
+
         :math:`\qquad\qquad+ 5.147 \cdot 10^{-6} \cdot \Big(T^3 - T_{m0}^3\Big) + 1.524 \cdot 10^6\Big(T^{-1} - T_{m0}^{-1}\Big)`
     - :math:`\mu` dynamic viscosity :math:`[Pa{\cdot}s]`:
 

@@ -6,9 +6,9 @@ Introduction
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by OECD/NEA :cite:`Agency2015`: 
 `oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
-. The thermo-physical properties implemented in the package are listed in table :numref:`tableprop`.
+. The thermo-physical properties implemented in the package are listed in :numref:`tableprop`.
 
-.. list-table:: lbh15 thermo-physical properties from the handbook edited by OECD/NEA  
+.. list-table:: *lbh15* thermo-physical properties from the handbook edited by OECD/NEA.
    :widths: 50 25 25
    :name: tableprop
    :header-rows: 1
@@ -64,9 +64,10 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
 
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
-The thermo-chemical properties implemented in the updated package are listed in table :numref:`tablethermochemicalprop`.
+The thermo-chemical properties implemented in the updated package are listed in :numref:`tablethermochemicalprop`.
 
-.. list-table:: lbh15 thermo-chemical properties from the handbook edited by OECD/NEA  
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA.
+   :class: longtable
    :widths: 50 25 25 25 25 25
    :name: tablethermochemicalprop
    :header-rows: 1
@@ -85,7 +86,7 @@ The thermo-chemical properties implemented in the updated package are listed in 
      - ✔
    * - Molar-specific entropy
      - :math:`S`
-     - :math:`[J/(mol.K)]`
+     - :math:`[J/(mol \cdot K)]`
      - ✔
      - ✔
      - ✔
@@ -137,7 +138,9 @@ The thermo-chemical properties implemented in the updated package are listed in 
      - ✔
      - ✔
      - ✔
-   * - Oxygen partial pressure divided by the oxygen concentration squared
+   * - Oxygen partial pressure divided by the oxygen
+
+       concentration squared
      - :math:`P_{O_2}`
      - :math:`[atm/wt.\%^2]`
      - ✔
@@ -179,51 +182,51 @@ The thermo-chemical properties implemented in the updated package are listed in 
      - ✔
      - :math:`-`
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control with
-   
-       iron, the structural material, at its saturation concentration
+   * - Lower limit of oxygen concentration for operational control
+
+       with iron, the structural material, at its saturation
        
-       in the liquid metal, lead or LBE.
+       concentration in the liquid metal, lead or LBE.
      - :math:`C_{O_2, Fe(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control with
+   * - Lower limit of oxygen concentration for operational control
    
-       nickel, the structural material, at its saturation concentration
+       with nickel, the structural material, at its saturation
        
-       in the liquid metal, lead or LBE.
+       concentration in the liquid metal, lead or LBE.
      - :math:`C_{O_2, Ni(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control with
+   * - Lower limit of oxygen concentration for operational control
    
-       chromium, the structural material, at its saturation concentration
+       withchromium, the structural material, at its saturation
        
-       in the liquid metal, lead or LBE.
+       concentration in the liquid metal, lead or LBE.
      - :math:`C_{O_2, Cr(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control with
+   * - Lower limit of oxygen concentration for operational control
    
-       silicon (the structural material) at its saturation concentration
+       with silicon (the structural material) at its saturation
        
-       in the liquid metal, lead or LBE.
+       concentration in the liquid metal, lead or LBE.
      - :math:`C_{O_2, Si(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control with
+   * - Lower limit of oxygen concentration for operational control
    
-       aluminium, the structural material, at its saturation concentration
+       with aluminium, the structural material, at its saturation
        
-       in the liquid metal, lead or LBE.
+       concentration in the liquid metal, lead or LBE.
      - :math:`C_{O_2, Al(sat)}`
      - :math:`[wt.\%]`
      - ✔
@@ -234,7 +237,7 @@ The thermo-chemical properties implemented in the updated package are listed in 
        times the iron (the structural material) concentration
        
        in the liquid metal, lead or LBE, raised to 3/4. 
-     - :math:`C_{O_2}.C_{Fe}^{3/4}`
+     - :math:`C_{O_2} \cdot C_{Fe}^{3/4}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
@@ -244,7 +247,7 @@ The thermo-chemical properties implemented in the updated package are listed in 
        times the nickel (the structural material) concentration
        
        in the liquid metal, lead or LBE. 
-     - :math:`C_{O_2}.C_{Ni}`
+     - :math:`C_{O_2} \cdot C_{Ni}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
@@ -254,7 +257,7 @@ The thermo-chemical properties implemented in the updated package are listed in 
        times the chromium (the structural material) concentration
        
        in the liquid metal, lead or LBE, raised to 2/3. 
-     - :math:`C_{O_2}.C_{Cr}^{2/3}`
+     - :math:`C_{O_2} \cdot C_{Cr}^{2/3}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
@@ -264,7 +267,7 @@ The thermo-chemical properties implemented in the updated package are listed in 
        times the silicon (the structural material) concentration
        
        in the liquid metal, lead, raised to 1/2. 
-     - :math:`C_{O_2}.C_{Si}^{1/2}`
+     - :math:`C_{O_2} \cdot C_{Si}^{1/2}`
      - :math:`[wt.\%]`
      - ✔
      - :math:`-`

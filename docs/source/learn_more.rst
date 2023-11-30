@@ -121,7 +121,7 @@ be derived that come from two different assumptions the user can choose between.
      thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved *PbO*, and by
      applying some transformations, one can obtain:
 
-     :math:`\ln{\left( C_O \right)} = - \frac{X}{Y}\ln{\left(C_{Me}\right)} + \frac{X}{Y}\ln{\left(C_{Me}^{sat}\right)} + \frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} + \ln{\left(\alpha_{Pb}\right)} + \ln{\left(C_O^{sat}\right)}`  (4)
+     :math:`\ln{\left( C_O \right)} = - \frac{X}{Y}\ln{\left(C_{Me}\right)} + \frac{X}{Y}\ln{\left(C_{Me}^{sat}\right)} + \frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} + \ln{\left(\alpha_{Pb}\right)} + \ln{\left(C_O^{sat}\right)} \quad` (4)
 
      In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_O` and the concentration
      :math:`C_{Me}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
@@ -169,6 +169,7 @@ oxygen concentration, each being valid over a specific temperature range. The te
 validity specified in the *lbh15* package for each correlation is the most restrictive one.
 
 In the following, the choices are detailed about the validity ranges that have been adopted:
+
   - For the lower limit correlations based on the saturation assumption (approach *a*), the lower temperature
     value is taken equal to the lower limit of the validity range of the oxygen solubility correlation,
     while the upper temperature value is taken equal to the upper limit of the validity range of the main
@@ -263,12 +264,14 @@ where:
 - :math:`h = c_p(T) \cdot T` is the specific enthalpy :math:`[J / kg]` of lead;
 - :math:`Q_{out}` is the dissipated heat in :math:`[W / m^3]`, that is kept constant throughout the entire simulation;
 - :math:`Q_{in}` is the heat load in :math:`[W / m^3]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
-  initial value is kept constant till the instantaneous change, after which it reaches a constant positive value, as illustrated in the following picture:
-
+  initial value is kept constant till the instantaneous change, after which it reaches a constant positive value, as illustrated in :numref:`timevsqin`.
+  
+  .. _timevsqin:
+  
   .. figure:: figures/time_Qin.png
     :width: 500
     :align: Center
-
+    
     Time history of the heat load applied to the lead volume.
 
 Let suppose that the lead volume works in an environment where the creation of an Iron oxyde layer must be guaranteed on the bounding walls. This requires
@@ -280,13 +283,15 @@ value. The choice of the Iron oxyde is just for illustrative
 purposes, the same goes for any other oxyde formation. The Oxygen concentration must then be controlled by supposing the application of an ideal device able
 to add and subtract Oxygen to/from the lead volume.
 
-The system enabling this kind of control is depicted in the following figure:
+The system enabling this kind of control is depicted in :numref:`contrschema`.
+
+.. _contrschema:
 
 .. figure:: figures/controlSchema.png
-    :width: 500
-    :align: Center
+  :width: 500
+  :align: Center
 
-    Control schema of the Oxygen concentration within the lead volume.
+  Control schema of the Oxygen concentration within the lead volume.
 
 In detail:
 
@@ -321,8 +326,8 @@ By looking into the code implementation, the following sections are identified:
   
   where:
 
-  - the lead-related module is imported from the *lbh15* package;
-  - the *PID* module is imported from the *simple_pid* package, which is available at:
+  - the lead-related module is imported from the ``lbh15`` package;
+  - the ``PID`` module is imported from the ``simple_pid`` package, which is available at:
     `https://pypi.org/project/simple-pid/ <https://pypi.org/project/simple-pid/>`_
     and which can be installed by applying the following instruction:
 
@@ -330,8 +335,8 @@ By looking into the code implementation, the following sections are identified:
 
       python -m pip install simple-pid
     
-    *simple-pid* :math:`>= 2.0.0` is required;
-  - the *support* module collects all the functions that are used in the remaining portion of the code;
+    ``simple-pid`` :math:`>= 2.0.0` is required;
+  - the ``support`` module collects all the functions that are used in the remaining portion of the code;
 
 - Constant and initial values setting:
 
@@ -383,7 +388,7 @@ By looking into the code implementation, the following sections are identified:
   - ``Ox_stp`` is the array where the Oxygen concentration setpoint values will be stored that will be followed by the PID controller;
   - ``Ox_sol`` is the array where the Oxygen concentration values will be stored that will be suggested by the PID controller;
 
-- Solutions initialization and *lead* object instantiation:
+- Solutions initialization and ``lead`` object instantiation:
 
   .. code-block:: python
 
@@ -462,20 +467,24 @@ By looking into the code implementation, the following sections are identified:
   where:
 
   - the first call to ``plotTimeHistory()`` returns the 2D plot shown above, where the heat load time history is depicted;
-  - the second call to ``plotTimeHistory()`` returns the 2D plot where the temperature time history is depicted of the lead volume, that is:
-  
+  - the second call to ``plotTimeHistory()`` returns the 2D plot where the temperature time history is depicted of the lead volume (see :numref:`timet`);
+    
+    .. _timet:
+    
     .. figure:: figures/time_T.png
       :width: 500
       :align: Center
-
+      
       Time evolution of the temperature of the lead volume.
   
-  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the Oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual Oxygen concentration:
-
+  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the Oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual Oxygen concentration (see :numref:`timeox`);
+    
+    .. _timeox:
+    
     .. figure:: figures/time_OxVsOxStp.png
       :width: 500
       :align: Center
-
+      
       Time evolution of the Oxygen concentrations within the lead volume: the Oxygen concentration setpoint (yellow) and the actual controlled Oxygen concentration (blue).
 
     After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (yellow curve).

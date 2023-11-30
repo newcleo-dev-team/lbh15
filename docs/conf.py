@@ -84,7 +84,9 @@ language = 'en'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = [
+    'source/learn_more.rst'
+]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -140,6 +142,7 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
 
     'preamble': r'''
+    \usepackage{caption}
 \renewcommand{\hyperref}[2][]{#2}
 ''',
 

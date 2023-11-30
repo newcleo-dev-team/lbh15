@@ -1,13 +1,8 @@
-.. raw:: latex
+.. only:: html
 
-   \cleardoublepage
-   \begingroup
-   \renewcommand\chapter[1]{\endgroup}
-   \phantomsection
-
-************
-Bibliography
-************
+   ************
+   Bibliography
+   ************
 
 .. bibliography:: lbh15.bib
    :style: plain

@@ -62,6 +62,7 @@ In detail, a :class:`.Bismuth` object comes with the following default propertie
     - :math:`h` specific enthalpy (as difference with respect to the melting point enthalpy) :math:`\Big[\frac{J}{kg}\Big]`:
 
         :math:`h(T) = \displaystyle118.2 \cdot \Big(T - T_{m0}\Big) + 2.967 \cdot 10^{-3} \cdot \Big(T^2 - T_{m0}^2\Big)`
+
         :math:`\qquad\qquad - 7.183 \cdot 10^6 \cdot \Big(T^{-1} - T_{m0}^{-1}\Big)`
     - :math:`\mu` dynamic viscosity :math:`[Pa{\cdot}s]`:
 

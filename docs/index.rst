@@ -15,6 +15,8 @@ Welcome to *lbh15* documentation!
 
    source/contacts.rst
 
+   source/acknowledgments.rst
+
    source/license.rst
    
 .. only:: html
