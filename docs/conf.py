@@ -130,36 +130,78 @@ htmlhelp_basename = 'lbh15 documentation'
 
 # -- Options for LaTeX output ------------------------------------------------
 
+title = 'lbh15: collection of properties from\
+    the lead-bismuth eutectic alloy and lead OECD/NEA handbook'
+
+abstract = 'This document is the reference manual for the \
+\\sphinxstyleemphasis{lbh15} (\\sphinxstylestrong{L}ead \
+\\sphinxstylestrong{B}ismuth \\sphinxstylestrong{H}andbook \
+20\\sphinxstylestrong{15}) Python package, that implements the \
+thermo\\sphinxhyphen{}physical and the thermo\\sphinxhyphen{}chemical \
+properties of lead, bismuth and lead\\sphinxhyphen{}bismuth eutectic \
+(lbe) metal alloy available from the handbook edited by OECD/NEA \
+{[}\\hyperlink{cite.source/bibliography:id2}{1}{]}:\\sphinxhref{https://www.oecd-nea.org/jcms/pl\\_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true}{oecd\\sphinxhyphen{}nea.org}.'
+
+templates_path = ['_templates']
+
+latex_theme = 'nwcldocs'
+
+latex_additional_files = [
+    'custom_classes/nwcldocs.cls'
+]
+
+latex_docclass = {
+    'nwcldocs': 'nwcldcs',
+}
+
 latex_elements = {
+
+    'classoptions': 'techdoc',
+
     # The paper size ('letterpaper' or 'a4paper').
 
-    'papersize': 'letterpaper',
+#    'papersize': 'letterpaper',
 
     # The font size ('10pt', '11pt' or '12pt').
 
-    'pointsize': '10pt',
+    'pointsize': '11pt',
+
+    'extrapackages': r'''
+\usepackage[title,titletoc]{appendix}
+\usepackage{caption}
+''',
 
     # Additional stuff for the LaTeX preamble.
 
     'preamble': r'''
-    \usepackage{caption}
+\date{}
+
+\newlist{packagelist}{description}{1}
+\setlist[packagelist]{itemsep=1pt,labelwidth=3cm,align=right,
+  font={\color{purple}\bfseries},
+  before={\color{indigo}{\itshape}}
+}
+
 \renewcommand{\hyperref}[2][]{#2}
 ''',
+# \newcommand{\chapter}[1]{\section{}{#1}}
 
     'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
 
     # Latex figure (float) alignment
 
     'figure_align': 'tbp',
+
+    # Abused keywords
+    'atendofbody': abstract, # Used for defining the abstract contents
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'lbh15.tex', 'lbh15: collection of properties from \
-    the lead-bismuth eutectic alloy and lead OECD/NEA handbook',
-     __author__, 'manual'),
+    (master_doc, 'lbh15.tex', title,
+     __author__, 'nwcldocs'),
 ]
 
 latex_logo = html_logo
