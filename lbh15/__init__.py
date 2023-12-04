@@ -1,7 +1,7 @@
 """__init__ module of lbh15 package"""
 
 __version__ = "1.2.0"
-__author__ = "Daniele Panico\\ Daniele Tomatis"
+__author__ = "Daniele Panico\break Daniele Tomatis\break Gabriele Ottino"
 __company__ = "newcleo"
 __date__ = "July 2023"
 

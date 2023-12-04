@@ -64,12 +64,14 @@ the handbook edited by OECD/NEA :cite:`Agency2015`:
 
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
-The thermo-chemical properties implemented in the updated package are listed in :numref:`tablethermochemicalprop`.
+The thermo-chemical properties implemented since version 1.2.0 are listed in :numref:`tablechemdata` (basic properties), :numref:`tablechemsoldiff`
+(solubilities, diffusivities and oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxyde layers generation
+when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of Oxygen concentration for
+oxyde layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA.
-   :class: longtable
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: basic properties.
    :widths: 50 25 25 25 25 25
-   :name: tablethermochemicalprop
+   :name: tablechemdata
    :header-rows: 1
 
    * - Property
@@ -96,18 +98,18 @@ The thermo-chemical properties implemented in the updated package are listed in 
      - ✔
      - ✔
      - ✔
-   * - Lead chemical activity in LBE
-     - :math:`\alpha_{Pb}`
-     - :math:`[-]`
-     - :math:`-`
-     - ✔
-     - :math:`-`
-   * - Bismuth chemical activity in LBE
-     - :math:`\alpha_{Bi}`
-     - :math:`[-]`
-     - :math:`-`
-     - ✔
-     - :math:`-`
+
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and oxygen partial pressure.
+   :widths: 50 25 25 25 25 25
+   :name: tablechemsoldiff
+   :header-rows: 1
+
+   * - Property
+     - Symbol
+     - Units
+     - Lead
+     - LBE
+     - Bismuth
    * - Iron solubility
      - :math:`S_{Fe}`
      - :math:`[wt.\%]`
@@ -126,7 +128,7 @@ The thermo-chemical properties implemented in the updated package are listed in 
      - ✔
      - ✔
      - ✔
-   * - Silicon solubility in liquid lead
+   * - Silicon solubility
      - :math:`S_{Si}`
      - :math:`[wt.\%]`
      - ✔
@@ -138,135 +140,171 @@ The thermo-chemical properties implemented in the updated package are listed in 
      - ✔
      - ✔
      - ✔
-   * - Oxygen partial pressure divided by the oxygen
-
-       concentration squared
-     - :math:`P_{O_2}`
-     - :math:`[atm/wt.\%^2]`
-     - ✔
-     - ✔
-     - ✔
    * - Oxygen diffusivity
      - :math:`D_{Fe}`
      - :math:`[cm^2/s]`
      - ✔
      - ✔
      - ✔
-   * - Iron diffusivity in lead and LBE
+   * - Iron diffusivity
      - :math:`D_{Fe}`
      - :math:`[cm^2/s]`
      - ✔
      - ✔
      - :math:`-`
-   * - Cobalt diffusivity in lead
+   * - Cobalt diffusivity
      - :math:`D_{Co}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
-   * - Selenium diffusivity in lead
+   * - Selenium diffusivity
      - :math:`D_{Se}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
-   * - Indium diffusivity in lead
+   * - Indium diffusivity
      - :math:`D_{In}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
-   * - Tellurium diffusivity in lead
+   * - Tellurium diffusivity
      - :math:`D_{Tl}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Oxygen partial pressure divided
 
-       with iron, the structural material, at its saturation
+       by the oxygen concentration squared
+     - :math:`P_{O_2}`
+     - :math:`[atm/wt.\%^2]`
+     - ✔
+     - ✔
+     - ✔
+
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxyde layers generation when the corresponding metal is considered at its saturation concentration.
+   :widths: 50 25 25 25 25 25
+   :name: tablechemlowlimssat
+   :header-rows: 1
+
+   * - Property
+     - Symbol
+     - Units
+     - Lead
+     - LBE
+     - Bismuth
+   * - Lower limit of Oxygen concentration for operational
+
+       control with Iron, the structural material, at its
        
-       concentration in the liquid metal, lead or LBE.
+       saturation concentration in the liquid metal.
      - :math:`C_{O_2, Fe(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
    
-       with nickel, the structural material, at its saturation
+       control with Nickel, the structural material, at its
        
-       concentration in the liquid metal, lead or LBE.
+       saturation concentration in the liquid metal.
      - :math:`C_{O_2, Ni(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
    
-       withchromium, the structural material, at its saturation
+       control with Chromium, the structural material, at its
        
-       concentration in the liquid metal, lead or LBE.
+       saturation concentration in the liquid metal.
      - :math:`C_{O_2, Cr(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
    
-       with silicon (the structural material) at its saturation
+       control with Silicon, the structural material, at its
        
-       concentration in the liquid metal, lead or LBE.
+       saturation concentration in the liquid metal.
      - :math:`C_{O_2, Si(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
    
-       with aluminium, the structural material, at its saturation
+       control with Aluminium, the structural material, at its
        
-       concentration in the liquid metal, lead or LBE.
+       saturation concentration in the liquid metal.
      - :math:`C_{O_2, Al(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
 
-       times the iron (the structural material) concentration
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxyde layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
+   :widths: 50 25 25 25 25 25
+   :name: tablechemlowlims
+   :header-rows: 1
+
+   * - Property
+     - Symbol
+     - Units
+     - Lead
+     - LBE
+     - Bismuth
+   * - Lead chemical activity in LBE
+     - :math:`\alpha_{Pb}`
+     - :math:`[-]`
+     - :math:`-`
+     - ✔
+     - :math:`-`
+   * - Bismuth chemical activity in LBE
+     - :math:`\alpha_{Bi}`
+     - :math:`[-]`
+     - :math:`-`
+     - ✔
+     - :math:`-`
+   * - Lower limit of Oxygen concentration for operational
+
+       control times the Iron, the structural material,
        
-       in the liquid metal, lead or LBE, raised to 3/4. 
+       concentration in the liquid metal raised to 3/4.
      - :math:`C_{O_2} \cdot C_{Fe}^{3/4}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
 
-       times the nickel (the structural material) concentration
+       control times the Nickel, the structural material,
        
-       in the liquid metal, lead or LBE. 
+       concentration in the liquid metal.
      - :math:`C_{O_2} \cdot C_{Ni}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
 
-       times the chromium (the structural material) concentration
+       control times the Chromium, the structural material,
        
-       in the liquid metal, lead or LBE, raised to 2/3. 
+       concentration in the liquid metal raised to 2/3.
      - :math:`C_{O_2} \cdot C_{Cr}^{2/3}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of oxygen concentration for operational control
+   * - Lower limit of Oxygen concentration for operational
 
-       times the silicon (the structural material) concentration
+       control times the Silicon, the structural material,
        
-       in the liquid metal, lead, raised to 1/2. 
+       concentration in the liquid metal raised to 1/2.
      - :math:`C_{O_2} \cdot C_{Si}^{1/2}`
      - :math:`[wt.\%]`
      - ✔

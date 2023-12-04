@@ -118,16 +118,17 @@
 <% else %>
 
 \fancypagestyle{plain}{}
-\pagestyle{fancy}
 
 \usepackage[]{hyperref}
 \newcounter{Chapcounter}
-\newcommand\showmycounter{\addtocounter{Chapcounter}{1}\themycounter}
 \newcommand{\chapter}[1] 
-{ {\centering          
-  \addtocounter{Chapcounter}{1} \Large \underline{\textbf{ \color{blue} Chapter \theChapcounter: ~#1}} }   
-  \addcontentsline{toc}{section}{ \color{blue} Chapter:~\theChapcounter~~ #1}    
+{ {
+  \addtocounter{Chapcounter}{1} \newpage \Large \textbf{ \color{black} \theChapcounter. ~#1} \newline }   
+  \addcontentsline{toc}{section}{ \color{black} ~\theChapcounter~~ #1}    
 }
+
+\counterwithin{section}{Chapcounter}
+
 
 <%= contentsname %>
 \usepackage{sphinxmessages}
@@ -143,6 +144,8 @@
 \setdutype{DUAL USE}
 \setrefcode{XXX-YYY-ZZZ-???}
 \setrev{0}
+\setreviewers{<%= author %>}
+\setapprovers{<%= author %>}
 
 \begin{document}
 \maketitle

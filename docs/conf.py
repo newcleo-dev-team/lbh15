@@ -146,13 +146,11 @@ templates_path = ['_templates']
 
 latex_theme = 'nwcldocs'
 
-latex_additional_files = [
-    'custom_classes/nwcldocs.cls'
-]
-
 latex_docclass = {
     'nwcldocs': 'nwcldcs',
 }
+
+# verificare che ci sia il file nwcldocs.cls
 
 latex_elements = {
 
