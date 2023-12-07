@@ -78,8 +78,6 @@
 <%- endif %>
 <%- endfor %>
 
-<% if docclass != 'nwcldocs' -%>
-
 <%= contentsname %>
 \usepackage{sphinxmessages}
 <%= tocdepth %>
@@ -87,9 +85,12 @@
 <%= preamble %>
 
 \title{<%= title %>}
+\author{<%= author %>}
+
+<% if docclass != 'nwcldocs' -%>
+
 \date{<%= date %>}
 \release{<%= release | e %>}
-\author{<%= author %>}
 <%- if logofilename %>
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{<%= logofilename %>}\par}
 <%- else %>
@@ -117,35 +118,16 @@
 
 <% else %>
 
-\fancypagestyle{plain}{}
-
-\usepackage[]{hyperref}
-\newcounter{Chapcounter}
-\newcommand{\chapter}[1] 
-{ {
-  \addtocounter{Chapcounter}{1} \newpage \Large \textbf{ \color{black} \theChapcounter. ~#1} \newline }   
-  \addcontentsline{toc}{section}{ \color{black} ~\theChapcounter~~ #1}    
-}
-
-\counterwithin{section}{Chapcounter}
-
-
-<%= contentsname %>
-\usepackage{sphinxmessages}
-<%= tocdepth %>
-<%= secnumdepth %>
-<%= preamble %>
-\title{<%= title %>}
-\author{<%= author %>}
-
 \setdoctype{Technical Report}
 \setidnb{1000yyy}
-\setdoclevel{UNKNOWN}
-\setdutype{DUAL USE}
+\setdoclevel{PUBLIC}
+\setdutype{NOT DUAL USE}
 \setrefcode{XXX-YYY-ZZZ-???}
 \setrev{0}
 \setreviewers{<%= author %>}
 \setapprovers{<%= author %>}
+
+<%= makeindex %>
 
 \begin{document}
 \maketitle
@@ -167,6 +149,8 @@
 
 <%= indices %>
 \renewcommand{\indexname}{<%= _('Index') | e %>}
+\hyphenpenalty=1000
+\hbadness=1000
 <%= printindex %>
 \end{document}
 <%- endif %>

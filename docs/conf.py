@@ -150,6 +150,8 @@ latex_docclass = {
     'nwcldocs': 'nwcldcs',
 }
 
+latex_toplevel_sectioning = 'section'
+
 # verificare che ci sia il file nwcldocs.cls
 
 latex_elements = {
@@ -167,6 +169,10 @@ latex_elements = {
     'extrapackages': r'''
 \usepackage[title,titletoc]{appendix}
 \usepackage{caption}
+\fancypagestyle{plain}{}
+\usepackage{titlesec}
+\usepackage[nottoc]{tocbibind}
+\usepackage{hyphenat}
 ''',
 
     # Additional stuff for the LaTeX preamble.
@@ -180,11 +186,11 @@ latex_elements = {
   before={\color{indigo}{\itshape}}
 }
 
+\newcommand{\sectionbreak}{\clearpage\phantomsection}
 \renewcommand{\hyperref}[2][]{#2}
 ''',
-# \newcommand{\chapter}[1]{\section{}{#1}}
 
-    'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
+    'makeindex': '\\usepackage[columns=1,totoc]{idxlayout}\\makeindex',
 
     # Latex figure (float) alignment
 
@@ -192,6 +198,9 @@ latex_elements = {
 
     # Abused keywords
     'atendofbody': abstract, # Used for defining the abstract contents
+
+    # Setup options for sphinx
+    'sphinxsetup': 'TitleColor={named}{black}',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
