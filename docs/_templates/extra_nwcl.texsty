@@ -1,4 +1,3 @@
 \usepackage{caption}
 \usepackage{hyphenat}
-\fancypagestyle{plain}{}
 \usepackage[nottoc]{tocbibind}

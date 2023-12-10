@@ -4,4 +4,5 @@
   font={\color{purple}\bfseries},
   before={\color{indigo}{\itshape}}
 }
+\fancypagestyle{plain}{}
 \newcommand{\sectionbreak}{\clearpage\phantomsection}

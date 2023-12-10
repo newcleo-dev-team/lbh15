@@ -5,7 +5,7 @@ Introduction
 *lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by OECD/NEA :cite:`Agency2015`:
-`oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_.
+https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition.
 The thermo-physical properties implemented in the package are listed in :numref:`tableprop`.
 
 .. list-table:: *lbh15* thermo-physical properties from the handbook edited by OECD/NEA.
@@ -316,17 +316,17 @@ oxyde layers generation multiplied by the corresponding metal concentration rais
 The pressure at which to evaluate the properties can be specified at object's instantiation.
 Otherwise, all the properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) by default.
 The correlations' validity range is checked at evaluation in terms of temperature value,
-raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
-Some examples of instantiation are provided using also a target property value, see section :ref:`Initialization from properties` 
+raising a warning in case it is not satisfied (see :numref:`basic usage` for more details).
+Some examples of instantiation are provided using also a target property value, see :numref:`initialization from properties` 
 for instance. For the sake of completeness, the correlations are also reported in the docstring documentation.
 The implementation is fully object-oriented to guarantee easy maintainability, extension and customization
-of the package (see :ref:`Advanced usage`).
+of the package (see :numref:`advanced usage`).
 
-Go to :ref:`API Guide` to see the full code documentation.
+Go to :numref:`API Guide` to see the full code documentation.
 
 *lbh15* is released under the GNU Lesser General Public License 3 (see :any:`License`).
 
-*lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
+*lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx) by IAEA.
 
 
 =================
@@ -407,7 +407,7 @@ This section contains some examples of basic usage and possible customization
 of the *lbh15* package. More examples are available in
 :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` classes.
 
-.. _Basic usage:
+.. _basic usage:
 
 +++++++++++
 Basic Usage
@@ -486,7 +486,7 @@ This section shows a few examples of basic usage of *lbh15*.
   Lead(T=900.00, p=101325.00, fe_sol=2.02e-04, lim_cr=1.52e-15, in_dif=4.91e-05, lim_si_sat=2.69e-17, fe_dif=1.38e-05, k=19.10, lim_fe_sat=1.60e-07, lim_fe=2.71e-10, beta_s=3.24e-11, se_dif=6.02e-05, H=9010.76, lim_ni_sat=9.30e-05, r=1.09e-06, si_sol=8.10e-05, lim_ni=6.01e-05, alpha=1.24e-04, h=43488.20, cp=142.52, p_s=0.12, lim_si=2.42e-19, G=-1.96e+03, co_dif=2.38e-05, o_pp=4.23e-11, lim_cr_sat=4.92e-13, o_dif=7.62e-06, rho=10289.45, ni_sol=0.65, S=12.19, te_dif=3.71e-05, lim_al_sat=1.54e-22, cr_sol=1.71e-04, o_sol=4.23e-03, u_s=1731.60, mu=1.49e-03, sigma=0.42)
 
 
-.. _Initialization from properties:
+.. _initialization from properties:
 
 +++++++++++++++++++++++++++++++++++++++++++++++
 Initialization from Properties (*experimental*)
@@ -500,7 +500,7 @@ necessary, but not jointly sufficient condition to find a root for the function.
 
 
 Since the existence of a (single) root cannot be guaranteed for every correlation, this functionality is marked as *experimental*:
-the user is invited to double-check the result (see :ref:`Advanced usage` section).
+the user is invited to double-check the result (see :numref:`advanced usage` section).
 
 
 In the following, some examples are provided:
@@ -561,7 +561,7 @@ In the following, some examples are provided:
 
 
 
-.. _Advanced usage:
+.. _advanced usage:
 
 ++++++++++++++
 Advanced Usage
@@ -622,7 +622,7 @@ Advanced usage includes the possibility of adding new properties and new physica
 
   .. note:: Properties are not allowed having the name starting with ``__``. This means that neither the name of the corresponding class nor the name provided by the ``name`` attribute must start with ``__``.
 
-  .. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :ref:`Basic usage`.
+  .. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :numref:`basic usage`.
 
   Then, provided that the execution is performed in :code:`<execution_dir>`, one can check the correct implementation as follows:
 

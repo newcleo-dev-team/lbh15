@@ -11,6 +11,7 @@
 <% endif -%>
 
 <% if docclass == 'nwcldocs' -%>
+\PassOptionsToPackage{hyphens}{url}
 \documentclass[<%= classoptions %>,<%= pointsize %>]{<%= wrapperclass %>}
 <% else -%>
 \documentclass[<%= papersize %>,<%= pointsize %><%= classoptions %>]{<%= wrapperclass %>}
