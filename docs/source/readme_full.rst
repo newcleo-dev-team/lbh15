@@ -69,7 +69,7 @@ The thermo-chemical properties implemented since version 1.2.0 are listed in :nu
 when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of Oxygen concentration for
 oxyde layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: basic properties.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: basic data.
    :widths: 50 25 25 25 25 25
    :name: tablechemdata
    :header-rows: 1
@@ -198,51 +198,51 @@ oxyde layers generation multiplied by the corresponding metal concentration rais
      - Lead
      - LBE
      - Bismuth
-   * - Lower limit of Oxygen concentration for operational
+   * - :math:`Fe_3 O_4`-related lower limit
 
-       control with Iron, the structural material, at its
+       of :math:`O_2` concentration in case
        
-       saturation concentration in the liquid metal.
+       of :math:`Fe`-saturated metal
      - :math:`C_{O_2, Fe(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
-   
-       control with Nickel, the structural material, at its
+   * - :math:`Ni O`-related lower limit
+
+       of :math:`O_2` concentration in case
        
-       saturation concentration in the liquid metal.
+       of :math:`Ni`-saturated metal
      - :math:`C_{O_2, Ni(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
-   
-       control with Chromium, the structural material, at its
+   * - :math:`Cr_2 O_3`-related lower limit
+
+       of :math:`O_2` concentration in case
        
-       saturation concentration in the liquid metal.
+       of :math:`Cr`-saturated metal
      - :math:`C_{O_2, Cr(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
-   
-       control with Silicon, the structural material, at its
+   * - :math:`Si O_2`-related lower limit
+
+       of :math:`O_2` concentration in case
        
-       saturation concentration in the liquid metal.
+       of :math:`Si`-saturated metal
      - :math:`C_{O_2, Si(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
-   
-       control with Aluminium, the structural material, at its
+   * - :math:`Al_2 O_3`-related lower limit
+
+       of :math:`O_2` concentration in case
        
-       saturation concentration in the liquid metal.
+       of :math:`Al`-saturated metal
      - :math:`C_{O_2, Al(sat)}`
      - :math:`[wt.\%]`
      - ✔
@@ -272,52 +272,52 @@ oxyde layers generation multiplied by the corresponding metal concentration rais
      - :math:`-`
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
+   * - :math:`Fe_3 O_4`-related lower limit
 
-       control times the Iron, the structural material,
+       of :math:`O_2` concentration times
        
-       concentration in the liquid metal raised to 3/4.
+       :math:`Fe` concentration raised to 3/4
      - :math:`C_{O_2} \cdot C_{Fe}^{3/4}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
+   * - :math:`Ni O`-related lower limit
 
-       control times the Nickel, the structural material,
+       of :math:`O_2` concentration times
        
-       concentration in the liquid metal.
+       :math:`Ni` concentration
      - :math:`C_{O_2} \cdot C_{Ni}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
+   * - :math:`Cr_2 O_3`-related lower limit
 
-       control times the Chromium, the structural material,
+       of :math:`O_2` concentration times
        
-       concentration in the liquid metal raised to 2/3.
+       :math:`Cr` concentration raised to 2/3
      - :math:`C_{O_2} \cdot C_{Cr}^{2/3}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - Lower limit of Oxygen concentration for operational
+   * - :math:`Si O_2`-related lower limit
 
-       control times the Silicon, the structural material,
+       of :math:`O_2` concentration times
        
-       concentration in the liquid metal raised to 1/2.
+       :math:`Si` concentration raised to 1/2
      - :math:`C_{O_2} \cdot C_{Si}^{1/2}`
      - :math:`[wt.\%]`
      - ✔
      - :math:`-`
      - :math:`-`
 
-The pressure at which to evaluate the properties can be specified at object's initialization:
-all the properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) by default.
+The pressure at which to evaluate the properties can be specified at object's instantiation.
+Otherwise, all the properties are given at atmospheric pressure (:math:`101325` :math:`[Pa]`) by default.
 The correlations' validity range is checked at evaluation in terms of temperature value,
 raising a warning in case it is not satisfied (see :ref:`Basic usage` for more details).
-Some examples of instantiation are provided even using a target property value, see section :ref:`Initialization from properties` 
+Some examples of instantiation are provided using also a target property value, see section :ref:`Initialization from properties` 
 for instance. For the sake of completeness, the correlations are also reported in the docstring documentation.
 The implementation is fully object-oriented to guarantee easy maintainability, extension and customization
 of the package (see :ref:`Advanced usage`).
@@ -349,9 +349,9 @@ The project is organized according to the following folder structure:
     
 
 - ``lbh15``: contains all modules, classes and methods implemented in *lbh15*;
-- ``docs``: contains materials for the generation of the documentation by Sphinx;
+- ``docs``: contains files for the generation of the documentation by Sphinx;
 - ``tests``: collection of tests used to verify the correct implementation;
-- ``tutorials``: collection of tutorials, each one into a dedicated sub-folder.
+- ``tutorials``: collection of tutorials and examples, each one into a dedicated sub-folder.
 
 ============
 Dependencies
@@ -365,12 +365,11 @@ Dependencies
 ============
 Installation
 ============
-To install the package *lbh15*, please type the following command:
+To install the *lbh15* package, please type the following command:
 
   .. code-block:: bash
 
       pip install lbh15
-
 
 Otherwise, clone the package from https://github.com/newcleo-dev-team/lbh15.git
 and execute the following command inside the resulting folder:
@@ -379,9 +378,14 @@ and execute the following command inside the resulting folder:
 
       pip install .
 
+To upgrade the *lbh15* package, please type the ``install`` command along with the ``--upgrade`` or ``-U`` flag:
+
+  .. code-block:: bash
+
+      pip install --upgrade lbh15
 
 The Sphinx documentation can be built in *html* and *LaTeX* by executing
-the following commands, respectively, in the folder ``docs/``:
+the following commands, respectively, in the ``docs/`` folder:
  
   .. code-block:: bash
 
@@ -391,13 +395,13 @@ the following commands, respectively, in the folder ``docs/``:
 
       make latexpdf
 
-The *html* documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
+The *html* documentation is available on GitHub Pages at https://newcleo-dev-team.github.io/lbh15/index.html.
 
 .. _Examples:
 
-========
-Examples
-========
+===============
+Getting Started
+===============
 
 This section contains some examples of basic usage and possible customization
 of the *lbh15* package. More examples are available in
@@ -467,13 +471,19 @@ This section shows a few examples of basic usage of *lbh15*.
   <stdin>:1: UserWarning: The surface tension is requested at temperature value of 1400.00 K that is not in validity range [600.60, 1300.00] K
   0.3676999999999999
 
-- Get summary information of the liquid metal using :code:`__repr__` (:code:`__str__` is also implemented offering a more detailed print):
+- Get summary information of the liquid metal using *pprint* package (the warnings about out-of-range correlations are also written):
 
   >>> from lbh15 import Lead
-  >>> liquid_lead = Lead(T=1000)
-  >>> repr(liquid_lead)
-  'Lead(T=1000.00, p=101325.00, cr_sol=9.38e-04, fe_sol=7.67e-04, ni_sol=0.92, o_sol=0.02, si_sol=5.08e-04, co_dif=3.20e-05, in_dif=5.90e-05, fe_dif=2.48e-05, o_dif=9.45e-06, se_dif=7.16e-05, te_dif=4.59e-05, G=-3.34e+03, H=11946.50, S=15.28, o_pp=1.06e-09, h=57656.86, lim_cr=1.43e-13, lim_fe=5.77e-09, lim_ni=3.97e-04, lim_al_sat=5.24e-20, lim_cr_sat=1.49e-11, lim_fe_sat=1.25e-06, lim_ni_sat=4.30e-04, lim_si_sat=2.28e-15, lim_si=5.14e-17, alpha=1.26e-04, beta_s=3.38e-11, cp=140.89, k=20.20, mu=1.33e-03, p_s=1.41, r=1.14e-06, rho=10161.50, sigma=0.41, u_s=1707.00)'
-
+  >>> import pprint
+  >>> liquid_lead = Lead(T=900)
+  >>> pprint.pprint(liquid_lead)
+  .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The iron diffusivity is requested at temperature value of 900.00 K that is not in validity range [973.00, 1273.00] K
+    attr_value = getattr(self, key)
+  .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The silicon solubility is requested at temperature value of 900.00 K that is not in validity range [1323.00, 1523.00] K
+    attr_value = getattr(self, key)
+  .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The cobalt diffusivity is requested at temperature value of 900.00 K that is not in validity range [1023.00, 1273.00] K
+    attr_value = getattr(self, key)
+  Lead(T=900.00, p=101325.00, fe_sol=2.02e-04, lim_cr=1.52e-15, in_dif=4.91e-05, lim_si_sat=2.69e-17, fe_dif=1.38e-05, k=19.10, lim_fe_sat=1.60e-07, lim_fe=2.71e-10, beta_s=3.24e-11, se_dif=6.02e-05, H=9010.76, lim_ni_sat=9.30e-05, r=1.09e-06, si_sol=8.10e-05, lim_ni=6.01e-05, alpha=1.24e-04, h=43488.20, cp=142.52, p_s=0.12, lim_si=2.42e-19, G=-1.96e+03, co_dif=2.38e-05, o_pp=4.23e-11, lim_cr_sat=4.92e-13, o_dif=7.62e-06, rho=10289.45, ni_sol=0.65, S=12.19, te_dif=3.71e-05, lim_al_sat=1.54e-22, cr_sol=1.71e-04, o_sol=4.23e-03, u_s=1731.60, mu=1.49e-03, sigma=0.42)
 
 
 .. _Initialization from properties:
@@ -486,7 +496,7 @@ The *lbh15* package gives the possibility to instantiate a liquid metal object b
 properties (see :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` classes documentation for the full list).
 This is accomplished by finding the root of the correlation function matching the target property value. Such function,
 which constitutes a physical correlation, must be injective in the range considered for the root. Note that this is a
-necessary, but not jointly sufficient condition to find a single root for the function.
+necessary, but not jointly sufficient condition to find a root for the function.
 
 
 Since the existence of a (single) root cannot be guaranteed for every correlation, this functionality is marked as *experimental*:
@@ -566,7 +576,7 @@ Advanced usage includes the possibility of adding new properties and new physica
   reference handbook :cite:`Agency2015`):
   
   >>> from lbh15 import Lead
-  >>> Lead.correlations_available()
+  >>> Lead.available_correlations()
   defaultdict(<class 'list'>, {'k': ['lbh15'], 'lim_ni': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'H': ['lbh15'], 'lim_cr': ['venkatraman1988', 'alden1958', 'gosse2014'], 'sigma': ['jauch1986'], 'cp': ['sobolev2011', 'gurvich1991'], 'cr_sol': ['venkatraman1988', 'gosse2014', 'alden1958'], 'in_dif': ['lbh15'], 'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'si_sol': ['lbh15'], 'fe_dif': ['lbh15'], 'lim_si': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'G': ['lbh15'], 'p_s': ['sobolev2011'], 'beta_s': ['lbh15'], 'se_dif': ['lbh15'], 'lim_al_sat': ['lbh15'], 'ni_sol': ['gosse2014'], 'r': ['lbh15'], 'S': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'co_dif': ['lbh15'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_fe': ['lbh15'], 'rho': ['sobolev2008a'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15']})
   
   
@@ -660,7 +670,7 @@ Advanced usage includes the possibility of adding new properties and new physica
   It is also possible to change the correlation used by a liquid metal object instance by calling the :code:`change_correlation_to_use` method
   on the instance itself.
 
-- *lbh15* allows also to add new properties to the liquid metal objects. For 
+- *lbh15* also allows to add new properties to the liquid metal objects. For 
   instance, let's implement in :code:`<execution_dir>/custom_property/double_T.py`
   a custom property that is simply the double of the temperature:
 
@@ -732,14 +742,11 @@ Advanced usage includes the possibility of adding new properties and new physica
 Learn More
 ==========
 
-This section can be subdivided into two parts:
-
-- the first one describes the oxygen-related correlations implemented in *lbh15*
-  and how they have been obtained;
-
-- the second one describes a tutorial application coming together with *lbh15*,
-  which is a representation of a simple oxygen control system applied to a
-  liquid lead volume.
+This section contains additional information about the chemistry of heavy liquid metals in presence of dispersed
+oxygen in the bulk. It is made of two parts. The first part, presented in :numref:`oxygen control`, describes
+the oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
+presented in :numref:`tutorials`, describes a tutorial application coming together with *lbh15*, which is a
+representation of a simple oxygen control system applied to a liquid lead volume.
 
 .. include:: learn_more.rst
  

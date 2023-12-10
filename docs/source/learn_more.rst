@@ -1,10 +1,12 @@
+.. _oxygen control:
+
 ++++++++++++++
 Oxygen Control
 ++++++++++++++
 
-In lead and LBE systems, Oxgyen is the most important chemical compound, which results
+In lead and LBE systems, Oxgyen is the most important chemical element, which results
 from start-up operations, maintenance services and possibily incidental contaminations (:cite:`Agency2015`).
-For the operation of a nuclear lead alloy system, it is thus important to
+For the operation of a nuclear reactor cooled by a lead alloy, it is thus important to
 determine the upper and the lower oxygen concentration limits.
 
 .. _ Oxygen concentration upper limit:
@@ -30,11 +32,11 @@ The oxide layer formation is possible only when the oxygen potential in the liqu
 potential leading to the protective film formation. The correlations implemented in the
 ``lead_thermochemical_properties.lead_oxygen_limits`` and ``lbe_thermochemical_properties.lbe_oxygen_limits``
 modules for computing the lower limits of oxygen concentration are obtained by applying the methodology
-described in :cite:`Agency2015`, chapter 4, part 4.2.2, pages 187-192. A brief resume is provided in the following.
+described in :cite:`Agency2015`, chapter 4, part 4.2.2, pages 187-192. A brief summary is provided in the following.
 
-After determining the reference reaction equation and the associated Gibbs free energy, the oxygen
-concentration will be expressed as a function of temperature, and eventually the correlations will
-be derived that come from two different assumptions the user can choose between.
+First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the oxygen
+concentration is expressed as a function of temperature. Eventually, two kinds of correlations, based on two different
+assumptions, are derived.
 
 ..
 
@@ -58,7 +60,7 @@ be derived that come from two different assumptions the user can choose between.
 
 ..
 
-  2. The Gibbs free energy associated to equation (3) results to be:
+  2. The Gibbs free energy associated to equation (3) is:
 
      :math:`\Delta G^0_{(3)} = \frac{\Delta G^0_{(1)}-\Delta G^0_{(2)}}{2}`
      :math:`= \frac{\left(\Delta H^0_{(1)}-T\cdot\Delta S^0_{(1)}\right)-\left(\Delta H^0_{(2)}-T\cdot\Delta S^0_{(2)}\right)}{2}`
@@ -83,8 +85,8 @@ be derived that come from two different assumptions the user can choose between.
        and temperature in :math:`[J\cdot mol^{-1}]`;
 
      - :math:`K_{(T)} = \prod\limits_{i=1}^{N} \alpha_i^{\nu_i}` is the equilibrium constant,
-       being :math:`\alpha_i` the chemical activity of the :math:`i`-th specie at the equilibrium,
-       :math:`\nu_i` the stoichiometric coefficient of the :math:`i`-th specie in the related reaction
+       being :math:`\alpha_i` the chemical activity of the :math:`i`-th species at the equilibrium,
+       :math:`\nu_i` the stoichiometric coefficient of the :math:`i`-th species in the related reaction
        (positive for the reaction products and negative for the reactants), and :math:`N` the number of
        components appearing in the related reaction.
 
@@ -92,16 +94,16 @@ be derived that come from two different assumptions the user can choose between.
      of a mixture of chemical substances from a standard behaviour. It is defined by the following relations:
 
      - :math:`\alpha_i = \gamma_i\cdot\chi_i` , being :math:`\gamma` the dimensionless activity coefficient
-       of the :math:`i`-th specie and :math:`\chi_i` the molar fraction of the same specie;
+       of the :math:`i`-th species and :math:`\chi_i` the molar fraction of the same species;
 
      - :math:`\alpha_i = \gamma_i\cdot\frac{C_i}{C_{iref}}`, being :math:`C_i` the concentration of the
-       :math:`i`-th specie in the mixture and :math:`C_{iref}` the reference concentration for the same specie.
+       :math:`i`-th species in the mixture and :math:`C_{iref}` the reference concentration for the same species.
 
      In :cite:`Agency2015`, the concentration at saturation is adopted as reference concentration. In addition,
-     by definition, the activity coefficient is assumed equal to one in two cases: when the related specie is a pure chemical
+     by definition, the activity coefficient is assumed equal to one in two cases: when the related species is a pure chemical
      element, and when it is very diluted. The activity of a pure element can then be defined as:
      
-     :math:`\alpha_i=\frac{C_i}{C_i^{sat}}`.
+     :math:`\alpha_i=C_i / C_i^{sat}`.
 
      About the chemical activity of lead in LBE, *lbh15* implements the correlation proposed by Gossé (2014)
      and written in chapter 3.3, part 3.3 of :cite:`Agency2015`.
@@ -125,7 +127,7 @@ be derived that come from two different assumptions the user can choose between.
 
      In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_O` and the concentration
      :math:`C_{Me}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
-     a useful correlation, two strategies are proposed and adopted in *lbh15* the user can choose between. They differ
+     a useful correlation, the user can choose between two strategies that are proposed and adopted in *lbh15*. They differ
      on how they treat the chemical activity of the dissolved metal. The actual activities at the interface are
      influenced by how diffusion, convection and mass transfer phenomena interact in the liquid metal boundary layer.
      Ongoing researches are in progress, but currently the exact values for the chemical activities of the dissolved
@@ -238,6 +240,8 @@ application requirements. In case other correlations are needed that are differe
 the "Advanced Usage" section.
 
 
+.. _tutorials:
+
 +++++++++
 Tutorials
 +++++++++
@@ -248,7 +252,7 @@ Control of Oxygen Concentration
 ===============================
 
 This section describes a simple, but meaningful example application where the *lbh15* package features are exploited.
-A generic volume of liquid lead is subject to a constant heat dissipation. At a specified time, instantaneously,
+A generic volume of liquid lead is subjected to a constant heat dissipation. At a specified time, instantaneously,
 a heat load is applied that remains constant for the rest of the simulation.
 
 The system behavior can be described by the following heat balance equation, where the transient term on the left
@@ -264,7 +268,7 @@ where:
 - :math:`h = c_p(T) \cdot T` is the specific enthalpy :math:`[J / kg]` of lead;
 - :math:`Q_{out}` is the dissipated heat in :math:`[W / m^3]`, that is kept constant throughout the entire simulation;
 - :math:`Q_{in}` is the heat load in :math:`[W / m^3]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
-  initial value is kept constant till the instantaneous change, after which it reaches a constant positive value, as illustrated in :numref:`timevsqin`.
+  initial value is kept to zero till the instantaneous change, after which it reaches a constant positive value, as illustrated in :numref:`timevsqin`.
   
   .. _timevsqin:
   
@@ -301,7 +305,7 @@ In detail:
   actual temperature value of the *Lead Volume*;
 - the *PID Controller* tries to reach the setpoint value which changes in time according to the evolution of the *Lead Volume*.
 
-The provided tutorial implements the just described system by extracting the thermo-physical and the thermo-chemical properties of the lead volume by means
+This tutorial implements the just described system by extracting the thermo-physical and the thermo-chemical properties of the lead volume by means
 of the *lbh15* package. The user can try more configurations than the one already implemented by changing the value of the following variables:
 
 - Lead initial temperature in :math:`[K]`;
@@ -328,7 +332,7 @@ By looking into the code implementation, the following sections are identified:
 
   - the lead-related module is imported from the ``lbh15`` package;
   - the ``PID`` module is imported from the ``simple_pid`` package, which is available at:
-    `https://pypi.org/project/simple-pid/ <https://pypi.org/project/simple-pid/>`_
+    https://pypi.org/project/simple-pid/
     and which can be installed by applying the following instruction:
 
     .. code-block:: console
