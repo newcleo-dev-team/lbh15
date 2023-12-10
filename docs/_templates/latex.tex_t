@@ -119,11 +119,11 @@
 <% else %>
 
 \setdoctype{Technical Report}
-\setidnb{1000yyy}
+\setidnb{<%= atendofbody ['id'] %>}
 \setdoclevel{PUBLIC}
 \setdutype{NOT DUAL USE}
-\setrefcode{XXX-YYY-ZZZ-???}
-\setrev{0}
+\setrefcode{<%= atendofbody ['ref_code'] %>}
+\setrev{<%= atendofbody ['rev'] %>}
 \setreviewers{<%= author %>}
 \setapprovers{<%= author %>}
 
@@ -131,13 +131,13 @@
 
 \begin{document}
 \maketitle
-\setabstract{<%= atendofbody %>}
+\setabstract{<%= atendofbody ['abstract'] %>}
 \mkWorkflowTable
 \newpage
 \setrevhistory{%
   \begin{tabularx}{.95\textwidth}{*{3}{C|}D{7cm}}\hline
     REV. No. & DATE & PAGES & DESCRIPTION OF CHANGES\\ \hline
-    1 & DD/MM/YYYY & All & First release\\ \hline
+    <%= atendofbody ['rev'] %> & <%= atendofbody ['date'] %> & <%= atendofbody ['pages'] %> & <%= atendofbody ['desc'] %>\\ \hline
   \end{tabularx}
 }
 \mkDistributionList
@@ -149,8 +149,6 @@
 
 <%= indices %>
 \renewcommand{\indexname}{<%= _('Index') | e %>}
-\hyphenpenalty=1000
-\hbadness=1000
 <%= printindex %>
 \end{document}
 <%- endif %>

@@ -1,0 +1,7 @@
+\date{}
+\newlist{packagelist}{description}{1}
+\setlist[packagelist]{itemsep=1pt,labelwidth=3cm,align=right,
+  font={\color{purple}\bfseries},
+  before={\color{indigo}{\itshape}}
+}
+\newcommand{\sectionbreak}{\clearpage\phantomsection}

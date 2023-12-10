@@ -4,9 +4,9 @@ Introduction
 
 *lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
-the handbook edited by OECD/NEA :cite:`Agency2015`: 
-`oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
-. The thermo-physical properties implemented in the package are listed in :numref:`tableprop`.
+the handbook edited by OECD/NEA :cite:`Agency2015`:
+`oecd-nea.org <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_.
+The thermo-physical properties implemented in the package are listed in :numref:`tableprop`.
 
 .. list-table:: *lbh15* thermo-physical properties from the handbook edited by OECD/NEA.
    :widths: 50 25 25
@@ -176,9 +176,11 @@ oxyde layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - :math:`-`
      - :math:`-`
-   * - Oxygen partial pressure divided
+   * - Oxygen partial pressure
 
-       by the oxygen concentration squared
+       divided by the oxygen
+       
+       concentration squared
      - :math:`P_{O_2}`
      - :math:`[atm/wt.\%^2]`
      - ✔
@@ -346,10 +348,10 @@ The project is organized according to the following folder structure:
     └── setup.py
     
 
-- ``lbh15``: contains all modules, classes and methods implemented in *lbh15*
-- ``docs``: contains materials for the generation of the documentation by Sphinx
-- ``tests``: collection of tests used to verify the correct implementation
-- ``tutorials``: collection of tutorials, each one into a dedicated sub-folder
+- ``lbh15``: contains all modules, classes and methods implemented in *lbh15*;
+- ``docs``: contains materials for the generation of the documentation by Sphinx;
+- ``tests``: collection of tests used to verify the correct implementation;
+- ``tutorials``: collection of tutorials, each one into a dedicated sub-folder.
 
 ============
 Dependencies

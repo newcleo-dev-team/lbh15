@@ -15,13 +15,20 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+import shutil
+import subprocess
 from setup import get_info
+from typing import Any
+from typing import Dict
 
 __company__ = get_info('lbh15/__init__.py', 'company')
 __author__ = get_info('lbh15/__init__.py', 'author')
 __version__ = get_info('lbh15/__init__.py', 'version')
+__date__ = get_info('lbh15/__init__.py', 'date')
 
-# -- Project information -----------------------------------------------------
+#####################
+# Project Information
+#####################
 
 project = 'lbh15'
 copyright = '2022, ' + __company__
@@ -32,6 +39,32 @@ version = str(__version__)
 # The full version, including alpha/beta/rc tags
 release = str(__version__)
 
+# Tex documentation template
+# Alternatives:
+# . 'manual' ==> report-style
+# . 'nwcldocs' ==> newcleo corporate-style
+latex_theme_to_use = 'manual'
+# Tex documentation title
+title = 'lbh15: collection of properties from\
+the lead-bismuth eutectic alloy and lead OECD/NEA handbook'
+# Entries for "nwcldocs" template only
+id_nwcldocs = '1000yyy' # ID Number
+ref_code_nwcldocs = 'XXX-YYY-ZZZ-???' # Reference Code
+rev_nwcldocs = '0' # Revision Number
+mod_pages_nwcldocs = 'All'
+mod_desc_nwcldocs = 'First Release'
+abstract = 'This document is the reference manual for the \
+\\sphinxstyleemphasis{lbh15} (\\sphinxstylestrong{L}ead \
+\\sphinxstylestrong{B}ismuth \\sphinxstylestrong{H}andbook \
+20\\sphinxstylestrong{15}) Python package, that implements the \
+thermo\\sphinxhyphen{}physical and the thermo\\sphinxhyphen{}chemical \
+properties of lead, bismuth and lead\\sphinxhyphen{}bismuth eutectic \
+(lbe) metal alloy available from the handbook edited by OECD/NEA \
+{[}\\hyperlink{cite.source/bibliography:id2}{1}{]}:\\sphinxhref{https://www.oecd-nea.org/jcms/pl\\_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true}{oecd\\sphinxhyphen{}nea.org}.'
+
+###########################
+# Project Information Ended
+###########################
 
 # -- General configuration ---------------------------------------------------
 
@@ -130,85 +163,83 @@ htmlhelp_basename = 'lbh15 documentation'
 
 # -- Options for LaTeX output ------------------------------------------------
 
-title = 'lbh15: collection of properties from\
-    the lead-bismuth eutectic alloy and lead OECD/NEA handbook'
-
-abstract = 'This document is the reference manual for the \
-\\sphinxstyleemphasis{lbh15} (\\sphinxstylestrong{L}ead \
-\\sphinxstylestrong{B}ismuth \\sphinxstylestrong{H}andbook \
-20\\sphinxstylestrong{15}) Python package, that implements the \
-thermo\\sphinxhyphen{}physical and the thermo\\sphinxhyphen{}chemical \
-properties of lead, bismuth and lead\\sphinxhyphen{}bismuth eutectic \
-(lbe) metal alloy available from the handbook edited by OECD/NEA \
-{[}\\hyperlink{cite.source/bibliography:id2}{1}{]}:\\sphinxhref{https://www.oecd-nea.org/jcms/pl\\_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true}{oecd\\sphinxhyphen{}nea.org}.'
-
+# List of folders where latex templates are placed
 templates_path = ['_templates']
 
-latex_theme = 'nwcldocs'
-
+# Mapping of the available latex docclasses
 latex_docclass = {
-    'nwcldocs': 'nwcldcs',
+    'manual': 'report',
+    'nwcldocs': 'nwcldocs'
 }
 
-latex_toplevel_sectioning = 'section'
-
-# verificare che ci sia il file nwcldocs.cls
-
-latex_elements = {
-
-    'classoptions': 'techdoc',
-
-    # The paper size ('letterpaper' or 'a4paper').
-
-#    'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-
+#############################
+# Setup for "manual" template
+latex_theme = 'manual'
+latex_elements: Dict[str, Any] = {
+    'papersize': 'letterpaper',
     'pointsize': '11pt',
-
-    'extrapackages': r'''
-\usepackage[title,titletoc]{appendix}
-\usepackage{caption}
-\fancypagestyle{plain}{}
-\usepackage{titlesec}
-\usepackage[nottoc]{tocbibind}
-\usepackage{hyphenat}
-''',
-
-    # Additional stuff for the LaTeX preamble.
-
-    'preamble': r'''
-\date{}
-
-\newlist{packagelist}{description}{1}
-\setlist[packagelist]{itemsep=1pt,labelwidth=3cm,align=right,
-  font={\color{purple}\bfseries},
-  before={\color{indigo}{\itshape}}
-}
-
-\newcommand{\sectionbreak}{\clearpage\phantomsection}
-\renewcommand{\hyperref}[2][]{#2}
-''',
-
-    'makeindex': '\\usepackage[columns=1,totoc]{idxlayout}\\makeindex',
-
-    # Latex figure (float) alignment
-
+    'extrapackages': r'\input{../../_templates/extra_manual.texsty}',
+    'makeindex': '\\usepackage[columns=1]{idxlayout}\\makeindex',
     'figure_align': 'tbp',
-
-    # Abused keywords
-    'atendofbody': abstract, # Used for defining the abstract contents
-
-    # Setup options for sphinx
-    'sphinxsetup': 'TitleColor={named}{black}',
 }
+latex_authors = author
+
+##########################################
+# Settings to use with "nwcldocs" template
+extrapackages_nwcldocs = r'\input{../../_templates/extra_nwcl.texsty}'
+preamble_nwcldocs = r'\input{../../_templates/preamble_nwcl.texsty}'
+makeindex_nwcldocs = '\\usepackage[columns=1,totoc]{idxlayout}\\makeindex'
+date_list = __date__.split(' ')
+from datetime import datetime
+date_nwcldocs = date_list[0] + "/" + \
+    str(datetime.strptime(date_list[1], '%B').month) + "/" + date_list[2]
+atendofbody_nwcldocs = {
+    'id': id_nwcldocs,
+    'ref_code': ref_code_nwcldocs,
+    'rev': rev_nwcldocs,
+    'abstract': abstract,
+    'date': date_nwcldocs,
+    'pages': mod_pages_nwcldocs,
+    'desc':mod_desc_nwcldocs,
+}
+
+# Check the availability of the theme and set it accordingly
+if latex_theme_to_use == 'nwcldocs':
+    if shutil.which('kpsewhich'):
+        check = subprocess.run(["kpsewhich", "nwcldocs.cls"],
+                               stdout=subprocess.PIPE, text=True)
+        if not check.stdout:
+            raise RuntimeError("'nwcldocs.cls' tex class not found!\n"
+                               "PDF file cannot be generated!\n Please change "
+                               "document class to use and try again!")
+        else:
+            latex_theme = 'nwcldocs'
+            latex_toplevel_sectioning = 'section'
+            latex_elements.pop('papersize', None)
+            latex_elements['classoptions'] = 'techdoc'
+            latex_elements['extrapackages'] = extrapackages_nwcldocs
+            latex_elements['preamble'] = preamble_nwcldocs
+            latex_elements['makeindex'] = makeindex_nwcldocs
+            latex_elements['atendofbody'] = atendofbody_nwcldocs
+            latex_elements['sphinxsetup'] = 'TitleColor={named}{black}'
+            latex_authors = '\\break '.join(str(item) for item
+                                           in author.split(", "))
+    else:
+        raise RuntimeError("No tex environment found!\n"
+                           "PDF file cannot be generated!\n Please change "
+                           "document class to use and try again!")
+elif latex_theme_to_use != 'manual':
+    raise RuntimeError("Only 'manual' and 'nwcldocs' document classes are "
+                       f"allowed, while '{latex_theme_to_use}' has been "
+                       "provided!\n Please change document class to use "
+                       "and try again!")
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 # author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'lbh15.tex', title,
-     __author__, 'nwcldocs'),
+     latex_authors, latex_theme),
 ]
 
 latex_logo = html_logo
