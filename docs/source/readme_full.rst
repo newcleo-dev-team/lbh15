@@ -65,9 +65,9 @@ The thermo-physical properties implemented in the package are listed in :numref:
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
 The thermo-chemical properties implemented since version 1.2.0 are listed in :numref:`tablechemdata` (basic properties), :numref:`tablechemsoldiff`
-(solubilities, diffusivities and oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxyde layers generation
+(solubilities, diffusivities and oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxide layers generation
 when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of Oxygen concentration for
-oxyde layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
+oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
 
 .. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: basic data.
    :widths: 50 25 25 25 25 25
@@ -187,7 +187,7 @@ oxyde layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - ✔
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxyde layers generation when the corresponding metal is considered at its saturation concentration.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxide layers generation when the corresponding metal is considered at its saturation concentration.
    :widths: 50 25 25 25 25 25
    :name: tablechemlowlimssat
    :header-rows: 1
@@ -249,7 +249,7 @@ oxyde layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - :math:`-`
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxyde layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
    :widths: 50 25 25 25 25 25
    :name: tablechemlowlims
    :header-rows: 1

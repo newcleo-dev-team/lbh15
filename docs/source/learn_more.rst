@@ -4,7 +4,7 @@
 Oxygen Control
 ++++++++++++++
 
-In lead and LBE systems, Oxgyen is the most important chemical element, which results
+In lead and LBE systems, Oxygen is the most important chemical element, which results
 from start-up operations, maintenance services and possibily incidental contaminations (:cite:`Agency2015`).
 For the operation of a nuclear reactor cooled by a lead alloy, it is thus important to
 determine the upper and the lower oxygen concentration limits.
@@ -117,7 +117,7 @@ assumptions, are derived.
      :math:`\Delta_rG^0_{(T)}=-RT\ln{\left(\frac{\alpha_{Pb}\cdot\alpha_{Me_XO_Y}^{\frac{1}{Y}}}{\alpha_{PbO}\cdot\alpha_{Me{(dissolved)}}^{\frac{X}{Y}}}\right)}`,
 
      where the term :math:`\alpha_{Me_XO_Y}` can be considered equal to one: the lower limit is to be found of the oxygen
-     concentration, thus the metal oxyde is considered very diluted.
+     concentration, thus the metal oxide is considered very diluted.
 
      By considering the oxygen dissolved in the solution in the form of *PbO* below its saturation limit, as stated in :cite:`Agency2015`,
      thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved *PbO*, and by
@@ -278,13 +278,13 @@ where:
     
     Time history of the heat load applied to the lead volume.
 
-Let suppose that the lead volume works in an environment where the creation of an Iron oxyde layer must be guaranteed on the bounding walls. This requires
+Let suppose that the lead volume works in an environment where the creation of an Iron oxide layer must be guaranteed on the bounding walls. This requires
 the Oxygen concentration within the lead to be always within the admissible range having the
 :class:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead.OxygenSolubility`
 value as upper limit and, as lower limit, the
 :class:`lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits.LowerLimitIron`
-value. The choice of the Iron oxyde is just for illustrative
-purposes, the same goes for any other oxyde formation. The Oxygen concentration must then be controlled by supposing the application of an ideal device able
+value. The choice of the Iron oxide is just for illustrative
+purposes, the same goes for any other oxide formation. The Oxygen concentration must then be controlled by supposing the application of an ideal device able
 to add and subtract Oxygen to/from the lead volume.
 
 The system enabling this kind of control is depicted in :numref:`contrschema`.
