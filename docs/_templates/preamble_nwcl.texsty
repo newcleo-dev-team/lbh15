@@ -6,3 +6,8 @@
 }
 \fancypagestyle{plain}{}
 \newcommand{\sectionbreak}{\clearpage\phantomsection}
+\AtBeginDocument{
+  \renewcommand\contentsname{\hfill TABLE OF CONTENTS\hfill}
+  \renewcommand{\listfigurename}{\hfill LIST OF FIGURES\hfill}
+  \renewcommand{\listtablename}{\hfill LIST OF TABLES\hfill}
+}

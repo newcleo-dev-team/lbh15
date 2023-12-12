@@ -146,6 +146,10 @@
 \clearpage
 \tableofcontents
 \clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
 <%= body %>
 
 <%= indices %>
