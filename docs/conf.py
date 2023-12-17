@@ -42,7 +42,7 @@ release = str(__version__)
 # Tex documentation template
 # Alternatives:
 # . 'manual' ==> report-style
-# . 'nwcldocs' ==> newcleo corporate-style
+# . 'nwcldocs' ==> newcleo corporate-style (proprietary)
 latex_theme_to_use = 'manual'
 # Tex documentation title
 title = 'lbh15: collection of properties from\

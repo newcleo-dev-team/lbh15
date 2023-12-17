@@ -357,10 +357,18 @@ The project is organized according to the following folder structure:
 Dependencies
 ============
 
-- Python >=3.8.10
-- Sphinx >=5.1.0
-- SciPy >=1.8.1
-- NumPy >=1.22.3
+To run the code, the following dependencies must be satisfied:
+
+- ``Python`` :math:`>= 3.8.10`
+- ``SciPy`` :math:`>= 1.8.1`
+- ``NumPy`` :math:`>= 1.22.3`
+
+To build the documentation in both *html* and *LaTeX* formats, the following dependencies must be satisfied:
+
+- ``sphinx`` :math:`>= 6.2.1`
+- ``sphinx-rtd-theme`` :math:`>= 1.3.0`
+- ``myst-parser`` :math:`>= 1.0.0`
+- ``sphinxcontrib-bibtex`` :math:`>= 2.5.0`
 
 ============
 Installation
@@ -396,6 +404,9 @@ the following commands, respectively, in the ``docs/`` folder:
       make latexpdf
 
 The *html* documentation is available on GitHub Pages at https://newcleo-dev-team.github.io/lbh15/index.html.
+
+To see the available templates for generating the documentation in *PDF* format and to choose among them, please
+look at the ``docs/conf.py`` file.
 
 .. _Examples:
 

@@ -59,6 +59,7 @@ Developers memo for release:
         - Change version in lbh15/__init__.py
         - Change date in lbh15/__init__.py
         - Change date in README.rst
+        - Update the "docs/source/release_notes.rst"
 
     2. Test the package build and install on test-pypi:
         a. Change the name of the package in setup.py and pyproject.toml in 'lbh15-test'
