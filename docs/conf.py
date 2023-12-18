@@ -84,6 +84,7 @@ bibtex_bibfiles = [os.path.join(srcdir, 'lbh15.bib')]
 autosectionlabel_prefix_document = True
 
 numfig = True
+math_numfig = True
 
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
@@ -140,7 +141,8 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [os.path.join(srcdir, '_static')]
 
-html_css_files = [os.path.join(srcdir, 'css', 'theme.css')]
+html_css_files = [os.path.join('css', 'theme.css'),
+                  os.path.join('css', 'eqno.css')]
 
 html_logo = os.path.join(srcdir, 'figures', 'newcleologo.png')
 

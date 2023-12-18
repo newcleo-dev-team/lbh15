@@ -40,18 +40,21 @@ assumptions, are derived.
 
 ..
 
-  1. The equation of the oxidation reaction (3) is set by considering that it occurs
+  1. The equation :eq:`oxide_react_eq` of the oxidation reaction is set by considering that it occurs
      between the metal and the oxygen, with the oxygen supposed in solution as dissolved *PbO* below its saturation limit.
-     The formation equation of the metal oxide (1) (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
-     equation of *PbO* (2), (table 4.2.2, page 189 of :cite:`Agency2015`):
+     The formation equation :eq:`metal_oxide_eq` of the metal oxide (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
+     equation :eq:`pbo_eq` of *PbO*, (table 4.2.2, page 189 of :cite:`Agency2015`):
 
-     :math:`\frac{2X}{Y}Me_{(dissolved)} + O_{2(dissolved)} \longrightarrow \frac{2}{Y}Me_XO_Y \quad` (1)
+     .. math:: \frac{2X}{Y}Me_{(dissolved)} + O_{2(dissolved)} \longrightarrow \frac{2}{Y}Me_XO_Y
+      :label: metal_oxide_eq
 
-     :math:`2Pb + O_2 \longrightarrow 2PbO \quad` (2)
+     .. math:: 2Pb + O_2 \longrightarrow 2PbO
+      :label: pbo_eq
 
      thus resulting in the following oxidation reaction equation for a mole of *PbO*:
 
-     :math:`\frac{X}{Y}Me_{(dissolved)} + O_{(dissolved)} + PbO \longrightarrow \frac{1}{Y}Me_XO_Y + Pb + O`, :math:`\quad` (3)
+     .. math:: \frac{X}{Y}Me_{(dissolved)} + O_{(dissolved)} + PbO \longrightarrow \frac{1}{Y}Me_XO_Y + Pb + O
+      :label: oxide_react_eq
 
      where:
 
@@ -60,15 +63,15 @@ assumptions, are derived.
 
 ..
 
-  2. The Gibbs free energy associated to equation (3) is:
+  2. The Gibbs free energy associated to equation :eq:`oxide_react_eq` is:
 
      :math:`\Delta G^0_{(3)} = \frac{\Delta G^0_{(1)}-\Delta G^0_{(2)}}{2}`
      :math:`= \frac{\left(\Delta H^0_{(1)}-T\cdot\Delta S^0_{(1)}\right)-\left(\Delta H^0_{(2)}-T\cdot\Delta S^0_{(2)}\right)}{2}`
      :math:`= \frac{\Delta H^0_{(3)}-T\cdot\Delta S^0_{(3)}}{2}`, where:
 
      - :math:`\Delta G^0_{(i)}` is the Gibbs free energy of formation related to the (i)-th reaction equation;
-     - :math:`\Delta H^0_{(3)} = \Delta H^0_{(1)}-\Delta H^0_{(2)}` is the formation enthalpy related to equation (3);
-     - :math:`\Delta S^0_{(3)} =\Delta S^0_{(1)}-\Delta S^0_{(2)}` is the formation entropy related to equation (3);
+     - :math:`\Delta H^0_{(3)} = \Delta H^0_{(1)}-\Delta H^0_{(2)}` is the formation enthalpy related to equation :eq:`oxide_react_eq`;
+     - :math:`\Delta S^0_{(3)} =\Delta S^0_{(1)}-\Delta S^0_{(2)}` is the formation entropy related to equation :eq:`oxide_react_eq`;
      - :math:`\Delta H^0` and :math:`\Delta S^0` values for each reaction are taken from the table 4.2.2 of :cite:`Agency2015`.
 
 ..
@@ -112,7 +115,7 @@ assumptions, are derived.
 
   4. The aim is now to develop, for each possible dissolved metal, a correlation for the lower limit of the
      oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
-     oxidation reaction equation (3), the following substitution is applied:
+     oxidation reaction equation :eq:`oxide_react_eq`, the following substitution is applied:
 
      :math:`\Delta_rG^0_{(T)}=-RT\ln{\left(\frac{\alpha_{Pb}\cdot\alpha_{Me_XO_Y}^{\frac{1}{Y}}}{\alpha_{PbO}\cdot\alpha_{Me{(dissolved)}}^{\frac{X}{Y}}}\right)}`,
 
@@ -123,7 +126,8 @@ assumptions, are derived.
      thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved *PbO*, and by
      applying some transformations, one can obtain:
 
-     :math:`\ln{\left( C_O \right)} = - \frac{X}{Y}\ln{\left(C_{Me}\right)} + \frac{X}{Y}\ln{\left(C_{Me}^{sat}\right)} + \frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} + \ln{\left(\alpha_{Pb}\right)} + \ln{\left(C_O^{sat}\right)} \quad` (4)
+     .. math:: \ln{\left( C_O \right)} = \frac{X}{Y}\ln{\left(\frac{C_{Me}^{sat}}{C_{Me}}\right)} + \frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} + \ln{\left(\alpha_{Pb} \cdot C_O^{sat}\right)}
+      :label: ox_conc_eq
 
      In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_O` and the concentration
      :math:`C_{Me}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
@@ -134,7 +138,7 @@ assumptions, are derived.
      metal and of the oxygen are not known.
 
      a. The first approach is to consider the chemical activity of the dissolved metal equal to one.
-        In this way, the first and the second terms of the right hand side of equation (4) become zero, enabling to
+        In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
         compute the lower limit of the oxygen concentration directly through the following relation:
 
         :math:`C_O = \displaystyle \alpha_{Pb} \cdot C_O^{sat} \cdot \exp{\left(\frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} \right)}`,
@@ -148,8 +152,8 @@ assumptions, are derived.
         - :math:`\alpha_{Pb}` is taken equal to one in pure Lead, while in LBE it is computed by adopting the
           correlation proposed by Gossé as indicated at page 146 of :cite:`Agency2015`.
 
-     b. The second approach does not exploit any assumption. In order to make equation (4) solvable, the two unknowns
-        :math:`C_O^{sat}` and :math:`C_{Me}` are collected into one single unknown, thus expressing equation (4) in terms
+     b. The second approach does not exploit any assumption. In order to make equation :eq:`ox_conc_eq` solvable, the two unknowns
+        :math:`C_O^{sat}` and :math:`C_{Me}` are collected into one single unknown, thus expressing equation :eq:`ox_conc_eq` in terms
         of :math:`C_O  \cdot C_{Me}^{\frac{X}{Y}}`, as indicated in the following:
 
         :math:`C_O \cdot C_{Me}^{\frac{X}{Y}} = \displaystyle \alpha_{Pb} \cdot C_O^{sat} \cdot \left(C_{Me}^{sat}\right)^{X/Y} \cdot \exp{\left(\frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R}\right)}`,
