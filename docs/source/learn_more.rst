@@ -1,4 +1,4 @@
-.. _oxygen control:
+.. _oxygen-control:
 
 ++++++++++++++
 Oxygen Control
@@ -237,7 +237,7 @@ are related to the lowest available temperature values and whose extension is th
 
 The user is invited to check the ranges of validity of the correlations she/he is using to make sure they match with the specific
 application requirements. In case other correlations are needed that are different from the ones already implemented in *lbh15*, please see
-the "Advanced Usage" section.
+:any:`advanced-usage` section.
 
 
 .. _tutorials:

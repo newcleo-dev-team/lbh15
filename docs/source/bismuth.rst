@@ -1,3 +1,5 @@
+.. _bismuth-module:
+
 *bismuth* Module
 ====================
 Module implementing the liquid bismuth class.

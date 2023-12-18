@@ -1,3 +1,5 @@
+.. _lbe-module:
+
 *lbe* Module
 ============
 Module implementing the liquid lead-bismuth-eutectic (LBE) class.

@@ -1,3 +1,5 @@
+.. _lead-module:
+
 *lead* Module
 =============
 Module implementing the liquid lead class.
