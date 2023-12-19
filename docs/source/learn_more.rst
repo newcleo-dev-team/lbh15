@@ -45,7 +45,7 @@ assumptions, are derived.
      The formation equation :eq:`metal_oxide_eq` of the metal oxide (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
      equation :eq:`pbo_eq` of *PbO*, (table 4.2.2, page 189 of :cite:`Agency2015`):
 
-     .. math:: \frac{2X}{Y}Me_{(dissolved)} + O_{2(dissolved)} \longrightarrow \frac{2}{Y}Me_XO_Y
+     .. math:: \frac{2X}{Y}Me_{\left(dissolved\right)} + O_{2\left(dissolved\right)} \longrightarrow \frac{2}{Y}Me_XO_Y
       :label: metal_oxide_eq
 
      .. math:: 2Pb + O_2 \longrightarrow 2PbO
@@ -53,7 +53,7 @@ assumptions, are derived.
 
      thus resulting in the following oxidation reaction equation for a mole of *PbO*:
 
-     .. math:: \frac{X}{Y}Me_{(dissolved)} + O_{(dissolved)} + PbO \longrightarrow \frac{1}{Y}Me_XO_Y + Pb + O
+     .. math:: \frac{X}{Y}Me_{\left(dissolved\right)} + O_{\left(dissolved\right)} + PbO \longrightarrow \frac{1}{Y}Me_XO_Y + Pb + O
       :label: oxide_react_eq
 
      where:
@@ -65,29 +65,36 @@ assumptions, are derived.
 
   2. The Gibbs free energy associated to equation :eq:`oxide_react_eq` is:
 
-     :math:`\Delta G^0_{(3)} = \frac{\Delta G^0_{(1)}-\Delta G^0_{(2)}}{2}`
-     :math:`= \frac{\left(\Delta H^0_{(1)}-T\cdot\Delta S^0_{(1)}\right)-\left(\Delta H^0_{(2)}-T\cdot\Delta S^0_{(2)}\right)}{2}`
-     :math:`= \frac{\Delta H^0_{(3)}-T\cdot\Delta S^0_{(3)}}{2}`, where:
+     .. math::
+      \Delta G^0_{\left(3\right)} & = \frac{\Delta G^0_{\left(1\right)}-\Delta G^0_{\left(2\right)}}{2}
 
-     - :math:`\Delta G^0_{(i)}` is the Gibbs free energy of formation related to the (i)-th reaction equation;
-     - :math:`\Delta H^0_{(3)} = \Delta H^0_{(1)}-\Delta H^0_{(2)}` is the formation enthalpy related to equation :eq:`oxide_react_eq`;
-     - :math:`\Delta S^0_{(3)} =\Delta S^0_{(1)}-\Delta S^0_{(2)}` is the formation entropy related to equation :eq:`oxide_react_eq`;
+      & = \frac{\left(\Delta H^0_{\left(1\right)}-T\cdot\Delta S^0_{\left(1\right)}\right)-\left(\Delta H^0_{\left(2\right)}-T\cdot\Delta S^0_{\left(2\right)}\right)}{2}
+
+      & = \frac{\Delta H^0_{\left(3\right)}-T\cdot\Delta S^0_{\left(3\right)}}{2},
+     
+     where:
+
+     - :math:`\Delta G^0_{\left(i\right)}` is the Gibbs free energy of formation related to the (i)-th reaction equation;
+     - :math:`\Delta H^0_{\left(3\right)} = \Delta H^0_{\left(1\right)}-\Delta H^0_{\left(2\right)}` is the formation enthalpy related to equation :eq:`oxide_react_eq`;
+     - :math:`\Delta S^0_{\left(3\right)} =\Delta S^0_{\left(1\right)}-\Delta S^0_{\left(2\right)}` is the formation entropy related to equation :eq:`oxide_react_eq`;
      - :math:`\Delta H^0` and :math:`\Delta S^0` values for each reaction are taken from the table 4.2.2 of :cite:`Agency2015`.
 
 ..
 
   3. In general, the Gibbs free energy of a reaction can also be expressed in the following way:
 
-     :math:`\Delta_rG^0_{(T)} = -RT \ln{(K_{(T)})}`, where:
+     .. math:: \Delta_rG^0 \left(T\right) = -R \cdot T \cdot \ln{\left(K \left(T\right)\right)},
+      
+     where:
 
-     - :math:`T` is the temperature in :math:`[K]`;
+     - :math:`T` is the temperature in :math:`\left[K\right]`;
 
-     - :math:`R` is the molar gas constant in :math:`[J\cdot K^{-1} \cdot mol^{-1}]`;
+     - :math:`R` is the molar gas constant in :math:`\left[J\cdot K^{-1} \cdot mol^{-1}\right]`;
 
-     - :math:`\Delta_rG^0_{(T)}` is the standard free enthalpy of reaction at constant pressure
-       and temperature in :math:`[J\cdot mol^{-1}]`;
+     - :math:`\Delta_rG^0 \left(T\right)` is the standard free enthalpy of reaction at constant pressure
+       and temperature in :math:`\left[J\cdot mol^{-1}\right]`;
 
-     - :math:`K_{(T)} = \prod\limits_{i=1}^{N} \alpha_i^{\nu_i}` is the equilibrium constant,
+     - :math:`K \left(T\right) = \prod\limits_{i=1}^{N} \alpha_i^{\nu_i}` is the equilibrium constant,
        being :math:`\alpha_i` the chemical activity of the :math:`i`-th species at the equilibrium,
        :math:`\nu_i` the stoichiometric coefficient of the :math:`i`-th species in the related reaction
        (positive for the reaction products and negative for the reactants), and :math:`N` the number of
@@ -106,7 +113,7 @@ assumptions, are derived.
      by definition, the activity coefficient is assumed equal to one in two cases: when the related species is a pure chemical
      element, and when it is very diluted. The activity of a pure element can then be defined as:
      
-     :math:`\alpha_i=C_i / C_i^{sat}`.
+     .. math:: \alpha_i=C_i / C_i^{sat}.
 
      About the chemical activity of lead in LBE, *lbh15* implements the correlation proposed by Gossé (2014)
      and written in chapter 3.3, part 3.3 of :cite:`Agency2015`.
@@ -117,7 +124,7 @@ assumptions, are derived.
      oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
      oxidation reaction equation :eq:`oxide_react_eq`, the following substitution is applied:
 
-     :math:`\Delta_rG^0_{(T)}=-RT\ln{\left(\frac{\alpha_{Pb}\cdot\alpha_{Me_XO_Y}^{\frac{1}{Y}}}{\alpha_{PbO}\cdot\alpha_{Me{(dissolved)}}^{\frac{X}{Y}}}\right)}`,
+     .. math:: \Delta_rG^0 \left(T\right) = -RT\ln{\left(\frac{\alpha_{Pb}\cdot\alpha_{Me_XO_Y}^{\frac{1}{Y}}}{\alpha_{PbO}\cdot\alpha_{Me{\left(dissolved\right)}}^{\frac{X}{Y}}}\right)},
 
      where the term :math:`\alpha_{Me_XO_Y}` can be considered equal to one: the lower limit is to be found of the oxygen
      concentration, thus the metal oxide is considered very diluted.
@@ -126,7 +133,7 @@ assumptions, are derived.
      thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved *PbO*, and by
      applying some transformations, one can obtain:
 
-     .. math:: \ln{\left( C_O \right)} = \frac{X}{Y}\ln{\left(\frac{C_{Me}^{sat}}{C_{Me}}\right)} + \frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} + \ln{\left(\alpha_{Pb} \cdot C_O^{sat}\right)}
+     .. math:: \ln{\left( C_O \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{Me}^{sat}}{C_{Me}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{Pb} \cdot C_O^{sat}\right)}
       :label: ox_conc_eq
 
      In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_O` and the concentration
@@ -141,11 +148,11 @@ assumptions, are derived.
         In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
         compute the lower limit of the oxygen concentration directly through the following relation:
 
-        :math:`C_O = \displaystyle \alpha_{Pb} \cdot C_O^{sat} \cdot \exp{\left(\frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R} \right)}`,
+        .. math:: C_O = \alpha_{Pb} \cdot C_O^{sat} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} \right)},
 
         where:
   
-        - :math:`\Delta H^0_{(3)}` and :math:`\Delta S^0_{(3)}` are extracted from table 4.2.2 of :cite:`Agency2015`;
+        - :math:`\Delta H^0_{\left(3\right)}` and :math:`\Delta S^0_{\left(3\right)}` are extracted from table 4.2.2 of :cite:`Agency2015`;
 
         - :math:`C_O^{sat}` is computed by adopting the recommended coefficients from table 3.5.2 of :cite:`Agency2015`;
 
@@ -156,13 +163,13 @@ assumptions, are derived.
         :math:`C_O^{sat}` and :math:`C_{Me}` are collected into one single unknown, thus expressing equation :eq:`ox_conc_eq` in terms
         of :math:`C_O  \cdot C_{Me}^{\frac{X}{Y}}`, as indicated in the following:
 
-        :math:`C_O \cdot C_{Me}^{\frac{X}{Y}} = \displaystyle \alpha_{Pb} \cdot C_O^{sat} \cdot \left(C_{Me}^{sat}\right)^{X/Y} \cdot \exp{\left(\frac{\Delta H^0_{(3)}}{2RT} - \frac{\Delta S^0_{(3)}}{2R}\right)}`,
+        .. math:: C_O \cdot C_{Me}^{\frac{X}{Y}} = \alpha_{Pb} \cdot C_O^{sat} \cdot \left(C_{Me}^{sat}\right)^{X/Y} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R}\right)},
 
         where:
 
         - :math:`C_{Me}^{sat}` values are computed by using the data from table 3.5.1 of :cite:`Agency2015`;
 
-        - :math:`\Delta H^0_{(3)}`, :math:`\Delta S^0_{(3)}`, :math:`C_O^{sat}` and :math:`\alpha_{Pb}` are computed as already
+        - :math:`\Delta H^0_{\left(3\right)}`, :math:`\Delta S^0_{\left(3\right)}`, :math:`C_O^{sat}` and :math:`\alpha_{Pb}` are computed as already
           indicated for the approach described above.
 
 .. _ Ranges of validity:
@@ -262,16 +269,14 @@ a heat load is applied that remains constant for the rest of the simulation.
 The system behavior can be described by the following heat balance equation, where the transient term on the left
 hand side is present, together with the above mentioned heat source terms on the right hand side:
 
-.. math::
-
-  \displaystyle \frac{d \left( \rho h \right)}{d t} \quad = \quad Q_{in} + Q_{out},
+.. math:: \frac{d \left( \rho h \right)}{d t} \quad = \quad Q_{in} + Q_{out},
 
 where:
 
-- :math:`\rho = \rho(T)` is the lead density :math:`[kg / m^3]`;
-- :math:`h = c_p(T) \cdot T` is the specific enthalpy :math:`[J / kg]` of lead;
-- :math:`Q_{out}` is the dissipated heat in :math:`[W / m^3]`, that is kept constant throughout the entire simulation;
-- :math:`Q_{in}` is the heat load in :math:`[W / m^3]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
+- :math:`\rho = \rho\left(T\right)` is the lead density :math:`\left[kg / m^3\right]`;
+- :math:`h = c_p\left(T\right) \cdot T` is the specific enthalpy :math:`\left[J / kg\right]` of lead;
+- :math:`Q_{out}` is the dissipated heat in :math:`\left[W / m^3\right]`, that is kept constant throughout the entire simulation;
+- :math:`Q_{in}` is the heat load in :math:`\left[W / m^3\right]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
   initial value is kept to zero till the instantaneous change, after which it reaches a constant positive value, as illustrated in :numref:`timevsqin`.
   
   .. _timevsqin:
@@ -312,11 +317,11 @@ In detail:
 This tutorial implements the just described system by extracting the thermo-physical and the thermo-chemical properties of the lead volume by means
 of the *lbh15* package. The user can try more configurations than the one already implemented by changing the value of the following variables:
 
-- Lead initial temperature in :math:`[K]`;
-- Maximum value of the heat load applied to the lead volume in :math:`[W / m^3]`;
-- Time instant when the heat load changes instantaneously in :math:`[s]`;
-- Constant dissipated heat power in :math:`[W / m^3]`;
-- Oxygen initial concentration in :math:`[wt.\%]`;
+- Lead initial temperature in :math:`\left[K\right]`;
+- Maximum value of the heat load applied to the lead volume in :math:`\left[W / m^3\right]`;
+- Time instant when the heat load changes instantaneously in :math:`\left[s\right]`;
+- Constant dissipated heat power in :math:`\left[W / m^3\right]`;
+- Oxygen initial concentration in :math:`\left[wt.\%\right]`;
 - PID controller settings, that is, the *proportional*, the *integral* and the *derivative* coefficients;
 - Simulation duration;
 - Number of integration time steps.
