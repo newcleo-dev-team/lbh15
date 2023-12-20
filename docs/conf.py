@@ -45,7 +45,7 @@ release = str(__version__)
 # . 'nwcldocs' ==> newcleo corporate-style (proprietary)
 latex_theme_to_use = 'manual'
 # Tex documentation title
-title = 'lbh15: collection of properties from\
+title = 'lbh15: collection of properties from \
 the lead-bismuth eutectic alloy and lead OECD/NEA handbook'
 # Entries for "nwcldocs" template only
 id_nwcldocs = '1000yyy' # ID Number

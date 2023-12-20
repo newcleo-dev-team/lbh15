@@ -18,7 +18,9 @@ Welcome to *lbh15* documentation!
    source/acknowledgments.rst
 
    source/license.rst
-   
+
+   source/release_notes.rst
+
 .. only:: html
 
    Indices and tables
