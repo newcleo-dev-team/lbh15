@@ -341,6 +341,7 @@ The project is organized according to the following folder structure:
     ├── lbh15/
     ├── tests/
     ├── tutorials/
+    ├── CHANGELOG.rst
     ├── LICENSE
     ├── MANIFEST.in
     ├── README.rst
