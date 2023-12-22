@@ -98,7 +98,8 @@ The *html* documentation is available on GitHub Pages at `newcleo-dev-team.githu
 To see the available templates for generating the documentation in *PDF* format and to choose among them, please
 look at the ``docs/conf.py`` file.
 
-.. rubric:: *Recommended publication for citing*
+How to Cite
+-----------
 
 .. code-block:: latex
 
