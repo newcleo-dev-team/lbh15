@@ -1,3 +1,7 @@
+.. raw:: latex
+
+   \setcounter{secnumdepth}{1}
+
 ============
 Introduction
 ============
@@ -65,7 +69,7 @@ The thermo-physical properties implemented in the package are listed in :numref:
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
 The thermo-chemical properties implemented since version 1.2.0 are listed in :numref:`tablechemdata` (basic properties), :numref:`tablechemsoldiff`
-(solubilities, diffusivities and oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxide layers generation
+(solubilities, diffusivities and Oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxide layers generation
 when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of Oxygen concentration for
 oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
 
@@ -99,7 +103,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - ✔
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and oxygen partial pressure.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and Oxygen partial pressure.
    :widths: 50 25 25 25 25 25
    :name: tablechemsoldiff
    :header-rows: 1
@@ -178,7 +182,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - :math:`-`
    * - Oxygen partial pressure
 
-       divided by the oxygen
+       divided by the Oxygen
        
        concentration squared
      - :math:`P_{\ce{O2}}`
@@ -462,7 +466,7 @@ This section shows a few examples of basic usage of *lbh15*.
   >>> liquid_lead.k
   22.4
 
-- Create an instance of :class:`.Lead` class at a given temperature, then change the temperature value. Compare the oxygen
+- Create an instance of :class:`.Lead` class at a given temperature, then change the temperature value. Compare the Oxygen
   diffusivity values at the two temperatures:
 
   >>> from lbh15 import Lead
@@ -755,10 +759,10 @@ Learn More
 ==========
 
 This section contains additional information about the chemistry of heavy liquid metals in presence of dispersed
-oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
-the oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
+Oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
+the Oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
 presented in :any:`tutorials` section, describes a tutorial application coming together with *lbh15*, which is a
-representation of a simple oxygen control system applied to a liquid lead volume.
+representation of a simple Oxygen control system applied to a liquid lead volume.
 
 .. include:: learn_more.rst
  

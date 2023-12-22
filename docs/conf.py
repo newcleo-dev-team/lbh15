@@ -61,6 +61,9 @@ thermo\\sphinxhyphen{}physical and the thermo\\sphinxhyphen{}chemical \
 properties of lead, bismuth and lead\\sphinxhyphen{}bismuth eutectic \
 (lbe) metal alloy available from the handbook edited by OECD/NEA \
 {[}\\hyperlink{cite.source/bibliography:id2}{1}{]}.'
+authors_for_latex = 'Daniele Panico, , , , Gabriele Ottino, , , , '
+reviewers_for_latex = 'Pierre-Alexandre Pantel, , , '
+approvers_for_latex = 'Daniele Tomatis, , , '
 
 ###########################
 # Project Information Ended
@@ -202,7 +205,11 @@ atendofbody_nwcldocs = {
     'abstract': abstract,
     'date': date_nwcldocs,
     'pages': mod_pages_nwcldocs,
-    'desc':mod_desc_nwcldocs,
+    'desc': mod_desc_nwcldocs,
+    'reviewers': '\\break '.join(str(item) for item
+                                 in reviewers_for_latex.split(", ")),
+    'approvers': '\\break '.join(str(item) for item
+                                 in approvers_for_latex.split(", "))
 }
 
 # Check the availability of the theme and set it accordingly
@@ -225,7 +232,7 @@ if latex_theme_to_use == 'nwcldocs':
             latex_elements['atendofbody'] = atendofbody_nwcldocs
             latex_elements['sphinxsetup'] = 'TitleColor={named}{black}'
             latex_authors = '\\break '.join(str(item) for item
-                                           in author.split(", "))
+                                           in authors_for_latex.split(", "))
     else:
         raise RuntimeError("No tex environment found!\n"
                            "PDF file cannot be generated!\n Please change "

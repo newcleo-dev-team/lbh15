@@ -1,3 +1,7 @@
+.. raw:: latex
+
+   \setcounter{secnumdepth}{-1}
+
 =============
 Release Notes
 =============
@@ -8,6 +12,10 @@ three lists according to the labels assigned to them. To access the entire issue
 related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
 1. **Enhancements**
+
+   - Remove typecheck for performance reasons - **#129**
+
+   - Review for v2.0.0 release - **#120**
 
    - Tutorial: code and doc - **#118**
 
@@ -131,7 +139,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
 ..
 
-1. **Bugs**
+3. **Bugs**
 
    - Allow to deeply copy *LiquidMetal* objects - **#115**
   
@@ -154,3 +162,30 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
    - Fix loading of duplicate properties - **#45**
 
    - Modify the :file:`test_lbh15_fromX.py` so that it dynamically tests the initialization from all the available properties - **#31**
+
+Some issues are yet to be solved. Here in the following the list of currently open issues subdivided according to their labels:
+
+1. **Enhancements**
+
+   - Refactor physical constants variables with dataclasses - **#122**
+
+   - Refactor path usages with pathlib.Path objects - **#121**
+
+   - Speed test addition - **#50**
+
+   - Support corrosion and interaction with steel - **#9**
+
+   - Revise properties considering radiation effects under exposure - **#8**
+
+2. **Documentation**
+
+   - :code:`graphivz`-generated diagrams - **#125**
+
+3. **Question**   
+  
+   - Investigating asynchronous approach - **#102**
+
+4. **Help wanted**   
+
+   - :code:`__repr__()` Method (:code:`_lbh15.py`) Improvement - **#70**
+   

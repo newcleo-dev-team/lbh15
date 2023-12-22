@@ -9,6 +9,8 @@ Welcome to *lbh15* documentation!
 .. toctree::
    :maxdepth: 3
 
+   source/release_notes.rst
+
    source/readme_full.rst
 
    source/bibliography.rst
@@ -18,8 +20,6 @@ Welcome to *lbh15* documentation!
    source/acknowledgments.rst
 
    source/license.rst
-
-   source/release_notes.rst
 
 .. only:: html
 

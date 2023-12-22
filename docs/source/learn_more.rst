@@ -7,15 +7,15 @@ Oxygen Control
 In lead and LBE systems, Oxygen is the most important chemical element, which results
 from start-up operations, maintenance services and possibily incidental contaminations (:cite:`Agency2015`).
 For the operation of a nuclear reactor cooled by a lead alloy, it is thus important to
-determine the upper and the lower oxygen concentration limits.
+determine the upper and the lower Oxygen concentration limits.
 
 .. _ Oxygen concentration upper limit:
 
 Oxygen Concentration Upper Limit
 ================================
 
-The upper limit corresponds to the oxygen concentration value above which contamination by coolant oxides occurs.
-It is represented by the *oxygen solubility* in lead and LBE alloys. *lbh15* provides
+The upper limit corresponds to the Oxygen concentration value above which contamination by coolant oxides occurs.
+It is represented by the *Oxygen solubility* in lead and LBE alloys. *lbh15* provides
 these properties in the ``lead_thermochemical_properties.solubility_in_lead``
 and ``lbe_thermochemical_properties.solubility_in_lbe`` modules.
 The implemented data are extracted from :cite:`Agency2015`, table 3.5.2,
@@ -31,19 +31,19 @@ The lower limit corresponds to the minimum value of the oxygen concentration ena
 The oxide layer formation is possible only when the oxygen potential in the liquid metal is above the
 potential leading to the protective film formation. The correlations implemented in the
 ``lead_thermochemical_properties.lead_oxygen_limits`` and ``lbe_thermochemical_properties.lbe_oxygen_limits``
-modules for computing the lower limits of oxygen concentration are obtained by applying the methodology
+modules for computing the lower limits of Oxygen concentration are obtained by applying the methodology
 described in :cite:`Agency2015`, chapter 4, part 4.2.2, pages 187-192. A brief summary is provided in the following.
 
-First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the oxygen
+First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the Oxygen
 concentration is expressed as a function of temperature. Eventually, two kinds of correlations, based on two different
 assumptions, are derived.
 
 ..
 
   1. The equation :eq:`oxide_react_eq` of the oxidation reaction is set by considering that it occurs
-     between the metal and the oxygen, with the oxygen supposed in solution as dissolved *PbO* below its saturation limit.
+     between the metal and the Oxygen, with the Oxygen supposed in solution as dissolved :math:`\ce{PbO}` below its saturation limit.
      The formation equation :eq:`metal_oxide_eq` of the metal oxide (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
-     equation :eq:`pbo_eq` of *PbO*, (table 4.2.2, page 189 of :cite:`Agency2015`):
+     equation :eq:`pbo_eq` of :math:`\ce{PbO}`, (table 4.2.2, page 189 of :cite:`Agency2015`):
 
      .. math:: \ce{\frac{2X}{Y}Me_{\left(dissolved\right)} + O_{2\left(dissolved\right)} -> \frac{2}{Y}Me_XO_Y}
       :label: metal_oxide_eq
@@ -51,9 +51,9 @@ assumptions, are derived.
      .. math:: \ce{2Pb + O_2 -> 2PbO}
       :label: pbo_eq
 
-     thus resulting in the following oxidation reaction equation for a mole of *PbO*:
+     thus resulting in the following oxidation reaction equation for a mole of :math:`\ce{PbO}`:
 
-     .. math:: \ce{\frac{X}{Y}Me_{\left(dissolved\right)} + O_{\left(dissolved\right)} + PbO -> \frac{1}{Y}Me_XO_Y + Pb + O}
+     .. math:: \ce{\frac{X}{Y}Me_{\left( dissolved \right)} + O_{\left(dissolved\right)} + PbO -> \frac{1}{Y}Me_XO_Y + Pb + O}
       :label: oxide_react_eq
 
      where:
@@ -121,32 +121,32 @@ assumptions, are derived.
 ..
 
   4. The aim is now to develop, for each possible dissolved metal, a correlation for the lower limit of the
-     oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
+     Oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
      oxidation reaction equation :eq:`oxide_react_eq`, the following substitution is applied:
 
-     .. math:: \Delta_rG^0 \left( T \right) = -RT\ln{ \left( \frac{\alpha_{\ce{Pb}} \cdot \alpha_{\ce{Me_XO_Y}}^{\frac{1}{Y}}}{\alpha_{\ce{PbO}}\cdot\alpha_{\ce{Me \left( dissolved \right) }}^{\frac{X}{Y}}} \right)},
+     .. math:: \Delta_rG^0 \left( T \right) = -RT\ln{ \left( \frac{\alpha_{\ce{Pb}} \cdot \alpha_{\ce{Me_XO_Y}}^{\frac{1}{Y}}}{\alpha_{\ce{PbO}}\cdot\alpha_{\ce{Me_{\left( dissolved \right)}}}^{\frac{X}{Y}}} \right)},
 
-     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the oxygen
+     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the Oxygen
      concentration, thus the metal oxide is considered very diluted.
 
-     By considering the oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
-     thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
+     By considering the Oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
+     thus taking the chemical activity of the dissolved Oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
      applying some transformations, one can obtain:
 
      .. math:: \ln{\left( C_{\ce{O}} \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{\ce{Me}}^{sat}}{C_{\ce{Me}}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat}\right)}
       :label: ox_conc_eq
 
-     In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_{\ce{O}}` and the concentration
+     In the above equation, the unknows are two, that is, the Oxygen concentration :math:`C_{\ce{O}}` and the concentration
      :math:`C_{\ce{Me}}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
      a useful correlation, the user can choose between two strategies that are proposed and adopted in *lbh15*. They differ
      on how they treat the chemical activity of the dissolved metal. The actual activities at the interface are
      influenced by how diffusion, convection and mass transfer phenomena interact in the liquid metal boundary layer.
      Ongoing researches are in progress, but currently the exact values for the chemical activities of the dissolved
-     metal and of the oxygen are not known.
+     metal and of the Oxygen are not known.
 
      a. The first approach is to consider the chemical activity of the dissolved metal equal to one.
         In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
-        compute the lower limit of the oxygen concentration directly through the following relation:
+        compute the lower limit of the Oxygen concentration directly through the following relation:
 
         .. math:: C_{\ce{O}} = \alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} \right)},
 
