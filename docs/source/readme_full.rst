@@ -111,67 +111,67 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - LBE
      - Bismuth
    * - Iron solubility
-     - :math:`S_{Fe}`
+     - :math:`S_{\ce{Fe}}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - ✔
    * - Nickel solubility
-     - :math:`S_{Ni}`
+     - :math:`S_{\ce{Ni}}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - ✔
    * - Chromium solubility
-     - :math:`S_{Cr}`
+     - :math:`S_{\ce{Cr}}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - ✔
    * - Silicon solubility
-     - :math:`S_{Si}`
+     - :math:`S_{\ce{Si}}`
      - :math:`[wt.\%]`
      - ✔
      - :math:`-`
      - :math:`-`
    * - Oxygen solubility
-     - :math:`S_{O}`
+     - :math:`S_{\ce{O}}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - ✔
    * - Oxygen diffusivity
-     - :math:`D_{Fe}`
+     - :math:`D_{\ce{O}}`
      - :math:`[cm^2/s]`
      - ✔
      - ✔
      - ✔
    * - Iron diffusivity
-     - :math:`D_{Fe}`
+     - :math:`D_{\ce{Fe}}`
      - :math:`[cm^2/s]`
      - ✔
      - ✔
      - :math:`-`
    * - Cobalt diffusivity
-     - :math:`D_{Co}`
+     - :math:`D_{\ce{Co}}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
    * - Selenium diffusivity
-     - :math:`D_{Se}`
+     - :math:`D_{\ce{Se}}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
    * - Indium diffusivity
-     - :math:`D_{In}`
+     - :math:`D_{\ce{In}}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
      - :math:`-`
    * - Tellurium diffusivity
-     - :math:`D_{Tl}`
+     - :math:`D_{\ce{Tl}}`
      - :math:`[cm^2/s]`
      - ✔
      - :math:`-`
@@ -181,7 +181,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
        divided by the oxygen
        
        concentration squared
-     - :math:`P_{O_2}`
+     - :math:`P_{\ce{O2}}`
      - :math:`[atm/wt.\%^2]`
      - ✔
      - ✔
@@ -198,52 +198,52 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - Lead
      - LBE
      - Bismuth
-   * - :math:`Fe_3 O_4`-related lower limit
+   * - :math:`\ce{Fe3O4}`-related lower limit
 
-       of :math:`O_2` concentration in case
+       of :math:`\ce{O2}` concentration in case
        
-       of :math:`Fe`-saturated metal
-     - :math:`C_{O_2, Fe(sat)}`
+       of :math:`\ce{Fe}`-saturated metal
+     - :math:`C_{\ce{O2}, \ce{Fe}(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Ni O`-related lower limit
+   * - :math:`\ce{NiO}`-related lower limit
 
-       of :math:`O_2` concentration in case
+       of :math:`\ce{O2}` concentration in case
        
-       of :math:`Ni`-saturated metal
-     - :math:`C_{O_2, Ni(sat)}`
+       of :math:`\ce{Ni}`-saturated metal
+     - :math:`C_{\ce{O2}, \ce{Ni}(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Cr_2 O_3`-related lower limit
+   * - :math:`\ce{Cr2O3}`-related lower limit
 
-       of :math:`O_2` concentration in case
+       of :math:`\ce{O2}` concentration in case
        
-       of :math:`Cr`-saturated metal
-     - :math:`C_{O_2, Cr(sat)}`
+       of :math:`\ce{Cr}`-saturated metal
+     - :math:`C_{\ce{O2}, \ce{Cr}(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Si O_2`-related lower limit
+   * - :math:`\ce{SiO2}`-related lower limit
 
-       of :math:`O_2` concentration in case
+       of :math:`\ce{O2}` concentration in case
        
-       of :math:`Si`-saturated metal
-     - :math:`C_{O_2, Si(sat)}`
+       of :math:`\ce{Si}`-saturated metal
+     - :math:`C_{\ce{O2}, \ce{Si}(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Al_2 O_3`-related lower limit
+   * - :math:`\ce{Al2O3}`-related lower limit
 
-       of :math:`O_2` concentration in case
+       of :math:`\ce{O2}` concentration in case
        
-       of :math:`Al`-saturated metal
-     - :math:`C_{O_2, Al(sat)}`
+       of :math:`\ce{Al}`-saturated metal
+     - :math:`C_{\ce{O2}, \ce{Al}(sat)}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
@@ -261,53 +261,53 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - LBE
      - Bismuth
    * - Lead chemical activity in LBE
-     - :math:`\alpha_{Pb}`
+     - :math:`\alpha_{\ce{Pb}}`
      - :math:`[-]`
      - :math:`-`
      - ✔
      - :math:`-`
    * - Bismuth chemical activity in LBE
-     - :math:`\alpha_{Bi}`
+     - :math:`\alpha_{\ce{Bi}}`
      - :math:`[-]`
      - :math:`-`
      - ✔
      - :math:`-`
-   * - :math:`Fe_3 O_4`-related lower limit
+   * - :math:`\ce{Fe3O4}`-related lower limit
 
-       of :math:`O_2` concentration times
+       of :math:`\ce{O2}` concentration times
        
-       :math:`Fe` concentration raised to 3/4
-     - :math:`C_{O_2} \cdot C_{Fe}^{3/4}`
+       :math:`\ce{Fe}` concentration raised to 3/4
+     - :math:`C_{\ce{O2}} \cdot C_{\ce{Fe}}^{3/4}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Ni O`-related lower limit
+   * - :math:`\ce{NiO}`-related lower limit
 
-       of :math:`O_2` concentration times
+       of :math:`\ce{O2}` concentration times
        
-       :math:`Ni` concentration
-     - :math:`C_{O_2} \cdot C_{Ni}`
+       :math:`\ce{Ni}` concentration
+     - :math:`C_{\ce{O2}} \cdot C_{\ce{Ni}}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Cr_2 O_3`-related lower limit
+   * - :math:`\ce{Cr2O3}`-related lower limit
 
-       of :math:`O_2` concentration times
+       of :math:`\ce{O2}` concentration times
        
-       :math:`Cr` concentration raised to 2/3
-     - :math:`C_{O_2} \cdot C_{Cr}^{2/3}`
+       :math:`\ce{Cr}` concentration raised to 2/3
+     - :math:`C_{\ce{O2}} \cdot C_{\ce{Cr}}^{2/3}`
      - :math:`[wt.\%]`
      - ✔
      - ✔
      - :math:`-`
-   * - :math:`Si O_2`-related lower limit
+   * - :math:`\ce{SiO2}`-related lower limit
 
-       of :math:`O_2` concentration times
+       of :math:`\ce{O2}` concentration times
        
-       :math:`Si` concentration raised to 1/2
-     - :math:`C_{O_2} \cdot C_{Si}^{1/2}`
+       :math:`\ce{Si}` concentration raised to 1/2
+     - :math:`C_{\ce{O2}} \cdot C_{\ce{Si}}^{1/2}`
      - :math:`[wt.\%]`
      - ✔
      - :math:`-`

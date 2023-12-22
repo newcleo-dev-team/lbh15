@@ -132,31 +132,31 @@ In detail, a :class:`.Lead` object comes with the following default properties:
         :math:`o\_pp\left(T\right) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /\left(2.3 \cdot R\right) \cdot \left( - 119411 / T + 12.222 \right) }`, :math:`\quad` where:
 
         :math:`M_O = 16 \frac{g}{mol} \quad` Oxygen molecular mass
-    - :math:`lim\_fe\_sat` Lower limit of Ox concentration with Iron @ saturation :math:`\left[wt.\%\right]`:
+    - :math:`lim\_fe\_sat` Lower limit of Oxygen concentration with Iron @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{57190}{R T} - \frac{21.1}{R} \right)}`
-    - :math:`lim\_cr\_sat` Lower limit of Ox concentration with Chromium @ saturation :math:`\left[wt.\%\right]`:
+    - :math:`lim\_cr\_sat` Lower limit of Oxygen concentration with Chromium @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_cr\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{317800}{2 R T} - \frac{27.3}{2R} \right)}`
-    - :math:`lim\_ni\_sat` Lower limit of Ox concentration with Nickel @ saturation :math:`\left[wt.\%\right]`:
+    - :math:`lim\_ni\_sat` Lower limit of Oxygen concentration with Nickel @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_ni\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{36080}{2 R T} - \frac{23.4}{2R} \right)}`
-    - :math:`lim\_si\_sat` Lower limit of Ox concentration with Silicon @ saturation :math:`\left[wt.\%\right]`:
+    - :math:`lim\_si\_sat` Lower limit of Oxygen concentration with Silicon @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_si\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{471710}{2 R T} - \frac{19.5}{2R} \right)}`
-    - :math:`lim\_al\_sat` Lower limit of Ox concentration with Aluminium @ saturation :math:`\left[wt.\%\right]`:
+    - :math:`lim\_al\_sat` Lower limit of Oxygen concentration with Aluminium @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_al\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{679540}{2 R T} + \frac{10.7}{2R} \right)}`
-    - :math:`lim\_cr` Lower limit of Ox concentration times Chromium concentration raised to :math:`2/3` :math:`\left[wt.\%\right]`:
+    - :math:`lim\_cr` Lower limit of Oxygen concentration times Chromium concentration raised to :math:`2/3` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_cr\left(T\right) = \displaystyle lim\_cr\_sat\left(T\right) \cdot cr\_sol\left(T\right)^{2/3}`
-    - :math:`lim\_ni` Lower limit of Ox concentration times Nickel concentration :math:`\left[wt.\%\right]`:
+    - :math:`lim\_ni` Lower limit of Oxygen concentration times Nickel concentration :math:`\left[wt.\%\right]`:
 
         :math:`lim\_ni\left(T\right) = \displaystyle lim\_ni\_sat\left(T\right) \cdot ni\_sol\left(T\right)`
-    - :math:`lim\_fe` Lower limit of Ox concentration times Iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
+    - :math:`lim\_fe` Lower limit of Oxygen concentration times Iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\left(T\right) = \displaystyle lim\_fe\_sat\left(T\right) \cdot fe\_sol\left(T\right)^{3/4}`
-    - :math:`lim\_si` Lower limit of Ox concentration times Silicon concentration raised to :math:`1/2` :math:`\left[wt.\%\right]`:
+    - :math:`lim\_si` Lower limit of Oxygen concentration times Silicon concentration raised to :math:`1/2` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_si\left(T\right) = \displaystyle lim\_si\_sat\left(T\right) \cdot si\_sol\left(T\right)^{1/2}`
 

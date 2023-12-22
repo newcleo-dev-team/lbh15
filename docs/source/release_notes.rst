@@ -109,6 +109,12 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
 2. **Documentation**
    
+   - Regularization of :code:`\displaystyle` equations and :code:`\Big` modifiers - **#126**
+
+   - Add equation automatic numbering to Sphinx - **#124**
+
+   - Use :code:`mhchem` *LaTeX* package for chemical equations - **#123**
+
    - Tutorial: code and doc	- **#118**
 
    - :code:`lbh15` within IAEA Oncore Codes List - **#73**
@@ -125,7 +131,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
 ..
 
-3. **Bugs**
+1. **Bugs**
 
    - Allow to deeply copy *LiquidMetal* objects - **#115**
   

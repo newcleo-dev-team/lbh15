@@ -45,21 +45,21 @@ assumptions, are derived.
      The formation equation :eq:`metal_oxide_eq` of the metal oxide (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
      equation :eq:`pbo_eq` of *PbO*, (table 4.2.2, page 189 of :cite:`Agency2015`):
 
-     .. math:: \frac{2X}{Y}Me_{\left(dissolved\right)} + O_{2\left(dissolved\right)} \longrightarrow \frac{2}{Y}Me_XO_Y
+     .. math:: \ce{\frac{2X}{Y}Me_{\left(dissolved\right)} + O_{2\left(dissolved\right)} -> \frac{2}{Y}Me_XO_Y}
       :label: metal_oxide_eq
 
-     .. math:: 2Pb + O_2 \longrightarrow 2PbO
+     .. math:: \ce{2Pb + O_2 -> 2PbO}
       :label: pbo_eq
 
      thus resulting in the following oxidation reaction equation for a mole of *PbO*:
 
-     .. math:: \frac{X}{Y}Me_{\left(dissolved\right)} + O_{\left(dissolved\right)} + PbO \longrightarrow \frac{1}{Y}Me_XO_Y + Pb + O
+     .. math:: \ce{\frac{X}{Y}Me_{\left(dissolved\right)} + O_{\left(dissolved\right)} + PbO -> \frac{1}{Y}Me_XO_Y + Pb + O}
       :label: oxide_react_eq
 
      where:
 
-     - :math:`Me` represents the metal of the structural material involved in the oxidation reaction,
-     - :math:`X` and :math:`Y` are coefficients specific to the reaction.
+     - :math:`\ce{Me}` represents the metal of the structural material involved in the oxidation reaction,
+     - :math:`\ce{X}` and :math:`\ce{Y}` are coefficients specific to the reaction.
 
 ..
 
@@ -124,20 +124,20 @@ assumptions, are derived.
      oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
      oxidation reaction equation :eq:`oxide_react_eq`, the following substitution is applied:
 
-     .. math:: \Delta_rG^0 \left(T\right) = -RT\ln{\left(\frac{\alpha_{Pb}\cdot\alpha_{Me_XO_Y}^{\frac{1}{Y}}}{\alpha_{PbO}\cdot\alpha_{Me{\left(dissolved\right)}}^{\frac{X}{Y}}}\right)},
+     .. math:: \Delta_rG^0 \left( T \right) = -RT\ln{ \left( \frac{\alpha_{\ce{Pb}} \cdot \alpha_{\ce{Me_XO_Y}}^{\frac{1}{Y}}}{\alpha_{\ce{PbO}}\cdot\alpha_{\ce{Me \left( dissolved \right) }}^{\frac{X}{Y}}} \right)},
 
-     where the term :math:`\alpha_{Me_XO_Y}` can be considered equal to one: the lower limit is to be found of the oxygen
+     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the oxygen
      concentration, thus the metal oxide is considered very diluted.
 
-     By considering the oxygen dissolved in the solution in the form of *PbO* below its saturation limit, as stated in :cite:`Agency2015`,
-     thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved *PbO*, and by
+     By considering the oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
+     thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
      applying some transformations, one can obtain:
 
-     .. math:: \ln{\left( C_O \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{Me}^{sat}}{C_{Me}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{Pb} \cdot C_O^{sat}\right)}
+     .. math:: \ln{\left( C_{\ce{O}} \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{\ce{Me}}^{sat}}{C_{\ce{Me}}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat}\right)}
       :label: ox_conc_eq
 
-     In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_O` and the concentration
-     :math:`C_{Me}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
+     In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_{\ce{O}}` and the concentration
+     :math:`C_{\ce{Me}}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
      a useful correlation, the user can choose between two strategies that are proposed and adopted in *lbh15*. They differ
      on how they treat the chemical activity of the dissolved metal. The actual activities at the interface are
      influenced by how diffusion, convection and mass transfer phenomena interact in the liquid metal boundary layer.
@@ -148,28 +148,28 @@ assumptions, are derived.
         In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
         compute the lower limit of the oxygen concentration directly through the following relation:
 
-        .. math:: C_O = \alpha_{Pb} \cdot C_O^{sat} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} \right)},
+        .. math:: C_{\ce{O}} = \alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} \right)},
 
         where:
   
         - :math:`\Delta H^0_{\left(3\right)}` and :math:`\Delta S^0_{\left(3\right)}` are extracted from table 4.2.2 of :cite:`Agency2015`;
 
-        - :math:`C_O^{sat}` is computed by adopting the recommended coefficients from table 3.5.2 of :cite:`Agency2015`;
+        - :math:`C_{\ce{O}}^{sat}` is computed by adopting the recommended coefficients from table 3.5.2 of :cite:`Agency2015`;
 
-        - :math:`\alpha_{Pb}` is taken equal to one in pure Lead, while in LBE it is computed by adopting the
+        - :math:`\alpha_{\ce{Pb}}` is taken equal to one in pure Lead, while in LBE it is computed by adopting the
           correlation proposed by Gossé as indicated at page 146 of :cite:`Agency2015`.
 
      b. The second approach does not exploit any assumption. In order to make equation :eq:`ox_conc_eq` solvable, the two unknowns
-        :math:`C_O^{sat}` and :math:`C_{Me}` are collected into one single unknown, thus expressing equation :eq:`ox_conc_eq` in terms
-        of :math:`C_O  \cdot C_{Me}^{\frac{X}{Y}}`, as indicated in the following:
+        :math:`C_{\ce{O}}^{sat}` and :math:`C_{\ce{Me}}` are collected into one single unknown, thus expressing equation :eq:`ox_conc_eq` in terms
+        of :math:`C_{\ce{O}} \cdot C_{\ce{Me}}^{\frac{X}{Y}}`, as indicated in the following:
 
-        .. math:: C_O \cdot C_{Me}^{\frac{X}{Y}} = \alpha_{Pb} \cdot C_O^{sat} \cdot \left(C_{Me}^{sat}\right)^{X/Y} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R}\right)},
+        .. math:: C_{\ce{O}} \cdot C_{\ce{Me}}^{\frac{X}{Y}} = \alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat} \cdot \left(C_{\ce{Me}}^{sat}\right)^{X/Y} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R}\right)},
 
         where:
 
-        - :math:`C_{Me}^{sat}` values are computed by using the data from table 3.5.1 of :cite:`Agency2015`;
+        - :math:`C_{\ce{Me}}^{sat}` values are computed by using the data from table 3.5.1 of :cite:`Agency2015`;
 
-        - :math:`\Delta H^0_{\left(3\right)}`, :math:`\Delta S^0_{\left(3\right)}`, :math:`C_O^{sat}` and :math:`\alpha_{Pb}` are computed as already
+        - :math:`\Delta H^0_{\left(3\right)}`, :math:`\Delta S^0_{\left(3\right)}`, :math:`C_{\ce{O}}^{sat}` and :math:`\alpha_{\ce{Pb}}` are computed as already
           indicated for the approach described above.
 
 .. _ Ranges of validity:
@@ -503,4 +503,4 @@ By looking into the code implementation, the following sections are identified:
     After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (yellow curve).
     The overlapping of the two Oxygen concentration curves can be improved or worsened by varying the PID coefficients.
 
-.. note:: This tutorial works even by substituting the *lead* object with either an instance of the :class:`.Bismuth` or of the :class:`.LBE` classes.
+.. note:: This tutorial works even with the :class:`.Bismuth` and the :class:`.LBE` classes instances.
