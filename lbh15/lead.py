@@ -10,7 +10,6 @@ from ._commons import LEAD_BOILING_TEMPERATURE
 from ._commons import LEAD_VAPORISATION_HEAT
 from ._commons import LEAD_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
-from ._decorators import typecheck_for_method
 from .properties.interface import PropertyInterface
 
 
@@ -106,7 +105,6 @@ class Lead(LiquidMetalInterface):
          'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
          'lbh15.properties.lead_properties']
 
-    @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LEAD_BOILING_TEMPERATURE / 2.0
         super().__init__(p=p, **kwargs)

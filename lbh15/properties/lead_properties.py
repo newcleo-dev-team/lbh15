@@ -6,7 +6,6 @@ import numpy as np
 from scipy.constants import atm
 from .interface import PropertyInterface
 from .._decorators import range_warning
-from .._decorators import typecheck_for_method
 from .._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from .._commons import LEAD_BOILING_TEMPERATURE as T_b0
 
@@ -16,7 +15,6 @@ class p_s(PropertyInterface):
     Liquid lead *saturation vapour pressure* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -41,7 +39,6 @@ class p_s(PropertyInterface):
         """
         return 5.76e9 * np.exp(-22131/T)
 
-    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
@@ -107,7 +104,6 @@ class sigma(PropertyInterface):
     Liquid lead *surface tension* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -174,7 +170,6 @@ class rho(PropertyInterface):
     Liquid lead *density* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -248,7 +243,6 @@ class alpha(PropertyInterface):
     Liquid lead *thermal expansion coefficient* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -308,7 +302,6 @@ class u_s(PropertyInterface):
     Liquid lead *sound velocity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -375,7 +368,6 @@ class beta_s(PropertyInterface):
     Liquid lead *isentropic compressibility* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -437,7 +429,6 @@ class cp_sobolev2011(PropertyInterface):
     the **sobolev2011** correlation.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -520,7 +511,6 @@ class cp_gurvich1991(PropertyInterface):
     the **gurvich1991** correlation.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -603,7 +593,6 @@ class h(PropertyInterface):
     Liquid lead *specific enthalpy* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -674,7 +663,6 @@ class mu(PropertyInterface):
     Liquid lead *dynamic viscosity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -699,7 +687,6 @@ class mu(PropertyInterface):
         """
         return 4.55e-4 * np.exp(1069/T)
 
-    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
@@ -756,7 +743,6 @@ class r(PropertyInterface):
     Liquid lead *electrical resistivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -816,7 +802,6 @@ class k(PropertyInterface):
     Liquid lead *thermal conductivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

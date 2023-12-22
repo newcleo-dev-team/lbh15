@@ -5,7 +5,6 @@ import numpy as np
 from scipy.constants import atm, R
 from lbh15.properties.interface import PropertyInterface
 from ..._decorators import range_warning
-from ..._decorators import typecheck_for_method
 
 
 class OxygenDiffusivityInterface(PropertyInterface):
@@ -47,7 +46,6 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
     implementing the correlation by *gromov1996*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -94,7 +92,6 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
     implementing the correlation by *ganesan2006b*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -140,7 +137,6 @@ class IronDiffusivity(PropertyInterface):
     Liquid lbe *Iron diffusivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

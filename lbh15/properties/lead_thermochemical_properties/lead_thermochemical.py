@@ -11,7 +11,6 @@ from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import range_warning
-from ..._decorators import typecheck_for_method
 
 
 class OxygenPartialPressureInterface(PropertyInterface):
@@ -19,7 +18,6 @@ class OxygenPartialPressureInterface(PropertyInterface):
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property abstract class.
     """
-    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
@@ -82,7 +80,6 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
     implementing the correlation by *otsuka1979*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -134,7 +131,6 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
     implementing the correlation by *otsuka1981*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -186,7 +182,6 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
     implementing the correlation by *ganesan2006*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -238,7 +233,6 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
     implementing the correlation by *alcock1964*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -290,7 +284,6 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
     implementing the correlation by *szwarc1972*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -342,7 +335,6 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
     implementing the correlation by *charle1976*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -394,7 +386,6 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
     implementing the correlation by *isecke1977*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -446,7 +437,6 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
     implementing the correlation by *taskinen1979*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -498,7 +488,6 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
     implementing the correlation by *fisher1966*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -548,7 +537,6 @@ class MolarEnthalpy(PropertyInterface):
     Liquid lead *molar enthalpy variation* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -615,7 +603,6 @@ class MolarEntropy(PropertyInterface):
     Liquid lead *molar entropy variation* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -686,7 +673,6 @@ class GibbsFreeEnergy(PropertyInterface):
     Liquid lead *Gibbs free energy variation* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
