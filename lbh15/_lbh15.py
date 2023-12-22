@@ -165,7 +165,7 @@ class LiquidMetalInterface(ABC):
         return self.cp * self.mu / self.k
 
     @property
-    def correlations_used(self) -> Dict[str, str]:
+    def used_correlations(self) -> Dict[str, str]:
         """
         Returns the dictionary defining the correlation used for the \
         corresponding property. Only properties are considered for \
@@ -271,7 +271,7 @@ class LiquidMetalInterface(ABC):
         return list(dict.fromkeys(rvalue))
 
     @classmethod
-    def correlations_available(cls) -> Dict[str, List[str]]:
+    def available_correlations(cls) -> Dict[str, List[str]]:
         """
         Returns the dictionary containing the available correlations \
         for each property.
@@ -337,7 +337,7 @@ class LiquidMetalInterface(ABC):
                           "\nPlease check the file path and try again!"
                           "\nNo custom property added.", stacklevel=5)
             return
-        char = '/' if 'Linux' in platform.system() else '\\'
+        char = '\\' if 'Windows' in platform.system() else '/'
         res = file_path.split(char)
         file_name = res[-1][:-3]
         path = file_path[:-len(res[-1])]

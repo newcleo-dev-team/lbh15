@@ -1,3 +1,5 @@
+.. _lead-module:
+
 *lead* Module
 =============
 Module implementing the liquid lead class.
@@ -23,142 +25,143 @@ In detail, a :class:`.Lead` object comes with the following default properties:
 
   a. **Thermo-physical**:
 
-    - :math:`T_{m0}` melting temperature :math:`[K]`:
+    - :math:`T_{m0}` melting temperature :math:`\left[K\right]`:
 
         :math:`600.6`
-    - :math:`Q_{m0}` melting latent heat :math:`\Big[\frac{J}{kg}\Big]`:
+    - :math:`Q_{m0}` melting latent heat :math:`\left[\frac{J}{kg}\right]`:
 
-        :math:`23.07\cdot10^3`
-    - :math:`T_{b0}` boiling temperature :math:`[K]`:
+        :math:`23.07 \cdot 10^3`
+    - :math:`T_{b0}` boiling temperature :math:`\left[K\right]`:
 
         :math:`2021`
-    - :math:`Q_{b0}` vaporisation heat :math:`\Big[\frac{J}{kg}\Big]`:
+    - :math:`Q_{b0}` vaporisation heat :math:`\left[\frac{J}{kg}\right]`:
 
-        :math:`858.6\cdot10^3`
-    - :math:`p_s` saturation vapour pressure :math:`[Pa]`:
+        :math:`858.6 \cdot 10^3`
+    - :math:`p_s` saturation vapour pressure :math:`\left[Pa\right]`:
 
-        :math:`p_s(T) = \displaystyle5.76\cdot10^9\cdot\exp{\Big(-22131/T\Big)}`
-    - :math:`\sigma` surface tension :math:`\Big[\frac{N}{m}\Big]`:
+        :math:`p_s\left(T\right) = \displaystyle 5.76\cdot10^9\cdot\exp{\left(-22131/T\right)}`
+    - :math:`\sigma` surface tension :math:`\left[\frac{N}{m}\right]`:
 
-        :math:`\sigma(T) = \displaystyle\Big(525.9 - 0.113{\cdot}T\Big)\cdot10^{-3}`
-    - :math:`u_s` speed of sound :math:`\Big[\frac{m}{s}\Big]`:
+        :math:`\sigma\left(T\right) = \displaystyle\left(525.9 - 0.113{\cdot}T\right)\cdot10^{-3}`
+    - :math:`u_s` speed of sound :math:`\left[\frac{m}{s}\right]`:
 
-        :math:`u_s(T) = \displaystyle1953 - 0.246{\cdot}T`
-    - :math:`\alpha` thermal expansion coefficient :math:`\Big[\frac{1}{K}\Big]`:
+        :math:`u_s\left(T\right) = \displaystyle 1953 - 0.246{\cdot}T`
+    - :math:`\alpha` thermal expansion coefficient :math:`\left[\frac{1}{K}\right]`:
 
-        :math:`\alpha(T) = \displaystyle\Big(8942 - T\Big)^{-1}`
-    - :math:`c_p` specific heat capacity :math:`\Big[\frac{J}{kg{\cdot}K}\Big]`:
+        :math:`\alpha\left(T\right) = \displaystyle \left(8942 - T\right)^{-1}`
+    - :math:`c_p` specific heat capacity :math:`\left[\frac{J}{kg{\cdot}K}\right]`:
 
-        :math:`c_p(T) = \displaystyle176.2 - 4.923\cdot10^{-2}{\cdot}T + 1.544\cdot10^{-5}{\cdot}T^2 - 1.524\cdot10^{6}{\cdot}T^{-2}`
-    - :math:`\rho` density :math:`\Big[\frac{kg}{m^3}\Big]`:
+        :math:`c_p\left(T\right) = \displaystyle176.2 - 4.923\cdot10^{-2}{\cdot}T + 1.544\cdot10^{-5}{\cdot}T^2 - 1.524\cdot10^{6}{\cdot}T^{-2}`
+    - :math:`\rho` density :math:`\left[\frac{kg}{m^3}\right]`:
 
-        :math:`\rho_0(T) = \displaystyle11441 - 1.2795{\cdot}T`
+        :math:`\rho_0\left(T\right) = \displaystyle11441 - 1.2795{\cdot}T`
 
-        :math:`\rho(T,p) = \displaystyle\rho_0(T) + \Big( \frac{1}{u_s(T)^2} + T \cdot \frac{\alpha(T)^2}{c_p(T)} \Big) \cdot ( p - p_{atm} )`, :math:`\quad` where:
+        :math:`\rho\left(T,p\right) = \displaystyle\rho_0\left(T\right) + \left( \frac{1}{u_s\left(T\right)^2} + T \cdot \frac{\alpha\left(T\right)^2}{c_p\left(T\right)} \right) \cdot \left( p - p_{atm} \right)`, :math:`\quad` where:
         
-        :math:`\quad p_{atm}=101325.00 [Pa]`
-    - :math:`\beta_s` isentropic compressibility :math:`\Big[\frac{1}{Pa}\Big]`:
+        :math:`\quad p_{atm}=101325.00 \left[Pa\right]`
+    - :math:`\beta_s` isentropic compressibility :math:`\left[\frac{1}{Pa}\right]`:
 
-        :math:`\beta_s(T) = \displaystyle\frac{1}{\rho(T,p) \cdot u_s(T)^2}`
-    - :math:`h` specific enthalpy (as difference with respect to the melting point enthalpy) :math:`\Big[\frac{J}{kg}\Big]`:
+        :math:`\beta_s\left(T\right) = \displaystyle\frac{1}{\rho\left(T,p\right) \cdot u_s\left(T\right)^2}`
+    - :math:`h` specific enthalpy (as difference with respect to the melting point enthalpy) :math:`\left[\frac{J}{kg}\right]`:
 
-        :math:`h(T) = \displaystyle176.2 \cdot \Big(T - T_{m0}\Big) - 2.4615 \cdot 10^{-2} \cdot \Big(T^2 - T_{m0}^2\Big)`
-        :math:`\qquad\qquad+ 5.147 \cdot 10^{-6} \cdot \Big(T^3 - T_{m0}^3\Big) + 1.524 \cdot 10^6\Big(T^{-1} - T_{m0}^{-1}\Big)`
-    - :math:`\mu` dynamic viscosity :math:`[Pa{\cdot}s]`:
+        :math:`h\left(T\right) = \displaystyle176.2 \cdot \left(T - T_{m0}\right) - 2.4615 \cdot 10^{-2} \cdot \left(T^2 - T_{m0}^2\right)`
 
-        :math:`\mu(T) = \displaystyle4.55 \cdot 10^{-4} \cdot \exp{\Big( 1069 / T \Big)}`
-    - :math:`r` electrical resistivity :math:`[\Omega{\cdot}m]`:
+        :math:`\qquad\qquad+ 5.147 \cdot 10^{-6} \cdot \left(T^3 - T_{m0}^3\right) + 1.524 \cdot 10^6 \cdot \left(T^{-1} - T_{m0}^{-1}\right)`
+    - :math:`\mu` dynamic viscosity :math:`\left[Pa{\cdot}s\right]`:
 
-        :math:`r(T) = \displaystyle\Big( 67.0 + 0.0471 \cdot T \Big) \cdot 10^{-8}`
-    - :math:`k` thermal conductivity :math:`\Big[\frac{W}{m \cdot K}\Big]`:
+        :math:`\mu\left(T\right) = \displaystyle4.55 \cdot 10^{-4} \cdot \exp{\left( 1069 / T \right)}`
+    - :math:`r` electrical resistivity :math:`\left[\Omega{\cdot}m\right]`:
 
-        :math:`k(T) = \displaystyle9.2 + 0.011 \cdot T`
-    - :math:`Pr` Prandtl number :math:`[-]`:
+        :math:`r\left(T\right) = \displaystyle\left( 67.0 + 0.0471 \cdot T \right) \cdot 10^{-8}`
+    - :math:`k` thermal conductivity :math:`\left[\frac{W}{m \cdot K}\right]`:
 
-        :math:`Pr(T) = \displaystyle\frac{c_p(T) \cdot \mu(T)}{k(T)}`
+        :math:`k\left(T\right) = \displaystyle9.2 + 0.011 \cdot T`
+    - :math:`Pr` Prandtl number :math:`\left[-\right]`:
+
+        :math:`Pr\left(T\right) = \displaystyle\frac{c_p\left(T\right) \cdot \mu\left(T\right)}{k\left(T\right)}`
 
   b. **Thermo-chemical**:
 
-    - :math:`M` molar mass :math:`\Big[\frac{g}{mol}\Big]`:
+    - :math:`M` molar mass :math:`\left[\frac{g}{mol}\right]`:
 
         :math:`207.20`
-    - :math:`H` molar enthalpy :math:`\Big[\frac{J}{mol}\Big]`:
+    - :math:`H` molar enthalpy :math:`\left[\frac{J}{mol}\right]`:
 
-        :math:`H(T) = \displaystyle h(T) \cdot \frac{M}{1000}`
-    - :math:`S` molar entropy :math:`\Big[\frac{J}{mol \cdot K}\Big]`:
+        :math:`H\left(T\right) = \displaystyle h\left(T\right) \cdot \frac{M}{1000}`
+    - :math:`S` molar entropy :math:`\left[\frac{J}{mol \cdot K}\right]`:
 
-        :math:`S(T) = \displaystyle \frac{M}{1000} \cdot \int_{T_{m0}}^T \frac{c_p(T)}{T} dT`
-    - :math:`G` Gibbs free energy :math:`\Big[\frac{J}{mol}\Big]`:
+        :math:`S\left(T\right) = \displaystyle \frac{M}{1000} \cdot \int_{T_{m0}}^T \frac{c_p\left(T\right)}{T} dT`
+    - :math:`G` Gibbs free energy :math:`\left[\frac{J}{mol}\right]`:
 
-        :math:`G(T) = \displaystyle H(T) - T \cdot S(T)`
-    - :math:`fe\_sol` Iron solubility :math:`[wt.\%]`:
+        :math:`G\left(T\right) = \displaystyle H\left(T\right) - T \cdot S\left(T\right)`
+    - :math:`fe\_sol` Iron solubility :math:`\left[wt.\%\right]`:
 
-        :math:`fe\_sol(T) = \displaystyle10^{2.11 - 5225 / T}`
-    - :math:`ni\_sol` Nickel solubility :math:`[wt.\%]`:
+        :math:`fe\_sol\left(T\right) = \displaystyle10^{2.11 - 5225 / T}`
+    - :math:`ni\_sol` Nickel solubility :math:`\left[wt.\%\right]`:
 
-        :math:`ni\_sol(T) = \displaystyle10^{1.36 - 1395 / T}`
-    - :math:`cr\_sol` Chromium solubility :math:`[wt.\%]`:
+        :math:`ni\_sol\left(T\right) = \displaystyle10^{1.36 - 1395 / T}`
+    - :math:`cr\_sol` Chromium solubility :math:`\left[wt.\%\right]`:
 
-        :math:`cr\_sol(T) = \displaystyle10^{3.62 - 6648 / T}`
-    - :math:`si\_sol` Silicon solubility :math:`[wt.\%]`:
+        :math:`cr\_sol\left(T\right) = \displaystyle10^{3.62 - 6648 / T}`
+    - :math:`si\_sol` Silicon solubility :math:`\left[wt.\%\right]`:
 
-        :math:`si\_sol(T) = \displaystyle10^{3.886 - 7180 / T}`
-    - :math:`o\_sol` Oxygen solubility :math:`[wt.\%]`:
+        :math:`si\_sol\left(T\right) = \displaystyle10^{3.886 - 7180 / T}`
+    - :math:`o\_sol` Oxygen solubility :math:`\left[wt.\%\right]`:
 
-        :math:`o\_sol(T) = \displaystyle10^{3.23 - 5043 / T}`
-    - :math:`o\_dif` Oxygen diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
+        :math:`o\_sol\left(T\right) = \displaystyle10^{3.23 - 5043 / T}`
+    - :math:`o\_dif` Oxygen diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
-        :math:`o\_dif(T) = \displaystyle6.6 \cdot 10^{-5} \cdot \exp{ - 16158 /(RT) }`
-    - :math:`fe\_dif` Iron diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
+        :math:`o\_dif\left(T\right) = \displaystyle6.6 \cdot 10^{-5} \cdot \exp{\left(- 16158 /\left(RT\right) \right)}`
+    - :math:`fe\_dif` Iron diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
-        :math:`fe\_dif(T) = \displaystyle10^{- 2.31 - 2295 / T}`
-    - :math:`co\_dif` Cobalt diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
+        :math:`fe\_dif\left(T\right) = \displaystyle10^{- 2.31 - 2295 / T}`
+    - :math:`co\_dif` Cobalt diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
-        :math:`co\_dif(T) = \displaystyle4.6 \cdot 10^{-4} \cdot \exp{ - 22154 /(RT) }`
-    - :math:`se\_dif` Selenium diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
+        :math:`co\_dif\left(T\right) = \displaystyle4.6 \cdot 10^{-4} \cdot \exp{\left(- 22154 /\left(RT\right) \right)}`
+    - :math:`se\_dif` Selenium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
-        :math:`co\_dif(T) = \displaystyle3.4 \cdot 10^{-4} \cdot \exp{ - 12958 /(RT) }`
-    - :math:`in\_dif` Indium diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
+        :math:`co\_dif\left(T\right) = \displaystyle3.4 \cdot 10^{-4} \cdot \exp{\left(- 12958 /\left(RT\right) \right)}`
+    - :math:`in\_dif` Indium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
-        :math:`in\_dif(T) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{ - 13794 /(RT) }`
-    - :math:`te\_dif` Tellurium diffusivity :math:`\Big[ \frac{cm^2}{s} \Big]`:
+        :math:`in\_dif\left(T\right) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{\left(- 13794 /\left(RT\right) \right)}`
+    - :math:`te\_dif` Tellurium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
-        :math:`te\_dif(T) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{ - 15884 /(RT) }`
-    - :math:`o\_pp` Oxygen partial pressure divided by Oxygen concentration squared :math:`\Big[ \frac{atm}{wt.\%^2} \Big]`:
+        :math:`te\_dif\left(T\right) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{\left(- 15884 /\left(RT\right) \right)}`
+    - :math:`o\_pp` Oxygen partial pressure divided by Oxygen concentration squared :math:`\left[ \frac{atm}{wt.\%^2} \right]`:
 
-        :math:`o\_pp(T) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /(2.3 \cdot R) \cdot ( - 119411 / T + 12.222 ) }`, :math:`\quad` where:
+        :math:`o\_pp\left(T\right) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /\left(2.3 \cdot R\right) \cdot \left( - 119411 / T + 12.222 \right) }`, :math:`\quad` where:
 
         :math:`M_O = 16 \frac{g}{mol} \quad` Oxygen molecular mass
-    - :math:`lim\_fe\_sat` Lower limit of Ox concentration with Iron @ saturation :math:`[wt.\%]`:
+    - :math:`lim\_fe\_sat` Lower limit of Oxygen concentration with Iron @ saturation :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_fe\_sat(T) = \displaystyle o\_sol(T) \cdot \exp{\left( - \frac{57190}{R T} - \frac{21.1}{R} \right)}`
-    - :math:`lim\_cr\_sat` Lower limit of Ox concentration with Chromium @ saturation :math:`[wt.\%]`:
+        :math:`lim\_fe\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{57190}{R T} - \frac{21.1}{R} \right)}`
+    - :math:`lim\_cr\_sat` Lower limit of Oxygen concentration with Chromium @ saturation :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_cr\_sat(T) = \displaystyle o\_sol(T) \cdot \exp{\left( - \frac{317800}{2 R T} - \frac{27.3}{2R} \right)}`
-    - :math:`lim\_ni\_sat` Lower limit of Ox concentration with Nickel @ saturation :math:`[wt.\%]`:
+        :math:`lim\_cr\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{317800}{2 R T} - \frac{27.3}{2R} \right)}`
+    - :math:`lim\_ni\_sat` Lower limit of Oxygen concentration with Nickel @ saturation :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_ni\_sat(T) = \displaystyle o\_sol(T) \cdot \exp{\left( - \frac{36080}{2 R T} - \frac{23.4}{2R} \right)}`
-    - :math:`lim\_si\_sat` Lower limit of Ox concentration with Silicon @ saturation :math:`[wt.\%]`:
+        :math:`lim\_ni\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{36080}{2 R T} - \frac{23.4}{2R} \right)}`
+    - :math:`lim\_si\_sat` Lower limit of Oxygen concentration with Silicon @ saturation :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_si\_sat(T) = \displaystyle o\_sol(T) \cdot \exp{\left( - \frac{471710}{2 R T} - \frac{19.5}{2R} \right)}`
-    - :math:`lim\_al\_sat` Lower limit of Ox concentration with Aluminium @ saturation :math:`[wt.\%]`:
+        :math:`lim\_si\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{471710}{2 R T} - \frac{19.5}{2R} \right)}`
+    - :math:`lim\_al\_sat` Lower limit of Oxygen concentration with Aluminium @ saturation :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_al\_sat(T) = \displaystyle o\_sol(T) \cdot \exp{\left( - \frac{679540}{2 R T} + \frac{10.7}{2R} \right)}`
-    - :math:`lim\_cr` Lower limit of Ox concentration times Chromium concentration raised to :math:`2/3` :math:`[wt.\%]`:
+        :math:`lim\_al\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{679540}{2 R T} + \frac{10.7}{2R} \right)}`
+    - :math:`lim\_cr` Lower limit of Oxygen concentration times Chromium concentration raised to :math:`2/3` :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_cr(T) = \displaystyle lim\_cr\_sat(T) \cdot cr\_sol(T)^{2/3}`
-    - :math:`lim\_ni` Lower limit of Ox concentration times Nickel concentration :math:`[wt.\%]`:
+        :math:`lim\_cr\left(T\right) = \displaystyle lim\_cr\_sat\left(T\right) \cdot cr\_sol\left(T\right)^{2/3}`
+    - :math:`lim\_ni` Lower limit of Oxygen concentration times Nickel concentration :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_ni(T) = \displaystyle lim\_ni\_sat(T) \cdot ni\_sol(T)`
-    - :math:`lim\_fe` Lower limit of Ox concentration times Iron concentration raised to :math:`3/4` :math:`[wt.\%]`:
+        :math:`lim\_ni\left(T\right) = \displaystyle lim\_ni\_sat\left(T\right) \cdot ni\_sol\left(T\right)`
+    - :math:`lim\_fe` Lower limit of Oxygen concentration times Iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_fe(T) = \displaystyle lim\_fe\_sat(T) \cdot fe\_sol(T)^{3/4}`
-    - :math:`lim\_si` Lower limit of Ox concentration times Silicon concentration raised to :math:`1/2` :math:`[wt.\%]`:
+        :math:`lim\_fe\left(T\right) = \displaystyle lim\_fe\_sat\left(T\right) \cdot fe\_sol\left(T\right)^{3/4}`
+    - :math:`lim\_si` Lower limit of Oxygen concentration times Silicon concentration raised to :math:`1/2` :math:`\left[wt.\%\right]`:
 
-        :math:`lim\_si(T) = \displaystyle lim\_si\_sat(T) \cdot si\_sol(T)^{1/2}`
+        :math:`lim\_si\left(T\right) = \displaystyle lim\_si\_sat\left(T\right) \cdot si\_sol\left(T\right)^{1/2}`
 
-where :math:`T` is the lead temperature in :math:`[K]`, :math:`p` is the lead pressure in :math:`[Pa]` and
-:math:`R` is the molar gas constant in :math:`[J/(mol K)]`.
+where :math:`T` is the lead temperature in :math:`\left[K\right]`, :math:`p` is the lead pressure in :math:`\left[Pa\right]` and
+:math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.
 
 In addition to provide the properties values directly, the :class:`.Lead` object dynamically adds the methods named
 :code:`<property_name>_info`, that return full information about the corresponding property. For instance:

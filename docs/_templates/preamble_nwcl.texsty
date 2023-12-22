@@ -1,0 +1,13 @@
+\date{}
+\newlist{packagelist}{description}{1}
+\setlist[packagelist]{itemsep=1pt,labelwidth=3cm,align=right,
+  font={\color{purple}\bfseries},
+  before={\color{indigo}{\itshape}}
+}
+\fancypagestyle{plain}{}
+\newcommand{\sectionbreak}{\clearpage\phantomsection}
+\AtBeginDocument{
+  \renewcommand\contentsname{\hfill TABLE OF CONTENTS\hfill}
+  \renewcommand{\listfigurename}{\hfill LIST OF FIGURES\hfill}
+  \renewcommand{\listtablename}{\hfill LIST OF TABLES\hfill}
+}

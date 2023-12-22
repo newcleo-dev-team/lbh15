@@ -7,7 +7,9 @@ Welcome to *lbh15* documentation!
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
+
+   source/release_notes.rst
 
    source/readme_full.rst
 
@@ -15,8 +17,10 @@ Welcome to *lbh15* documentation!
 
    source/contacts.rst
 
+   source/acknowledgments.rst
+
    source/license.rst
-   
+
 .. only:: html
 
    Indices and tables

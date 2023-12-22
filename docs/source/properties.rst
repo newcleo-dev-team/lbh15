@@ -1,3 +1,5 @@
+.. _properties-module:
+
 *properties* Modules
 ====================
 

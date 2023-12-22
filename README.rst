@@ -7,19 +7,18 @@ lbh15
 Introduction
 ------------
 
-lbh15 (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
-thermo-physical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
+*lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
+thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by 
 `OECD/NEA <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
 
+*lbh15* is released under the **GNU Lesser General Public License 3**.
 
-lbh15 is released under the GNU Lesser General Public License 3.
-
-lbh15 is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
-
+*lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
 
 Project Structure
 -----------------
+
 The project is organized according to the following folder structure:
 
 .. code:: text
@@ -28,27 +27,40 @@ The project is organized according to the following folder structure:
     ├── docs/
     ├── lbh15/
     ├── tests/
+    ├── tutorials/
+    ├── CHANGELOG.rst
     ├── LICENSE
     ├── MANIFEST.in
     ├── README.rst
+    ├── pyproject.toml
     └── setup.py
     
 
-- lbh15: contains all modules, classes and methods implemented in lbh15
-- docs: contains materials for the generation of the documentation by Sphinx
-- tests: collection of tests used to verify the correct implementation
+- ``lbh15``: contains all modules, classes and methods implemented in *lbh15*;
+- ``docs``: contains files for the generation of the documentation by Sphinx;
+- ``tests``: collection of tests used to verify the correct implementation;
+- ``tutorials``: collection of tutorials and examples, each one into a dedicated sub-folder.
 
 Dependencies
 ------------
 
-- Python >=3.8.10
-- Sphinx >=5.1.0
-- SciPy >=1.8.1
-- NumPy >=1.22.3
+To run the code, the following dependencies must be satisfied:
+
+- ``Python`` :math:`>= 3.8.10`
+- ``SciPy`` :math:`>= 1.8.1`
+- ``NumPy`` :math:`>= 1.22.3`
+
+To build the documentation in both *html* and *LaTeX* formats, the following dependencies must be satisfied:
+
+- ``sphinx`` :math:`>= 6.2.1`
+- ``sphinx-rtd-theme`` :math:`>= 1.3.0`
+- ``myst-parser`` :math:`>= 1.0.0`
+- ``sphinxcontrib-bibtex`` :math:`>= 2.5.0`
 
 Installation
 ------------
-To install the package lbh15, type please the following command:
+
+To install the *lbh15* package, please type the following command:
 
   .. code-block:: bash
 
@@ -61,22 +73,30 @@ After cloning the package, execute the following command inside the base folder:
 
       pip install .
 
+To upgrade the *lbh15* package, please type the ``install`` command along with the ``--upgrade`` or ``-U`` flag:
+
+  .. code-block:: bash
+
+      pip install --upgrade lbh15
+
 Documentation
 -------------
 
-The Sphinx documentation can be built in html and latex by executing
+The Sphinx documentation can be built in *html* and *LaTeX* formats by executing
 the following command in the folder ``docs/``:
- 
+
   .. code-block:: bash
 
       make html
- 
+
   .. code-block:: bash
 
       make latexpdf
 
-The html documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
+The *html* documentation is available on GitHub Pages at `newcleo-dev-team.github.io/lbh15 <https://newcleo-dev-team.github.io/lbh15/index.html>`_.
 
+To see the available templates for generating the documentation in *PDF* format and to choose among them, please
+look at the ``docs/conf.py`` file.
 
 .. rubric:: *Recommended publication for citing*
 
