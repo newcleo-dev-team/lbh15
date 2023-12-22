@@ -10,7 +10,6 @@ from ._commons import LBE_BOILING_TEMPERATURE
 from ._commons import LBE_VAPORISATION_HEAT
 from ._commons import LBE_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
-from ._decorators import typecheck_for_method
 from .properties.interface import PropertyInterface
 
 
@@ -95,7 +94,6 @@ class LBE(LiquidMetalInterface):
          'lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits',
          'lbh15.properties.lbe_properties']
 
-    @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LBE_BOILING_TEMPERATURE / 2.0
         super().__init__(p=p, **kwargs)

@@ -8,7 +8,6 @@ from numpy import nan
 from scipy.optimize import minimize_scalar
 from scipy.constants import atm
 from .._decorators import range_warning
-from .._decorators import typecheck_for_method
 
 
 class PropertyInterface(ABC):
@@ -91,7 +90,6 @@ class PropertyInterface(ABC):
             raise RuntimeError("Unable to find the maximum point: "
                                + res.message)
 
-    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[float, None]:
         """
@@ -110,7 +108,6 @@ class PropertyInterface(ABC):
         """
         return None
 
-    @typecheck_for_method
     def info(self, T: float, p: float = atm,
              print_info: bool = True, n_tab: int = 0) -> Union[None, str]:
         """

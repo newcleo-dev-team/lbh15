@@ -6,7 +6,6 @@ from scipy.constants import atm
 from scipy.constants import R
 from lbh15.properties.interface import PropertyInterface
 from ..._decorators import range_warning
-from ..._decorators import typecheck_for_method
 
 
 class OxygenDiffusivityInterface(PropertyInterface):
@@ -48,7 +47,6 @@ class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
     implementing the correlation by *arcella1968*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -95,7 +93,6 @@ class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
     implementing the correlation by *homna1971*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -142,7 +139,6 @@ class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
     implementing the correlation by *swzarc1972*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -189,7 +185,6 @@ class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
     implementing the correlation by *otsuka1975*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -236,7 +231,6 @@ class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
     implementing the correlation by *charle1976*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -283,7 +277,6 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
     implementing the correlation by *gromov1996*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -330,7 +323,6 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
     implementing the correlation by *ganesan2006b*.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -376,7 +368,6 @@ class IronDiffusivity(PropertyInterface):
     Liquid lead *Iron diffusivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -443,7 +434,6 @@ class CobaltDiffusivity(PropertyInterface):
     Liquid lead *Cobalt diffusivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -510,7 +500,6 @@ class SeleniumDiffusivity(PropertyInterface):
     Liquid lead *Selenium diffusivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -577,7 +566,6 @@ class IndiumDiffusivity(PropertyInterface):
     Liquid lead *Indium diffusivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -644,7 +632,6 @@ class TelluriumDiffusivity(PropertyInterface):
     Liquid lead *Tellurium diffusivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

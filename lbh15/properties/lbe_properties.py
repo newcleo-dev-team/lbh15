@@ -6,7 +6,6 @@ import numpy as np
 from scipy.constants import atm
 from .interface import PropertyInterface
 from .._decorators import range_warning
-from .._decorators import typecheck_for_method
 from .._commons import LBE_MELTING_TEMPERATURE as T_m0
 from .._commons import LBE_BOILING_TEMPERATURE as T_b0
 
@@ -16,7 +15,6 @@ class p_s(PropertyInterface):
     Liquid lead-bismuth eutectic *saturation vapour pressure* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -41,7 +39,6 @@ class p_s(PropertyInterface):
         """
         return 1.22e10 * np.exp(-22552/T)
 
-    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
@@ -107,7 +104,6 @@ class sigma(PropertyInterface):
     Liquid lead-bismuth eutectic *surface tension* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -174,7 +170,6 @@ class rho(PropertyInterface):
     Liquid lead-bismuth eutectic *density* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -241,7 +236,6 @@ class alpha(PropertyInterface):
     property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -301,7 +295,6 @@ class u_s(PropertyInterface):
     Liquid lead-bismuth eutectic *sound velocity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -368,7 +361,6 @@ class beta_s(PropertyInterface):
     Liquid lead-bismuth eutectic *isentropic compressibility* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -429,7 +421,6 @@ class cp(PropertyInterface):
     Liquid lead-bismuth eutectic *specific heat capacity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -504,7 +495,6 @@ class h(PropertyInterface):
     Liquid lead-bismuth eutectic *specific enthalpy* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -575,7 +565,6 @@ class mu(PropertyInterface):
     Liquid lead-bismuth eutectic *dynamic viscosity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -635,7 +624,6 @@ class r(PropertyInterface):
     Liquid lead-bismuth eutectic *electrical resistivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -695,7 +683,6 @@ class k(PropertyInterface):
     Liquid lead-bismuth eutectic *thermal conductivity* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

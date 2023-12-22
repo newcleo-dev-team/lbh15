@@ -10,7 +10,6 @@ from ._commons import BISMUTH_BOILING_TEMPERATURE
 from ._commons import BISMUTH_VAPORISATION_HEAT
 from ._commons import BISMUTH_MOLAR_MASS
 from ._lbh15 import LiquidMetalInterface
-from ._decorators import typecheck_for_method
 from .properties.interface import PropertyInterface
 
 
@@ -77,7 +76,6 @@ class Bismuth(LiquidMetalInterface):
 .bismuth_thermochemical',
          'lbh15.properties.bismuth_properties']
 
-    @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
         self._guess = BISMUTH_BOILING_TEMPERATURE / 2.0
         super().__init__(p=p, **kwargs)

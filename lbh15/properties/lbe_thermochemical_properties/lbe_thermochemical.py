@@ -12,7 +12,6 @@ from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
 from ..._commons import LBE_MOLAR_MASS as M
 from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import range_warning
-from ..._decorators import typecheck_for_method
 
 
 class OxygenPartialPressure(PropertyInterface):
@@ -20,7 +19,6 @@ class OxygenPartialPressure(PropertyInterface):
     *Oxygen partial pressure in liquid lbe divided by the
     Oxygen concentration in liquid lbe squared* property class.
     """
-    @typecheck_for_method
     def initialization_helper(self,
                               property_value: float) -> Union[None, float]:
         """
@@ -44,7 +42,6 @@ class OxygenPartialPressure(PropertyInterface):
         return 1600
 
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -119,7 +116,6 @@ class LeadChemicalActivity(PropertyInterface):
     *Lead chemical activity* in liquid lbe property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -193,7 +189,6 @@ class BismuthChemicalActivity(PropertyInterface):
     *Bismuth chemical activity* in liquid lbe property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -267,7 +262,6 @@ class MolarEnthalpy(PropertyInterface):
     Liquid lbe *molar enthalpy variation* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -334,7 +328,6 @@ class MolarEntropy(PropertyInterface):
     Liquid lbe *molar entropy variation* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
@@ -404,7 +397,6 @@ class GibbsFreeEnergy(PropertyInterface):
     Liquid lbe *Gibbs free energy variation* property class.
     """
     @range_warning
-    @typecheck_for_method
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """

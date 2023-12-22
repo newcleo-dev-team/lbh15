@@ -16,7 +16,6 @@ from typing import Tuple
 from typing import Union
 from scipy.constants import atm
 from scipy.optimize import fsolve
-from ._decorators import typecheck_for_method
 from .properties.interface import PropertyInterface
 
 warnings.simplefilter("always")
@@ -64,7 +63,6 @@ class LiquidMetalInterface(ABC):
     __p: float = 0
     __T: float = 0
 
-    @typecheck_for_method
     def __init__(self, p: float = atm, **kwargs):
         if len(kwargs) != 1:
             raise ValueError("One and only one property at "
@@ -123,7 +121,6 @@ class LiquidMetalInterface(ABC):
         return self.__p
 
     @p.setter
-    @typecheck_for_method
     def p(self, p: float) -> None:
         """
         p(p: float) -> None
@@ -145,7 +142,6 @@ class LiquidMetalInterface(ABC):
         return self.__T
 
     @T.setter
-    @typecheck_for_method
     def T(self, T: float) -> None:
         """
         Set liquid metal temperature
@@ -177,7 +173,6 @@ class LiquidMetalInterface(ABC):
         """
         return copy.deepcopy(self.__corr2use)
 
-    @typecheck_for_method
     def change_correlation_to_use(self, property_name: str,
                                   correlation_name: str) -> None:
         """
@@ -218,7 +213,6 @@ class LiquidMetalInterface(ABC):
         if property_name in self._default_corr_to_use:
             self.__corr2use[property_name] = correlation_name
 
-    @typecheck_for_method
     def check_temperature(self, T: float) -> Tuple[bool, str]:
         """
         Checks whether the provided temperature value belongs to the valid \
@@ -285,7 +279,6 @@ class LiquidMetalInterface(ABC):
         return cls.__extract_available_correlations(obj_list)
 
     @classmethod
-    @typecheck_for_method
     def set_correlation_to_use(cls, property_name: str,
                                correlation_name: str) -> None:
         """
@@ -301,7 +294,6 @@ class LiquidMetalInterface(ABC):
         cls._correlations_to_use[property_name] = correlation_name
 
     @classmethod
-    @typecheck_for_method
     def set_root_to_use(cls, property_name: str, root_index: int) -> None:
         """
         Sets the index of the root to use for computing the temperature \
@@ -320,7 +312,6 @@ class LiquidMetalInterface(ABC):
         cls._roots_to_use[property_name] = root_index
 
     @classmethod
-    @typecheck_for_method
     def set_custom_properties_path(cls, file_path: str) -> None:
         """
         Sets the absolute path of the file where looking for \
