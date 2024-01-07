@@ -19,9 +19,9 @@ authors:
   - name: Pierre-Alexandre Pantel
     affiliation: 2
 affiliations:
-  - name: newcleo S.r.l., Italy
+  - name: '*new*cleo S.r.l., Italy'
     index: 1
-  - name: newcleo SA, France
+  - name: '*new*cleo SA, France'
     index: 2
 date: 04 January 2023
 bibliography: paper.bib
