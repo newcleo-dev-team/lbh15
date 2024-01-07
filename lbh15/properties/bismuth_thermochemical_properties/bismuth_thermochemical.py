@@ -439,7 +439,7 @@ class GibbsFreeEnergy(PropertyInterface):
         Returns
         -------
         float:
-            Gibbs free energy in :math:`[J/mol)]`
+            Gibbs free energy in :math:`[J/mol]`
         """
         return MolarEnthalpy().correlation(T, p)\
             - T * MolarEntropy().correlation(T, p)

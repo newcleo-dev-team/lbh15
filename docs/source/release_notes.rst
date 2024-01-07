@@ -29,7 +29,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Horner's Scheme - **#100**
 
-   - Update :code:`test_custom_properties`` to test correct assignment of custom properties to different liquid metal classes - **#86**
+   - Update :code:`test_custom_properties` to test correct assignment of custom properties to different liquid metal classes - **#86**
 
    - Thermochemical Modules Corrections and Improvements - **#76**
 
@@ -101,7 +101,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Modifiy liquid metal classes to read thermochemical properties - **#30**
 
-   - Properties module attribute of :code:`LiquidMetalInterface`` must be a dictionary to handle multiple modules - **#29**
+   - Properties module attribute of :code:`LiquidMetalInterface` must be a dictionary to handle multiple modules - **#29**
 
    - Modify the properties sub-package for the implementation of thermochemical properties - **#28**
 
@@ -145,7 +145,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
   
    - Warnings management - **#107**
 
-   - Add the pressure info inside the :code:`__repr__`` method - **#106**
+   - Add the pressure info inside the :code:`__repr__` method - **#106**
 
    - Fix initialization of liquid metal object from thermochemical properties - **#83**
 
@@ -157,7 +157,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Attribute Change within :file:`_lbh15.py` - **#55**
 
-   - Bug into "range_warning" Method ("interface.py") - **#51**
+   - Bug into :code:`range_warning` Method (:file:`interface.py`) - **#51**
 
    - Fix loading of duplicate properties - **#45**
 
