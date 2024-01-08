@@ -112,3 +112,12 @@ How to Cite
     month = {Aug 20--25},
     editor = {ANS}
   }
+
+.. code-block:: latex
+
+  @article{lbh15JOSS2024,
+    author = {Ottino, G.M., Panico, D., Tomatis, D. and Pantel, P.A.},
+    title = {{lbh15: a Python package for standard use and implementation of physical data of heavy liquid metals used in nuclear reactors}},
+    editor = {Journal of Open-Source Scientific Software}
+    note={submitted}
+  }

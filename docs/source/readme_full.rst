@@ -1,6 +1,6 @@
 .. raw:: latex
 
-   \setcounter{secnumdepth}{1}
+   \setcounter{secnumdepth}{3}
 
 ============
 Introduction
@@ -432,7 +432,7 @@ Basic Usage
 This section shows a few examples of basic usage of *lbh15*.
 
 - Create a :class:`.Lead` instance using Celsius degrees as temperature unit
-  and print the corresponding dynamic viscosity:
+  and print the corresponding dynamic viscosity :code:`mu`:
   
   >>> from scipy.constants import convert_temperature
   >>> from lbh15 import Lead
@@ -443,7 +443,7 @@ This section shows a few examples of basic usage of *lbh15*.
   0.0022534948395446985
 
 - Create two instances of :class:`.Lead` class, one at atmospheric pressure and one at twenty times the 
-  atmospheric pressure. Then compare their density values:
+  atmospheric pressure. Then compare their density values :code:`rho`:
 
   >>> from lbh15 import Lead
   >>> from scipy.constants import atm
@@ -455,8 +455,8 @@ This section shows a few examples of basic usage of *lbh15*.
   >>> liquid_lead.rho, liquid_lead_2.rho
   (10417.4, 10418.185181757714)
 
-- Create an instance of :class:`.Lead` class at a given temperature, then change the temperature value. Compare the conductivity
-  values at the two temperatures:
+- Create an instance of :class:`.Lead` class at a given temperature :code:`T`, then change the temperature value. Compare the conductivity
+  values :code:`k` at the two temperatures:
 
   >>> from lbh15 import Lead
   >>> liquid_lead = Lead(T=750)
@@ -466,8 +466,8 @@ This section shows a few examples of basic usage of *lbh15*.
   >>> liquid_lead.k
   22.4
 
-- Create an instance of :class:`.Lead` class at a given temperature, then change the temperature value. Compare the Oxygen
-  diffusivity values at the two temperatures:
+- Create an instance of :class:`.Lead` class at a given temperature :code:`T`, then change the temperature value. Compare the Oxygen
+  diffusivity values :code:`o_dif` at the two temperatures:
 
   >>> from lbh15 import Lead
   >>> liquid_lead = Lead(T=700)
@@ -478,8 +478,7 @@ This section shows a few examples of basic usage of *lbh15*.
   6.708316471487037e-06
 
 - Request a property outside the range of validity of the corresponding correlation. In this example, a :class:`.Lead` object is initialized
-  using a temperature value that is outside the range of physical validity of the surface tension
-  correlation:
+  using a temperature value :code:`T` that is outside the range of physical validity of the surface tension :code:`sigma` correlation:
 
   >>> from lbh15 import Lead
   >>> liquid_lead = Lead(T=1400.0)
@@ -521,8 +520,8 @@ the user is invited to double-check the result (see :any:`advanced-usage` sectio
 
 In the following, some examples are provided:
 
-- Initialize an :class:`.LBE` instance, i.e., lead-bismuth-eutectic object, by setting its density
-  and retrieve the corresponding temperature in Kelvin degrees:
+- Initialize an :class:`.LBE` instance, i.e., lead-bismuth-eutectic object, by setting its density :code:`rho`
+  and retrieve the corresponding temperature :code:`T` in Kelvin degrees:
 
   >>> from lbh15 import LBE
   >>> # Initialize LBE with rho=9800 [kg/m^3]
@@ -533,8 +532,8 @@ In the following, some examples are provided:
 
 - Compare properties of different liquid metal objects at a given temperature. In this 
   example, a :class:`.Lead` object is initialized by specifying a value of the thermal
-  conductivity :math:`k`; then, a :class:`.Bismuth` object is initialized using the :class:`.Lead`
-  instance temperature in Kelvin degrees. Finally, the conductivity of the :class:`.Bismuth` object
+  conductivity :code:`k`; then, a :class:`.Bismuth` object is initialized using the :class:`.Lead`
+  instance temperature :code:`T` in Kelvin degrees. Finally, the thermal conductivity :code:`k` of the :class:`.Bismuth` object
   is printed for comparison purposes:
 
   >>> from lbh15 import Lead
@@ -605,34 +604,34 @@ Advanced usage includes the possibility of adding new properties and new physica
     from lbh15.properties.interface import range_warning
 
     class rho_custom_corr(PropertyInterface):
-      @range_warning
-      def correlation(self, T, p=atm, verbose=False):
-          "Implement here the user-defined correlation."
-          return 11400 - 1.2*T
+        @range_warning
+        def correlation(self, T, p=atm, verbose=False):
+            "Implement here the user-defined correlation."
+            return 11400 - 1.2*T
 
-      @property
-      def range(self):
-          return [700.0, 1900.0]
+        @property
+        def range(self):
+            return [700.0, 1900.0]
 
-      @property
-      def units(self):
-          return "[kg/m^3]"
+        @property
+        def units(self):
+            return "[kg/m^3]"
 
-      @property
-      def name(self):
-          return "rho"
+        @property
+        def name(self):
+            return "rho"
 
-      @property
-      def long_name(self):
-          return "custom density"
+        @property
+        def long_name(self):
+            return "custom density"
 
-      @property
-      def description(self):
-          return "Liquid lead " + self.long_name
+        @property
+        def description(self):
+            return "Liquid lead " + self.long_name
 
-      @property
-      def correlation_name(self):
-          return "custom2022"
+        @property
+        def correlation_name(self):
+            return "custom2022"
 
   .. note:: It is mandatory to override the ``correlation`` method and the ``range``, ``units``, ``long_name`` and ``description`` properties.
 
@@ -697,34 +696,34 @@ Advanced usage includes the possibility of adding new properties and new physica
     from lbh15.properties.interface import range_warning
 
     class T_double(PropertyInterface):
-      @range_warning
-      def correlation(self, T, p=atm, verbose=False):
-          "Return the temperature value multiplied by 2."
-          return 2*T
+        @range_warning
+        def correlation(self, T, p=atm, verbose=False):
+            "Return the temperature value multiplied by 2."
+            return 2*T
 
-      @property
-      def range(self):
-          return [700.0, 1900.0]
+        @property
+        def range(self):
+            return [700.0, 1900.0]
 
-      @property
-      def units(self):
-          return "[K]"
+        @property
+        def units(self):
+            return "[K]"
 
-      @property
-      def name(self):
-          return "T_double"
+        @property
+        def name(self):
+            return "T_double"
 
-      @property
-      def long_name(self):
-          return "double of the temperature"
+        @property
+        def long_name(self):
+            return "double of the temperature"
 
-      @property
-      def description(self):
-          return "Liquid lead " + self.long_name
+        @property
+        def description(self):
+            return "Liquid lead " + self.long_name
 
-      @property
-      def correlation_name(self):
-          return "double2022"
+        @property
+        def correlation_name(self):
+            return "double2022"
 
   The new custom property can be set as :class:`.Lead` attribute by specifying the path to the module
   where it is defined:

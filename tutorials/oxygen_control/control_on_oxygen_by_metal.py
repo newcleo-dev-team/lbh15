@@ -22,7 +22,7 @@ t_jump: float = 100 # Time instant when the heat load jump happens [s]
 Qout: float = -1e6 # Value of dissipated heat power [W/m3]
 Ox_start = 7e-4 # Initial oxygen concentration [wt.%]
 # PID controller settings
-P_coeff: float = 0.75 # Proportial coefficient [-]
+P_coeff: float = 0.75 # Proportional coefficient [-]
 I_coeff: float = 0.9 # Integral coefficient [-]
 D_coeff: float = 0.0 # Derivative coefficient [-]
 max_output: float = Ox_start # Maximum value of the output [wt.%]

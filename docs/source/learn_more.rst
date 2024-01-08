@@ -5,8 +5,8 @@ Oxygen Control
 ++++++++++++++
 
 In lead and LBE systems, Oxygen is the most important chemical element, which results
-from start-up operations, maintenance services and possibily incidental contaminations (:cite:`Agency2015`).
-For the operation of a nuclear reactor cooled by a lead alloy, it is thus important to
+from start-up operations, maintenance services and, possibily, incidental contaminations (:cite:`Agency2015`).
+To operate a nuclear reactor cooled by a lead alloy, it is thus important to
 determine the upper and the lower Oxygen concentration limits.
 
 .. _ Oxygen concentration upper limit:
@@ -74,7 +74,7 @@ assumptions, are derived.
      
      where:
 
-     - :math:`\Delta G^0_{\left(i\right)}` is the Gibbs free energy of formation related to the (i)-th reaction equation;
+     - :math:`\Delta G^0_{\left(i\right)}` is the Gibbs free energy of formation related to the (:math:`i`)-th reaction equation;
      - :math:`\Delta H^0_{\left(3\right)} = \Delta H^0_{\left(1\right)}-\Delta H^0_{\left(2\right)}` is the formation enthalpy related to equation :eq:`oxide_react_eq`;
      - :math:`\Delta S^0_{\left(3\right)} =\Delta S^0_{\left(1\right)}-\Delta S^0_{\left(2\right)}` is the formation entropy related to equation :eq:`oxide_react_eq`;
      - :math:`\Delta H^0` and :math:`\Delta S^0` values for each reaction are taken from the table 4.2.2 of :cite:`Agency2015`.
@@ -133,7 +133,7 @@ assumptions, are derived.
      thus taking the chemical activity of the dissolved Oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
      applying some transformations, one can obtain:
 
-     .. math:: \ln{\left( C_{\ce{O}} \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{\ce{Me}}^{sat}}{C_{\ce{Me}}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat}\right)}
+     .. math:: \ln{\left( C_{\ce{O}} \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{\ce{Me}}^{sat}}{C_{\ce{Me}}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat}\right)}.
       :label: ox_conc_eq
 
      In the above equation, the unknows are two, that is, the Oxygen concentration :math:`C_{\ce{O}}` and the concentration
@@ -364,7 +364,7 @@ By looking into the code implementation, the following sections are identified:
     Qout: float = -1e6 # Value of dissipated heat power [W/m3]
     Ox_start = 7e-4 # Initial oxygen concentration [wt.%]
     # PID controller settings
-    P_coeff: float = 0.75 # Proportial coefficient [-]
+    P_coeff: float = 0.75 # Proportional coefficient [-]
     I_coeff: float = 0.9 # Integral coefficient [-]
     D_coeff: float = 0.0 # Derivative coefficient [-]
     max_output: float = Ox_start # Maximum value of the output [wt.%]
@@ -394,7 +394,7 @@ By looking into the code implementation, the following sections are identified:
 
   where:
 
-  - ``time`` contains all the time instants hich the solution is computed at;
+  - ``time`` contains all the time instants which the solution is computed at;
   - ``delta_t`` is the integration time step;
   - ``Qin`` is a dictionary containing for each time instant (key) the corresponding heat load value; values coincide with the Heaviside function values stored in ``Qin_signal``;
   - ``T_sol`` is the array where the lead temperature time history will be stored;
@@ -448,7 +448,7 @@ By looking into the code implementation, the following sections are identified:
         Ox_sol[i] = pid(Ox_sol[i])
         i += 1
 
-  where there is a loop over all the required time instants; for each *i*-th instant:
+  where there is a loop over all the required time instants; for each :code:`i`-th instant:
 
   - an explicit call is made to the time integration function;
   - the Oxygen concentration setpoint is updated correspondingly;
@@ -479,7 +479,7 @@ By looking into the code implementation, the following sections are identified:
   
   where:
 
-  - the first call to ``plotTimeHistory()`` returns the 2D plot shown above, where the heat load time history is depicted;
+  - the first call to ``plotTimeHistory()`` returns the 2D plot shown in :numref:`timevsqin`, where the heat load time history is depicted;
   - the second call to ``plotTimeHistory()`` returns the 2D plot where the temperature time history is depicted of the lead volume (see :numref:`timet`);
     
     .. _timet:
@@ -498,9 +498,9 @@ By looking into the code implementation, the following sections are identified:
       :width: 500
       :align: Center
       
-      Time evolution of the Oxygen concentrations within the lead volume: the Oxygen concentration setpoint (yellow) and the actual controlled Oxygen concentration (blue).
+      Time evolution of the Oxygen concentrations within the lead volume: the Oxygen concentration setpoint (orange) and the actual controlled Oxygen concentration (blue).
 
-    After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (yellow curve).
+    After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (orange curve).
     The overlapping of the two Oxygen concentration curves can be improved or worsened by varying the PID coefficients.
 
 .. note:: This tutorial works even with the :class:`.Bismuth` and the :class:`.LBE` classes instances.
