@@ -32,7 +32,7 @@ bibliography: paper.bib
 
 `lbh15` is a Python package that provides function correlations for the physical 
 properties of the liquid metals used as coolant in GEN-IV liquid metal fast 
-reactors (*LMFR*), such as those cooled by molten lead, bismuth and their 
+reactors (*LMFR*), such as those cooled by molten lead and lead-bismuth 
 eutectic alloy. The package implements the correlations contained in the 
 reference handbook edited by OECD/NEA [@nea], also offering the possibility of 
 adding new customized properties with minimal effort for the user. The 
@@ -68,7 +68,7 @@ that implements the water-related *IAPWS* full standard [@iapws]. However,
 `lbh15` follows a different implementation approach.
 
 The efficiency and the effectiveness are assured by the *Object-Oriented* 
-and the *Dynamic Programming* approaches, that have been applied throughout 
+and the *Dynamic Loading* approaches, that have been applied throughout 
 the entire development process. `lbh15` relies on the abstract liquid metal 
 class: all classes describing the different metals inherit from it. The 
 abstract class does not implement directly the property correlations, but 
@@ -86,8 +86,7 @@ There are two main ways to use the package, that is, either by instantiating
 a liquid metal object to access its related properties, or by instantiating 
 an object for each specific property. The former approach provides one 
 single entry point to all the liquid metal properties, which are evaluated 
-at the specified thermo-dynamic state after checking its validity with
-respect to the validity range of the properties themselves
+at the specified thermo-dynamic state after checking its validity 
 (temperature between the melting and the boiling values, and positive 
 pressure). In addition, the former approach allows to manage the properties 
 correlations in a simpler way, by acting either on a single or on all
