@@ -7,11 +7,11 @@ tags:
   - standardization
   - nuclear reactor cooling
 authors:
-  - name: Gabriele M. Ottino
+  - name: Gabriele Ottino
     orcid: 0000-0003-0937-8897
     corresponding: true
     affiliation: 1
-  - name: Daniele M. Panico
+  - name: Daniele Panico
     affiliation: 1
   - name: Daniele Tomatis
     orcid: 0000-0001-7314-2227
@@ -23,7 +23,7 @@ affiliations:
     index: 1
   - name: '*new*cleo SA, 9 Rue des Cuirassiers, 69003 Lyon, France'
     index: 2
-date: 04 January 2023
+date: 08 January 2023
 bibliography: paper.bib
 
 ---
