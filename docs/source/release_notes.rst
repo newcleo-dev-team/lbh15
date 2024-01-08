@@ -13,6 +13,8 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
 1. **Enhancements**
 
+   - Minor revisions to doc and comments - **#131**
+
    - Remove typecheck for performance reasons - **#129**
 
    - Review for v2.0.0 release - **#120**
