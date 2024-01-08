@@ -62,7 +62,6 @@ Developers memo for release:
         - Update the "docs/source/release_notes.rst"
         - Update the CHANGELOG.rst file with the features introduced in the last release
         - Update author list in README.rst
-        - Update latex document cover fields as variables within "conf.py"
 
     2. Test the package build and install on test-pypi:
         a. Change the name of the package in setup.py and pyproject.toml in 'lbh15-test'

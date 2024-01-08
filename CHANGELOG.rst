@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Version 2.0.0 (XXXX-XX-XX)
+Version 2.0.0 (2024-01-08)
 --------------------------
 
 - implemented thermo-chemical data and properties (solubility and diffusivity of impurities, Oxygen concentration range where protective oxide layer formation is assured,

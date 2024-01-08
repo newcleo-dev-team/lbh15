@@ -2,7 +2,8 @@ lbh15
 =====
 
 :Author: Daniele Panico, Daniele Tomatis
-:Date: 07/04/2023
+:Contributor: Gabriele Ottino, Lucie Kerleau, Chloé Largeron
+:Date: 08/01/2024
 
 Introduction
 ------------
