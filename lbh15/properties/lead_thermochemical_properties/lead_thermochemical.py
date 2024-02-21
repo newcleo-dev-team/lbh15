@@ -31,7 +31,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         property_value : float
             oxygen partial pressure in liquid lead divided by the
             oxygen concentration in liquid lead squared
-            in :math:`[atm. /wt.\\%^2]`
+            in :math:`[Pa /wt.\\%^2]`
 
         Returns
         -------
@@ -53,7 +53,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         str : Oxygen partial pressure in liquid lead divided by the
         Oxygen concentration in liquid lead squared unit
         """
-        return "[atm.wt.%^-2]"
+        return "[Pa.wt.%^-2]"
 
     @property
     def long_name(self) -> str:
@@ -102,10 +102,10 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-118600 / T + 14.1))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -153,10 +153,10 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-117170 / T + 12.9))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -204,10 +204,10 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-121349 / T + 16.906))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -255,10 +255,10 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-119411 / T + 12.222))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -306,10 +306,10 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-105855 / T + 18.661))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -357,10 +357,10 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-119840 / T + 15.794))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -408,10 +408,10 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-120376 / T + 16.255))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -459,10 +459,10 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-116717 / T + 12.699))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -510,10 +510,10 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-106395 / T + 10.254))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:

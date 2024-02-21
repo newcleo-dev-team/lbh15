@@ -24,7 +24,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         """
         str : Oxygen diffusivity unit
         """
-        return "[cm^2.s^-1]"
+        return "[m^2.s^-1]"
 
     @property
     def long_name(self) -> str:
@@ -67,9 +67,9 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-49229 / R / T) * 1.07e-2
+        return np.exp(-49229 / R / T) * 1.07e-6
 
     @property
     def correlation_name(self) -> str:
@@ -113,9 +113,9 @@ class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-26610 / R / T) * 1.98e-4
+        return np.exp(-26610 / R / T) * 1.98e-8
 
     @property
     def correlation_name(self) -> str:

@@ -50,10 +50,10 @@ class LBE(LiquidMetalInterface):
         - **ni_sol** (float) : Nickel solubility :math:`[wt.\\%]`
         - **cr_sol** (float) : Chromium solubility :math:`[wt.\\%]`
         - **o_sol** (float) : Oxygen solubility :math:`[wt.\\%]`
-        - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
-        - **fe_dif** (float) : Iron diffusivity :math:`[cm^2 / s]`
+        - **o_dif** (float) : Oxygen diffusivity :math:`[m^2 / s]`
+        - **fe_dif** (float) : Iron diffusivity :math:`[m^2 / s]`
         - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
-            concentration squared :math:`[atm / wt.\\%^2]`
+            concentration squared :math:`[Pa / wt.\\%^2]`
         - **lim_fe_sat** (float) : Lower limit of Oxygen concentration with \
             Iron at saturation :math:`[wt.\\%]`
         - **lim_cr_sat** (float) : Lower limit of Oxygen concentration with \

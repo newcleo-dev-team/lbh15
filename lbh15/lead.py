@@ -49,14 +49,14 @@ class Lead(LiquidMetalInterface):
         - **cr_sol** (float) : Chromium solubility :math:`[wt.\\%]`
         - **si_sol** (float) : Silicon solubility :math:`[wt.\\%]`
         - **o_sol** (float) : Oxygen solubility :math:`[wt.\\%]`
-        - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
-        - **fe_dif** (float) : Iron diffusivity :math:`[cm^2 / s]`
-        - **co_dif** (float) : Cobalt diffusivity :math:`[cm^2 / s]`
-        - **se_dif** (float) : Selenium diffusivity :math:`[cm^2 / s]`
-        - **in_dif** (float) : Indium diffusivity :math:`[cm^2 / s]`
-        - **te_dif** (float) : Tellurium diffusivity :math:`[cm^2 / s]`
+        - **o_dif** (float) : Oxygen diffusivity :math:`[m^2 / s]`
+        - **fe_dif** (float) : Iron diffusivity :math:`[m^2 / s]`
+        - **co_dif** (float) : Cobalt diffusivity :math:`[m^2 / s]`
+        - **se_dif** (float) : Selenium diffusivity :math:`[m^2 / s]`
+        - **in_dif** (float) : Indium diffusivity :math:`[m^2 / s]`
+        - **te_dif** (float) : Tellurium diffusivity :math:`[m^2 / s]`
         - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
-            concentration squared :math:`[atm / wt.\\%^2]`
+            concentration squared :math:`[Pa / wt.\\%^2]`
         - **lim_fe_sat** (float) : Lower limit of Oxygen concentration with \
             Iron at saturation :math:`[wt.\\%]`
         - **lim_cr_sat** (float) : Lower limit of Oxygen concentration with \
