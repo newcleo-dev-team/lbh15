@@ -48,9 +48,9 @@ class Bismuth(LiquidMetalInterface):
         - **ni_sol** (float) : Nickel solubility :math:`[wt.\\%]`
         - **cr_sol** (float) : Chromium solubility :math:`[wt.\\%]`
         - **o_sol** (float) : Oxygen solubility :math:`[wt.\\%]`
-        - **o_dif** (float) : Oxygen diffusivity :math:`[cm^2 / s]`
+        - **o_dif** (float) : Oxygen diffusivity :math:`[m^2 / s]`
         - **o_pp** (float) : Oxygen partial pressure divided by Oxygen \
-            concentration squared :math:`[atm / wt.\\%^2]`
+            concentration squared :math:`[Pa / wt.\\%^2]`
 
     Example
     -------

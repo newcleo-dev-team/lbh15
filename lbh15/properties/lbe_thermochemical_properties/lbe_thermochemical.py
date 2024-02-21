@@ -32,7 +32,7 @@ class OxygenPartialPressure(PropertyInterface):
         property_value : float
             oxygen partial pressure in liquid lbe divided by the
             oxygen concentration in liquid lbe squared
-            in :math:`[atm. /wt.\\%^2]`
+            in :math:`[Pa /wt.\\%^2]`
 
         Returns
         -------
@@ -64,10 +64,10 @@ class OxygenPartialPressure(PropertyInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-127398 / T + 27.938))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def name(self) -> str:
@@ -82,7 +82,7 @@ class OxygenPartialPressure(PropertyInterface):
         str : Oxygen partial pressure in liquid lbe divided by the
         Oxygen concentration in liquid lbe squared unit
         """
-        return "[atm.wt.%^-2]"
+        return "[Pa.wt.%^-2]"
 
     @property
     def range(self) -> List[float]:
