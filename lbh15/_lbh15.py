@@ -279,6 +279,16 @@ class LiquidMetalInterface(ABC):
         return cls.__extract_available_correlations(obj_list)
 
     @classmethod
+    def available_correlations_for_property(cls, properties: Union[str, List[str]]) -> Union[List[str], Dict[str, List[str]], None]:
+        props_dict = cls.available_correlations()
+        if isinstance(properties, str):
+            return props_dict.get(properties, None)
+        filtered_dict = {k:v for k, v in props_dict.items() if k in properties}
+        if len(filtered_dict) == 0:
+            return None
+        return filtered_dict
+
+    @classmethod
     def set_correlation_to_use(cls, property_name: str,
                                correlation_name: str) -> None:
         """
