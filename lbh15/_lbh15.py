@@ -291,9 +291,11 @@ class LiquidMetalInterface(ABC):
 
         Parameters
         ----------
-        properties : :obj:`typing.Union[str, typing.List]`
+        properties : str | List[str]
             name(s) of the property(ies) whose available correlations
-            are to be retrieved.
+            are to be retrieved. If multiple properties are required,
+            the list of their names must be provided, otherwise a simple
+            string is enough.
 
         Returns
         -------
