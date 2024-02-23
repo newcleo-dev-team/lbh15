@@ -279,14 +279,39 @@ class LiquidMetalInterface(ABC):
         return cls.__extract_available_correlations(obj_list)
 
     @classmethod
-    def available_correlations_for_property(cls, properties: Union[str, List[str]]) -> Union[List[str], Dict[str, List[str]], None]:
+    def available_corrs_for_property(cls, properties: Union[str, List[str]]) \
+        -> Dict[str, List[str]]:
+        """
+        Returns the available correlations for the properties passed as
+        argument. Result is formatted as dictionary, where keys are the
+        required property names and values are the corresponding lists
+        of available correlations. In case at least one required property
+        is not among the implemented ones, a warning message is returned
+        listing the names of all the properties that have not been found.
+
+        Parameters
+        ----------
+        properties : :obj:`typing.Union[str, typing.List]`
+            name(s) of the property(ies) whose available correlations
+            are to be retrieved.
+
+        Returns
+        -------
+        Dict[str, List[str]]
+        """
         props_dict = cls.available_correlations()
         if isinstance(properties, str):
-            return props_dict.get(properties, None)
-        filtered_dict = {k:v for k, v in props_dict.items() if k in properties}
-        if len(filtered_dict) == 0:
-            return None
-        return filtered_dict
+            properties = [properties]
+
+        # Check for any required property that is not available
+        props_not_avail = [
+            pr for pr in properties if pr not in props_dict.keys()]
+        if len(props_not_avail) > 0:
+            warnings.warn(f"Required '{props_not_avail}' properties not found!"
+                          "\nPlease check the property name(s) "
+                          "and try again!", stacklevel=5)
+
+        return {k:v for k, v in props_dict.items() if k in properties}
 
     @classmethod
     def set_correlation_to_use(cls, property_name: str,
