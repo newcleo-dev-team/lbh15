@@ -267,7 +267,7 @@ class LiquidMetalInterface(ABC):
     @classmethod
     def available_correlations(cls,
                                properties: Union[str, List[str], None] = None)\
-                                 -> Dict[str, List[str]]:
+            -> Dict[str, List[str]]:
         """
         Returns the available correlations for the properties passed as
         argument. Result is formatted as dictionary, where keys are the
@@ -310,7 +310,7 @@ class LiquidMetalInterface(ABC):
                           "\nPlease check the property name(s) "
                           "and try again!", stacklevel=5)
 
-        return {k:v for k, v in props_dict.items() if k in properties}
+        return {k: v for k, v in props_dict.items() if k in properties}
 
     @classmethod
     def set_correlation_to_use(cls, property_name: str,
@@ -357,7 +357,7 @@ class LiquidMetalInterface(ABC):
             absolute path of the file where custom properties are implemented
         """
         # Exit if the file passed as argument does not exist
-        if (not os.path.isfile(file_path)):
+        if not os.path.isfile(file_path):
             warnings.warn(f"'{file_path}' provided file not found!"
                           "\nPlease check the file path and try again!"
                           "\nNo custom property added.", stacklevel=5)
