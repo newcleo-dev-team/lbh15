@@ -588,13 +588,17 @@ Advanced usage includes the possibility of adding new properties and new physica
   does not depend on pressure, and how to use it instead of the default one (the same holds for :class:`.Bismuth` and :class:`.LBE` classes).
   The names of the available correlations can be queried by a simple function call
   (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
-  reference handbook :cite:`Agency2015`):
+  reference handbook :cite:`Agency2015`); two examples are provided, the first one asking for the available correlations
+  for all the implemented properties, the second one asking for the available correlations for a few specific properties, that is,
+  the heat capacity and the speed of sound:
   
   >>> from lbh15 import Lead
   >>> Lead.available_correlations()
   defaultdict(<class 'list'>, {'k': ['lbh15'], 'lim_ni': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'H': ['lbh15'], 'lim_cr': ['venkatraman1988', 'alden1958', 'gosse2014'], 'sigma': ['jauch1986'], 'cp': ['sobolev2011', 'gurvich1991'], 'cr_sol': ['venkatraman1988', 'gosse2014', 'alden1958'], 'in_dif': ['lbh15'], 'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'si_sol': ['lbh15'], 'fe_dif': ['lbh15'], 'lim_si': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'G': ['lbh15'], 'p_s': ['sobolev2011'], 'beta_s': ['lbh15'], 'se_dif': ['lbh15'], 'lim_al_sat': ['lbh15'], 'ni_sol': ['gosse2014'], 'r': ['lbh15'], 'S': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'co_dif': ['lbh15'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_fe': ['lbh15'], 'rho': ['sobolev2008a'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15']})
-  
-  
+  >>> Lead.available_correlations(["cp", "u_s"])
+  {'cp': ['gurvich1991', 'sobolev2011'], 'u_s': ['sobolev2011']}
+
+
   Let implement the new property in :code:`<execution_dir>/custom_properties/lead_properties.py` as:
 
   .. code-block:: python
