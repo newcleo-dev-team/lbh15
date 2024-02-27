@@ -265,22 +265,9 @@ class LiquidMetalInterface(ABC):
         return list(dict.fromkeys(rvalue))
 
     @classmethod
-    def available_correlations(cls) -> Dict[str, List[str]]:
-        """
-        Returns the dictionary containing the available correlations \
-        for each property.
-
-        Returns
-        -------
-        Dict[str, List[str]]
-        """
-        obj_list = cls.__load_properties()
-        obj_list += cls.__load_custom_properties()
-        return cls.__extract_available_correlations(obj_list)
-
-    @classmethod
-    def available_corrs_for_property(cls, properties: Union[str, List[str]]) \
-        -> Dict[str, List[str]]:
+    def available_correlations(cls,
+                               properties: Union[str, List[str], None] = None)\
+            -> Dict[str, List[str]]:
         """
         Returns the available correlations for the properties passed as
         argument. Result is formatted as dictionary, where keys are the
@@ -288,24 +275,34 @@ class LiquidMetalInterface(ABC):
         of available correlations. In case at least one required property
         is not among the implemented ones, a warning message is returned
         listing the names of all the properties that have not been found.
+        In case no value is passed as argument, the available correlations
+        are returned for all the implemented properties.
 
         Parameters
         ----------
-        properties : str | List[str]
+        properties : str | List[str] | None
             name(s) of the property(ies) whose available correlations
             are to be retrieved. If multiple properties are required,
             the list of their names must be provided, otherwise a simple
-            string is enough.
+            string is enough. If the correlations are required for all the
+            implemented properties, then `None` value is to be passed.
 
         Returns
         -------
         Dict[str, List[str]]
         """
-        props_dict = cls.available_correlations()
-        if isinstance(properties, str):
-            properties = [properties]
+        obj_list = cls.__load_properties()
+        obj_list += cls.__load_custom_properties()
+        props_dict = cls.__extract_available_correlations(obj_list)
+
+        # If no argument is passed as input,
+        # return correlations for all the implemented properties
+        if properties is None:
+            return props_dict
 
         # Check for any required property that is not available
+        if isinstance(properties, str):
+            properties = [properties]
         props_not_avail = [
             pr for pr in properties if pr not in props_dict.keys()]
         if len(props_not_avail) > 0:
@@ -313,7 +310,7 @@ class LiquidMetalInterface(ABC):
                           "\nPlease check the property name(s) "
                           "and try again!", stacklevel=5)
 
-        return {k:v for k, v in props_dict.items() if k in properties}
+        return {k: v for k, v in props_dict.items() if k in properties}
 
     @classmethod
     def set_correlation_to_use(cls, property_name: str,
@@ -360,7 +357,7 @@ class LiquidMetalInterface(ABC):
             absolute path of the file where custom properties are implemented
         """
         # Exit if the file passed as argument does not exist
-        if (not os.path.isfile(file_path)):
+        if not os.path.isfile(file_path):
             warnings.warn(f"'{file_path}' provided file not found!"
                           "\nPlease check the file path and try again!"
                           "\nNo custom property added.", stacklevel=5)
