@@ -87,12 +87,16 @@ class LBE(LiquidMetalInterface):
     _custom_properties_path: Dict[str, List[str]] = {}
     _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}
-    _properties_modules_list: List[str] = \
-        ['lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe',
-         'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
-         'lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical',
-         'lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits',
-         'lbh15.properties.lbe_properties']
+    _properties_modules_dict: Dict[str, str] = \
+        {'solubility': 'lbh15.properties.lbe_thermochemical_properties\
+.solubility_in_lbe',
+         'diffusivity': 'lbh15.properties.lbe_thermochemical_properties\
+.diffusivity_in_lbe',
+         'thermochem': 'lbh15.properties.lbe_thermochemical_properties\
+.lbe_thermochemical',
+         'oxygenlims': 'lbh15.properties.lbe_thermochemical_properties\
+.lbe_oxygen_limits',
+         'thermophys': 'lbh15.properties.lbe_properties'}
 
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LBE_BOILING_TEMPERATURE / 2.0

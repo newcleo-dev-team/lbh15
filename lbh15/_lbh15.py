@@ -56,7 +56,7 @@ class LiquidMetalInterface(ABC):
     _correlations_to_use: Dict[str, str] = {}
     _roots_to_use: Dict[str, int] = {}
     _default_corr_to_use: Dict[str, str] = {}
-    _properties_modules_list: List[str] = []
+    _properties_modules_dict: Dict[str, str] = {}
     _custom_properties_path: Dict[str, List[str]] = {}
     _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}
@@ -656,7 +656,7 @@ class LiquidMetalInterface(ABC):
         """
         # Consider default modules if none is provided
         if modules is None:
-            modules = cls._properties_modules_list
+            modules = list(cls._properties_modules_dict.values())
 
         def is_valid(obj):
             '''

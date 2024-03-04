@@ -67,14 +67,14 @@ class Bismuth(LiquidMetalInterface):
     _custom_properties_path: Dict[str, List[str]] = {}
     _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}
-    _properties_modules_list: List[str] = \
-        ['lbh15.properties.bismuth_thermochemical_properties\
+    _properties_modules_dict: Dict[str, str] = \
+        {'solubility': 'lbh15.properties.bismuth_thermochemical_properties\
 .solubility_in_bismuth',
-         'lbh15.properties.bismuth_thermochemical_properties\
+         'diffusivity': 'lbh15.properties.bismuth_thermochemical_properties\
 .diffusivity_in_bismuth',
-         'lbh15.properties.bismuth_thermochemical_properties\
+         'thermochem': 'lbh15.properties.bismuth_thermochemical_properties\
 .bismuth_thermochemical',
-         'lbh15.properties.bismuth_properties']
+         'thermophys': 'lbh15.properties.bismuth_properties'}
 
     def __init__(self, p: float = atm, **kwargs):
         self._guess = BISMUTH_BOILING_TEMPERATURE / 2.0
