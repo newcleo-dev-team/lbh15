@@ -17,7 +17,7 @@ This package offers a standard implementation for use of these properties in sci
 *lbh15* is used for numerical simulation and experimental activities supporting the
 development of nuclear reactors that employ heavy liquid metals as primary coolant.
 
-*lbh15* is developed by the **Codes & Methods** group of ** *new*cleo ** and it is released under the **GNU Lesser General Public License 3**.
+*lbh15* is developed by the **Codes & Methods** group of `newcleo <https://www.newcleo.com/>`_ and it is released under the **GNU Lesser General Public License 3**.
 
 *lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
 
