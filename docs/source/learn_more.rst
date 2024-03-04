@@ -263,6 +263,9 @@ Control of Oxygen Concentration
 ===============================
 
 This section describes a simple, but meaningful example application where the *lbh15* package features are exploited.
+This simple model is useful for the setup of chemistry control of lead. The use of standard and uniform data is
+essential into this context to ensure comparability of results.
+
 A generic volume of liquid lead is subjected to a constant heat dissipation. At a specified time, instantaneously,
 a heat load is applied that remains constant for the rest of the simulation.
 
