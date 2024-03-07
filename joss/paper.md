@@ -30,50 +30,55 @@ bibliography: paper.bib
 
 # Summary
 
-`lbh15` is a Python package that provides function correlations for the physical 
-properties of the liquid metals used as coolant in GEN-IV liquid metal fast 
+`lbh15` is a Python package that provides function correlations for the 
+physical properties of the liquid metals used as coolant in GEN-IV liquid metal fast 
 reactors (*LMFR*), such as those cooled by molten lead and lead-bismuth 
 eutectic alloy. The package implements the correlations contained in the 
 reference handbook edited by OECD/NEA [@nea], also offering the possibility of 
 adding new customized properties with minimal effort for the user. The 
 properties of the liquid metal are uniquely defined by its thermo-dynamic 
-state, namely by the temperature and the pressure values. In addition, the 
-value of several other properties can be used at liquid metal object's 
-instantiation, provided that the inverse of the corresponding correlation 
-has at least one root in the validity range (*injective function* property).
+state, namely by the temperature and pressure values. As alternative, the 
+physical properties can be used at liquid metal object's instantiation, 
+provided that the inverse of the corresponding correlation has at least one 
+root in the validity range (*injective function* property).
 
 `lbh15` package is released under the *GNU Lesser General Public License v3.0*.
 
 # Statement of Need
 
 Thermal-hydraulic analysis is a key factor for the design and safety studies 
-of *LMFR*s. It involves the implementation and use of several numerical 
-methods and physical data that are employed in different computer tools. 
+of *LMFR*s, involving the implementation and use of several numerical 
+methods and physical data that are employed in different computational tools. 
+A standardization of the methods is necessary to guarantee homogeneity, 
+reproducibility, and comparability of the numerical results. This 
+standardization is particularly important considering the growing community 
+of users with robust quality assurance needs.
+
 With a growing community of users and considering quality assurance needs 
 for the engineering studies, a standardization of the approaches becomes 
 necessary to guarantee homogeneity, reproducibility and comparability of 
-the numerical results. This is an essential point to ensure work 
-effectiveness and successful projects in both industry and research 
+the numerical results. This is an essential point to ensure effective and 
+successful projects in both industry and research 
 environments, especially for nuclear science and engineering. As well, 
 *new*cleo pursues efforts for data standardization to develop new units 
 of lead-cooled fast reactors (*LFR*).
 
 In this context, standard libraries providing the physical correlations for 
-thermal-hydraulic computer tools are needed.
+thermal-hydraulic computational tools are needed.
 
 # Implementation
 
 `lbh15` package takes inspiration from the `iapws`[^1] Python package, 
-that implements the water-related *IAPWS* full standard [@iapws]. However, 
+which implements the water-related *IAPWS* full standard [@iapws]. However, 
 `lbh15` follows a different implementation approach.
 
 The efficiency and the effectiveness are assured by the *Object-Oriented* 
-and the *Dynamic Loading* approaches, that have been applied throughout 
+and the *Dynamic Loading* approaches, which have been applied throughout 
 the entire development process. `lbh15` relies on the abstract liquid metal 
 class: all classes describing the different metals inherit from it. The 
-abstract class does not implement directly the property correlations, but 
-it instantiates the property objects and provides the property values. In 
-other words, the abstract liquid metal class acts as both *factory* of 
+abstract class does not directly implement the property correlations, but 
+it instead instantiates the property objects and provides the property values. 
+In other words, the abstract liquid metal class acts as both *factory* of 
 the property objects and *proxy* of the property values [@pybook]. 
 This allows the user to add new custom properties without modifying the 
 existing implementation of the liquid metal class.
@@ -82,33 +87,31 @@ existing implementation of the liquid metal class.
 
 # Use
 
-There are two main ways to use the package, that is, either by instantiating 
-a liquid metal object to access its related properties, or by instantiating 
-an object for each specific property. The former approach provides one 
+There are two main ways to use the package: either by instantiating 
+a liquid metal object to access all its properties, or by instantiating 
+an object for each specific property. The former approach provides a 
 single entry point to all the liquid metal properties, which are evaluated 
-at the specified thermo-dynamic state after checking its validity 
+at the specified thermo-dynamic state after checking that such state is valid 
 (temperature between the melting and the boiling values, and positive 
-pressure). In addition, the former approach allows to manage the properties 
-correlations in a simpler way, by acting either on a single or on all
-liquid metal instances at the same time. The latter approach is best suited 
-to cases where only a few specific properties are required for an
-individual thermo-dynamic state, i.e., where it may be too much to know the 
-values of all the properties of the liquid metal at once.
+pressure). In addition, this approach allows to select the default 
+correlations of the properties by means of the available class methods. The 
+latter approach is best suited to cases where only a few specific properties 
+are required for an individual thermo-dynamic state, since it offers faster 
+instantiation and evaluation of the correlation fucntions.
 
 # Implemented Properties
 
 The properties implemented so far can be subdivided into two groups:
 
-* *thermo-physical* (saturation vapour pressure, surface tension, density, 
+* *thermo-physical*: saturation vapour pressure, surface tension, density, 
   thermal expansion coefficient, speed of sound, isentropic compressibility, 
   specific heat capacity, specific enthalpy, dynamic viscosity, electrical 
-  resistivity, thermal conductivity, Prandtl number);
+  resistivity, thermal conductivity, Prandtl number;
 
-* *thermo-chemical*, including the diffusivity and the solubility of Oxygen 
-  and of the impurities within the liquid metals, the Oxygen partial pressure, 
-  the molar enthalpy, the molar entropy, the Gibbs free energy and the range 
-  of the Oxygen concentration values where a corrosion-protective oxide layer 
-  on metallic structure is assured.
+* *thermo-chemical*: diffusivity and solubility of Oxygen 
+  and of the impurities in the liquid metals, Oxygen partial pressure, 
+  molar enthalpy, molar entropy, Gibbs free energy, and Oxygen concentration 
+  range assuring corrosion-protective oxide layer on metallic structure.
 
 # Implementation History
 
@@ -116,14 +119,14 @@ The release of version *1.1.0* of the package `lbh15` was described in
 [@nureth20]. This version implemented only the thermo-physical properties.
 
 The current version *2.0.0* implements the thermo-chemical properties and 
-updates the documentation accordingly. It improves the performance and 
-the readability. Moreover, solutions have been adopted improving 
-performance and usability (enforced vectorisation over the whole 
-implementation and use of the Horner scheme to evaluate polynomials 
-[@hornerbook]). It includes a tutorial focusing on a volume of lead that 
-is subjected to time-varying thermal loads, where the Oxygen concentration 
-is controlled to fall in the range where the protective oxide 
-layer formation is assured, see [@nea]. Great attention is paid to 
+updates the documentation accordingly. The current version improves the 
+performance and the readability. Moreover, solutions have been adopted to 
+improve performance and usability such as, for instance, enforcing 
+vectorisation over the whole implementation and using the Horner scheme to 
+evaluate polynomials [@hornerbook]. It includes a tutorial focusing on a 
+volume of lead that is subjected to time-varying thermal loads, where the 
+Oxygen concentration is controlled to fall in the range where the protective 
+oxide layer formation is assured [@nea]. Great attention is paid to 
 the code quality and readability. *PEP8* guidelines[^2] are ensured by 
 the *pycodestyle* utility. In addition, the automatic static analysis 
 of the code has been performed by applying the *pylint* tool throughout 
@@ -143,8 +146,8 @@ The documentation of `lbh15` is generated by `Sphinx` and published on
 
 It is composed of parts addressed separately to the developers and to the 
 users. An advanced use of the package needs skills in Python software 
-development. The documentation is completed with examples for the users, 
-starting from basic use up to short tutorials for more advanced 
+development. The documentation contains examples for users, 
+from basic use to short tutorials for more advanced 
 applications.
 
 # References
