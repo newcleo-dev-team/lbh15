@@ -5,10 +5,11 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.common_interface import OxygenDiffusivityInterface
 from ..._decorators import range_warning
 
 
-class OxygenDiffusivityInterface(PropertyInterface):
+class BismuthOxygenDiffusivityInterface(OxygenDiffusivityInterface):
     """
     Liquid bismuth *Oxygen diffusivity* property abstract class.
     """
@@ -41,7 +42,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
+class OxygenDiffusivityFitzner1980(BismuthOxygenDiffusivityInterface):
     """
     Liquid bismuth *Oxygen diffusivity* property class
     implementing the correlation by *fitzner1980*.
@@ -87,7 +88,7 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
         return [951, 1100]
 
 
-class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
+class OxygenDiffusivityHeshmatpour1981(BismuthOxygenDiffusivityInterface):
     """
     Liquid bismuth *Oxygen diffusivity* property class
     implementing the correlation by *heshmatpour1981*.

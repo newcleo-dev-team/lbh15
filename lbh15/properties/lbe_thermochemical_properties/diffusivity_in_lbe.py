@@ -4,34 +4,14 @@ from typing import List
 import numpy as np
 from scipy.constants import atm, R
 from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.common_interface import OxygenDiffusivityInterface
 from ..._decorators import range_warning
 
 
-class OxygenDiffusivityInterface(PropertyInterface):
+class LBEOxygenDiffusivityInterface(OxygenDiffusivityInterface):
     """
     Liquid lbe *Oxygen diffusivity* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen diffusivity unit
-        """
-        return "[m^2.s^-1]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen diffusivity long name
-        """
-        return "oxygen diffusivity"
-
     @property
     def description(self) -> str:
         """
@@ -40,7 +20,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
+class OxygenDiffusivityGromov1996(LBEOxygenDiffusivityInterface):
     """
     Liquid lbe *Oxygen diffusivity* property class
     implementing the correlation by *gromov1996*.
@@ -86,7 +66,7 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         return [473, 1273]
 
 
-class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
+class OxygenDiffusivityGanesan2006b(LBEOxygenDiffusivityInterface):
     """
     Liquid lbe *Oxygen diffusivity* property class
     implementing the correlation by *ganesan2006b*.

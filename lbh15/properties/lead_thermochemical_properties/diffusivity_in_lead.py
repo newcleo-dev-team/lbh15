@@ -5,34 +5,14 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.common_interface import OxygenDiffusivityInterface
 from ..._decorators import range_warning
 
 
-class OxygenDiffusivityInterface(PropertyInterface):
+class LeadOxygenDiffusivityInterface(OxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen diffusivity unit
-        """
-        return "[m^2.s^-1]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen diffusivity long name
-        """
-        return "oxygen diffusivity"
-
     @property
     def description(self) -> str:
         """
@@ -41,7 +21,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
+class OxygenDiffusivityArcella1968(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *arcella1968*.
@@ -87,7 +67,7 @@ class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
         return [973, 1173]
 
 
-class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
+class OxygenDiffusivityHomna1971(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *homna1971*.
@@ -133,7 +113,7 @@ class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
         return [1073, 1373]
 
 
-class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
+class OxygenDiffusivitySwzarc1972(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *swzarc1972*.
@@ -179,7 +159,7 @@ class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
         return [1013, 1353]
 
 
-class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
+class OxygenDiffusivityOtsuka1975(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *otsuka1975*.
@@ -225,7 +205,7 @@ class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
         return [1173, 1373]
 
 
-class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
+class OxygenDiffusivityCharle1976(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *charle1976*.
@@ -271,7 +251,7 @@ class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
         return [1173, 1373]
 
 
-class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
+class OxygenDiffusivityGromov1996(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *gromov1996*.
@@ -317,7 +297,7 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         return [673, 1273]
 
 
-class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
+class OxygenDiffusivityGanesan2006b(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *ganesan2006b*.
