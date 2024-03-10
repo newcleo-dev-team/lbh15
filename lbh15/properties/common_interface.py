@@ -27,7 +27,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         str : Oxygen diffusivity long name
         """
         return "oxygen diffusivity"
-    
+
 
 class IronDiffusivityInterface(PropertyInterface):
     """
@@ -109,6 +109,32 @@ class MolarEnthalpyInterface(PropertyInterface):
         str : Molar enthalpy variation long name
         """
         return "molar enthalpy variation"
+
+
+class MolarEntropyInterface(PropertyInterface):
+    """
+    Liquid metal *molar entropy variation* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "S"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Molar entropy variation unit
+        """
+        return "[J/(mol.K)]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Molar entropy variation long name
+        """
+        return "molar entropy variation"
 
 
 class IronSolubilityInterface(PropertyInterface):
