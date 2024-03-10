@@ -299,7 +299,7 @@
       "max": 0.0,
       "T_at_max": 999.9999743571
    },
-   "lim_fe_sat_lbh15_Oxygen_concentration_lower_limit_for_iron_at_its_saturation_concentration_in_liquid_lead": {
+   "lim_fe_sat_lbh15_Oxygen_concentration_lower_limit_foriron_at_its_saturation_concentration_in_liquid_lead": {
       "min": 2e-10,
       "T_at_min": 673.0000121095,
       "max": 1.2521e-06,
@@ -695,13 +695,13 @@
       "max": 7.2e-09,
       "T_at_max": 999.9999743571
    },
-   "lim_ni_gosse2014_Oxygen_concentration_lower_limit_timesnickel_concentration_in_lbe": {
+   "lim_ni_gosse2014_Oxygen_concentration_lower_limit_times_nickel_concentration_in_lbe": {
       "min": 3.868e-07,
       "T_at_min": 673.0000145852,
       "max": 0.0007252655,
       "T_at_max": 999.9999743571
    },
-   "lim_ni_martinelli2010_Oxygen_concentration_lower_limit_timesnickel_concentration_in_lbe": {
+   "lim_ni_martinelli2010_Oxygen_concentration_lower_limit_times_nickel_concentration_in_lbe": {
       "min": 4.216e-07,
       "T_at_min": 673.0000198925,
       "max": 0.0006568966,
@@ -713,7 +713,7 @@
       "max": 0.0,
       "T_at_max": 999.9999743571
    },
-   "lim_cr_sat_lbh15_Oxygen_concentration_lower_limit_forchromium_at_its_saturation_concentration_in_lbe": {
+   "lim_cr_sat_lbh15_Oxygen_concentration_lower_limit_for_chromium_at_its_saturation_concentration_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000111399,
       "max": 0.0,
