@@ -27,6 +27,32 @@ class OxygenDiffusivityInterface(PropertyInterface):
         str : Oxygen diffusivity long name
         """
         return "oxygen diffusivity"
+    
+
+class IronDiffusivityInterface(PropertyInterface):
+    """
+    Liquid metal *Iron diffusivity* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "fe_dif"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Iron diffusivity unit
+        """
+        return "[m^2.s^-1]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Iron diffusivity long name
+        """
+        return "iron diffusivity"
 
 
 class OxygenPartialPressureInterface(PropertyInterface):

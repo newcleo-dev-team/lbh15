@@ -3,8 +3,8 @@ property objects for *lead-bismuth eutectic* (*lbe*)."""
 from typing import List
 import numpy as np
 from scipy.constants import atm, R
-from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import OxygenDiffusivityInterface
+from lbh15.properties.common_interface import IronDiffusivityInterface
 from ..._decorators import range_warning
 
 
@@ -112,7 +112,7 @@ class OxygenDiffusivityGanesan2006b(LBEOxygenDiffusivityInterface):
         return [813, 973]
 
 
-class IronDiffusivity(PropertyInterface):
+class IronDiffusivity(IronDiffusivityInterface):
     """
     Liquid lbe *Iron diffusivity* property class.
     """
@@ -142,33 +142,12 @@ class IronDiffusivity(PropertyInterface):
         return np.power(10, - 2.31 - 2295 / T) * 1.0e-4
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron diffusivity unit
-        """
-        return "[m^2.s^-1]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Iron diffusivity
         correlation function
         """
         return [973.0, 1273.0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Iron diffusivity long name
-        """
-        return "iron diffusivity"
 
     @property
     def description(self) -> str:
