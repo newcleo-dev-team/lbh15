@@ -6,6 +6,7 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from ..interface import PropertyInterface
+from ..common_interface import OxygenPartialPressureInterface
 from ..bismuth_properties import h
 from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
@@ -14,7 +15,7 @@ from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import range_warning
 
 
-class OxygenPartialPressureInterface(PropertyInterface):
+class BismuthOxygenPartialPressureInterface(OxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property abstract class.
@@ -44,30 +45,6 @@ class OxygenPartialPressureInterface(PropertyInterface):
         return 1500
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_pp"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid bismuth divided by the
-        Oxygen concentration in liquid bismuth squared unit
-        """
-        return "[Pa.wt.%^-2]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid bismuth divided by the
-        Oxygen concentration in liquid bismuth squared long name
-        """
-        return ("Oxygen partial pressure divided by the"
-                " oxygen concentration squared")
-
-    @property
     def description(self) -> str:
         """
         str : Oxygen partial pressure in liquid bismuth divided by the
@@ -76,7 +53,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
+class OxygenPartialPressureFitzner1980(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -127,7 +104,7 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
         return [988, 1181]
 
 
-class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
+class OxygenPartialPressureIsecke1979(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -178,7 +155,7 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
         return [973, 1473]
 
 
-class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
+class OxygenPartialPressureHahn1979(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -229,7 +206,7 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
         return [1073, 1223]
 
 
-class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
+class OxygenPartialPressureHeshmatpour1981(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
