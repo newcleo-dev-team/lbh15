@@ -13,6 +13,8 @@ These classes represent the properties dynamically loaded by the :class:`.Lead`,
 
    interface.rst
 
+   common_interface.rst
+
    lead_properties.rst
 
    bismuth_properties.rst
