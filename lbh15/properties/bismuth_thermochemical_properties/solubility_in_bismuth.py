@@ -5,34 +5,14 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.common_interface import IronSolubilityInterface
 from ..._decorators import range_warning
 
 
-class IronSolubilityInterface(PropertyInterface):
+class BismuthIronSolubilityInterface(IronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Iron solubility long name
-        """
-        return "iron solubility"
-
     @property
     def description(self) -> str:
         """
@@ -41,7 +21,7 @@ class IronSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class IronSolubilityGosse2014(IronSolubilityInterface):
+class IronSolubilityGosse2014(BismuthIronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property class
     implementing the correlation by *gosse2014*.
@@ -87,7 +67,7 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
         return [545.0, 1173.0]
 
 
-class IronSolubilityMassalski1990(IronSolubilityInterface):
+class IronSolubilityMassalski1990(BismuthIronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property class
     implementing the correlation by *massalski1990*.
@@ -133,7 +113,7 @@ class IronSolubilityMassalski1990(IronSolubilityInterface):
         return [973.0, 1173.0]
 
 
-class IronSolubilityWeeks1998(IronSolubilityInterface):
+class IronSolubilityWeeks1998(BismuthIronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property class
     implementing the correlation by *weeks1998*.

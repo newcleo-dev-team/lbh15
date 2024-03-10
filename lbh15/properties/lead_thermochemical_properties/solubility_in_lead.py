@@ -4,10 +4,11 @@ from typing import List
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
+from lbh15.properties.common_interface import IronSolubilityInterface
 from ..._decorators import range_warning
 
 
-class IronSolubility(PropertyInterface):
+class IronSolubility(IronSolubilityInterface):
     """
     Liquid lead *Iron solubility* property class.
     """
@@ -35,20 +36,6 @@ class IronSolubility(PropertyInterface):
             solubility in :math:`[wt.\\%]`
         """
         return np.power(10, 2.11-5225/T)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron solubility unit
-        """
-        return "[wt.%]"
 
     @property
     def correlation_name(self) -> str:

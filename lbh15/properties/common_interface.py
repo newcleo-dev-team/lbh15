@@ -57,3 +57,29 @@ class OxygenPartialPressureInterface(PropertyInterface):
         """
         return ("Oxygen partial pressure divided by the"
                 " oxygen concentration squared")
+
+
+class IronSolubilityInterface(PropertyInterface):
+    """
+    Liquid metal *Iron solubility* property abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "fe_sol"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Iron solubility unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Iron solubility long name
+        """
+        return "iron solubility"
