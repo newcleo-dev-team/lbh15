@@ -5,6 +5,7 @@ import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
+from lbh15.properties.common_interface import NickelSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -53,13 +54,6 @@ class IronSolubility(IronSolubilityInterface):
         return [600.0, 1173.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Iron solubility long name
-        """
-        return "iron solubility"
-
-    @property
     def description(self) -> str:
         """
         str : Iron solubility description
@@ -67,7 +61,7 @@ class IronSolubility(IronSolubilityInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class NickelSolubility(PropertyInterface):
+class NickelSolubility(NickelSolubilityInterface):
     """
     Liquid lead *Nickel solubility* property class.
     """
@@ -97,20 +91,6 @@ class NickelSolubility(PropertyInterface):
         return np.power(10, 1.36-1395/T)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "ni_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Nickel solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
@@ -124,13 +104,6 @@ class NickelSolubility(PropertyInterface):
         correlation function
         """
         return [598.0, 917.0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Nickel solubility long name
-        """
-        return "nickel solubility"
 
     @property
     def description(self) -> str:

@@ -83,3 +83,29 @@ class IronSolubilityInterface(PropertyInterface):
         str : Iron solubility long name
         """
         return "iron solubility"
+
+
+class NickelSolubilityInterface(PropertyInterface):
+    """
+    Liquid metal *Nickel solubility* property abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "ni_sol"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Nickel solubility unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Nickel solubility long name
+        """
+        return "nickel solubility"

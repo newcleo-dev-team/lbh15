@@ -6,6 +6,7 @@ import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
+from lbh15.properties.common_interface import NickelSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -159,31 +160,10 @@ class IronSolubilityWeeks1998(BismuthIronSolubilityInterface):
         return [713.0, 998.0]
 
 
-class NickelSolubilityInterface(PropertyInterface):
+class BismuthNickelSolubilityInterface(NickelSolubilityInterface):
     """
     Liquid bismuth *Nickel solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "ni_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Nickel solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Nickel solubility long name
-        """
-        return "nickel solubility"
-
     @property
     def description(self) -> str:
         """
@@ -192,7 +172,7 @@ class NickelSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class NickelSolubilityWeeks1998(NickelSolubilityInterface):
+class NickelSolubilityWeeks1998(BismuthNickelSolubilityInterface):
     """
     Liquid bismuth *Nickel solubility* property class
     implementing the correlation by *weeks1998*.
@@ -238,7 +218,7 @@ class NickelSolubilityWeeks1998(NickelSolubilityInterface):
         return [723.0, 903.0]
 
 
-class NickelSolubilityGosse2014(NickelSolubilityInterface):
+class NickelSolubilityGosse2014(BismuthNickelSolubilityInterface):
     """
     Liquid bismuth *Nickel solubility* property class
     implementing the correlation by *gosse2014*.

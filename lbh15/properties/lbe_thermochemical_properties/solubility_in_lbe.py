@@ -6,6 +6,7 @@ import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
+from lbh15.properties.common_interface import NickelSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -113,7 +114,7 @@ class IronSolubilityWeeks1969(LBEIronSolubilityInterface):
         return [823.0, 1053.0]
 
 
-class NickelSolubilityInterface(PropertyInterface):
+class LBENickelSolubilityInterface(NickelSolubilityInterface):
     """
     Liquid lbe *Nickel solubility* property abstract class.
     """
@@ -146,7 +147,7 @@ class NickelSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
+class NickelSolubilityMartinelli2010(LBENickelSolubilityInterface):
     """
     Liquid lbe *Nickel solubility* property class
     implementing the correlation by *martinelli2010*.
@@ -193,7 +194,7 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
         return [603.0, 1173.0]
 
 
-class NickelSolubilityGosse2014(NickelSolubilityInterface):
+class NickelSolubilityGosse2014(LBENickelSolubilityInterface):
     """
     Liquid lbe *Nickel solubility* property class
     implementing the correlation by *gosse2014*.
