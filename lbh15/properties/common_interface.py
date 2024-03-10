@@ -265,3 +265,231 @@ class OxygenSolubilityInterface(PropertyInterface):
         str : Oxygen solubility long name
         """
         return "oxygen solubility"
+
+
+class LowerLimitSaturationIronInterface(PropertyInterface):
+    """
+    *Lower limit of Oxygen concentration* to promote a
+    protective oxide film in liquid metal considering
+    *Iron at its saturation concentration* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_fe_sat"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit for"
+                "iron at its saturation concentration")
+
+class LowerLimitSaturationChromiumInterface(PropertyInterface):
+    """
+    *Lower limit of Oxygen concentration* to promote a
+    protective oxide film in liquid metal considering
+    *Chromium at its saturation concentration* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_cr_sat"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit for"
+                " chromium at its saturation concentration")
+
+class LowerLimitSaturationNickelInterface(PropertyInterface):
+    """
+    *Lower limit of Oxygen concentration* to promote a
+    protective oxide film in liquid metal considering
+    *Nickel at its saturation concentration* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_ni_sat"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit for"
+                " nickel at its saturation concentration")
+
+
+class LowerLimitSaturationSiliconInterface(PropertyInterface):
+    """
+    *Lower limit of Oxygen concentration* to promote a
+    protective oxide film in liquid metal considering
+    *Silicon at its saturation concentration* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_si_sat"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit for"
+                " silicon at its saturation concentration")
+
+
+class LowerLimitSaturationAluminiumInterface(PropertyInterface):
+    """
+    *Lower limit of Oxygen concentration* to promote a
+    protective oxide film in liquid metal considering
+    *Aluminium at its saturation concentration* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_al_sat"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit for"
+                " aluminium at its saturation concentration")
+
+class LowerLimitChromiumInterface(PropertyInterface):
+    """
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Chromium concentration*
+    raised to :math:`2/3` in liquid metal property abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_cr"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit times"
+                " chromium concentration raised to 2/3")
+
+class LowerLimitNickelInterface(PropertyInterface):
+    """
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Nickel concentration*
+    in liquid metal property abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_ni"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit times"
+                " nickel concentration")
+
+
+class LowerLimitIronInterface(PropertyInterface):
+    """
+    *Lower limit of oxygen concentration* to promote a
+    protective oxide film times the *Iron concentration*
+    raised to :math:`3/4` in liquid metal property abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "lim_fe"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen concentration lower limit unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen concentration lower limit long name
+        """
+        return ("Oxygen concentration lower limit times"
+                " iron concentration raised to 3/4")

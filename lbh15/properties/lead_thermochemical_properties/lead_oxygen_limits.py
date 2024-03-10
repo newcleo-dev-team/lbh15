@@ -6,6 +6,14 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from ..interface import PropertyInterface
+from ..common_interface import LowerLimitSaturationIronInterface
+from ..common_interface import LowerLimitSaturationChromiumInterface
+from ..common_interface import LowerLimitSaturationNickelInterface
+from ..common_interface import LowerLimitSaturationSiliconInterface
+from ..common_interface import LowerLimitSaturationAluminiumInterface
+from ..common_interface import LowerLimitChromiumInterface
+from ..common_interface import LowerLimitNickelInterface
+from ..common_interface import LowerLimitIronInterface
 from .solubility_in_lead import OxygenSolubility
 from .solubility_in_lead import ChromiumSolubilityGosse2014
 from .solubility_in_lead import ChromiumSolubilityAlden1958
@@ -16,7 +24,7 @@ from .solubility_in_lead import SiliconSolubility
 from ..._decorators import range_warning
 
 
-class LowerLimitSaturationIron(PropertyInterface):
+class LowerLimitSaturationIron(LowerLimitSaturationIronInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
@@ -77,34 +85,12 @@ class LowerLimitSaturationIron(PropertyInterface):
             * OxygenSolubility().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_fe_sat"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 1000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " iron at its saturation concentration")
 
     @property
     def description(self) -> str:
@@ -114,7 +100,7 @@ class LowerLimitSaturationIron(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class LowerLimitSaturationChromium(PropertyInterface):
+class LowerLimitSaturationChromium(LowerLimitSaturationChromiumInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
@@ -175,34 +161,12 @@ class LowerLimitSaturationChromium(PropertyInterface):
             * OxygenSolubility().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_cr_sat"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 1000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " chromium at its saturation concentration")
 
     @property
     def description(self) -> str:
@@ -212,7 +176,7 @@ class LowerLimitSaturationChromium(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class LowerLimitSaturationNickel(PropertyInterface):
+class LowerLimitSaturationNickel(LowerLimitSaturationNickelInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
@@ -247,34 +211,12 @@ class LowerLimitSaturationNickel(PropertyInterface):
             * OxygenSolubility().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_ni_sat"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 1000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " nickel at its saturation concentration")
 
     @property
     def description(self) -> str:
@@ -284,7 +226,7 @@ class LowerLimitSaturationNickel(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class LowerLimitSaturationSilicon(PropertyInterface):
+class LowerLimitSaturationSilicon(LowerLimitSaturationSiliconInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
@@ -345,34 +287,12 @@ class LowerLimitSaturationSilicon(PropertyInterface):
             * OxygenSolubility().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_si_sat"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 1000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " silicon at its saturation concentration")
 
     @property
     def description(self) -> str:
@@ -382,7 +302,7 @@ class LowerLimitSaturationSilicon(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class LowerLimitSaturationAluminium(PropertyInterface):
+class LowerLimitSaturationAluminium(LowerLimitSaturationAluminiumInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid lead considering
@@ -441,34 +361,12 @@ class LowerLimitSaturationAluminium(PropertyInterface):
             * OxygenSolubility().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_al_sat"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 1000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit for"
-                " aluminium at its saturation concentration")
 
     @property
     def description(self) -> str:
@@ -478,7 +376,7 @@ class LowerLimitSaturationAluminium(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class LowerLimitChromiumInterface(PropertyInterface):
+class LeadLowerLimitChromiumInterface(LowerLimitChromiumInterface):
     """
     *Lower limit of oxygen concentration* to promote a
     protective oxide film times the *Chromium concentration*
@@ -511,28 +409,6 @@ class LowerLimitChromiumInterface(PropertyInterface):
         return 1800
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_cr"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit times"
-                " chromium concentration raised to 2/3")
-
-    @property
     def description(self) -> str:
         """
         str : Oxygen concentration lower limit description
@@ -540,7 +416,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
         return f"{self.long_name} in lead"
 
 
-class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
+class LowerLimitChromiumGosse2014(LeadLowerLimitChromiumInterface):
     """
     *Lower limit of oxygen concentration* to promote a
     protective oxide film times the *Chromium concentration*
@@ -591,7 +467,7 @@ class LowerLimitChromiumGosse2014(LowerLimitChromiumInterface):
         return [673, 1000]
 
 
-class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
+class LowerLimitChromiumVenkatraman1988(LeadLowerLimitChromiumInterface):
     """
     *Lower limit of oxygen concentration* to promote a
     protective oxide film times the *Chromium concentration*
@@ -643,7 +519,7 @@ class LowerLimitChromiumVenkatraman1988(LowerLimitChromiumInterface):
         return [673, 1000]
 
 
-class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
+class LowerLimitChromiumAlden1958(LeadLowerLimitChromiumInterface):
     """
     *Lower limit of oxygen concentration* to promote a
     protective oxide film times the *Chromium concentration*
@@ -694,7 +570,7 @@ class LowerLimitChromiumAlden1958(LowerLimitChromiumInterface):
         return [673, 1000]
 
 
-class LowerLimitNickel(PropertyInterface):
+class LowerLimitNickel(LowerLimitNickelInterface):
     """
     *Lower limit of oxygen concentration* to promote a
     protective oxide film times the *Nickel concentration*
@@ -729,34 +605,12 @@ class LowerLimitNickel(PropertyInterface):
             * NickelSolubility().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_ni"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 917]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit times"
-                " nickel concentration")
 
     @property
     def description(self) -> str:
@@ -766,7 +620,7 @@ class LowerLimitNickel(PropertyInterface):
         return f"{self.long_name} in lead"
 
 
-class LowerLimitIron(PropertyInterface):
+class LowerLimitIron(LowerLimitIronInterface):
     """
     *Lower limit of oxygen concentration* to promote a
     protective oxide film times the *Iron concentration*
@@ -827,34 +681,12 @@ class LowerLimitIron(PropertyInterface):
             * np.power(IronSolubility().correlation(T, p), 0.75)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "lim_fe"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen concentration lower limit unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen concentration
         lower limit correlation function
         """
         return [673, 1000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen concentration lower limit long name
-        """
-        return ("Oxygen concentration lower limit times"
-                " iron concentration raised to 3/4")
 
     @property
     def description(self) -> str:
