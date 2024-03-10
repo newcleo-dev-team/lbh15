@@ -135,3 +135,29 @@ class ChromiumSolubilityInterface(PropertyInterface):
         str : Chromium solubility long name
         """
         return "chromium solubility"
+
+
+class OxygenSolubilityInterface(PropertyInterface):
+    """
+    Liquid metal *Oxygen solubility* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "o_sol"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Oxygen solubility unit
+        """
+        return "[wt.%]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Oxygen solubility long name
+        """
+        return "oxygen solubility"

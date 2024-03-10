@@ -4,10 +4,10 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
 from lbh15.properties.common_interface import NickelSolubilityInterface
 from lbh15.properties.common_interface import ChromiumSolubilityInterface
+from lbh15.properties.common_interface import OxygenSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -417,7 +417,7 @@ class ChromiumSolubilityGosse2014(BismuthChromiumSolubilityInterface):
         return [545.0, 1773.0]
 
 
-class OxygenSolubility(PropertyInterface):
+class OxygenSolubility(OxygenSolubilityInterface):
     """
     Liquid bismuth *Oxygen solubility* property class.
     """
@@ -448,33 +448,12 @@ class OxygenSolubility(PropertyInterface):
                         np.power(10, 3.04-4810/T))[()]
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen solubility
         correlation function
         """
         return [573.0, 1573.0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen solubility long name
-        """
-        return "oxygen solubility"
 
     @property
     def description(self) -> str:

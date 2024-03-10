@@ -7,6 +7,7 @@ from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
 from lbh15.properties.common_interface import NickelSolubilityInterface
 from lbh15.properties.common_interface import ChromiumSolubilityInterface
+from lbh15.properties.common_interface import OxygenSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -330,7 +331,7 @@ class SiliconSolubility(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class OxygenSolubility(PropertyInterface):
+class OxygenSolubility(OxygenSolubilityInterface):
     """
     Liquid lead *Oxygen solubility* property class.
     """
@@ -360,33 +361,12 @@ class OxygenSolubility(PropertyInterface):
         return np.power(10, 3.23-5043/T)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen solubility
         correlation function
         """
         return [673.0, 1373.0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen solubility long name
-        """
-        return "oxygen solubility"
 
     @property
     def description(self) -> str:
