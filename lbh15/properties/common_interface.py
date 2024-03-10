@@ -295,6 +295,7 @@ class LowerLimitSaturationIronInterface(PropertyInterface):
         return ("Oxygen concentration lower limit for"
                 "iron at its saturation concentration")
 
+
 class LowerLimitSaturationChromiumInterface(PropertyInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
@@ -322,6 +323,7 @@ class LowerLimitSaturationChromiumInterface(PropertyInterface):
         """
         return ("Oxygen concentration lower limit for"
                 " chromium at its saturation concentration")
+
 
 class LowerLimitSaturationNickelInterface(PropertyInterface):
     """
@@ -409,6 +411,7 @@ class LowerLimitSaturationAluminiumInterface(PropertyInterface):
         return ("Oxygen concentration lower limit for"
                 " aluminium at its saturation concentration")
 
+
 class LowerLimitChromiumInterface(PropertyInterface):
     """
     *Lower limit of oxygen concentration* to promote a
@@ -436,6 +439,7 @@ class LowerLimitChromiumInterface(PropertyInterface):
         """
         return ("Oxygen concentration lower limit times"
                 " chromium concentration raised to 2/3")
+
 
 class LowerLimitNickelInterface(PropertyInterface):
     """
