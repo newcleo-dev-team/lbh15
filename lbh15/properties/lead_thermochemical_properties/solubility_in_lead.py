@@ -6,6 +6,7 @@ from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
 from lbh15.properties.common_interface import NickelSolubilityInterface
+from lbh15.properties.common_interface import ChromiumSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -113,31 +114,10 @@ class NickelSolubility(NickelSolubilityInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class ChromiumSolubilityInterface(PropertyInterface):
+class LeadChromiumSolubilityInterface(ChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "cr_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Chromium solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Chromium solubility long name
-        """
-        return "chromium solubility"
-
     @property
     def description(self) -> str:
         """
@@ -146,7 +126,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class ChromiumSolubilityAlden1958(ChromiumSolubilityInterface):
+class ChromiumSolubilityAlden1958(LeadChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property class
     implementing the correlation by *alden1958*.
@@ -192,7 +172,7 @@ class ChromiumSolubilityAlden1958(ChromiumSolubilityInterface):
         return [1181.0, 1483.0]
 
 
-class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
+class ChromiumSolubilityVenkatraman1988(LeadChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property class
     implementing the correlation by *venkatraman1988*.
@@ -238,7 +218,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         return [1173.0, 1473.0]
 
 
-class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
+class ChromiumSolubilityGosse2014(LeadChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property class
     implementing the correlation by *gosse2014*.

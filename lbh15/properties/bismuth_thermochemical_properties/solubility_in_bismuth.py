@@ -7,6 +7,7 @@ from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
 from lbh15.properties.common_interface import NickelSolubilityInterface
+from lbh15.properties.common_interface import ChromiumSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -266,31 +267,10 @@ class NickelSolubilityGosse2014(BismuthNickelSolubilityInterface):
         return [543.0, 1173.0]
 
 
-class ChromiumSolubilityInterface(PropertyInterface):
+class BismuthChromiumSolubilityInterface(ChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "cr_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Chromium solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Chromium solubility long name
-        """
-        return "chromium solubility"
-
     @property
     def description(self) -> str:
         """
@@ -299,7 +279,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
+class ChromiumSolubilityVenkatraman1988(BismuthChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property class
     implementing the correlation by *venkatraman1988*.
@@ -345,7 +325,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         return [658.0, 901.0]
 
 
-class ChromiumSolubilityWeeks1998(ChromiumSolubilityInterface):
+class ChromiumSolubilityWeeks1998(BismuthChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property class
     implementing the correlation by *weeks1998*.
@@ -391,7 +371,7 @@ class ChromiumSolubilityWeeks1998(ChromiumSolubilityInterface):
         return [663.0, 998.0]
 
 
-class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
+class ChromiumSolubilityGosse2014(BismuthChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property class
     implementing the correlation by *gosse2014*.

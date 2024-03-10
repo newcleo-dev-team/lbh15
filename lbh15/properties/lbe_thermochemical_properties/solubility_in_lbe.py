@@ -7,6 +7,7 @@ from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import IronSolubilityInterface
 from lbh15.properties.common_interface import NickelSolubilityInterface
+from lbh15.properties.common_interface import ChromiumSolubilityInterface
 from ..._decorators import range_warning
 
 
@@ -241,7 +242,7 @@ class NickelSolubilityGosse2014(LBENickelSolubilityInterface):
         return [528.0, 1173.0]
 
 
-class ChromiumSolubilityInterface(PropertyInterface):
+class LBEChromiumSolubilityInterface(ChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property abstract class.
     """
@@ -274,7 +275,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
+class ChromiumSolubilityGosse2014(LBEChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property class
     implementing the correlation by *gosse2014*.
@@ -320,7 +321,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         return [399.0, 1173.0]
 
 
-class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
+class ChromiumSolubilityCourouau2004(LBEChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property class
     implementing the correlation by *courouau2004*.
@@ -366,7 +367,7 @@ class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
         return [643.0, 813.0]
 
 
-class ChromiumSolubilityMartynov1998(ChromiumSolubilityInterface):
+class ChromiumSolubilityMartynov1998(LBEChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property class
     implementing the correlation by *martynov1998*.
