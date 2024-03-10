@@ -406,7 +406,7 @@ class IronDiffusivity(PropertyInterface):
         """
         str : Iron diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class CobaltDiffusivity(PropertyInterface):
@@ -472,7 +472,7 @@ class CobaltDiffusivity(PropertyInterface):
         """
         str : Cobalt diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class SeleniumDiffusivity(PropertyInterface):
@@ -538,7 +538,7 @@ class SeleniumDiffusivity(PropertyInterface):
         """
         str : Selenium diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class IndiumDiffusivity(PropertyInterface):
@@ -604,7 +604,7 @@ class IndiumDiffusivity(PropertyInterface):
         """
         str : Indium diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class TelluriumDiffusivity(PropertyInterface):
@@ -670,4 +670,4 @@ class TelluriumDiffusivity(PropertyInterface):
         """
         str : Tellurium diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"

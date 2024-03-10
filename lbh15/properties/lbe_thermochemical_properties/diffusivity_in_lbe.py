@@ -175,4 +175,4 @@ class IronDiffusivity(PropertyInterface):
         """
         str : Iron diffusivity description
         """
-        return "f{self.long_name} in liquid lbe"
+        return f"{self.long_name} in liquid lbe"

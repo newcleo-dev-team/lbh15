@@ -541,4 +541,4 @@ class OxygenSolubility(PropertyInterface):
         """
         str : Oxygen solubility description
         """
-        return "f{self.long_name} in liquid bismuth"
+        return f"{self.long_name} in liquid bismuth"

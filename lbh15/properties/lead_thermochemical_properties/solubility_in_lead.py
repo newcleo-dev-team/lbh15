@@ -77,7 +77,7 @@ class IronSolubility(PropertyInterface):
         """
         str : Iron solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class NickelSolubility(PropertyInterface):
@@ -150,7 +150,7 @@ class NickelSolubility(PropertyInterface):
         """
         str : Nickel solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class ChromiumSolubilityInterface(PropertyInterface):
@@ -387,7 +387,7 @@ class SiliconSolubility(PropertyInterface):
         """
         str : Silicon solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class OxygenSolubility(PropertyInterface):
@@ -453,4 +453,4 @@ class OxygenSolubility(PropertyInterface):
         """
         str : Oxygen solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"

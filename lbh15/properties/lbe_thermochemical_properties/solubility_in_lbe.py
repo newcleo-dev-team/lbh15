@@ -494,4 +494,4 @@ class OxygenSolubility(PropertyInterface):
         """
         str : Oxygen solubility description
         """
-        return "f{self.long_name} in liquid lbe"
+        return f"{self.long_name} in liquid lbe"
