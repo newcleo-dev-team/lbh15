@@ -7,6 +7,7 @@ from scipy.constants import atm
 from scipy.constants import R
 from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import OxygenPartialPressureInterface
+from lbh15.properties.common_interface import MolarEnthalpyInterface
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M
@@ -509,7 +510,7 @@ class OxygenPartialPressureFisher1966(LeadOxygenPartialPressureInterface):
         return [903, 1253]
 
 
-class MolarEnthalpy(PropertyInterface):
+class MolarEnthalpy(MolarEnthalpyInterface):
     """
     Liquid lead *molar enthalpy variation* property class.
     """
@@ -539,33 +540,12 @@ class MolarEnthalpy(PropertyInterface):
         return h().correlation(T, p) * M / 1000
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "H"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar enthalpy variation unit
-        """
-        return "[J.mol^-1]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar enthalpy
         variation correlation function
         """
         return [T_m0, 2000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar enthalpy variation long name
-        """
-        return "molar enthalpy variation"
 
     @property
     def description(self) -> str:

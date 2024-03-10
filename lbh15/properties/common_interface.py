@@ -85,6 +85,32 @@ class OxygenPartialPressureInterface(PropertyInterface):
                 " oxygen concentration squared")
 
 
+class MolarEnthalpyInterface(PropertyInterface):
+    """
+    Liquid metal *molar enthalpy variation* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "H"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Molar enthalpy variation unit
+        """
+        return "[J.mol^-1]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Molar enthalpy variation long name
+        """
+        return "molar enthalpy variation"
+
+
 class IronSolubilityInterface(PropertyInterface):
     """
     Liquid metal *Iron solubility* property abstract class.

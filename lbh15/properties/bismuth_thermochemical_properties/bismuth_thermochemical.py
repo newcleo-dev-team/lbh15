@@ -7,6 +7,7 @@ from scipy.constants import atm
 from scipy.constants import R
 from ..interface import PropertyInterface
 from ..common_interface import OxygenPartialPressureInterface
+from ..common_interface import MolarEnthalpyInterface
 from ..bismuth_properties import h
 from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
@@ -257,7 +258,7 @@ class OxygenPartialPressureHeshmatpour1981(BismuthOxygenPartialPressureInterface
         return [1023, 1273]
 
 
-class MolarEnthalpy(PropertyInterface):
+class MolarEnthalpy(MolarEnthalpyInterface):
     """
     Liquid bismuth *molar enthalpy variation* property class.
     """
@@ -287,33 +288,12 @@ class MolarEnthalpy(PropertyInterface):
         return h().correlation(T, p) * M / 1000
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "H"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar enthalpy variation unit
-        """
-        return "[J.mol^-1]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar enthalpy
         variation correlation function
         """
         return [T_m0, T_b0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar enthalpy variation long name
-        """
-        return "molar enthalpy variation"
 
     @property
     def description(self) -> str:

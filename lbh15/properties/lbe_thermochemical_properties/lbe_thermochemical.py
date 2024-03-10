@@ -6,6 +6,8 @@ import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
 from ..interface import PropertyInterface
+from ..common_interface import OxygenPartialPressureInterface
+from ..common_interface import MolarEnthalpyInterface
 from ..lbe_properties import h
 from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
 from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
@@ -14,7 +16,7 @@ from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import range_warning
 
 
-class OxygenPartialPressure(PropertyInterface):
+class OxygenPartialPressure(OxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lbe divided by the
     Oxygen concentration in liquid lbe squared* property class.
@@ -70,21 +72,6 @@ class OxygenPartialPressure(PropertyInterface):
             * M * M / M_O / M_O * 101325
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_pp"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid lbe divided by the
-        Oxygen concentration in liquid lbe squared unit
-        """
-        return "[Pa.wt.%^-2]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen partial
@@ -92,15 +79,6 @@ class OxygenPartialPressure(PropertyInterface):
         correlation function
         """
         return [812, 1008]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid lbe divided by the
-        Oxygen concentration in liquid lbe squared long name
-        """
-        return ("Oxygen partial pressure divided by the"
-                " oxygen concentration squared")
 
     @property
     def description(self) -> str:
@@ -257,7 +235,7 @@ class BismuthChemicalActivity(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class MolarEnthalpy(PropertyInterface):
+class MolarEnthalpy(MolarEnthalpyInterface):
     """
     Liquid lbe *molar enthalpy variation* property class.
     """
@@ -287,33 +265,12 @@ class MolarEnthalpy(PropertyInterface):
         return h().correlation(T, p) * M / 1000
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "H"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar enthalpy variation unit
-        """
-        return "[J.mol^-1]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar enthalpy
         variation correlation function
         """
         return [400.0, T_b0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar enthalpy variation long name
-        """
-        return "molar enthalpy variation"
 
     @property
     def description(self) -> str:
