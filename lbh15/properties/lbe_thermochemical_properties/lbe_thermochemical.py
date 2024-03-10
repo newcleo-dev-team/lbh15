@@ -9,6 +9,7 @@ from ..interface import PropertyInterface
 from ..common_interface import OxygenPartialPressureInterface
 from ..common_interface import MolarEnthalpyInterface
 from ..common_interface import MolarEntropyInterface
+from ..common_interface import GibbsFreeEnergyInterface
 from ..lbe_properties import h
 from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
 from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
@@ -329,7 +330,7 @@ class MolarEntropy(MolarEntropyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class GibbsFreeEnergy(PropertyInterface):
+class GibbsFreeEnergy(GibbsFreeEnergyInterface):
     """
     Liquid lbe *Gibbs free energy variation* property class.
     """
@@ -360,33 +361,12 @@ class GibbsFreeEnergy(PropertyInterface):
             - T * MolarEntropy().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "G"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Gibbs free energy unit
-        """
-        return "[J/mol]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Gibbs free energy
         variation correlation function
         """
         return [400, T_b0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Gibbs free energy long name
-        """
-        return "Gibbs free energy variation"
 
     @property
     def description(self) -> str:

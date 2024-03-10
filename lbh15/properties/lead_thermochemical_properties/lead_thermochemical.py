@@ -5,10 +5,10 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from lbh15.properties.interface import PropertyInterface
 from lbh15.properties.common_interface import OxygenPartialPressureInterface
 from lbh15.properties.common_interface import MolarEnthalpyInterface
 from lbh15.properties.common_interface import MolarEntropyInterface
+from lbh15.properties.common_interface import GibbsFreeEnergyInterface
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M
@@ -605,7 +605,7 @@ class MolarEntropy(MolarEntropyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class GibbsFreeEnergy(PropertyInterface):
+class GibbsFreeEnergy(GibbsFreeEnergyInterface):
     """
     Liquid lead *Gibbs free energy variation* property class.
     """
@@ -637,33 +637,12 @@ class GibbsFreeEnergy(PropertyInterface):
             - T * MolarEntropy().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "G"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Gibbs free energy unit
-        """
-        return "[J/mol]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Gibbs free energy
         variation correlation function
         """
         return [T_m0, 2000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Gibbs free energy long name
-        """
-        return "Gibbs free energy variation"
 
     @property
     def description(self) -> str:

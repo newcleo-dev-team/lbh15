@@ -137,6 +137,32 @@ class MolarEntropyInterface(PropertyInterface):
         return "molar entropy variation"
 
 
+class GibbsFreeEnergyInterface(PropertyInterface):
+    """
+    Liquid metal *Gibbs free energy variation* property class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "G"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Gibbs free energy unit
+        """
+        return "[J/mol]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Gibbs free energy long name
+        """
+        return "Gibbs free energy variation"
+
+
 class IronSolubilityInterface(PropertyInterface):
     """
     Liquid metal *Iron solubility* property abstract class.
