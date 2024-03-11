@@ -31,7 +31,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
 
 class IronDiffusivityInterface(PropertyInterface):
     """
-    Liquid metal *Iron diffusivity* property class.
+    Liquid metal *Iron diffusivity* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -87,7 +87,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
 
 class MolarEnthalpyInterface(PropertyInterface):
     """
-    Liquid metal *molar enthalpy variation* property class.
+    Liquid metal *molar enthalpy variation* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -113,7 +113,7 @@ class MolarEnthalpyInterface(PropertyInterface):
 
 class MolarEntropyInterface(PropertyInterface):
     """
-    Liquid metal *molar entropy variation* property class.
+    Liquid metal *molar entropy variation* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -139,7 +139,7 @@ class MolarEntropyInterface(PropertyInterface):
 
 class GibbsFreeEnergyInterface(PropertyInterface):
     """
-    Liquid metal *Gibbs free energy variation* property class.
+    Liquid metal *Gibbs free energy variation* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -243,7 +243,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
 
 class OxygenSolubilityInterface(PropertyInterface):
     """
-    Liquid metal *Oxygen solubility* property class.
+    Liquid metal *Oxygen solubility* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -271,7 +271,7 @@ class LowerLimitSaturationIronInterface(PropertyInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid metal considering
-    *Iron at its saturation concentration* property class.
+    *Iron at its saturation concentration* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -300,7 +300,7 @@ class LowerLimitSaturationChromiumInterface(PropertyInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid metal considering
-    *Chromium at its saturation concentration* property class.
+    *Chromium at its saturation concentration* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -329,7 +329,7 @@ class LowerLimitSaturationNickelInterface(PropertyInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid metal considering
-    *Nickel at its saturation concentration* property class.
+    *Nickel at its saturation concentration* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -358,7 +358,7 @@ class LowerLimitSaturationSiliconInterface(PropertyInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid metal considering
-    *Silicon at its saturation concentration* property class.
+    *Silicon at its saturation concentration* property abstract class.
     """
     @property
     def name(self) -> str:
@@ -387,7 +387,7 @@ class LowerLimitSaturationAluminiumInterface(PropertyInterface):
     """
     *Lower limit of Oxygen concentration* to promote a
     protective oxide film in liquid metal considering
-    *Aluminium at its saturation concentration* property class.
+    *Aluminium at its saturation concentration* property abstract class.
     """
     @property
     def name(self) -> str:
