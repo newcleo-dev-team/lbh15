@@ -4,13 +4,23 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from .interface import PropertyInterface
+from .tph_common_interface import SaturationVapourPressureInterface
+from .tph_common_interface import SurfaceTensionInterface
+from .tph_common_interface import DensityInterface
+from .tph_common_interface import ThermalExpansionInterface
+from .tph_common_interface import SpeedOfSoundInterface
+from .tph_common_interface import IsentropicCompressibilityInterface
+from .tph_common_interface import SpecificHeatInterface
+from .tph_common_interface import SpecificEnthalpyInterface
+from .tph_common_interface import DynamicViscosityInterface
+from .tph_common_interface import ElectricalResistivityInterface
+from .tph_common_interface import ThermalConductivityInterface
 from .._decorators import range_warning
 from .._commons import LBE_MELTING_TEMPERATURE as T_m0
 from .._commons import LBE_BOILING_TEMPERATURE as T_b0
 
 
-class p_s(PropertyInterface):
+class p_s(SaturationVapourPressureInterface):
     """
     Liquid lead-bismuth eutectic *saturation vapour pressure* property class.
     """
@@ -78,20 +88,6 @@ class p_s(PropertyInterface):
         return [T_m0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Saturation vapour pressure unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Saturation vapour pressure long name
-        """
-        return "saturation vapour pressure"
-
-    @property
     def description(self) -> str:
         """
         str : Saturation vapour pressure description
@@ -99,7 +95,7 @@ class p_s(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class sigma(PropertyInterface):
+class sigma(SurfaceTensionInterface):
     """
     Liquid lead-bismuth eutectic *surface tension* property class.
     """
@@ -144,20 +140,6 @@ class sigma(PropertyInterface):
         return [T_m0, 1400.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Surface tension unit
-        """
-        return "[N/m]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Surface tension long name
-        """
-        return "surface tension"
-
-    @property
     def description(self) -> str:
         """
         str : Surface tension description
@@ -165,7 +147,7 @@ class sigma(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class rho(PropertyInterface):
+class rho(DensityInterface):
     """
     Liquid lead-bismuth eutectic *density* property class.
     """
@@ -209,20 +191,6 @@ class rho(PropertyInterface):
         return [T_m0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Density unit
-        """
-        return "[kg/m^3]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Density long name
-        """
-        return "density"
-
-    @property
     def description(self) -> str:
         """
         str : Density description
@@ -230,7 +198,7 @@ class rho(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class alpha(PropertyInterface):
+class alpha(ThermalExpansionInterface):
     """
     Liquid lead-bismuth eutectic *thermal expansion coefficient*
     property class.
@@ -269,20 +237,6 @@ class alpha(PropertyInterface):
         return [T_m0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Thermal expansion coefficient unit
-        """
-        return "[1/K]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Thermal expansion coefficient long name
-        """
-        return "thermal expansion coefficient"
-
-    @property
     def description(self) -> str:
         """
         str : Thermal expansion coefficient description
@@ -290,7 +244,7 @@ class alpha(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class u_s(PropertyInterface):
+class u_s(SpeedOfSoundInterface):
     """
     Liquid lead-bismuth eutectic *sound velocity* property class.
     """
@@ -335,20 +289,6 @@ class u_s(PropertyInterface):
         return [400.0, 1100.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Sound velocity unit
-        """
-        return "[m/s]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Sound velocity long name
-        """
-        return "sound velocity"
-
-    @property
     def description(self) -> str:
         """
         str : Sound velocity description
@@ -356,7 +296,7 @@ class u_s(PropertyInterface):
         return "Sound velocity in liquid lbe"
 
 
-class beta_s(PropertyInterface):
+class beta_s(IsentropicCompressibilityInterface):
     """
     Liquid lead-bismuth eutectic *isentropic compressibility* property class.
     """
@@ -395,20 +335,6 @@ class beta_s(PropertyInterface):
         return [400.0, 1100.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Isentropic compressibility unit
-        """
-        return "[1/Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Isentropic compressibility long name
-        """
-        return "isentropic compressibility"
-
-    @property
     def description(self) -> str:
         """
         str : Isentropic compressibility description
@@ -416,7 +342,7 @@ class beta_s(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class cp(PropertyInterface):
+class cp(SpecificHeatInterface):
     """
     Liquid lead-bismuth eutectic *specific heat capacity* property class.
     """
@@ -453,34 +379,12 @@ class cp(PropertyInterface):
         return 'sobolev2011'
 
     @property
-    def is_injective(self) -> bool:
-        """
-        bool : `True` if the correlation is injective,
-        `False` otherwise.
-        """
-        return False
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the specific heat
         capacity correlation function
         """
         return [400.0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : Specific heat capacity unit
-        """
-        return "[J/(kg*K)]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Specific heat capacity long name
-        """
-        return "specific heat capacity"
 
     @property
     def description(self) -> str:
@@ -490,7 +394,7 @@ class cp(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class h(PropertyInterface):
+class h(SpecificEnthalpyInterface):
     """
     Liquid lead-bismuth eutectic *specific enthalpy* property class.
     """
@@ -537,20 +441,6 @@ class h(PropertyInterface):
         return [400.0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Specific enthalpy unit
-        """
-        return "[J/kg]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Specific enthalpy long name
-        """
-        return "specific enthalpy"
-
-    @property
     def description(self) -> str:
         """
         str : str : Specific enthalpy description
@@ -560,7 +450,7 @@ class h(PropertyInterface):
                 "the melting point enthalpy)")
 
 
-class mu(PropertyInterface):
+class mu(DynamicViscosityInterface):
     """
     Liquid lead-bismuth eutectic *dynamic viscosity* property class.
     """
@@ -598,20 +488,6 @@ class mu(PropertyInterface):
         return [T_m0, 1300.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Dynamic viscosity unit
-        """
-        return "[Pa*s]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Dynamic viscosity long name
-        """
-        return "dynamic viscosity"
-
-    @property
     def description(self) -> str:
         """
         str : Dynamic viscosity description
@@ -619,7 +495,7 @@ class mu(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class r(PropertyInterface):
+class r(ElectricalResistivityInterface):
     """
     Liquid lead-bismuth eutectic *electrical resistivity* property class.
     """
@@ -657,20 +533,6 @@ class r(PropertyInterface):
         return [400.0, 1100.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Electrical resistivity unit
-        """
-        return "[Ohm*m]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Electrical resistivity long name
-        """
-        return "electrical resistivity"
-
-    @property
     def description(self) -> str:
         """
         str : Electrical resistivity description
@@ -678,7 +540,7 @@ class r(PropertyInterface):
         return f"Liquid lbe {self.long_name}"
 
 
-class k(PropertyInterface):
+class k(ThermalConductivityInterface):
     """
     Liquid lead-bismuth eutectic *thermal conductivity* property class.
     """
@@ -721,20 +583,6 @@ class k(PropertyInterface):
         conductivity correlation function
         """
         return [T_m0, 1200.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : Thermal conductivity unit
-        """
-        return "[W/(m*K)]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Thermal conductivity long name
-        """
-        return "thermal conductivity"
 
     @property
     def description(self) -> str:
