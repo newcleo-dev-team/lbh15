@@ -1,5 +1,5 @@
-"""
-Module with the definition of common property interfaces"""
+"""Module with the definition of common property interfaces
+for thermochemical properties"""
 from .interface import PropertyInterface
 
 
