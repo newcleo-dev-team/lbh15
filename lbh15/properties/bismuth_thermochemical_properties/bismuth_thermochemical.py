@@ -5,10 +5,10 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from ..common_interface import OxygenPartialPressureInterface
-from ..common_interface import MolarEnthalpyInterface
-from ..common_interface import MolarEntropyInterface
-from ..common_interface import GibbsFreeEnergyInterface
+from ..tch_common_interface import OxygenPartialPressureInterface
+from ..tch_common_interface import MolarEnthalpyInterface
+from ..tch_common_interface import MolarEntropyInterface
+from ..tch_common_interface import GibbsFreeEnergyInterface
 from ..bismuth_properties import h
 from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0

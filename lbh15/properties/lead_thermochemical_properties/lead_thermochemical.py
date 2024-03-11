@@ -5,10 +5,10 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from lbh15.properties.common_interface import OxygenPartialPressureInterface
-from lbh15.properties.common_interface import MolarEnthalpyInterface
-from lbh15.properties.common_interface import MolarEntropyInterface
-from lbh15.properties.common_interface import GibbsFreeEnergyInterface
+from ..tch_common_interface import OxygenPartialPressureInterface
+from ..tch_common_interface import MolarEnthalpyInterface
+from ..tch_common_interface import MolarEntropyInterface
+from ..tch_common_interface import GibbsFreeEnergyInterface
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M

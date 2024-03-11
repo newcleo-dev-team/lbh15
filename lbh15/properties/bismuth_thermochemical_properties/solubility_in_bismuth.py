@@ -4,10 +4,10 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from lbh15.properties.common_interface import IronSolubilityInterface
-from lbh15.properties.common_interface import NickelSolubilityInterface
-from lbh15.properties.common_interface import ChromiumSolubilityInterface
-from lbh15.properties.common_interface import OxygenSolubilityInterface
+from ..tch_common_interface import IronSolubilityInterface
+from ..tch_common_interface import NickelSolubilityInterface
+from ..tch_common_interface import ChromiumSolubilityInterface
+from ..tch_common_interface import OxygenSolubilityInterface
 from ..._decorators import range_warning
 
 

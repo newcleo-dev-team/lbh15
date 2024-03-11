@@ -4,7 +4,7 @@ from typing import List
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from lbh15.properties.common_interface import OxygenDiffusivityInterface
+from ..tch_common_interface import OxygenDiffusivityInterface
 from ..._decorators import range_warning
 
 

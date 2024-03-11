@@ -3,8 +3,8 @@ property objects for *lead-bismuth eutectic* (*lbe*)."""
 from typing import List
 import numpy as np
 from scipy.constants import atm, R
-from lbh15.properties.common_interface import OxygenDiffusivityInterface
-from lbh15.properties.common_interface import IronDiffusivityInterface
+from ..tch_common_interface import OxygenDiffusivityInterface
+from ..tch_common_interface import IronDiffusivityInterface
 from ..._decorators import range_warning
 
 
