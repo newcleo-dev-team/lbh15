@@ -36,7 +36,7 @@ reactors (*LMFR*), such as those cooled by molten lead and lead-bismuth
 eutectic alloy. The package implements the correlations contained in the 
 reference handbook edited by OECD/NEA [@nea], also offering the possibility of 
 adding new customized properties with minimal effort for the user. The 
-properties of the liquid metal are uniquely defined by its thermo-dynamic 
+properties of the liquid metal are uniquely defined by its thermodynamic 
 state, namely by the temperature and pressure values. As alternative, the 
 physical properties can be used at liquid metal object's instantiation, 
 provided that the inverse of the corresponding correlation has at least one 
@@ -86,12 +86,12 @@ There are two main ways to use the package: either by instantiating
 a liquid metal object to access all its properties, or by instantiating 
 an object for each specific property. The former approach provides a 
 single entry point to all the liquid metal properties, which are evaluated 
-at the specified thermo-dynamic state after checking that such state is valid 
+at the specified thermodynamic state after checking that such state is valid 
 (temperature between the melting and the boiling values, and positive 
 pressure). In addition, this approach allows to select the default 
 correlations of the properties by means of the available class methods. The 
 latter approach is best suited to cases where only a few specific properties 
-are required for an individual thermo-dynamic state, since it offers faster 
+are required for an individual thermodynamic state, since it offers faster 
 instantiation and evaluation of the correlation functions.
 
 # Implemented Properties
