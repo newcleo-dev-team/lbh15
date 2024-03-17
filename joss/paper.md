@@ -52,13 +52,8 @@ methods and physical data that are employed in different computational tools.
 A standardization of the methods is necessary to guarantee homogeneity, 
 reproducibility, and comparability of the numerical results. This 
 standardization is particularly important considering the growing community 
-of users with robust quality assurance needs.
-
-With a growing community of users and considering quality assurance needs 
-for the engineering studies, a standardization of the approaches becomes 
-necessary to guarantee homogeneity, reproducibility and comparability of 
-the numerical results. This is an essential point to ensure effective and 
-successful projects in both industry and research 
+of users with robust quality assurance needs. This is an essential point to 
+ensure effective and successful projects in both industry and research 
 environments, especially for nuclear science and engineering. As well, 
 *new*cleo pursues efforts for data standardization to develop new units 
 of lead-cooled fast reactors (*LFR*).
@@ -97,7 +92,7 @@ pressure). In addition, this approach allows to select the default
 correlations of the properties by means of the available class methods. The 
 latter approach is best suited to cases where only a few specific properties 
 are required for an individual thermo-dynamic state, since it offers faster 
-instantiation and evaluation of the correlation fucntions.
+instantiation and evaluation of the correlation functions.
 
 # Implemented Properties
 
@@ -119,11 +114,11 @@ The release of version *1.1.0* of the package `lbh15` was described in
 [@nureth20]. This version implemented only the thermo-physical properties.
 
 The current version *2.0.0* implements the thermo-chemical properties and 
-updates the documentation accordingly. The current version improves the 
-performance and the readability. Moreover, solutions have been adopted to 
-improve performance and usability such as, for instance, enforcing 
-vectorisation over the whole implementation and using the Horner scheme to 
-evaluate polynomials [@hornerbook]. It includes a tutorial focusing on a 
+updates the documentation accordingly. It improves the performance and the 
+readability. Moreover, solutions have been adopted to improve performance and 
+usability such as, for instance, enforcing vectorisation over the whole 
+implementation and using the Horner scheme to evaluate polynomials 
+[@hornerbook]. The current version includes a tutorial focusing on a 
 volume of lead that is subjected to time-varying thermal loads, where the 
 Oxygen concentration is controlled to fall in the range where the protective 
 oxide layer formation is assured [@nea]. Great attention is paid to 
