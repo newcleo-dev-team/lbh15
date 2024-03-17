@@ -17,6 +17,7 @@ Contribution process
 | **Clone the Project**: Next, clone the project to your local machine. This allows you to make changes to the code;
 | **Create a New Branch**: Before making any change, create a new branch in your local project. This helps isolate your changes and makes it easier to submit a merge request later. Use a descriptive name for your branch: the name of the branch is suggested to start with the index that identifies the issue you will be working on.
 | **Make Your Changes**: Now you're ready to make your changes. Make sure you follow the project's coding standards and guidelines.
+| **Test Your Changes**: Before pushing a change, check it with the tests contained in the `folder <https://github.com/newcleo-dev-team/lbh15/tree/master/tests>`_. They are all based on the ``unittest`` framework.
 | **Commit Your Changes**: After making your changes, commit them to your local project. Write a clear and concise commit message describing what you've done.
 | **Push Your Changes**: Push your changes and the new branch to the remote project.
 | **Submit a Merge Request**: Finally, navigate to the `project <https://github.com/newcleo-dev-team/lbh15>`_ on GitHub and click on the *Pull request* button in the top menu bar. Fill out the form and submit your merge request. In case of merge conflicts, please try to reduce them as much as possibile.
@@ -28,7 +29,7 @@ Review process
 
 Once you've submitted a merge request, it goes through a review process. Here's what to expect:
 
-| **Automated Checks**: After submission, automated checks will run to ensure all tests pass with your changes.
+| **Automated Checks**: After submission, automated checks will run to ensure all tests contained in the `folder <https://github.com/newcleo-dev-team/lbh15/tree/master/tests>`_ pass with your changes.
 | **Maintainer Review**: The project's maintainers will review your merge request. They may provide feedback and request changes. Please, respond to comments and make the requested changes, if any.
 | **Revision**: If changes are requested, make the changes in your branch and commit them. GitHub will automatically update the merge request with your new commits.
 | **Approval**: Once the maintainers are satisfied with the changes, they will approve the merge request.
