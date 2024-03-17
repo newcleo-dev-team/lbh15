@@ -87,7 +87,7 @@ an object for each specific property. The former approach provides a
 single entry point to all the liquid metal properties, which are evaluated 
 at the specified thermodynamic state after checking that such state is valid 
 (temperature between the melting and the boiling values, and positive 
-pressure). In addition, this approach allows to select the default 
+pressure). In addition, this approach allows users to select the default 
 correlations of the properties by means of the available class methods. The 
 latter approach is best suited to cases where only a few specific properties 
 are required for an individual thermodynamic state, since it offers faster 
