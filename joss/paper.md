@@ -64,12 +64,12 @@ system and sub-channel codes concerning heavy liquid metals.
 
 # Implementation
 
-`lbh15` package takes inspiration from the `iapws`[^1] Python package, 
+`lbh15` package takes inspiration from the `iapws`[@iapwscode] Python package, 
 which implements the water-related *IAPWS* full standard [@iapws]. However, 
 `lbh15` follows a different implementation approach.
 
 The efficiency and the effectiveness are assured by the *Object-Oriented* 
-and the *Dynamic Loading* approaches, which have been applied throughout 
+design and the *Dynamic Loading* approach, which have been applied throughout 
 the entire development process. `lbh15` relies on the abstract liquid metal 
 class: all classes describing the different metals inherit from it. The 
 abstract class does not directly implement the property correlations, but 
@@ -78,8 +78,6 @@ In other words, the abstract liquid metal class acts as both *factory* of
 the property objects and *proxy* of the property values [@pybook]. 
 This allows the user to add new custom properties without modifying the 
 existing implementation of the liquid metal class.
-
-[^1]: https://pypi.org/project/iapws/ - *Iapws 1.5.3* - jjgomera - 2022
 
 # Use
 
