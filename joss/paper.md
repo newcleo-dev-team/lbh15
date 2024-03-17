@@ -53,13 +53,14 @@ A standardization of the methods is necessary to guarantee homogeneity,
 reproducibility, and comparability of the numerical results. This 
 standardization is particularly important considering the growing community 
 of users with robust quality assurance needs. This is an essential point to 
-ensure effective and successful projects in both industry and research 
+ensure effective and successful projects in both industrial and research 
 environments, especially for nuclear science and engineering. As well, 
 *new*cleo pursues efforts for data standardization to develop new units 
 of lead-cooled fast reactors (*LFR*).
 
-In this context, standard libraries providing the physical correlations for 
-thermal-hydraulic computational tools are needed.
+In this context, standard libraries providing the correlations of physical 
+properties for thermal-hydraulic computational tools are needed, such as CFD, 
+system and sub-channel codes concerning heavy liquid metals.
 
 # Implementation
 
