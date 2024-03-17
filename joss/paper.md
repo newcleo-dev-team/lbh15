@@ -113,23 +113,24 @@ The release of version *1.1.0* of the package `lbh15` was described in
 [@nureth20]. This version implemented only the thermo-physical properties.
 
 The current version *2.0.0* implements the thermo-chemical properties and 
-updates the documentation accordingly. It improves the performance and the 
-readability. Moreover, solutions have been adopted to improve performance and 
-usability such as, for instance, enforcing vectorisation over the whole 
-implementation and using the Horner scheme to evaluate polynomials 
-[@hornerbook]. The current version includes a tutorial focusing on a 
-volume of lead that is subjected to time-varying thermal loads, where the 
-oxygen concentration is controlled to fall in the range where the protective 
-oxide layer formation is assured [@nea]. Great attention is paid to 
-the code quality and readability. *PEP8* guidelines[^2] are ensured by 
-the *pycodestyle* utility. In addition, the automatic static analysis 
-of the code has been performed by applying the *pylint* tool throughout 
-the entire development, achieving a score higher than 9 out of 10.
+updates the documentation accordingly, improving the overall understanding. 
+Moreover, solutions have been adopted to improve performance and 
+usability of the code such as, for instance, enforcing vectorisation over the 
+whole implementation and using the Horner scheme to evaluate polynomials 
+[@hornerbook]. Great attention is paid to the code quality. *PEP8* 
+guidelines[^1] are ensured by *pycodestyle*[^2], and the 
+automatic static analysis has been performed by applying *pylint*[^3]. The 
+documentation of the current version includes a tutorial focusing on a volume 
+of lead that is subjected to time-varying thermal loads, where the oxygen 
+concentration is controlled to fall in the range where the protective oxide 
+layer formation is assured [@nea].
 
 The implementation of irradiation-related properties with new tutorials is 
 planned as future improvement.
 
-[^2]: https://www.python.org/dev/peps/pep-0008/ - *Style Guide for Python Code. PEP 8.* - G. van Rossum, B. Warsaw, and N. Coghlan - 2001
+[^1]: https://www.python.org/dev/peps/pep-0008/ - *Style Guide for Python Code. PEP 8.* - G. van Rossum, B. Warsaw, and Coghlan - 2001
+[^2]: https://pypi.org/project/pycodestyle/ - pycodestyle 2.11.1
+[^3]: https://pypi.org/project/pylint/ - Pylint 3.1.0
 
 # Documentation
 
