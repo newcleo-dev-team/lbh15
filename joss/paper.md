@@ -102,9 +102,9 @@ The properties implemented so far can be subdivided into two groups:
   specific heat capacity, specific enthalpy, dynamic viscosity, electrical 
   resistivity, thermal conductivity, Prandtl number;
 
-* *thermo-chemical*: diffusivity and solubility of Oxygen 
-  and of the impurities in the liquid metals, Oxygen partial pressure, 
-  molar enthalpy, molar entropy, Gibbs free energy, and Oxygen concentration 
+* *thermo-chemical*: diffusivity and solubility of oxygen 
+  and of the impurities in the liquid metals, oxygen partial pressure, 
+  molar enthalpy, molar entropy, Gibbs free energy, and oxygen concentration 
   range assuring corrosion-protective oxide layer on metallic structure.
 
 # Implementation History
@@ -119,7 +119,7 @@ usability such as, for instance, enforcing vectorisation over the whole
 implementation and using the Horner scheme to evaluate polynomials 
 [@hornerbook]. The current version includes a tutorial focusing on a 
 volume of lead that is subjected to time-varying thermal loads, where the 
-Oxygen concentration is controlled to fall in the range where the protective 
+oxygen concentration is controlled to fall in the range where the protective 
 oxide layer formation is assured [@nea]. Great attention is paid to 
 the code quality and readability. *PEP8* guidelines[^2] are ensured by 
 the *pycodestyle* utility. In addition, the automatic static analysis 
