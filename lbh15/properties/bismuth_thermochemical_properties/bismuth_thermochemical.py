@@ -5,7 +5,10 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from ..interface import PropertyInterface
+from ..tch_common_interface import OxygenPartialPressureInterface
+from ..tch_common_interface import MolarEnthalpyInterface
+from ..tch_common_interface import MolarEntropyInterface
+from ..tch_common_interface import GibbsFreeEnergyInterface
 from ..bismuth_properties import h
 from ..._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 from ..._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
@@ -14,7 +17,7 @@ from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import range_warning
 
 
-class OxygenPartialPressureInterface(PropertyInterface):
+class BismuthOxygenPartialPressureInterface(OxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property abstract class.
@@ -44,30 +47,6 @@ class OxygenPartialPressureInterface(PropertyInterface):
         return 1500
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_pp"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid bismuth divided by the
-        Oxygen concentration in liquid bismuth squared unit
-        """
-        return "[Pa.wt.%^-2]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid bismuth divided by the
-        Oxygen concentration in liquid bismuth squared long name
-        """
-        return ("Oxygen partial pressure divided by the"
-                " oxygen concentration squared")
-
-    @property
     def description(self) -> str:
         """
         str : Oxygen partial pressure in liquid bismuth divided by the
@@ -76,7 +55,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
+class OxygenPartialPressureFitzner1980(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -127,7 +106,7 @@ class OxygenPartialPressureFitzner1980(OxygenPartialPressureInterface):
         return [988, 1181]
 
 
-class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
+class OxygenPartialPressureIsecke1979(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -178,7 +157,7 @@ class OxygenPartialPressureIsecke1979(OxygenPartialPressureInterface):
         return [973, 1473]
 
 
-class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
+class OxygenPartialPressureHahn1979(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -229,7 +208,7 @@ class OxygenPartialPressureHahn1979(OxygenPartialPressureInterface):
         return [1073, 1223]
 
 
-class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
+class OxygenPartialPressureHeshmatpour1981(BismuthOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid bismuth divided by the
     Oxygen concentration in liquid bismuth squared* property class
@@ -280,7 +259,7 @@ class OxygenPartialPressureHeshmatpour1981(OxygenPartialPressureInterface):
         return [1023, 1273]
 
 
-class MolarEnthalpy(PropertyInterface):
+class MolarEnthalpy(MolarEnthalpyInterface):
     """
     Liquid bismuth *molar enthalpy variation* property class.
     """
@@ -310,33 +289,12 @@ class MolarEnthalpy(PropertyInterface):
         return h().correlation(T, p) * M / 1000
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "H"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar enthalpy variation unit
-        """
-        return "[J.mol^-1]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar enthalpy
         variation correlation function
         """
         return [T_m0, T_b0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar enthalpy variation long name
-        """
-        return "molar enthalpy variation"
 
     @property
     def description(self) -> str:
@@ -346,7 +304,7 @@ class MolarEnthalpy(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class MolarEntropy(PropertyInterface):
+class MolarEntropy(MolarEntropyInterface):
     """
     Liquid bismuth *molar entropy variation* property class.
     """
@@ -378,33 +336,12 @@ class MolarEntropy(PropertyInterface):
                            - 7.183e6 / 2 * (1 / T / T - 1 / T_m0 / T_m0))
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "S"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar entropy variation unit
-        """
-        return "[J/(mol.K)]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar entropy
         variation correlation function
         """
         return [T_m0, T_b0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar entropy variation long name
-        """
-        return "molar entropy variation"
 
     @property
     def description(self) -> str:
@@ -414,7 +351,7 @@ class MolarEntropy(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class GibbsFreeEnergy(PropertyInterface):
+class GibbsFreeEnergy(GibbsFreeEnergyInterface):
     """
     Liquid bismuth *Gibbs free energy variation* property class.
     """
@@ -445,33 +382,12 @@ class GibbsFreeEnergy(PropertyInterface):
             - T * MolarEntropy().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "G"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Gibbs free energy unit
-        """
-        return "[J/mol]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Gibbs free energy
         variation correlation function
         """
         return [T_m0, T_b0]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Gibbs free energy long name
-        """
-        return "Gibbs free energy variation"
 
     @property
     def description(self) -> str:

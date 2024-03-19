@@ -4,35 +4,17 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from lbh15.properties.interface import PropertyInterface
+from ..tch_common_interface import IronSolubilityInterface
+from ..tch_common_interface import NickelSolubilityInterface
+from ..tch_common_interface import ChromiumSolubilityInterface
+from ..tch_common_interface import OxygenSolubilityInterface
 from ..._decorators import range_warning
 
 
-class IronSolubilityInterface(PropertyInterface):
+class BismuthIronSolubilityInterface(IronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Iron solubility long name
-        """
-        return "iron solubility"
-
     @property
     def description(self) -> str:
         """
@@ -41,7 +23,7 @@ class IronSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class IronSolubilityGosse2014(IronSolubilityInterface):
+class IronSolubilityGosse2014(BismuthIronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property class
     implementing the correlation by *gosse2014*.
@@ -87,7 +69,7 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
         return [545.0, 1173.0]
 
 
-class IronSolubilityMassalski1990(IronSolubilityInterface):
+class IronSolubilityMassalski1990(BismuthIronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property class
     implementing the correlation by *massalski1990*.
@@ -133,7 +115,7 @@ class IronSolubilityMassalski1990(IronSolubilityInterface):
         return [973.0, 1173.0]
 
 
-class IronSolubilityWeeks1998(IronSolubilityInterface):
+class IronSolubilityWeeks1998(BismuthIronSolubilityInterface):
     """
     Liquid bismuth *Iron solubility* property class
     implementing the correlation by *weeks1998*.
@@ -179,31 +161,10 @@ class IronSolubilityWeeks1998(IronSolubilityInterface):
         return [713.0, 998.0]
 
 
-class NickelSolubilityInterface(PropertyInterface):
+class BismuthNickelSolubilityInterface(NickelSolubilityInterface):
     """
     Liquid bismuth *Nickel solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "ni_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Nickel solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Nickel solubility long name
-        """
-        return "nickel solubility"
-
     @property
     def description(self) -> str:
         """
@@ -212,7 +173,7 @@ class NickelSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class NickelSolubilityWeeks1998(NickelSolubilityInterface):
+class NickelSolubilityWeeks1998(BismuthNickelSolubilityInterface):
     """
     Liquid bismuth *Nickel solubility* property class
     implementing the correlation by *weeks1998*.
@@ -258,7 +219,7 @@ class NickelSolubilityWeeks1998(NickelSolubilityInterface):
         return [723.0, 903.0]
 
 
-class NickelSolubilityGosse2014(NickelSolubilityInterface):
+class NickelSolubilityGosse2014(BismuthNickelSolubilityInterface):
     """
     Liquid bismuth *Nickel solubility* property class
     implementing the correlation by *gosse2014*.
@@ -306,31 +267,10 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         return [543.0, 1173.0]
 
 
-class ChromiumSolubilityInterface(PropertyInterface):
+class BismuthChromiumSolubilityInterface(ChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "cr_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Chromium solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Chromium solubility long name
-        """
-        return "chromium solubility"
-
     @property
     def description(self) -> str:
         """
@@ -339,7 +279,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
+class ChromiumSolubilityVenkatraman1988(BismuthChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property class
     implementing the correlation by *venkatraman1988*.
@@ -385,7 +325,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         return [658.0, 901.0]
 
 
-class ChromiumSolubilityWeeks1998(ChromiumSolubilityInterface):
+class ChromiumSolubilityWeeks1998(BismuthChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property class
     implementing the correlation by *weeks1998*.
@@ -431,7 +371,7 @@ class ChromiumSolubilityWeeks1998(ChromiumSolubilityInterface):
         return [663.0, 998.0]
 
 
-class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
+class ChromiumSolubilityGosse2014(BismuthChromiumSolubilityInterface):
     """
     Liquid bismuth *Chromium solubility* property class
     implementing the correlation by *gosse2014*.
@@ -477,7 +417,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         return [545.0, 1773.0]
 
 
-class OxygenSolubility(PropertyInterface):
+class OxygenSolubility(OxygenSolubilityInterface):
     """
     Liquid bismuth *Oxygen solubility* property class.
     """
@@ -508,20 +448,6 @@ class OxygenSolubility(PropertyInterface):
                         np.power(10, 3.04-4810/T))[()]
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen solubility
@@ -530,15 +456,8 @@ class OxygenSolubility(PropertyInterface):
         return [573.0, 1573.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen solubility long name
-        """
-        return "oxygen solubility"
-
-    @property
     def description(self) -> str:
         """
         str : Oxygen solubility description
         """
-        return "f{self.long_name} in liquid bismuth"
+        return f"{self.long_name} in liquid bismuth"

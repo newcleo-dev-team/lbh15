@@ -4,35 +4,17 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from lbh15.properties.interface import PropertyInterface
+from ..tch_common_interface import IronSolubilityInterface
+from ..tch_common_interface import NickelSolubilityInterface
+from ..tch_common_interface import ChromiumSolubilityInterface
+from ..tch_common_interface import OxygenSolubilityInterface
 from ..._decorators import range_warning
 
 
-class IronSolubilityInterface(PropertyInterface):
+class LBEIronSolubilityInterface(IronSolubilityInterface):
     """
     Liquid lbe *Iron solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Iron solubility long name
-        """
-        return "iron solubility"
-
     @property
     def description(self) -> str:
         """
@@ -41,7 +23,7 @@ class IronSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class IronSolubilityGosse2014(IronSolubilityInterface):
+class IronSolubilityGosse2014(LBEIronSolubilityInterface):
     """
     Liquid lbe *Iron solubility* property class
     implementing the correlation by *gosse2014*.
@@ -87,7 +69,7 @@ class IronSolubilityGosse2014(IronSolubilityInterface):
         return [399.0, 1173.0]
 
 
-class IronSolubilityWeeks1969(IronSolubilityInterface):
+class IronSolubilityWeeks1969(LBEIronSolubilityInterface):
     """
     Liquid lbe *Iron solubility* property class
     implementing the correlation by *weeks1969*.
@@ -133,7 +115,7 @@ class IronSolubilityWeeks1969(IronSolubilityInterface):
         return [823.0, 1053.0]
 
 
-class NickelSolubilityInterface(PropertyInterface):
+class LBENickelSolubilityInterface(NickelSolubilityInterface):
     """
     Liquid lbe *Nickel solubility* property abstract class.
     """
@@ -166,7 +148,7 @@ class NickelSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
+class NickelSolubilityMartinelli2010(LBENickelSolubilityInterface):
     """
     Liquid lbe *Nickel solubility* property class
     implementing the correlation by *martinelli2010*.
@@ -213,7 +195,7 @@ class NickelSolubilityMartinelli2010(NickelSolubilityInterface):
         return [603.0, 1173.0]
 
 
-class NickelSolubilityGosse2014(NickelSolubilityInterface):
+class NickelSolubilityGosse2014(LBENickelSolubilityInterface):
     """
     Liquid lbe *Nickel solubility* property class
     implementing the correlation by *gosse2014*.
@@ -260,7 +242,7 @@ class NickelSolubilityGosse2014(NickelSolubilityInterface):
         return [528.0, 1173.0]
 
 
-class ChromiumSolubilityInterface(PropertyInterface):
+class LBEChromiumSolubilityInterface(ChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property abstract class.
     """
@@ -293,7 +275,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
+class ChromiumSolubilityGosse2014(LBEChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property class
     implementing the correlation by *gosse2014*.
@@ -339,7 +321,7 @@ class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
         return [399.0, 1173.0]
 
 
-class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
+class ChromiumSolubilityCourouau2004(LBEChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property class
     implementing the correlation by *courouau2004*.
@@ -385,7 +367,7 @@ class ChromiumSolubilityCourouau2004(ChromiumSolubilityInterface):
         return [643.0, 813.0]
 
 
-class ChromiumSolubilityMartynov1998(ChromiumSolubilityInterface):
+class ChromiumSolubilityMartynov1998(LBEChromiumSolubilityInterface):
     """
     Liquid lbe *Chromium solubility* property class
     implementing the correlation by *martynov1998*.
@@ -431,7 +413,7 @@ class ChromiumSolubilityMartynov1998(ChromiumSolubilityInterface):
         return [673.0, 773.0]
 
 
-class OxygenSolubility(PropertyInterface):
+class OxygenSolubility(OxygenSolubilityInterface):
     """
     Liquid lbe *Oxygen solubility* property class.
     """
@@ -461,20 +443,6 @@ class OxygenSolubility(PropertyInterface):
         return np.power(10, 2.25-4125/T)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen solubility
@@ -483,15 +451,8 @@ class OxygenSolubility(PropertyInterface):
         return [673.0, 1013.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen solubility long name
-        """
-        return "oxygen solubility"
-
-    @property
     def description(self) -> str:
         """
         str : Oxygen solubility description
         """
-        return "f{self.long_name} in liquid lbe"
+        return f"{self.long_name} in liquid lbe"
