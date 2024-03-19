@@ -19,7 +19,7 @@ How to Contribute
 
 For anyone wishing to contribute to the development of the project, report issues
 or problems with the software, or request support, please refer to this
-web page: https://github.com/newcleo-dev-team/lbh15/blob/master/CONTRIBUTIONS.
+web page: https://github.com/newcleo-dev-team/lbh15/blob/master/CONTRIBUTIONS.rst.
 
 +++++++++++
 How to Cite
