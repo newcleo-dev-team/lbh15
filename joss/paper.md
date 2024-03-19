@@ -115,7 +115,7 @@ The release of version *1.1.0* of the package `lbh15` was described in
 The current version *2.0.0* implements the thermo-chemical properties and 
 updates the documentation accordingly, improving the overall understanding. 
 Moreover, solutions have been adopted to improve performance and 
-usability of the code such as, for instance, enforcing vectorisation over the 
+usability of the code such as enforcing vectorisation over the 
 whole implementation and using the Horner scheme to evaluate polynomials 
 [@hornerbook]. Great attention is paid to the code quality. *PEP8* 
 guidelines[^1] are ensured by *pycodestyle*[^2], and the 
@@ -125,8 +125,8 @@ of lead that is subjected to time-varying thermal loads, where the oxygen
 concentration is controlled to fall in the range where the protective oxide 
 layer formation is assured [@nea].
 
-The implementation of irradiation-related properties with new tutorials is 
-planned as future improvement.
+The implementation of irradiated liquid metals' properties with new tutorials 
+is planned as future improvement.
 
 [^1]: https://www.python.org/dev/peps/pep-0008/ - *Style Guide for Python Code. PEP 8.* - G. van Rossum, B. Warsaw, and Coghlan - 2001
 [^2]: https://pypi.org/project/pycodestyle/ - pycodestyle 2.11.1
