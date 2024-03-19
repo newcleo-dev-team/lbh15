@@ -103,6 +103,13 @@ The *html* documentation is available on GitHub Pages at `newcleo-dev-team.githu
 To see the available templates for generating the documentation in *PDF* format and to choose among them, please
 look at the ``docs/conf.py`` file.
 
+How to Contribute
+-----------------
+
+For anyone wishing to contribute to the development of the project, report issues
+or problems with the software, or request support, please refer to this
+`web page <https://github.com/newcleo-dev-team/lbh15/blob/master/CONTRIBUTIONS>`_.
+
 How to Cite
 -----------
 

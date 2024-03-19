@@ -13,6 +13,14 @@ suggestions of new development, please contact:
 - Daniele Tomatis (daniele.tomatis@newcleo.com)
 - Gabriele Ottino (gabriele.ottino@newcleo.com)
 
++++++++++++++++++
+How to Contribute
++++++++++++++++++
+
+For anyone wishing to contribute to the development of the project, report issues
+or problems with the software, or request support, please refer to this
+web page: https://github.com/newcleo-dev-team/lbh15/blob/master/CONTRIBUTIONS.
+
 +++++++++++
 How to Cite
 +++++++++++
