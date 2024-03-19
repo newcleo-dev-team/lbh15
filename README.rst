@@ -11,9 +11,13 @@ Introduction
 *lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by 
-`OECD/NEA <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
+`OECD/NEA <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_.
 
-*lbh15* is released under the **GNU Lesser General Public License 3**.
+*lbh15* offers a standard implementation for use of these properties in scientific applications.
+In particular, this package is used for numerical simulation and experimental activities supporting the
+development of nuclear reactors that employ heavy liquid metals as primary coolant.
+
+*lbh15* is developed by the **Codes & Methods** group of `newcleo <https://www.newcleo.com/>`_ and it is released under the **GNU Lesser General Public License 3**.
 
 *lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
 

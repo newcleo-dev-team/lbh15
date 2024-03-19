@@ -10,6 +10,11 @@ Introduction
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by OECD/NEA :cite:`Agency2015`:
 https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition.
+
+*lbh15* offers a standard implementation for use of these properties in scientific applications.
+In particular, this package is used for numerical simulation and experimental activities supporting the
+development of nuclear reactors that employ heavy liquid metals as primary coolant.
+
 The thermo-physical properties implemented in the package are listed in :numref:`tableprop`.
 
 .. list-table:: *lbh15* thermo-physical properties from the handbook edited by OECD/NEA.
@@ -328,7 +333,8 @@ of the package (see :any:`advanced-usage` section).
 
 Go to :any:`API-Guide` section to see the full code documentation.
 
-*lbh15* is released under the GNU Lesser General Public License 3 (see :any:`License` section).
+*lbh15* is developed and maintained by the **Codes & Methods** group of \ *new*\ cleo (https://www.newcleo.com/) and
+is released under the GNU Lesser General Public License 3 (see :any:`License` section).
 
 *lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx) by IAEA.
 
