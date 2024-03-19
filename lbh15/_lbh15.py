@@ -556,8 +556,9 @@ class LiquidMetalInterface(ABC):
         key = property_object.name
         self.__properties[key] = property_object
         setattr(self, property_object.name+"_info",
-                lambda: self.__properties[key].info(self.__T, self.__p,
-                                                    True, 0))
+                lambda print_info=True, n_tab=0:
+                    self.__properties[key].info(self.__T, self.__p,
+                                                print_info, n_tab))
 
     def __align_corrs_to_properties(self) -> None:
         """
