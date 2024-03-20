@@ -492,12 +492,11 @@ This section shows a few examples of basic usage of *lbh15*.
   <stdin>:1: UserWarning: The surface tension is requested at temperature value of 1400.00 K that is not in validity range [600.60, 1300.00] K
   0.3676999999999999
 
-- Get summary information of the liquid metal using *pprint* package (the warnings about out-of-range correlations are also written):
+- Get summary information of the liquid metal using the overriden *__repr__* dunder method (the warnings about out-of-range correlations are also written):
 
   >>> from lbh15 import Lead
-  >>> import pprint
   >>> liquid_lead = Lead(T=900)
-  >>> pprint.pprint(liquid_lead)
+  >>> liquid_lead
   .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The iron diffusivity is requested at temperature value of 900.00 K that is not in validity range [973.00, 1273.00] K
     attr_value = getattr(self, key)
   .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The silicon solubility is requested at temperature value of 900.00 K that is not in validity range [1323.00, 1523.00] K
