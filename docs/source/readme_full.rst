@@ -654,7 +654,7 @@ Advanced usage includes the possibility of adding new properties and new physica
   >>> from lbh15 import Lead
   >>> import os
   >>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
-  >>> Lead.correlations_available()
+  >>> Lead.available_correlations()
   defaultdict(<class 'list'>, {'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'fe_dif': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'rho': ['sobolev2008a', 'custom2022'], 'cp': ['gurvich1991', 'sobolev2011'], 'lim_si': ['lbh15'], 'G': ['lbh15'], 'se_dif': ['lbh15'], 'ni_sol': ['gosse2014'], 'lim_al_sat': ['lbh15'], 'k': ['lbh15'], 'si_sol': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'sigma': ['jauch1986'], 'cr_sol': ['gosse2014', 'alden1958', 'venkatraman1988'], 'S': ['lbh15'], 'lim_cr': ['alden1958', 'gosse2014', 'venkatraman1988'], 'H': ['lbh15'], 'co_dif': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'lim_fe': ['lbh15'], 'beta_s': ['lbh15'], 'p_s': ['sobolev2011'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15'], 'r': ['lbh15'], 'lim_ni': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'in_dif': ['lbh15'], 'T_double': ['double2022']})
 
   The correlations currently available for the density property :code:`rho` are now 2: :code:`sobolev2008a` and :code:`custom2022`.
