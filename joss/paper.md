@@ -64,7 +64,7 @@ system and sub-channel codes concerning heavy liquid metals.
 
 # Implementation
 
-`lbh15` package takes inspiration from the `iapws`[@iapwscode] Python package, 
+`lbh15` package takes inspiration from the `iapws` [@iapwscode] Python package, 
 which implements the water-related *IAPWS* full standard [@iapws]. However, 
 `lbh15` follows a different implementation approach.
 
