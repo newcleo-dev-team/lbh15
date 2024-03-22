@@ -605,7 +605,7 @@ Advanced usage includes the possibility of adding new properties and new physica
   {'cp': ['gurvich1991', 'sobolev2011'], 'u_s': ['sobolev2011']}
 
 
-  Let implement the new property in :code:`<execution_dir>/custom_properties/lead_properties.py` as:
+  Let's implement the new property in :code:`<execution_dir>/custom_properties/lead_properties.py` as:
 
   .. code-block:: python
 
