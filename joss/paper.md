@@ -37,8 +37,8 @@ eutectic alloy. The package implements the correlations contained in the
 reference handbook edited by OECD/NEA [@nea], also offering the possibility of 
 adding new customized properties with minimal effort for the user. The 
 properties of the liquid metal are uniquely defined by its thermodynamic 
-state, namely by the temperature and pressure values. As alternative, the 
-physical properties can be used at liquid metal object's instantiation, 
+state, namely by the temperature and pressure values. Alternatively, the 
+physical properties can be used at the liquid metal object's instantiation, 
 provided that the inverse of the corresponding correlation has at least one 
 root in the validity range (*injective function* property).
 
@@ -54,13 +54,13 @@ reproducibility, and comparability of the numerical results. This
 standardization is particularly important considering the growing community 
 of users with robust quality assurance needs. This is an essential point to 
 ensure effective and successful projects in both industrial and research 
-environments, especially for nuclear science and engineering. As well, 
+environments, especially for nuclear science and engineering. Additionally, 
 *new*cleo pursues efforts for data standardization to develop new units 
 of lead-cooled fast reactors (*LFR*).
 
 In this context, standard libraries providing the correlations of physical 
 properties for thermal-hydraulic computational tools are needed, such as CFD, 
-system and sub-channel codes concerning heavy liquid metals.
+system, and sub-channel codes concerning heavy liquid metals.
 
 # Implementation
 
@@ -71,7 +71,7 @@ which implements the water-related *IAPWS* full standard [@iapws]. However,
 The efficiency and the effectiveness are assured by the *Object-Oriented* 
 design and the *Dynamic Loading* approach, which have been applied throughout 
 the entire development process. `lbh15` relies on the abstract liquid metal 
-class: all classes describing the different metals inherit from it. The 
+class; all classes describing the different metals inherit from it. The 
 abstract class does not directly implement the property correlations, but 
 it instead instantiates the property objects and provides the property values. 
 In other words, the abstract liquid metal class acts as both *factory* of 
@@ -100,7 +100,7 @@ The properties implemented so far can be subdivided into two groups:
 * *thermo-physical*: saturation vapour pressure, surface tension, density, 
   thermal expansion coefficient, speed of sound, isentropic compressibility, 
   specific heat capacity, specific enthalpy, dynamic viscosity, electrical 
-  resistivity, thermal conductivity, Prandtl number;
+  resistivity, thermal conductivity, and Prandtl number;
 
 * *thermo-chemical*: diffusivity and solubility of oxygen 
   and of the impurities in the liquid metals, oxygen partial pressure, 
