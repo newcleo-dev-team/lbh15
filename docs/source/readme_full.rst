@@ -580,8 +580,6 @@ In the following, some examples are provided:
   >>> lead_cp_1.T, lead_cp_2.T
   (1437.4148683656551, 1699.157333532332)
 
-
-
 .. _advanced-usage:
 
 ++++++++++++++
@@ -606,183 +604,189 @@ defaultdict(<class 'list'>, {'k': ['lbh15'], 'lim_ni': ['lbh15'], 'u_s': ['sobol
 
 In the first example, the keys of the returned dictionary represents all the
 properties currently available, and, for each one, a list is provided containing
-the names of all the related correlations. The name :code:`lbh15` is used when
-only the default correlation is available. In the second example, the structure
-of the returned dictionary is the same, but containing only data for the
-required properties.
+the names of all the related correlations. The generic name :code:`lbh15` is
+used in case the correlation's name is not specified in the reference handbook
+:cite:`Agency2015`. In the second example, the structure of the returned
+dictionary is the same, but containing only data for the required properties.
 
 The rest of this chapter is divided into two sections, the first describing
 how to add a new correlation to an existing property, the second describing
 how to add a new property with its correlation.
 
-- This first example shows how to define a custom correlation for the liquid lead density that 
-  does not depend on pressure, and how to use it instead of the default one (the same holds for :class:`.Bismuth` and :class:`.LBE` classes).
-  The names of the available correlations can be queried by a simple function call
-  (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
-  reference handbook :cite:`Agency2015`); two examples are provided, the first one asking for the available correlations
-  for all the implemented properties, the second one asking for the available correlations for a few specific properties, that is,
-  the heat capacity and the speed of sound:
-  
-  >>> from lbh15 import Lead
-  >>> Lead.available_correlations()
-  defaultdict(<class 'list'>, {'k': ['lbh15'], 'lim_ni': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'H': ['lbh15'], 'lim_cr': ['venkatraman1988', 'alden1958', 'gosse2014'], 'sigma': ['jauch1986'], 'cp': ['sobolev2011', 'gurvich1991'], 'cr_sol': ['venkatraman1988', 'gosse2014', 'alden1958'], 'in_dif': ['lbh15'], 'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'si_sol': ['lbh15'], 'fe_dif': ['lbh15'], 'lim_si': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'G': ['lbh15'], 'p_s': ['sobolev2011'], 'beta_s': ['lbh15'], 'se_dif': ['lbh15'], 'lim_al_sat': ['lbh15'], 'ni_sol': ['gosse2014'], 'r': ['lbh15'], 'S': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'co_dif': ['lbh15'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_fe': ['lbh15'], 'rho': ['sobolev2008a'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15']})
-  >>> Lead.available_correlations(["cp", "u_s"])
-  {'cp': ['gurvich1991', 'sobolev2011'], 'u_s': ['sobolev2011']}
+.. _how-new-corrs:
 
+How to Add New Correlations
+===========================
 
-  Let's implement the new property in :code:`<execution_dir>/custom_properties/lead_properties.py` as:
+This section shows how to define a custom correlation for the density of
+liquid lead that does not depend on pressure, and how to use it instead of
+the default one (the same holds for :class:`.Bismuth` and :class:`.LBE`
+classes).
 
-  .. code-block:: python
+Let's implement the new property in
+:code:`<execution_dir>/custom_properties/lead_properties.py` as:
 
-    from scipy.constants import atm
-    from lbh15.properties.interface import PropertyInterface
-    from lbh15.properties.interface import range_warning
+.. code-block:: python
 
-    class rho_custom_corr(PropertyInterface):
-        @range_warning
-        def correlation(self, T, p=atm, verbose=False):
-            "Implement here the user-defined correlation."
-            return 11400 - 1.2*T
+  from scipy.constants import atm
+  from lbh15.properties.interface import PropertyInterface
+  from lbh15.properties.interface import range_warning
 
-        @property
-        def range(self):
-            return [700.0, 1900.0]
+  class rho_custom_corr(PropertyInterface):
+      @range_warning
+      def correlation(self, T, p=atm, verbose=False):
+          "Implement here the user-defined correlation."
+          return 11400 - 1.2*T
 
-        @property
-        def units(self):
-            return "[kg/m^3]"
+      @property
+      def range(self):
+          return [700.0, 1900.0]
 
-        @property
-        def name(self):
-            return "rho"
+      @property
+      def units(self):
+          return "[kg/m^3]"
 
-        @property
-        def long_name(self):
-            return "custom density"
+      @property
+      def name(self):
+          return "rho"
 
-        @property
-        def description(self):
-            return "Liquid lead " + self.long_name
+      @property
+      def long_name(self):
+          return "custom density"
 
-        @property
-        def correlation_name(self):
-            return "custom2022"
+      @property
+      def description(self):
+          return "Liquid lead " + self.long_name
 
-  .. note:: It is mandatory to override the ``correlation`` method and the ``range``, ``units``, ``long_name`` and ``description`` properties.
+      @property
+      def correlation_name(self):
+          return "custom2022"
 
-  .. note:: Properties are not allowed having the name starting with ``__``. This means that neither the name of the corresponding class nor the name provided by the ``name`` attribute must start with ``__``.
+.. note:: It is mandatory to override the ``correlation`` method and the ``range``, ``units``, ``long_name`` and ``description`` properties.
 
-  .. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :ref:`basic-usage` section.
+.. note:: Properties are not allowed having the name starting with ``__``. This means that neither the name of the corresponding class nor the name provided by the ``name`` attribute must start with ``__``.
 
-  Then, provided that the execution is performed in :code:`<execution_dir>`, one can check the correct implementation as follows:
+.. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :ref:`basic-usage` section.
 
-  >>> from lbh15 import Lead
-  >>> import os
-  >>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
-  >>> Lead.correlations_available()
-  defaultdict(<class 'list'>, {'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'fe_dif': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'rho': ['sobolev2008a', 'custom2022'], 'cp': ['gurvich1991', 'sobolev2011'], 'lim_si': ['lbh15'], 'G': ['lbh15'], 'se_dif': ['lbh15'], 'ni_sol': ['gosse2014'], 'lim_al_sat': ['lbh15'], 'k': ['lbh15'], 'si_sol': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'sigma': ['jauch1986'], 'cr_sol': ['gosse2014', 'alden1958', 'venkatraman1988'], 'S': ['lbh15'], 'lim_cr': ['alden1958', 'gosse2014', 'venkatraman1988'], 'H': ['lbh15'], 'co_dif': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'lim_fe': ['lbh15'], 'beta_s': ['lbh15'], 'p_s': ['sobolev2011'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15'], 'r': ['lbh15'], 'lim_ni': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'in_dif': ['lbh15'], 'T_double': ['double2022']})
+Then, provided that the execution is performed in :code:`<execution_dir>`, one
+can check the correct implementation as follows:
 
-  The correlations currently available for the density property :code:`rho` are now 2: :code:`sobolev2008a` and :code:`custom2022`.
-  If the density correlation is not specified for a new object instantiation, the last one in the list will be selected as default:
+>>> from lbh15 import Lead
+>>> import os
+>>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
+>>> Lead.correlations_available()
+defaultdict(<class 'list'>, {'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'fe_dif': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'rho': ['sobolev2008a', 'custom2022'], 'cp': ['gurvich1991', 'sobolev2011'], 'lim_si': ['lbh15'], 'G': ['lbh15'], 'se_dif': ['lbh15'], 'ni_sol': ['gosse2014'], 'lim_al_sat': ['lbh15'], 'k': ['lbh15'], 'si_sol': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'sigma': ['jauch1986'], 'cr_sol': ['gosse2014', 'alden1958', 'venkatraman1988'], 'S': ['lbh15'], 'lim_cr': ['alden1958', 'gosse2014', 'venkatraman1988'], 'H': ['lbh15'], 'co_dif': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'lim_fe': ['lbh15'], 'beta_s': ['lbh15'], 'p_s': ['sobolev2011'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15'], 'r': ['lbh15'], 'lim_ni': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'in_dif': ['lbh15'], 'T_double': ['double2022']})
 
-  >>> # Use default one
-  >>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
-  >>> # Get an instance of Lead object at T=1000 K
-  >>> liquid_lead_1 = Lead(T=1000)
-  >>> # Print info about rho
-  >>> liquid_lead_1.rho_info()
-  rho:
-        Value: 10161.50 [kg/m^3]
-        Validity range: [600.60, 2021.00] K
-        Correlation name: 'sobolev2008a'
-        Long name: density
-        Units: [kg/m^3]
-        Description:
-                Liquid lead density
-  >>> # Use the custom implementation of density
-  >>> Lead.set_correlation_to_use('rho', 'custom2022')
-  >>> # Get another instance of Lead object with new rho
-  >>> liquid_lead_2 = Lead(T=1000)
-  >>> # Compare the density of the two objects
-  >>> liquid_lead_1.rho, liquid_lead_2.rho
-  (10161.5 10200.0)
-  >>> # Print full info about density of second instance
-  >>> liquid_lead_2.rho_info()
-  rho:
-        Value: 10200.00 [kg/m^3]
+The correlations currently available for the density property :code:`rho` are
+now 2: :code:`sobolev2008a` and :code:`custom2022`. If the density correlation
+is not specified for a new object instantiation, the last one in the list will
+be selected by default:
+
+>>> # Use default one
+>>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
+>>> # Get an instance of Lead object at T=1000 K
+>>> liquid_lead_1 = Lead(T=1000)
+>>> # Print info about rho
+>>> liquid_lead_1.rho_info()
+rho:
+      Value: 10161.50 [kg/m^3]
+      Validity range: [600.60, 2021.00] K
+      Correlation name: 'sobolev2008a'
+      Long name: density
+      Units: [kg/m^3]
+      Description:
+              Liquid lead density
+>>> # Use the custom implementation of density
+>>> Lead.set_correlation_to_use('rho', 'custom2022')
+>>> # Get another instance of Lead object with new rho
+>>> liquid_lead_2 = Lead(T=1000)
+>>> # Compare the density of the two objects
+>>> liquid_lead_1.rho, liquid_lead_2.rho
+(10161.5 10200.0)
+>>> # Print full info about density of second instance
+>>> liquid_lead_2.rho_info()
+rho:
+      Value: 10200.00 [kg/m^3]
+      Validity range: [700.00, 1900.00] K
+      Correlation name: 'custom2022'
+      Long name: custom density
+      Units: [kg/m^3]
+      Description:
+              Liquid Lead custom density
+
+It is also possible to change the correlation used by a liquid metal object
+instance by calling the :meth:`.Lead.change_correlation_to_use` method on the
+instance itself.
+
+.. _how-new-props:
+
+How to Add New Properties
+=========================
+
+This section describes how to add new properties to the liquid metal objects.
+For instance, let's implement in
+:code:`<execution_dir>/custom_property/double_T.py` the custom property
+:code:`double_T` that is simply the double of the temperature:
+
+.. code-block:: python
+
+  from scipy.constants import atm
+  from lbh15.properties.interface import PropertyInterface
+  from lbh15.properties.interface import range_warning
+
+  class T_double(PropertyInterface):
+      @range_warning
+      def correlation(self, T, p=atm, verbose=False):
+          "Return the temperature value multiplied by 2."
+          return 2*T
+
+      @property
+      def range(self):
+          return [700.0, 1900.0]
+
+      @property
+      def units(self):
+          return "[K]"
+
+      @property
+      def name(self):
+          return "T_double"
+
+      @property
+      def long_name(self):
+          return "double of the temperature"
+
+      @property
+      def description(self):
+          return "Liquid lead " + self.long_name
+
+      @property
+      def correlation_name(self):
+          return "double2022"
+
+The new custom property can be set as :class:`.Lead` attribute by specifying
+the path to the module where it is defined:
+
+>>> from lbh15 import Lead
+>>> import os
+>>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
+>>> # Initialization of lead object at T=750 K
+>>> liquid_lead = Lead(T=750)
+>>> # Get T_double
+>>> liquid_lead.T_double
+1500
+>>> # Get its info
+>>> liquid_lead.T_double_info()
+T_double:
+        Value: 1500.00 [K]
         Validity range: [700.00, 1900.00] K
-        Correlation name: 'custom2022'
-        Long name: custom density
-        Units: [kg/m^3]
+        Correlation name: 'double2022'
+        Long name: double of the temperature
+        Units: [K]
         Description:
-                Liquid Lead custom density
+                Liquid lead double of the temperature
 
-  It is also possible to change the correlation used by a liquid metal object instance by calling the :code:`change_correlation_to_use` method
-  on the instance itself.
-
-- *lbh15* also allows to add new properties to the liquid metal objects. For 
-  instance, let's implement in :code:`<execution_dir>/custom_property/double_T.py`
-  a custom property that is simply the double of the temperature:
-
-  .. code-block:: python
-
-    from scipy.constants import atm
-    from lbh15.properties.interface import PropertyInterface
-    from lbh15.properties.interface import range_warning
-
-    class T_double(PropertyInterface):
-        @range_warning
-        def correlation(self, T, p=atm, verbose=False):
-            "Return the temperature value multiplied by 2."
-            return 2*T
-
-        @property
-        def range(self):
-            return [700.0, 1900.0]
-
-        @property
-        def units(self):
-            return "[K]"
-
-        @property
-        def name(self):
-            return "T_double"
-
-        @property
-        def long_name(self):
-            return "double of the temperature"
-
-        @property
-        def description(self):
-            return "Liquid lead " + self.long_name
-
-        @property
-        def correlation_name(self):
-            return "double2022"
-
-  The new custom property can be set as :class:`.Lead` attribute by specifying the path to the module
-  where it is defined:
-
-  >>> from lbh15 import Lead
-  >>> import os
-  >>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
-  >>> # Initialization of lead object at T=750 K
-  >>> liquid_lead = Lead(T=750)
-  >>> # Get T_double
-  >>> liquid_lead.T_double
-  1500
-  >>> # Get its info
-  >>> liquid_lead.T_double_info()
-  T_double:
-          Value: 1500.00 [K]
-          Validity range: [700.00, 1900.00] K
-          Correlation name: 'double2022'
-          Long name: double of the temperature
-          Units: [K]
-          Description:
-                  Liquid lead double of the temperature
-
-  Each new property implemented by the user is also available at initialization.
+Each new property implemented by the user is also available at initialization.
 
 .. note:: The paths of the modules to load the properties from must be absolute.
 
