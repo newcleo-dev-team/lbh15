@@ -725,7 +725,7 @@ How to Add New Properties
 
 This section describes how to add new properties to the liquid metal objects.
 For instance, let's implement in
-:code:`<execution_dir>/custom_property/double_T.py` the custom property
+:code:`<execution_dir>/custom_properties/double_T.py` the custom property
 :code:`double_T` that is simply the double of the temperature:
 
 .. code-block:: python
