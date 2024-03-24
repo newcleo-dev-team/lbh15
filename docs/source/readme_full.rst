@@ -682,6 +682,22 @@ now 2: :code:`sobolev2008a` and :code:`custom2022`. If the density correlation
 is not specified for a new object instantiation, the last one in the list will
 be selected by default:
 
+>>> liquid_lead = Lead(T=1000)
+>>> liquid_lead.rho_info()
+rho:
+      Value: 10200.00 [kg/m^3]
+      Validity range: [700.00, 1900.00] K
+      Correlation name: 'custom2022'
+      Long name: custom density
+      Units: [kg/m^3]
+      Description:
+              Liquid Lead custom density
+
+Once introduced the new correlation :code:`custom2022` for the density
+:code:`rho`, the user can choose which one to use by means of the method
+:meth:`.Lead.set_correlation_to_use`, according to the following
+example:
+
 >>> # Use default one
 >>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
 >>> # Get an instance of Lead object at T=1000 K
