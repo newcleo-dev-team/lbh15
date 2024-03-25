@@ -35,7 +35,7 @@ class LowerLimitSaturationIron(LowerLimitSaturationIronInterface):
         """
         Returns the temperature guess value according to the value
         of the lower limit of Oxygen concentration to promote a protective
-        oxide film in liquid lead considering Chromium at its saturation
+        oxide film in liquid lead considering Iron at its saturation
         concentration passed as argument.
         It is used by the root finder algorithm.
 
@@ -44,7 +44,7 @@ class LowerLimitSaturationIron(LowerLimitSaturationIronInterface):
         property_value : float
             lower limit of Oxygen concentration to promote a
             protective oxide film in liquid lead considering
-            Chromium at its saturation concentration
+            Iron at its saturation concentration
             in :math:`[wt.\\%]`
 
         Returns

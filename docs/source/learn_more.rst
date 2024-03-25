@@ -179,38 +179,37 @@ Ranges of Validity
 
 As stated in the previous section, multiple correlations are involved in the computation of the lower limits of
 oxygen concentration, each being valid over a specific temperature range. The temperature range of
-validity specified in the *lbh15* package for each correlation is the most restrictive one.
-
-In the following, the choices are detailed about the validity ranges that have been adopted:
+validity specified in the *lbh15* package for each lower limit is given by the intersection of the
+ranges of the needed correlations. More details as follows:
 
   - For the lower limit correlations based on the saturation assumption (approach *a*), the lower temperature
     value is taken equal to the lower limit of the validity range of the oxygen solubility correlation,
     while the upper temperature value is taken equal to the upper limit of the validity range of the main
-    oxides free enthalpy coefficients. The result is the [673;1000] *K* range.
+    oxides free enthalpy coefficients. The result is the [673;1000] *[K]* range.
   
   ..
 
   - For the lower limit of the oxygen concentration times the metal concentration raised to a certain exponent (approach *b*),
-    the validity range is taken equal to that in the approach *a*, that is, [673;1000] *K*, but for the following correlations:
+    the validity range is taken equal to that in the approach *a*, that is, [673;1000] *[K]*, but for the following correlations:
 
     - Concerning the chromium solubility in LBE given by Courouau in 2004, the upper limit of the validity range
-      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;813] *K* range;
+      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;813] *[K]* range;
 
     ..
 
     - Concerning the chromium solubility in LBE given by Martynov in 1998, the upper limit of the validity range
-      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;773] *K* range;
+      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;773] *[K]* range;
 
     ..
 
     - Concerning the nickel solubility in lead given by Gossé in 2014, the upper limit of the validity range
-      is taken equal to the upper limit of the validity range of the corresponding nickel solubility correlation, resulting in the [673;917] *K* range;
+      is taken equal to the upper limit of the validity range of the corresponding nickel solubility correlation, resulting in the [673;917] *[K]* range;
 
     ..
     
     - Concerning the chromium solubility in lead given by Venkatraman in 1998 and by Alden in 1958, and the silicon solubility
-      in lead extracted from *Tecdoc* (2002), there is no overlapping of the temperature validity ranges. It has then been decided
-      to adopt the [673;1000] *K* range for analogy with the greatest amount of the other correlations. This is why the related
+      in lead, there is no overlapping of the temperature validity ranges. It has then been decided
+      to adopt the [673;1000] *[K]* range in analogy with the most of the other correlations. This is why the related
       correlations need to be used carefully.
 
 .. _ Correlations adopted by default:
