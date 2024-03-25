@@ -179,8 +179,8 @@ Ranges of Validity
 
 As stated in the previous section, multiple correlations are involved in the computation of the lower limits of
 oxygen concentration, each being valid over a specific temperature range. The temperature range of
-validity specified in the *lbh15* package for each lower limit is given by the intersection of the
-ranges of the needed correlations. More details as follows:
+validity specified in *lbh15* for each lower limit is given by the intersection of the
+ranges of the correlations which the lower limit depends on. More details as follows:
 
   - For the lower limit correlations based on the saturation assumption (approach *a*), the lower temperature
     value is taken equal to the lower limit of the validity range of the oxygen solubility correlation,
@@ -243,7 +243,7 @@ implemented since either it is the only one available or it is specifically reco
 
 The choice of the above default correlations has been driven by what recommended in :cite:`Agency2015` and by the temperature ranges.
 In particular, since most of the liquid lead applications are working at low temperatures, the correlations are preferred whose validity ranges
-are related to the lowest available temperature values and whose extension is the widest available.
+are related to the lowest available temperature values and whose applicability is the widest available.
 
 The user is invited to check the ranges of validity of the correlations she/he is using to make sure they match with the specific
 application requirements. In case other correlations are needed that are different from the ones already implemented in *lbh15*, please see
