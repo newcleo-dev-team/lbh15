@@ -789,4 +789,4 @@ In the end, in :any:`properties-module` section, the *API Guide* is provided of 
 .. toctree::
    :maxdepth: 2
 
-   documentation.rst
+   lbh15.rst
