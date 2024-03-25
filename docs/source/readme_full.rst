@@ -586,7 +586,7 @@ In the following, some examples are provided:
 Advanced Usage
 ++++++++++++++
 
-Advanced usage includes the possibility of adding new properties and new physical
+Advanced usage includes the possibility of adding new properties and new
 correlations. First of all, the user should be aware of the properties that are
 currently available along with the correlations. The method
 :meth:`.Lead.available_correlations` provides this information for a
