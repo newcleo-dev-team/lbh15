@@ -359,7 +359,7 @@ class LiquidMetalInterface(ABC):
         """
         norm_path = os.path.normpath(file_path)
         if 'Windows' not in platform.system():
-            norm_path = norm_path.replace('\\', '/')
+            norm_path = norm_path.replace('\\', pathlib.os.sep)
         # Exit if the file passed as argument does not exist
         if not os.path.isfile(norm_path):
             warnings.warn(f"'{norm_path}' provided file not found!"
