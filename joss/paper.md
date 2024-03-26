@@ -97,7 +97,7 @@ instantiation and evaluation of the correlation functions.
 
 The properties implemented so far can be subdivided into two groups:
 
-* *thermo-physical*: saturation vapour pressure, surface tension, density, 
+* *thermo-physical*: saturation vapor pressure, surface tension, density, 
   thermal expansion coefficient, speed of sound, isentropic compressibility, 
   specific heat capacity, specific enthalpy, dynamic viscosity, electrical 
   resistivity, thermal conductivity, and Prandtl number;
@@ -115,7 +115,7 @@ The release of version *1.1.0* of the package `lbh15` was described in
 The current version *2.0.0* implements the thermo-chemical properties and 
 updates the documentation accordingly, improving the overall understanding. 
 Moreover, solutions have been adopted to improve performance and 
-usability of the code such as enforcing vectorisation over the 
+usability of the code such as enforcing vectorization over the 
 whole implementation and using the Horner scheme to evaluate polynomials 
 [@hornerbook]. Great attention is paid to the code quality. *PEP8* 
 guidelines[^1] are ensured by *pycodestyle*[^2], and the 
