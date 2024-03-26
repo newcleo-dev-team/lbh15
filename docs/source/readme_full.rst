@@ -34,10 +34,10 @@ The thermo-physical properties implemented in the package are listed in :numref:
    * - Boiling temperature
      - :math:`T_{b0}`
      - :math:`[K]`
-   * - Vaporisation heat
+   * - Vaporization heat
      - :math:`Q_{b0}`
      - :math:`[J/kg]`
-   * - Saturation vapour pressure
+   * - Saturation vapor pressure
      - :math:`p_s`
      - :math:`[Pa]`
    * - Surface tension

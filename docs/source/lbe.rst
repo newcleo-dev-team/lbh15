@@ -34,10 +34,10 @@ In detail, a :class:`.LBE` object comes with the following default properties:
     - ``T_b0`` boiling temperature :math:`\left[K\right]`:
 
         :math:`1927`
-    - ``Q_b0`` vaporisation heat :math:`\left[\frac{J}{kg}\right]`:
+    - ``Q_b0`` vaporization heat :math:`\left[\frac{J}{kg}\right]`:
 
         :math:`856.6 \cdot 10^3`
-    - ``p_s`` saturation vapour pressure :math:`\left[Pa\right]`:
+    - ``p_s`` saturation vapor pressure :math:`\left[Pa\right]`:
 
         :math:`p_s\left(T\right) = \displaystyle1.22 \cdot 10^{10} \cdot \exp{\left(-22552 / T\right)}`
     - ``sigma`` surface tension :math:`\left[\frac{N}{m}\right]`:

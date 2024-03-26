@@ -5,7 +5,7 @@ Oxygen Control
 ++++++++++++++
 
 In lead and LBE systems, Oxygen is the most important chemical element, which results
-from start-up operations, maintenance services and, possibily, incidental contaminations (:cite:`Agency2015`).
+from start-up operations, maintenance services and, possibly, incidental contaminations (:cite:`Agency2015`).
 To operate a nuclear reactor cooled by a lead alloy, it is thus important to
 determine the upper and the lower Oxygen concentration limits.
 
@@ -101,7 +101,7 @@ assumptions, are derived.
        components appearing in the related reaction.
 
      In detail, the chemical activity :math:`\alpha` is a dimensionless quantity used to express the deviation
-     of a mixture of chemical substances from a standard behaviour. It is defined by the following relations:
+     of a mixture of chemical substances from a standard behavior. It is defined by the following relations:
 
      - :math:`\alpha_i = \gamma_i\cdot\chi_i` , being :math:`\gamma` the dimensionless activity coefficient
        of the :math:`i`-th species and :math:`\chi_i` the molar fraction of the same species;

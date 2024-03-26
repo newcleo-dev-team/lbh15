@@ -33,7 +33,7 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Update :code:`test_custom_properties` to test correct assignment of custom properties to different liquid metal classes - **#86**
 
-   - Thermochemical Modules Corrections and Improvements - **#76**
+   - Thermo-chemical Modules Corrections and Improvements - **#76**
 
    - Constants Into Commons - **#71**
 
@@ -73,15 +73,15 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Type Hints and Type Checking - **#49**
  
-   - Define two new sections of the documentation to give the user more insights about thermochemical properties and their usage - **#48**
+   - Define two new sections of the documentation to give the user more insights about thermo-chemical properties and their usage - **#48**
 
-   - Update the documentation to show the new thermochemical properties - **#47**
+   - Update the documentation to show the new thermo-chemical properties - **#47**
 
-   - Set the default correlations to use for the thermochemical properties of all liquid metals - **#44**
+   - Set the default correlations to use for the thermo-chemical properties of all liquid metals - **#44**
 
    - Define module containing oxygen limits correlations related to Lead - **#42**
 
-   - Define module containing thermochemical correlations related to Lead - **#41**
+   - Define module containing thermo-chemical correlations related to Lead - **#41**
 
    - Define module containing diffusivity of elements in Lead - **#40**
 
@@ -89,23 +89,23 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Define module containing oxygen limits correlations related to LBE - **#38**
 
-   - Define module containing thermochemical correlations related to LBE - **#37**
+   - Define module containing thermo-chemical correlations related to LBE - **#37**
 
    - Define module containing diffusivity of elements in LBE - **#36**
 
    - Define module containing solubility of elements in LBE - **#35**
 
-   - Define module containing thermochemical properties in Bismuth - **#34**
+   - Define module containing thermo-chemical properties in Bismuth - **#34**
 
    - Define module containing diffusivity of elements in Bismuth - **#33**
 
    - Modify the :code:`test_lbh15_fromX` so that it dynamically tests the initialization from all the available properties - **#31**
 
-   - Modifiy liquid metal classes to read thermochemical properties - **#30**
+   - Modifiy liquid metal classes to read thermo-chemical properties - **#30**
 
    - Properties module attribute of :code:`LiquidMetalInterface` must be a dictionary to handle multiple modules - **#29**
 
-   - Modify the properties sub-package for the implementation of thermochemical properties - **#28**
+   - Modify the properties sub-package for the implementation of thermo-chemical properties - **#28**
 
    - Define solubility of elements in Bismuth - **#27**
 
@@ -129,11 +129,11 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - :code:`lbh15` within IAEA Oncore Codes List - **#73**
 
-   - Define two new sections of the documentation to give the user more insights about thermochemical properties and their usage - **#48**
+   - Define two new sections of the documentation to give the user more insights about thermo-chemical properties and their usage - **#48**
 
-   - Update the documentation to show the new thermochemical properties - **#47**
+   - Update the documentation to show the new thermo-chemical properties - **#47**
 
-   - Update the API guide of the documentation to include the new thermochemical properties - **#43**
+   - Update the API guide of the documentation to include the new thermo-chemical properties - **#43**
 
    - Use the tex corporate class when generating the pdf documentation - **#24**
 
@@ -149,9 +149,9 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Add the pressure info inside the :code:`__repr__` method - **#106**
 
-   - Fix initialization of liquid metal object from thermochemical properties - **#83**
+   - Fix initialization of liquid metal object from thermo-chemical properties - **#83**
 
-   - Thermochemical Modules Corrections and Improvements - **#76**
+   - Thermo-chemical Modules Corrections and Improvements - **#76**
 
    - Fix build of online documentation - **#72**
 
