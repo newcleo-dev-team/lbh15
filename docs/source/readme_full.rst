@@ -515,7 +515,7 @@ Initialization from Properties (*experimental*)
 The *lbh15* package gives the possibility to instantiate a liquid metal object by simply knowing the value of one of its
 properties (see :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` classes documentation for the full list).
 This is accomplished by finding the root of the correlation function matching the target property value. Such function,
-which constitutes a physical correlation, must be injective in the range considered for the root. Note that this is a
+which constitutes a physical property correlation, must be injective in the range considered for the root. Note that this is a
 necessary, but not jointly sufficient condition to find a root for the function.
 
 
