@@ -278,7 +278,7 @@ where:
 - :math:`\rho = \rho\left(T\right)` is the lead density :math:`\left[kg / m^3\right]`;
 - :math:`h = c_p\left(T\right) \cdot T` is the specific enthalpy :math:`\left[J / kg\right]` of lead;
 - :math:`Q_{out}` is the dissipated heat in :math:`\left[W / m^3\right]`, that is kept constant throughout the entire simulation;
-- :math:`Q_{in}` is the heat load in :math:`\left[W / m^3\right]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
+- :math:`Q_{in}` is the heat load in :math:`\left[W / m^3\right]` that suddenly, during the simulation, undergoes a step variation; like a Heaviside function, the heat load
   initial value is kept to zero till the instantaneous change, after which it reaches a constant positive value, as illustrated in :numref:`timevsqin`.
   
   .. _timevsqin:
@@ -289,12 +289,12 @@ where:
     
     Time history of the heat load applied to the lead volume.
 
-Let suppose that the lead volume works in an environment where the creation of an iron oxide layer must be guaranteed on the bounding walls. This requires
+Suppose the lead volume works in an environment where the creation of an iron oxide layer must be guaranteed on the bounding walls. This requires
 the oxygen concentration within the lead to be always within the admissible range having the
 :class:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead.OxygenSolubility`
 value as upper limit and, as lower limit, the
 :class:`lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits.LowerLimitIron`
-value. The choice of the Iron oxide is just for illustrative
+value. The choice of the iron oxide is just for illustrative
 purposes, the same goes for any other oxide formation. The oxygen concentration must then be controlled by supposing the application of an ideal device able
 to add and subtract oxygen to/from the lead volume.
 
@@ -342,17 +342,23 @@ By looking into the code implementation, the following sections are identified:
   where:
 
   - the lead-related module is imported from the ``lbh15`` package;
-  - the ``PID`` module is imported from the ``simple_pid`` package, which is available at:
+  - the ``PID`` module is imported from the ``simple_pid`` package, which is available at
     https://pypi.org/project/simple-pid/
-    and which can be installed by applying the following instruction:
+    and can be installed by applying the following instruction:
 
     .. code-block:: console
 
       python -m pip install simple-pid
     
     ``simple-pid`` :math:`>= 2.0.0` is required;
-  - the ``support`` module collects all the functions that are used in the remaining portion of the code;
+  - the ``support`` module collects all the functions that are used in the remaining portion of the code; it imports the ``matplotlib``
+    package, which is available at https://pypi.org/project/matplotlib/ and can be installed by applying the following instruction:
 
+    .. code-block:: console
+
+      python -m pip install matplotlib
+
+    ``matplotlib`` :math:`>= 3.7.1` is required;
 - Constant and initial values setting:
 
   .. code-block:: python
