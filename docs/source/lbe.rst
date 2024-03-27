@@ -4,8 +4,8 @@
 ============
 Module implementing the liquid lead-bismuth-eutectic (lbe) class.
 
-A *lbe* instance can be created by providing either the temperature value or the value of one
-of the available properties (see :class:`.LBE` for the full list). The instantiation based on the value of
+A :class:`.LBE` instance can be created by providing either the temperature value or the value of one
+of the available properties. The instantiation based on the value of
 properties other than the temperature passes through the solution, in terms of the temperature value,
 of the corresponding correlation implemented in the *lbh15* package.
 

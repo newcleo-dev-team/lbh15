@@ -4,8 +4,8 @@
 =============
 Module implementing the liquid lead class.
 
-A *lead* instance can be created by providing either the temperature value or the value of one
-of the available properties (see :class:`.Lead` for the full list). The instantiation based on the value of
+A :class:`.Lead` instance can be created by providing either the temperature value or the value of one
+of the available properties. The instantiation based on the value of
 properties other than the temperature passes through the solution, in terms of the temperature value,
 of the corresponding correlation implemented in the *lbh15* package.
 
