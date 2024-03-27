@@ -93,32 +93,32 @@ In detail, a :class:`.Bismuth` object comes with the following default propertie
     - ``G`` Gibbs free energy :math:`\left[\frac{J}{mol}\right]`:
 
         :math:`G\left(T\right) = \displaystyle H\left(T\right) - T \cdot S\left(T\right)`
-    - ``fe_sol`` Iron solubility :math:`\left[wt.\%\right]`:
+    - ``fe_sol`` iron solubility :math:`\left[wt.\%\right]`:
 
         :math:`fe\_sol\left(T\right) = \displaystyle10^{2.20 - 3930 / T}`
-    - ``ni_sol`` Nickel solubility :math:`\left[wt.\%\right]`:
+    - ``ni_sol`` nickel solubility :math:`\left[wt.\%\right]`:
 
         :math:`ni\_sol\left(T\right) = \displaystyle10^{3.81 - 2429 / T} \quad \Longleftrightarrow \quad 543 K <= T < 738 K`
 
         :math:`ni\_sol\left(T\right) = \displaystyle10^{2.05 - 1131 / T} \quad \Longleftrightarrow \quad 738 K <= T < 918 K`
   
         :math:`ni\_sol\left(T\right) = \displaystyle10^{1.35 - 484 / T} \quad \Longleftrightarrow \quad 918 K <= T < 1173 K`
-    - ``cr_sol`` Chromium solubility :math:`\left[wt.\%\right]`:
+    - ``cr_sol`` chromium solubility :math:`\left[wt.\%\right]`:
 
         :math:`cr\_sol\left(T\right) = \displaystyle10^{2.34 - 3610 / T}`
-    - ``o_sol`` Oxygen solubility :math:`\left[wt.\%\right]`:
+    - ``o_sol`` oxygen solubility :math:`\left[wt.\%\right]`:
 
         :math:`o\_sol\left(T\right) = \displaystyle10^{2.30 - 4066 / T} \quad \Longleftrightarrow \quad T <= 1002 K`
 
         :math:`o\_sol\left(T\right) = \displaystyle10^{3.04 - 4810 / T} \quad \Longleftrightarrow \quad T > 1002 K`
-    - ``o_dif`` Oxygen diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``o_dif`` oxygen diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`o\_dif\left(T\right) = \displaystyle1.07 \cdot 10^{-2} \cdot \exp{\left(- 49229 /\left(RT\right) \right)}`
-    - ``o_pp`` Oxygen partial pressure divided by Oxygen concentration squared :math:`\left[ \frac{atm}{wt.\%^2} \right]`:
+    - ``o_pp`` oxygen partial pressure divided by oxygen concentration squared :math:`\left[ \frac{atm}{wt.\%^2} \right]`:
 
         :math:`o\_pp\left(T\right) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /\left(2.3 \cdot R\right) \cdot \left( - 101098 / T + 15.66 \right) }`, :math:`\quad` where:
 
-        :math:`M_O = 16 \frac{g}{mol} \quad` Oxygen molecular mass
+        :math:`M_O = 16 \frac{g}{mol} \quad` oxygen molecular mass
 
 where :math:`T` is the bismuth temperature in :math:`\left[K\right]`, :math:`p` is the bismuth pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.

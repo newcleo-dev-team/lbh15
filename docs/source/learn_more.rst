@@ -4,17 +4,17 @@
 Oxygen Control
 ++++++++++++++
 
-In lead and LBE systems, Oxygen is the most important chemical element, which results
+In lead and LBE systems, oxygen is the most important chemical element, which results
 from start-up operations, maintenance services and, possibly, incidental contaminations (:cite:`Agency2015`).
 To operate a nuclear reactor cooled by a lead alloy, it is thus important to
-determine the upper and the lower Oxygen concentration limits.
+determine the upper and the lower oxygen concentration limits.
 
 .. _ Oxygen concentration upper limit:
 
 Oxygen Concentration Upper Limit
 ================================
 
-The upper limit corresponds to the Oxygen concentration value above which contamination by coolant oxides occurs.
+The upper limit corresponds to the oxygen concentration value above which contamination by coolant oxides occurs.
 It is represented by the *Oxygen solubility* in lead and LBE alloys. *lbh15* provides
 these properties in the ``lead_thermochemical_properties.solubility_in_lead``
 and ``lbe_thermochemical_properties.solubility_in_lbe`` modules.
@@ -31,17 +31,17 @@ The lower limit corresponds to the minimum value of the oxygen concentration ena
 The oxide layer formation is possible only when the oxygen potential in the liquid metal is above the
 potential leading to the protective film formation. The correlations implemented in the
 ``lead_thermochemical_properties.lead_oxygen_limits`` and ``lbe_thermochemical_properties.lbe_oxygen_limits``
-modules for computing the lower limits of Oxygen concentration are obtained by applying the methodology
+modules for computing the lower limits of oxygen concentration are obtained by applying the methodology
 described in :cite:`Agency2015`, chapter 4, part 4.2.2, pages 187-192. A brief summary is provided in the following.
 
-First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the Oxygen
+First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the oxygen
 concentration is expressed as a function of temperature. Eventually, two kinds of correlations, based on two different
 assumptions, are derived.
 
 ..
 
   1. The equation :eq:`oxide_react_eq` of the oxidation reaction is set by considering that it occurs
-     between the metal and the Oxygen, with the Oxygen supposed in solution as dissolved :math:`\ce{PbO}` below its saturation limit.
+     between the metal and the oxygen, with the oxygen supposed in solution as dissolved :math:`\ce{PbO}` below its saturation limit.
      The formation equation :eq:`metal_oxide_eq` of the metal oxide (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
      equation :eq:`pbo_eq` of :math:`\ce{PbO}`, (table 4.2.2, page 189 of :cite:`Agency2015`):
 
@@ -121,22 +121,22 @@ assumptions, are derived.
 ..
 
   4. The aim is now to develop, for each possible dissolved metal, a correlation for the lower limit of the
-     Oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
+     oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
      oxidation reaction equation :eq:`oxide_react_eq`, the following substitution is applied:
 
      .. math:: \Delta_rG^0 \left( T \right) = -RT\ln{ \left( \frac{\alpha_{\ce{Pb}} \cdot \alpha_{\ce{Me_XO_Y}}^{\frac{1}{Y}}}{\alpha_{\ce{PbO}}\cdot\alpha_{\ce{Me_{\left( dissolved \right)}}}^{\frac{X}{Y}}} \right)},
 
-     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the Oxygen
+     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the oxygen
      concentration, thus the metal oxide is considered very diluted.
 
-     By considering the Oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
-     thus taking the chemical activity of the dissolved Oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
+     By considering the oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
+     thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
      applying some transformations, one can obtain:
 
      .. math:: \ln{\left( C_{\ce{O}} \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{\ce{Me}}^{sat}}{C_{\ce{Me}}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat}\right)}.
       :label: ox_conc_eq
 
-     In the above equation, the unknows are two, that is, the Oxygen concentration :math:`C_{\ce{O}}` and the concentration
+     In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_{\ce{O}}` and the concentration
      :math:`C_{\ce{Me}}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
      a useful correlation, the user can choose between two strategies that are proposed and adopted in *lbh15*. They differ
      on how they treat the chemical activity of the dissolved metal. The actual activities at the interface are
@@ -146,7 +146,7 @@ assumptions, are derived.
 
      a. The first approach is to consider the chemical activity of the dissolved metal equal to one.
         In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
-        compute the lower limit of the Oxygen concentration directly through the following relation:
+        compute the lower limit of the oxygen concentration directly through the following relation:
 
         .. math:: C_{\ce{O}} = \alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} \right)},
 
@@ -289,14 +289,14 @@ where:
     
     Time history of the heat load applied to the lead volume.
 
-Let suppose that the lead volume works in an environment where the creation of an Iron oxide layer must be guaranteed on the bounding walls. This requires
-the Oxygen concentration within the lead to be always within the admissible range having the
+Let suppose that the lead volume works in an environment where the creation of an iron oxide layer must be guaranteed on the bounding walls. This requires
+the oxygen concentration within the lead to be always within the admissible range having the
 :class:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead.OxygenSolubility`
 value as upper limit and, as lower limit, the
 :class:`lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits.LowerLimitIron`
 value. The choice of the Iron oxide is just for illustrative
-purposes, the same goes for any other oxide formation. The Oxygen concentration must then be controlled by supposing the application of an ideal device able
-to add and subtract Oxygen to/from the lead volume.
+purposes, the same goes for any other oxide formation. The oxygen concentration must then be controlled by supposing the application of an ideal device able
+to add and subtract oxygen to/from the lead volume.
 
 The system enabling this kind of control is depicted in :numref:`contrschema`.
 
@@ -306,13 +306,13 @@ The system enabling this kind of control is depicted in :numref:`contrschema`.
   :width: 500
   :align: Center
 
-  Control schema of the Oxygen concentration within the lead volume.
+  Control schema of the oxygen concentration within the lead volume.
 
 In detail:
 
-- the *Lead Volume* behaves as stated by the above mentioned heat balance equation, thus providing the actual temperature and Oxygen concentration values;
-- the *PID Controller* estimates the Oxygen concentration value to assure within the *Lead Volume*;
-- the *setpoint* the controller should follow is computed as the middle value of the admissibile Oxygen concentration range, and it is computed by exploiting the
+- the *Lead Volume* behaves as stated by the above mentioned heat balance equation, thus providing the actual temperature and oxygen concentration values;
+- the *PID Controller* estimates the oxygen concentration value to assure within the *Lead Volume*;
+- the *setpoint* the controller should follow is computed as the middle value of the admissibile oxygen concentration range, and it is computed by exploiting the
   actual temperature value of the *Lead Volume*;
 - the *PID Controller* tries to reach the setpoint value which changes in time according to the evolution of the *Lead Volume*.
 
@@ -400,8 +400,8 @@ By looking into the code implementation, the following sections are identified:
   - ``delta_t`` is the integration time step;
   - ``Qin`` is a dictionary containing for each time instant (key) the corresponding heat load value; values coincide with the Heaviside function values stored in ``Qin_signal``;
   - ``T_sol`` is the array where the lead temperature time history will be stored;
-  - ``Ox_stp`` is the array where the Oxygen concentration setpoint values will be stored that will be followed by the PID controller;
-  - ``Ox_sol`` is the array where the Oxygen concentration values will be stored that will be suggested by the PID controller;
+  - ``Ox_stp`` is the array where the oxygen concentration setpoint values will be stored that will be followed by the PID controller;
+  - ``Ox_sol`` is the array where the oxygen concentration values will be stored that will be suggested by the PID controller;
 
 - Solutions initialization and ``lead`` object instantiation:
 
@@ -417,7 +417,7 @@ By looking into the code implementation, the following sections are identified:
   where:
 
   - ``lead`` object is instantiated at a reference temperature equal to the initial temperature of the lead volume;
-  - the initial value of the Oxygen concentration setpoint is taken equal to the middle value of the admissibile operative range of the Oxygen concentration as function of temperature;
+  - the initial value of the oxygen concentration setpoint is taken equal to the middle value of the admissibile operative range of the oxygen concentration as function of temperature;
 
 - PID controller setup:
 
@@ -453,8 +453,8 @@ By looking into the code implementation, the following sections are identified:
   where there is a loop over all the required time instants; for each :code:`i`-th instant:
 
   - an explicit call is made to the time integration function;
-  - the Oxygen concentration setpoint is updated correspondingly;
-  - the PID is asked to provide the new Oxygen concentration value to guarantee within the lead volume;
+  - the oxygen concentration setpoint is updated correspondingly;
+  - the PID is asked to provide the new oxygen concentration value to guarantee within the lead volume;
 
 - Results plotting:
 
@@ -492,7 +492,7 @@ By looking into the code implementation, the following sections are identified:
       
       Time evolution of the temperature of the lead volume.
   
-  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the Oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual Oxygen concentration (see :numref:`timeox`);
+  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual oxygen concentration (see :numref:`timeox`);
     
     .. _timeox:
     
@@ -500,9 +500,9 @@ By looking into the code implementation, the following sections are identified:
       :width: 500
       :align: Center
       
-      Time evolution of the Oxygen concentrations within the lead volume: the Oxygen concentration setpoint (orange) and the actual controlled Oxygen concentration (blue).
+      Time evolution of the oxygen concentrations within the lead volume: the oxygen concentration setpoint (orange) and the actual controlled oxygen concentration (blue).
 
-    After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (orange curve).
-    The overlapping of the two Oxygen concentration curves can be improved or worsened by varying the PID coefficients.
+    After an initial transient, the blue curve, representing the controlled oxygen concentration within lead, overlaps almost exactly with the setpoint values (orange curve).
+    The overlapping of the two oxygen concentration curves can be improved or worsened by varying the PID coefficients.
 
 .. note:: This tutorial works even with the :class:`.Bismuth` and the :class:`.LBE` classes instances.

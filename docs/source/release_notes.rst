@@ -79,13 +79,13 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Set the default correlations to use for the thermo-chemical properties of all liquid metals - **#44**
 
-   - Define module containing oxygen limits correlations related to Lead - **#42**
+   - Define module containing oxygen limits correlations related to lead - **#42**
 
-   - Define module containing thermo-chemical correlations related to Lead - **#41**
+   - Define module containing thermo-chemical correlations related to lead - **#41**
 
-   - Define module containing diffusivity of elements in Lead - **#40**
+   - Define module containing diffusivity of elements in lead - **#40**
 
-   - Define module containing solubility of elements in Lead - **#39**
+   - Define module containing solubility of elements in lead - **#39**
 
    - Define module containing oxygen limits correlations related to LBE - **#38**
 
@@ -95,9 +95,9 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Define module containing solubility of elements in LBE - **#35**
 
-   - Define module containing thermo-chemical properties in Bismuth - **#34**
+   - Define module containing thermo-chemical properties in bismuth - **#34**
 
-   - Define module containing diffusivity of elements in Bismuth - **#33**
+   - Define module containing diffusivity of elements in bismuth - **#33**
 
    - Modify the :code:`test_lbh15_fromX` so that it dynamically tests the initialization from all the available properties - **#31**
 
@@ -107,9 +107,9 @@ related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
    - Modify the properties sub-package for the implementation of thermo-chemical properties - **#28**
 
-   - Define solubility of elements in Bismuth - **#27**
+   - Define solubility of elements in bismuth - **#27**
 
-   - Define iron solubility property classes for Bismuth - **#25**
+   - Define iron solubility property classes for bismuth - **#25**
 
    - provide :code:`pyproject.toml` - **#22**
 
@@ -190,4 +190,3 @@ Some issues are yet to be solved. Here in the following the list of currently op
 4. **Help wanted**   
 
    - :code:`__repr__()` Method (:code:`_lbh15.py`) Improvement - **#70**
-   

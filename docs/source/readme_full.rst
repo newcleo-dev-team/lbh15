@@ -74,8 +74,8 @@ The thermo-physical properties implemented in the package are listed in :numref:
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
 The thermo-chemical properties implemented since version 1.2.0 are listed in :numref:`tablechemdata` (basic properties), :numref:`tablechemsoldiff`
-(solubilities, diffusivities and Oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxide layers generation
-when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of Oxygen concentration for
+(solubilities, diffusivities and Oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of oxygen concentration for oxide layers generation
+when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of oxygen concentration for
 oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
 
 .. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: basic data.
@@ -108,7 +108,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - ✔
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and Oxygen partial pressure.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and oxygen partial pressure.
    :widths: 50 25 25 25 25 25
    :name: tablechemsoldiff
    :header-rows: 1
@@ -187,7 +187,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - :math:`-`
    * - Oxygen partial pressure
 
-       divided by the Oxygen
+       divided by the oxygen
        
        concentration squared
      - :math:`P_{\ce{O2}}`
@@ -196,7 +196,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - ✔
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxide layers generation when the corresponding metal is considered at its saturation concentration.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of oxygen concentration for oxide layers generation when the corresponding metal is considered at its saturation concentration.
    :widths: 50 25 25 25 25 25
    :name: tablechemlowlimssat
    :header-rows: 1
@@ -258,7 +258,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - :math:`-`
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of oxygen concentration for oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
    :widths: 50 25 25 25 25 25
    :name: tablechemlowlims
    :header-rows: 1
@@ -472,7 +472,7 @@ This section shows a few examples of basic usage of *lbh15*.
   >>> liquid_lead.k
   22.4
 
-- Create an instance of :class:`.Lead` class at a given temperature :code:`T`, then change the temperature value. Compare the Oxygen
+- Create an instance of :class:`.Lead` class at a given temperature :code:`T`, then change the temperature value. Compare the oxygen
   diffusivity values :code:`o_dif` at the two temperatures:
 
   >>> from lbh15 import Lead
@@ -543,11 +543,11 @@ In the following, some examples are provided:
 
   >>> from lbh15 import Lead
   >>> from lbh15 import Bismuth
-  >>> # Inititialize Lead with k=17.37 [W/(m*K)]
+  >>> # Inititialize lead with k=17.37 [W/(m*K)]
   >>> liquid_lead = Lead(k=17.37)
-  >>> # Initialize Bismuth with Lead temperature in K
+  >>> # Initialize bismuth with lead temperature in K
   >>> liquid_bismuth = Bismuth(T=liquid_lead.T)
-  >>> # Print Bismuth conductivity
+  >>> # Print bismuth conductivity
   >>> liquid_bismuth.k
   14.395909090909091
 
@@ -699,7 +699,7 @@ example:
 
 >>> # Use default one
 >>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
->>> # Get an instance of Lead object at T=1000 K
+>>> # Get an instance of lead object at T=1000 K
 >>> liquid_lead_1 = Lead(T=1000)
 >>> # Print info about rho
 >>> liquid_lead_1.rho_info()
@@ -713,7 +713,7 @@ rho:
               Liquid lead density
 >>> # Use the custom implementation of density
 >>> Lead.set_correlation_to_use('rho', 'custom2022')
->>> # Get another instance of Lead object with new rho
+>>> # Get another instance of lead object with new rho
 >>> liquid_lead_2 = Lead(T=1000)
 >>> # Compare the density of the two objects
 >>> liquid_lead_1.rho, liquid_lead_2.rho
@@ -812,10 +812,10 @@ Learn More
 ==========
 
 This section contains additional information about the chemistry of heavy liquid metals in presence of dispersed
-Oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
-the Oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
-presented in :any:`tutorials` section, describes a tutorial application coming together with *lbh15*, which is a
-representation of a simple Oxygen control system applied to a liquid lead volume.
+oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
+the oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
+presented in :any:`tutorials` section, describes a tutorial application delivered with *lbh15*, which is a
+representation of a simple oxygen control system applied to a liquid lead volume.
 
 .. include:: learn_more.rst
  
