@@ -4,7 +4,7 @@
 Oxygen Control
 ++++++++++++++
 
-In lead and LBE systems, oxygen is the most important chemical element, which results
+In lead and lbe systems, oxygen is the most important chemical element, which results
 from start-up operations, maintenance services and, possibly, incidental contaminations (:cite:`Agency2015`).
 To operate a nuclear reactor cooled by a lead alloy, it is thus important to
 determine the upper and the lower oxygen concentration limits.
@@ -15,7 +15,7 @@ Oxygen Concentration Upper Limit
 ================================
 
 The upper limit corresponds to the oxygen concentration value above which contamination by coolant oxides occurs.
-It is represented by the *Oxygen solubility* in lead and LBE alloys. *lbh15* provides
+It is represented by the *oxygen solubility* in lead and lbe alloys. *lbh15* provides
 these properties in the ``lead_thermochemical_properties.solubility_in_lead``
 and ``lbe_thermochemical_properties.solubility_in_lbe`` modules.
 The implemented data are extracted from :cite:`Agency2015`, table 3.5.2,
@@ -115,7 +115,7 @@ assumptions, are derived.
      
      .. math:: \alpha_i=C_i / C_i^{sat}.
 
-     About the chemical activity of lead in LBE, *lbh15* implements the correlation proposed by Gossé (2014)
+     About the chemical activity of lead in lbe, *lbh15* implements the correlation proposed by Gossé (2014)
      and written in chapter 3.3, part 3.3 of :cite:`Agency2015`.
 
 ..
@@ -141,8 +141,8 @@ assumptions, are derived.
      a useful correlation, the user can choose between two strategies that are proposed and adopted in *lbh15*. They differ
      on how they treat the chemical activity of the dissolved metal. The actual activities at the interface are
      influenced by how diffusion, convection and mass transfer phenomena interact in the liquid metal boundary layer.
-     Ongoing researches are in progress, but currently the exact values for the chemical activities of the dissolved
-     metal and of the Oxygen are not known.
+     In spite of the ongoing research, the exact values for the chemical activities of the dissolved
+     metal and of the oxygen are not known.
 
      a. The first approach is to consider the chemical activity of the dissolved metal equal to one.
         In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
@@ -156,7 +156,7 @@ assumptions, are derived.
 
         - :math:`C_{\ce{O}}^{sat}` is computed by adopting the recommended coefficients from table 3.5.2 of :cite:`Agency2015`;
 
-        - :math:`\alpha_{\ce{Pb}}` is taken equal to one in pure Lead, while in LBE it is computed by adopting the
+        - :math:`\alpha_{\ce{Pb}}` is taken equal to one in pure Lead, while in lbe it is computed by adopting the
           correlation proposed by Gossé as indicated at page 146 of :cite:`Agency2015`.
 
      b. The second approach does not exploit any assumption. In order to make equation :eq:`ox_conc_eq` solvable, the two unknowns
@@ -178,9 +178,9 @@ Ranges of Validity
 ==================
 
 As stated in the previous section, multiple correlations are involved in the computation of the lower limits of
-oxygen concentration, each being valid over a specific temperature range. The temperature range of
-validity specified in *lbh15* for each lower limit is given by the intersection of the
-ranges of the correlations which the lower limit depends on. More details as follows:
+oxygen concentration, each being valid over a specific temperature range. The validity range of a specific lower limit
+is then defined as the intersection of the validity ranges of the correlations on which the lower limit itself depends.
+More details as follows:
 
   - For the lower limit correlations based on the saturation assumption (approach *a*), the lower temperature
     value is taken equal to the lower limit of the validity range of the oxygen solubility correlation,
@@ -192,12 +192,12 @@ ranges of the correlations which the lower limit depends on. More details as fol
   - For the lower limit of the oxygen concentration times the metal concentration raised to a certain exponent (approach *b*),
     the validity range is taken equal to that in the approach *a*, that is, [673;1000] *[K]*, but for the following correlations:
 
-    - Concerning the chromium solubility in LBE given by Courouau in 2004, the upper limit of the validity range
+    - Concerning the chromium solubility in lbe given by Courouau in 2004, the upper limit of the validity range
       is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;813] *[K]* range;
 
     ..
 
-    - Concerning the chromium solubility in LBE given by Martynov in 1998, the upper limit of the validity range
+    - Concerning the chromium solubility in lbe given by Martynov in 1998, the upper limit of the validity range
       is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;773] *[K]* range;
 
     ..
@@ -221,7 +221,7 @@ For most of the properties, correlations from different authors are available. T
 correlations chosen as the default ones in *lbh15*. For all the non-mentioned properties, only one correlation is
 implemented since either it is the only one available or it is specifically recommended in :cite:`Agency2015`:
 
-- *Gossé* correlation of 2014 for the solubility of iron, nickel and chromium in lead, LBE and bismuth;
+- *Gossé* correlation of 2014 for the solubility of iron, nickel and chromium in lead, lbe and bismuth;
 
 ..
 
@@ -233,7 +233,7 @@ implemented since either it is the only one available or it is specifically reco
 
 ..
 
-- *Gromov* correlation of 1996 for the oxygen diffusivity in lead and in LBE;
+- *Gromov* correlation of 1996 for the oxygen diffusivity in lead and in lbe;
 
 ..
 
@@ -242,8 +242,8 @@ implemented since either it is the only one available or it is specifically reco
 ..
 
 The choice of the above default correlations has been driven by what recommended in :cite:`Agency2015` and by the temperature ranges.
-In particular, since most of the liquid lead applications are working at low temperatures, the correlations are preferred whose validity ranges
-are related to the lowest available temperature values and whose applicability is the widest available.
+In particular, since most of the liquid lead applications are working at low temperatures, preference is given to those correlations
+whose range of validity is based on the lowest available temperature value and is the widest available.
 
 The user is invited to check the ranges of validity of the correlations she/he is using to make sure they match with the specific
 application requirements. In case other correlations are needed that are different from the ones already implemented in *lbh15*, please see
