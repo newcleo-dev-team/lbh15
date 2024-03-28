@@ -4,9 +4,7 @@ import warnings
 import sys
 import inspect
 import importlib
-import os.path
 import pathlib
-import platform
 import copy
 from abc import ABC
 from abc import abstractmethod
@@ -357,18 +355,26 @@ class LiquidMetalInterface(ABC):
         file_path : str
             absolute path of the file where custom properties are implemented
         """
-        norm_path = os.path.normpath(file_path)
-        if 'Windows' not in platform.system():
-            norm_path = norm_path.replace('\\', pathlib.os.sep)
+        # No "\" allowed in the path
+        if "\\" in file_path:
+            warnings.warn("No backslahes allowed in the path!"
+                          "\nPlease check the file path and try again!"
+                          "\nNo custom property added.", stacklevel=5)
+            return
+
+        # Normalize the path, no matter the OS
+        norm_path = pathlib.Path(file_path)
+
         # Exit if the file passed as argument does not exist
-        if not os.path.isfile(norm_path):
+        if not norm_path.exists():
             warnings.warn(f"'{norm_path}' provided file not found!"
                           "\nPlease check the file path and try again!"
                           "\nNo custom property added.", stacklevel=5)
             return
-        res = norm_path.split(pathlib.os.sep)
-        file_name = res[-1][:-3]
-        path = norm_path[:-len(res[-1])]
+
+        # Add filename and the corresponding path to the class dict
+        file_name = norm_path.stem
+        path = str(norm_path.parent)
         if path not in cls._custom_properties_path:
             cls._custom_properties_path[path] = [file_name]
         else:
