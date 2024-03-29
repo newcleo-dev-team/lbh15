@@ -355,13 +355,6 @@ class LiquidMetalInterface(ABC):
         file_path : str
             absolute path of the file where custom properties are implemented
         """
-        # No "\" allowed in the path
-        if "\\" in file_path:
-            warnings.warn("No backslahes allowed in the path!"
-                          "\nPlease check the file path and try again!"
-                          "\nNo custom property added.", stacklevel=5)
-            return
-
         # Normalize the path, no matter the OS
         norm_path = pathlib.Path(file_path)
 
