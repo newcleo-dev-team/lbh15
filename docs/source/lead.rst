@@ -4,8 +4,8 @@
 =============
 Module implementing the liquid lead class.
 
-A *lead* instance can be created by providing either the temperature value or the value of one
-of the available properties (see :class:`.Lead` for the full list). The instantiation based on the value of
+A :class:`.Lead` instance can be created by providing either the temperature value or the value of one
+of the available properties. The instantiation based on the value of
 properties other than the temperature passes through the solution, in terms of the temperature value,
 of the corresponding correlation implemented in the *lbh15* package.
 
@@ -34,10 +34,10 @@ In detail, a :class:`.Lead` object comes with the following default properties:
     - ``T_b0`` boiling temperature :math:`\left[K\right]`:
 
         :math:`2021`
-    - ``Q_b0`` vaporisation heat :math:`\left[\frac{J}{kg}\right]`:
+    - ``Q_b0`` vaporization heat :math:`\left[\frac{J}{kg}\right]`:
 
         :math:`858.6 \cdot 10^3`
-    - ``p_s`` saturation vapour pressure :math:`\left[Pa\right]`:
+    - ``p_s`` saturation vapor pressure :math:`\left[Pa\right]`:
 
         :math:`p_s\left(T\right) = \displaystyle 5.76\cdot10^9\cdot\exp{\left(-22131/T\right)}`
     - ``sigma`` surface tension :math:`\left[\frac{N}{m}\right]`:
@@ -94,76 +94,76 @@ In detail, a :class:`.Lead` object comes with the following default properties:
     - ``G`` Gibbs free energy :math:`\left[\frac{J}{mol}\right]`:
 
         :math:`G\left(T\right) = \displaystyle H\left(T\right) - T \cdot S\left(T\right)`
-    - ``fe_sol`` Iron solubility :math:`\left[wt.\%\right]`:
+    - ``fe_sol`` iron solubility :math:`\left[wt.\%\right]`:
 
         :math:`fe\_sol\left(T\right) = \displaystyle10^{2.11 - 5225 / T}`
-    - ``ni_sol`` Nickel solubility :math:`\left[wt.\%\right]`:
+    - ``ni_sol`` nickel solubility :math:`\left[wt.\%\right]`:
 
         :math:`ni\_sol\left(T\right) = \displaystyle10^{1.36 - 1395 / T}`
-    - ``cr_sol`` Chromium solubility :math:`\left[wt.\%\right]`:
+    - ``cr_sol`` chromium solubility :math:`\left[wt.\%\right]`:
 
         :math:`cr\_sol\left(T\right) = \displaystyle10^{3.62 - 6648 / T}`
-    - ``si_sol`` Silicon solubility :math:`\left[wt.\%\right]`:
+    - ``si_sol`` silicon solubility :math:`\left[wt.\%\right]`:
 
         :math:`si\_sol\left(T\right) = \displaystyle10^{3.886 - 7180 / T}`
-    - ``o_sol`` Oxygen solubility :math:`\left[wt.\%\right]`:
+    - ``o_sol`` oxygen solubility :math:`\left[wt.\%\right]`:
 
         :math:`o\_sol\left(T\right) = \displaystyle10^{3.23 - 5043 / T}`
-    - ``o_dif`` Oxygen diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``o_dif`` oxygen diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`o\_dif\left(T\right) = \displaystyle6.6 \cdot 10^{-5} \cdot \exp{\left(- 16158 /\left(RT\right) \right)}`
-    - ``fe_dif`` Iron diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``fe_dif`` iron diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`fe\_dif\left(T\right) = \displaystyle10^{- 2.31 - 2295 / T}`
-    - ``co_dif`` Cobalt diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``co_dif`` cobalt diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`co\_dif\left(T\right) = \displaystyle4.6 \cdot 10^{-4} \cdot \exp{\left(- 22154 /\left(RT\right) \right)}`
-    - ``se_dif`` Selenium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``se_dif`` selenium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`co\_dif\left(T\right) = \displaystyle3.4 \cdot 10^{-4} \cdot \exp{\left(- 12958 /\left(RT\right) \right)}`
-    - ``in_dif`` Indium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``in_dif`` indium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`in\_dif\left(T\right) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{\left(- 13794 /\left(RT\right) \right)}`
-    - ``te_dif`` Tellurium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
+    - ``te_dif`` tellurium diffusivity :math:`\left[ \frac{cm^2}{s} \right]`:
 
         :math:`te\_dif\left(T\right) = \displaystyle3.1 \cdot 10^{-4} \cdot \exp{\left(- 15884 /\left(RT\right) \right)}`
-    - ``o_pp`` Oxygen partial pressure divided by Oxygen concentration squared :math:`\left[ \frac{atm}{wt.\%^2} \right]`:
+    - ``o_pp`` oxygen partial pressure divided by oxygen concentration squared :math:`\left[ \frac{atm}{wt.\%^2} \right]`:
 
         :math:`o\_pp\left(T\right) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /\left(2.3 \cdot R\right) \cdot \left( - 119411 / T + 12.222 \right) }`, :math:`\quad` where:
 
-        :math:`M_O = 16 \frac{g}{mol} \quad` Oxygen molecular mass
-    - ``lim_fe_sat`` Lower limit of Oxygen concentration with Iron @ saturation :math:`\left[wt.\%\right]`:
+        :math:`M_O = 16 \frac{g}{mol} \quad` oxygen molecular mass
+    - ``lim_fe_sat`` lower limit of oxygen concentration with iron @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{57190}{R T} - \frac{21.1}{R} \right)}`
-    - ``lim_cr_sat`` Lower limit of Oxygen concentration with Chromium @ saturation :math:`\left[wt.\%\right]`:
+    - ``lim_cr_sat`` lower limit of oxygen concentration with chromium @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_cr\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{317800}{2 R T} - \frac{27.3}{2R} \right)}`
-    - ``lim_ni_sat`` Lower limit of Oxygen concentration with Nickel @ saturation :math:`\left[wt.\%\right]`:
+    - ``lim_ni_sat`` lower limit of oxygen concentration with nickel @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_ni\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{36080}{2 R T} - \frac{23.4}{2R} \right)}`
-    - ``lim_si_sat`` Lower limit of Oxygen concentration with Silicon @ saturation :math:`\left[wt.\%\right]`:
+    - ``lim_si_sat`` lower limit of oxygen concentration with silicon @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_si\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{471710}{2 R T} - \frac{19.5}{2R} \right)}`
-    - ``lim_al_sat`` Lower limit of Oxygen concentration with Aluminium @ saturation :math:`\left[wt.\%\right]`:
+    - ``lim_al_sat`` lower limit of oxygen concentration with aluminium @ saturation :math:`\left[wt.\%\right]`:
 
         :math:`lim\_al\_sat\left(T\right) = \displaystyle o\_sol\left(T\right) \cdot \exp{\left( - \frac{679540}{2 R T} + \frac{10.7}{2R} \right)}`
-    - ``lim_cr`` Lower limit of Oxygen concentration times Chromium concentration raised to :math:`2/3` :math:`\left[wt.\%\right]`:
+    - ``lim_cr`` lower limit of oxygen concentration times chromium concentration raised to :math:`2/3` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_cr\left(T\right) = \displaystyle lim\_cr\_sat\left(T\right) \cdot cr\_sol\left(T\right)^{2/3}`
-    - ``lim_ni`` Lower limit of Oxygen concentration times Nickel concentration :math:`\left[wt.\%\right]`:
+    - ``lim_ni`` lower limit of oxygen concentration times nickel concentration :math:`\left[wt.\%\right]`:
 
         :math:`lim\_ni\left(T\right) = \displaystyle lim\_ni\_sat\left(T\right) \cdot ni\_sol\left(T\right)`
-    - ``lim_fe`` Lower limit of Oxygen concentration times Iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
+    - ``lim_fe`` lower limit of oxygen concentration times iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\left(T\right) = \displaystyle lim\_fe\_sat\left(T\right) \cdot fe\_sol\left(T\right)^{3/4}`
-    - ``lim_si`` Lower limit of Oxygen concentration times Silicon concentration raised to :math:`1/2` :math:`\left[wt.\%\right]`:
+    - ``lim_si`` lower limit of oxygen concentration times silicon concentration raised to :math:`1/2` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_si\left(T\right) = \displaystyle lim\_si\_sat\left(T\right) \cdot si\_sol\left(T\right)^{1/2}`
 
 where :math:`T` is the lead temperature in :math:`\left[K\right]`, :math:`p` is the lead pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.
 
-In addition to provide the properties values directly, the :class:`.Lead` object dynamically adds the methods named
+In addition, to provide the property values directly, the :class:`.Lead` object dynamically adds the methods named
 :code:`<property_name>_info`, that return full information about the corresponding property. For instance:
 
 >>> from lbh15 import Lead
