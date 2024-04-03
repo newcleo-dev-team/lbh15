@@ -144,4 +144,17 @@ users. The documentation contains examples for users,
 from basic use to short tutorials for more advanced 
 applications.
 
+# Authors Contribution with [CRediT](https://credit.niso.org/)
+
+* Gabriele Ottino: Software, Validation, Writing - original draft,
+  Writing - review & editing
+
+* Daniele Panico: Conceptualization, Software, Supervision,
+  Writing - review & editing
+
+* Daniele Tomatis: Conceptualization, Project Administration, Supervision,
+  Writing - original draft, Writing - review & editing
+
+* Pierre-Alexandre Pantel: Writing - review & editing
+
 # References
