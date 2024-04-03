@@ -148,13 +148,10 @@ applications.
 
 * Gabriele Ottino: Software, Validation, Writing - original draft,
   Writing - review & editing
-
 * Daniele Panico: Conceptualization, Software, Supervision,
   Writing - review & editing
-
 * Daniele Tomatis: Conceptualization, Project Administration, Supervision,
   Writing - original draft, Writing - review & editing
-
 * Pierre-Alexandre Pantel: Writing - review & editing
 
 # References
