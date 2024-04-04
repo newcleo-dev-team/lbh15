@@ -11,163 +11,50 @@ They are tracked as issues that have been managed during the development process
 three lists according to the labels assigned to them. To access the entire issue history and comments and commits
 related to each one, please look at https://github.com/newcleo-dev-team/lbh15.
 
+
 1. **Enhancements**
 
-   - Minor revisions to doc and comments - **#131**
+   - Increase abstraction level of `OxygenDiffusivityInterface` and `IronSolubility` classes - **#160**
 
-   - Remove typecheck for performance reasons - **#129**
+   - Including all the dependencies for doc building and testing into toml and `setup.py` - **#155**
 
-   - Review for v2.0.0 release - **#120**
-
-   - Tutorial: code and doc - **#118**
-
-   - Allow to deeply copy *LiquidMetal* objects - **#115**
-
-   - Need for a test covering all temperatures - **#113**
-
-   - :code:`set_custom_properties_path` Improvement - **#110**
-
-   - Making element-wise the correlation functions of all properties - **#103**
-
-   - Horner's Scheme - **#100**
-
-   - Update :code:`test_custom_properties` to test correct assignment of custom properties to different liquid metal classes - **#86**
-
-   - Thermo-chemical Modules Corrections and Improvements - **#76**
-
-   - Constants Into Commons - **#71**
-
-   - :code:`change_correlation_to_use()` Method (:code:`_lbh15.py`) Improvement - **#69**
-
-   - :code:`__assign_p()` Method (:code:`_lbh15.py`) Improvement - **#68**
-
-   - :code:`__compute_T()` Method (:code:`_lbh15.py`) Improvement - **#67**
-
-   - :code:`__check_temperature()` Method (:code:`_lbh15.py`) Improvement - **#66**
-
-   - :code:`__fill_class_attributes` Method (:code:`_lbh15.py`) Improvement - **#65**
-
-   - :code:`__check_properties()` Method (:code:`_lbh15.py`) Improvement - **#64**
-
-   - :code:`__add_property()` Method (:code:`_lbh15.py`) Improvement - **#63**
-
-   - :code:`__fill_instance_properties()` Method (:code:`_lbh15.py`) Improvement - **#62**
-
-   - Attribute Storing the Available Correlations (:code:`_lbh15.py`) - **#61**
-
-   - Attribute Storing All Property Objects (:code:`_lbh15.py`) - **#60**
-
-   - :code:`__load_custom_properties()` Method (:code:`_lbh15.py`) Improvement - **#59**
-
-   - :code:`__custom_properties_path` Attribute (:code:`_lbh15.py`) Modification - **#58**
-
-   - :code:`__property_list()` Method (:code:`_lbh15.py`) Improvement - **#57**
-
-   - :code:`_properties` Dict (:code:`_lbh15.py`) Keys Modification - **#56**
-
-   - :code:`is_injective()` Method (:code:`interface.py`) Name - **#54**
-
-   - :code:`info()` Method (:code:`interface.py`) Improvement - **#53**
-
-   - :code:`compute_bounds` Method (:code:`interface.py`) Improvement - **#52**
-
-   - Type Hints and Type Checking - **#49**
- 
-   - Define two new sections of the documentation to give the user more insights about thermo-chemical properties and their usage - **#48**
-
-   - Update the documentation to show the new thermo-chemical properties - **#47**
-
-   - Set the default correlations to use for the thermo-chemical properties of all liquid metals - **#44**
-
-   - Define module containing oxygen limits correlations related to lead - **#42**
-
-   - Define module containing thermo-chemical correlations related to lead - **#41**
-
-   - Define module containing diffusivity of elements in lead - **#40**
-
-   - Define module containing solubility of elements in lead - **#39**
-
-   - Define module containing oxygen limits correlations related to LBE - **#38**
-
-   - Define module containing thermo-chemical correlations related to LBE - **#37**
-
-   - Define module containing diffusivity of elements in LBE - **#36**
-
-   - Define module containing solubility of elements in LBE - **#35**
-
-   - Define module containing thermo-chemical properties in bismuth - **#34**
-
-   - Define module containing diffusivity of elements in bismuth - **#33**
-
-   - Modify the :code:`test_lbh15_fromX` so that it dynamically tests the initialization from all the available properties - **#31**
-
-   - Modifiy liquid metal classes to read thermo-chemical properties - **#30**
-
-   - Properties module attribute of :code:`LiquidMetalInterface` must be a dictionary to handle multiple modules - **#29**
-
-   - Modify the properties sub-package for the implementation of thermo-chemical properties - **#28**
-
-   - Define solubility of elements in bismuth - **#27**
-
-   - Define iron solubility property classes for bismuth - **#25**
-
-   - provide :code:`pyproject.toml` - **#22**
-
-   - Support of thermo-chemical properties - **#7**
+   - Checking separator when calling `set_custom_properties_path()` method - **#153**
 
 ..
 
 2. **Documentation**
    
-   - Regularization of :code:`\displaystyle` equations and :code:`\Big` modifiers - **#126**
+   - Review for v2.1.0 release - **#179**
 
-   - Add equation automatic numbering to Sphinx - **#124**
+   - Add monospace expression of all liquid metal properties - **#159**
 
-   - Use :code:`mhchem` *LaTeX* package for chemical equations - **#123**
+   - Unnecessary page in the html doc - **#158**
 
-   - Tutorial: code and doc	- **#118**
+   - Checking the way the correlations provided with different validity ranges have been selected - **#157**
 
-   - :code:`lbh15` within IAEA Oncore Codes List - **#73**
+   - Refactor *Advanced Usage* section in the doc and correct errors therein - **156**
 
-   - Define two new sections of the documentation to give the user more insights about thermo-chemical properties and their usage - **#48**
+   - Unnecessary use of `pprint` - **#154**
 
-   - Update the documentation to show the new thermo-chemical properties - **#47**
+   - Add contributing document - **#150**
 
-   - Update the API guide of the documentation to include the new thermo-chemical properties - **#43**
-
-   - Use the tex corporate class when generating the pdf documentation - **#24**
-
-   - Enable :code:`latexpdf` to generate the documentation - **#21**
+   - Clarify the statement of need	- **#148**
 
 ..
 
 3. **Bugs**
 
-   - Allow to deeply copy *LiquidMetal* objects - **#115**
-  
-   - Warnings management - **#107**
-
-   - Add the pressure info inside the :code:`__repr__` method - **#106**
-
-   - Fix initialization of liquid metal object from thermo-chemical properties - **#83**
-
-   - Thermo-chemical Modules Corrections and Improvements - **#76**
-
-   - Fix build of online documentation - **#72**
-
-   - :code:`__check_properties()` Method (:file:`_lbh15.py`) Improvement - **#64**
-
-   - Attribute Change within :file:`_lbh15.py` - **#55**
-
-   - Bug into :code:`range_warning` Method (:file:`interface.py`) - **#51**
-
-   - Fix loading of duplicate properties - **#45**
-
-   - Modify the :file:`test_lbh15_fromX.py` so that it dynamically tests the initialization from all the available properties - **#31**
+   - `print()` method not working - **#152**
 
 Some issues are yet to be solved. Here in the following the list of currently open issues subdivided according to their labels:
 
 1. **Enhancements**
+
+   - Testing with `pytest` not working - **#175**
+
+   - Introduce the ability to restore the default correlations - **#146**
+
+   - Giving the user the possibility to choose which module to load - **#137**
 
    - Refactor physical constants variables with dataclasses - **#122**
 
@@ -181,10 +68,14 @@ Some issues are yet to be solved. Here in the following the list of currently op
 
 2. **Documentation**
 
+   - Include automatic tests description into doc for Verification purposes - **#138**
+
    - :code:`graphivz`-generated diagrams - **#125**
 
 3. **Question**   
-  
+
+   - New elements and correlations for lead thermochemistry - **#134**
+
    - Investigating asynchronous approach - **#102**
 
 4. **Help wanted**   
