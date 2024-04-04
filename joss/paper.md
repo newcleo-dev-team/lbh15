@@ -19,9 +19,9 @@ authors:
   - name: Pierre-Alexandre Pantel
     affiliation: 2
 affiliations:
-  - name: '*new*cleo Srl, via Giuseppe Galliano 27, 10129 Torino, Italy'
+  - name: 'newcleo Srl, via Giuseppe Galliano 27, 10129 Torino, Italy'
     index: 1
-  - name: '*new*cleo SA, 9 Rue des Cuirassiers, 69003 Lyon, France'
+  - name: 'newcleo SA, 9 Rue des Cuirassiers, 69003 Lyon, France'
     index: 2
 date: 08 January 2023
 bibliography: paper.bib
