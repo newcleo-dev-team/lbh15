@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Version 2.1.0 (2024-04-04)
+--------------------------
+
+- fixed known bugs
+
+- peer-reviewed documentation
+
+- refactored property classes
+
+- improved cross-platform path handling for user-defined properties
+
+- inserted contributing guidelines
+
 Version 2.0.0 (2024-01-08)
 --------------------------
 
