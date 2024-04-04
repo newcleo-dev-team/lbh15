@@ -10,6 +10,11 @@ Introduction
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by OECD/NEA :cite:`Agency2015`:
 https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition.
+
+*lbh15* offers a standard implementation for use of these properties in scientific applications.
+In particular, this package is used for numerical simulation and experimental activities supporting the
+development of nuclear reactors that employ heavy liquid metals as primary coolant.
+
 The thermo-physical properties implemented in the package are listed in :numref:`tableprop`.
 
 .. list-table:: *lbh15* thermo-physical properties from the handbook edited by OECD/NEA.
@@ -29,10 +34,10 @@ The thermo-physical properties implemented in the package are listed in :numref:
    * - Boiling temperature
      - :math:`T_{b0}`
      - :math:`[K]`
-   * - Vaporisation heat
+   * - Vaporization heat
      - :math:`Q_{b0}`
      - :math:`[J/kg]`
-   * - Saturation vapour pressure
+   * - Saturation vapor pressure
      - :math:`p_s`
      - :math:`[Pa]`
    * - Surface tension
@@ -69,8 +74,8 @@ The thermo-physical properties implemented in the package are listed in :numref:
 The dimensionless Prandtl number (:math:`Pr`) can be queried as instance attribute as well.
 
 The thermo-chemical properties implemented since version 1.2.0 are listed in :numref:`tablechemdata` (basic properties), :numref:`tablechemsoldiff`
-(solubilities, diffusivities and Oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of Oxygen concentration for oxide layers generation
-when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of Oxygen concentration for
+(solubilities, diffusivities and Oxygen partial pressure), :numref:`tablechemlowlimssat` (lower limits of oxygen concentration for oxide layers generation
+when the corresponding metal is considered at its saturation concentration) and :numref:`tablechemlowlims` (lower limits of oxygen concentration for
 oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient).
 
 .. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: basic data.
@@ -103,7 +108,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - ✔
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and Oxygen partial pressure.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: solubilities, diffusivities and oxygen partial pressure.
    :widths: 50 25 25 25 25 25
    :name: tablechemsoldiff
    :header-rows: 1
@@ -182,7 +187,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - :math:`-`
    * - Oxygen partial pressure
 
-       divided by the Oxygen
+       divided by the oxygen
        
        concentration squared
      - :math:`P_{\ce{O2}}`
@@ -191,7 +196,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - ✔
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxide layers generation when the corresponding metal is considered at its saturation concentration.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of oxygen concentration for oxide layers generation when the corresponding metal is considered at its saturation concentration.
    :widths: 50 25 25 25 25 25
    :name: tablechemlowlimssat
    :header-rows: 1
@@ -253,7 +258,7 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - ✔
      - :math:`-`
 
-.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of Oxygen concentration for oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
+.. list-table:: *lbh15* thermo-chemical properties from the handbook edited by OECD/NEA: lower limits of oxygen concentration for oxide layers generation multiplied by the corresponding metal concentration raised to a specific coefficient.
    :widths: 50 25 25 25 25 25
    :name: tablechemlowlims
    :header-rows: 1
@@ -328,7 +333,8 @@ of the package (see :any:`advanced-usage` section).
 
 Go to :any:`API-Guide` section to see the full code documentation.
 
-*lbh15* is released under the GNU Lesser General Public License 3 (see :any:`License` section).
+*lbh15* is developed and maintained by the **Codes & Methods** group of \ *new*\ cleo (https://www.newcleo.com/) and
+is released under the GNU Lesser General Public License 3 (see :any:`License` section).
 
 *lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx) by IAEA.
 
@@ -466,7 +472,7 @@ This section shows a few examples of basic usage of *lbh15*.
   >>> liquid_lead.k
   22.4
 
-- Create an instance of :class:`.Lead` class at a given temperature :code:`T`, then change the temperature value. Compare the Oxygen
+- Create an instance of :class:`.Lead` class at a given temperature :code:`T`, then change the temperature value. Compare the oxygen
   diffusivity values :code:`o_dif` at the two temperatures:
 
   >>> from lbh15 import Lead
@@ -486,12 +492,11 @@ This section shows a few examples of basic usage of *lbh15*.
   <stdin>:1: UserWarning: The surface tension is requested at temperature value of 1400.00 K that is not in validity range [600.60, 1300.00] K
   0.3676999999999999
 
-- Get summary information of the liquid metal using *pprint* package (the warnings about out-of-range correlations are also written):
+- Get summary information of the liquid metal using the overriden *__repr__* dunder method (the warnings about out-of-range correlations are also written):
 
   >>> from lbh15 import Lead
-  >>> import pprint
   >>> liquid_lead = Lead(T=900)
-  >>> pprint.pprint(liquid_lead)
+  >>> liquid_lead
   .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The iron diffusivity is requested at temperature value of 900.00 K that is not in validity range [973.00, 1273.00] K
     attr_value = getattr(self, key)
   .local/lib/python3.9/site-packages/lbh15/_lbh15.py:740: UserWarning: The silicon solubility is requested at temperature value of 900.00 K that is not in validity range [1323.00, 1523.00] K
@@ -510,7 +515,7 @@ Initialization from Properties (*experimental*)
 The *lbh15* package gives the possibility to instantiate a liquid metal object by simply knowing the value of one of its
 properties (see :class:`.Lead`, :class:`.Bismuth` and :class:`.LBE` classes documentation for the full list).
 This is accomplished by finding the root of the correlation function matching the target property value. Such function,
-which constitutes a physical correlation, must be injective in the range considered for the root. Note that this is a
+which is a physical property correlation, must be injective in the range considered for the root. Note that this is a
 necessary, but not jointly sufficient condition to find a root for the function.
 
 
@@ -538,11 +543,11 @@ In the following, some examples are provided:
 
   >>> from lbh15 import Lead
   >>> from lbh15 import Bismuth
-  >>> # Inititialize Lead with k=17.37 [W/(m*K)]
+  >>> # Inititialize lead with k=17.37 [W/(m*K)]
   >>> liquid_lead = Lead(k=17.37)
-  >>> # Initialize Bismuth with Lead temperature in K
+  >>> # Initialize bismuth with lead temperature in K
   >>> liquid_bismuth = Bismuth(T=liquid_lead.T)
-  >>> # Print Bismuth conductivity
+  >>> # Print bismuth conductivity
   >>> liquid_bismuth.k
   14.395909090909091
 
@@ -574,180 +579,229 @@ In the following, some examples are provided:
   >>> lead_cp_1.T, lead_cp_2.T
   (1437.4148683656551, 1699.157333532332)
 
-
-
 .. _advanced-usage:
 
 ++++++++++++++
 Advanced Usage
 ++++++++++++++
 
-Advanced usage includes the possibility of adding new properties and new physical correlations according to the following examples.
+Advanced usage includes the possibility of adding new properties and new
+correlations. First of all, the user should be aware of the properties that are
+currently available along with the correlations. The method
+:meth:`.Lead.available_correlations` provides this information for a
+:class:`.Lead` instance (the same goes for :class:`.Bismuth` and :class:`.LBE`
+instances). Two examples of use are provided, the first one asking for the
+available correlations for all the implemented properties, the second one
+asking for the available correlations for a few specific properties, that is,
+the heat capacity and the speed of sound:
 
-- This first example shows how to define a custom correlation for the liquid lead density that 
-  does not depend on pressure, and how to use it instead of the default one (the same holds for :class:`.Bismuth` and :class:`.LBE` classes).
-  The names of the available correlations can be queried by a simple function call
-  (the generic name :code:`lbh15` is used in case the correlation's name is not specified in the
-  reference handbook :cite:`Agency2015`):
-  
-  >>> from lbh15 import Lead
-  >>> Lead.available_correlations()
-  defaultdict(<class 'list'>, {'k': ['lbh15'], 'lim_ni': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'H': ['lbh15'], 'lim_cr': ['venkatraman1988', 'alden1958', 'gosse2014'], 'sigma': ['jauch1986'], 'cp': ['sobolev2011', 'gurvich1991'], 'cr_sol': ['venkatraman1988', 'gosse2014', 'alden1958'], 'in_dif': ['lbh15'], 'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'si_sol': ['lbh15'], 'fe_dif': ['lbh15'], 'lim_si': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'G': ['lbh15'], 'p_s': ['sobolev2011'], 'beta_s': ['lbh15'], 'se_dif': ['lbh15'], 'lim_al_sat': ['lbh15'], 'ni_sol': ['gosse2014'], 'r': ['lbh15'], 'S': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'co_dif': ['lbh15'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_fe': ['lbh15'], 'rho': ['sobolev2008a'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15']})
-  
-  
-  Let implement the new property in :code:`<execution_dir>/custom_properties/lead_properties.py` as:
+>>> from lbh15 import Lead
+>>> Lead.available_correlations()
+defaultdict(<class 'list'>, {'k': ['lbh15'], 'lim_ni': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'H': ['lbh15'], 'lim_cr': ['venkatraman1988', 'alden1958', 'gosse2014'], 'sigma': ['jauch1986'], 'cp': ['sobolev2011', 'gurvich1991'], 'cr_sol': ['venkatraman1988', 'gosse2014', 'alden1958'], 'in_dif': ['lbh15'], 'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'si_sol': ['lbh15'], 'fe_dif': ['lbh15'], 'lim_si': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'G': ['lbh15'], 'p_s': ['sobolev2011'], 'beta_s': ['lbh15'], 'se_dif': ['lbh15'], 'lim_al_sat': ['lbh15'], 'ni_sol': ['gosse2014'], 'r': ['lbh15'], 'S': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'co_dif': ['lbh15'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_fe': ['lbh15'], 'rho': ['sobolev2008a'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15']})
+>>> Lead.available_correlations(["cp", "u_s"])
+{'cp': ['gurvich1991', 'sobolev2011'], 'u_s': ['sobolev2011']}
 
-  .. code-block:: python
+In the first example, the keys of the returned dictionary represents all the
+properties currently available, and, for each one, a list is provided containing
+the names of all the related correlations. The generic name :code:`lbh15` is
+used in case the correlation's name is not specified in the reference handbook
+:cite:`Agency2015`. In the second example, the structure of the returned
+dictionary is the same, but containing only data for the required properties.
 
-    from scipy.constants import atm
-    from lbh15.properties.interface import PropertyInterface
-    from lbh15.properties.interface import range_warning
+The rest of this chapter is divided into two sections, the first describing
+how to add a new correlation to an existing property, the second describing
+how to add a new property with its correlation.
 
-    class rho_custom_corr(PropertyInterface):
-        @range_warning
-        def correlation(self, T, p=atm, verbose=False):
-            "Implement here the user-defined correlation."
-            return 11400 - 1.2*T
+.. _how-new-corrs:
 
-        @property
-        def range(self):
-            return [700.0, 1900.0]
+How to Add New Correlations
+===========================
 
-        @property
-        def units(self):
-            return "[kg/m^3]"
+This section shows how to define a custom correlation for the density of
+liquid lead that does not depend on pressure, and how to use it instead of
+the default one (the same holds for :class:`.Bismuth` and :class:`.LBE`
+classes).
 
-        @property
-        def name(self):
-            return "rho"
+Let's implement the new property in
+:code:`<execution_dir>/custom_properties/lead_properties.py` as:
 
-        @property
-        def long_name(self):
-            return "custom density"
+.. code-block:: python
 
-        @property
-        def description(self):
-            return "Liquid lead " + self.long_name
+  from scipy.constants import atm
+  from lbh15.properties.interface import PropertyInterface
+  from lbh15.properties.interface import range_warning
 
-        @property
-        def correlation_name(self):
-            return "custom2022"
+  class rho_custom_corr(PropertyInterface):
+      @range_warning
+      def correlation(self, T, p=atm, verbose=False):
+          "Implement here the user-defined correlation."
+          return 11400 - 1.2*T
 
-  .. note:: It is mandatory to override the ``correlation`` method and the ``range``, ``units``, ``long_name`` and ``description`` properties.
+      @property
+      def range(self):
+          return [700.0, 1900.0]
 
-  .. note:: Properties are not allowed having the name starting with ``__``. This means that neither the name of the corresponding class nor the name provided by the ``name`` attribute must start with ``__``.
+      @property
+      def units(self):
+          return "[kg/m^3]"
 
-  .. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :ref:`basic-usage` section.
+      @property
+      def name(self):
+          return "rho"
 
-  Then, provided that the execution is performed in :code:`<execution_dir>`, one can check the correct implementation as follows:
+      @property
+      def long_name(self):
+          return "custom density"
 
-  >>> from lbh15 import Lead
-  >>> import os
-  >>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
-  >>> Lead.correlations_available()
-  defaultdict(<class 'list'>, {'o_pp': ['taskinen1979', 'charle1976', 'alcock1964', 'otsuka1979', 'otsuka1981', 'fisher1966', 'isecke1977', 'szwarc1972', 'ganesan2006'], 'lim_cr_sat': ['lbh15'], 'fe_dif': ['lbh15'], 'o_dif': ['charle1976', 'swzarc1972', 'arcella1968', 'gromov1996', 'ganesan2006b', 'otsuka1975', 'homna1971'], 'rho': ['sobolev2008a', 'custom2022'], 'cp': ['gurvich1991', 'sobolev2011'], 'lim_si': ['lbh15'], 'G': ['lbh15'], 'se_dif': ['lbh15'], 'ni_sol': ['gosse2014'], 'lim_al_sat': ['lbh15'], 'k': ['lbh15'], 'si_sol': ['lbh15'], 'u_s': ['sobolev2011'], 'mu': ['lbh15'], 'sigma': ['jauch1986'], 'cr_sol': ['gosse2014', 'alden1958', 'venkatraman1988'], 'S': ['lbh15'], 'lim_cr': ['alden1958', 'gosse2014', 'venkatraman1988'], 'H': ['lbh15'], 'co_dif': ['lbh15'], 'fe_sol': ['gosse2014'], 'lim_si_sat': ['lbh15'], 'lim_fe_sat': ['lbh15'], 'lim_fe': ['lbh15'], 'beta_s': ['lbh15'], 'p_s': ['sobolev2011'], 'te_dif': ['lbh15'], 'lim_ni_sat': ['lbh15'], 'o_sol': ['lbh15'], 'r': ['lbh15'], 'lim_ni': ['lbh15'], 'h': ['sobolev2011'], 'alpha': ['lbh15'], 'in_dif': ['lbh15'], 'T_double': ['double2022']})
+      @property
+      def description(self):
+          return "Liquid lead " + self.long_name
 
-  The correlations currently available for the density property :code:`rho` are now 2: :code:`sobolev2008a` and :code:`custom2022`.
-  If the density correlation is not specified for a new object instantiation, the last one in the list will be selected as default:
+      @property
+      def correlation_name(self):
+          return "custom2022"
 
-  >>> # Use default one
-  >>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
-  >>> # Get an instance of Lead object at T=1000 K
-  >>> liquid_lead_1 = Lead(T=1000)
-  >>> # Print info about rho
-  >>> liquid_lead_1.rho_info()
-  rho:
-        Value: 10161.50 [kg/m^3]
-        Validity range: [600.60, 2021.00] K
-        Correlation name: 'sobolev2008a'
-        Long name: density
-        Units: [kg/m^3]
-        Description:
-                Liquid lead density
-  >>> # Use the custom implementation of density
-  >>> Lead.set_correlation_to_use('rho', 'custom2022')
-  >>> # Get another instance of Lead object with new rho
-  >>> liquid_lead_2 = Lead(T=1000)
-  >>> # Compare the density of the two objects
-  >>> liquid_lead_1.rho, liquid_lead_2.rho
-  (10161.5 10200.0)
-  >>> # Print full info about density of second instance
-  >>> liquid_lead_2.rho_info()
-  rho:
-        Value: 10200.00 [kg/m^3]
+.. note:: It is mandatory to override the ``correlation`` method and the ``range``, ``units``, ``long_name`` and ``description`` properties.
+
+.. note:: Properties are not allowed having the name starting with ``__``. This means that neither the name of the corresponding class nor the name provided by the ``name`` attribute must start with ``__``.
+
+.. note:: It is strongly recommended to use the ``@range_warning`` decorator so that the correlation range is checked when property is queried as liquid metal property and warning is printed, if any, as in :ref:`basic-usage` section.
+
+Then, provided that the execution is performed in :code:`<execution_dir>`, one
+can check the correct implementation as follows:
+
+>>> from lbh15 import Lead
+>>> import os
+>>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
+>>> Lead.available_correlations("rho")
+{'rho': ['sobolev2008a', 'custom2022']}
+
+The correlations available for the density property :code:`rho` are
+now 2: :code:`sobolev2008a` and :code:`custom2022`. If the density correlation
+is not specified for a new object instantiation, the last one in the list will
+be selected by default:
+
+>>> liquid_lead = Lead(T=1000)
+>>> liquid_lead.rho_info()
+rho:
+      Value: 10200.00 [kg/m^3]
+      Validity range: [700.00, 1900.00] K
+      Correlation name: 'custom2022'
+      Long name: custom density
+      Units: [kg/m^3]
+      Description:
+              Liquid Lead custom density
+
+Once introduced the new correlation :code:`custom2022` for the density
+:code:`rho`, the user can choose which one to use by means of the method
+:meth:`.Lead.set_correlation_to_use`, according to the following
+example:
+
+>>> # Use default one
+>>> Lead.set_correlation_to_use('rho', 'sobolev2008a')
+>>> # Get an instance of lead object at T=1000 K
+>>> liquid_lead_1 = Lead(T=1000)
+>>> # Print info about rho
+>>> liquid_lead_1.rho_info()
+rho:
+      Value: 10161.50 [kg/m^3]
+      Validity range: [600.60, 2021.00] K
+      Correlation name: 'sobolev2008a'
+      Long name: density
+      Units: [kg/m^3]
+      Description:
+              Liquid lead density
+>>> # Use the custom implementation of density
+>>> Lead.set_correlation_to_use('rho', 'custom2022')
+>>> # Get another instance of lead object with new rho
+>>> liquid_lead_2 = Lead(T=1000)
+>>> # Compare the density of the two objects
+>>> liquid_lead_1.rho, liquid_lead_2.rho
+(10161.5 10200.0)
+>>> # Print full info about density of second instance
+>>> liquid_lead_2.rho_info()
+rho:
+      Value: 10200.00 [kg/m^3]
+      Validity range: [700.00, 1900.00] K
+      Correlation name: 'custom2022'
+      Long name: custom density
+      Units: [kg/m^3]
+      Description:
+              Liquid Lead custom density
+
+It is also possible to change the correlation used by a liquid metal object
+instance by calling the :meth:`.Lead.change_correlation_to_use` method on the
+instance itself.
+
+.. _how-new-props:
+
+How to Add New Properties
+=========================
+
+This section describes how to add new properties to the liquid metal objects.
+For instance, let's implement in
+:code:`<execution_dir>/custom_properties/double_T.py` the custom property
+:code:`double_T` that is simply the double of the temperature:
+
+.. code-block:: python
+
+  from scipy.constants import atm
+  from lbh15.properties.interface import PropertyInterface
+  from lbh15.properties.interface import range_warning
+
+  class T_double(PropertyInterface):
+      @range_warning
+      def correlation(self, T, p=atm, verbose=False):
+          "Return the temperature value multiplied by 2."
+          return 2*T
+
+      @property
+      def range(self):
+          return [700.0, 1900.0]
+
+      @property
+      def units(self):
+          return "[K]"
+
+      @property
+      def name(self):
+          return "T_double"
+
+      @property
+      def long_name(self):
+          return "double of the temperature"
+
+      @property
+      def description(self):
+          return "Liquid lead " + self.long_name
+
+      @property
+      def correlation_name(self):
+          return "double2022"
+
+The new custom property can be set as :class:`.Lead` attribute by specifying
+the path to the module where it is defined:
+
+>>> from lbh15 import Lead
+>>> import os
+>>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
+>>> # Initialization of lead object at T=750 K
+>>> liquid_lead = Lead(T=750)
+>>> # Get T_double
+>>> liquid_lead.T_double
+1500
+>>> # Get its info
+>>> liquid_lead.T_double_info()
+T_double:
+        Value: 1500.00 [K]
         Validity range: [700.00, 1900.00] K
-        Correlation name: 'custom2022'
-        Long name: custom density
-        Units: [kg/m^3]
+        Correlation name: 'double2022'
+        Long name: double of the temperature
+        Units: [K]
         Description:
-                Liquid Lead custom density
+                Liquid lead double of the temperature
 
-  It is also possible to change the correlation used by a liquid metal object instance by calling the :code:`change_correlation_to_use` method
-  on the instance itself.
-
-- *lbh15* also allows to add new properties to the liquid metal objects. For 
-  instance, let's implement in :code:`<execution_dir>/custom_property/double_T.py`
-  a custom property that is simply the double of the temperature:
-
-  .. code-block:: python
-
-    from scipy.constants import atm
-    from lbh15.properties.interface import PropertyInterface
-    from lbh15.properties.interface import range_warning
-
-    class T_double(PropertyInterface):
-        @range_warning
-        def correlation(self, T, p=atm, verbose=False):
-            "Return the temperature value multiplied by 2."
-            return 2*T
-
-        @property
-        def range(self):
-            return [700.0, 1900.0]
-
-        @property
-        def units(self):
-            return "[K]"
-
-        @property
-        def name(self):
-            return "T_double"
-
-        @property
-        def long_name(self):
-            return "double of the temperature"
-
-        @property
-        def description(self):
-            return "Liquid lead " + self.long_name
-
-        @property
-        def correlation_name(self):
-            return "double2022"
-
-  The new custom property can be set as :class:`.Lead` attribute by specifying the path to the module
-  where it is defined:
-
-  >>> from lbh15 import Lead
-  >>> import os
-  >>> Lead.set_custom_properties_path(os.getcwd() + '/custom_properties/lead_properties.py')
-  >>> # Initialization of lead object at T=750 K
-  >>> liquid_lead = Lead(T=750)
-  >>> # Get T_double
-  >>> liquid_lead.T_double
-  1500
-  >>> # Get its info
-  >>> liquid_lead.T_double_info()
-  T_double:
-          Value: 1500.00 [K]
-          Validity range: [700.00, 1900.00] K
-          Correlation name: 'double2022'
-          Long name: double of the temperature
-          Units: [K]
-          Description:
-                  Liquid lead double of the temperature
-
-  Each new property implemented by the user is also available at initialization.
+Each new property implemented by the user is also available at initialization.
 
 .. note:: The paths of the modules to load the properties from must be absolute.
 
@@ -758,10 +812,10 @@ Learn More
 ==========
 
 This section contains additional information about the chemistry of heavy liquid metals in presence of dispersed
-Oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
-the Oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
-presented in :any:`tutorials` section, describes a tutorial application coming together with *lbh15*, which is a
-representation of a simple Oxygen control system applied to a liquid lead volume.
+oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
+the oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
+presented in :any:`tutorials` section, describes a tutorial application delivered with *lbh15*, which is a
+representation of a simple oxygen control system applied to a liquid lead volume.
 
 .. include:: learn_more.rst
  
@@ -780,4 +834,4 @@ In the end, in :any:`properties-module` section, the *API Guide* is provided of 
 .. toctree::
    :maxdepth: 2
 
-   documentation.rst
+   lbh15.rst

@@ -4,8 +4,7 @@ import warnings
 import sys
 import inspect
 import importlib
-import os.path
-import platform
+import pathlib
 import copy
 from abc import ABC
 from abc import abstractmethod
@@ -265,10 +264,27 @@ class LiquidMetalInterface(ABC):
         return list(dict.fromkeys(rvalue))
 
     @classmethod
-    def available_correlations(cls) -> Dict[str, List[str]]:
+    def available_correlations(cls,
+                               properties: Union[str, List[str], None] = None)\
+            -> Dict[str, List[str]]:
         """
-        Returns the dictionary containing the available correlations \
-        for each property.
+        Returns the available correlations for the properties passed as
+        argument. Result is formatted as dictionary, where keys are the
+        required property names and values are the corresponding lists
+        of available correlations. In case at least one required property
+        is not among the implemented ones, a warning message is returned
+        listing the names of all the properties that have not been found.
+        In case no value is passed as argument, the available correlations
+        are returned for all the implemented properties.
+
+        Parameters
+        ----------
+        properties : str | List[str] | None
+            name(s) of the property(ies) whose available correlations
+            are to be retrieved. If multiple properties are required,
+            the list of their names must be provided, otherwise a simple
+            string is enough. If the correlations are required for all the
+            implemented properties, then `None` value is to be passed.
 
         Returns
         -------
@@ -276,7 +292,24 @@ class LiquidMetalInterface(ABC):
         """
         obj_list = cls.__load_properties()
         obj_list += cls.__load_custom_properties()
-        return cls.__extract_available_correlations(obj_list)
+        props_dict = cls.__extract_available_correlations(obj_list)
+
+        # If no argument is passed as input,
+        # return correlations for all the implemented properties
+        if properties is None:
+            return props_dict
+
+        # Check for any required property that is not available
+        if isinstance(properties, str):
+            properties = [properties]
+        props_not_avail = [
+            pr for pr in properties if pr not in props_dict.keys()]
+        if len(props_not_avail) > 0:
+            warnings.warn(f"Required '{props_not_avail}' properties not found!"
+                          "\nPlease check the property name(s) "
+                          "and try again!", stacklevel=5)
+
+        return {k: v for k, v in props_dict.items() if k in properties}
 
     @classmethod
     def set_correlation_to_use(cls, property_name: str,
@@ -322,16 +355,19 @@ class LiquidMetalInterface(ABC):
         file_path : str
             absolute path of the file where custom properties are implemented
         """
+        # Normalize the path, no matter the OS
+        norm_path = pathlib.Path(file_path)
+
         # Exit if the file passed as argument does not exist
-        if (not os.path.isfile(file_path)):
-            warnings.warn(f"'{file_path}' provided file not found!"
+        if not norm_path.exists():
+            warnings.warn(f"'{norm_path}' provided file not found!"
                           "\nPlease check the file path and try again!"
                           "\nNo custom property added.", stacklevel=5)
             return
-        char = '\\' if 'Windows' in platform.system() else '/'
-        res = file_path.split(char)
-        file_name = res[-1][:-3]
-        path = file_path[:-len(res[-1])]
+
+        # Add filename and the corresponding path to the class dict
+        file_name = norm_path.stem
+        path = str(norm_path.parent)
         if path not in cls._custom_properties_path:
             cls._custom_properties_path[path] = [file_name]
         else:
@@ -522,8 +558,9 @@ class LiquidMetalInterface(ABC):
         key = property_object.name
         self.__properties[key] = property_object
         setattr(self, property_object.name+"_info",
-                lambda: self.__properties[key].info(self.__T, self.__p,
-                                                    True, 0))
+                lambda print_info=True, n_tab=0:
+                    self.__properties[key].info(self.__T, self.__p,
+                                                print_info, n_tab))
 
     def __align_corrs_to_properties(self) -> None:
         """

@@ -1,3 +1,6 @@
+lbh15 Package
+=============
+
 .. toctree::
    :maxdepth: 1
 

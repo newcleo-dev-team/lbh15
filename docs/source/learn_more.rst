@@ -4,18 +4,18 @@
 Oxygen Control
 ++++++++++++++
 
-In lead and LBE systems, Oxygen is the most important chemical element, which results
-from start-up operations, maintenance services and, possibily, incidental contaminations (:cite:`Agency2015`).
+In lead and lbe systems, oxygen is the most important chemical element, which results
+from start-up operations, maintenance services and, possibly, incidental contaminations (:cite:`Agency2015`).
 To operate a nuclear reactor cooled by a lead alloy, it is thus important to
-determine the upper and the lower Oxygen concentration limits.
+determine the upper and the lower oxygen concentration limits.
 
 .. _ Oxygen concentration upper limit:
 
 Oxygen Concentration Upper Limit
 ================================
 
-The upper limit corresponds to the Oxygen concentration value above which contamination by coolant oxides occurs.
-It is represented by the *Oxygen solubility* in lead and LBE alloys. *lbh15* provides
+The upper limit corresponds to the oxygen concentration value above which contamination by coolant oxides occurs.
+It is represented by the *oxygen solubility* in lead and lbe alloys. *lbh15* provides
 these properties in the ``lead_thermochemical_properties.solubility_in_lead``
 and ``lbe_thermochemical_properties.solubility_in_lbe`` modules.
 The implemented data are extracted from :cite:`Agency2015`, table 3.5.2,
@@ -31,17 +31,17 @@ The lower limit corresponds to the minimum value of the oxygen concentration ena
 The oxide layer formation is possible only when the oxygen potential in the liquid metal is above the
 potential leading to the protective film formation. The correlations implemented in the
 ``lead_thermochemical_properties.lead_oxygen_limits`` and ``lbe_thermochemical_properties.lbe_oxygen_limits``
-modules for computing the lower limits of Oxygen concentration are obtained by applying the methodology
+modules for computing the lower limits of oxygen concentration are obtained by applying the methodology
 described in :cite:`Agency2015`, chapter 4, part 4.2.2, pages 187-192. A brief summary is provided in the following.
 
-First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the Oxygen
+First of all, the reference reaction equation and the associated Gibbs free energy are determined. Then, the oxygen
 concentration is expressed as a function of temperature. Eventually, two kinds of correlations, based on two different
 assumptions, are derived.
 
 ..
 
   1. The equation :eq:`oxide_react_eq` of the oxidation reaction is set by considering that it occurs
-     between the metal and the Oxygen, with the Oxygen supposed in solution as dissolved :math:`\ce{PbO}` below its saturation limit.
+     between the metal and the oxygen, with the oxygen supposed in solution as dissolved :math:`\ce{PbO}` below its saturation limit.
      The formation equation :eq:`metal_oxide_eq` of the metal oxide (equation 4.5, page 188 of :cite:`Agency2015`) is combined with the formation
      equation :eq:`pbo_eq` of :math:`\ce{PbO}`, (table 4.2.2, page 189 of :cite:`Agency2015`):
 
@@ -101,7 +101,7 @@ assumptions, are derived.
        components appearing in the related reaction.
 
      In detail, the chemical activity :math:`\alpha` is a dimensionless quantity used to express the deviation
-     of a mixture of chemical substances from a standard behaviour. It is defined by the following relations:
+     of a mixture of chemical substances from a standard behavior. It is defined by the following relations:
 
      - :math:`\alpha_i = \gamma_i\cdot\chi_i` , being :math:`\gamma` the dimensionless activity coefficient
        of the :math:`i`-th species and :math:`\chi_i` the molar fraction of the same species;
@@ -115,38 +115,38 @@ assumptions, are derived.
      
      .. math:: \alpha_i=C_i / C_i^{sat}.
 
-     About the chemical activity of lead in LBE, *lbh15* implements the correlation proposed by Gossé (2014)
+     About the chemical activity of lead in lbe, *lbh15* implements the correlation proposed by Gossé (2014)
      and written in chapter 3.3, part 3.3 of :cite:`Agency2015`.
 
 ..
 
   4. The aim is now to develop, for each possible dissolved metal, a correlation for the lower limit of the
-     Oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
+     oxygen concentration that has the same structure as the equation 4.12, part 4.2.2 of :cite:`Agency2015`. Starting from the
      oxidation reaction equation :eq:`oxide_react_eq`, the following substitution is applied:
 
      .. math:: \Delta_rG^0 \left( T \right) = -RT\ln{ \left( \frac{\alpha_{\ce{Pb}} \cdot \alpha_{\ce{Me_XO_Y}}^{\frac{1}{Y}}}{\alpha_{\ce{PbO}}\cdot\alpha_{\ce{Me_{\left( dissolved \right)}}}^{\frac{X}{Y}}} \right)},
 
-     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the Oxygen
+     where the term :math:`\alpha_{\ce{Me_XO_Y}}` can be considered equal to one: the lower limit is to be found of the oxygen
      concentration, thus the metal oxide is considered very diluted.
 
-     By considering the Oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
-     thus taking the chemical activity of the dissolved Oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
+     By considering the oxygen dissolved in the solution in the form of :math:`\ce{PbO}` below its saturation limit, as stated in :cite:`Agency2015`,
+     thus taking the chemical activity of the dissolved oxygen equal to the chemical activity of the dissolved :math:`\ce{PbO}`, and by
      applying some transformations, one can obtain:
 
      .. math:: \ln{\left( C_{\ce{O}} \right)} = \frac{X}{Y} \cdot \ln{\left(\frac{C_{\ce{Me}}^{sat}}{C_{\ce{Me}}}\right)} + \frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} + \ln{\left(\alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat}\right)}.
       :label: ox_conc_eq
 
-     In the above equation, the unknows are two, that is, the Oxygen concentration :math:`C_{\ce{O}}` and the concentration
+     In the above equation, the unknows are two, that is, the oxygen concentration :math:`C_{\ce{O}}` and the concentration
      :math:`C_{\ce{Me}}` of the dissolved metal, thus preventing the direct computation of the solution. For achieving
      a useful correlation, the user can choose between two strategies that are proposed and adopted in *lbh15*. They differ
      on how they treat the chemical activity of the dissolved metal. The actual activities at the interface are
      influenced by how diffusion, convection and mass transfer phenomena interact in the liquid metal boundary layer.
-     Ongoing researches are in progress, but currently the exact values for the chemical activities of the dissolved
-     metal and of the Oxygen are not known.
+     In spite of the ongoing research, the exact values for the chemical activities of the dissolved
+     metal and of the oxygen are not known.
 
      a. The first approach is to consider the chemical activity of the dissolved metal equal to one.
         In this way, the first and the second terms of the right hand side of equation :eq:`ox_conc_eq` become zero, enabling to
-        compute the lower limit of the Oxygen concentration directly through the following relation:
+        compute the lower limit of the oxygen concentration directly through the following relation:
 
         .. math:: C_{\ce{O}} = \alpha_{\ce{Pb}} \cdot C_{\ce{O}}^{sat} \cdot \exp{\left(\frac{\Delta H^0_{\left(3\right)}}{2RT} - \frac{\Delta S^0_{\left(3\right)}}{2R} \right)},
 
@@ -156,7 +156,7 @@ assumptions, are derived.
 
         - :math:`C_{\ce{O}}^{sat}` is computed by adopting the recommended coefficients from table 3.5.2 of :cite:`Agency2015`;
 
-        - :math:`\alpha_{\ce{Pb}}` is taken equal to one in pure Lead, while in LBE it is computed by adopting the
+        - :math:`\alpha_{\ce{Pb}}` is taken equal to one in pure Lead, while in lbe it is computed by adopting the
           correlation proposed by Gossé as indicated at page 146 of :cite:`Agency2015`.
 
      b. The second approach does not exploit any assumption. In order to make equation :eq:`ox_conc_eq` solvable, the two unknowns
@@ -178,39 +178,38 @@ Ranges of Validity
 ==================
 
 As stated in the previous section, multiple correlations are involved in the computation of the lower limits of
-oxygen concentration, each being valid over a specific temperature range. The temperature range of
-validity specified in the *lbh15* package for each correlation is the most restrictive one.
-
-In the following, the choices are detailed about the validity ranges that have been adopted:
+oxygen concentration, each being valid over a specific temperature range. The validity range of a specific lower limit
+is then defined as the intersection of the validity ranges of the correlations on which the lower limit itself depends.
+More details as follows:
 
   - For the lower limit correlations based on the saturation assumption (approach *a*), the lower temperature
     value is taken equal to the lower limit of the validity range of the oxygen solubility correlation,
     while the upper temperature value is taken equal to the upper limit of the validity range of the main
-    oxides free enthalpy coefficients. The result is the [673;1000] *K* range.
+    oxides free enthalpy coefficients. The result is the [673;1000] *[K]* range.
   
   ..
 
   - For the lower limit of the oxygen concentration times the metal concentration raised to a certain exponent (approach *b*),
-    the validity range is taken equal to that in the approach *a*, that is, [673;1000] *K*, but for the following correlations:
+    the validity range is taken equal to that in the approach *a*, that is, [673;1000] *[K]*, but for the following correlations:
 
-    - Concerning the chromium solubility in LBE given by Courouau in 2004, the upper limit of the validity range
-      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;813] *K* range;
+    - Concerning the chromium solubility in lbe given by Courouau in 2004, the upper limit of the validity range
+      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;813] *[K]* range;
 
     ..
 
-    - Concerning the chromium solubility in LBE given by Martynov in 1998, the upper limit of the validity range
-      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;773] *K* range;
+    - Concerning the chromium solubility in lbe given by Martynov in 1998, the upper limit of the validity range
+      is taken equal to the upper limit of the validity range of the corresponding chromium solubility correlation, resulting in the [673;773] *[K]* range;
 
     ..
 
     - Concerning the nickel solubility in lead given by Gossé in 2014, the upper limit of the validity range
-      is taken equal to the upper limit of the validity range of the corresponding nickel solubility correlation, resulting in the [673;917] *K* range;
+      is taken equal to the upper limit of the validity range of the corresponding nickel solubility correlation, resulting in the [673;917] *[K]* range;
 
     ..
     
     - Concerning the chromium solubility in lead given by Venkatraman in 1998 and by Alden in 1958, and the silicon solubility
-      in lead extracted from *Tecdoc* (2002), there is no overlapping of the temperature validity ranges. It has then been decided
-      to adopt the [673;1000] *K* range for analogy with the greatest amount of the other correlations. This is why the related
+      in lead, there is no overlapping of the temperature validity ranges. It has then been decided
+      to adopt the [673;1000] *[K]* range in analogy with the most of the other correlations. This is why the related
       correlations need to be used carefully.
 
 .. _ Correlations adopted by default:
@@ -222,7 +221,7 @@ For most of the properties, correlations from different authors are available. T
 correlations chosen as the default ones in *lbh15*. For all the non-mentioned properties, only one correlation is
 implemented since either it is the only one available or it is specifically recommended in :cite:`Agency2015`:
 
-- *Gossé* correlation of 2014 for the solubility of iron, nickel and chromium in lead, LBE and bismuth;
+- *Gossé* correlation of 2014 for the solubility of iron, nickel and chromium in lead, lbe and bismuth;
 
 ..
 
@@ -234,7 +233,7 @@ implemented since either it is the only one available or it is specifically reco
 
 ..
 
-- *Gromov* correlation of 1996 for the oxygen diffusivity in lead and in LBE;
+- *Gromov* correlation of 1996 for the oxygen diffusivity in lead and in lbe;
 
 ..
 
@@ -243,8 +242,8 @@ implemented since either it is the only one available or it is specifically reco
 ..
 
 The choice of the above default correlations has been driven by what recommended in :cite:`Agency2015` and by the temperature ranges.
-In particular, since most of the liquid lead applications are working at low temperatures, the correlations are preferred whose validity ranges
-are related to the lowest available temperature values and whose extension is the widest available.
+In particular, since most of the liquid lead applications are working at low temperatures, preference is given to those correlations
+whose range of validity is based on the lowest available temperature value and is the widest available.
 
 The user is invited to check the ranges of validity of the correlations she/he is using to make sure they match with the specific
 application requirements. In case other correlations are needed that are different from the ones already implemented in *lbh15*, please see
@@ -263,6 +262,9 @@ Control of Oxygen Concentration
 ===============================
 
 This section describes a simple, but meaningful example application where the *lbh15* package features are exploited.
+This simple model is useful for the setup of chemistry control of lead. The use of standard and uniform data is
+essential into this context to ensure comparability of results.
+
 A generic volume of liquid lead is subjected to a constant heat dissipation. At a specified time, instantaneously,
 a heat load is applied that remains constant for the rest of the simulation.
 
@@ -276,7 +278,7 @@ where:
 - :math:`\rho = \rho\left(T\right)` is the lead density :math:`\left[kg / m^3\right]`;
 - :math:`h = c_p\left(T\right) \cdot T` is the specific enthalpy :math:`\left[J / kg\right]` of lead;
 - :math:`Q_{out}` is the dissipated heat in :math:`\left[W / m^3\right]`, that is kept constant throughout the entire simulation;
-- :math:`Q_{in}` is the heat load in :math:`\left[W / m^3\right]` that suddenly, during the simulation, undergoes a step variation; like an Heaviside function, the heat load
+- :math:`Q_{in}` is the heat load in :math:`\left[W / m^3\right]` that suddenly, during the simulation, undergoes a step variation; like a Heaviside function, the heat load
   initial value is kept to zero till the instantaneous change, after which it reaches a constant positive value, as illustrated in :numref:`timevsqin`.
   
   .. _timevsqin:
@@ -287,14 +289,14 @@ where:
     
     Time history of the heat load applied to the lead volume.
 
-Let suppose that the lead volume works in an environment where the creation of an Iron oxide layer must be guaranteed on the bounding walls. This requires
-the Oxygen concentration within the lead to be always within the admissible range having the
+Suppose the lead volume works in an environment where the creation of an iron oxide layer must be guaranteed on the bounding walls. This requires
+the oxygen concentration within the lead to be always within the admissible range having the
 :class:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead.OxygenSolubility`
 value as upper limit and, as lower limit, the
 :class:`lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits.LowerLimitIron`
-value. The choice of the Iron oxide is just for illustrative
-purposes, the same goes for any other oxide formation. The Oxygen concentration must then be controlled by supposing the application of an ideal device able
-to add and subtract Oxygen to/from the lead volume.
+value. The choice of the iron oxide is just for illustrative
+purposes, the same goes for any other oxide formation. The oxygen concentration must then be controlled by supposing the application of an ideal device able
+to add and subtract oxygen to/from the lead volume.
 
 The system enabling this kind of control is depicted in :numref:`contrschema`.
 
@@ -304,13 +306,13 @@ The system enabling this kind of control is depicted in :numref:`contrschema`.
   :width: 500
   :align: Center
 
-  Control schema of the Oxygen concentration within the lead volume.
+  Control schema of the oxygen concentration within the lead volume.
 
 In detail:
 
-- the *Lead Volume* behaves as stated by the above mentioned heat balance equation, thus providing the actual temperature and Oxygen concentration values;
-- the *PID Controller* estimates the Oxygen concentration value to assure within the *Lead Volume*;
-- the *setpoint* the controller should follow is computed as the middle value of the admissibile Oxygen concentration range, and it is computed by exploiting the
+- the *Lead Volume* behaves as stated by the above mentioned heat balance equation, thus providing the actual temperature and oxygen concentration values;
+- the *PID Controller* estimates the oxygen concentration value to assure within the *Lead Volume*;
+- the *setpoint* the controller should follow is computed as the middle value of the admissibile oxygen concentration range, and it is computed by exploiting the
   actual temperature value of the *Lead Volume*;
 - the *PID Controller* tries to reach the setpoint value which changes in time according to the evolution of the *Lead Volume*.
 
@@ -340,17 +342,23 @@ By looking into the code implementation, the following sections are identified:
   where:
 
   - the lead-related module is imported from the ``lbh15`` package;
-  - the ``PID`` module is imported from the ``simple_pid`` package, which is available at:
+  - the ``PID`` module is imported from the ``simple_pid`` package, which is available at
     https://pypi.org/project/simple-pid/
-    and which can be installed by applying the following instruction:
+    and can be installed by applying the following instruction:
 
     .. code-block:: console
 
       python -m pip install simple-pid
     
     ``simple-pid`` :math:`>= 2.0.0` is required;
-  - the ``support`` module collects all the functions that are used in the remaining portion of the code;
+  - the ``support`` module collects all the functions that are used in the remaining portion of the code; it imports the ``matplotlib``
+    package, which is available at https://pypi.org/project/matplotlib/ and can be installed by applying the following instruction:
 
+    .. code-block:: console
+
+      python -m pip install matplotlib
+
+    ``matplotlib`` :math:`>= 3.7.1` is required;
 - Constant and initial values setting:
 
   .. code-block:: python
@@ -398,8 +406,8 @@ By looking into the code implementation, the following sections are identified:
   - ``delta_t`` is the integration time step;
   - ``Qin`` is a dictionary containing for each time instant (key) the corresponding heat load value; values coincide with the Heaviside function values stored in ``Qin_signal``;
   - ``T_sol`` is the array where the lead temperature time history will be stored;
-  - ``Ox_stp`` is the array where the Oxygen concentration setpoint values will be stored that will be followed by the PID controller;
-  - ``Ox_sol`` is the array where the Oxygen concentration values will be stored that will be suggested by the PID controller;
+  - ``Ox_stp`` is the array where the oxygen concentration setpoint values will be stored that will be followed by the PID controller;
+  - ``Ox_sol`` is the array where the oxygen concentration values will be stored that will be suggested by the PID controller;
 
 - Solutions initialization and ``lead`` object instantiation:
 
@@ -415,7 +423,7 @@ By looking into the code implementation, the following sections are identified:
   where:
 
   - ``lead`` object is instantiated at a reference temperature equal to the initial temperature of the lead volume;
-  - the initial value of the Oxygen concentration setpoint is taken equal to the middle value of the admissibile operative range of the Oxygen concentration as function of temperature;
+  - the initial value of the oxygen concentration setpoint is taken equal to the middle value of the admissibile operative range of the oxygen concentration as function of temperature;
 
 - PID controller setup:
 
@@ -451,8 +459,8 @@ By looking into the code implementation, the following sections are identified:
   where there is a loop over all the required time instants; for each :code:`i`-th instant:
 
   - an explicit call is made to the time integration function;
-  - the Oxygen concentration setpoint is updated correspondingly;
-  - the PID is asked to provide the new Oxygen concentration value to guarantee within the lead volume;
+  - the oxygen concentration setpoint is updated correspondingly;
+  - the PID is asked to provide the new oxygen concentration value to guarantee within the lead volume;
 
 - Results plotting:
 
@@ -490,7 +498,7 @@ By looking into the code implementation, the following sections are identified:
       
       Time evolution of the temperature of the lead volume.
   
-  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the Oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual Oxygen concentration (see :numref:`timeox`);
+  - the call to ``plot2TimeHistories()`` returns the 2D plot where both the oxygen concentrations time histories are reproduced, that is, the one of the setpoint and the one of the actual oxygen concentration (see :numref:`timeox`);
     
     .. _timeox:
     
@@ -498,9 +506,9 @@ By looking into the code implementation, the following sections are identified:
       :width: 500
       :align: Center
       
-      Time evolution of the Oxygen concentrations within the lead volume: the Oxygen concentration setpoint (orange) and the actual controlled Oxygen concentration (blue).
+      Time evolution of the oxygen concentrations within the lead volume: the oxygen concentration setpoint (orange) and the actual controlled oxygen concentration (blue).
 
-    After an initial transient, the blue curve, representing the controlled Oxygen concentration within lead, overlaps almost exactly with the setpoint values (orange curve).
-    The overlapping of the two Oxygen concentration curves can be improved or worsened by varying the PID coefficients.
+    After an initial transient, the blue curve, representing the controlled oxygen concentration within lead, overlaps almost exactly with the setpoint values (orange curve).
+    The overlapping of the two oxygen concentration curves can be improved or worsened by varying the PID coefficients.
 
 .. note:: This tutorial works even with the :class:`.Bismuth` and the :class:`.LBE` classes instances.

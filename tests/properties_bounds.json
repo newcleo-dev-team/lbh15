@@ -89,172 +89,172 @@
       "max": 0.1373667919,
       "T_at_max": 1472.9999619347
    },
-   "fe_sol_gosse2014_f{self.long_name}_in_liquid_lead": {
+   "fe_sol_gosse2014_iron_solubility_in_liquid_lead": {
       "min": 2.522e-07,
       "T_at_min": 600.0000166405,
       "max": 0.0045249048,
       "T_at_max": 1172.9999724645
    },
-   "ni_sol_gosse2014_f{self.long_name}_in_liquid_lead": {
+   "ni_sol_gosse2014_nickel_solubility_in_liquid_lead": {
       "min": 0.1064692367,
       "T_at_min": 598.0000154605,
       "max": 0.689818701,
       "T_at_max": 916.9999749844
    },
-   "o_sol_lbh15_f{self.long_name}_in_liquid_lead": {
+   "o_sol_lbh15_oxygen_solubility_in_liquid_lead": {
       "min": 5.45364e-05,
       "T_at_min": 673.0000180825,
       "max": 0.3605961046,
       "T_at_max": 1372.9999660742
    },
-   "si_sol_lbh15_f{self.long_name}_in_liquid_lead": {
+   "si_sol_lbh15_silicon_solubility_in_liquid_lead": {
       "min": 0.028770034,
       "T_at_min": 1323.0000214373,
       "max": 0.148463727,
       "T_at_max": 1522.9999589394
    },
-   "co_dif_lbh15_f{self.long_name}_in_liquid_lead": {
-      "min": 3.40088e-05,
+   "co_dif_lbh15_cobalt_diffusivity_in_liquid_lead": {
+      "min": 3.4e-09,
       "T_at_min": 1023.0000165475,
-      "max": 5.67201e-05,
+      "max": 5.7e-09,
       "T_at_max": 1272.9999682789
    },
-   "in_dif_lbh15_f{self.long_name}_in_liquid_lead": {
-      "min": 3.12468e-05,
+   "in_dif_lbh15_indium_diffusivity_in_liquid_lead": {
+      "min": 3.1e-09,
       "T_at_min": 723.0000110856,
-      "max": 7.53556e-05,
+      "max": 7.5e-09,
       "T_at_max": 1172.99998211
    },
-   "fe_dif_lbh15_f{self.long_name}_in_liquid_lead": {
-      "min": 2.14445e-05,
+   "fe_dif_lbh15_iron_diffusivity_in_liquid_lead": {
+      "min": 2.1e-09,
       "T_at_min": 973.0000235256,
-      "max": 7.71209e-05,
+      "max": 7.7e-09,
       "T_at_max": 1272.9999808164
    },
    "o_dif_arcella1968_oxygen_diffusivity_in_liquid_lead": {
-      "min": 9.922e-06,
+      "min": 1e-09,
       "T_at_min": 973.0000253769,
-      "max": 1.36051e-05,
+      "max": 1.4e-09,
       "T_at_max": 1172.9999763378
    },
    "o_dif_charle1976_oxygen_diffusivity_in_liquid_lead": {
-      "min": 0.0002222673,
+      "min": 2.22e-08,
       "T_at_min": 1173.0000236622,
-      "max": 0.0003038218,
+      "max": 3.04e-08,
       "T_at_max": 1372.9999793043
    },
    "o_dif_ganesan2006b_oxygen_diffusivity_in_liquid_lead": {
-      "min": 3.5671e-06,
+      "min": 4e-10,
       "T_at_min": 823.0000169763,
-      "max": 1.52855e-05,
+      "max": 1.5e-09,
       "T_at_max": 1052.9999708166
    },
    "o_dif_gromov1996_oxygen_diffusivity_in_liquid_lead": {
-      "min": 3.6768e-06,
+      "min": 4e-10,
       "T_at_min": 673.000017972,
-      "max": 1.434e-05,
+      "max": 1.4e-09,
       "T_at_max": 1272.9999718304
    },
    "o_dif_homna1971_oxygen_diffusivity_in_liquid_lead": {
-      "min": 1.01598e-05,
+      "min": 1e-09,
       "T_at_min": 1073.0000221501,
-      "max": 1.6615e-05,
+      "max": 1.7e-09,
       "T_at_max": 1372.9999619347
    },
    "o_dif_otsuka1975_oxygen_diffusivity_in_liquid_lead": {
-      "min": 0.0002004756,
+      "min": 2e-08,
       "T_at_min": 1173.0000236622,
-      "max": 0.0002682434,
+      "max": 2.68e-08,
       "T_at_max": 1372.9999793043
    },
    "o_dif_swzarc1972_oxygen_diffusivity_in_liquid_lead": {
-      "min": 6.61771e-05,
+      "min": 6.6e-09,
       "T_at_min": 1013.0000266624,
-      "max": 0.0001434998,
+      "max": 1.43e-08,
       "T_at_max": 1352.9999769276
    },
-   "se_dif_lbh15_f{self.long_name}_in_liquid_lead": {
-      "min": 5.11763e-05,
+   "se_dif_lbh15_selenium_diffusivity_in_liquid_lead": {
+      "min": 5.1e-09,
       "T_at_min": 823.0000152395,
-      "max": 9.00451e-05,
+      "max": 9e-09,
       "T_at_max": 1172.9999729889
    },
-   "te_dif_lbh15_f{self.long_name}_in_liquid_lead": {
-      "min": 2.20705e-05,
+   "te_dif_lbh15_tellurium_diffusivity_in_liquid_lead": {
+      "min": 2.2e-09,
       "T_at_min": 723.0000110856,
-      "max": 6.08202e-05,
+      "max": 6.1e-09,
       "T_at_max": 1172.99998211
    },
    "G_lbh15_Gibbs_free_energy_variation_in_liquid_lead": {
-      "min": -29673.2366576338,
+      "min": -29.6732366576,
       "T_at_min": 1999.9999618422,
-      "max": 5.47e-08,
+      "max": 1e-10,
       "T_at_max": 600.6014640717
    },
    "H_lbh15_molar_enthalpy_variation_in_liquid_lead": {
-      "min": 0.0004909043,
+      "min": 4.909e-07,
       "T_at_min": 600.6000160107,
-      "max": 40461.7783877942,
+      "max": 40.4617783878,
       "T_at_max": 1999.9999618422
    },
    "S_lbh15_molar_entropy_variation_in_liquid_lead": {
-      "min": 8.174e-07,
+      "min": 8e-10,
       "T_at_min": 600.6000160107,
-      "max": 35.0675081918,
+      "max": 0.0350675082,
       "T_at_max": 1999.9999618422
    },
    "o_pp_alcock1964_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 0.0,
+      "min": 3.62e-08,
       "T_at_min": 783.0000202001,
-      "max": 5e-10,
+      "max": 4.71393e-05,
       "T_at_max": 972.999975892
    },
    "o_pp_charle1976_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.554e-07,
+      "min": 0.0157447029,
       "T_at_min": 1173.0000285823,
-      "max": 5.5957e-06,
+      "max": 0.5669828293,
       "T_at_max": 1372.9999793043
    },
    "o_pp_fisher1966_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 9e-10,
+      "min": 9.55198e-05,
       "T_at_min": 903.0000255083,
-      "max": 2.6088e-06,
+      "max": 0.2643337647,
       "T_at_max": 1252.9999741755
    },
    "o_pp_ganesan2006_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 0.0,
+      "min": 2.669e-07,
       "T_at_min": 815.0000172979,
-      "max": 2.24e-08,
+      "max": 0.0022647564,
       "T_at_max": 1089.9999812742
    },
    "o_pp_isecke1977_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.555e-07,
+      "min": 0.015760074,
       "T_at_min": 1173.0000289778,
-      "max": 5.6917e-06,
+      "max": 0.5767067644,
       "T_at_max": 1372.9999793043
    },
    "o_pp_otsuka1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.38e-08,
+      "min": 0.0013964659,
       "T_at_min": 1073.0000287357,
-      "max": 0.0001928023,
+      "max": 19.5356967881,
       "T_at_max": 1672.9999529487
    },
    "o_pp_otsuka1981_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 3.9e-09,
+      "min": 0.0003987713,
       "T_at_min": 1023.0000267898,
-      "max": 8.86e-07,
+      "max": 0.0897786661,
       "T_at_max": 1272.9999682789
    },
    "o_pp_szwarc1972_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.724e-07,
+      "min": 0.0174733543,
       "T_at_min": 1012.0000245197,
-      "max": 9.85775e-05,
+      "max": 9.9883627314,
       "T_at_max": 1352.9999768007
    },
    "o_pp_taskinen1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lead": {
-      "min": 1.5e-08,
+      "min": 0.0015206948,
       "T_at_min": 1073.0000266894,
-      "max": 2.545e-07,
+      "max": 0.0257872157,
       "T_at_max": 1202.999974659
    },
    "lim_cr_alden1958_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lead": {
@@ -299,7 +299,7 @@
       "max": 0.0,
       "T_at_max": 999.9999743571
    },
-   "lim_fe_sat_lbh15_Oxygen_concentration_lower_limit_for_iron_at_its_saturation_concentration_in_liquid_lead": {
+   "lim_fe_sat_lbh15_Oxygen_concentration_lower_limit_foriron_at_its_saturation_concentration_in_liquid_lead": {
       "min": 2e-10,
       "T_at_min": 673.0000121095,
       "max": 1.2521e-06,
@@ -437,64 +437,64 @@
       "max": 8.068418932,
       "T_at_max": 902.9999771608
    },
-   "o_sol_lbh15_f{self.long_name}_in_liquid_bismuth": {
+   "o_sol_lbh15_oxygen_solubility_in_liquid_bismuth": {
       "min": 1.59961e-05,
       "T_at_min": 573.0000087999,
       "max": 0.9597292065,
       "T_at_max": 1572.9999748659
    },
    "o_dif_fitzner1980_oxygen_diffusivity_in_liquid_bismuth": {
-      "min": 2.11584e-05,
+      "min": 2.1e-09,
       "T_at_min": 951.0000164845,
-      "max": 4.91744e-05,
+      "max": 4.9e-09,
       "T_at_max": 1099.9999694098
    },
    "o_dif_heshmatpour1981_oxygen_diffusivity_in_liquid_bismuth": {
-      "min": 8.6692e-06,
+      "min": 9e-10,
       "T_at_min": 1023.0000165475,
-      "max": 1.60253e-05,
+      "max": 1.6e-09,
       "T_at_max": 1272.9999682789
    },
    "G_lbh15_Gibbs_free_energy_variation_in_liquid_bismuth": {
-      "min": -26379.5884858887,
+      "min": -26.3795884859,
       "T_at_min": 1830.9999648121,
       "max": -0.0,
       "T_at_max": 544.6000147179
    },
    "H_lbh15_molar_enthalpy_variation_in_liquid_bismuth": {
-      "min": 0.0004479834,
+      "min": 4.48e-07,
       "T_at_min": 544.6000147179,
-      "max": 35607.2762714908,
+      "max": 35.6072762715,
       "T_at_max": 1830.9999648121
    },
    "S_lbh15_molar_entropy_variation_in_liquid_bismuth": {
-      "min": 8.226e-07,
+      "min": 8e-10,
       "T_at_min": 544.6000147179,
-      "max": 33.8541048327,
+      "max": 0.0338541048,
       "T_at_max": 1830.9999648121
    },
    "o_pp_fitzner1980_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 1.368e-07,
+      "min": 0.0138597517,
       "T_at_min": 988.0000170986,
-      "max": 6.1393e-06,
+      "max": 0.6220631653,
       "T_at_max": 1180.9999778936
    },
    "o_pp_hahn1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 0.0011686189,
+      "min": 118.4103097223,
       "T_at_min": 1073.0000307955,
-      "max": 0.0076286298,
+      "max": 772.9709193544,
       "T_at_max": 1222.9999692045
    },
    "o_pp_heshmatpour1981_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 7.42e-08,
+      "min": 0.0075193048,
       "T_at_min": 1023.0000181672,
-      "max": 6.1175e-06,
+      "max": 0.619852834,
       "T_at_max": 1272.9999682789
    },
    "o_pp_isecke1979_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_bismuth": {
-      "min": 1.007e-07,
+      "min": 0.0102042588,
       "T_at_min": 973.0000150658,
-      "max": 0.0004916922,
+      "max": 49.8207121233,
       "T_at_max": 1472.9999607906
    },
    "alpha_lbh15_Liquid_lbe_thermal_expansion_coefficient": {
@@ -605,28 +605,28 @@
       "max": 6.9153223123,
       "T_at_max": 1172.9999726997
    },
-   "o_sol_lbh15_f{self.long_name}_in_liquid_lbe": {
+   "o_sol_lbh15_oxygen_solubility_in_liquid_lbe": {
       "min": 0.0001320469,
       "T_at_min": 673.0000169974,
       "max": 0.0150638754,
       "T_at_max": 1012.9999733376
    },
-   "fe_dif_lbh15_f{self.long_name}_in_liquid_lbe": {
-      "min": 2.14445e-05,
+   "fe_dif_lbh15_iron_diffusivity_in_liquid_lbe": {
+      "min": 2.1e-09,
       "T_at_min": 973.0000235256,
-      "max": 7.71209e-05,
+      "max": 7.7e-09,
       "T_at_max": 1272.9999808164
    },
    "o_dif_ganesan2006b_oxygen_diffusivity_in_liquid_lbe": {
-      "min": 5.6231e-06,
+      "min": 6e-10,
       "T_at_min": 813.0000203015,
-      "max": 3.01776e-05,
+      "max": 3e-09,
       "T_at_max": 972.9999815835
    },
    "o_dif_gromov1996_oxygen_diffusivity_in_liquid_lbe": {
-      "min": 4.186e-07,
+      "min": 0.0,
       "T_at_min": 473.0000098149,
-      "max": 0.000408348,
+      "max": 4.08e-08,
       "T_at_max": 1272.9999801093
    },
    "bi_a_gosse2014_Bismuth_chemical_activity_in_liquid_lbe": {
@@ -636,9 +636,9 @@
       "T_at_max": 1172.9999798861
    },
    "G_lbh15_Gibbs_free_energy_variation_in_liquid_lbe": {
-      "min": -44627.616203231,
+      "min": -44.6276162032,
       "T_at_min": 1926.9999545753,
-      "max": -0.1547227372,
+      "max": -0.0001547227,
       "T_at_max": 400.0000107974
    },
    "pb_a_gosse2014_lead_chemical_activity_in_liquid_lbe": {
@@ -648,21 +648,21 @@
       "T_at_max": 1172.9999798861
    },
    "H_lbh15_molar_enthalpy_variation_in_liquid_lbe": {
-      "min": 61.7067763553,
+      "min": 0.0617067764,
       "T_at_min": 400.0000107974,
-      "max": 43840.9766425039,
+      "max": 43.8409766425,
       "T_at_max": 1926.9999545753
    },
    "S_lbh15_molar_entropy_variation_in_liquid_lbe": {
-      "min": 0.1546537436,
+      "min": 0.0001546537,
       "T_at_min": 400.0000107974,
-      "max": 45.9100129378,
+      "max": 0.0459100129,
       "T_at_max": 1926.9999545753
    },
    "o_pp_lbh15_Oxygen_partial_pressure_divided_by_the_oxygen_concentration_squared_in_liquid_lbe": {
-      "min": 0.0,
+      "min": 5.591e-07,
       "T_at_min": 812.000021982,
-      "max": 8.6e-09,
+      "max": 0.000867172,
       "T_at_max": 1007.9999751307
    },
    "lim_cr_courouau2004_Oxygen_concentration_lower_limit_times_chromium_concentration_raised_to_2/3_in_lbe": {
@@ -695,13 +695,13 @@
       "max": 7.2e-09,
       "T_at_max": 999.9999743571
    },
-   "lim_ni_gosse2014_Oxygen_concentration_lower_limit_timesnickel_concentration_in_lbe": {
+   "lim_ni_gosse2014_Oxygen_concentration_lower_limit_times_nickel_concentration_in_lbe": {
       "min": 3.868e-07,
       "T_at_min": 673.0000145852,
       "max": 0.0007252655,
       "T_at_max": 999.9999743571
    },
-   "lim_ni_martinelli2010_Oxygen_concentration_lower_limit_timesnickel_concentration_in_lbe": {
+   "lim_ni_martinelli2010_Oxygen_concentration_lower_limit_times_nickel_concentration_in_lbe": {
       "min": 4.216e-07,
       "T_at_min": 673.0000198925,
       "max": 0.0006568966,
@@ -713,7 +713,7 @@
       "max": 0.0,
       "T_at_max": 999.9999743571
    },
-   "lim_cr_sat_lbh15_Oxygen_concentration_lower_limit_forchromium_at_its_saturation_concentration_in_lbe": {
+   "lim_cr_sat_lbh15_Oxygen_concentration_lower_limit_for_chromium_at_its_saturation_concentration_in_lbe": {
       "min": 0.0,
       "T_at_min": 673.0000111399,
       "max": 0.0,

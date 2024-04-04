@@ -5,7 +5,10 @@ from typing import Union
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from lbh15.properties.interface import PropertyInterface
+from ..tch_common_interface import OxygenPartialPressureInterface
+from ..tch_common_interface import MolarEnthalpyInterface
+from ..tch_common_interface import MolarEntropyInterface
+from ..tch_common_interface import GibbsFreeEnergyInterface
 from ..lead_properties import h
 from ..._commons import LEAD_MELTING_TEMPERATURE as T_m0
 from ..._commons import LEAD_MOLAR_MASS as M
@@ -13,7 +16,7 @@ from ..._commons import OXYGEN_MOLAR_MASS as M_O
 from ..._decorators import range_warning
 
 
-class OxygenPartialPressureInterface(PropertyInterface):
+class LeadOxygenPartialPressureInterface(OxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property abstract class.
@@ -31,7 +34,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         property_value : float
             oxygen partial pressure in liquid lead divided by the
             oxygen concentration in liquid lead squared
-            in :math:`[atm. /wt.\\%^2]`
+            in :math:`[Pa /wt.\\%^2]`
 
         Returns
         -------
@@ -39,30 +42,6 @@ class OxygenPartialPressureInterface(PropertyInterface):
             Temperature guess value in :math:`[K]`
         """
         return 1600
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_pp"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid lead divided by the
-        Oxygen concentration in liquid lead squared unit
-        """
-        return "[atm.wt.%^-2]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen partial pressure in liquid lead divided by the
-        Oxygen concentration in liquid lead squared long name
-        """
-        return ("Oxygen partial pressure divided by the"
-                " oxygen concentration squared")
 
     @property
     def description(self) -> str:
@@ -73,7 +52,7 @@ class OxygenPartialPressureInterface(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
+class OxygenPartialPressureOtsuka1979(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -102,10 +81,10 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-118600 / T + 14.1))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -124,7 +103,7 @@ class OxygenPartialPressureOtsuka1979(OxygenPartialPressureInterface):
         return [1073, 1673]
 
 
-class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
+class OxygenPartialPressureOtsuka1981(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -153,10 +132,10 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-117170 / T + 12.9))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -175,7 +154,7 @@ class OxygenPartialPressureOtsuka1981(OxygenPartialPressureInterface):
         return [1023, 1273]
 
 
-class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
+class OxygenPartialPressureGanesan2006(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -204,10 +183,10 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-121349 / T + 16.906))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -226,7 +205,7 @@ class OxygenPartialPressureGanesan2006(OxygenPartialPressureInterface):
         return [815, 1090]
 
 
-class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
+class OxygenPartialPressureAlcock1964(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -255,10 +234,10 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-119411 / T + 12.222))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -277,7 +256,7 @@ class OxygenPartialPressureAlcock1964(OxygenPartialPressureInterface):
         return [783, 973]
 
 
-class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
+class OxygenPartialPressureSzwarc1972(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -306,10 +285,10 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-105855 / T + 18.661))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -328,7 +307,7 @@ class OxygenPartialPressureSzwarc1972(OxygenPartialPressureInterface):
         return [1012, 1353]
 
 
-class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
+class OxygenPartialPressureCharle1976(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -357,10 +336,10 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-119840 / T + 15.794))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -379,7 +358,7 @@ class OxygenPartialPressureCharle1976(OxygenPartialPressureInterface):
         return [1173, 1373]
 
 
-class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
+class OxygenPartialPressureIsecke1977(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -408,10 +387,10 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-120376 / T + 16.255))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -430,7 +409,7 @@ class OxygenPartialPressureIsecke1977(OxygenPartialPressureInterface):
         return [1173, 1373]
 
 
-class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
+class OxygenPartialPressureTaskinen1979(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -459,10 +438,10 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-116717 / T + 12.699))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -481,7 +460,7 @@ class OxygenPartialPressureTaskinen1979(OxygenPartialPressureInterface):
         return [1073, 1203]
 
 
-class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
+class OxygenPartialPressureFisher1966(LeadOxygenPartialPressureInterface):
     """
     *Oxygen partial pressure in liquid lead divided by the
     Oxygen concentration in liquid lead squared* property class
@@ -510,10 +489,10 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
         -------
         float:
             Oxygen partial pressure divided by Oxygen concentration
-            squared in :math:`[atm. / wt.\\%^2]`
+            squared in :math:`[Pa / wt.\\%^2]`
         """
         return np.power(10, 2 / 2.3 / R * (-106395 / T + 10.254))\
-            * M * M / M_O / M_O
+            * M * M / M_O / M_O * 101325
 
     @property
     def correlation_name(self) -> str:
@@ -532,7 +511,7 @@ class OxygenPartialPressureFisher1966(OxygenPartialPressureInterface):
         return [903, 1253]
 
 
-class MolarEnthalpy(PropertyInterface):
+class MolarEnthalpy(MolarEnthalpyInterface):
     """
     Liquid lead *molar enthalpy variation* property class.
     """
@@ -562,33 +541,12 @@ class MolarEnthalpy(PropertyInterface):
         return h().correlation(T, p) * M / 1000
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "H"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar enthalpy variation unit
-        """
-        return "[J.mol^-1]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar enthalpy
         variation correlation function
         """
         return [T_m0, 2000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar enthalpy variation long name
-        """
-        return "molar enthalpy variation"
 
     @property
     def description(self) -> str:
@@ -598,7 +556,7 @@ class MolarEnthalpy(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class MolarEntropy(PropertyInterface):
+class MolarEntropy(MolarEntropyInterface):
     """
     Liquid lead *molar entropy variation* property class.
     """
@@ -632,33 +590,12 @@ class MolarEntropy(PropertyInterface):
                            + 7.62e5 * (1 / T / T - 1 / T_m0 / T_m0))
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "S"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Molar entropy variation unit
-        """
-        return "[J/(mol.K)]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the molar entropy
         variation correlation function
         """
         return [T_m0, 2000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Molar entropy variation long name
-        """
-        return "molar entropy variation"
 
     @property
     def description(self) -> str:
@@ -668,7 +605,7 @@ class MolarEntropy(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class GibbsFreeEnergy(PropertyInterface):
+class GibbsFreeEnergy(GibbsFreeEnergyInterface):
     """
     Liquid lead *Gibbs free energy variation* property class.
     """
@@ -700,33 +637,12 @@ class GibbsFreeEnergy(PropertyInterface):
             - T * MolarEntropy().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "G"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Gibbs free energy unit
-        """
-        return "[J/mol]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Gibbs free energy
         variation correlation function
         """
         return [T_m0, 2000]
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Gibbs free energy long name
-        """
-        return "Gibbs free energy variation"
 
     @property
     def description(self) -> str:

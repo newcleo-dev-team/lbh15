@@ -38,7 +38,8 @@ if __name__ == '__main__':
         long_description=open('README.rst', 'r').read(),
         license='lgpl v3',
         python_requires='>=3.8.10',
-        install_requires=['scipy>=1.8.1', 'numpy>=1.22.3'],
+        install_requires=['scipy>=1.8.1', 'numpy>=1.22.3', 'sphinx>=6.2.1',
+                          'sphinx-rtd-theme>=1.3.0', 'myst-parser>=1.0.0', 'sphinxcontrib-bibtex>=2.5.0'],
         classifiers=[
             "Development Status :: 5 - Production/Stable",
             "Intended Audience :: Education",
@@ -62,7 +63,6 @@ Developers memo for release:
         - Update the "docs/source/release_notes.rst"
         - Update the CHANGELOG.rst file with the features introduced in the last release
         - Update author list in README.rst
-        - Update latex document cover fields as variables within "conf.py"
 
     2. Test the package build and install on test-pypi:
         a. Change the name of the package in setup.py and pyproject.toml in 'lbh15-test'

@@ -4,10 +4,14 @@ from typing import List
 import numpy as np
 from scipy.constants import atm
 from lbh15.properties.interface import PropertyInterface
+from ..tch_common_interface import IronSolubilityInterface
+from ..tch_common_interface import NickelSolubilityInterface
+from ..tch_common_interface import ChromiumSolubilityInterface
+from ..tch_common_interface import OxygenSolubilityInterface
 from ..._decorators import range_warning
 
 
-class IronSolubility(PropertyInterface):
+class IronSolubility(IronSolubilityInterface):
     """
     Liquid lead *Iron solubility* property class.
     """
@@ -37,20 +41,6 @@ class IronSolubility(PropertyInterface):
         return np.power(10, 2.11-5225/T)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
@@ -66,21 +56,14 @@ class IronSolubility(PropertyInterface):
         return [600.0, 1173.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Iron solubility long name
-        """
-        return "iron solubility"
-
-    @property
     def description(self) -> str:
         """
         str : Iron solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
-class NickelSolubility(PropertyInterface):
+class NickelSolubility(NickelSolubilityInterface):
     """
     Liquid lead *Nickel solubility* property class.
     """
@@ -110,20 +93,6 @@ class NickelSolubility(PropertyInterface):
         return np.power(10, 1.36-1395/T)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "ni_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Nickel solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
@@ -139,45 +108,17 @@ class NickelSolubility(PropertyInterface):
         return [598.0, 917.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Nickel solubility long name
-        """
-        return "nickel solubility"
-
-    @property
     def description(self) -> str:
         """
         str : Nickel solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
-class ChromiumSolubilityInterface(PropertyInterface):
+class LeadChromiumSolubilityInterface(ChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "cr_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Chromium solubility unit
-        """
-        return "[wt.%]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Chromium solubility long name
-        """
-        return "chromium solubility"
-
     @property
     def description(self) -> str:
         """
@@ -186,7 +127,7 @@ class ChromiumSolubilityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class ChromiumSolubilityAlden1958(ChromiumSolubilityInterface):
+class ChromiumSolubilityAlden1958(LeadChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property class
     implementing the correlation by *alden1958*.
@@ -232,7 +173,7 @@ class ChromiumSolubilityAlden1958(ChromiumSolubilityInterface):
         return [1181.0, 1483.0]
 
 
-class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
+class ChromiumSolubilityVenkatraman1988(LeadChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property class
     implementing the correlation by *venkatraman1988*.
@@ -278,7 +219,7 @@ class ChromiumSolubilityVenkatraman1988(ChromiumSolubilityInterface):
         return [1173.0, 1473.0]
 
 
-class ChromiumSolubilityGosse2014(ChromiumSolubilityInterface):
+class ChromiumSolubilityGosse2014(LeadChromiumSolubilityInterface):
     """
     Liquid lead *Chromium solubility* property class
     implementing the correlation by *gosse2014*.
@@ -387,10 +328,10 @@ class SiliconSolubility(PropertyInterface):
         """
         str : Silicon solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
-class OxygenSolubility(PropertyInterface):
+class OxygenSolubility(OxygenSolubilityInterface):
     """
     Liquid lead *Oxygen solubility* property class.
     """
@@ -420,20 +361,6 @@ class OxygenSolubility(PropertyInterface):
         return np.power(10, 3.23-5043/T)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_sol"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen solubility unit
-        """
-        return "[wt.%]"
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Oxygen solubility
@@ -442,15 +369,8 @@ class OxygenSolubility(PropertyInterface):
         return [673.0, 1373.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen solubility long name
-        """
-        return "oxygen solubility"
-
-    @property
     def description(self) -> str:
         """
         str : Oxygen solubility description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"

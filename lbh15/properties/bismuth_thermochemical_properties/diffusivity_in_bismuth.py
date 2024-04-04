@@ -4,11 +4,11 @@ from typing import List
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from lbh15.properties.interface import PropertyInterface
+from ..tch_common_interface import OxygenDiffusivityInterface
 from ..._decorators import range_warning
 
 
-class OxygenDiffusivityInterface(PropertyInterface):
+class BismuthOxygenDiffusivityInterface(OxygenDiffusivityInterface):
     """
     Liquid bismuth *Oxygen diffusivity* property abstract class.
     """
@@ -24,7 +24,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         """
         str : Oxygen diffusivity unit
         """
-        return "[cm^2.s^-1]"
+        return "[m^2.s^-1]"
 
     @property
     def long_name(self) -> str:
@@ -41,7 +41,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         return f"{self.long_name} in liquid bismuth"
 
 
-class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
+class OxygenDiffusivityFitzner1980(BismuthOxygenDiffusivityInterface):
     """
     Liquid bismuth *Oxygen diffusivity* property class
     implementing the correlation by *fitzner1980*.
@@ -67,9 +67,9 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-49229 / R / T) * 1.07e-2
+        return np.exp(-49229 / R / T) * 1.07e-6
 
     @property
     def correlation_name(self) -> str:
@@ -87,7 +87,7 @@ class OxygenDiffusivityFitzner1980(OxygenDiffusivityInterface):
         return [951, 1100]
 
 
-class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
+class OxygenDiffusivityHeshmatpour1981(BismuthOxygenDiffusivityInterface):
     """
     Liquid bismuth *Oxygen diffusivity* property class
     implementing the correlation by *heshmatpour1981*.
@@ -113,9 +113,9 @@ class OxygenDiffusivityHeshmatpour1981(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-26610 / R / T) * 1.98e-4
+        return np.exp(-26610 / R / T) * 1.98e-8
 
     @property
     def correlation_name(self) -> str:

@@ -177,7 +177,7 @@ class PropertyInterface(ABC):
         verbose : bool, optional
             `True` to tell the decorator to print a warning message in case of
             range check failing, `False` otherwise. By default, `False`
-        
+
         Returns
         -------
         exception

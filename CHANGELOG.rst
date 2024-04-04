@@ -1,7 +1,20 @@
 Changelog
 =========
 
-Version 2.0.0 (XXXX-XX-XX)
+Version 2.1.0 (2024-04-04)
+--------------------------
+
+- fixed known bugs
+
+- peer-reviewed documentation
+
+- refactored property classes
+
+- improved cross-platform path handling for user-defined properties
+
+- inserted contributing guidelines
+
+Version 2.0.0 (2024-01-08)
 --------------------------
 
 - implemented thermo-chemical data and properties (solubility and diffusivity of impurities, Oxygen concentration range where protective oxide layer formation is assured,

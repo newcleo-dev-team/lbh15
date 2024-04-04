@@ -1,9 +1,9 @@
 """__init__ module of lbh15 package"""
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __author__ = "Daniele Panico, Daniele Tomatis, Gabriele Ottino"
 __company__ = "newcleo"
-__date__ = "11 December 2023"
+__date__ = "04 April 2024"
 
 from .lead import Lead
 from .bismuth import Bismuth

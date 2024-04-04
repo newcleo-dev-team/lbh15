@@ -3,35 +3,15 @@ property objects for *lead-bismuth eutectic* (*lbe*)."""
 from typing import List
 import numpy as np
 from scipy.constants import atm, R
-from lbh15.properties.interface import PropertyInterface
+from ..tch_common_interface import OxygenDiffusivityInterface
+from ..tch_common_interface import IronDiffusivityInterface
 from ..._decorators import range_warning
 
 
-class OxygenDiffusivityInterface(PropertyInterface):
+class LBEOxygenDiffusivityInterface(OxygenDiffusivityInterface):
     """
     Liquid lbe *Oxygen diffusivity* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen diffusivity unit
-        """
-        return "[cm^2.s^-1]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen diffusivity long name
-        """
-        return "oxygen diffusivity"
-
     @property
     def description(self) -> str:
         """
@@ -40,7 +20,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
-class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
+class OxygenDiffusivityGromov1996(LBEOxygenDiffusivityInterface):
     """
     Liquid lbe *Oxygen diffusivity* property class
     implementing the correlation by *gromov1996*.
@@ -66,9 +46,9 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-43073 / R / T) * 2.39e-2
+        return np.exp(-43073 / R / T) * 2.39e-6
 
     @property
     def correlation_name(self) -> str:
@@ -86,7 +66,7 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         return [473, 1273]
 
 
-class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
+class OxygenDiffusivityGanesan2006b(LBEOxygenDiffusivityInterface):
     """
     Liquid lbe *Oxygen diffusivity* property class
     implementing the correlation by *ganesan2006b*.
@@ -112,9 +92,9 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-69069 / R / T) * 0.154
+        return np.exp(-69069 / R / T) * 0.154e-4
 
     @property
     def correlation_name(self) -> str:
@@ -132,7 +112,7 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
         return [813, 973]
 
 
-class IronDiffusivity(PropertyInterface):
+class IronDiffusivity(IronDiffusivityInterface):
     """
     Liquid lbe *Iron diffusivity* property class.
     """
@@ -157,23 +137,9 @@ class IronDiffusivity(PropertyInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.power(10, - 2.31 - 2295 / T)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron diffusivity unit
-        """
-        return "[cm^2.s^-1]"
+        return np.power(10, - 2.31 - 2295 / T) * 1.0e-4
 
     @property
     def range(self) -> List[float]:
@@ -184,15 +150,8 @@ class IronDiffusivity(PropertyInterface):
         return [973.0, 1273.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Iron diffusivity long name
-        """
-        return "iron diffusivity"
-
-    @property
     def description(self) -> str:
         """
         str : Iron diffusivity description
         """
-        return "f{self.long_name} in liquid lbe"
+        return f"{self.long_name} in liquid lbe"

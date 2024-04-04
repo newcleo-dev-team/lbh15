@@ -2,7 +2,8 @@ lbh15
 =====
 
 :Author: Daniele Panico, Daniele Tomatis
-:Date: 07/04/2023
+:Contributor: Gabriele Ottino, Lucie Kerleau, Chloé Largeron
+:Date: 04/04/2024
 
 Introduction
 ------------
@@ -10,9 +11,13 @@ Introduction
 *lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the
 thermo-physical and the thermo-chemical properties of lead, bismuth and lead-bismuth eutectic (lbe) metal alloy available from
 the handbook edited by 
-`OECD/NEA <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_
+`OECD/NEA <https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition?details=true>`_.
 
-*lbh15* is released under the **GNU Lesser General Public License 3**.
+*lbh15* offers a standard implementation for use of these properties in scientific applications.
+In particular, this package is used for numerical simulation and experimental activities supporting the
+development of nuclear reactors that employ heavy liquid metals as primary coolant.
+
+*lbh15* is developed by the **Codes & Methods** group of `newcleo <https://www.newcleo.com/>`_ and it is released under the **GNU Lesser General Public License 3**.
 
 *lbh15* is listed among the Open-source Nuclear Codes for Reactor Analysis (`ONCORE <https://nucleus.iaea.org/sites/oncore/SitePages/List%20of%20Codes.aspx>`_) by IAEA.
 
@@ -97,6 +102,13 @@ The *html* documentation is available on GitHub Pages at `newcleo-dev-team.githu
 
 To see the available templates for generating the documentation in *PDF* format and to choose among them, please
 look at the ``docs/conf.py`` file.
+
+How to Contribute
+-----------------
+
+For anyone wishing to contribute to the development of the project, report issues
+or problems with the software, or request support, please refer to this
+`web page <https://github.com/newcleo-dev-team/lbh15/blob/master/CONTRIBUTIONS.rst>`_.
 
 How to Cite
 -----------

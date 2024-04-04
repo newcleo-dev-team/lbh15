@@ -4,13 +4,23 @@ from typing import List
 from typing import Union
 import numpy as np
 from scipy.constants import atm
-from .interface import PropertyInterface
+from .tph_common_interface import SaturationVapourPressureInterface
+from .tph_common_interface import SurfaceTensionInterface
+from .tph_common_interface import DensityInterface
+from .tph_common_interface import ThermalExpansionInterface
+from .tph_common_interface import SpeedOfSoundInterface
+from .tph_common_interface import IsentropicCompressibilityInterface
+from .tph_common_interface import SpecificHeatInterface
+from .tph_common_interface import SpecificEnthalpyInterface
+from .tph_common_interface import DynamicViscosityInterface
+from .tph_common_interface import ElectricalResistivityInterface
+from .tph_common_interface import ThermalConductivityInterface
 from .._decorators import range_warning
 from .._commons import BISMUTH_MELTING_TEMPERATURE as T_m0
 from .._commons import BISMUTH_BOILING_TEMPERATURE as T_b0
 
 
-class p_s(PropertyInterface):
+class p_s(SaturationVapourPressureInterface):
     """
     Liquid bismuth *saturation vapour pressure* property class.
     """
@@ -99,7 +109,7 @@ class p_s(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class sigma(PropertyInterface):
+class sigma(SurfaceTensionInterface):
     """
     Liquid bismuth *surface tension* property class.
     """
@@ -136,28 +146,6 @@ class sigma(PropertyInterface):
         return 'sobolev2011'
 
     @property
-    def range(self) -> List[float]:
-        """
-        List[float] : Temperature validity range of the surface
-        tension correlation function
-        """
-        return [T_m0, 1400.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : Surface tension unit
-        """
-        return "[N/m]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Surface tension long name
-        """
-        return "surface tension"
-
-    @property
     def description(self) -> str:
         """
         str : Surface tension description
@@ -165,7 +153,7 @@ class sigma(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class rho(PropertyInterface):
+class rho(DensityInterface):
     """
     Liquid bismuth *density* property class.
     """
@@ -215,20 +203,6 @@ class rho(PropertyInterface):
         return [T_m0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Density unit
-        """
-        return "[kg/m^3]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Density long name
-        """
-        return "density"
-
-    @property
     def description(self) -> str:
         """
         str : Density description
@@ -236,7 +210,7 @@ class rho(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class alpha(PropertyInterface):
+class alpha(ThermalExpansionInterface):
     """
     Liquid bismuth *thermal expansion coefficient* property class.
     """
@@ -274,20 +248,6 @@ class alpha(PropertyInterface):
         return [T_m0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Thermal expansion coefficient unit
-        """
-        return "[1/K]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Thermal expansion coefficient long name
-        """
-        return "thermal expansion coefficient"
-
-    @property
     def description(self) -> str:
         """
         str : Thermal expansion coefficient description
@@ -295,7 +255,7 @@ class alpha(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class u_s(PropertyInterface):
+class u_s(SpeedOfSoundInterface):
     """
     Liquid bismuth *sound velocity* property class.
     """
@@ -340,20 +300,6 @@ class u_s(PropertyInterface):
         return [T_m0, 1800.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Sound velocity unit
-        """
-        return "[m/s]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Sound velocity long name
-        """
-        return "sound velocity"
-
-    @property
     def description(self) -> str:
         """
         str : Sound velocity description
@@ -361,7 +307,7 @@ class u_s(PropertyInterface):
         return "Sound velocity in liquid bismuth"
 
 
-class beta_s(PropertyInterface):
+class beta_s(IsentropicCompressibilityInterface):
     """
     Liquid bismuth *isentropic compressibility* property class.
     """
@@ -400,20 +346,6 @@ class beta_s(PropertyInterface):
         return [T_m0, 1800.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Isentropic compressibility unit
-        """
-        return "[1/Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Isentropic compressibility long name
-        """
-        return "isentropic compressibility"
-
-    @property
     def description(self) -> str:
         """
         str : Isentropic compressibility description
@@ -421,7 +353,7 @@ class beta_s(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class cp(PropertyInterface):
+class cp(SpecificHeatInterface):
     """
     Liquid bismuth *specific heat capacity* property class.
     """
@@ -458,34 +390,12 @@ class cp(PropertyInterface):
         return "imbeni1998"
 
     @property
-    def is_injective(self) -> bool:
-        """
-        bool : `True` if the correlation is injective,
-        `False` otherwise.
-        """
-        return False
-
-    @property
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the specific heat
         capacity correlation function
         """
         return [T_m0, T_b0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : Specific heat capacity unit
-        """
-        return "[J/(kg*K)]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Specific heat capacity long name
-        """
-        return "specific heat capacity"
 
     @property
     def description(self) -> str:
@@ -495,7 +405,7 @@ class cp(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class h(PropertyInterface):
+class h(SpecificEnthalpyInterface):
     """
     Liquid bismuth *specific enthalpy* property class.
     """
@@ -541,20 +451,6 @@ class h(PropertyInterface):
         return [T_m0, T_b0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Specific enthalpy unit
-        """
-        return "[J/kg]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Specific enthalpy long name
-        """
-        return "specific enthalpy"
-
-    @property
     def description(self) -> str:
         """
         str : Specific enthalpy description
@@ -564,7 +460,7 @@ class h(PropertyInterface):
                 "the melting point enthalpy)")
 
 
-class mu(PropertyInterface):
+class mu(DynamicViscosityInterface):
     """
     Liquid bismuth *dynamic viscosity* property class.
     """
@@ -609,20 +505,6 @@ class mu(PropertyInterface):
         return [T_m0, 1300.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Dynamic viscosity unit
-        """
-        return "[Pa*s]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Dynamic viscosity long name
-        """
-        return "dynamic viscosity"
-
-    @property
     def description(self) -> str:
         """
         str : Dynamic viscosity description
@@ -630,7 +512,7 @@ class mu(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class r(PropertyInterface):
+class r(ElectricalResistivityInterface):
     """
     Liquid bismuth *electrical resistivity* property class.
     """
@@ -668,20 +550,6 @@ class r(PropertyInterface):
         return [545.0, 1423.0]
 
     @property
-    def units(self) -> str:
-        """
-        str : Electrical resistivity unit
-        """
-        return "[Ohm*m]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Electrical resistivity long name
-        """
-        return "electrical resistivity"
-
-    @property
     def description(self) -> str:
         """
         str : Electrical resistivity description
@@ -689,7 +557,7 @@ class r(PropertyInterface):
         return f"Liquid bismuth {self.long_name}"
 
 
-class k(PropertyInterface):
+class k(ThermalConductivityInterface):
     """
     Liquid bismuth *thermal conductivity* property class.
     """
@@ -732,20 +600,6 @@ class k(PropertyInterface):
         conductivity correlation function
         """
         return [T_m0, 1000.0]
-
-    @property
-    def units(self) -> str:
-        """
-        str : Thermal conductivity unit
-        """
-        return "[W/(m*K)]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Thermal conductivity long name
-        """
-        return "thermal conductivity"
 
     @property
     def description(self) -> str:

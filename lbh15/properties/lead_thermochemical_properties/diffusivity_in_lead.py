@@ -4,35 +4,16 @@ from typing import List
 import numpy as np
 from scipy.constants import atm
 from scipy.constants import R
-from lbh15.properties.interface import PropertyInterface
+from ..interface import PropertyInterface
+from ..tch_common_interface import OxygenDiffusivityInterface
+from ..tch_common_interface import IronDiffusivityInterface
 from ..._decorators import range_warning
 
 
-class OxygenDiffusivityInterface(PropertyInterface):
+class LeadOxygenDiffusivityInterface(OxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property abstract class.
     """
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "o_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Oxygen diffusivity unit
-        """
-        return "[cm^2.s^-1]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Oxygen diffusivity long name
-        """
-        return "oxygen diffusivity"
-
     @property
     def description(self) -> str:
         """
@@ -41,7 +22,7 @@ class OxygenDiffusivityInterface(PropertyInterface):
         return f"{self.long_name} in liquid lead"
 
 
-class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
+class OxygenDiffusivityArcella1968(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *arcella1968*.
@@ -67,9 +48,9 @@ class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-14979 / R / T) * 6.32e-5
+        return np.exp(-14979 / R / T) * 6.32e-9
 
     @property
     def correlation_name(self) -> str:
@@ -87,7 +68,7 @@ class OxygenDiffusivityArcella1968(OxygenDiffusivityInterface):
         return [973, 1173]
 
 
-class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
+class OxygenDiffusivityHomna1971(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *homna1971*.
@@ -113,9 +94,9 @@ class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-20083 / R / T) * 9.65e-5
+        return np.exp(-20083 / R / T) * 9.65e-9
 
     @property
     def correlation_name(self) -> str:
@@ -133,7 +114,7 @@ class OxygenDiffusivityHomna1971(OxygenDiffusivityInterface):
         return [1073, 1373]
 
 
-class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
+class OxygenDiffusivitySwzarc1972(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *swzarc1972*.
@@ -159,9 +140,9 @@ class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-25942 / R / T) * 1.44e-3
+        return np.exp(-25942 / R / T) * 1.44e-7
 
     @property
     def correlation_name(self) -> str:
@@ -179,7 +160,7 @@ class OxygenDiffusivitySwzarc1972(OxygenDiffusivityInterface):
         return [1013, 1353]
 
 
-class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
+class OxygenDiffusivityOtsuka1975(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *otsuka1975*.
@@ -205,9 +186,9 @@ class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-19497 / R / T) * 1.48e-3
+        return np.exp(-19497 / R / T) * 1.48e-7
 
     @property
     def correlation_name(self) -> str:
@@ -225,7 +206,7 @@ class OxygenDiffusivityOtsuka1975(OxygenDiffusivityInterface):
         return [1173, 1373]
 
 
-class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
+class OxygenDiffusivityCharle1976(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *charle1976*.
@@ -251,9 +232,9 @@ class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-20927 / R / T) * 1.90e-3
+        return np.exp(-20927 / R / T) * 1.90e-7
 
     @property
     def correlation_name(self) -> str:
@@ -271,7 +252,7 @@ class OxygenDiffusivityCharle1976(OxygenDiffusivityInterface):
         return [1173, 1373]
 
 
-class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
+class OxygenDiffusivityGromov1996(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *gromov1996*.
@@ -297,9 +278,9 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-16158 / R / T) * 6.6e-5
+        return np.exp(-16158 / R / T) * 6.6e-9
 
     @property
     def correlation_name(self) -> str:
@@ -317,7 +298,7 @@ class OxygenDiffusivityGromov1996(OxygenDiffusivityInterface):
         return [673, 1273]
 
 
-class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
+class OxygenDiffusivityGanesan2006b(LeadOxygenDiffusivityInterface):
     """
     Liquid lead *Oxygen diffusivity* property class
     implementing the correlation by *ganesan2006b*.
@@ -343,9 +324,9 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-45587 / R / T) * 2.79e-3
+        return np.exp(-45587 / R / T) * 2.79e-7
 
     @property
     def correlation_name(self) -> str:
@@ -363,7 +344,7 @@ class OxygenDiffusivityGanesan2006b(OxygenDiffusivityInterface):
         return [823, 1053]
 
 
-class IronDiffusivity(PropertyInterface):
+class IronDiffusivity(IronDiffusivityInterface):
     """
     Liquid lead *Iron diffusivity* property class.
     """
@@ -388,23 +369,9 @@ class IronDiffusivity(PropertyInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.power(10, - 2.31 - 2295 / T)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "fe_dif"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Iron diffusivity unit
-        """
-        return "[cm^2.s^-1]"
+        return np.power(10, - 2.31 - 2295 / T) * 1.0e-4
 
     @property
     def range(self) -> List[float]:
@@ -415,18 +382,11 @@ class IronDiffusivity(PropertyInterface):
         return [973.0, 1273.0]
 
     @property
-    def long_name(self) -> str:
-        """
-        str : Iron diffusivity long name
-        """
-        return "iron diffusivity"
-
-    @property
     def description(self) -> str:
         """
         str : Iron diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class CobaltDiffusivity(PropertyInterface):
@@ -454,9 +414,9 @@ class CobaltDiffusivity(PropertyInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-22154 / R / T) * 4.6e-4
+        return np.exp(-22154 / R / T) * 4.6e-8
 
     @property
     def name(self) -> str:
@@ -470,7 +430,7 @@ class CobaltDiffusivity(PropertyInterface):
         """
         str : Cobalt diffusivity unit
         """
-        return "[cm^2.s^-1]"
+        return "[m^2.s^-1]"
 
     @property
     def range(self) -> List[float]:
@@ -492,7 +452,7 @@ class CobaltDiffusivity(PropertyInterface):
         """
         str : Cobalt diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class SeleniumDiffusivity(PropertyInterface):
@@ -520,9 +480,9 @@ class SeleniumDiffusivity(PropertyInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-12958 / R / T) * 3.4e-4
+        return np.exp(-12958 / R / T) * 3.4e-8
 
     @property
     def name(self) -> str:
@@ -536,7 +496,7 @@ class SeleniumDiffusivity(PropertyInterface):
         """
         str : Selenium diffusivity unit
         """
-        return "[cm^2.s^-1]"
+        return "[m^2.s^-1]"
 
     @property
     def range(self) -> List[float]:
@@ -558,7 +518,7 @@ class SeleniumDiffusivity(PropertyInterface):
         """
         str : Selenium diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class IndiumDiffusivity(PropertyInterface):
@@ -586,9 +546,9 @@ class IndiumDiffusivity(PropertyInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-13794 / R / T) * 3.1e-4
+        return np.exp(-13794 / R / T) * 3.1e-8
 
     @property
     def name(self) -> str:
@@ -602,7 +562,7 @@ class IndiumDiffusivity(PropertyInterface):
         """
         str : Indium diffusivity unit
         """
-        return "[cm^2.s^-1]"
+        return "[m^2.s^-1]"
 
     @property
     def range(self) -> List[float]:
@@ -624,7 +584,7 @@ class IndiumDiffusivity(PropertyInterface):
         """
         str : Indium diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
 
 
 class TelluriumDiffusivity(PropertyInterface):
@@ -652,9 +612,9 @@ class TelluriumDiffusivity(PropertyInterface):
         Returns
         -------
         float:
-            diffusivity in :math:`[cm^2 / s]`
+            diffusivity in :math:`[m^2 / s]`
         """
-        return np.exp(-15884 / R / T) * 3.1e-4
+        return np.exp(-15884 / R / T) * 3.1e-8
 
     @property
     def name(self) -> str:
@@ -668,7 +628,7 @@ class TelluriumDiffusivity(PropertyInterface):
         """
         str : Tellurium diffusivity unit
         """
-        return "[cm^2.s^-1]"
+        return "[m^2.s^-1]"
 
     @property
     def range(self) -> List[float]:
@@ -690,4 +650,4 @@ class TelluriumDiffusivity(PropertyInterface):
         """
         str : Tellurium diffusivity description
         """
-        return "f{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid lead"
