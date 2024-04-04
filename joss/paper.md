@@ -112,7 +112,7 @@ The properties implemented so far can be subdivided into two groups:
 The release of version *1.1.0* of the package `lbh15` was described in 
 [@nureth20]. This version implemented only the thermo-physical properties.
 
-The current version *2.0.0* implements the thermo-chemical properties and 
+The current version *2.1.0* implements the thermo-chemical properties and 
 updates the documentation accordingly, improving the overall understanding. 
 Moreover, solutions have been adopted to improve performance and 
 usability of the code such as enforcing vectorization over the 
