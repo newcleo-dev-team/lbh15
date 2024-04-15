@@ -1,6 +1,9 @@
 lbh15
 =====
 
+.. image:: https://joss.theoj.org/papers/10.21105/joss.06383/status.svg
+   :target: https://doi.org/10.21105/joss.06383
+
 :Author: Daniele Panico, Daniele Tomatis
 :Contributor: Gabriele Ottino, Lucie Kerleau, Chloé Largeron
 :Date: 04/04/2024
@@ -125,11 +128,15 @@ How to Cite
     editor = {ANS}
   }
 
+
 .. code-block:: latex
 
-  @article{lbh15JOSS2024,
-    author = {Ottino, G.M., Panico, D., Tomatis, D. and Pantel, P.A.},
-    title = {{lbh15: a Python package for standard use and implementation of physical data of heavy liquid metals used in nuclear reactors}},
-    editor = {Journal of Open-Source Scientific Software}
-    note={submitted}
+  @article{ottino2024lbh15,
+    title={lbh15: a Python package for standard use and implementation of physical data of heavy liquid metals used in nuclear reactors},
+    author={Ottino, Gabriele and Panico, Daniele and Tomatis, Daniele and Pantel, Pierre-Alexandre},
+    journal={Journal of Open Source Software},
+    volume={9},
+    number={96},
+    pages={6383},
+    year={2024}
   }
