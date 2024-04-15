@@ -38,3 +38,16 @@ How to Cite
     month = {Aug 20--25},
     editor = {ANS}
   }
+
+
+.. code-block:: latex
+
+  @article{ottino2024lbh15,
+    title={lbh15: a Python package for standard use and implementation of physical data of heavy liquid metals used in nuclear reactors},
+    author={Ottino, Gabriele and Panico, Daniele and Tomatis, Daniele and Pantel, Pierre-Alexandre},
+    journal={Journal of Open Source Software},
+    volume={9},
+    number={96},
+    pages={6383},
+    year={2024}
+  }
