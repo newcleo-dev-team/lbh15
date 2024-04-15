@@ -125,11 +125,5 @@ How to Cite
     editor = {ANS}
   }
 
-.. code-block:: latex
-
-  @article{lbh15JOSS2024,
-    author = {Ottino, G.M., Panico, D., Tomatis, D. and Pantel, P.A.},
-    title = {{lbh15: a Python package for standard use and implementation of physical data of heavy liquid metals used in nuclear reactors}},
-    editor = {Journal of Open-Source Scientific Software}
-    note={submitted}
-  }
+.. image:: https://joss.theoj.org/papers/10.21105/joss.06383/status.svg
+   :target: https://doi.org/10.21105/joss.06383`
