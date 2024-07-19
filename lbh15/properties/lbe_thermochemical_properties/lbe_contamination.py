@@ -301,3 +301,77 @@ class LBECadmiumVapourPressureInterfaceLandolt1991(PropertyInterface):
         pressure correlation function.
         """
         return [398.0, 1927.0]
+
+
+class LBEThalliumHenryConstantInterfaceLandolt1991(PropertyInterface):
+    """
+    Liquid LBE *Thallium compounds Henry constant* property class
+    implementing the correltion by *landolt1991*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Thallium compounds Henry constant* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            Henry constant in :math:`[Pa]`
+        """
+        return 10**((- 9463 / T) + 13.264 - 0.892 * log(T))
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_LBETl"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "landolt1991"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Thallium Henry constant long name
+        """
+        return "Henry constant of Thallium in LBE"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Thallium Henry constant description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Thallium Henry
+        constant correlation function.
+        """
+        return [398.0, 1927.0]
