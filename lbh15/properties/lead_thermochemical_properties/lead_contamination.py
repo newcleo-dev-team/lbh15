@@ -449,3 +449,79 @@ class LeadCaesiumHenryConstantInterfaceYamshchikov2001(PropertyInterface):
         correlation function
         """
         return [643.0, 933.0]
+
+
+class LeadCaesiumVapourPressureInterfaceYamshchikov2001(PropertyInterface):
+    """
+    Liquid lead *Caesium compounds vapour pressure* property class
+    implementing the correlation by *yamshchikov2001*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Caesium compounds vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return 10**(-1.5) * 10**((- 4979.5799 / T) - 9.3234247 * log(T)
+                                 + 0.0044733132 * T - 8.684092 *
+                                 10**(-7) * T**(2) + 34.573234)
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_PbCs"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "yamshchikov2001"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Caesium vapour pressure long name
+        """
+        return "Caesium compounds vapour pressure in pure lead"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Caesium vapour pressure description
+        """
+        return f"{self.long_name} in liquid lead"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Ceasium vapour pressure
+        correlation function
+        """
+        return [643.0, 933.0]
