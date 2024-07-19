@@ -300,3 +300,76 @@ class LeadIodineVapourPressureInterfaceKonings1996(PropertyInterface):
         vapour pressure correlation function.
         """
         return [600.6, 697.0]   
+
+class LeadIodineVapourPressureInterfaceKnacke1991(PropertyInterface):
+    """
+    Liquid lead *Iodine compounds vapour pressure* property class
+    implementing the correlation by *knacke1991*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Iodine compounds vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return 10**((- 9087 / T) + 31.897 - 6.16 * log(T))
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_PbI2_b"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "knacke1991"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Iodine vapour pressure long name
+        """
+        return "Vapour pressure of Iodine in pure lead"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Iodine vapour pressure description
+        """
+        return f"{self.long_name} in liquid lead"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Iodine
+        vapour pressure correlation function.
+        """
+        return [697.1, 2021.1]
