@@ -79,4 +79,77 @@ class LeadPoloniumVapourPressureInterfaceAbakumov1994a(PropertyInterface):
         vapour pressure correlation function
         """
         return [913.0, 1123.0]
-    
+
+
+class LeadPoloniumHenryConstantInterfaceOhno2006(PropertyInterface):
+    """
+    Liquid lead *Polonium compounds Henry constant* property class
+    implementing the correlation by *ohno2006*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Polonium compounds Henry constant* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return 10**((- 8348 / T) + 10.5357)
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_PbPo"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "ohno2006"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Henry constant unit
+        """
+        return "[]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Polonium Henry constant long name
+        """
+        return "Henry constant of Polonium in pure lead"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Polonium Henry constant description
+        """
+        return f"{self.long_name} in liquid lead"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Polonium Henry constant
+        correlation function
+        """
+        return [723.0, 1023.0]
