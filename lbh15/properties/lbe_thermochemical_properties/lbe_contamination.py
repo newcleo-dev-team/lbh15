@@ -227,3 +227,77 @@ class LBECadmiumHenryConstantInterfaceLandolt1991(PropertyInterface):
         correlation function
         """
         return [398.0, 1927.0]
+
+
+class LBECadmiumVapourPressureInterfaceLandolt1991(PropertyInterface):
+    """
+    Liquid LBE *Cadmium compounds vapour pressure* property class
+    implementing the correlation by *landolt1991*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Cadmium compounds vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return 0.25 * 10**((- 5711 / T) + 14.38 - 1.0867 * log(T))
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_LBECd"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "landolt1991"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Cadmium Vapour pressure long name
+        """
+        return "Vapour pressure of Cadmium in LBE"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Cadmium Vapour pressure description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Cadmium vapour
+        pressure correlation function.
+        """
+        return [398.0, 1927.0]
