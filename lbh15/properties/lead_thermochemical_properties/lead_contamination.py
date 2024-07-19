@@ -107,7 +107,7 @@ class LeadPoloniumHenryConstantInterfaceOhno2006(PropertyInterface):
         Returns
         -------
         float:
-            pressure in :math:`[Pa]`
+            Henry constant in :math:`[Pa]`
         """
         return 10**((- 8348 / T) + 10.5357)
 
@@ -130,7 +130,7 @@ class LeadPoloniumHenryConstantInterfaceOhno2006(PropertyInterface):
         """
         str : Henry constant unit
         """
-        return "[]"
+        return "[Pa]"
 
     @property
     def long_name(self) -> str:
@@ -153,3 +153,75 @@ class LeadPoloniumHenryConstantInterfaceOhno2006(PropertyInterface):
         correlation function
         """
         return [723.0, 1023.0]
+
+class LeadPoloniumActivityCoefficientInterfaceLi1998(PropertyInterface):
+    """
+    Liquid lbe *Polonium compounds activity coefficient* property class.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Polonium compounds activity coefficient* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            activity coefficient in :math:`[]`
+        """
+        return 10**((- 1830 / T) - 0.40)
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "gamma_PbPo"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "Li1998"
+
+    @property
+    def units(self) -> str:
+        """
+        str : activity coefficient unit
+        """
+        return "[]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Polonium activity coefficient long name
+        """
+        return "Activity coefficient of Polonium in pure lead"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Polonium Activity coefficient description
+        """
+        return f"{self.long_name} in liquid lead"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Polonium activity
+        coefficient correlation function.
+        """
+        return [641.0, 877.0]
