@@ -597,3 +597,151 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
         activity coefficient correlation function.
         """
         return [723.0, 1023.0]
+   
+
+class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
+    """
+    Liquid LBE *Rubidium compounds vapour pressure* property class
+    implementing the correlation by *landolt1960*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Rubidium compounds vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return 10**((- 4588 / T) + 14.110 - 1.45 * log(T))
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_LBERb"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "landolt1960"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Rubidium vapour pressure long name
+        """
+        return "Vapour pressure of Rubidium in pure LBE"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Rubidium vapour pressure description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Rubidium
+        vapour pressure correlation function.
+        """
+        return [398.0, 1927.0]
+
+
+class LBERubidiumVapourPressureInterfaceHandbook(PropertyInterface):
+    """
+    Liquid LBE *Rubidium compounds vapour pressure* property class
+    implementing the correlation by *handbook*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Rubidium compounds vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return 10**(-1.7) * 10**((- 4588 / T) + 14.110 - 1.45 * log(T))
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_LBERb"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "handbook"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Rubidium vapour pressure long name
+        """
+        return "Vapour pressure of Rubidium in pure LBE"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Rubidium vapour pressure description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Rubidium
+        vapour pressure correlation function.
+        """
+        return [398.0, 1927.0]
