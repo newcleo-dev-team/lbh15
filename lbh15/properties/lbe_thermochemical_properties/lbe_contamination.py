@@ -79,3 +79,77 @@ class LBEPoloniumHenryConstantInterfaceOhno2006(PropertyInterface):
         correlation function
         """
         return [723.0, 1023.0]
+
+
+class LBEMercuryHenryConstantInterfaceLandolt1991(PropertyInterface):
+    """
+    Liquid LBE *Mercury compounds Henry constant* property class
+    implementing the correlation by *landolt1991*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Mercury compounds Henry constant* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            Henry constant in :math:`[Pa]`
+        """
+        return 10**((- 3332.7 / T) + 12.6706 - 0.848 * log(T))
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_LBEHg"
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "landolt1991"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Mercury Henry constant long name
+        """
+        return "Henry constant of Mercury in LBE"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Mercury Henry constant description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Mercury Henry constant
+        correlation function
+        """
+        return [625.0, 1927.0]
