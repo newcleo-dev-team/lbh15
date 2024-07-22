@@ -13,8 +13,9 @@ In addition to the class attributes that are shown in the second part of this se
 thermo-physical properties implemented in :py:mod:`lbh15.properties.lead_properties` module and the
 thermo-chemical properties implemented in :py:mod:`lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead`,
 :py:mod:`lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits`,
-:py:mod:`lbh15.properties.lead_thermochemical_properties.lead_thermochemical` and
-:py:mod:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead` modules. For instance:
+:py:mod:`lbh15.properties.lead_thermochemical_properties.lead_thermochemical`,
+:py:mod:`lbh15.properties.lead_thermochemical_properties.solubility_in_lead` and
+:py:mod:`lbh15.properties.lead_thermochemical_properties.lead_contamination` modules. For instance:
 
 >>> from lbh15 import Lead
 >>> liquid_lead = Lead(T=668.15)
@@ -159,6 +160,27 @@ In detail, a :class:`.Lead` object comes with the following default properties:
     - ``lim_si`` lower limit of oxygen concentration times silicon concentration raised to :math:`1/2` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_si\left(T\right) = \displaystyle lim\_si\_sat\left(T\right) \cdot si\_sol\left(T\right)^{1/2}`
+    - ``P_PbPo`` vapour pressure of Po :math:`[Pa]`:
+
+        :math:`P_{PbPo} = 10^{-\frac{7270\pm80}{T} + 9.06\pm0.07}`
+    - ``K_PbPo`` Henry constant of Po :math:`[Pa]`:
+
+        :math:`K_{PbPo} = 10^{-\frac{8348}{T} + 10.5357}`
+    - ``gamma_PbPo`` Activity coefficient of Po:
+
+        :math:`\gamma_{Po(LBE)} = 10^{-\frac{1830}{T}-0.40}`
+    - ``P_PbI2_a`` vapour pressure of I :math:`[Pa]`:
+
+        :math:`P_{PbI_{2}} = 10^{-\frac{8691 \pm 84}{T} + 13.814 \pm 0.140}`
+    - ``P_PbI2_b`` vapour pressure of I :math:`[Pa]`:
+
+        :math:`P_{PbI_{2}} = 10^{-\frac{9087}{T} + 31.897 - 6.16\log{T}}`
+    - ``K_PbCs`` Henry constant of Cs :math:`[Pa]`:
+
+        :math:`K_{H(Cs,Pb)} = 10^{-\frac{4980}{T} - 9.323\log{T} + 0.004473T - 8.684.10^{-7}T^{2} + 33.07}`
+    - ``P_PbCs`` vapour pressure of Cs :math:`[Pa]`:
+
+        :math:`P_{PbCs} = 10^{-1.5}10^{-\frac{4979.5799}{T} - 9.3234247\log{T} + 0.0044733132T - 8.684092*10^{-7}T^{2} + 34.573234}`
 
 where :math:`T` is the lead temperature in :math:`\left[K\right]`, :math:`p` is the lead pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.

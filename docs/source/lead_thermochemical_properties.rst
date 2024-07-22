@@ -15,3 +15,5 @@ class.
    lead_thermochemical.rst
 
    lead_oxygen_limits.rst
+
+   lead_contamination.rst
