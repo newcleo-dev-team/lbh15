@@ -13,8 +13,9 @@ In addition to the class attributes that are shown in the second part of this se
 thermo-physical properties implemented in :py:mod:`lbh15.properties.lbe_properties` module and the
 thermo-chemical properties implemented in :py:mod:`lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe`,
 :py:mod:`lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits`,
-:py:mod:`lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical` and
-:py:mod:`lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe` modules. For instance:
+:py:mod:`lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical`,
+:py:mod:`lbh15.properties.lbe_thermochemical_properties.solubility_in_lbe` and
+:py:mod:`lbh15.properties.lbe_thermochemical_properties.lbe_contamination` modules. For instance:
 
 >>> from lbh15 import LBE
 >>> liquid_lbe = LBE(T=668.15)
@@ -153,6 +154,36 @@ In detail, a :class:`.LBE` object comes with the following default properties:
     - ``lim_fe`` lower limit of ox concentration times iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\left(T\right) = \displaystyle lim\_fe\_sat\left(T\right) \cdot fe\_sol\left(T\right)^{3/4}`
+    - ``K_LBEPo`` Henry constant of Po :math:`[Pa]`:
+
+        :math:`K_{H(Po(LBE))} = 10^{-\frac{8348}{T} + 10.5357}`
+    - ``K_LBEHg`` Henry constant of Hg :math:`[Pa]`:
+
+        :math:`K_{H(Hg,LBE)} = 10^{-\frac{3332.7}{T} + 12.6706 - 0.848 \log{T}}`
+    - ``K_LBECd`` Henry constant of Cd :math:`[Pa]`:
+
+        :math:`K_{H(Cd,LBE)} = 10^{-\frac{5711}{T} + 14.38 - 1.0867\log{T}}`
+    - ``P_LBECd`` vapour pressure of Cd :math:`[Pa]`:
+
+        :math:`P_{Cd(LBE)} = 0.25 * 10^{-\frac{5711}{T} + 14.38 - 1.0867\log{T}}`
+    - ``K_LBETl`` Henry constant of Tl :math:`[Pa]`:
+
+        :math:`K_{H(Tl,LBE)} = 10^{-\frac{9463}{T} + 13.264 - 0.892\log{T}}`
+    - ``P_LBETl`` vapour pressure of Tl :math:`[Pa]`:
+
+        :math:`P_{Tl(LBE)} = 1.25 * 10^{-\frac{9463}{T} + 13.264 - 0.892\log{T}}`
+    - ``K_LBEI`` Henry constant of I :math:`[Pa]`:
+
+        :math:`K_{H(I,LBE)} = 10^{-\frac{10407}{T} + 14.56}`
+    - ``gamma_LBECs`` activity coefficient of Cs:
+
+        :math:`\gamma_{Cs(LBE)} = 10^{-\frac{2677 \pm 863}{T} + 0.75 \pm 0.98}`
+    - ``P_LBERb_a`` vapour pressure of Rb :math:`[Pa]`:
+
+        :math:`P_{Rb} = 10^{-\frac{4588}{T} - 1.45\log{T} + 14.110}`
+    - ``P_LBERb_b`` vapour pressure of Rb :math:`[Pa]`:
+
+        :math:`P_{Rb} = 10^{-1.7}s10^{-\frac{4588}{T} - 1.45\log{T} + 14.110}`
 
 
 where :math:`T` is the lbe temperature in :math:`\left[K\right]`, :math:`p` is the lbe pressure in :math:`\left[Pa\right]` and

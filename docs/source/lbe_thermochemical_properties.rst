@@ -15,3 +15,5 @@ lead-bismuth eutectic. They are among the classes dynamically loaded by the
     lbe_thermochemical.rst
 
     lbe_oxygen_limits.rst
+
+    lbe_contamination.rst
