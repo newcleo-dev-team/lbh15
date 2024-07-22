@@ -13,3 +13,5 @@ class.
     solubility_in_bismuth.rst
 
     bismuth_thermochemical.rst
+
+    bismuth_contamination.rst

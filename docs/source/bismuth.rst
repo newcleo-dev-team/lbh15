@@ -12,8 +12,9 @@ of the corresponding correlation implemented in the *lbh15* package.
 In addition to the class attributes that are shown in the second part of this section, :class:`.Bismuth` class dynamically adds the
 thermo-physical properties implemented in :py:mod:`lbh15.properties.bismuth_properties` module and the
 thermo-chemical properties implemented in :py:mod:`lbh15.properties.bismuth_thermochemical_properties.diffusivity_in_bismuth`,
-:py:mod:`lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical` and
-:py:mod:`lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth` modules. For instance:
+:py:mod:`lbh15.properties.bismuth_thermochemical_properties.bismuth_thermochemical`,
+:py:mod:`lbh15.properties.bismuth_thermochemical_properties.solubility_in_bismuth` and
+:py:mod:`lbh15.properties.bismuth_thermochemical_properties.bismuth_contamination` modules. For instance:
 
 >>> from lbh15 import Bismuth
 >>> liquid_bismuth = Bismuth(T=668.15)
@@ -119,6 +120,12 @@ In detail, a :class:`.Bismuth` object comes with the following default propertie
         :math:`o\_pp\left(T\right) = \displaystyle \left( \frac{M}{M_O} \right)^2 \cdot 10^{ 2 /\left(2.3 \cdot R\right) \cdot \left( - 101098 / T + 15.66 \right) }`, :math:`\quad` where:
 
         :math:`M_O = 16 \frac{g}{mol} \quad` oxygen molecular mass
+    - ``gamma_BiPo`` activity coefficient of Po:
+
+        :math:`\gamma_{Po(Bi)} = 10^{-\frac{2272.7}{T} + 0.1316}`
+    - ``P_BiI3`` Vapour pressure of I :math:`[Pa]`:
+
+        :math:`P_{BiI_{3}} = 10^{-\frac{4310}{T} + 10.29}`
 
 where :math:`T` is the bismuth temperature in :math:`\left[K\right]`, :math:`p` is the bismuth pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.
