@@ -18,6 +18,7 @@ from .properties.lbe_thermochemical_properties import solubility_in_lbe
 from .properties.lbe_thermochemical_properties import diffusivity_in_lbe
 from .properties.lbe_thermochemical_properties import lbe_thermochemical
 from .properties.lbe_thermochemical_properties import lbe_oxygen_limits
+from .properties.lbe_thermochemical_properties import lbe_contamination
 from .properties.lead_thermochemical_properties import solubility_in_lead
 from .properties.lead_thermochemical_properties import diffusivity_in_lead
 from .properties.lead_thermochemical_properties import lead_thermochemical
