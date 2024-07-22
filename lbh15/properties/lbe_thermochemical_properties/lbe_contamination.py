@@ -634,7 +634,7 @@ class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBERb"
+        return "P_LBERb_a"
 
     @property
     def correlation_name(self) -> str:
@@ -708,7 +708,7 @@ class LBERubidiumVapourPressureInterfaceHandbook(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBERb"
+        return "P_LBERb_b"
 
     @property
     def correlation_name(self) -> str:
