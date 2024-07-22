@@ -468,5 +468,33 @@ class LeadContaminationTester(unittest.TestCase):
             val, key = get_val(prop, "T_at_max")
             self.assertAlmostEqual(val, prop.T_at_max, tol, key+" FAILED")
 
+class BismuthContaminationTester(unittest.TestCase):
+
+    properties = load_prop('lbh15.properties.bismuth_thermochemical_properties.bismuth_contamination')
+
+    def test_min(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "min")
+            self.assertAlmostEqual(val, prop.min, tol, key+" FAILED")
+
+    def test_T_at_min(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "T_at_min")
+            self.assertAlmostEqual(val, prop.T_at_min, tol, key+" FAILED")
+
+    def test_max(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "max")
+            self.assertAlmostEqual(val, prop.max, tol, key+" FAILED")
+
+    def test_T_at_max(self):
+        for prop in self.properties:
+            prop.compute_bounds()
+            val, key = get_val(prop, "T_at_max")
+            self.assertAlmostEqual(val, prop.T_at_max, tol, key+" FAILED")
+
 if __name__ == "__main__":
     unittest.main()
