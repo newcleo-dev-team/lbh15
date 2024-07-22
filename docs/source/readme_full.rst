@@ -811,11 +811,13 @@ Each new property implemented by the user is also available at initialization.
 Learn More
 ==========
 
-This section contains additional information about the chemistry of heavy liquid metals in presence of dispersed
-oxygen in the bulk. It is made of two parts. The first part, presented in :any:`oxygen-control` section, describes
+This section contains additional information about the chemistry of heavy liquid metals, firstly in presence of dispersed
+oxygen in the bulk, and then focusing on the contamination that it implies and its importance. It is made of three parts. 
+The first part, presented in :any:`oxygen-control` section, describes
 the oxygen-related correlations implemented in *lbh15* and how they have been obtained. The second part,
 presented in :any:`tutorials` section, describes a tutorial application delivered with *lbh15*, which is a
-representation of a simple oxygen control system applied to a liquid lead volume.
+representation of a simple oxygen control system applied to a liquid lead volume. The third part presents 
+an overview of the critical importance of addressing impurities in liquid metal spallation targets and nuclear reactors.
 
 .. include:: learn_more.rst
  
