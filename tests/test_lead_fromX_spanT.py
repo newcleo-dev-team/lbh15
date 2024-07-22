@@ -110,6 +110,17 @@ class LeadLimitsTester(unittest.TestCase):
                 fromX = Lead(**init_dict)
                 self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
 
+class LeadContaminationTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        for leadP in leadPs:
+            properties = load_prop('lbh15.properties.lead_thermochemical_properties.lead_contamination')
+            for prop in properties:
+                name = prop.name
+                val = getattr(leadP, name)
+                init_dict = {name: val}
+                fromX = Lead(**init_dict)
+                self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
 
 if __name__ == "__main__":
     unittest.main()
