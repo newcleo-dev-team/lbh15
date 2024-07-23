@@ -103,7 +103,8 @@ class Lead(LiquidMetalInterface):
          'lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead',
          'lbh15.properties.lead_thermochemical_properties.lead_thermochemical',
          'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
-         'lbh15.properties.lead_properties']
+         'lbh15.properties.lead_properties',
+         'lbh15.properties.lead_thermochemical_properties.lead_contamination']
 
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LEAD_BOILING_TEMPERATURE / 2.0

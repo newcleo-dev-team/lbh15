@@ -92,7 +92,8 @@ class LBE(LiquidMetalInterface):
          'lbh15.properties.lbe_thermochemical_properties.diffusivity_in_lbe',
          'lbh15.properties.lbe_thermochemical_properties.lbe_thermochemical',
          'lbh15.properties.lbe_thermochemical_properties.lbe_oxygen_limits',
-         'lbh15.properties.lbe_properties']
+         'lbh15.properties.lbe_properties',
+         'lbh15.properties.lbe_thermochemical_properties.lbe_contamination']
 
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LBE_BOILING_TEMPERATURE / 2.0

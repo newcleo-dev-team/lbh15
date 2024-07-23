@@ -74,7 +74,9 @@ class Bismuth(LiquidMetalInterface):
 .diffusivity_in_bismuth',
          'lbh15.properties.bismuth_thermochemical_properties\
 .bismuth_thermochemical',
-         'lbh15.properties.bismuth_properties']
+         'lbh15.properties.bismuth_properties',
+         'lbh15.properties.bismuth_thermochemical_properties\
+.bismuth_contamination']
 
     def __init__(self, p: float = atm, **kwargs):
         self._guess = BISMUTH_BOILING_TEMPERATURE / 2.0
