@@ -553,7 +553,7 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
         float:
             activity coefficient in :math:`[]`
         """
-        return 10**((- 10407 / T) + 14.56)
+        return 10**((- 2677 / T) + 0.75)
 
     @property
     def name(self) -> str:
