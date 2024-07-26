@@ -9,14 +9,14 @@ from ..._decorators import range_warning
 
 class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
     """
-    Liquid lead *PbPo Polonium compounds vapour pressure* property class
+    Liquid lead *PbPo Polonium compound vapour pressure* property class
     implementing the correlation by *abakumov1994a*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbPo Polonium compounds vapour pressure* by
+        Returns the value of the *PbPo Polonium compound vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -83,14 +83,14 @@ class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
 
 class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
     """
-    Liquid lead *PbPo Polonium compounds activity coefficient* 
+    Liquid lead *PbPo Polonium compound activity coefficient* 
     property class implementing the correlation by *li1998*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbPo Polonium compounds activity coefficient*
+        Returns the value of the *PbPo Polonium compound activity coefficient*
         by applying the property correlation.
 
         Parameters
@@ -157,14 +157,14 @@ class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
 
 class LeadPoloniumHenryConstantHandbook(PropertyInterface):
     """
-    Liquid lead *PbPo Polonium compounds Henry constant* 
+    Liquid lead *PbPo Polonium compound Henry constant* 
     property class implementing the correlation by *handbook*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbPo Polonium compounds Henry constant*
+        Returns the value of the *PbPo Polonium compound Henry constant*
         by applying the property correlation.
 
         Parameters
@@ -231,14 +231,14 @@ class LeadPoloniumHenryConstantHandbook(PropertyInterface):
 
 class LeadIodineVapourPressureKonings1996(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compounds vapour pressure* property class
+    Liquid lead *PbI2 Iodine compound vapour pressure* property class
     implementing the correlation by *konings1996*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds vapour pressure* by
+        Returns the value of the *PbI2 Iodine compound vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -285,12 +285,12 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
         """
         str : PbI2 Iodine vapour pressure long name
         """
-        return "Vapour pressure of PbI2 Iodine in pure lead"
+        return "Vapour pressure of PbI2 Iodine compound in pure lead"
 
     @property
     def description(self) -> str:
         """
-        str : PbI2 Iodine vapour pressure description
+        str : PbI2 Iodine compound vapour pressure description
         """
         return f"{self.long_name} in liquid lead"
 
@@ -298,21 +298,21 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the PbI2 
-        Iodine vapour pressure correlation function.
+        Iodine compound vapour pressure correlation function.
         """
         return [600.6, 697.0]   
 
 
 class LeadIodineVapourPressureKnacke1991(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compounds vapour pressure* property class
+    Liquid lead *PbI2 Iodine compound vapour pressure* property class
     implementing the correlation by *knacke1991*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds vapour pressure* by
+        Returns the value of the *PbI2 Iodine compound vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -357,14 +357,14 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : PbI2 Iodine vapour pressure long name
+        str : PbI2 Iodine compound vapour pressure long name
         """
-        return "Vapour pressure of PbI2 Iodine in pure lead"
+        return "Vapour pressure of PbI2 Iodine compound in pure lead"
 
     @property
     def description(self) -> str:
         """
-        str : PbI2 Iodine vapour pressure description
+        str : PbI2 Iodine compound vapour pressure description
         """
         return f"{self.long_name} in liquid lead"
 
@@ -372,21 +372,21 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the PbI2
-        Iodine vapour pressure correlation function.
+        Iodine compound vapour pressure correlation function.
         """
         return [697.1, 2021.1]
 
 
 class LeadIodineActivityCoefficientHandbook(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compounds activity coefficient* 
+    Liquid lead *PbI2 Iodine compound activity coefficient* 
     property class implementing the correlation by *handbook*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds activity coefficient*
+        Returns the value of the *PbI2 Iodine compound activity coefficient*
         by applying the property correlation.
 
         Parameters
@@ -433,7 +433,7 @@ class LeadIodineActivityCoefficientHandbook(PropertyInterface):
         """
         str : PbI2 iodine compound activity coefficient long name
         """
-        return "Activity coefficient of PbI2 compound in pure lead"
+        return "Activity coefficient of PbI2 Iodine compound in pure lead"
 
     @property
     def description(self) -> str:
@@ -453,14 +453,14 @@ class LeadIodineActivityCoefficientHandbook(PropertyInterface):
 
 class LeadIodineHenryConstantKonings1996(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compounds Henry constant* 
+    Liquid lead *PbI2 Iodine compound Henry constant* 
     property class implementing the correlation by *konings1996*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds Henry constant*
+        Returns the value of the *PbI2 Iodine compound Henry constant*
         by applying the property correlation.
 
         Parameters
@@ -507,12 +507,12 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
         """
         str : PbI2 Iodine compound Henry constant long name
         """
-        return "Henry constant of PbI2 compound in pure lead"
+        return "Henry constant of PbI2 Iodine compound in pure lead"
 
     @property
     def description(self) -> str:
         """
-        str : PbI2 iodine compound Henry constant description
+        str : PbI2 Iodine compound Henry constant description
         """
         return f"{self.long_name} in liquid lead"
 
@@ -527,14 +527,14 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
 
 class LeadIodineHenryConstantKnacke1991(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compounds Henry constant* 
+    Liquid lead *PbI2 Iodine compound Henry constant* 
     property class implementing the correlation by *knacke1991*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds Henry constant*
+        Returns the value of the *PbI2 Iodine compound Henry constant*
         by applying the property correlation.
 
         Parameters
@@ -581,7 +581,7 @@ class LeadIodineHenryConstantKnacke1991(PropertyInterface):
         """
         str : PbI2 Iodine compound Henry constant long name
         """
-        return "Henry constant of PbI2 compound in pure lead"
+        return "Henry constant of PbI2 Iodine compound in pure lead"
 
     @property
     def description(self) -> str:
@@ -757,7 +757,7 @@ class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Cs-Pb Caesium intermetallic compounds
+        Returns the value of the *Cs-Pb Caesium intermetallic compound
         vapour pressure* by applying the property correlation.
 
         Parameters
