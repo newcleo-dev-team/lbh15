@@ -615,8 +615,8 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10, - 4979.5799 / T - 9.3234247 * np.log(T) + 0.0044733132 * T
-                    - 8.684092 * 10**(-7) * T**(2) + 34.573234)
+        return np.power(10, - 4980 / T - 9.323 * np.log(T) + 0.004473 * T
+                    - 8.684 * 10**(-7) * T**(2) + 33.07)
 
     @property
     def name(self) -> str:
@@ -665,14 +665,14 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
 class LeadCaesiumActivityCoefficient(PropertyInterface):
     """
     Liquid lead *Cs-Pb Caesium intermetallic compound activity coefficient* 
-    property class implementing the correlation by *handbook*.
+    property class implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Cs-Pb Caesium intermetallic compound activity coefficient*
-        by applying the property correlation.
+        Returns the value of the *Cs-Pb Caesium intermetallic compound
+        activity coefficient* by applying the property correlation.
 
         Parameters
         ----------
@@ -709,14 +709,16 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : Cs-Pb Caesium intermetallic compound activity coefficient long name
+        str : Cs-Pb Caesium intermetallic compound activity coefficient
+        long name
         """
         return "Activity coefficient of Cs-Pb Caesium intermetallic compound"
 
     @property
     def description(self) -> str:
         """
-        str : Cs-Pb Caesium intermetallic compound activity coefficient description
+        str : Cs-Pb Caesium intermetallic compound activity coefficient 
+        description
         """
         return f"{self.long_name} in liquid lead"
 
@@ -724,15 +726,15 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Cs-Pb Caesium 
-        intermetallic compound compound activity coefficient correlation function
+        intermetallic compound activity coefficient correlation function
         """
-        return [643.0, 1100.0]
+        return [T_m0, 1100.0]
 
 
-class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
+class LeadCaesiumVapourPressure(PropertyInterface):
     """
     Liquid lead *Cs-Pb Caesium intermetallic compound vapour pressure* 
-    property class implementing the correlation by *yamshchikov2001*.
+    property class implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
@@ -757,7 +759,8 @@ class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p) / LeadCaesiumActivityCoefficient().correlation(T, p)
+        return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p)\
+              / LeadCaesiumActivityCoefficient().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -765,13 +768,6 @@ class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
         str : Name of the property
         """
         return "P_PbCs"
-
-    @property
-    def correlation_name(self) -> str:
-        """
-        str : Name of the correlation
-        """
-        return "yamshchikov2001"
 
     @property
     def units(self) -> str:
