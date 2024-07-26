@@ -84,7 +84,7 @@ class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
 class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
     """
     Liquid lead *PbPo Polonium compound activity coefficient* 
-    property class implementing the correlation by *li1998*.
+    property class implementing the suggestion by *li1998*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
@@ -107,7 +107,7 @@ class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
         Returns
         -------
         float:
-            activity coefficient in :math:`[]`
+            activity coefficient in :math:`[-]`
         """
         return 1
 
@@ -130,14 +130,14 @@ class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
         """
         str : activity coefficient unit
         """
-        return "[]"
+        return "[-]"
 
     @property
     def long_name(self) -> str:
         """
         str : PbPo Polonium compound activity coefficient long name
         """
-        return "Activity coefficient of PbPo compound in pure lead"
+        return "Activity coefficient of PbPo compound"
 
     @property
     def description(self) -> str:
@@ -183,7 +183,7 @@ class LeadPoloniumHenryConstantHandbook(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return LeadPoloniumVapourPressureAbakumov1994a.correlation(T,p)
+        return LeadPoloniumVapourPressureAbakumov1994a().correlation(T,p)
 
     @property
     def name(self) -> str:
@@ -211,7 +211,7 @@ class LeadPoloniumHenryConstantHandbook(PropertyInterface):
         """
         str : PbPo Polonium compound Henry constant long name
         """
-        return "Henry constant of PbPo compound in pure lead"
+        return "Henry constant of PbPo compound"
 
     @property
     def description(self) -> str:
@@ -285,7 +285,7 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
         """
         str : PbI2 Iodine vapour pressure long name
         """
-        return "Vapour pressure of PbI2 Iodine compound in pure lead"
+        return "Vapour pressure of PbI2 Iodine compound"
 
     @property
     def description(self) -> str:
@@ -359,7 +359,7 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
         """
         str : PbI2 Iodine compound vapour pressure long name
         """
-        return "Vapour pressure of PbI2 Iodine compound in pure lead"
+        return "Vapour pressure of PbI2 Iodine compound"
 
     @property
     def description(self) -> str:
@@ -380,7 +380,7 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
 class LeadIodineActivityCoefficientHandbook(PropertyInterface):
     """
     Liquid lead *PbI2 Iodine compound activity coefficient* 
-    property class implementing the correlation by *handbook*.
+    property class implementing the suggestion by *handbook*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
@@ -403,7 +403,7 @@ class LeadIodineActivityCoefficientHandbook(PropertyInterface):
         Returns
         -------
         float:
-            activity coefficient in :math:`[]`
+            activity coefficient in :math:`[-]`
         """
         return 1
 
@@ -426,14 +426,14 @@ class LeadIodineActivityCoefficientHandbook(PropertyInterface):
         """
         str : activity coefficient unit
         """
-        return "[]"
+        return "[-]"
 
     @property
     def long_name(self) -> str:
         """
         str : PbI2 iodine compound activity coefficient long name
         """
-        return "Activity coefficient of PbI2 Iodine compound in pure lead"
+        return "Activity coefficient of PbI2 Iodine compound"
 
     @property
     def description(self) -> str:
@@ -507,7 +507,7 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
         """
         str : PbI2 Iodine compound Henry constant long name
         """
-        return "Henry constant of PbI2 Iodine compound in pure lead"
+        return "Henry constant of PbI2 Iodine compound"
 
     @property
     def description(self) -> str:
@@ -581,7 +581,7 @@ class LeadIodineHenryConstantKnacke1991(PropertyInterface):
         """
         str : PbI2 Iodine compound Henry constant long name
         """
-        return "Henry constant of PbI2 Iodine compound in pure lead"
+        return "Henry constant of PbI2 Iodine compound"
 
     @property
     def description(self) -> str:
@@ -656,7 +656,7 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
         """
         str : Cs-Pb Caesium intermetallic compound Henry constant long name
         """
-        return "Cs-Pb Caesium intermetallic compound Henry Constant in pure lead"
+        return "Cs-Pb Caesium intermetallic compound Henry constant"
 
     @property
     def description(self) -> str:
@@ -700,7 +700,7 @@ class LeadCaesiumActivityCoefficientHandbook(PropertyInterface):
         Returns
         -------
         float:
-            activity coefficient in :math:`[]`
+            activity coefficient in :math:`[-]`
         """
         return 10**(-1.5)
 
@@ -723,14 +723,14 @@ class LeadCaesiumActivityCoefficientHandbook(PropertyInterface):
         """
         str : activity coefficient unit
         """
-        return "[]"
+        return "[-]"
 
     @property
     def long_name(self) -> str:
         """
         str : Cs-Pb Caesium intermetallic compound activity coefficient long name
         """
-        return "Activity coefficient of Cs-Pb Caesium intermetallic compound in pure lead"
+        return "Activity coefficient of Cs-Pb Caesium intermetallic compound"
 
     @property
     def description(self) -> str:
@@ -804,7 +804,7 @@ class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
         """
         str : Cs-Pb Caesium intermetallic compound vapour pressure long name
         """
-        return "Cs-Pb Caesium intermetallic compound vapour pressure in pure lead"
+        return "Cs-Pb Caesium intermetallic compound vapour pressure"
 
     @property
     def description(self) -> str:
