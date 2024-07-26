@@ -77,7 +77,7 @@ class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbPo Polonium 
+        List[float] : Temperature validity range of the PbPo Polonium
         compound vapour pressure correlation function
         """
         return [913.0, 1123.0]
@@ -85,7 +85,7 @@ class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
 
 class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
     """
-    Liquid lead *PbPo Polonium compound activity coefficient* 
+    Liquid lead *PbPo Polonium compound activity coefficient*
     property class implementing the suggestion by *li1998*.
     """
     @range_warning
@@ -151,7 +151,7 @@ class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbPo Polonium 
+        List[float] : Temperature validity range of the PbPo Polonium
         compound activity coefficient correlation function
         """
         return [913.0, 1123.0]
@@ -159,7 +159,7 @@ class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
 
 class LeadPoloniumHenryConstant(PropertyInterface):
     """
-    Liquid lead *PbPo Polonium compound Henry constant* 
+    Liquid lead *PbPo Polonium compound Henry constant*
     property class implementing the correlation by *handbook*.
     """
     @range_warning
@@ -218,7 +218,7 @@ class LeadPoloniumHenryConstant(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbPo Polonium 
+        List[float] : Temperature validity range of the PbPo Polonium
         compound Henry constant correlation function
         """
         return [913.0, 1123.0]
@@ -292,10 +292,10 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbI2 
+        List[float] : Temperature validity range of the PbI2
         Iodine compound vapour pressure correlation function.
         """
-        return [T_m0, 697.0]   
+        return [T_m0, 697.0]
 
 
 class LeadIodineVapourPressureKnacke1991(PropertyInterface):
@@ -374,7 +374,7 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
 
 class LeadIodineActivityCoefficient(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compound activity coefficient* 
+    Liquid lead *PbI2 Iodine compound activity coefficient*
     property class implementing the suggestion by *handbook*.
     """
     @range_warning
@@ -441,7 +441,7 @@ class LeadIodineActivityCoefficient(PropertyInterface):
 
 class LeadIodineHenryConstantKonings1996(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compound Henry constant* 
+    Liquid lead *PbI2 Iodine compound Henry constant*
     property class implementing the correlation by *konings1996*.
     """
     @range_warning
@@ -510,12 +510,12 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
         List[float] : Temperature validity range of the PbI2 Iodine
         compound Henry constant correlation function
         """
-        return [T_m0, 697.0] 
+        return [T_m0, 697.0]
 
 
 class LeadIodineHenryConstantKnacke1991(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compound Henry constant* 
+    Liquid lead *PbI2 Iodine compound Henry constant*
     property class implementing the correlation by *knacke1991*.
     """
     @range_warning
@@ -584,7 +584,7 @@ class LeadIodineHenryConstantKnacke1991(PropertyInterface):
         List[float] : Temperature validity range of the PbI2 Iodine
         compound Henry constant correlation function
         """
-        return [697.0, T_b0] 
+        return [697.0, T_b0]
 
 
 class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
@@ -616,7 +616,7 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
             Henry constant in :math:`[Pa]`
         """
         return np.power(10, - 4980 / T - 9.323 * np.log(T) + 0.004473 * T
-                    - 8.684 * 10**(-7) * T**(2) + 33.07)
+                        - 8.684 * 10**(-7) * T**(2) + 33.07)
 
     @property
     def name(self) -> str:
@@ -656,7 +656,7 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Cs-Pb Caesium 
+        List[float] : Temperature validity range of the Cs-Pb Caesium
         intermetallic compound Henry constant correlation function
         """
         return [643.0, 933.0]
@@ -664,7 +664,7 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
 
 class LeadCaesiumActivityCoefficient(PropertyInterface):
     """
-    Liquid lead *Cs-Pb Caesium intermetallic compound activity coefficient* 
+    Liquid lead *Cs-Pb Caesium intermetallic compound activity coefficient*
     property class implementing the correlation by *lbh15*.
     """
     @range_warning
@@ -717,7 +717,7 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
     @property
     def description(self) -> str:
         """
-        str : Cs-Pb Caesium intermetallic compound activity coefficient 
+        str : Cs-Pb Caesium intermetallic compound activity coefficient
         description
         """
         return f"{self.long_name} in liquid lead"
@@ -725,7 +725,7 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Cs-Pb Caesium 
+        List[float] : Temperature validity range of the Cs-Pb Caesium
         intermetallic compound activity coefficient correlation function
         """
         return [T_m0, 1100.0]
@@ -733,7 +733,7 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
 
 class LeadCaesiumVapourPressure(PropertyInterface):
     """
-    Liquid lead *Cs-Pb Caesium intermetallic compound vapour pressure* 
+    Liquid lead *Cs-Pb Caesium intermetallic compound vapour pressure*
     property class implementing the correlation by *lbh15*.
     """
     @range_warning
@@ -759,8 +759,8 @@ class LeadCaesiumVapourPressure(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p)\
-              / LeadCaesiumActivityCoefficient().correlation(T, p)
+        return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p) /\
+            LeadCaesiumActivityCoefficient().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -793,7 +793,7 @@ class LeadCaesiumVapourPressure(PropertyInterface):
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Cs-Pb Caesium 
+        List[float] : Temperature validity range of the Cs-Pb Caesium
         intermetallic compound vapour pressure correlation function
         """
         return [643.0, 933.0]
