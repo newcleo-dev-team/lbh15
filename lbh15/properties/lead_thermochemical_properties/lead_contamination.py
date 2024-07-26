@@ -589,8 +589,8 @@ class LeadIodineHenryConstantKnacke1991(PropertyInterface):
 
 class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
     """
-    Liquid lead *Cs-Pb Caesium intermetallic compound Henry constant* property class
-    implementing the correlation by *yamshchikov2001*.
+    Liquid lead *Cs-Pb Caesium intermetallic compound Henry constant* property
+    class implementing the correlation by *yamshchikov2001*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
@@ -726,7 +726,7 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
         List[float] : Temperature validity range of the Cs-Pb Caesium 
         intermetallic compound compound activity coefficient correlation function
         """
-        return [643.0, 933.0]
+        return [643.0, 1100.0]
 
 
 class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
