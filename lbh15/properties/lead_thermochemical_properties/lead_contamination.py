@@ -37,7 +37,7 @@ class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return np.power(10,(- 7270 / T) + 9.06)
+        return np.power(10, - 7270 / T + 9.06)
 
     @property
     def name(self) -> str:
@@ -185,7 +185,7 @@ class LeadPoloniumHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return LeadPoloniumVapourPressureAbakumov1994a().correlation(T,p)
+        return LeadPoloniumVapourPressureAbakumov1994a().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -252,7 +252,7 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return np.power(10,(- 8691 / T) + 13.814)
+        return np.power(10, - 8691 / T + 13.814)
 
     @property
     def name(self) -> str:
@@ -326,7 +326,7 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return np.power(10,(- 9087 / T) - 6.16 * np.log(T) + 31.897)
+        return np.power(10, - 9087 / T - 6.16 * np.log(T) + 31.897)
 
     @property
     def name(self) -> str:
@@ -467,7 +467,7 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return LeadIodineVapourPressureKonings1996().correlation(T,p)
+        return LeadIodineVapourPressureKonings1996().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -541,7 +541,7 @@ class LeadIodineHenryConstantKnacke1991(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return LeadIodineVapourPressureKnacke1991().correlation(T,p)
+        return LeadIodineVapourPressureKnacke1991().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -615,7 +615,7 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 4979.5799 / T) - 9.3234247 * np.log(T) + 0.0044733132 * T
+        return np.power(10, - 4979.5799 / T - 9.3234247 * np.log(T) + 0.0044733132 * T
                     - 8.684092 * 10**(-7) * T**(2) + 34.573234)
 
     @property
@@ -690,7 +690,7 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
         float:
             activity coefficient in :math:`[-]`
         """
-        return np.power(10,-1.5)
+        return np.power(10, -1.5)
 
     @property
     def name(self) -> str:
@@ -757,7 +757,7 @@ class LeadCaesiumVapourPressureYamshchikov2001(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return LeadCaesiumActivityCoefficientHandbook().correlation(T,p) * LeadCaesiumHenryConstantYamshchikov2001().correlation(T,p)
+        return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p) / LeadCaesiumActivityCoefficient().correlation(T, p)
 
     @property
     def name(self) -> str:
