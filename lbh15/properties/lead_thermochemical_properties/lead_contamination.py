@@ -1,7 +1,7 @@
 """Module with the definition of some coumpounds properties
 for contamination assessment"""
-import numpy as np
 from typing import List
+import numpy as np
 from scipy.constants import atm
 from ..interface import PropertyInterface
 from ..._decorators import range_warning
