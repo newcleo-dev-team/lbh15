@@ -1,15 +1,49 @@
 """Module with the definition of some coumpounds properties
 for contamination assessment"""
-import numpy as np
 from typing import List
+import numpy as np
 from scipy.constants import atm
 from ..interface import PropertyInterface
 from ..._decorators import range_warning
-from..._commons import LBE_MELTING_TEMPERATURE as T_m0
+from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
 from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
 
 
-class LBEPoloniumHenryConstantOhno2006(PropertyInterface):
+class LBEPoloniumHenryConstantInterface(PropertyInterface):
+    """
+    Liquid LBE *Polonium compound Henry constant*
+    abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_LBEPo"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Polonium Henry constant long name
+        """
+        return "Henry constant of Polonium"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Polonium Henry constant description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+
+class LBEPoloniumHenryConstantOhno2006(LBEPoloniumHenryConstantInterface):
     """
     Liquid LBE *Polonium compound Henry constant* property class
     implementing the correlation by *ohno2006*.
@@ -37,14 +71,7 @@ class LBEPoloniumHenryConstantOhno2006(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 8348 / T) + 10.5357)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "K_LBEPo_a"
+        return np.power(10, - 8348 / T + 10.5357)
 
     @property
     def correlation_name(self) -> str:
@@ -54,110 +81,16 @@ class LBEPoloniumHenryConstantOhno2006(PropertyInterface):
         return "ohno2006"
 
     @property
-    def units(self) -> str:
-        """
-        str : Henry constant unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Polonium Henry constant long name
-        """
-        return "Henry constant of Polonium"
-
-    @property
-    def description(self) -> str:
-        """
-        str : Polonium Henry constant description
-        """
-        return f"{self.long_name} in liquid LBE"
-
-    @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Polonium 
+        List[float] : Temperature validity range of the Polonium
         Henry constant correlation function
         """
         return [723.0, 1023.0]
 
 
-class LBEPoloniumActivityCoefficientOhno2006(PropertyInterface):
-    """
-    Liquid LBE *Polonium compound activity coefficient* property class
-    implementing the correlation by *ohno2006*.
-    """
-    @range_warning
-    def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
-        """
-        Returns the value of the *Polonium compound activity coefficient* by
-        applying the property correlation.
-
-        Parameters
-        ----------
-        T : float
-            Temperature in :math:`[K]`
-        p : float, optional
-            Pressure in :math:`[Pa]`, by default the atmospheric pressure
-            value, i.e., :math:`101325.0 Pa`
-        verbose : bool, optional
-            `True` to tell the decorator to print a warning message in case of
-            range check failing, `False` otherwise. By default, `False`
-
-        Returns
-        -------
-        float:
-            activity coefficient in :math:`[-]`
-        """
-        return np.power(10,(- 2908 / T) + 1.079)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "gamma_LBEPo_a"
-
-    @property
-    def correlation_name(self) -> str:
-        """
-        str : Name of the correlation
-        """
-        return "ohno2006"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Activity coefficient unit
-        """
-        return "[-]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Polonium activity coefficient long name
-        """
-        return "activity coefficient of Polonium"
-
-    @property
-    def description(self) -> str:
-        """
-        str : Polonium activity coefficient description
-        """
-        return f"{self.long_name} in liquid LBE"
-
-    @property
-    def range(self) -> List[float]:
-        """
-        List[float] : Temperature validity range of the Polonium 
-        activity coefficient correlation function
-        """
-        return [723.0, 877.0]
-
-
-class LBEPoloniumHenryConstantBuongiorno2003(PropertyInterface):
+class LBEPoloniumHenryConstantBuongiorno2003\
+        (LBEPoloniumHenryConstantInterface):
     """
     Liquid LBE *Polonium compound Henry constant* property class
     implementing the correlation by *buongiorno2003*.
@@ -185,14 +118,7 @@ class LBEPoloniumHenryConstantBuongiorno2003(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 6790 / T) + 1.26)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "K_LBEPo_b"
+        return np.power(10, - 6790 / T + 1.26)
 
     @property
     def correlation_name(self) -> str:
@@ -202,36 +128,96 @@ class LBEPoloniumHenryConstantBuongiorno2003(PropertyInterface):
         return "buongiorno2003"
 
     @property
-    def units(self) -> str:
-        """
-        str : Henry constant unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Polonium Henry constant long name
-        """
-        return "Henry constant of Polonium"
-
-    @property
-    def description(self) -> str:
-        """
-        str : Polonium Henry constant description
-        """
-        return f"{self.long_name} in liquid LBE"
-
-    @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Polonium 
+        List[float] : Temperature validity range of the Polonium
         Henry constant correlation function
         """
         return [665.0, 823.0]
 
 
-class LBEPoloniumActivityCoefficient(PropertyInterface):
+class LBEPoloniumActivityCoefficientInterface(PropertyInterface):
+    """
+    Liquid LBE *Polonium compound activity coefficient*
+    abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "gamma_LBEPo"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Activity coefficient unit
+        """
+        return "[-]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Polonium activity coefficient long name
+        """
+        return "activity coefficient of Polonium"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Polonium activity coefficient description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+
+class LBEPoloniumActivityCoefficientOhno2006\
+        (LBEPoloniumActivityCoefficientInterface):
+    """
+    Liquid LBE *Polonium compound activity coefficient* property class
+    implementing the correlation by *ohno2006*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *Polonium compound activity coefficient* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            activity coefficient in :math:`[-]`
+        """
+        return np.power(10, - 2908 / T + 1.079)
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "ohno2006"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the Polonium
+        activity coefficient correlation function
+        """
+        return [723.0, 877.0]
+
+
+class LBEPoloniumActivityCoefficient(LBEPoloniumActivityCoefficientInterface):
     """
     Liquid LBE *Polonium compound activity coefficient* property class
     implementing the correlation by *lbh15*.
@@ -259,40 +245,12 @@ class LBEPoloniumActivityCoefficient(PropertyInterface):
         float:
             activity coefficient in :math:`[-]`
         """
-        return np.power(10,(- 1830 / T) + 0.40)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "gamma_LBEPo_b"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Activity coefficient unit
-        """
-        return "[-]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : Polonium activity coefficient long name
-        """
-        return "activity coefficient of Polonium"
-
-    @property
-    def description(self) -> str:
-        """
-        str : Polonium activity coefficient description
-        """
-        return f"{self.long_name} in liquid LBE"
+        return np.power(10, - 1830 / T + 0.40)
 
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Polonium 
+        List[float] : Temperature validity range of the Polonium
         activity coefficient correlation function
         """
         return [913.0, 1123.0]
@@ -326,7 +284,7 @@ class LBEMercuryHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 3332.7 / T) - 0.848 * np.log(T) + 12.6706)
+        return np.power(10, - 3332.7 / T - 0.848 * np.log(T) + 12.6706)
 
     @property
     def name(self) -> str:
@@ -460,7 +418,8 @@ class LBEMercuryVapourPressure(PropertyInterface):
         float:
             Vapour pressure in :math:`[Pa]`
         """
-        return LBEMercuryHenryConstant().correlation(T,p) / LBEMercuryActivityCoefficient().correlation(T,p)
+        return LBEMercuryHenryConstant().correlation(T, p) /\
+            LBEMercuryActivityCoefficient().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -527,7 +486,7 @@ class LBECadmiumHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 5711 / T) - 1.0867 * np.log(T) + 14.38)
+        return np.power(10, - 5711 / T - 1.0867 * np.log(T) + 14.38)
 
     @property
     def name(self) -> str:
@@ -661,7 +620,8 @@ class LBECadmiumVapourPressure(PropertyInterface):
         float:
             vapour pressure in :math:`[Pa]`
         """
-        return LBECadmiumHenryConstant().correlation(T,p) / LBECadmiumActivityCoefficient().correlation(T,p)
+        return LBECadmiumHenryConstant().correlation(T, p) /\
+            LBECadmiumActivityCoefficient().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -728,7 +688,7 @@ class LBEThalliumHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 9463 / T) - 0.892 * np.log(T) + 13.264)
+        return np.power(10, - 9463 / T - 0.892 * np.log(T) + 13.264)
 
     @property
     def name(self) -> str:
@@ -862,7 +822,8 @@ class LBEThalliumVapourPressure(PropertyInterface):
         float:
             vapour pressure in :math:`[Pa]`
         """
-        return LBEThalliumHenryConstant().correlation(T,p) / LBEThalliumActivityCoefficient().correlation(T,p)
+        return LBEThalliumHenryConstant().correlation(T, p) /\
+            LBEThalliumActivityCoefficient().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -929,7 +890,7 @@ class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10,(- 10407 / T) + 14.56)
+        return np.power(10, - 10407 / T + 14.56)
 
     @property
     def name(self) -> str:
@@ -984,8 +945,8 @@ class LBEIodineActivityCoefficientNeuhasen2005c(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds activity coefficient* by
-        applying the property correlation.
+        Returns the value of the *PbI2 Iodine compounds activity coefficient*
+        by applying the property correlation.
 
         Parameters
         ----------
@@ -1077,7 +1038,8 @@ class LBEIodineVapourPressure(PropertyInterface):
         float:
             vapour pressure in :math:`[Pa]`
         """
-        return LBEIodineHenryConstantNeuhausen2005().correlation(T,p) / LBEIodineActivityCoefficientNeuhasen2005c().correlation(T,p)
+        return LBEIodineHenryConstantNeuhausen2005().correlation(T, p) /\
+            LBEIodineActivityCoefficientNeuhasen2005c().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -1144,7 +1106,7 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
         float:
             activity coefficient in :math:`[-]`
         """
-        return np.power(10,(- 2677 / T) + 0.75)
+        return np.power(10, - 2677 / T + 0.75)
 
     @property
     def name(self) -> str:
@@ -1188,7 +1150,7 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
         activity coefficient correlation function.
         """
         return [723.0, 1023.0]
-   
+
 
 class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
     """
@@ -1218,7 +1180,7 @@ class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return np.power(10,(- 4588 / T) - 1.45 * np.log(T) + 14.110)
+        return np.power(10, - 4588 / T - 1.45 * np.log(T) + 14.110)
 
     @property
     def name(self) -> str:
@@ -1292,7 +1254,7 @@ class LBERubidiumActivityCoefficient(PropertyInterface):
         float:
             activity coefficient in :math:`[-]`
         """
-        return np.power(10,-1.7)
+        return np.power(10, -1.7)
 
     @property
     def name(self) -> str:
@@ -1359,7 +1321,9 @@ class LBERubidiumHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return LBERubidiumVapourPressureInterfaceLandolt1960().correlation(T,p) * LBERubidiumActivityCoefficient().correlation(T,p)
+        return LBERubidiumVapourPressureInterfaceLandolt1960()\
+            .correlation(T, p) * LBERubidiumActivityCoefficient()\
+            .correlation(T, p)
 
     @property
     def name(self) -> str:
