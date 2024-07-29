@@ -224,7 +224,41 @@ class LeadPoloniumHenryConstant(PropertyInterface):
         return [913.0, 1123.0]
 
 
-class LeadIodineVapourPressureKonings1996(PropertyInterface):
+class LeadIodineVapourPressureInterface(PropertyInterface):
+    """
+    Liquid lead *PbI2 Iodine compound vapour pressure* 
+    abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_PbI2"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : PbI2 Iodine vapour pressure long name
+        """
+        return "Vapour pressure of PbI2 Iodine compound"
+
+    @property
+    def description(self) -> str:
+        """
+        str : PbI2 Iodine compound vapour pressure description
+        """
+        return f"{self.long_name} in liquid lead"
+
+
+class LeadIodineVapourPressureKonings1996(LeadIodineVapourPressureInterface):
     """
     Liquid lead *PbI2 Iodine compound vapour pressure* property class
     implementing the correlation by *konings1996*.
@@ -255,39 +289,11 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
         return np.power(10, - 8691 / T + 13.814)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "P_PbI2_s"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
         """
         return "konings1996"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Vapour pressure unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : PbI2 Iodine vapour pressure long name
-        """
-        return "Vapour pressure of PbI2 Iodine compound"
-
-    @property
-    def description(self) -> str:
-        """
-        str : PbI2 Iodine compound vapour pressure description
-        """
-        return f"{self.long_name} in liquid lead"
 
     @property
     def range(self) -> List[float]:
@@ -298,7 +304,7 @@ class LeadIodineVapourPressureKonings1996(PropertyInterface):
         return [T_m0, 697.0]
 
 
-class LeadIodineVapourPressureKnacke1991(PropertyInterface):
+class LeadIodineVapourPressureKnacke1991(LeadIodineVapourPressureInterface):
     """
     Liquid lead *PbI2 Iodine compound vapour pressure* property class
     implementing the correlation by *knacke1991*.
@@ -329,39 +335,11 @@ class LeadIodineVapourPressureKnacke1991(PropertyInterface):
         return np.power(10, - 9087 / T - 6.16 * np.log(T) + 31.897)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "P_PbI2_l"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
         """
         return "knacke1991"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Vapour pressure unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : PbI2 Iodine compound vapour pressure long name
-        """
-        return "Vapour pressure of PbI2 Iodine compound"
-
-    @property
-    def description(self) -> str:
-        """
-        str : PbI2 Iodine compound vapour pressure description
-        """
-        return f"{self.long_name} in liquid lead"
 
     @property
     def range(self) -> List[float]:
@@ -439,7 +417,41 @@ class LeadIodineActivityCoefficient(PropertyInterface):
         return [T_m0, T_b0]
 
 
-class LeadIodineHenryConstantKonings1996(PropertyInterface):
+class LeadIodineHenryConstantInterface(PropertyInterface):
+    """
+    Liquid lead *PbI2 Iodine compound Henry constant*
+    abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_PbI2"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : PbI2 Iodine compound Henry constant long name
+        """
+        return "Henry constant of PbI2 Iodine compound"
+
+    @property
+    def description(self) -> str:
+        """
+        str : PbI2 Iodine compound Henry constant description
+        """
+        return f"{self.long_name} in liquid lead"
+
+
+class LeadIodineHenryConstantKonings1996(LeadIodineHenryConstantInterface):
     """
     Liquid lead *PbI2 Iodine compound Henry constant*
     property class implementing the correlation by *konings1996*.
@@ -470,39 +482,11 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
         return LeadIodineVapourPressureKonings1996().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "K_PbI2_s"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
         """
         return "konings1996"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Henry constant unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : PbI2 Iodine compound Henry constant long name
-        """
-        return "Henry constant of PbI2 Iodine compound"
-
-    @property
-    def description(self) -> str:
-        """
-        str : PbI2 Iodine compound Henry constant description
-        """
-        return f"{self.long_name} in liquid lead"
 
     @property
     def range(self) -> List[float]:
@@ -513,7 +497,7 @@ class LeadIodineHenryConstantKonings1996(PropertyInterface):
         return [T_m0, 697.0]
 
 
-class LeadIodineHenryConstantKnacke1991(PropertyInterface):
+class LeadIodineHenryConstantKnacke1991(LeadIodineHenryConstantInterface):
     """
     Liquid lead *PbI2 Iodine compound Henry constant*
     property class implementing the correlation by *knacke1991*.
@@ -544,39 +528,11 @@ class LeadIodineHenryConstantKnacke1991(PropertyInterface):
         return LeadIodineVapourPressureKnacke1991().correlation(T, p)
 
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "K_PbI2_l"
-
-    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
         """
         return "knacke1991"
-
-    @property
-    def units(self) -> str:
-        """
-        str : Henry constant unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : PbI2 Iodine compound Henry constant long name
-        """
-        return "Henry constant of PbI2 Iodine compound"
-
-    @property
-    def description(self) -> str:
-        """
-        str : PbI2 iodine compound Henry constant description
-        """
-        return f"{self.long_name} in liquid lead"
 
     @property
     def range(self) -> List[float]:
