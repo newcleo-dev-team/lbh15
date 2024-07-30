@@ -19,7 +19,7 @@ class LBEPoloniumHenryConstantInterface(PropertyInterface):
         """
         str : Name of the property
         """
-        return "K_LBEPo"
+        return "K_Po"
 
     @property
     def units(self) -> str:
@@ -45,14 +45,14 @@ class LBEPoloniumHenryConstantInterface(PropertyInterface):
 
 class LBEPoloniumHenryConstantOhno2006(LBEPoloniumHenryConstantInterface):
     """
-    Liquid LBE *Polonium compound Henry constant* property class
+    Liquid LBE *elemental Polonium Henry constant* property class
     implementing the correlation by *ohno2006*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Polonium compound Henry constant* by
+        Returns the value of the *elemental Polonium Henry constant* by
         applying the property correlation.
 
         Parameters
