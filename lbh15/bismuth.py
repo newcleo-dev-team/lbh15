@@ -61,7 +61,7 @@ class Bismuth(LiquidMetalInterface):
     _default_corr_to_use: Dict[str, str] = \
         {'fe_sol': "gosse2014", 'ni_sol': "gosse2014",
          'cr_sol': "gosse2014", 'o_dif': "fitzner1980",
-         'o_pp': "isecke1979", 'gamma_BiPo': 'lbh15'}
+         'o_pp': "isecke1979", 'gamma_Po': 'lbh15'}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
