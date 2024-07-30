@@ -22,3 +22,4 @@ from .properties.lead_thermochemical_properties import solubility_in_lead
 from .properties.lead_thermochemical_properties import diffusivity_in_lead
 from .properties.lead_thermochemical_properties import lead_thermochemical
 from .properties.lead_thermochemical_properties import lead_oxygen_limits
+from .properties.lead_thermochemical_properties import lead_contamination
