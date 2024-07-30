@@ -19,7 +19,7 @@ class BismuthPoloniumActivityCoefficientInterface(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_BiPo"
+        return "gamma_Po"
 
     @property
     def units(self) -> str:
@@ -46,7 +46,7 @@ class BismuthPoloniumActivityCoefficientInterface(PropertyInterface):
 class BismuthPoloniumActivityCoefficientJoy1963\
         (BismuthPoloniumActivityCoefficientInterface):
     """
-    Liquid bismuth *dilute Polonium activity coeffcient* property class
+    Liquid bismuth *dilute Polonium activity coefficient* property class
     implementing the correlation by *joy1963*.
     """
     @range_warning
@@ -93,7 +93,7 @@ class BismuthPoloniumActivityCoefficientJoy1963\
 class BismuthPoloniumActivityCoefficient\
         (BismuthPoloniumActivityCoefficientInterface):
     """
-    Liquid bismuth *dilute Polonium activity coeffcient* property class
+    Liquid bismuth *dilute Polonium activity coefficient* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
@@ -201,19 +201,19 @@ class BismuthIodineVapourPressureCubicciotti1959(PropertyInterface):
         List[float] : Temperature validity range of the BiI3 Iodide
         vapour pressure correlation function
         """
-        return [T_m0, T_b0]
+        return [682.0, T_b0]
 
 
-class BismuthIodineActivityCoefficientGverdtsiteli1984(PropertyInterface):
+class BismuthCaesiumActivityCoefficientGverdtsiteli1984(PropertyInterface):
     """
-    Liquid bismuth *Caesium intermetallic compound activity coefficient*
+    Liquid bismuth *Caesium intermetallic compounds activity coefficient*
     property class implementing the correlation by *gverdtsiteli1984*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Caesium intermetallic compound
+        Returns the value of the *Caesium intermetallic compounds
         activity coefficient* by applying the property correlation.
 
         Parameters
@@ -239,7 +239,7 @@ class BismuthIodineActivityCoefficientGverdtsiteli1984(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_BiCs"
+        return "gamma_Cs"
 
     @property
     def correlation_name(self) -> str:
@@ -258,14 +258,14 @@ class BismuthIodineActivityCoefficientGverdtsiteli1984(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : Caesium intermetallic compound activity coefficient long name
+        str : Caesium intermetallic compounds activity coefficient long name
         """
-        return "Activity coefficient of Caesium intermetallic compound"
+        return "Activity coefficient of Caesium intermetallic compounds"
 
     @property
     def description(self) -> str:
         """
-        str : Caesium intermetallic compound activity coefficient description
+        str : Caesium intermetallic compounds activity coefficient description
         """
         return f"{self.long_name} in liquid bismuth"
 
@@ -273,6 +273,6 @@ class BismuthIodineActivityCoefficientGverdtsiteli1984(PropertyInterface):
     def range(self) -> List[float]:
         """
         List[float] : Temperature validity range of the Caesium intermetallic
-        compound activity coefficient correlation function
+        compounds activity coefficient correlation function
         """
         return [T_m0, 1000]
