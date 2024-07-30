@@ -14,6 +14,7 @@ from .properties import lbe_properties
 from .properties.bismuth_thermochemical_properties import solubility_in_bismuth
 from .properties.bismuth_thermochemical_properties import diffusivity_in_bismuth
 from .properties.bismuth_thermochemical_properties import bismuth_thermochemical
+from .properties.bismuth_thermochemical_properties import bismuth_contamination
 from .properties.lbe_thermochemical_properties import solubility_in_lbe
 from .properties.lbe_thermochemical_properties import diffusivity_in_lbe
 from .properties.lbe_thermochemical_properties import lbe_thermochemical
