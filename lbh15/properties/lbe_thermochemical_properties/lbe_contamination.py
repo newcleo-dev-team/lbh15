@@ -15,13 +15,6 @@ class LBEPoloniumHenryConstantInterface(PropertyInterface):
     abstract class.
     """
     @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "K_Po"
-
-    @property
     def units(self) -> str:
         """
         str : Henry constant unit
@@ -74,6 +67,13 @@ class LBEPoloniumHenryConstantOhno2006(LBEPoloniumHenryConstantInterface):
         return np.power(10, - 8348 / T + 10.5357)
 
     @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_Po"
+
+    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
@@ -121,6 +121,13 @@ class LBEPoloniumHenryConstantBuongiorno2003\
         return np.power(10, - 6790 / T + 1.26)
 
     @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_PbPo"
+
+    @property
     def correlation_name(self) -> str:
         """
         str : Name of the correlation
@@ -146,7 +153,7 @@ class LBEPoloniumActivityCoefficientInterface(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBEPo"
+        return "gamma_Po"
 
     @property
     def units(self) -> str:
@@ -258,14 +265,14 @@ class LBEPoloniumActivityCoefficient(LBEPoloniumActivityCoefficientInterface):
 
 class LBEMercuryHenryConstant(PropertyInterface):
     """
-    Liquid LBE *Mercury compound Henry constant* property class
+    Liquid LBE *dilute Mercury Henry constant* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Mercury compounds Henry constant* by
+        Returns the value of the *dilute Mercury Henry constant* by
         applying the property correlation.
 
         Parameters
@@ -320,19 +327,19 @@ class LBEMercuryHenryConstant(PropertyInterface):
         List[float] : Temperature validity range of the Mercury
         Henry constant correlation function
         """
-        return [603.0, T_b0]
+        return [629.73, T_b0]
 
 
 class LBEMercuryActivityCoefficient(PropertyInterface):
     """
-    Liquid LBE *Mercury compound activity coefficient* property class
+    Liquid LBE *dilute Mercury activity coefficient* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Mercury compounds activity coefficient* by
+        Returns the value of the *dilute Mercury activity coefficient* by
         applying the property correlation.
 
         Parameters
@@ -358,7 +365,7 @@ class LBEMercuryActivityCoefficient(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBEHg"
+        return "gamma_Hg"
 
     @property
     def units(self) -> str:
@@ -387,19 +394,19 @@ class LBEMercuryActivityCoefficient(PropertyInterface):
         List[float] : Temperature validity range of the Mercury
         activity coefficient correlation function
         """
-        return [603.0, T_b0]
+        return [629.73, T_b0]
 
 
 class LBEMercuryVapourPressure(PropertyInterface):
     """
-    Liquid LBE *Mercury compound vapour pressure* property class
+    Liquid LBE *dilute Mercury vapour pressure* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Mercury compounds vapour pressure* by
+        Returns the value of the *dilute Mercury vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -426,7 +433,7 @@ class LBEMercuryVapourPressure(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBEHg"
+        return "P_Hg"
 
     @property
     def units(self) -> str:
@@ -455,19 +462,19 @@ class LBEMercuryVapourPressure(PropertyInterface):
         List[float] : Temperature validity range of the Mercury
         vapour pressure correlation function
         """
-        return [603.0, T_b0]
+        return [629.73, T_b0]
 
 
 class LBECadmiumHenryConstant(PropertyInterface):
     """
-    Liquid LBE *Cadmium compound Henry constant* property class
+    Liquid LBE *dilute Cadmium Henry constant* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Cadmium compound Henry constant* by
+        Returns the value of the *dilute Cadmium Henry constant* by
         applying the property correlation.
 
         Parameters
@@ -493,7 +500,7 @@ class LBECadmiumHenryConstant(PropertyInterface):
         """
         str : Name of the property
         """
-        return "K_LBECd"
+        return "K_Cd"
 
     @property
     def units(self) -> str:
@@ -527,14 +534,14 @@ class LBECadmiumHenryConstant(PropertyInterface):
 
 class LBECadmiumActivityCoefficient(PropertyInterface):
     """
-    Liquid LBE *Cadmium compound activity coefficient* property class
+    Liquid LBE *dilute Cadmium activity coefficient* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Cadmium compounds activity coefficient* by
+        Returns the value of the *dilute Cadmium activity coefficient* by
         applying the property correlation.
 
         Parameters
@@ -560,7 +567,7 @@ class LBECadmiumActivityCoefficient(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBECd"
+        return "gamma_Cd"
 
     @property
     def units(self) -> str:
@@ -594,14 +601,14 @@ class LBECadmiumActivityCoefficient(PropertyInterface):
 
 class LBECadmiumVapourPressure(PropertyInterface):
     """
-    Liquid LBE *Cadmium compound vapour pressure* property class
+    Liquid LBE *dilute Cadmium vapour pressure* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Cadmium compounds vapour pressure* by
+        Returns the value of the *dilute Cadmium vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -628,7 +635,7 @@ class LBECadmiumVapourPressure(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBECd"
+        return "P_Cd"
 
     @property
     def units(self) -> str:
@@ -662,14 +669,14 @@ class LBECadmiumVapourPressure(PropertyInterface):
 
 class LBEThalliumHenryConstant(PropertyInterface):
     """
-    Liquid LBE *Thallium compounds Henry constant* property class
+    Liquid LBE *dilute Thallium Henry constant* property class
     implementing the correltion by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Thallium compounds Henry constant* by
+        Returns the value of the *dilute Thallium Henry constant* by
         applying the property correlation.
 
         Parameters
@@ -695,7 +702,7 @@ class LBEThalliumHenryConstant(PropertyInterface):
         """
         str : Name of the property
         """
-        return "K_LBETl"
+        return "K_Tl"
 
     @property
     def units(self) -> str:
@@ -724,19 +731,19 @@ class LBEThalliumHenryConstant(PropertyInterface):
         List[float] : Temperature validity range of the Thallium Henry
         constant correlation function.
         """
-        return [T_m0, T_b0]
+        return [577.0, T_b0]
 
 
 class LBEThalliumActivityCoefficient(PropertyInterface):
     """
-    Liquid LBE *Thallium compound activity coefficient* property class
+    Liquid LBE *dilute Thallium activity coefficient* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Thallium compounds activity coefficient* by
+        Returns the value of the *dilute Thallium activity coefficient* by
         applying the property correlation.
 
         Parameters
@@ -762,7 +769,7 @@ class LBEThalliumActivityCoefficient(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBETl"
+        return "gamma_Tl"
 
     @property
     def units(self) -> str:
@@ -791,19 +798,19 @@ class LBEThalliumActivityCoefficient(PropertyInterface):
         List[float] : Temperature validity range of the Thallium
         activity coefficient correlation function
         """
-        return [T_m0, T_b0]
+        return [577.0, T_b0]
 
 
 class LBEThalliumVapourPressure(PropertyInterface):
     """
-    Liquid LBE *Thallium compound vapour pressure* property class
+    Liquid LBE *dilute Thallium vapour pressure* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Thallium compounds vapour pressure* by
+        Returns the value of the *dilute Thallium vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -830,7 +837,7 @@ class LBEThalliumVapourPressure(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBETl"
+        return "P_Tl"
 
     @property
     def units(self) -> str:
@@ -859,19 +866,19 @@ class LBEThalliumVapourPressure(PropertyInterface):
         List[float] : Temperature validity range of the Thallium
         vapour pressure correlation function
         """
-        return [T_m0, T_b0]
+        return [577.0, T_b0]
 
 
 class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
     """
-    Liquid LBE *PbI2 Iodine compounds Henry constant* property class
+    Liquid LBE *monoatomic Iodine Henry constant* property class
     implementing the correlation by *neuhausen2005*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds Henry constant* by
+        Returns the value of the *monoatomic Iodine Henry constant* by
         applying the property correlation.
 
         Parameters
@@ -897,7 +904,7 @@ class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
         """
         str : Name of the property
         """
-        return "K_LBEPbI2"
+        return "K_I"
 
     @property
     def correlation_name(self) -> str:
@@ -916,36 +923,36 @@ class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : PbI2 Iodine Henry constant long name
+        str : monoatomic Iodine Henry constant long name
         """
-        return "Henry constant of PbI2 Iodine"
+        return "Henry constant of monoatomic Iodine"
 
     @property
     def description(self) -> str:
         """
-        str : PbI2 Iodine Henry constant description
+        str : monoatomic Iodine Henry constant description
         """
         return f"{self.long_name} in liquid LBE"
 
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbI2 Iodine
+        List[float] : Temperature validity range of the monoatomic Iodine
         Henry constant correlation function
         """
-        return [T_m0, T_b0]
+        return [700, T_b0]
 
 
 class LBEIodineActivityCoefficientNeuhasen2005c(PropertyInterface):
     """
-    Liquid LBE *PbI2 Iodine compound activity coefficient* property class
+    Liquid LBE *monoatomic Iodine activity coefficient* property class
     implementing the correlation by *neuhasen2005c*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds activity coefficient*
+        Returns the value of the *monoatomic Iodine activity coefficient*
         by applying the property correlation.
 
         Parameters
@@ -971,7 +978,7 @@ class LBEIodineActivityCoefficientNeuhasen2005c(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBEPbI2"
+        return "gamma_I"
 
     @property
     def correlation_name(self) -> str:
@@ -990,36 +997,36 @@ class LBEIodineActivityCoefficientNeuhasen2005c(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : PbI2 Iodine activity coefficient long name
+        str : monoatomic Iodine activity coefficient long name
         """
-        return "Activity coefficient of PbI2 Iodine"
+        return "Activity coefficient of monoatomic Iodine"
 
     @property
     def description(self) -> str:
         """
-        str : PbI2 Iodine activity coefficient description
+        str : monoatomic Iodine activity coefficient description
         """
         return f"{self.long_name} in liquid LBE"
 
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbI2 Iodine
+        List[float] : Temperature validity range of the monoatomic Iodine
         activity coefficient correlation function
         """
-        return [T_m0, T_b0]
+        return [700, T_b0]
 
 
 class LBEIodineVapourPressure(PropertyInterface):
     """
-    Liquid LBE *PbI2 Iodine compound vapour pressure* property class
+    Liquid LBE *monoatomic Iodine vapour pressure* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *PbI2 Iodine compounds vapour pressure* by
+        Returns the value of the *monoatomic Iodine vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -1046,7 +1053,7 @@ class LBEIodineVapourPressure(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBEPbI2"
+        return "P_I"
 
     @property
     def units(self) -> str:
@@ -1058,36 +1065,36 @@ class LBEIodineVapourPressure(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : PbI2 Iodine vapour pressure long name
+        str : monoatomic Iodine vapour pressure long name
         """
-        return "Vapour pressure of PbI2 Iodine"
+        return "Vapour pressure of monoatomic Iodine"
 
     @property
     def description(self) -> str:
         """
-        str : PbI2 Iodine vapour pressure description
+        str : monoatomic Iodine vapour pressure description
         """
         return f"{self.long_name} in liquid LBE"
 
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the PbI2 Iodine
+        List[float] : Temperature validity range of the monoatomic Iodine
         vapour pressure correlation function
         """
-        return [T_m0, T_b0]
+        return [700, T_b0]
 
 
 class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
     """
-    Liquid LBE *Caesium compound activity coefficient* property class
+    Liquid LBE *Caesium intermetallic compounds activity coefficient* property class
     implementing the correlation by *ohno2006*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Caesium compound Henry constant* by
+        Returns the value of the *Caesium intermetallic compounds Henry constant* by
         applying the property correlation.
 
         Parameters
@@ -1113,7 +1120,7 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBECs"
+        return "gamma_Cs"
 
     @property
     def correlation_name(self) -> str:
@@ -1132,36 +1139,36 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
     @property
     def long_name(self) -> str:
         """
-        str : Caesium compound activity coefficient long name
+        str : Caesium intermetallic compounds activity coefficient long name
         """
-        return "Activity coefficient of Caesium compound"
+        return "Activity coefficient of Caesium intermetallic compounds"
 
     @property
     def description(self) -> str:
         """
-        str : Caesium compound activity coefficient description
+        str : Caesium intermetallic compounds activity coefficient description
         """
         return f"{self.long_name} in liquid lead"
 
     @property
     def range(self) -> List[float]:
         """
-        List[float] : Temperature validity range of the Caesium compound
-        activity coefficient correlation function.
+        List[float] : Temperature validity range of the Caesium
+        intermetallic compounds activity coefficient correlation function.
         """
         return [723.0, 1023.0]
 
 
 class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
     """
-    Liquid LBE *Rubidium compounds vapour pressure* property class
+    Liquid LBE *Rubidium vapour pressure* property class
     implementing the correlation by *landolt1960*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Rubidium compounds vapour pressure* by
+        Returns the value of the *Rubidium vapour pressure* by
         applying the property correlation.
 
         Parameters
@@ -1187,7 +1194,7 @@ class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
         """
         str : Name of the property
         """
-        return "P_LBERb"
+        return "P_Rb"
 
     @property
     def correlation_name(self) -> str:
@@ -1223,19 +1230,19 @@ class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
         List[float] : Temperature validity range of the Rubidium
         vapour pressure correlation function.
         """
-        return [T_m0, T_b0]
+        return [800, T_b0]
 
 
 class LBERubidiumActivityCoefficient(PropertyInterface):
     """
-    Liquid LBE *Rubidium compound activity coefficient* property class
+    Liquid LBE *Rubidium activity coefficient* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Rubidium compounds activity coefficient* by
+        Returns the value of the *Rubidium activity coefficient* by
         applying the property correlation.
 
         Parameters
@@ -1261,7 +1268,7 @@ class LBERubidiumActivityCoefficient(PropertyInterface):
         """
         str : Name of the property
         """
-        return "gamma_LBERb"
+        return "gamma_Rb"
 
     @property
     def units(self) -> str:
@@ -1290,19 +1297,19 @@ class LBERubidiumActivityCoefficient(PropertyInterface):
         List[float] : Temperature validity range of the Rubidium
         activity coefficient correlation function
         """
-        return [T_m0, T_b0]
+        return [800, T_b0]
 
 
 class LBERubidiumHenryConstant(PropertyInterface):
     """
-    Liquid LBE *Rubidium compounds Henry constant* property class
+    Liquid LBE *Rubidium Henry constant* property class
     implementing the correlation by *lbh15*.
     """
     @range_warning
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *Rubidium compounds Henry constant* by
+        Returns the value of the *Rubidium Henry constant* by
         applying the property correlation.
 
         Parameters
@@ -1330,7 +1337,7 @@ class LBERubidiumHenryConstant(PropertyInterface):
         """
         str : Name of the property
         """
-        return "K_LBERb"
+        return "K_Rb"
 
     @property
     def units(self) -> str:
@@ -1359,4 +1366,4 @@ class LBERubidiumHenryConstant(PropertyInterface):
         List[float] : Temperature validity range of the Rubidium
         Henry constant correlation function.
         """
-        return [T_m0, T_b0]
+        return [800, T_b0]
