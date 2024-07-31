@@ -82,7 +82,8 @@ class LBE(LiquidMetalInterface):
          'cr_sol': 'gosse2014', 'o_dif': "gromov1996",
          'lim_cr': "gosse2014", 'lim_ni': "gosse2014",
          'lim_fe': "gosse2014", 'K_Po': 'ohno2006',
-         'gamma_LBEPo': 'ohno2006'}
+         'gamma_Po': 'ohno2006', 'P_PbI2': 'knacke1991',
+         'K_PbI2': 'knacke1991'}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
