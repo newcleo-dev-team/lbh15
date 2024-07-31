@@ -869,7 +869,387 @@ class LBEThalliumVapourPressure(PropertyInterface):
         return [577.0, T_b0]
 
 
-class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
+class LBEIodineVapourPressureInterface(PropertyInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound vapour pressure* 
+    abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_PbI2"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Vapour pressure unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : PbI2 Iodine vapour pressure long name
+        """
+        return "Vapour pressure of PbI2 Iodine compound"
+
+    @property
+    def description(self) -> str:
+        """
+        str : PbI2 Iodine compound vapour pressure description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+
+class LBEIodineVapourPressureKonings1996(LBEIodineVapourPressureInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound vapour pressure* property class
+    implementing the correlation by *konings1996*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *PbI2 Iodine compound vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return np.power(10, - 8691 / T + 13.814)
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "konings1996"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the PbI2
+        Iodine compound vapour pressure correlation function.
+        """
+        return [T_m0, 697.0]
+
+
+class LBEIodineVapourPressureKnacke1991(LBEIodineVapourPressureInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound vapour pressure* property class
+    implementing the correlation by *knacke1991*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *PbI2 Iodine compound vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            pressure in :math:`[Pa]`
+        """
+        return np.power(10, - 9087 / T - 6.16 * np.log(T) + 31.897)
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "knacke1991"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the PbI2
+        Iodine compound vapour pressure correlation function.
+        """
+        return [697.0, T_b0]
+
+
+class LBEIodineVapourPressure(LBEIodineVapourPressureInterface):
+    """
+    Liquid LBE *monoatomic Iodine vapour pressure* property class
+    implementing the correlation by *lbh15*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *monoatomic Iodine vapour pressure* by
+        applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            vapour pressure in :math:`[Pa]`
+        """
+        return LBEIodineHenryConstantNeuhausen2005().correlation(T, p) /\
+            LBEIodineActivityCoefficient().correlation(T, p)
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "P_I"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : monoatomic Iodine vapour pressure long name
+        """
+        return "Vapour pressure of monoatomic Iodine"
+
+    @property
+    def description(self) -> str:
+        """
+        str : monoatomic Iodine vapour pressure description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the monoatomic Iodine
+        vapour pressure correlation function
+        """
+        return [700, T_b0]
+
+
+class LBEIodineActivityCoefficient(PropertyInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound activity coefficient*
+    property class implementing the suggestion by *handbook*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *PbI2 Iodine compound activity coefficient*
+        by applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            activity coefficient in :math:`[-]`
+        """
+        return 1
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "gamma_PbI2"
+
+    @property
+    def units(self) -> str:
+        """
+        str : activity coefficient unit
+        """
+        return "[-]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : PbI2 iodine compound activity coefficient long name
+        """
+        return "Activity coefficient of PbI2 Iodine compound"
+
+    @property
+    def description(self) -> str:
+        """
+        str : PbI2 Iodine compound activity coefficient description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the PbI2 Iodine
+        compound activity coefficient correlation function
+        """
+        return [T_m0, T_b0]
+
+
+class LBEIodineHenryConstantInterface(PropertyInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound Henry constant*
+    abstract class.
+    """
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "K_PbI2"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : PbI2 Iodine compound Henry constant long name
+        """
+        return "Henry constant of PbI2 Iodine compound"
+
+    @property
+    def description(self) -> str:
+        """
+        str : PbI2 Iodine compound Henry constant description
+        """
+        return f"{self.long_name} in liquid LBE"
+
+
+class LBEIodineHenryConstantKonings1996(LBEIodineHenryConstantInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound Henry constant*
+    property class implementing the correlation by *konings1996*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *PbI2 Iodine compound Henry constant*
+        by applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            Henry constant in :math:`[Pa]`
+        """
+        return LBEIodineVapourPressureKonings1996().correlation(T, p)
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "konings1996"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the PbI2 Iodine
+        compound Henry constant correlation function
+        """
+        return [T_m0, 697.0]
+
+
+class LBEIodineHenryConstantKnacke1991(LBEIodineHenryConstantInterface):
+    """
+    Liquid LBE *PbI2 Iodine compound Henry constant*
+    property class implementing the correlation by *knacke1991*.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *PbI2 Iodine compound Henry constant*
+        by applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            Henry constant in :math:`[Pa]`
+        """
+        return LBEIodineVapourPressureKnacke1991().correlation(T, p)
+
+    @property
+    def correlation_name(self) -> str:
+        """
+        str : Name of the correlation
+        """
+        return "knacke1991"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the PbI2 Iodine
+        compound Henry constant correlation function
+        """
+        return [697.0, T_b0]
+
+
+class LBEIodineHenryConstantNeuhausen2005(LBEIodineHenryConstantInterface):
     """
     Liquid LBE *monoatomic Iodine Henry constant* property class
     implementing the correlation by *neuhausen2005*.
@@ -914,13 +1294,6 @@ class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
         return "neuheusen2005"
 
     @property
-    def units(self) -> str:
-        """
-        str : Henry constant unit
-        """
-        return "[Pa]"
-
-    @property
     def long_name(self) -> str:
         """
         str : monoatomic Iodine Henry constant long name
@@ -943,7 +1316,7 @@ class LBEIodineHenryConstantNeuhausen2005(PropertyInterface):
         return [700, T_b0]
 
 
-class LBEIodineActivityCoefficientNeuhasen2005c(PropertyInterface):
+
     """
     Liquid LBE *monoatomic Iodine activity coefficient* property class
     implementing the correlation by *neuhasen2005c*.
@@ -1017,74 +1390,6 @@ class LBEIodineActivityCoefficientNeuhasen2005c(PropertyInterface):
         return [700, T_b0]
 
 
-class LBEIodineVapourPressure(PropertyInterface):
-    """
-    Liquid LBE *monoatomic Iodine vapour pressure* property class
-    implementing the correlation by *lbh15*.
-    """
-    @range_warning
-    def correlation(self, T: float, p: float = atm,
-                    verbose: bool = False) -> float:
-        """
-        Returns the value of the *monoatomic Iodine vapour pressure* by
-        applying the property correlation.
-
-        Parameters
-        ----------
-        T : float
-            Temperature in :math:`[K]`
-        p : float, optional
-            Pressure in :math:`[Pa]`, by default the atmospheric pressure
-            value, i.e., :math:`101325.0 Pa`
-        verbose : bool, optional
-            `True` to tell the decorator to print a warning message in case of
-            range check failing, `False` otherwise. By default, `False`
-
-        Returns
-        -------
-        float:
-            vapour pressure in :math:`[Pa]`
-        """
-        return LBEIodineHenryConstantNeuhausen2005().correlation(T, p) /\
-            LBEIodineActivityCoefficientNeuhasen2005c().correlation(T, p)
-
-    @property
-    def name(self) -> str:
-        """
-        str : Name of the property
-        """
-        return "P_I"
-
-    @property
-    def units(self) -> str:
-        """
-        str : vapour pressure unit
-        """
-        return "[Pa]"
-
-    @property
-    def long_name(self) -> str:
-        """
-        str : monoatomic Iodine vapour pressure long name
-        """
-        return "Vapour pressure of monoatomic Iodine"
-
-    @property
-    def description(self) -> str:
-        """
-        str : monoatomic Iodine vapour pressure description
-        """
-        return f"{self.long_name} in liquid LBE"
-
-    @property
-    def range(self) -> List[float]:
-        """
-        List[float] : Temperature validity range of the monoatomic Iodine
-        vapour pressure correlation function
-        """
-        return [700, T_b0]
-
-
 class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
     """
     Liquid LBE *Caesium intermetallic compounds activity coefficient* property class
@@ -1148,7 +1453,7 @@ class LBECaesiumActivityCoefficientOhno2006(PropertyInterface):
         """
         str : Caesium intermetallic compounds activity coefficient description
         """
-        return f"{self.long_name} in liquid lead"
+        return f"{self.long_name} in liquid LBE"
 
     @property
     def range(self) -> List[float]:
