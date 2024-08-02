@@ -7,6 +7,14 @@ from ..interface import PropertyInterface
 from ..._decorators import range_warning
 from ..._commons import LBE_MELTING_TEMPERATURE as T_m0
 from ..._commons import LBE_BOILING_TEMPERATURE as T_b0
+from ..lead_thermochemical_properties.lead_contamination \
+    import LeadIodineVapourPressureKonings1996
+from ..lead_thermochemical_properties.lead_contamination \
+    import LeadIodineVapourPressureKnacke1991
+from ..lead_thermochemical_properties.lead_contamination \
+    import LeadCaesiumActivityCoefficient
+from ..lead_thermochemical_properties.lead_contamination \
+    import LeadCaesiumHenryConstantYamshchikov2001
 
 
 class LBEPoloniumHenryConstantInterface(PropertyInterface):
@@ -733,7 +741,7 @@ class LBEIodineVapourPressureKonings1996(LBEIodineVapourPressureInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return np.power(10, - 8691 / T + 13.814)
+        return LeadIodineVapourPressureKonings1996().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -779,7 +787,7 @@ class LBEIodineVapourPressureKnacke1991(LBEIodineVapourPressureInterface):
         float:
             pressure in :math:`[Pa]`
         """
-        return np.power(10, - 9087 / T - 6.16 * np.log(T) + 31.897)
+        return LeadIodineVapourPressureKnacke1991().correlation(T, p)
 
     @property
     def correlation_name(self) -> str:
@@ -1085,8 +1093,7 @@ class LBECaesiumHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return np.power(10, - 4980 / T - 9.323 * np.log(T)
-                        + 0.004473 * T - 8.684e-7 * T**2 + 33.07)
+        return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p)
 
     @property
     def name(self) -> str:
@@ -1188,7 +1195,7 @@ class LBECaesiumActivityCoefficient(LBECaesiumActivityCoefficientInterface):
         float:
             activity coefficient in :math:`[-]`
         """
-        return np.power(10, -1.5)
+        return LeadCaesiumActivityCoefficient().correlation(T, p)
 
     @property
     def range(self) -> List[float]:
