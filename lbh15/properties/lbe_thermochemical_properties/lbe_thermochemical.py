@@ -193,6 +193,25 @@ class LeadHenryConstant(PropertyInterface):
         """
         return np.power(10, - 10130 / T - 0.985 * np.log(T) + 12.8163)
 
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of the Lead Henry constant passed as argument.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Lead Henry constant in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        return 1500
+
     @property
     def name(self) -> str:
         """
@@ -332,6 +351,25 @@ class BismuthHenryConstant(PropertyInterface):
             Bismuth Henry constant in :math:`[Pa]`
         """
         return np.power(10, - 9656.4 / T + 9.9272)
+
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of the Bismuth Henry constant passed as argument.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Bismuth Henry constant in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        return 1500
 
     @property
     def name(self) -> str:
