@@ -65,7 +65,7 @@ class LeadPoloniumVapourPressureAbakumov1994a(PropertyInterface):
         """
         str : PbPo Polonium compound vapour pressure long name
         """
-        return "Vapour pressure of PbPo compound in pure lead"
+        return "Vapour pressure of PbPo compound"
 
     @property
     def description(self) -> str:

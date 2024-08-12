@@ -1,6 +1,6 @@
 """Module with the definition of some coumpounds properties
 for contamination assessment"""
-from typing import List
+from typing import List, Union
 import numpy as np
 from scipy.constants import atm
 from ..interface import PropertyInterface
@@ -1253,7 +1253,7 @@ class LBECaesiumActivityCoefficientOhno2006\
         return [723.0, 1023.0]
 
 
-class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
+class LBERubidiumVapourPressureLandolt1960(PropertyInterface):
     """
     Liquid LBE *Rubidium vapour pressure* property class
     implementing the correlation by *landolt1960*.
@@ -1424,7 +1424,7 @@ class LBERubidiumHenryConstant(PropertyInterface):
         float:
             Henry constant in :math:`[Pa]`
         """
-        return LBERubidiumVapourPressureInterfaceLandolt1960()\
+        return LBERubidiumVapourPressureLandolt1960()\
             .correlation(T, p) * LBERubidiumActivityCoefficient()\
             .correlation(T, p)
 

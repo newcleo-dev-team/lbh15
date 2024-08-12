@@ -748,5 +748,227 @@
       "T_at_min": 673.00001951,
       "max": 0.0,
       "T_at_max": 999.9999743571
+   },
+   "P_PbPo_abakumov1994a_Vapour_pressure_of_PbPo_compound_in_liquid_lead": {
+      "min": 12.5095034388,
+      "T_at_min": 913.0000231923,
+      "max": 385.7169908819,
+      "T_at_max": 1122.9999735432
+   },
+   "gamma_PbPo_li1998_Activity_coefficient_of_PbPo_compound_in_liquid_lead": {
+      "min": 1.0000000000,
+      "T_at_min": 1122.9999735432,
+      "max": 1.0000000000,
+      "T_at_max": 1122.9999735432
+   },
+   "K_PbPo_lbh15_Henry_constant_of_PbPo_compound_in_liquid_lead": {
+      "min": 12.5095034388,
+      "T_at_min": 913.0000231923,
+      "max": 385.7169908819,
+      "T_at_max": 1122.9999735432
+   },
+   "P_PbI2_konings1996_Vapour_pressure_of_PbI2_Iodine_compound_in_liquid_lead": {
+      "min": 0.2205316217,
+      "T_at_min": 600.6000141817,
+      "max": 22.1231075622,
+      "T_at_max": 696.9999802088
+   },
+   "P_PbI2_knacke1991_Vapour_pressure_of_PbI2_Iodine_compound_in_liquid_lead": {
+      "min": 0.0000000000,
+      "T_at_min": 697.0000136286,
+      "max": 0.0000000000,
+      "T_at_max": 1475.1623230823368
+   },
+   "gamma_PbI2_lbh15_Activity_coefficient_of_PbI2_Iodine_compound_in_liquid_lead": {
+      "min": 1.0000000000,
+      "T_at_min": 2020.9999611359,
+      "max": 1.0000000000,
+      "T_at_max": 2020.9999611359
+   },
+   "K_PbI2_konings1996_Henry_constant_of_PbI2_Iodine_compound_in_liquid_lead": {
+      "min": 0.2205316217,
+      "T_at_min": 600.6000141817,
+      "max": 22.1231075622,
+      "T_at_max": 696.9999802088
+   },
+   "K_PbI2_knacke1991_Henry_constant_of_PbI2_Iodine_compound_in_liquid_lead": {
+      "min": 0.0000000000,
+      "T_at_min": 697.0000136286,
+      "max": 0.0000000000,
+      "T_at_max": 1475.1623230823368
+   },
+   "K_PbCs_yamshchikov2001_Cs-Pb_Caesium_intermetallic_compound_Henry_constant_in_liquid_lead": {
+      "min": 0.0000000000,
+      "T_at_min": 932.9999772585,
+      "max": 0.0000000000,
+      "T_at_max": 708.9085832567
+   },
+   "gamma_PbCs_lbh15_Activity_coefficient_of_Cs-Pb_Caesium_intermetallic_compound_in_liquid_lead": {
+      "min": 0.0316227766,
+      "T_at_min": 1099.9999771533,
+      "max": 0.0316227766,
+      "T_at_max": 1099.9999771533
+   },
+   "P_PbCs_lbh15_Cs-Pb_Caesium_intermetallic_compound_vapour_pressure_in_liquid_lead": {
+      "min": 0.0000000000,
+      "T_at_min": 932.9999772585,
+      "max": 0.0000000000,
+      "T_at_max": 708.9086327201708
+   },
+   "gamma_Po_joy1963_Activity_coefficient_of_Polonium_in_liquid_bismuth": {
+      "min": 0.0022080953,
+      "T_at_min": 723.0000193862,
+      "max": 0.0487669181,
+      "T_at_max": 1122.9999686325
+   },
+   "gamma_Po_lbh15_Activity_coefficient_of_Polonium_in_liquid_bismuth": {
+      "min": 0.0046698529,
+      "T_at_min": 923.0000236099,
+      "max": 0.0087518712,
+      "T_at_max": 1037.9999771945
+   },
+   "P_BiI3_cubicciotti1959_Vapour_pressure_of_BiI3_Iodide_in_liquid_bismuth": {
+      "min": 237.64832610980847,
+      "T_at_min": 544.6000088591823,
+      "max": 86316731.09536353,
+      "T_at_max": 1830.9999648121470
+   },
+   "gamma_Cs_gverdtsiteli1984_Activity_coefficient_of_Caesium_intermetallic_compounds_in_liquid_bismuth": {
+      "min": 0.0031622777,
+      "T_at_min": 999.9999791205,
+      "max": 0.0031622777,
+      "T_at_max": 999.9999791205
+   },
+   "K_Po_ohno2006_Henry_constant_of_Polonium_in_liquid_LBE": {
+      "min": 0.0975810518,
+      "T_at_min": 723.0000132379,
+      "max": 237.3487844736,
+      "T_at_max": 1022.9999771083
+   },
+   "K_PbPo_buongiorno2003_Henry_constant_of_Polonium_in_liquid_LBE": {
+      "min": 0.0177612640,
+      "T_at_min": 665.0000120712,
+      "max": 1.6206753711,
+      "T_at_max": 822.9999799523
+   },
+   "gamma_Po_ohno2006_Activity_coefficient_of_elemental_Polonium_in_liquid_LBE": {
+      "min": 0.001139908769775767,
+      "T_at_min": 723.0000195402,
+      "max": 0.0057962945,
+      "T_at_max": 876.9999813914
+   },
+   "gamma_Po_lbh15_Activity_coefficient_of_elemental_Polonium_in_liquid_LBE": {
+      "min": 0.02486674251805006,
+      "T_at_min": 913.0000266457,
+      "max": 0.0589435506,
+      "T_at_max": 1122.9999735432
+   },
+   "K_Hg_lbh15_Henry_constant_of_Mercury_in_liquid_LBE": {
+      "min": 21.3022269849,
+      "T_at_min": 526.5500115906,
+      "max": 343.9970060127,
+      "T_at_max": 679.4499805994
+   },
+   "gamma_Hg_lbh15_Activity_coefficient_of_Mercury_in_liquid_LBE": {
+      "min": 2.0000000000,
+      "T_at_min": 679.4499805994,
+      "max": 2.0000000000,
+      "T_at_max": 679.4499805994
+   },
+   "K_Cd_lbh15_Henry_constant_of_Cadmium_in_liquid_LBE": {
+      "min": 0.1167695558,
+      "T_at_min": 696.5500194006,
+      "max": 2.1255978513,
+      "T_at_max": 849.4499812086
+   },
+   "gamma_Cd_lbh15_Activity_coefficient_of_Cadmium_in_liquid_LBE": {
+      "min": 4.0000000000,
+      "T_at_min": 849.4499812086,
+      "max": 4.0000000000,
+      "T_at_max": 849.4499812086
+   },
+   "K_Tl_lbh15_Henry_constant_of_Thallium_in_liquid_LBE": {
+      "min": 0.0000006907,
+      "T_at_min": 696.5500153335,
+      "max": 0.0001281377,
+      "T_at_max": 849.4499812086
+   },
+   "gamma_Tl_lbh15_Activity_coefficient_of_Thallium_in_liquid_LBE": {
+      "min": 0.8000000000,
+      "T_at_min": 849.4499812086,
+      "max": 0.8000000000,
+      "T_at_max": 849.4499812086
+   },
+   "P_PbI2_konings1996_Vapour_pressure_of_PbI2_Iodine_compound_in_liquid_LBE": {
+      "min": 0.0675332282,
+      "T_at_min": 580.0000104114,
+      "max": 22.1231131294,
+      "T_at_max": 696.9999863178
+   },
+   "P_PbI2_knacke1991_Vapour_pressure_of_PbI2_Iodine_compound_in_liquid_LBE": {
+      "min": 0.0000000000,
+      "T_at_min": 697.0000149130,
+      "max": 0.0000000000,
+      "T_at_max": 1119.9999668288
+   },
+   "gamma_PbI2_lbh15_Activity_coefficient_of_PbI2_Iodine_compound_in_liquid_LBE": {
+      "min": 1.0000000000,
+      "T_at_min": 1119.9999742661614,
+      "max": 1.0000000000,
+      "T_at_max": 1119.9999742661614
+   },
+   "K_PbI2_konings1996_Henry_constant_of_PbI2_Iodine_compound_in_liquid_LBE": {
+      "min": 0.0675332282,
+      "T_at_min": 580.0000104114,
+      "max": 22.1231131294,
+      "T_at_max": 696.9999863178
+   },
+   "K_PbI2_knacke1991_Henry_constant_of_PbI2_Iodine_compound_in_liquid_LBE": {
+      "min": 0.0000000000,
+      "T_at_min": 697.0000149130,
+      "max": 0.0000000000,
+      "T_at_max": 1119.9999668288
+   },
+   "K_I_neuhausen2005_Henry_constant_of_monoatomic_Iodine_in_liquid_LBE": {
+      "min": 0.4930118675,
+      "T_at_min": 700.0000108607,
+      "max": 185368.2888892461,
+      "T_at_max": 1119.9999670641
+   },
+   "K_Cs_lbh15_Henry_constant_of_Caesium_intermettalic_compounds_in_liquid_LBE": {
+      "min": 2.4848725492608575e-33,
+      "T_at_min": 932.9999772585,
+      "max": 3.855017547852056e-33,
+      "T_at_max":708.9085832567
+   },
+   "gamma_Cs_lbh15_Activity_coefficient_of_Caesium_intermetallic_compounds_in_liquid_LBE": {
+      "min": 0.0316227766,
+      "T_at_min": 932.9999772585,
+      "max": 0.0316227766,
+      "T_at_max": 932.9999772585
+   },
+   "gamma_Cs_ohno2006_Activity_coefficient_of_Caesium_intermetallic_compounds_in_liquid_LBE": {
+      "min": 0.0011152497,
+      "T_at_min": 723.0000128018,
+      "max": 0.0135889734,
+      "T_at_max": 1022.9999771083
+   },
+   "P_Rb_landolt1960_Vapour_pressure_of_Rubidium_in_liquid_LBE": {
+      "min": 0.0461041946,
+      "T_at_min": 796.5500194006,
+      "max": 0.2171193162,
+      "T_at_max": 949.4499826918
+   },
+   "gamma_Rb_lbh15_Activity_coefficient_of_Rubidium_in_liquid_LBE": {
+      "min": 0.0200000000,
+      "T_at_min": 949.4499826918,
+      "max": 0.0200000000,
+      "T_at_max": 949.4499826918
+   },
+   "K_Rb_lbh15_Henry_constant_of_Rubidium_in_liquid_LBE": {
+      "min": 0.0009220839,
+      "T_at_min": 796.5500194006,
+      "max": 0.0043423863,
+      "T_at_max": 949.4499826918
    }
 }
