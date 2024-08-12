@@ -92,7 +92,8 @@ class Lead(LiquidMetalInterface):
     _default_corr_to_use: Dict[str, str] = \
         {'cp': 'sobolev2011', 'cr_sol': "gosse2014",
          'o_pp': "alcock1964", 'o_dif': "gromov1996",
-         'lim_cr': "gosse2014"}
+         'lim_cr': "gosse2014", 'P_PbI2': 'knacke1991',
+         'K_PbI2': 'knacke1991'}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
     _roots_to_use: Dict[str, int] = {'cp': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
@@ -103,8 +104,8 @@ class Lead(LiquidMetalInterface):
          'lbh15.properties.lead_thermochemical_properties.diffusivity_in_lead',
          'lbh15.properties.lead_thermochemical_properties.lead_thermochemical',
          'lbh15.properties.lead_thermochemical_properties.lead_oxygen_limits',
-         'lbh15.properties.lead_properties',
-         'lbh15.properties.lead_thermochemical_properties.lead_contamination']
+         'lbh15.properties.lead_thermochemical_properties.lead_contamination',
+         'lbh15.properties.lead_properties']
 
     def __init__(self, p: float = atm, **kwargs):
         self._guess = LEAD_BOILING_TEMPERATURE / 2.0
