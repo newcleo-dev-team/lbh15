@@ -382,6 +382,18 @@ class cp(SpecificHeatInterface):
         """
         return 118.2 + 5.934e-3*T + 7.183e6/T/T
 
+    def guess_helper(self) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        return [1, 3]
+
     @property
     def correlation_name(self) -> str:
         """
@@ -607,3 +619,4 @@ class k(ThermalConductivityInterface):
         str : Thermal conductivity description
         """
         return f"Liquid bismuth {self.long_name}"
+    
