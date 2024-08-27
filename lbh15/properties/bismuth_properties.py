@@ -387,6 +387,7 @@ class cp(SpecificHeatInterface):
         Returns the coefficient values applied to the temperature initial
         guess if the correlation is non injective. The return type is `None`
         if the correlation is injective.
+        
         Returns
         -------
         List[float]:
