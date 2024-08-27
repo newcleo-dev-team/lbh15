@@ -343,7 +343,7 @@ class LeadIodineVapourPressureKnacke1991(LeadIodineVapourPressureInterface):
         Returns
         -------
         List[float]:
-            Temperature initial guess' coefficient
+            Temperature initial guess' coefficients
         """
         return [1.14, 1.85]
 
@@ -557,7 +557,7 @@ class LeadIodineHenryConstantKnacke1991(LeadIodineHenryConstantInterface):
         Returns
         -------
         List[float]:
-            Temperature initial guess' coefficient
+            Temperature initial guess' coefficients
         """
         return [1.14, 1.85]
 

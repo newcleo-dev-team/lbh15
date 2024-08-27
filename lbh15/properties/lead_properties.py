@@ -400,7 +400,7 @@ class cp_sobolev2011(LeadCpInterface):
         Returns
         -------
         List[float]:
-            Temperature initial guess' coefficient
+            Temperature initial guess' coefficients
         """
         return [1, 3]
 
@@ -467,7 +467,7 @@ class cp_gurvich1991(LeadCpInterface):
         Returns
         -------
         List[float]:
-            Temperature initial guess' coefficient
+            Temperature initial guess' coefficients
         """
         return [1, 3]
 
