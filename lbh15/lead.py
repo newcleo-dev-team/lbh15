@@ -95,7 +95,7 @@ class Lead(LiquidMetalInterface):
          'lim_cr': "gosse2014", 'P_PbI2': 'knacke1991',
          'K_PbI2': 'knacke1991'}
     _correlations_to_use: Dict[str, str] = copy.deepcopy(_default_corr_to_use)
-    _roots_to_use: Dict[str, int] = {'cp': 0}
+    _roots_to_use: Dict[str, int] = {'cp': 0, 'P_PbI2': 0, 'K_PbI2': 0}
     _custom_properties_path: Dict[str, List[str]] = {}
     _available_properties_dict: Dict[str, PropertyInterface] = {}
     _available_correlations_dict: Dict[str, List[str]] = {}

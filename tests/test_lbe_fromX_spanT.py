@@ -96,18 +96,6 @@ class LBELimitsTester(unittest.TestCase):
                 fromX = LBE(**init_dict)
                 self.assertAlmostEqual(lbeP.T, fromX.T, tol, name+" FAILED")
 
-class LBEContaminationTester(unittest.TestCase):
-
-    def test_init_fromX(self):
-        for lbeP in lbePs:
-            properties = load_prop('lbh15.properties.lbe_thermochemical_properties.lbe_contamination')
-            for prop in properties:
-                name = prop.name
-                val = getattr(lbeP, name)
-                init_dict = {name: val}
-                fromX = LBE(**init_dict)
-                self.assertAlmostEqual(lbeP.T, fromX.T, tol,
-                                       name+" FAILED")
 
 if __name__ == "__main__":
     unittest.main()

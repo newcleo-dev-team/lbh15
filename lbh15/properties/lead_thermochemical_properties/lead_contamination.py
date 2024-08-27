@@ -226,7 +226,7 @@ class LeadPoloniumHenryConstant(PropertyInterface):
 
 class LeadIodineVapourPressureInterface(PropertyInterface):
     """
-    Liquid lead *PbI2 Iodine compound vapour pressure* 
+    Liquid lead *PbI2 Iodine compound vapour pressure*
     abstract class.
     """
     @property
@@ -333,6 +333,27 @@ class LeadIodineVapourPressureKnacke1991(LeadIodineVapourPressureInterface):
             pressure in :math:`[Pa]`
         """
         return np.power(10, - 9087 / T - 6.16 * np.log(T) + 31.897)
+
+    def guess_helper(self) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficient
+        """
+        return [1.14, 1.85]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise.
+        """
+        return False
 
     @property
     def correlation_name(self) -> str:
@@ -526,6 +547,27 @@ class LeadIodineHenryConstantKnacke1991(LeadIodineHenryConstantInterface):
             Henry constant in :math:`[Pa]`
         """
         return LeadIodineVapourPressureKnacke1991().correlation(T, p)
+
+    def guess_helper(self) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficient
+        """
+        return [1.14, 1.85]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise.
+        """
+        return False
 
     @property
     def correlation_name(self) -> str:
