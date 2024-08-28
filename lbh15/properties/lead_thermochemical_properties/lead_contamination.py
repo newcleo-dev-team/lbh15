@@ -334,11 +334,16 @@ class LeadIodineVapourPressureKnacke1991(LeadIodineVapourPressureInterface):
         """
         return np.power(10, - 9087 / T - 6.16 * np.log(T) + 31.897)
 
-    def guess_helper(self) -> List[float]:
+    def guess_helper(self, property_value: float) -> List[float]:
         """
         Returns the coefficient values applied to the temperature initial
         guess if the correlation is non injective. The return type is `None`
         if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
 
         Returns
         -------
@@ -548,11 +553,16 @@ class LeadIodineHenryConstantKnacke1991(LeadIodineHenryConstantInterface):
         """
         return LeadIodineVapourPressureKnacke1991().correlation(T, p)
 
-    def guess_helper(self) -> List[float]:
+    def guess_helper(self, property_value: float) -> List[float]:
         """
         Returns the coefficient values applied to the temperature initial
         guess if the correlation is non injective. The return type is `None`
         if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
 
         Returns
         -------
