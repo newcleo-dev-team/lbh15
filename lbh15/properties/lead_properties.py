@@ -391,11 +391,16 @@ class cp_sobolev2011(LeadCpInterface):
         """
         return 176.2 - T * (4.923e-2 - 1.544e-5 * T) - 1.524e6 / T / T
 
-    def guess_helper(self) -> List[float]:
+    def guess_helper(self, property_value: float) -> List[float]:
         """
         Returns the coefficient values applied to the temperature initial
         guess if the correlation is non injective. The return type is `None`
         if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`s
 
         Returns
         -------
@@ -458,11 +463,16 @@ class cp_gurvich1991(LeadCpInterface):
         return 175.1 - T * (4.961e-2 - T * (1.985e-5 - 2.099e-9 * T))\
             - 1.524e6 / T / T
 
-    def guess_helper(self) -> List[float]:
+    def guess_helper(self, property_value: float) -> List[float]:
         """
         Returns the coefficient values applied to the temperature initial
         guess if the correlation is non injective. The return type is `None`
         if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`
         
         Returns
         -------

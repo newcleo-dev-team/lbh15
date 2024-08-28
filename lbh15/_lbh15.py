@@ -456,7 +456,7 @@ class LiquidMetalInterface(ABC):
             res, _, ier, msg = fsolve(function_to_solve,
                                       x0=[k*self._guess for k in
                                           self.__properties[input_property]
-                                          .guess_helper()],
+                                          .guess_helper(input_value)],
                                       args=(input_value), xtol=1e-10,
                                       full_output=True)
         # Raise an exception in case the solver did not converge
