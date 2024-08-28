@@ -1,6 +1,6 @@
 """Module with the definition of some coumpounds properties
 for contamination assessment"""
-from typing import List
+from typing import List, Union
 import numpy as np
 from scipy.constants import atm
 from ..interface import PropertyInterface
@@ -73,6 +73,26 @@ class LBEPoloniumHenryConstantOhno2006(LBEPoloniumHenryConstantInterface):
             Henry constant in :math:`[Pa]`
         """
         return np.power(10, - 8348 / T + 10.5357)
+
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of Henry constant of Polonium in liquid LBE.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Polonium Henry constant value in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        if property_value > 235:
+            return 1200
 
     @property
     def name(self) -> str:
@@ -573,6 +593,26 @@ class LBEThalliumHenryConstant(PropertyInterface):
         """
         return np.power(10, - 9463 / T - 0.892 * np.log(T) + 13.264)
 
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of Henry constant of Thallium in liquid LBE.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Thallium Henry constant value in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        if property_value > 0.02:
+            return 1200
+
     @property
     def name(self) -> str:
         """
@@ -789,6 +829,34 @@ class LBEIodineVapourPressureKnacke1991(LBEIodineVapourPressureInterface):
         """
         return LeadIodineVapourPressureKnacke1991().correlation(T, p)
 
+    def guess_helper(self, property_value: float) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        if property_value > 3.5e-20:
+            return [1.14, 1.65]
+        return [1, 1]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise.
+        """
+        return False
+
     @property
     def correlation_name(self) -> str:
         """
@@ -982,6 +1050,34 @@ class LBEIodineHenryConstantKnacke1991(LBEIodineHenryConstantInterface):
         """
         return LBEIodineVapourPressureKnacke1991().correlation(T, p)
 
+    def guess_helper(self, property_value: float) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        if property_value > 3.5e-20:
+            return [1.14, 1.65]
+        return [1, 1]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise.
+        """
+        return False
+
     @property
     def correlation_name(self) -> str:
         """
@@ -1027,6 +1123,26 @@ class LBEIodineHenryConstantNeuhausen2005(LBEIodineHenryConstantInterface):
             Henry constant in :math:`[Pa]`
         """
         return np.power(10, - 10407 / T + 14.56)
+
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of Henry constant of Iodine in liquid LBE.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Iodine Henry constant value in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        if property_value > 1.8e+5:
+            return 1500
 
     @property
     def name(self) -> str:
@@ -1283,6 +1399,26 @@ class LBERubidiumVapourPressureInterfaceLandolt1960(PropertyInterface):
         """
         return np.power(10, - 4588 / T - 1.45 * np.log(T) + 14.110)
 
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of vapoure pressure of Rubidium in liquid LBE.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Rubidium vapour pressure value in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        if property_value > 0.1:
+            return 1900
+
     @property
     def name(self) -> str:
         """
@@ -1427,6 +1563,26 @@ class LBERubidiumHenryConstant(PropertyInterface):
         return LBERubidiumVapourPressureInterfaceLandolt1960()\
             .correlation(T, p) * LBERubidiumActivityCoefficient()\
             .correlation(T, p)
+
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of Henry constant of Rubidium in liquid LBE.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Rubidium Henry constant value in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        if property_value > 0.1:
+            return 1900
 
     @property
     def name(self) -> str:
