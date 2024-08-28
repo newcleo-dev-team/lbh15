@@ -443,7 +443,8 @@ class LBELimitsTester(unittest.TestCase):
 
 class LeadContaminationTester(unittest.TestCase):
 
-    properties = load_prop('lbh15.properties.lead_thermochemical_properties.lead_contamination')
+    properties = load_prop(
+        'lbh15.properties.lead_thermochemical_properties.lead_contamination')
 
     def test_min(self):
         for prop in self.properties:
