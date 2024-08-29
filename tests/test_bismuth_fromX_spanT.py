@@ -91,12 +91,11 @@ class BismuthContaminationTester(unittest.TestCase):
             properties = load_prop('lbh15.properties.bismuth_thermochemical_properties.bismuth_contamination')
             for prop in properties:
                 name = prop.name
+                if prop.is_constant():
+                    continue
                 val = getattr(bismuthP, name)
                 init_dict = {name: val}
                 fromX = Bismuth(**init_dict)
-                if np.isnan(fromX.T):
-                    print(f"Test passed for {name} because it is a constant.")
-                    continue
                 self.assertAlmostEqual(bismuthP.T, fromX.T, tol,
                                        name+" FAILED")
 

@@ -234,6 +234,17 @@ class BismuthCaesiumActivityCoefficientGverdtsiteli1984(PropertyInterface):
         """
         return np.power(10, -2.5)
 
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
+
     @property
     def name(self) -> str:
         """
