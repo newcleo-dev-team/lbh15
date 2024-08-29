@@ -400,7 +400,7 @@ class cp_sobolev2011(LeadCpInterface):
         Parameters
         ----------
         property_value : float
-            value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`s
+            value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`
 
         Returns
         -------
@@ -473,7 +473,7 @@ class cp_gurvich1991(LeadCpInterface):
         ----------
         property_value : float
             value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`
-        
+
         Returns
         -------
         List[float]:

@@ -126,6 +126,17 @@ class PropertyInterface(ABC):
         """
         return None
 
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value,
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return False
+
     def info(self, T: float, p: float = atm,
              print_info: bool = True, n_tab: int = 0) -> Union[None, str]:
         """
