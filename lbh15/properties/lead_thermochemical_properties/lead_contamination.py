@@ -113,6 +113,17 @@ class LeadPoloniumActivityCoefficientLi1998(PropertyInterface):
         """
         return 1
 
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
+
     @property
     def name(self) -> str:
         """
@@ -406,6 +417,17 @@ class LeadIodineActivityCoefficient(PropertyInterface):
         """
         return 1
 
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
+
     @property
     def name(self) -> str:
         """
@@ -624,7 +646,35 @@ class LeadCaesiumHenryConstantYamshchikov2001(PropertyInterface):
             Henry constant in :math:`[Pa]`
         """
         return np.power(10, - 4980 / T - 9.323 * np.log(T) + 0.004473 * T
-                        - 8.684 * 10**(-7) * T**(2) + 33.07)
+                        - 8.684 * 10**(-7) * np.power(T, 2) + 33.07)
+
+    def guess_helper(self, property_value: float) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        if property_value > 3.1e-33:
+            return [0.85, 1.2]
+        return [1, 1]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise
+        """
+        return False
 
     @property
     def name(self) -> str:
@@ -700,6 +750,17 @@ class LeadCaesiumActivityCoefficient(PropertyInterface):
         """
         return np.power(10, -1.5)
 
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
+
     @property
     def name(self) -> str:
         """
@@ -769,6 +830,34 @@ class LeadCaesiumVapourPressure(PropertyInterface):
         """
         return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p) /\
             LeadCaesiumActivityCoefficient().correlation(T, p)
+
+    def guess_helper(self, property_value: float) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        if property_value > 3.1e-33:
+            return [0.85, 1.2]
+        return [1, 1]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise
+        """
+        return False
 
     @property
     def name(self) -> str:

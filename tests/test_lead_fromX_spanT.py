@@ -32,7 +32,8 @@ leadPs = []
 for T in Ts:
     leadPs.append(Lead(T=T))
 
-# Compute temperature discriminants for cp, P_PbI2 and K_PbI2 root index identification
+# Compute temperature discriminants for cp, P_PbI2, K_PbI2 
+# K_PbCs and P_PbCs root index identification
 cp_sobolev2011 = lead_properties.cp_sobolev2011()
 cp_sobolev2011.compute_bounds()
 T_change_sobolev2011 = cp_sobolev2011.T_at_min
@@ -45,6 +46,12 @@ T_change_P_PbI2 = P_PbI2.T_at_max
 K_PbI2 = lead_contamination.LeadIodineHenryConstantKnacke1991()
 K_PbI2.compute_bounds()
 T_change_K_PbI2 = K_PbI2.T_at_max
+K_PbCs = lead_contamination.LeadCaesiumHenryConstantYamshchikov2001()
+K_PbCs.compute_bounds()
+T_change_K_PbCs = K_PbCs.T_at_max
+P_PbCs = lead_contamination.LeadCaesiumVapourPressure()
+P_PbCs.compute_bounds()
+T_change_P_PbCs = P_PbCs.T_at_max
 
 class LeadTester(unittest.TestCase):
 
@@ -124,6 +131,8 @@ class LeadContaminationTester(unittest.TestCase):
             properties = load_prop('lbh15.properties.lead_thermochemical_properties.lead_contamination')
             for prop in properties:
                 name = prop.name
+                if prop.is_constant():
+                    continue
                 if name == 'P_PbI2' and\
                     (prop.correlation_name == 'knacke1991'\
                      and leadP.T > T_change_P_PbI2):
@@ -132,12 +141,15 @@ class LeadContaminationTester(unittest.TestCase):
                     (prop.correlation_name == 'knacke1991'\
                      and leadP.T > T_change_K_PbI2):
                     Lead.set_root_to_use('K_PbI2', 1)
+                if name == 'K_PbCs' and\
+                    leadP.T > T_change_K_PbCs:
+                    Lead.set_root_to_use('K_PbCs', 0)
+                if name == 'P_PbCs' and\
+                    leadP.T > T_change_P_PbCs:
+                    Lead.set_root_to_use('P_PbCs', 0)
                 val = getattr(leadP, name)
                 init_dict = {name: val}
-                fromX = Lead(**init_dict)
-                if np.isnan(fromX.T):
-                    print(f"Test passed for {name} because it is a constant.")
-                    continue  
+                fromX = Lead(**init_dict) 
                 self.assertAlmostEqual(leadP.T, fromX.T, tol, name+" FAILED")
 
 if __name__ == "__main__":

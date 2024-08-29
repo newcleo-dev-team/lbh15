@@ -233,8 +233,6 @@ class LiquidMetalInterface(ABC):
                 to the temperature check
         """
         # Manage acceptable value
-        if np.isnan(T):
-            return True, ""
         if self.T_m0 < T < self.T_b0:
             return True, ""
         # Manage value outside the acceptable range
@@ -427,14 +425,11 @@ class LiquidMetalInterface(ABC):
                                     "value can not be computed!")
 
         # Check if the correlation is constant
-        range_of_function = self.__properties[input_property].range
-        test_value = function_of_T(range_of_function[0], self.__p)
-        if np.allclose(function_of_T(np.linspace(range_of_function[0] + 1,
-                                                 range_of_function[1], 5),
-                                     self.__p), test_value,
-                       atol=1e-25):
-            return float('nan')
-
+        if self.__properties[input_property].is_constant():
+            raise ValueError(f"The property {input_property} is "
+                             "constant. The temperature value "
+                             "can not be computed !")
+        
         def function_to_solve(T: float, target: float) -> float:
             return function_of_T(T, self.__p) - target
 
@@ -459,7 +454,6 @@ class LiquidMetalInterface(ABC):
                                           .guess_helper(input_value)],
                                       args=(input_value), xtol=1e-10,
                                       full_output=True)
-
         # Raise an exception in case the solver did not converge
         if ier == 0:
             raise RuntimeError(f"Error: {msg}\n"
