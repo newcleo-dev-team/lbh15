@@ -3,12 +3,10 @@ import unittest
 import sys
 import os
 import inspect
-import numpy as np
 sys.path.insert(0, os.path.abspath('..'))
 from lbh15.properties.interface import PropertyInterface
 from lbh15 import LBE
 from lbh15 import lead_contamination
-from lbh15 import lbe_contamination
 from scipy.constants import convert_temperature
 
 
