@@ -389,6 +389,17 @@ class LBEMercuryActivityCoefficient(PropertyInterface):
         """
         return 2
 
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
+
     @property
     def name(self) -> str:
         """
@@ -524,6 +535,17 @@ class LBECadmiumActivityCoefficient(PropertyInterface):
             activity coefficient in :math:`[-]`
         """
         return 4
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
 
     @property
     def name(self) -> str:
@@ -680,6 +702,17 @@ class LBEThalliumActivityCoefficient(PropertyInterface):
             activity coefficient in :math:`[-]`
         """
         return 0.8
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
 
     @property
     def name(self) -> str:
@@ -847,6 +880,8 @@ class LBEIodineVapourPressureKnacke1991(LBEIodineVapourPressureInterface):
         """
         if property_value > 3.5e-20:
             return [1.14, 1.65]
+        if property_value < 2e-22:
+            return [0.70, 1]
         return [1, 1]
 
     @property
@@ -902,6 +937,17 @@ class LBEIodineActivityCoefficient(PropertyInterface):
             activity coefficient in :math:`[-]`
         """
         return 1
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
 
     @property
     def name(self) -> str:
@@ -1068,6 +1114,8 @@ class LBEIodineHenryConstantKnacke1991(LBEIodineHenryConstantInterface):
         """
         if property_value > 3.5e-20:
             return [1.14, 1.65]
+        if property_value < 2e-22:
+            return [0.70, 1]
         return [1, 1]
 
     @property
@@ -1091,7 +1139,7 @@ class LBEIodineHenryConstantKnacke1991(LBEIodineHenryConstantInterface):
         List[float] : Temperature validity range of the PbI2 Iodine
         compound Henry constant correlation function
         """
-        return [697.0, 1120.0]
+        return [398.0, 1120.0]
 
 
 class LBEIodineHenryConstantNeuhausen2005(LBEIodineHenryConstantInterface):
@@ -1211,6 +1259,34 @@ class LBECaesiumHenryConstant(PropertyInterface):
         """
         return LeadCaesiumHenryConstantYamshchikov2001().correlation(T, p)
 
+    def guess_helper(self, property_value: float) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the pressure in :math:`[Pa]`
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        if property_value > 2.3e-34:
+            return [0.5, 1]
+        return [1, 1]
+
+    @property
+    def is_injective(self) -> bool:
+        """
+        bool : `True` if the correlation is injective,
+        `False` otherwise
+        """
+        return False
+
     @property
     def name(self) -> str:
         """
@@ -1312,6 +1388,17 @@ class LBECaesiumActivityCoefficient(LBECaesiumActivityCoefficientInterface):
             activity coefficient in :math:`[-]`
         """
         return LeadCaesiumActivityCoefficient().correlation(T, p)
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
 
     @property
     def range(self) -> List[float]:
@@ -1493,6 +1580,17 @@ class LBERubidiumActivityCoefficient(PropertyInterface):
             activity coefficient in :math:`[-]`
         """
         return 0.02
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
 
     @property
     def name(self) -> str:
