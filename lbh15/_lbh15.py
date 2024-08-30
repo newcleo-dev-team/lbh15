@@ -13,6 +13,7 @@ from typing import Dict
 from typing import List
 from typing import Tuple
 from typing import Union
+import numpy as np
 from scipy.constants import atm
 from scipy.optimize import fsolve
 from .properties.interface import PropertyInterface
@@ -232,6 +233,8 @@ class LiquidMetalInterface(ABC):
                 to the temperature check
         """
         # Manage acceptable value
+        if np.isnan(T):
+            return True, ""
         if self.T_m0 < T < self.T_b0:
             return True, ""
         # Manage value outside the acceptable range
@@ -423,6 +426,12 @@ class LiquidMetalInterface(ABC):
                                     f"{input_property}! The temperature "
                                     "value can not be computed!")
 
+        # Check if the correlation is constant
+        if self.__properties[input_property].is_constant():
+            raise ValueError(f"The property {input_property} is "
+                             "constant. The temperature value "
+                             "can not be computed !")
+        
         def function_to_solve(T: float, target: float) -> float:
             return function_of_T(T, self.__p) - target
 
@@ -442,7 +451,9 @@ class LiquidMetalInterface(ABC):
             index = (self._roots_to_use[input_property]
                      if input_property in self._roots_to_use else 0)
             res, _, ier, msg = fsolve(function_to_solve,
-                                      x0=[self._guess, 3*self._guess],
+                                      x0=[k*self._guess for k in
+                                          self.__properties[input_property]
+                                          .guess_helper(input_value)],
                                       args=(input_value), xtol=1e-10,
                                       full_output=True)
         # Raise an exception in case the solver did not converge

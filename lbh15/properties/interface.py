@@ -108,6 +108,35 @@ class PropertyInterface(ABC):
         """
         return None
 
+    def guess_helper(self,
+                     property_value: float) -> Union[List[float], None]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the property
+
+        Returns
+        -------
+        None
+        """
+        return None
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value,
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return False
+
     def info(self, T: float, p: float = atm,
              print_info: bool = True, n_tab: int = 0) -> Union[None, str]:
         """
