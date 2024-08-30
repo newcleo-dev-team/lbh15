@@ -84,6 +84,20 @@ class BismuthThermochemicalTester(unittest.TestCase):
                 fromX = Bismuth(**init_dict)
                 self.assertAlmostEqual(bismuthP.T, fromX.T, tol, name+" FAILED")
 
+class BismuthContaminationTester(unittest.TestCase):
+
+    def test_init_fromX(self):
+        for bismuthP in bismuthPs:
+            properties = load_prop('lbh15.properties.bismuth_thermochemical_properties.bismuth_contamination')
+            for prop in properties:
+                name = prop.name
+                if prop.is_constant():
+                    continue
+                val = getattr(bismuthP, name)
+                init_dict = {name: val}
+                fromX = Bismuth(**init_dict)
+                self.assertAlmostEqual(bismuthP.T, fromX.T, tol,
+                                       name+" FAILED")
 
 if __name__ == "__main__":
     unittest.main()
