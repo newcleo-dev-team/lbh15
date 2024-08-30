@@ -371,6 +371,24 @@ class cp(SpecificHeatInterface):
         """
         return 164.8 - T * (3.94e-2 - 1.25e-5 * T) - 4.56e5 / T / T
 
+    def guess_helper(self, property_value: float) -> List[float]:
+        """
+        Returns the coefficient values applied to the temperature initial
+        guess if the correlation is non injective. The return type is `None`
+        if the correlation is injective.
+
+        Parameters
+        ----------
+        property_value : float
+            value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`
+
+        Returns
+        -------
+        List[float]:
+            Temperature initial guess' coefficients
+        """
+        return [1, 3]
+
     @property
     def correlation_name(self) -> str:
         """
