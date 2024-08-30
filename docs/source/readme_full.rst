@@ -6,8 +6,8 @@
 Introduction
 ============
 
-*lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the thermo-physical and the thermo-chemical properties of
-lead, bismuth and lead-bismuth eutectic (lbe) metal alloy and the properties of the impurities introduced by nuclear reactions
+*lbh15* (**L**\ ead **B**\ ismuth **H**\ andbook 20\ **15**) is a Python package that implements the thermo-physical and thermo-chemical properties of
+lead, bismuth and lead-bismuth eutectic (lbe) metal alloy and properties of the impurities introduced by nuclear reactions
 within such heavy liquid metals as available from the handbook edited by OECD/NEA :cite:`Agency2015`:
 https://www.oecd-nea.org/jcms/pl_14972/handbook-on-lead-bismuth-eutectic-alloy-and-lead-properties-materials-compatibility-thermal-hydraulics-and-technologies-2015-edition.
 
@@ -322,12 +322,12 @@ oxide layers generation multiplied by the corresponding metal concentration rais
      - :math:`-`
      - :math:`-`
 
-In :numref:`tableimplead`, :numref:`tableimpbi` and :numref:`tableimplbe` the vapour pressures, the Henry constants and the chemical activity coefficients, respectively, of
-the impurities that are produced by the nuclear reactions and considered into the heavy liquid metals are listed. In addition, Table 9 list the
-vapour pressures of the same impurities considered alone as metallic element or compound. All this information has been introduced
+In :numref:`tableimplead`, :numref:`tableimpbi` and :numref:`tableimplbe` list the vapour pressures, the Henry constants and the chemical activity coefficients, respectively, of
+the impurities that are produced by the nuclear reactions and considered into the heavy liquid metals are listed. In addition, :numref:`tableimpmet` lists the
+vapour pressures of the same impurities considered alone as metallic elements or compounds. All this information has been introduced
 since version 3.0.0.
 
-.. list-table:: *lbh15* vapour pressures, Henry constants and chemical activity coefficients of the impurities that are produced by the nuclear reactions and considered into liquid lead
+.. list-table:: *lbh15* vapour pressures, Henry constants and chemical activity coefficients of the impurities that are produced by the nuclear reactions and considered into liquid lead.
    :widths: 30 30 30 30 30
    :name: tableimplead
    :header-rows: 1
@@ -338,42 +338,42 @@ since version 3.0.0.
      - Henry constant
      - Activity coefficient
    * - Polonium
-     - :math:`Po`
+     - :math:`\ce{Po}`
      - ✔
      - ✔
      - ✔
    * - Mercury
-     - :math:`Hg`
+     - :math:`\ce{Hg}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
    * - Cadmium
-     - :math:`Cd`
+     - :math:`\ce{Cd}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
    * - Thallium
-     - :math:`Tl`
+     - :math:`\ce{Tl}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
    * - Iodine
-     - :math:`I`
+     - :math:`\ce{I}`
      - ✔
      - ✔
      - ✔
    * - Caesium
-     - :math:`Cs`
+     - :math:`\ce{Cs}`
      - ✔
      - ✔
      - ✔
    * - Rubidium
-     - :math:`Rb`
+     - :math:`\ce{Rb}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
 
-.. list-table:: *lbh15* vapour pressures, Henry constants and chemical activity coefficients of the impurities that are produced by the nuclear reactions and considered into liquid bismuth
+.. list-table:: *lbh15* vapour pressures, Henry constants and chemical activity coefficients of the impurities that are produced by the nuclear reactions and considered into liquid bismuth.
    :widths: 30 30 30 30 30
    :name: tableimpbi
    :header-rows: 1
@@ -384,42 +384,42 @@ since version 3.0.0.
      - Henry constant
      - Activity coefficient
    * - Polonium
-     - :math:`Po`
+     - :math:`\ce{Po}`
      - :math:`-`
      - :math:`-`
      - ✔
    * - Mercury
-     - :math:`Hg`
+     - :math:`\ce{Hg}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
    * - Cadmium
-     - :math:`Cd`
+     - :math:`\ce{Cd}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
    * - Thallium
-     - :math:`Tl`
+     - :math:`\ce{Tl}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
    * - Iodine
-     - :math:`I`
+     - :math:`\ce{I}`
      - ✔
      - :math:`-`
      - :math:`-`
    * - Caesium
-     - :math:`Cs`
+     - :math:`\ce{Cs}`
      - :math:`-`
      - :math:`-`
      - ✔
    * - Rubidium
-     - :math:`Rb`
+     - :math:`\ce{Rb}`
      - :math:`-`
      - :math:`-`
      - :math:`-`
 
-.. list-table:: *lbh15* vapour pressures, Henry constants and chemical activity coefficients of the impurities that are produced by the nuclear reactions and considered into lbe
+.. list-table:: *lbh15* vapour pressures, Henry constants and chemical activity coefficients of the impurities that are produced by the nuclear reactions and considered into lbe.
    :widths: 30 30 30 30 30
    :name: tableimplbe
    :header-rows: 1
@@ -430,43 +430,43 @@ since version 3.0.0.
      - Henry constant
      - Activity coefficient
    * - Polonium
-     - :math:`Po`
+     - :math:`\ce{Po}`
      - :math:`-`
      - ✔
      - ✔
    * - Mercury
-     - :math:`Hg`
+     - :math:`\ce{Hg}`
      - :math:`-`
      - ✔
      - ✔
    * - Cadmium
-     - :math:`Cd`
+     - :math:`\ce{Cd}`
      - :math:`-`
      - ✔
      - ✔
    * - Thallium
-     - :math:`Tl`
+     - :math:`\ce{Tl}`
      - :math:`-`
      - ✔
      - ✔
    * - Iodine
-     - :math:`I`
+     - :math:`\ce{I}`
      - ✔
      - ✔
      - ✔
    * - Caesium
-     - :math:`Cs`
+     - :math:`\ce{Cs}`
      - :math:`-`
      - ✔
      - ✔
    * - Rubidium
-     - :math:`Rb`
+     - :math:`\ce{Rb}`
      - ✔
      - ✔
      - ✔
 
-.. list-table:: *lbh15* vapour pressures of the impurities that are produced by the nuclear reactions and considered in their pure metallic form
-   :widths: 20 20 30
+.. list-table:: *lbh15* vapour pressures of the impurities that are produced by the nuclear reactions and considered in their pure metallic form.
+   :widths: 30 30 30
    :name: tableimpmet
    :header-rows: 1
 
@@ -474,25 +474,25 @@ since version 3.0.0.
      - Symbol
      - Vapour pressure
    * - Polonium
-     - :math:`Po`
+     - :math:`\ce{Po}`
      - ✔
    * - Mercury
-     - :math:`Hg`
+     - :math:`\ce{Hg}`
      - ✔
    * - Cadmium
-     - :math:`Cd`
+     - :math:`\ce{Cd}`
      - ✔
    * - Thallium
-     - :math:`Tl`
+     - :math:`\ce{Tl}`
      - ✔
    * - Iodine
-     - :math:`I`
+     - :math:`\ce{I}`
      - :math:`-`
    * - Caesium
-     - :math:`Cs`
+     - :math:`\ce{Cs}`
      - ✔
    * - Rubidium
-     - :math:`Rb`
+     - :math:`\ce{Rb}`
      - ✔
 
 
@@ -658,23 +658,23 @@ This section shows a few examples of basic usage of *lbh15*.
   >>> liquid_lead.o_dif
   6.708316471487037e-06
 
-- Create an instance of :class:`.Lead` object at a given temperature :code:`T`, then change the temperature value. Compare the values of vapour pressure
+- Create an instance of :class:`.LBE` class at a given temperature :code:`T`, then change the temperature value. Compare the values of vapour pressure
   :code:`P_Rb`, Henry constant :code:`K_Rb` and chemical activity coefficient :code:`gamma_Rb` of the *Rubidium* at the two temperatures:
 
   >>> from lbh15 import LBE
-  >>> liquid_lead = LBE(T=800)
-  >>> liquid_lead.P_Rb
+  >>> liquid_lbe = LBE(T=800)
+  >>> liquid_lbe.P_Rb
   0.048118601299823954
-  >>> liquid_lead.K_Rb
+  >>> liquid_lbe.K_Rb
   0.0009623720259964791
-  >>> liquid_lead.gamma_Rb
+  >>> liquid_lbe.gamma_Rb
   0.02
-  >>> liquid_lead.T = 900
-  >>> liquid_lead.P_Rb
+  >>> liquid_lbe.T = 900
+  >>> liquid_lbe.P_Rb
   0.140847718135227
-  >>> liquid_lead.K_Rb
+  >>> liquid_lbe.K_Rb
   0.00281695436270454
-  >>> liquid_lead.gamma_Rb
+  >>> liquid_lbe.gamma_Rb
   0.02
   
 - Request a property outside the range of validity of the corresponding correlation. In this example, a :class:`.Lead` object is initialized
@@ -806,6 +806,8 @@ The rest of this chapter is divided into two sections, the first describing
 how to add a new correlation to an existing property, the second describing
 how to add a new property with its correlation.
 
+.. note:: For the time being, there is no possibility of adding new correlations or new properties for the impurities considered as metallic elements or compounds.
+
 .. _how-new-corrs:
 
 How to Add New Correlations
@@ -815,8 +817,6 @@ This section shows how to define a custom correlation for the density of
 liquid lead that does not depend on pressure, and how to use it instead of
 the default one (the same holds for :class:`.Bismuth` and :class:`.LBE`
 classes).
-
-.. note:: For the time being, there is no possibility of adding new correlations or new properties for the impurities considered as metallic elements or compounds.
 
 
 Let's implement the new property in
@@ -1008,14 +1008,14 @@ Each new property implemented by the user is also available at initialization.
 Learn More
 ==========
 
-This section contains detailed information about some of the features implemented in lbh15. It is made of two parts.
+This section contains detailed information about some of the features implemented in *lbh15*. It is made of two parts.
 
-The first part provides :any:`theoretical` that are useful for understanding and exploiting the data and physical correlations implemented in lbh15.
+The first part provides :any:`theoretical` that are useful for understanding and exploiting the data and physical correlations implemented in *lbh15*.
 The :any:`oxygen-control` sub-section focuses on the chemistry of heavy liquid metals in presence of dispersed oxygen in the bulk: it describes the oxygen-related correlations
 implemented in lbh15 and how they have been obtained. The :any:`impurities` sub-section explains why information about such impurities are
 useful and how to use them properly.
 
-The second part, presented in :any:`tutorials` section, is intended to be a description of the tutorials delivered with lbh15. For the time being, the only tutorial application provided
+The second part, named :any:`tutorials` section, is intended to be a description of the tutorials delivered with *lbh15*. For the time being, the only tutorial application provided
 is a representation of a simple oxygen control system applied to a liquid lead volume.
 
 .. include:: learn_more.rst

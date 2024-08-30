@@ -19,8 +19,8 @@ determine the upper and the lower oxygen concentration limits.
 .. _ Oxygen concentration upper limit:
 
 
-a.Oxygen Concentration Upper Limit
-----------------------------------
+Oxygen Concentration Upper Limit
+--------------------------------
 
 The upper limit corresponds to the oxygen concentration value above which contamination by coolant oxides occurs.
 It is represented by the *oxygen solubility* in lead and lbe alloys. *lbh15* provides
@@ -32,8 +32,8 @@ several correlations specified therein.
 
 .. _ Oxygen concentration lower limit:
 
-b.Oxygen Concentration Lower Limit
-----------------------------------
+Oxygen Concentration Lower Limit
+--------------------------------
 
 The lower limit corresponds to the minimum value of the oxygen concentration enabling the formation of a protective oxide layer on the structural material.
 The oxide layer formation is possible only when the oxygen potential in the liquid metal is above the
@@ -182,8 +182,8 @@ assumptions, are derived.
 
 .. _ Ranges of validity:
 
-c.Ranges of Validity
---------------------
+Ranges of Validity
+------------------
 
 As stated in the previous section, multiple correlations are involved in the computation of the lower limits of
 oxygen concentration, each being valid over a specific temperature range. The validity range of a specific lower limit
@@ -222,8 +222,8 @@ More details as follows:
 
 .. _ Correlations adopted by default:
 
-d.Correlations Adopted by Default
----------------------------------
+Correlations Adopted by Default
+-------------------------------
 
 For most of the properties, correlations from different authors are available. This section provides a list of the
 correlations chosen as the default ones in *lbh15*. For all the non-mentioned properties, only one correlation is
@@ -266,8 +266,7 @@ Impurities introduced by nuclear reactions
 ==========================================
 
 In addition to its primary functions as a target material and heat transfer medium, the liquid metal in a spallation target also acts as a solvent and reaction
-medium for nuclear reaction products, including polonium, mercury, and other metallic impurities. The behaviour of these impurities in liquid metal spallation
-targets and nuclear reactors is of critical importance. The typical quantities and concentrations of impurities that have been detected in different facilities,
+medium for nuclear reaction products, including polonium, mercury, and other metallic impurities. The typical quantities and concentrations of impurities that have been detected in different facilities,
 and predicted by using nuclear codes, show considerable variability. Such variabilities require detailed investigations and the implementation of appropriate
 management strategies.
 
@@ -276,9 +275,7 @@ or reactor pool. This phenomenon is of great importance in assessing the release
 products exist in atomically dispersed form. Then, when they reach a sufficient concentration, they react to form compounds or begin to evaporate. The degree of
 dilution and the chemical interaction with the solvent (lead, bismuth or LBE) can modify the thermodynamic activity of these products, thereby also influencing
 the thermodynamic state of the medium. At the same time, the composition of the cover gas can change, then it is necessary to monitor it to ensure the safe
-operation of the system. However, acquiring comprehensive thermodynamic data for all species and phases is challenging due to system complexity. Effective
-management of impurities in liquid metal spallation systems is crucial for predicting and mitigating radioactive release risks, making it essential to characterize
-the thermochemical state of contaminating compounds.
+operation of the system.
 
 In this context, the main aim is to estimate the maximum gas-phase concentrations of radionuclides in the cover gas (of liquid metal targets and reactor systems)
 based on equilibrium of vapor pressures.
@@ -293,28 +290,30 @@ The following assumptions are made:
 
 All such assumptions are valid for the LFR.
 
-Correlations for vapor pressure, Henry constant and chemical activity coefficient of the impurities will allow the estimation of the vapour pressure of the solution
-made by the heavy liquid metal and impurities dissolved therein, thus helping determining the composition of the cover gas and possible related dangers in case the
-reactor is opened, due for example to maintenance operations or leakages formation.
+Correlations for vapour pressure, Henry constant and chemical activity coefficient of the impurities allows the estimation of the vapour pressure of the solution
+made of the heavy liquid metal and impurities dissolved therein, thus helping determining the composition of the cover gas and possible related dangers in case the
+reactor is opened, due for example to maintenance operations or leakages creation.
 
-As a reminder, Raoult's law is: 
+The following laws are then used to estimate the composition of the cover gas:
 
-.. math:: P_{A} = P_{A}^{\circ} \cdot \gamma_{A} \cdot X_{A}
+- Raoult's law: 
 
-And Henry's law is: 
+  .. math:: P_{A} = P_{A}^{\circ} \cdot \gamma_{A} \cdot X_{A}
 
-.. math:: P_{A} = K_{H,A} \cdot X_{A}
+- Henry's law: 
 
-where:
+  .. math:: P_{A} = K_{H,A} \cdot X_{A}
 
-- :math:`K_{H,A} = P_{A}^{\circ} \cdot \gamma_{A}` the Henry constant.
+  where:
+
+  .. math::`K_{H,A} = P_{A}^{\circ} \cdot \gamma_{A}` the Henry constant.
 
 
 .. _exampleofuse:
 
 
-a.Example of use
-----------------
+Example of use
+--------------
 
 
 This example illustrates how the Henry constant correlation of polonium in LBE can be used to estimate 
@@ -431,8 +430,8 @@ The results (:numref:`concPo`) show a significant increase in polonium partial p
 
 
 
-b.Ranges of temperature
------------------------
+Ranges of temperature
+---------------------
 
 The temperature ranges over which the various correlations are valid are not consistently stated in the Handbook :cite:`Agency2015`.
 This section provides a justification for the temperature ranges implemented in lbh15, in cases where precise data are not 
