@@ -1139,7 +1139,7 @@ class LBEIodineHenryConstantKnacke1991(LBEIodineHenryConstantInterface):
         List[float] : Temperature validity range of the PbI2 Iodine
         compound Henry constant correlation function
         """
-        return [398.0, 1120.0]
+        return [697.0, 1120.0]
 
 
 class LBEIodineHenryConstantNeuhausen2005(LBEIodineHenryConstantInterface):
