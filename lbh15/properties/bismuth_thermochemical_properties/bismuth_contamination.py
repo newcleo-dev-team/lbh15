@@ -201,7 +201,7 @@ class BismuthIodineVapourPressureCubicciotti1959(PropertyInterface):
         List[float] : Temperature validity range of the BiI3 Iodide
         vapour pressure correlation function
         """
-        return [682.0, T_b0]
+        return [T_m0, T_b0]
 
 
 class BismuthCaesiumActivityCoefficientGverdtsiteli1984(PropertyInterface):
@@ -233,6 +233,17 @@ class BismuthCaesiumActivityCoefficientGverdtsiteli1984(PropertyInterface):
             activity coefficient in :math:`[-]`
         """
         return np.power(10, -2.5)
+
+    def is_constant(self) -> bool:
+        """
+        Returns True if the correlation returns a constant value, 
+        False otherwise.
+
+        Returns
+        -------
+        bool
+        """
+        return True
 
     @property
     def name(self) -> str:
