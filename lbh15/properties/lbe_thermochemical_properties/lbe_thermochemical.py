@@ -164,6 +164,92 @@ class LeadChemicalActivity(PropertyInterface):
         return f"{self.long_name} in liquid lbe"
 
 
+class LeadHenryConstant(PropertyInterface):
+    """
+    *Lead Henry constant* in liquid lbe property class.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *lead Henry constant* in liquid lbe
+        by applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            Lead Henry constant in :math:`[Pa]`
+        """
+        return np.power(10, - 10130 / T - 0.985 * np.log(T) + 12.8163)
+
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of the Lead Henry constant passed as argument.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Lead Henry constant in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        return 1500
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "pb_Kh"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Lead Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the lead Henry
+        constant correlation function
+        """
+        return [700 - 0.05 * (T_b0 - T_m0),
+                700 + 0.05 * (T_b0 - T_m0)]
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Lead Henry constant long name
+        """
+        return "lead Henry constant"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Lead Henry constant description
+        """
+        return f"{self.long_name} in liquid lbe"
+
+
 class BismuthChemicalActivity(PropertyInterface):
     """
     *Bismuth chemical activity* in liquid lbe property class.
@@ -233,6 +319,92 @@ class BismuthChemicalActivity(PropertyInterface):
     def description(self) -> str:
         """
         str : Bismuth chemical activity description
+        """
+        return f"{self.long_name} in liquid lbe"
+
+
+class BismuthHenryConstant(PropertyInterface):
+    """
+    *Bismuth Henry constant* in liquid lbe property class.
+    """
+    @range_warning
+    def correlation(self, T: float, p: float = atm,
+                    verbose: bool = False) -> float:
+        """
+        Returns the value of the *bismuth Henry constant* in liquid lbe
+        by applying the property correlation.
+
+        Parameters
+        ----------
+        T : float
+            Temperature in :math:`[K]`
+        p : float, optional
+            Pressure in :math:`[Pa]`, by default the atmospheric pressure
+            value, i.e., :math:`101325.0 Pa`
+        verbose : bool, optional
+            `True` to tell the decorator to print a warning message in case of
+            range check failing, `False` otherwise. By default, `False`
+
+        Returns
+        -------
+        float:
+            Bismuth Henry constant in :math:`[Pa]`
+        """
+        return np.power(10, - 9656.4 / T + 9.9272)
+
+    def initialization_helper(self,
+                              property_value: float) -> Union[None, float]:
+        """
+        Returns the temperature guess value according to the value
+        of the Bismuth Henry constant passed as argument.
+        It is used by the root finder algorithm.
+
+        Parameters
+        ----------
+        property_value : float
+            Bismuth Henry constant in :math:`[Pa]`
+
+        Returns
+        -------
+        float
+            Temperature guess value in :math:`[K]`
+        """
+        return 1500
+
+    @property
+    def name(self) -> str:
+        """
+        str : Name of the property
+        """
+        return "bi_Kh"
+
+    @property
+    def units(self) -> str:
+        """
+        str : Bismuth Henry constant unit
+        """
+        return "[Pa]"
+
+    @property
+    def range(self) -> List[float]:
+        """
+        List[float] : Temperature validity range of the bismuth Henry
+        constant correlation function
+        """
+        return [700 - 0.05 * (T_b0 - T_m0),
+                700 + 0.05 * (T_b0 - T_m0)]
+
+    @property
+    def long_name(self) -> str:
+        """
+        str : Bismuth Henry constant long name
+        """
+        return "bismuth Henry constant"
+
+    @property
+    def description(self) -> str:
+        """
+        str : Bismuth Henry constant description
         """
         return f"{self.long_name} in liquid lbe"
 
