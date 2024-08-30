@@ -392,7 +392,7 @@ class cp(SpecificHeatInterface):
         ----------
         property_value : float
             value of the specific heat capacity in :math:`[J/(kg \\cdot K)]`
-
+            
         Returns
         -------
         List[float]:
@@ -625,3 +625,4 @@ class k(ThermalConductivityInterface):
         str : Thermal conductivity description
         """
         return f"Liquid bismuth {self.long_name}"
+    
