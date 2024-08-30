@@ -635,6 +635,12 @@
       "max": 0.4858986607,
       "T_at_max": 1172.9999798861
    },
+   "bi_Kh_lbh15_bismuth_Henry_constant_in_liquid_lbe": {
+      "min": 0.0000027608,
+      "T_at_min": 623.5500154587,
+      "max": 0.0030945479,
+      "T_at_max": 776.4499805994
+   },
    "G_lbh15_Gibbs_free_energy_variation_in_liquid_lbe": {
       "min": -44.6276162032,
       "T_at_min": 1926.9999545753,
@@ -646,6 +652,12 @@
       "T_at_min": 399.0000084103,
       "max": 0.3681810562,
       "T_at_max": 1172.9999798861
+   },
+   "pb_Kh_lbh15_lead_Henry_constant_in_liquid_lbe": {
+      "min": 0.0000000002,
+      "T_at_min": 623.5500144393,
+      "max": 0.0000001640,
+      "T_at_max": 776.4499805994
    },
    "H_lbh15_molar_enthalpy_variation_in_liquid_lbe": {
       "min": 0.0617067764,
