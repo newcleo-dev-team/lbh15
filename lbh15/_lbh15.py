@@ -233,8 +233,6 @@ class LiquidMetalInterface(ABC):
                 to the temperature check
         """
         # Manage acceptable value
-        if np.isnan(T):
-            return True, ""
         if self.T_m0 < T < self.T_b0:
             return True, ""
         # Manage value outside the acceptable range
