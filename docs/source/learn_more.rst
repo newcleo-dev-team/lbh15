@@ -306,7 +306,17 @@ The following laws are then used to estimate the composition of the cover gas:
 
   where:
 
-  .. math::`K_{H,A} = P_{A}^{\circ} \cdot \gamma_{A}` the Henry constant.
+  - :math:`P_{A}^{\circ}` is the vapour pressure of compound A if it was in equilibrium with its own liquid phase.
+  
+  - :math:`P_{A}` is the vapour pressure of compound A in the gas phase of the solution.
+
+  - :math:`X_{A}` is the molar fraction of compound A in the solution.
+
+  - :math:`\gamma_{A} = \frac{P_{A}}{P^{\circ}}` is the thermodynamic activity coefficient of compound A.
+
+  - :math:`P^{\circ}` is the ambient pressure, equal to 1atm.
+
+  - :math:`K_{H,A} = P_{A}^{\circ} \cdot \gamma_{A}` is the Henry constant of compound A.
 
 
 .. _exampleofuse:
@@ -315,234 +325,254 @@ The following laws are then used to estimate the composition of the cover gas:
 Example of use
 --------------
 
+In this section, three examples are provided to show how the properties of irradiation-induced impurities can be exploited:
 
-This example illustrates how the Henry constant correlation of polonium in LBE can be used to estimate 
-the partial pressure of such a contaminant at different temperature values.
+- **Vapour pressure of polonium as function of temperature**
 
-In this example, we consider a generic volume of LBE subjected to varying temperature conditions and utilise 
-the Henry constant correlation to estimate the concentration of polonium in the vapor phase. 
+  A generic volume of LBE subjected to varying temperature conditions is considered and 
+  the Henry constant correlation is used to estimate the vapour pressure of polonium in the 
+  cover gas. 
 
-The Henry constant of polonium over lead-bismuth eutectic :math:`K_{H(Po(LBE))}` can be expressed using empirical
-correlations, derived from experimental measurements. The correlation is implemented in 
-:py:mod:`lbh15.properties.lbe_thermochemical_properties.lbe_contamination.py` in the class 
-*LBEPoloniumHenryConstantOhno2006*.
+  According to the Henry's Law, the partial pressure of polonium in LBE is given by the following expression:
 
-According to the Henry's Law, the partial pressure of polonium in LBE is given by the following expression:
-
-.. math:: P_{Po(LBE)} = K_{H,Po(LBE)} \cdot X_{Po(LBE)}
+  .. math:: P_{Po(LBE)} = K_{H,Po(LBE)} \cdot X_{Po(LBE)},
+   :label: henry_po
 
 
-With :math:`X_{Po(LBE)}` the molar fraction of Polonium in liquid LBE, generally between :math:`10^{-12}` and :math:`10^{-10}`.
+  where :math:`X_{Po(LBE)}` is the molar fraction of polonium in liquid LBE, 
+  generally between :math:`10^{-12}` and :math:`10^{-10}`.
 
-On the range [723.0, 1023.0 K] given by the Handbook, with molar fraction of :math:`10^{-12}`, the vapour pressure of Polonium in liquid LBE shows this behaviour 9 (see :numref:`pressPo`):
+  The correlation by Ohno2006 is exploited for the computing the Henry constant of polonium, 
+  and the molar fraction is supposed to be :math:`10^{-12}`.
 
-.. raw:: latex
+  To compute and plot the behaviour of polonium vapour pressure, the following code is
+  to be used (only relevant lines are retained, neglecting the ones for defining plot features):
 
-   \clearpage
+  .. code-block:: python
 
-.. _pressPo:
-.. figure:: figures/test_K_Po.png
-    :width: 500
-    :align: Center
-    
-    Evolution of Polonium vapour pressure in liquid LBE as a function of temperature.
+      import numpy as np
+      from lbh15.properties.lbe_thermochemical_properties.lbe_contamination import LBEPoloniumHenryConstantOhno2006
+      from lbh15.lbe import LBE
 
+      # Define Molar fraction of Po in LBE
+      X = 10**(-12)
 
-Using the following code:
+      # Generate temperature values
+      T_values = np.linspace(LBEPoloniumHenryConstantOhno2006().range[0], 
+                             LBEPoloniumHenryConstantOhno2006().range[1], 100)
 
-.. code-block:: python
+      # Generate list of liq
+      liqs = [LBE(T=temp) for temp in T_values]
 
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from lbh15.properties.lbe_thermochemical_properties.lbe_contamination import LBEPoloniumHenryConstantOhno2006
-    from lbh15.lbe import LBE
+      # Calculate pressures using Henry's law
+      P_values = [liq.K_Po * X for liq in liqs]
+  
 
-    # Define initial parameters
-    T_start = 398.0
-    X = 10**(-12)
+  .. raw:: latex
 
-    # Create the LBE liquid object
-    liq = LBE(T=T_start)
+     \clearpage
 
-    # Instantiate the object for Polonium Henry constant
-    K_Po = LBEPoloniumHenryConstantOhno2006()
+  .. _pressPo:
 
-    # Generate temperature values within the valid range of the correlation
-    T_values = np.linspace(K_Po.range[0], K_Po.range[1], 100)
+  .. figure:: figures/K_Po_LBE.png
+      :width: 500
+      :align: Center
 
-    # Calculate pressures using Henry's law
-    P_values = np.array([K_Po.correlation(T) * X for T in T_values])
-
-    # Plot the results
-    plt.plot(T_values, P_values, label=f'X = {X}')
-    plt.xlabel('Temperature (K)')
-    plt.ylabel('Pressure (Pa)')
-    plt.title('Pressure Profile using Henry\'s Law for Polonium in LBE')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+      Behaviour of polonium vapour pressure in liquid LBE as a function of temperature.
 
 
-It is now possible to determine the concentration of polonium in the cover gas by applying the ideal gas law:
+  
 
-.. math:: C_{Po(g)} = \frac{P_{Po(LBE)}}{R \cdot T}
+- **Vapour pressure of polonium as function of its molar fraction**
 
-The results (:numref:`concPo`) show a significant increase in polonium partial pressure and associated concentration with increasing temperature. 
+  A generic volume of LBE at :math:`T = 750K` is considered and 
+  the Henry constant correlation is used to estimate the vapour pressure of polonium
+  in the cover gas. According to the Henry's Law, the partial pressure of polonium in LBE is given in :eq:`henry_po`.
+  In  the following code, the behaviour of the vapour pressure of polonium in LBE is calculated; in figure :numref:`pressPoX`, the result 
+  is shown:
 
-.. code-block:: python
+  .. code-block:: python
 
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from lbh15.properties.lbe_thermochemical_properties.lbe_contamination import LBEPoloniumHenryConstantOhno2006
-    from lbh15.lbe import LBE
+      import numpy as np
+      from lbh15.lbe import LBE
 
-    # Define initial parameters
-    T_start = 398.1
-    X = 10**(-12)
+      # Generate Molar fraction values
+      X_values = np.linspace(1e-10, 1e-12, 500)
 
-    # Create the LBE liquid object
-    liq = LBE(T=T_start)
+      # Generate liquid at T = 750K
+      liq=LBE(T = 750)
 
-    # Instantiate the object for Polonium Henry constant
-    K_Po = LBEPoloniumHenryConstantOhno2006()
+      # Calculate pressures using Henry's law
+      P_values = liq.K_Po * X_values
 
-    # Generate temperature values within the valid range of the correlation
-    T_values = np.linspace(K_Po.range[0], K_Po.range[1], 100)
 
-    # Calculate concentration of Polonium using Ideal Gas' law
-    C_values = np.array([(K_Po.correlation(T) * X) / (8.314 * T) for T in T_values])
+  .. _pressPoX:
 
-    # Plot the results
-    plt.plot(T_values, C_values, label=f'X = {X}')
-    plt.xlabel('Temperature (K)')
-    plt.ylabel('Concentration (mol/L)')
-    plt.title('Concentration profile using Ideal Gas\' Law of Polonium in the cover gas')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+  .. figure:: figures/K_Po_LBE_X.png
+      :width: 500
+      :align: Center
 
-.. _concPo:
-.. figure:: figures/test_C_Po.png
-    :width: 500
-    :align: Center
-    
-    Evolution of Polonium concentration in the cover gas as a function of temperature.
+      Behaviour of polonium vapour pressure in liquid LBE as function of polonium molar fraction.
+
+
+- **Concentration of polonium in the cover gas as function of temperature**
+
+  To determine the concentration of polonium in the cover gas, the ideal gas law should be applied:
+
+  .. math:: C_{Po(g)} = \frac{P_{Po(LBE)}}{R \cdot T}
+
+  The following code implements such law, and in figure :numref:`_concPo` the result is shown. In this case, instead of a liquid metal instance,
+  an instance of the required property is used.
+
+  .. code-block:: python
+
+      import numpy as np
+      from scipy.constants import R
+      from lbh15.properties.lbe_thermochemical_properties.lbe_contamination import LBEPoloniumHenryConstantOhno2006
+
+      # Define initial parameters
+      X = 10**(-12)
+
+      # Instantiate for K_Po
+      K_Po = LBEPoloniumHenryConstantOhno2006()
+
+      # Generate temperature values
+      T_values = np.linspace(K_Po.range[0], K_Po.range[1], 100)
+
+      # Calculate concentration of Polonium
+      C_values = np.array([(K_Po.correlation(T) * X) / (R * T) for T in T_values])
+
+  .. _concPo:
+
+  .. figure:: figures/Po_concentration.png
+      :width: 500
+      :align: Center
+
+      Behaviour of polonium concentration in the cover gas as function of temperature.
 
 
 
 Ranges of temperature
 ---------------------
 
-The temperature ranges over which the various correlations are valid are not consistently stated in the Handbook :cite:`Agency2015`.
-This section provides a justification for the temperature ranges implemented in lbh15, in cases where precise data are not 
-suggested by Handbook :cite:`Agency2015`.
+The temperature ranges over which the various correlations are valid are not always consistently stated in the Handbook :cite:`Agency2015`.
+This section provides a justification of the temperature ranges implemented in *lbh15* for the correlations whose validity range is not 
+precisely indicated in the Handbook :cite:`Agency2015`.
 
 
-*Impurities in Lead:*
+- *Impurities in Lead:*
 
-- *LeadPoloniumActivityCoefficientLi1998*:
+  - *LeadPoloniumActivityCoefficientLi1998*:
 
-  For the chemical activity coefficient of polonium given by Li in 1998, the same range as that given for the vapour pressure correlation
-  by Abakumov in 1994 is used, since Li refers to this correlation in his work.
+    For the chemical activity coefficient of polonium given by Li in 1998, the same range as that given for the vapour pressure correlation
+    by Abakumov in 1994 is used, since Li refers to this correlation in his work.
 
-..
+  ..
 
-- *LeadPoloniumHenryConstant*:
+  - *LeadPoloniumHenryConstant*:
 
-  For the Henry constant of polonium given by the Handbook, the same range as that given for the vapour pressure correlation by Abakumov in
-  1994 and for the activity coefficient correlation by Li 1998, since it is determined from these two correlations using Henry\'s law.
+    For the Henry constant of polonium given by the Handbook, the same range as that given for the vapour pressure correlation by Abakumov in
+    1994 and for the activity coefficient correlation by Li 1998 is selected, since it is determined by exploiting this two correlations 
+    through the Henry\'s law.
 
-..
+  ..
 
-- *LeadIodineActivityCoefficient*:
+  - *LeadIodineActivityCoefficient*:
 
-  In the absence of any information, the temperature range of lead is selected for the purposes of coherence.
+    For the iodine activity coefficient given by the Handbook, as lower limit 673K is chosen since the iodine exhibits a 
+    positive deviation from Raoult's law below it. As upper limit, the boiling temperature of lead is chosen, due to absence
+    of related information.
 
-..
-
-
-
-
-
-*Impurities in Bismuth:*
-
--	*BismuthPoloniumActivityCoefficient*:
-
-  For the chemical activity coefficient of polonium determined by the Handbook, the same range as the
-  one used in the experiment of Bradley in 1968 is selected, since it is the experiment upon which the
-  Handbook calculates the correlation.
-
-..
-
--	*BismuthIodineVapourPressureCubicciotti1959*:
-
-  For the vapour pressure or Iodine, this range has been chosen since the correlation overestimates the
-  real vapor pressure at any T of bismuth.
-
-..
-
--	*BismuthCaesiumActivityCoefficientGverdtsiteli1984*:
-
-  The Handbook states that the correlation has been verified up to 1 000K.
-  Given that the melting temperature of caesium is considerably lower than that of bismuth, this is why
-  the melting temperature of bismuth is chosen as lower limit of the validity range.
-
-..
+  ..
 
 
 
+- *Impurities in Bismuth:*
+
+  -	*BismuthPoloniumActivityCoefficient*:
+
+    For the chemical activity coefficient of polonium determined by the Handbook, the same range as the
+    one used in the experiment of Bradley in 1968 is selected, since it is the experiment upon which the
+    Handbook calculates the correlation.
+
+  ..
+
+  -	*BismuthIodineVapourPressureCubicciotti1959*:
+
+    For the vapour pressure or Iodine, this range has been chosen since the correlation overestimates the
+    real vapor pressure at any T of bismuth.
+
+  ..
+
+  -	*BismuthCaesiumActivityCoefficientGverdtsiteli1984*:
+
+    The Handbook states that the correlation has been verified up to 1 000K.
+    Given that the melting temperature of caesium is considerably lower than that of bismuth, this is why
+    the melting temperature of bismuth is chosen as lower limit of the validity range.
+
+  ..
 
 
 
-*Impurities in LBE:*
 
--	*LBEPoloniumActivityCoefficient*:
 
-  The correlation is derived from two other correlations (5.14) and (5.16), which provide two distinct ranges.
-  The correlation 5.14 has a range of [641-877K], whereas the 5.16 is valid on the range [913, 1023K].
-  Fig. 5.2.4 at page 258 plots and compares the behavior of several correlations for the activity coefficient of
-  Po in Pb and Bi alloys over the temperature range [500 K, 1000 K]. Also, the correlation represented by the property
-  LBEPoloniumActivityCoefficient is plotted. But the accompanying explanatory text explicitly states that this correlation
-  is based on measurements made above 913 K, so its extrapolation to lower temperatures should not be trusted. This is why
-  the validity range of (5.16) is applied also to this correlation in lbh15.
 
-..
+- *Impurities in LBE:*
 
--	*LBEIodineHenryConstantNeuhausen2005*:
+  -	*LBEPoloniumActivityCoefficientOhno2006*:
 
-  As stated at pag. 287 of the HANDBOOK, iodine is retained in LBE for temperature values below 700 K.
-  This is the reason why 700 K is implemented as the lower limit of the validity range of this property.
-  About the higher limit of this range, the same value indicated for LBEIodineHenryConstantKnacke1991 is
-  used since the HANDBOOK states that the correlation by Neuhausen shows the same behavior as the one by
-  Knacke for temperature values that are higher than 700 K.
+    The correlation is derived from (5.14) and (5.23), the range is obtained by taking the highest lower limit of
+    the two ranges as a lower limit, and the lowest higher limit of the two ranges as a higher limit.
 
-..
-  
-- *Experimental and under review*:
+    ..
 
-  For the following impurities in LBE, the nominal ranges in Table 5.2.4 om page 301 are stated to be “around”
-  certain temperatures. To ensure the greatest consistency, in line with the ranges presented by these correlations,
-  it has been decided that the term "around" will be characterised as :math:`± 0.05 * \delta_{T}`, where :math:`\delta_{T} = T_b0 - T_m0`,
-  :math:`T_b0` and :math:`T_m0` being the boiling and melting temperatures of LBE, respectively.
-  Here the classes concerned by this approximation:
+  -	*LBEPoloniumActivityCoefficient*:
 
-  - *LBEMercuryHenryConstant*: around 603K
+    The correlation is derived from two other correlations (5.14) and (5.16), which provide two distinct ranges.
+    The correlation 5.14 has a range of [641-877K], whereas the 5.16 is valid on the range [913, 1023K].
+    Fig. 5.2.4 at page 258 plots and compares the behavior of several correlations for the activity coefficient of
+    Po in Pb and Bi alloys over the temperature range [500 K, 1000 K]. Also, the correlation represented by the property
+    LBEPoloniumActivityCoefficient is plotted. But the accompanying explanatory text explicitly states that this correlation
+    is based on measurements made above 913 K, so its extrapolation to lower temperatures should not be trusted. This is why
+    the validity range of (5.16) is applied also to this correlation in lbh15.
 
-  - *LBEMercuryActivityCoefficient*: around 603K
+  ..
 
-  - *LBECadmiumHenryConstant*: around 773K
+  -	*LBEIodineHenryConstantNeuhausen2005*:
 
-  - *LBECadmiumActivityCoefficient*: around 773K
+    As stated at pag. 287 of the HANDBOOK, iodine is retained in LBE for temperature values below 700 K.
+    This is the reason why 700 K is implemented as the lower limit of the validity range of this property.
+    About the higher limit of this range, the same value indicated for LBEIodineHenryConstantKnacke1991 is
+    used since the HANDBOOK states that the correlation by Neuhausen shows the same behavior as the one by
+    Knacke for temperature values that are higher than 700 K.
 
-  - *LBEThalliumHenryConstant*: around 773K
+  ..
 
-  - *LBEThalliumActivityCoefficient*: around 773K
+  - *Experimental and under review*:
 
-  - *LBERubidiumVapourPressureLandolt1960*: around 873K
+    For the following impurities in LBE, the nominal ranges in Table 5.2.4 om page 301 are stated to be “around”
+    certain temperatures. To ensure the greatest consistency, in line with the ranges presented by these correlations,
+    it has been decided that the term "around" will be characterised as :math:`± 0.05 * \delta_{T}`, where :math:`\delta_{T} = T_b0 - T_m0`,
+    :math:`T_b0` and :math:`T_m0` being the boiling and melting temperatures of LBE, respectively.
+    Here the classes concerned by this approximation:
 
-  - *LBERubidiumActivityCoefficient*: around 873K
+    - *LBEMercuryHenryConstant*: around 603K
 
-..
+    - *LBEMercuryActivityCoefficient*: around 603K
+
+    - *LBECadmiumHenryConstant*: around 773K
+
+    - *LBECadmiumActivityCoefficient*: around 773K
+
+    - *LBEThalliumHenryConstant*: around 773K
+
+    - *LBEThalliumActivityCoefficient*: around 773K
+
+    - *LBERubidiumVapourPressureLandolt1960*: around 873K
+
+    - *LBERubidiumActivityCoefficient*: around 873K
+
+  ..
 
 .. _tutorials:
 
