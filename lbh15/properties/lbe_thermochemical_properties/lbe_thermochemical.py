@@ -172,8 +172,8 @@ class LeadHenryConstant(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *lead Henry constant* in liquid lbe
-        by applying the property correlation.
+        Returns the value of the *lead Henry constant* in liquid
+        lbe by applying the property correlation.
 
         Parameters
         ----------
@@ -331,8 +331,8 @@ class BismuthHenryConstant(PropertyInterface):
     def correlation(self, T: float, p: float = atm,
                     verbose: bool = False) -> float:
         """
-        Returns the value of the *bismuth Henry constant* in liquid lbe
-        by applying the property correlation.
+        Returns the value of the *bismuth Henry constant* in liquid
+        lbe by applying the property correlation.
 
         Parameters
         ----------

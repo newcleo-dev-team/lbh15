@@ -153,7 +153,12 @@ In detail, a :class:`.LBE` object comes with the following default properties:
     - ``lim_fe`` lower limit of ox concentration times iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\left(T\right) = \displaystyle lim\_fe\_sat\left(T\right) \cdot fe\_sol\left(T\right)^{3/4}`
+    - ``pb_Kh`` lead Henry constant :math:`\left[Pa\right]`:
 
+        :math:`pb\_Kh\left(T\right) = 10^{- \frac{10130}{T} - 0.985 \cdot \log\left(T\right) + 12.8163} `
+    - ``bi_Kh`` bismuth Henry constant :math:`\left[Pa\right]`:
+
+        :math:`pb\_Kh\left(T\right) = 10^{- \frac{9656.4}{T} + 9.9272} `
 
 where :math:`T` is the lbe temperature in :math:`\left[K\right]`, :math:`p` is the lbe pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.
