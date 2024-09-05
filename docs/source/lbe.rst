@@ -154,37 +154,57 @@ In detail, a :class:`.LBE` object comes with the following default properties:
     - ``lim_fe`` lower limit of ox concentration times iron concentration raised to :math:`3/4` :math:`\left[wt.\%\right]`:
 
         :math:`lim\_fe\left(T\right) = \displaystyle lim\_fe\_sat\left(T\right) \cdot fe\_sol\left(T\right)^{3/4}`
-    - ``K_LBEPo`` Henry constant of Po :math:`[Pa]`:
 
-        :math:`K_{H(Po(LBE))} = 10^{-\frac{8348}{T} + 10.5357}`
-    - ``K_LBEHg`` Henry constant of Hg :math:`[Pa]`:
+  c. **Impurities**:
 
-        :math:`K_{H(Hg,LBE)} = 10^{-\frac{3332.7}{T} + 12.6706 - 0.848 \log{T}}`
-    - ``K_LBECd`` Henry constant of Cd :math:`[Pa]`:
+    - ``K_Po`` elemental polonium Henry constant :math:`\left[Pa\right]`:
 
-        :math:`K_{H(Cd,LBE)} = 10^{-\frac{5711}{T} + 14.38 - 1.0867\log{T}}`
-    - ``P_LBECd`` vapour pressure of Cd :math:`[Pa]`:
+        :math:`K_{Po}\left(T\right) = 10^{- \frac{8348}{T} + 10.5357}`
+    - ``gamma_Po`` elemental Polonium activity coefficient :math:`\left[-\right]`:
 
-        :math:`P_{Cd(LBE)} = 0.25 * 10^{-\frac{5711}{T} + 14.38 - 1.0867\log{T}}`
-    - ``K_LBETl`` Henry constant of Tl :math:`[Pa]`:
+        :math:`\gamma_{Po}\left(T\right) = 10^{- \frac{2908}{T} + 1.079}`
+    - ``K_Hg`` mercury Henry constant :math:`\left[Pa\right]`:
 
-        :math:`K_{H(Tl,LBE)} = 10^{-\frac{9463}{T} + 13.264 - 0.892\log{T}}`
-    - ``P_LBETl`` vapour pressure of Tl :math:`[Pa]`:
+        :math:`K_{Hg}\left(T\right) = 10^{- \frac{3332.7}{T} - 0.848 \cdot \log\left(T\right) + 12.9716}`
+    - ``gamma_Hg`` mercury activity coefficient :math:`\left[-\right]`:
 
-        :math:`P_{Tl(LBE)} = 1.25 * 10^{-\frac{9463}{T} + 13.264 - 0.892\log{T}}`
-    - ``K_LBEI`` Henry constant of I :math:`[Pa]`:
+        :math:`\gamma_{Hg}\left(T\right) = 2`
+    - ``K_Cd`` cadmium Henry constant :math:`\left[Pa\right]`:
 
-        :math:`K_{H(I,LBE)} = 10^{-\frac{10407}{T} + 14.56}`
-    - ``gamma_LBECs`` activity coefficient of Cs:
+        :math:`K_{Cd}\left(T\right) = 10^{- \frac{5711}{T} - 1.0867 \cdot \log\left(T\right) + 14.38}`
+    - ``gamma_Cd`` cadmium activity coefficient :math:`\left[-\right]`:
 
-        :math:`\gamma_{Cs(LBE)} = 10^{-\frac{2677 \pm 863}{T} + 0.75 \pm 0.98}`
-    - ``P_LBERb_a`` vapour pressure of Rb :math:`[Pa]`:
+        :math:`\gamma_{Cd}\left(T\right) = 4`
+    - ``K_Tl`` thallium Henry constant :math:`\left[Pa\right]`:
 
-        :math:`P_{Rb} = 10^{-\frac{4588}{T} - 1.45\log{T} + 14.110}`
-    - ``P_LBERb_b`` vapour pressure of Rb :math:`[Pa]`:
+        :math:`K_{Tl}\left(T\right) = 10^{- \frac{9463}{T} - 0.892 \cdot \log\left(T\right) + 13.264}`
+    - ``gamma_Tl`` thallium activity coefficient :math:`\left[Pa\right]`:
 
-        :math:`P_{Rb} = 10^{-1.7}s10^{-\frac{4588}{T} - 1.45\log{T} + 14.110}`
+        :math:`\gamma_{Tl}\left(T\right) = 0.8`
+    - ``P_PbI2`` iodine compound vapour pressure :math:`\left[Pa\right]`:
 
+        :math:`P_{PbI2}\left(T\right) = 10^{- \frac{9087}{T} - 6.16 \cdot \log\left(T\right) + 31.897}`
+    - ``gamma_PbI2`` iodine compound activity coefficient :math:`\left[-\right]`:
+
+        :math:`\gamma_{PbI2}\left(T\right) = 1`
+    - ``K_PbI2`` iodine compound Henry constant :math:`\left[Pa\right]`:
+
+        :math:`K_{PbI2}\left(T\right) = 10^{- \frac{9087}{T} - 6.16 \cdot \log\left(T\right) + 31.897}`
+    - ``K_Cs`` caesium intermetallic compounds Henry constant :math:`\left[Pa\right]`:
+
+        :math:`K_{Cs}\left(T\right) = 10^{- \frac{4980}{T} - 9.323 \cdot \log\left(T\right) + 0.004473 \cdot T - 8.684 \cdot 10^{-7} \cdot T^2 + 33.07}`
+    - ``gamma_Cs`` caesium intermetallic compounds activity coefficient :math:`\left[-\right]`:
+
+        :math:`\gamma_{Cs}\left(T\right) = 10^{-1.5}`
+    - ``P_Rb`` rubidium vapour pressure :math:`\left[Pa\right]`:
+
+        :math:`P_{Rb}\left(T\right) = 10^{- \frac{4588}{T} - 1.45 \cdot \log\left(T\right) + 14.110}`
+    - ``gamma_Rb`` rubidium activity coefficient :math:`\left[-\right]`:
+
+        :math:`\gamma_{Rb}\left(T\right) = 0.02`
+    - ``K_Rb`` rubidium Henry constant :math:`\left[Pa\right]`:
+
+        :math:`K_{Rb}\left(T\right) = 0.02 \cdot 10^{- \frac{4588}{T} - 1.45 \cdot \log\left(T\right) + 14.110}`
 
 where :math:`T` is the lbe temperature in :math:`\left[K\right]`, :math:`p` is the lbe pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.
