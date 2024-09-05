@@ -182,7 +182,7 @@ In detail, a :class:`.Lead` object comes with the following default properties:
 
         :math:`P_{PbCs} = 10^{-1.5}10^{-\frac{4979.5799}{T} - 9.3234247\log{T} + 0.0044733132T - 8.684092*10^{-7}T^{2} + 34.573234}`
 
-c. **Impurities**:
+  c. **Impurities**:
 
     - ``P_PbPo`` polonium compound vapour pressure :math:`\left[Pa\right]`:
 
