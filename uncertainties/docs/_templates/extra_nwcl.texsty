@@ -1,0 +1,4 @@
+\usepackage{caption}
+\usepackage{hyphenat}
+\usepackage[nottoc, notlot, notlof]{tocbibind}
+\usepackage[version=4]{mhchem}
