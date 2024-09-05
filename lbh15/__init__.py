@@ -8,9 +8,11 @@ __date__ = "04 April 2024"
 from .lead import Lead
 from .bismuth import Bismuth
 from .lbe import LBE
+from .impurities import MetallicImpurities
 from .properties import lead_properties
 from .properties import bismuth_properties
 from .properties import lbe_properties
+from .properties import impurities_properties
 from .properties.bismuth_thermochemical_properties import solubility_in_bismuth
 from .properties.bismuth_thermochemical_properties import diffusivity_in_bismuth
 from .properties.bismuth_thermochemical_properties import bismuth_thermochemical
@@ -25,3 +27,9 @@ from .properties.lead_thermochemical_properties import diffusivity_in_lead
 from .properties.lead_thermochemical_properties import lead_thermochemical
 from .properties.lead_thermochemical_properties import lead_oxygen_limits
 from .properties.lead_thermochemical_properties import lead_contamination
+from .properties.impurities_properties import polonium_properties
+from .properties.impurities_properties import mercury_properties
+from .properties.impurities_properties import thallium_properties
+from .properties.impurities_properties import cadmium_properties
+from .properties.impurities_properties import caesium_properties
+from .properties.impurities_properties import rubidium_properties
