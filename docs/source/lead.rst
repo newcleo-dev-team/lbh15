@@ -182,6 +182,37 @@ In detail, a :class:`.Lead` object comes with the following default properties:
 
         :math:`P_{PbCs} = 10^{-1.5}10^{-\frac{4979.5799}{T} - 9.3234247\log{T} + 0.0044733132T - 8.684092*10^{-7}T^{2} + 34.573234}`
 
+c. **Impurities**:
+
+    - ``P_PbPo`` polonium compound vapour pressure :math:`\left[Pa\right]`:
+
+        :math:`P_{PbPo}\left(T\right) = 10^{- \frac{7270}{T} + 9.06}`
+    - ``gamma_PbPo`` polonium compound activity coefficient :math:`\left[-\right]`:
+
+        :math:`\gamma_{PbPo}\left(T\right) = 1`
+    - ``K_PbPo`` polonium compound Henry constant :math:`\left[Pa\right]`:
+
+        :math:`K_{PbPo}\left(T\right) = 10^{- \frac{7270}{T} + 9.06}`
+    - ``P_PbI2`` iodine compound vapour pressure :math:`\left[Pa\right]`:
+
+        :math:`P_{PbI2}\left(T\right) = 10^{- \frac{9087}{T} - 6.16 \cdot \log\left(T\right) + 31.897}`
+    - ``gamma_PbI2`` iodine compound activity coefficient :math:`\left[-\right]`:
+
+        :math:`\gamma_{PbI2}\left(T\right) = 1`
+    - ``K_PbI2`` iodine compound Henry constant :math:`\left[Pa\right]`:
+
+        :math:`K_{PbI2}\left(T\right) = 10^{- \frac{9087}{T} - 6.16 \cdot \log\left(T\right) + 31.897}`
+    - ``K_PbCs`` caesium intermetallic compounds Henry constant :math:`\left[Pa\right]`:
+
+        :math:`K_{PbCs}\left(T\right) = 10^{- \frac{4980}{T} - 9.323 \cdot \log\left(T\right) + 0.004473 \cdot T - 8.684 \cdot 10^{-7} \cdot T^2 + 33.07}`
+    - ``gamma_PbCs`` caesium intermetallic compounds activity coefficient :math:`\left[-\right]`:
+
+        :math:`\gamma_{PbCs}\left(T\right) = 10^{-1.5}`
+    - ``P_PbCs`` caesium intermetallic compounds vapour pressure :math:`\left[Pa\right]`:
+
+        :math:`P_{PbCs}\left(T\right) = 10^{1.5} \cdot 10^{- \frac{4980}{T} - 9.323 \cdot \log\left(T\right) + 0.004473 \cdot T - 8.684 \cdot 10^{-7} \cdot T^2 + 33.07}`
+
+
 where :math:`T` is the lead temperature in :math:`\left[K\right]`, :math:`p` is the lead pressure in :math:`\left[Pa\right]` and
 :math:`R` is the molar gas constant in :math:`\left[J/(mol K)\right]`.
 
