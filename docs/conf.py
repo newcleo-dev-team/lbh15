@@ -12,11 +12,14 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+import locale
+locale.setlocale(locale.LC_TIME, 'en_US.utf8')
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 import shutil
 import subprocess
+from datetime import datetime
 from setup import get_info
 from typing import Any
 from typing import Dict
