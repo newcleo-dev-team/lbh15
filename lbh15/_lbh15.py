@@ -9,6 +9,7 @@ import copy
 from abc import ABC
 from abc import abstractmethod
 from collections import defaultdict
+from functools import partial
 from typing import Dict
 from typing import List
 from typing import Tuple
@@ -542,6 +543,32 @@ class LiquidMetalInterface(ABC):
                              f"{p:.2f} [Pa] was provided")
         self.__p = p
 
+    def __property_info(self, property_name: str, print_info: bool = True,
+                        n_tab: int = 0) -> Union[str, None]:
+        """
+        Extracts the information from the property based on
+        the provided name, and return them as a single string.
+
+        Parameters
+        ----------
+        property_name : str
+            name of the property from which the information
+            is to be extracted
+        print_info : bool, optional
+            `True` to print to the console, `False` for getting the
+            string. By default, `True`
+        n_tab : int, optional
+            Number of indentation tabs used to format the output,
+            by default `0`
+
+        Returns
+        -------
+        str
+            Content of the information.
+        """
+        return self.__properties[property_name].info(self.__T, self.__p,
+                                                     print_info, n_tab)
+
     def __add_property(self, property_object: PropertyInterface) -> None:
         """
         Adds the property to class attributes. In particular, it adds
@@ -558,9 +585,7 @@ class LiquidMetalInterface(ABC):
         key = property_object.name
         self.__properties[key] = property_object
         setattr(self, property_object.name+"_info",
-                lambda print_info=True, n_tab=0:
-                    self.__properties[key].info(self.__T, self.__p,
-                                                print_info, n_tab))
+                partial(self.__property_info, key))
 
     def __align_corrs_to_properties(self) -> None:
         """
